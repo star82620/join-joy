@@ -5,7 +5,7 @@ interface Props {}
 
 export default function Header() {
   return (
-    <header className="bg-orange-100 py-3 border-b-2 border-stone-950">
+    <header className="flex justify-center items-center bg-orange-100 py-3 border-b-2 border-stone-950">
       <div className="container flex justify-between">
         <Logo />
         <div className="flex gap-6">
