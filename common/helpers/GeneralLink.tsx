@@ -1,8 +1,8 @@
 import React, { Children, ReactNode } from "react";
 import Link from "next/link";
 
-// 執行此元件 function：給予對應的 props（url、alt、target），輸出結果為 內部連結<Link> 或 外部連結<a>
-// 如果有 alt 就是外部連結，不然就是 Link
+// 執行此元件 function：給予對應的 props（url、target），輸出結果為 內部連結<Link> 或 外部連結<a>
+// 如果有 target 就是外部連結，不然就是 Link
 
 interface Props {
   href: string;
