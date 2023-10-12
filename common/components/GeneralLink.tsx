@@ -10,9 +10,6 @@ interface Props {
 }
 
 export default function GeneralLink({ href, children, target }: Props) {
-  // 如果沒有 href => 什麼都不給 return null
-  if (!href) return null;
-
   // 如果有 href 但沒有 target => 內部連結
   if (href && !target)
     return (
@@ -34,5 +31,6 @@ export default function GeneralLink({ href, children, target }: Props) {
       </a>
     );
 
+  // 如果不符合上述條件，什麼都不給 return null
   return null;
 }
