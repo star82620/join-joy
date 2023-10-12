@@ -33,4 +33,6 @@ export default function GeneralLink({ href, children, target }: Props) {
         {children}
       </a>
     );
+
+  return null;
 }
