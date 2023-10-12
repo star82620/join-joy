@@ -3,14 +3,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 interface Props {
-  Children: ReactNode;
+  children: ReactNode;
 }
 
-export default function Layout({ Children }: Props) {
+export default function Layout({ children }: Props) {
   return (
     <>
       <Header />
-      {Children}
+      {children}
       <Footer />
     </>
   );

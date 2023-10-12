@@ -4,8 +4,8 @@ import logo from "@/public/images/logo.jpg";
 
 export default function Logo() {
   return (
-    <div>
-      <Image src={logo} alt="JoinJoy" />
+    <div className="h-full">
+      <Image src={logo} alt="JoinJoy" height="80" />
     </div>
   );
 }
