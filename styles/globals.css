@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  font-family: Lato, Inter, Roboto, San Francisco, Segoe UI, "Ping fang",
+    Microsoft JhengHei, "微軟正黑體", sans-serif;
+  color: #272725;
+  /* 預設字色 "gray-950": "#272725" */
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+h3 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+h4 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+h5 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+h6 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
