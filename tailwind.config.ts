@@ -7,6 +7,12 @@ const config: Config = {
     "./common/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      // tablet : md ,desktop : lg
+      lg: { max: "1272px" },
+      md: { max: "768px" },
+      sm: { max: "375px" },
+    },
     colors: {
       // primary-yellow
       "yellow-primary": "#FAF2E2",
@@ -86,13 +92,6 @@ const config: Config = {
           fontWeight: 400,
         },
       ],
-    },
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
     },
   },
   plugins: [],

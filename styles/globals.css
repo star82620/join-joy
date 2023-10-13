@@ -6,7 +6,7 @@ body {
   font-family: Lato, Inter, Roboto, San Francisco, Segoe UI, "Ping fang",
     Microsoft JhengHei, "微軟正黑體", sans-serif;
   color: #272725;
-  /* "gray-950": "#272725" */
+  /* 預設字色 "gray-950": "#272725" */
 }
 
 h1 {
