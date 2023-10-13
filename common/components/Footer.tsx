@@ -1,20 +1,16 @@
 import React from "react";
 
-interface Props {
-  // type: string;
-}
-
-const copyrightContent: string =
+const copyright: string =
   "Copyright © 2023 遊人揪揪工作室 All rights reserved.";
 
-export default function Footer({}: Props) {
-  //簡易版 <div className="text-center w-full">{copyrightContent}</div>
+export default function Footer() {
+  //簡易版 <div className="text-center w-full">{copyright}</div>
   return (
     <footer className="flex justify-center items-center py-3 bg-slate-400">
       <div className="container flex justify-between flex-wrap">
         <div>
           <div>Logo</div>
-          <div>Joining Together, Joy Forever!</div>
+          <p>Joining Together, Joy Forever!</p>
         </div>
         <div className="flex gap-12">
           <section>
@@ -40,7 +36,7 @@ export default function Footer({}: Props) {
           </section>
         </div>
 
-        <div className="text-center w-full">{copyrightContent}</div>
+        <p className="text-center w-full">{copyright}</p>
       </div>
     </footer>
   );
