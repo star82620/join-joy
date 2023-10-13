@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main>
+    <>
       <div>index</div>
       <ul>
         <li>
@@ -25,6 +25,6 @@ export default function Home() {
           <Link href="/create-group">我要開團</Link>
         </li>
       </ul>
-    </main>
+    </>
   );
 }
