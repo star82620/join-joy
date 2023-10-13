@@ -17,7 +17,7 @@ export default function GeneralButton({
 }: Props) {
   return (
     <button
-      className="border text-green-dark"
+      className="border border-gray-950 shadow-button px-4 py-3"
       type={type}
       onClick={onClick}
       disabled={disabled}

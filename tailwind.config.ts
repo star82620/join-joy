@@ -94,6 +94,11 @@ const config: Config = {
       ],
     },
   },
+  extend: {
+    boxShadow: {
+      button: "2px 2px 0 0 #504F4E",
+    },
+  },
   plugins: [],
 };
 export default config;
