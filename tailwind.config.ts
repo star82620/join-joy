@@ -93,14 +93,10 @@ const config: Config = {
         },
       ],
     },
-    boxShadow: {
-      btn: "2px 2px 0 0 #504F4E",
-    },
-  },
-  variants: {
     extend: {
-      backgroundColor: ["hover", "active", "disabled"],
-      borderColor: ["hover", "active", "disabled"],
+      boxShadow: {
+        btn: "2px 2px 0 0 #504F4E",
+      },
     },
   },
   plugins: [],

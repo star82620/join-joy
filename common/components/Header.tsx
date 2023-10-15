@@ -11,7 +11,7 @@ export default function Header() {
         <Logo width="80" height="80" />
         <section className="flex gap-6">
           <a>在 揪遊 上成立店家</a>
-          <Button type="button" onClick={test} appearance="light">
+          <Button type="button" onClick={test} appearance="light" size="lg">
             會員按鈕
           </Button>
         </section>
