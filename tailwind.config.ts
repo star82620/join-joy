@@ -8,26 +8,26 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      // tablet : md ,desktop : lg
+      // desktop : lg, tablet : md, mobile: sm
       lg: { max: "1272px" },
       md: { max: "768px" },
       sm: { max: "375px" },
     },
     colors: {
       // primary-yellow
-      "yellow-primary": "#FAF2E2",
-      "yellow-second": "#FEFAF2",
-      "yellow-neutral": "#FFF4C6",
-      "yellow-tone": "#FFE788",
-      "yellow-tint": "#FFD44A",
-      "yellow-dark": "#FFCD00",
-      // secondary-peach
-      "peach-primary": "#F8E9E4",
-      "peach-second": "#FFF4F0",
-      "peach-neutral": "#FFDFD3",
-      "peach-tone": "#FFC8B4",
-      "peach-tint": "#FFA584",
-      "peach-dark": "#FF8356",
+      "yellow-primary": "#FFCD00",
+      "yellow-second": "#FFD44A",
+      "yellow-neutral": "#FFE788",
+      "yellow-tone": "#FFF4C6",
+      "yellow-tint": "#FEFAF2",
+      "yellow-dark": "#FAF2E2",
+      // secondary-orange
+      "orange-primary": "#FF8356",
+      "orange-second": "#FFA584",
+      "orange-neutral": "#FFC8B4",
+      "orange-tone": "#FFDFD3",
+      "orange-tint": "#FFF4F0",
+      "orange-dark": "#FAF2E2",
       // Natural Gray
       "gray-950": "#272725",
       "gray-900": "#3D3D3C",
@@ -92,6 +92,11 @@ const config: Config = {
           fontWeight: 400,
         },
       ],
+    },
+    extend: {
+      boxShadow: {
+        btn: "2px 2px 0 0 #504F4E",
+      },
     },
   },
   plugins: [],
