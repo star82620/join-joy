@@ -8,26 +8,26 @@ const config: Config = {
   ],
   theme: {
     screens: {
-      // tablet : md ,desktop : lg
+      // desktop : lg, tablet : md, mobile: sm
       lg: { max: "1272px" },
       md: { max: "768px" },
       sm: { max: "375px" },
     },
     colors: {
       // primary-yellow
-      "yellow-primary": "#FAF2E2",
-      "yellow-second": "#FEFAF2",
-      "yellow-neutral": "#FFF4C6",
+      "yellow-primary": "#FFCD00",
+      "yellow-second": "#FFD44A",
+      "yellow-neutral": "#FFE788",
       "yellow-tone": "#FFE788",
       "yellow-tint": "#FFD44A",
       "yellow-dark": "#FFCD00",
-      // secondary-peach
-      "peach-primary": "#F8E9E4",
-      "peach-second": "#FFF4F0",
-      "peach-neutral": "#FFDFD3",
-      "peach-tone": "#FFC8B4",
-      "peach-tint": "#FFA584",
-      "peach-dark": "#FF8356",
+      // secondary-orange
+      "orange-primary": "#F8E9E4",
+      "orange-second": "#FFF4F0",
+      "orange-neutral": "#FFDFD3",
+      "orange-tone": "#FFC8B4",
+      "orange-tint": "#FFA584",
+      "orange-dark": "#FF8356",
       // Natural Gray
       "gray-950": "#272725",
       "gray-900": "#3D3D3C",
@@ -93,10 +93,14 @@ const config: Config = {
         },
       ],
     },
-  },
-  extend: {
     boxShadow: {
-      button: "2px 2px 0 0 #504F4E",
+      btn: "2px 2px 0 0 #504F4E",
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ["hover", "active", "disabled"],
+      borderColor: ["hover", "active", "disabled"],
     },
   },
   plugins: [],
