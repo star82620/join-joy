@@ -21,10 +21,12 @@ interface FormInputProps {
 export default function FormInput({ formSet }: FormInputProps) {
   return formSet.map((input) => (
     <label key={input.inputName}>
-      <h3 className="text-[18px]">{input.label}</h3>
+      <h3 className="text-[18px] md:text-[16px] md:leading-heading ">
+        {input.label}
+      </h3>
       <div className="flex items-center">
         <input
-          className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 relative"
+          className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
           type={input.type}
           name={input.inputName}
           placeholder={input.placeholder}
@@ -38,7 +40,9 @@ export default function FormInput({ formSet }: FormInputProps) {
         ></span>
       </div>
 
-      <p className="hidden text-danger mt-2">{input.errorMsg}</p>
+      <p className="text-danger mt-2 md:mt-1 text-sm md:text-xs">
+        input.errorMsg
+      </p>
     </label>
   ));
 }

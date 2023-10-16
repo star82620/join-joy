@@ -51,48 +51,12 @@ const config: Config = {
       white: "#FFFFFF",
     },
     fontSize: {
-      xl: [
-        "20px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      lg: [
-        "18px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      md: [
-        "16px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      sm: [
-        "14px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      xs: [
-        "12px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      xxs: [
-        "10px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
+      xl: "20px",
+      lg: "18px",
+      md: "16px",
+      sm: "14px",
+      xs: "12px",
+      xxs: "10px",
     },
     extend: {
       boxShadow: {
