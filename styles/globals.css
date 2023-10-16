@@ -9,6 +9,10 @@ body {
   /* 預設字色 "gray-950": "#272725" */
 }
 
+* {
+  outline: none;
+}
+
 h1 {
   font-size: 40px;
   font-weight: 600;

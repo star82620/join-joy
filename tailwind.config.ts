@@ -98,6 +98,10 @@ const config: Config = {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
       },
+      backgroundImage: {
+        "eye-off": 'url("/images/input-visibility-off.svg")',
+        "eye-on": 'url("/images/input-visibility-on.svg")',
+      },
     },
   },
   plugins: [],
