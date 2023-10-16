@@ -49,11 +49,11 @@ export default function SignUp() {
   ];
 
   const t = () => {};
-
+  const titleTag = <h2 className="text-[20px]">會員註冊</h2>;
   return (
     <div>
       <div className="m-auto w-fit">
-        <FrameWindow title="會員註冊">
+        <FrameWindow titleTag={titleTag}>
           <form className="flex flex-col gap-6 w-[376px]">
             <FormInput formSet={formSet} />
             <button type="button" className="mt-2" onClick={t}>
