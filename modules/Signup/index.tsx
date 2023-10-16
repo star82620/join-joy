@@ -55,7 +55,6 @@ export default function SignUp() {
       <div className="m-auto w-fit">
         <FrameWindow titleTag={titleTag}>
           <form className="flex flex-col gap-6 w-[376px]">
-            <FormInput formSet={formSet} />
             <button type="button" className="mt-2" onClick={t}>
               註冊
             </button>
