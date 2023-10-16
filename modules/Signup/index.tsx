@@ -49,18 +49,20 @@ export default function Signup() {
   ];
 
   const t = () => {};
-  const titleTag = <h2 className="text-[20px]">會員註冊</h2>;
+  const titleTag = (
+    <h2 className="text-[20px] md:text-[18px] md:leading-heading">會員註冊</h2>
+  );
   return (
     <div>
       <div className="m-auto w-fit">
         <FrameWindow titleTag={titleTag}>
-          <form className="flex flex-col gap-6 w-[376px]">
+          <form className="flex flex-col gap-6 w-[380px] md:w-[300px] sm:w-[280px]">
             <FormInput formSet={formSet} />
             <button type="button" className="mt-2" onClick={t}>
               註冊
             </button>
           </form>
-          <p className="mt-3 text-center text-sm">
+          <p className="mt-3 text-center text-sm md:text-xs">
             註冊即表示您閱讀並同意 <b>服務條款</b> 及 <b>隱私權政策</b>
           </p>
           <p className="mt-8 text-center text-md font-semibold">

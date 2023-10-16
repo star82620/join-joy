@@ -97,10 +97,15 @@ const config: Config = {
     extend: {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
+        window: "3px 2px 0 0 #504F4E",
       },
       backgroundImage: {
         "eye-off": 'url("/images/input-visibility-off.svg")',
         "eye-on": 'url("/images/input-visibility-on.svg")',
+      },
+      lineHeight: {
+        heading: "1.4rem",
+        text: "1.2rem",
       },
     },
   },
