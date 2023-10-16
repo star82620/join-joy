@@ -5,7 +5,7 @@ import FormInput from "@/common/components/FormInput";
 
 // 如果錯誤就把 errorMsg 填入，如果 !errorMsg 就不 SHOW
 
-export default function SignUp() {
+export default function Signup() {
   const [error, setError] = useState({
     nickname: "",
     email: "",
