@@ -48,6 +48,7 @@ const config: Config = {
       "purple-light": "#DD84FC",
       "purple-dark": "#9354A9",
       danger: "#DD240B",
+      white: "#FFFFFF",
     },
     fontSize: {
       xl: [
