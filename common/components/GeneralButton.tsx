@@ -8,7 +8,7 @@ interface Props {
   type: "button" | "submit" | "reset";
   children: ReactNode;
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
-  disabled?: boolean;
+  isDisabled?: boolean;
   appearance: "orange" | "yellow" | "light";
 }
 
@@ -37,7 +37,7 @@ export default function GeneralButton({
   type,
   children,
   onClick,
-  disabled,
+  isDisabled,
   appearance,
 }: Props) {
   const defaultStyle = styleSet[appearance].default;
@@ -53,12 +53,12 @@ export default function GeneralButton({
         defaultStyle,
         hoverStyle,
         activeStyle,
-        disabled ? disabledStyle : "",
+        isDisabled ? disabledStyle : "",
         "active:shadow-none active:-mr-0.5 active:ml-0.5 active:mt-0.5 active:-mb-0.5"
       )}
       type={type}
       onClick={onClick}
-      disabled={disabled}
+      disabled={isDisabled}
     >
       {children}
     </button>
