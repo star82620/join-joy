@@ -8,7 +8,7 @@ import clsx from "clsx";
 interface Props {
   type: "button" | "submit" | "reset";
   children: ReactNode;
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick: (event: React.MouseEvent<HTMLElement>) => void;
   disabled?: boolean;
   appearance: "orange" | "yellow" | "light";
   size?: "lg" | "";
