@@ -1,3 +1,5 @@
+//import clsx
+
 export default function FormInput({ formSet }) {
   return formSet.map((input) => (
     <label key={input.inputName}>
@@ -9,6 +11,7 @@ export default function FormInput({ formSet }) {
         placeholder={input.placeholder}
         required={input.required}
       ></input>
+      <p className="hidden text-danger mt-2">{input.errorMsg}</p>
     </label>
   ));
 }

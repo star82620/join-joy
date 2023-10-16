@@ -5,6 +5,8 @@ interface Props {
   children: ReactNode;
 }
 
+// window 寬度是看內容的
+
 export default function FrameWindow({ title, children }: Props) {
   return (
     <div className="m-auto w-fit">
