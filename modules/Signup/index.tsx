@@ -28,7 +28,7 @@ export default function SignUp() {
       inputName: "email",
       placeholder: "example@mail.com",
       required: true,
-      errMsg: error.email,
+      errorMsg: error.email,
     },
     {
       label: "密碼",
@@ -36,7 +36,7 @@ export default function SignUp() {
       inputName: "password",
       placeholder: "輸入 6-12 位英數字組合",
       required: true,
-      errMsg: error.password,
+      errorMsg: error.password,
     },
     {
       label: "再次輸入密碼",
@@ -44,7 +44,7 @@ export default function SignUp() {
       inputName: "confirmPassword",
       placeholder: "再次輸入您的密碼",
       required: true,
-      errMsg: error.confirmPassword,
+      errorMsg: error.confirmPassword,
     },
   ];
 

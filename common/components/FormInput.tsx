@@ -6,23 +6,20 @@ import { useEffect, useRef, useState } from "react";
 // 如果 type === password，就 show 眼睛圖
 // 點擊 eye image 改變該 input type => useState + useRef
 
-export default function FormInput({ formSet }) {
-  // const [visibility, setVisibility] = useState({
-  //   pw: "off",
-  //   "confirm-pw": "off",
-  // });
+interface InputItem {
+  label: string;
+  type: string;
+  inputName: string;
+  placeholder: string;
+  required: boolean;
+  errorMsg?: string;
+}
 
-  // const ref = useRef();
+interface FormInputProps {
+  formSet: InputItem[];
+}
 
-  // function switchVisibility() {
-  //   // 要抓到是誰
-  //   setVisibility([]."on");
-  // }
-
-  // if (input.type === "password") {
-  //   input.type = visibility === "on" ? "text" : "password";
-  // }
-
+export default function FormInput({ formSet }: FormInputProps) {
   return formSet.map((input) => (
     <label key={input.inputName}>
       <h4>{input.label}</h4>
