@@ -1,5 +1,6 @@
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import clsx from "clsx";
 
 // 如果 errorMsg 有內容，就 show errorMsg，沒有的話就隱藏
 // 如果 type === password，就 show 眼睛圖
@@ -33,7 +34,12 @@ export default function FormInput({ formSet }: FormInputProps) {
           required={input.required}
         ></input>
         <span
-          className="inline-block w-11 h-7 -ml-11 mt-2 z-10 bg-eye-off bg-center bg-no-repeat bg-yellow-tint"
+          className={clsx(
+            input.type === "password" ? "inline-block" : "hidden",
+            "w-11 h-7 -ml-11 mt-2 z-10",
+            "bg-eye-off",
+            "bg-center bg-no-repeat bg-yellow-tint"
+          )}
           onClick={() => {
             console.log("按了要改變 state");
           }}
