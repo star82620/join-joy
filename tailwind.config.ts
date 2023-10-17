@@ -18,16 +18,16 @@ const config: Config = {
       "yellow-primary": "#FFCD00",
       "yellow-second": "#FFD44A",
       "yellow-neutral": "#FFE788",
-      "yellow-tone": "#FFF4C6",
-      "yellow-tint": "#FEFAF2",
-      "yellow-dark": "#FAF2E2",
+      "yellow-tone": "#FFE788",
+      "yellow-tint": "#FFD44A",
+      "yellow-dark": "#FFCD00",
       // secondary-orange
-      "orange-primary": "#FF8356",
-      "orange-second": "#FFA584",
-      "orange-neutral": "#FFC8B4",
-      "orange-tone": "#FFDFD3",
-      "orange-tint": "#FFF4F0",
-      "orange-dark": "#FAF2E2",
+      "orange-primary": "#F8E9E4",
+      "orange-second": "#FFF4F0",
+      "orange-neutral": "#FFDFD3",
+      "orange-tone": "#FFC8B4",
+      "orange-tint": "#FFA584",
+      "orange-dark": "#F8E9E4",
       // Natural Gray
       "gray-950": "#272725",
       "gray-900": "#3D3D3C",
@@ -48,54 +48,28 @@ const config: Config = {
       "purple-light": "#DD84FC",
       "purple-dark": "#9354A9",
       danger: "#DD240B",
+      white: "#FFFFFF",
     },
     fontSize: {
-      xl: [
-        "20px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      lg: [
-        "18px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      md: [
-        "16px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      sm: [
-        "14px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      xs: [
-        "12px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      xxs: [
-        "10px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
+      xl: "20px",
+      lg: "18px",
+      md: "16px",
+      sm: "14px",
+      xs: "12px",
+      xxs: "10px",
     },
     extend: {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
+        window: "3px 2px 0 0 #504F4E",
+      },
+      backgroundImage: {
+        "eye-hide": 'url("/images/input-password-hide.svg")',
+        "eye-show": 'url("/images/input-password-show.svg")',
+      },
+      lineHeight: {
+        heading: "1.4rem",
+        text: "1.2rem",
       },
     },
   },

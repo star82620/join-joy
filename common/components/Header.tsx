@@ -1,5 +1,8 @@
 import React from "react";
 import Logo from "./WebsiteLogo";
+import Button from "./GeneralButton";
+
+const test = () => console.log("I see");
 
 export default function Header() {
   return (
@@ -8,7 +11,9 @@ export default function Header() {
         <Logo width="80" height="80" />
         <section className="flex gap-6">
           <a>在 揪遊 上成立店家</a>
-          <button>會員按鈕</button>
+          <Button type="button" onClick={test} appearance="light">
+            會員按鈕
+          </Button>
         </section>
       </div>
     </header>
