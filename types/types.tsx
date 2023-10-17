@@ -1,5 +1,5 @@
 //
-export interface IInputType {
+export interface InputType {
   label: string;
   type: "text" | "email" | "password";
   inputName: string;
@@ -8,6 +8,6 @@ export interface IInputType {
   errorMsg?: string;
 }
 
-export interface IFormType {
-  dataSet: IInputType[];
+export interface FormDataType {
+  dataSet: InputType[];
 }

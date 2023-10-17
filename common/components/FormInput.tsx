@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { IFormType, IInputType } from "@/types/interface";
+import { FormDataType, InputType } from "@/types/types";
 
 // 如果 errorMsg 有內容，就 show errorMsg，沒有的話就隱藏
 // 如果 type === password，就 show 眼睛圖
 // 點擊 eye image 改變該 input type => useState + useRef
 
-interface IShowPasswordState {
-  [inputName: string]: boolean;
-}
-export default function FormInput({ dataSet }: IFormType) {
-  const initialState: IShowPasswordState = dataSet.reduce<IShowPasswordState>(
-    (state, input) => {
+type ShowPasswordStateType = Record<string, boolean>;
+
+export default function FormInput({ dataSet }: FormDataType) {
+  const initialState: ShowPasswordStateType =
+    dataSet.reduce<ShowPasswordStateType>((state, input) => {
       if (input.type === "password") state[input.inputName] = false;
       return state;
-    },
-    {}
-  );
+    }, {});
 
   const [showPassword, setShowPassword] =
-    useState<IShowPasswordState>(initialState); //預設看不到密碼
+    useState<ShowPasswordStateType>(initialState); //預設看不到密碼
 
-  return dataSet.map((input: IInputType) => {
+  return dataSet.map((input: InputType) => {
     const { label, type, inputName, placeholder, required, errorMsg } = input;
 
     return (

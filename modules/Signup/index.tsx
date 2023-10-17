@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Link from "@/common/components/GeneralLink";
 import Wrapper from "@/common/components/Wrapper";
 import FormInput from "@/common/components/FormInput";
-import { IInputType } from "@/types/interface";
+import { InputType } from "@/types/types";
 
 // errorMsg
-export interface IErrorState {
+export interface ErrorStateType {
   nickname: string | undefined;
   email: string | undefined;
   password: string | undefined;
@@ -19,14 +19,14 @@ const titleTag = (
 
 export default function Signup() {
   // 如果錯誤就把 errorMsg 填入，如果 !errorMsg 就不 SHOW (待優化：這個地方可以自動 run key 嗎)
-  const [error, setError] = useState<IErrorState>({
+  const [error, setError] = useState<ErrorStateType>({
     nickname: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const dataSet: IInputType[] = [
+  const dataSet: InputType[] = [
     {
       label: "你的名字",
       type: "text",
