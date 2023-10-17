@@ -48,54 +48,28 @@ const config: Config = {
       "purple-light": "#DD84FC",
       "purple-dark": "#9354A9",
       danger: "#DD240B",
+      white: "#FFFFFF",
     },
     fontSize: {
-      xl: [
-        "20px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      lg: [
-        "18px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      md: [
-        "16px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      sm: [
-        "14px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      xs: [
-        "12px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
-      xxs: [
-        "10px",
-        {
-          lineHeight: "1.5",
-          fontWeight: 400,
-        },
-      ],
+      xl: "20px",
+      lg: "18px",
+      md: "16px",
+      sm: "14px",
+      xs: "12px",
+      xxs: "10px",
     },
     extend: {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
+        window: "3px 2px 0 0 #504F4E",
+      },
+      backgroundImage: {
+        "eye-hide": 'url("/images/input-password-hide.svg")',
+        "eye-show": 'url("/images/input-password-show.svg")',
+      },
+      lineHeight: {
+        heading: "1.4rem",
+        text: "1.2rem",
       },
     },
   },
