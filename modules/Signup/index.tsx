@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "@/common/components/GeneralLink";
 import FrameWindow from "@/common/components/FrameWindow";
 import FormInput from "@/common/components/FormInput";
-import { IInputItem } from "@/types/IFormInput";
+import { IInputType } from "@/types/interface";
 
 // 如果錯誤就把 errorMsg 填入，如果 !errorMsg 就不 SHOW
 
@@ -14,7 +14,7 @@ export default function Signup() {
     confirmPassword: "",
   });
 
-  const formSet: IInputItem[] = [
+  const formSet: IInputType[] = [
     {
       label: "你的名字",
       type: "text",
@@ -49,7 +49,6 @@ export default function Signup() {
     },
   ];
 
-  const t = () => {};
   const titleTag = (
     <h2 className="text-[20px] md:text-[18px] md:leading-heading">會員註冊</h2>
   );

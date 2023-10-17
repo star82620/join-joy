@@ -1,12 +1,12 @@
-export interface IInputItem {
+export interface IInputType {
   label: string;
-  type: string;
+  type: "text" | "email" | "password";
   inputName: string;
   placeholder: string;
   required: boolean;
   errorMsg?: string;
 }
 
-export interface IFormInputProps {
+export interface IFormSetType {
   formSet: IInputItem[];
 }

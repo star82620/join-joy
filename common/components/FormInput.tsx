@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState, ReactNode } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { IInputItem, IFormInputProps } from "@/types/IFormInput";
+import { IFormSetType } from "@/types/interface";
 
 // 如果 errorMsg 有內容，就 show errorMsg，沒有的話就隱藏
 // 如果 type === password，就 show 眼睛圖
 // 點擊 eye image 改變該 input type => useState + useRef
 
-export default function FormInput({ formSet }: IFormInputProps) {
+export default function FormInput({ formSet }: IFormSetType) {
   const [showPassword, setShowPassword] = useState(false); //預設看不到密碼
 
   return formSet.map((input) => (
