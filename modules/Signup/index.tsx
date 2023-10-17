@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Link from "@/common/components/GeneralLink";
 import Wrapper from "@/common/components/Wrapper";
 import FormInput from "@/common/components/FormInput";
-import { InputType } from "@/types/types";
+import { InputType, InputSetType } from "@/types/types";
 
 // errorMsg
-export interface ErrorStateType {
+export interface ErrorType {
   nickname: string | undefined;
   email: string | undefined;
   password: string | undefined;
@@ -19,14 +19,14 @@ const titleTag = (
 
 export default function Signup() {
   // 如果錯誤就把 errorMsg 填入，如果 !errorMsg 就不 SHOW (待優化：這個地方可以自動 run key 嗎)
-  const [error, setError] = useState<ErrorStateType>({
+  const [error, setError] = useState<ErrorType>({
     nickname: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
 
-  const dataSet: InputType[] = [
+  const inputSet: InputSetType = [
     {
       label: "你的名字",
       type: "text",
@@ -65,7 +65,7 @@ export default function Signup() {
     <div className="m-auto w-fit">
       <Wrapper titleTag={titleTag}>
         <form className="flex flex-col gap-6 md:gap-4 w-[380px] md:w-[300px] sm:w-[280px]">
-          <FormInput dataSet={dataSet} />
+          <FormInput inputSet={inputSet} />
           <button type="button" className="mt-2">
             註冊
           </button>

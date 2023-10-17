@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { FormDataType, InputType } from "@/types/types";
+import { InputType, InputSetType } from "@/types/types";
 
 // 如果 errorMsg 有內容，就 show errorMsg，沒有的話就隱藏
 // 如果 type === password，就 show 眼睛圖
 // 點擊 eye image 改變該 input type => useState + useRef
 
-type ShowPasswordStateType = Record<string, boolean>;
+type ShowPasswordType = Record<string, boolean>;
 
-export default function FormInput({ dataSet }: FormDataType) {
-  const initialState: ShowPasswordStateType =
-    dataSet.reduce<ShowPasswordStateType>((state, input) => {
-      if (input.type === "password") state[input.inputName] = false;
-      return state;
-    }, {});
+type PropsType = { inputSet: InputSetType };
+
+export default function FormInput({ inputSet }: PropsType) {
+  const initialState: ShowPasswordType = inputSet.reduce<ShowPasswordType>(
+    (obj, input) => {
+      if (input.type === "password") obj[input.inputName] = false;
+      return obj;
+    },
+    {}
+  );
 
   const [showPassword, setShowPassword] =
-    useState<ShowPasswordStateType>(initialState); //預設看不到密碼
+    useState<ShowPasswordType>(initialState); //預設看不到密碼
 
-  return dataSet.map((input: InputType) => {
+  return inputSet.map((input: InputType) => {
     const { label, type, inputName, placeholder, required, errorMsg } = input;
 
     return (

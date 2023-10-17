@@ -8,6 +8,4 @@ export interface InputType {
   errorMsg?: string;
 }
 
-export interface FormDataType {
-  dataSet: InputType[];
-}
+export type InputSetType = InputType[];
