@@ -10,6 +10,7 @@ interface Props {
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
   isDisabled?: boolean;
   appearance: "orange" | "yellow" | "light";
+  extraStyle?: string;
 }
 
 const styleSet = {
@@ -39,6 +40,7 @@ export default function GeneralButton({
   onClick,
   isDisabled,
   appearance,
+  extraStyle,
 }: Props) {
   const defaultStyle = styleSet[appearance].default;
   const hoverStyle = styleSet[appearance].hover;
@@ -54,7 +56,8 @@ export default function GeneralButton({
         hoverStyle,
         activeStyle,
         isDisabled ? disabledStyle : "",
-        "active:shadow-none active:-mr-0.5 active:ml-0.5 active:mt-0.5 active:-mb-0.5"
+        "active:shadow-none active:-mr-0.5 active:ml-0.5 active:mt-0.5 active:-mb-0.5",
+        extraStyle
       )}
       type={type}
       onClick={onClick}
