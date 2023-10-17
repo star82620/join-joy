@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "@/common/components/GeneralLink";
 import FrameWindow from "@/common/components/FrameWindow";
 import FormInput from "@/common/components/FormInput";
-import { IFormInput, IInputItem } from "@/types/IFormInput";
+import { IInputItem } from "@/types/IFormInput";
 
 // 如果錯誤就把 errorMsg 填入，如果 !errorMsg 就不 SHOW
 

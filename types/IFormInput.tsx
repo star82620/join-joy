@@ -7,6 +7,6 @@ export interface IInputItem {
   errorMsg?: string;
 }
 
-export type IFormInput {
-  formSet: InputItem[];
+export interface IFormInputProps {
+  formSet: IInputItem[];
 }
