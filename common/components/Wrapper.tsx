@@ -7,7 +7,7 @@ interface Props {
 
 // FrameWindow 框框寬度是看內容的
 
-export default function FrameWindow({ titleTag, children }: Props) {
+export default function Wrapper({ titleTag, children }: Props) {
   return (
     <div className="m-auto w-fit rounded-t-lg shadow-window">
       <section className="flex justify-between items-center bg-yellow-neutral border-[3px] border-b-2 rounded-t-lg px-3 py-2 text-center">

@@ -1,3 +1,4 @@
+//
 export interface IInputType {
   label: string;
   type: "text" | "email" | "password";
@@ -7,6 +8,6 @@ export interface IInputType {
   errorMsg?: string;
 }
 
-export interface IFormSetType {
-  formSet: IInputItem[];
+export interface IFormType {
+  dataSet: IInputType[];
 }
