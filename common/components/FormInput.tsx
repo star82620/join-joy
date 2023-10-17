@@ -11,10 +11,13 @@ interface IShowPasswordState {
   [inputName: string]: boolean;
 }
 export default function FormInput({ dataSet }: IFormType) {
-  const initialState: IShowPasswordState = dataSet.reduce((acc, input) => {
-    if (input.type === "password") acc[input.inputName] = false;
-    return acc;
-  }, {});
+  const initialState: IShowPasswordState = dataSet.reduce<IShowPasswordState>(
+    (state, input) => {
+      if (input.type === "password") state[input.inputName] = false;
+      return state;
+    },
+    {}
+  );
 
   const [showPassword, setShowPassword] =
     useState<IShowPasswordState>(initialState); //預設看不到密碼
