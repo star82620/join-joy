@@ -64,8 +64,8 @@ const config: Config = {
         window: "3px 2px 0 0 #504F4E",
       },
       backgroundImage: {
-        "eye-off": 'url("/images/input-visibility-off.svg")',
-        "eye-on": 'url("/images/input-visibility-on.svg")',
+        "eye-hide": 'url("/images/input-password-hide.svg")',
+        "eye-show": 'url("/images/input-password-show.svg")',
       },
       lineHeight: {
         heading: "1.4rem",
