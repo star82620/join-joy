@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer className="flex justify-center items-center flex-wrap py-3 bg-gray-700 text-gray-50 text-sm md:text-xs">
       {!isSimple && (
-        <div className="container flex justify-between ">
+        <div className="container flex justify-betweens">
           <div>
             <div>Logo</div>
             <p>Joining Together, Joy Forever!</p>

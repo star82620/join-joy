@@ -33,6 +33,7 @@ export default function Header() {
               className="inline"
             ></Image>
           </Button>
+          <section>{/* 點擊按鈕下拉選單，登入狀態會影響內容 */}</section>
         </section>
       </div>
     </header>
