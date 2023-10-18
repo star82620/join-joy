@@ -4,7 +4,7 @@ import { isNumericLiteral } from "typescript";
 
 // image data
 const image = {
-  src: "/images/logo.jpg",
+  src: "/images/logo-joinjoy.png",
   alt: "JoinJoy-logo",
 };
 
@@ -25,13 +25,13 @@ export default function WebsiteLogo({ width, height }: Props) {
   // console.log(imageSize);
 
   return (
-    <div className={`relative w-[80px] h-[80px]`}>
+    <div className={`relative w-[100px] h-[40px]`}>
       <Image
         src={image.src}
         alt={image.alt}
         fill={true}
         sizes="100%"
-        className="object-cover"
+        className="object-contain"
       />
     </div>
   );
