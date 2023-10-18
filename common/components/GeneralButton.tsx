@@ -4,14 +4,14 @@ import clsx from "clsx";
 // 執行此元件 function：給予對應的 props（type、text、callback function），輸出結果為 button
 // 需要判斷的東西：樣式顏色（目前有三種：白黃橘）、按鈕 type、callbackFunction、按鈕內容
 
-interface Props {
+type PropsType = {
   type: "button" | "submit" | "reset";
   children: ReactNode;
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
   isDisabled?: boolean;
   appearance: "orange" | "yellow" | "light";
-  extraStyle?: string;
-}
+  className?: string;
+};
 
 const styleSet = {
   orange: {
@@ -40,8 +40,8 @@ export default function GeneralButton({
   onClick,
   isDisabled,
   appearance,
-  extraStyle,
-}: Props) {
+  className,
+}: PropsType) {
   const defaultStyle = styleSet[appearance].default;
   const hoverStyle = styleSet[appearance].hover;
   const activeStyle = styleSet[appearance].active;
@@ -51,13 +51,13 @@ export default function GeneralButton({
     <button
       className={clsx(
         "border-2 border-gray-950 shadow-btn",
-        "px-2 py-3",
+        "px-3 py-2",
         defaultStyle,
         hoverStyle,
         activeStyle,
         isDisabled ? disabledStyle : "",
         "active:shadow-none active:-mr-0.5 active:ml-0.5 active:mt-0.5 active:-mb-0.5",
-        extraStyle
+        className
       )}
       type={type}
       onClick={onClick}
