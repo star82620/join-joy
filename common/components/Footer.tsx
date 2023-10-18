@@ -1,17 +1,14 @@
 import React from "react";
+import useSimpleFooter from "../helpers/useSimpleFooter";
 
 const copyright: string =
   "Copyright © 2023 遊人揪揪工作室 All rights reserved.";
 
 // 這些是測試，到時候應該要另外拉出來做
-const pageTitle = "會員註冊";
-const isSimple =
-  pageTitle === "會員註冊" ||
-  pageTitle === "會員登入" ||
-  pageTitle === "忘記密碼" ||
-  pageTitle === "開團表單";
 
 export default function Footer() {
+  const isSimple = useSimpleFooter();
+
   return (
     <footer className="flex justify-center items-center flex-wrap py-3 bg-gray-700 text-gray-50 text-sm md:text-xs">
       {!isSimple && (
