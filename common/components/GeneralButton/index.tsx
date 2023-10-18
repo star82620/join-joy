@@ -13,10 +13,10 @@ export default function GeneralButton({
   appearance,
   className,
 }: PropsType) {
-  const defaultStyle = styleSet[appearance].default;
-  const hoverStyle = styleSet[appearance].hover;
-  const activeStyle = styleSet[appearance].active;
-  const disabledStyle = styleSet[appearance].disabled;
+  const defaultStyle = dataSet[appearance].default;
+  const hoverStyle = dataSet[appearance].hover;
+  const activeStyle = dataSet[appearance].active;
+  const disabledStyle = dataSet[appearance].disabled;
 
   return (
     <button
