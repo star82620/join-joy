@@ -7,13 +7,19 @@ interface Props {
   href: string;
   children: ReactNode;
   target?: string;
+  extraStyle?: string;
 }
 
-export default function GeneralLink({ href, children, target }: Props) {
+export default function GeneralLink({
+  href,
+  children,
+  target,
+  extraStyle,
+}: Props) {
   // 如果有 href 但沒有 target => 內部連結
   if (href && !target)
     return (
-      <Link className="bg-red-200" href={href}>
+      <Link className={extraStyle} href={href}>
         {children}
       </Link>
     );
@@ -22,7 +28,7 @@ export default function GeneralLink({ href, children, target }: Props) {
   if (href && target)
     return (
       <a
-        className="bg-yellow-400"
+        className={extraStyle}
         href={href}
         target={target}
         rel="noreferrer noopener"
