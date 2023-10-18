@@ -17,7 +17,7 @@ export default function Login() {
         <form className="flex flex-col gap-6 md:gap-4 w-[380px] md:w-[300px] sm:w-[280px]">
           <FormInput inputSet={inputSet} />
           <Button
-            // extraStyle="mt-2"
+            // extraStyle="mt-2" 之後補上
             type="button"
             appearance="orange"
             onClick={() => console.log("y")}
@@ -25,9 +25,10 @@ export default function Login() {
             登入
           </Button>
         </form>
-        <p className="mt-3 text-center text-sm md:text-xs"></p>
+        <p className="mt-3 text-center text-sm md:text-xs">忘記密碼</p>
         <p className="mt-8 text-center text-md font-semibold">
           已有帳號？ <Link href="/signup">點擊註冊</Link>
+          {/* 之後補上： <Link href="/signup" extraStyle="text-blue-dark" >點擊註冊</Link> */}
         </p>
       </Wrapper>
     </div>
