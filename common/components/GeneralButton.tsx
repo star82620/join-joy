@@ -56,7 +56,7 @@ export default function GeneralButton({
         hoverStyle,
         activeStyle,
         isDisabled ? disabledStyle : "",
-        "active:shadow-none active:-mr-0.5 active:ml-0.5 active:mt-0.5 active:-mb-0.5",
+        "active:shadow-none active:translate-x-0.5 active:translate-y-0.5",
         className
       )}
       type={type}
