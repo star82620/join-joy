@@ -1,5 +1,6 @@
 import React, { Children, ReactNode } from "react";
 import Link from "next/link";
+import clsx from "clsx";
 
 // 執行此元件 function：給予對應的 props（url、target），輸出結果為 內部連結<Link> 或 外部連結<a>
 
@@ -19,7 +20,7 @@ export default function GeneralLink({
   // 如果有 href 但沒有 target => 內部連結
   if (href && !target)
     return (
-      <Link className={extraStyle} href={href}>
+      <Link className={clsx("underline", extraStyle)} href={href}>
         {children}
       </Link>
     );
@@ -28,7 +29,7 @@ export default function GeneralLink({
   if (href && target)
     return (
       <a
-        className={extraStyle}
+        className={clsx("underline", extraStyle)}
         href={href}
         target={target}
         rel="noreferrer noopener"
