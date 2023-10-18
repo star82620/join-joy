@@ -6,8 +6,9 @@ const copyright: string =
 export default function Footer() {
   //簡易版 <div className="text-center w-full">{copyright}</div>
   return (
-    <footer className="flex justify-center items-center py-3 bg-slate-400">
-      <div className="container flex justify-between flex-wrap">
+    <footer className="flex justify-center items-center flex-wrap py-3 bg-gray-700 text-gray-50 text-sm md:text-xs">
+      {/* 完整內容，要寫判斷顯示 */}
+      {/* <div className="container flex justify-between ">
         <div>
           <div>Logo</div>
           <p>Joining Together, Joy Forever!</p>
@@ -35,9 +36,8 @@ export default function Footer() {
             </ul>
           </section>
         </div>
-
-        <p className="text-center w-full">{copyright}</p>
-      </div>
+      </div> */}
+      <p className="text-center w-full">{copyright}</p>
     </footer>
   );
 }

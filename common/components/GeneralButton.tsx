@@ -49,7 +49,7 @@ export default function GeneralButton({
     <button
       className={clsx(
         "border-2 border-gray-950 shadow-btn",
-        "px-2 py-3",
+        "px-3 py-2",
         defaultStyle,
         hoverStyle,
         activeStyle,
