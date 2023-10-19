@@ -3,10 +3,9 @@ import Image from "next/image";
 import Logo from "../WebsiteLogo";
 import Button from "../GeneralButton";
 import Link from "../GeneralLink";
-import HeaderUserNavbar from "../HeaderUserNavbar";
+import Navbar from "../Navbar";
 import { hideGroupPages, hideStorePages } from "./data";
 
-const test = () => console.log("I see");
 type HeaderProps = {
   pageCategory: string;
 };
@@ -50,24 +49,27 @@ export default function Header({ pageCategory }: HeaderProps) {
             </Button>
           )}
           <section className="flex flex-col">
-            <Button type="button" appearance="light" onClick={test}>
+            <Button
+              type="button"
+              appearance="light"
+              onClick={() => console.log("I see")}
+            >
               <Image
                 src="/images/icon-header-user.svg"
                 alt="user"
                 width="36"
                 height="24"
                 className="inline md:hidden border-r-2 border-gray-950 pr-3 mr-3"
-              ></Image>
+              />
               <Image
                 src="/images/icon-header-menu.svg"
                 alt="menu"
                 width="24"
                 height="24"
-                className="inline"
-              ></Image>
+              />
             </Button>
             {/* 點擊按鈕下拉選單，登入狀態會影響內容 */}
-            {/* <HeaderUserNavbar /> */}
+            {/* <Navbar /> */}
           </section>
         </section>
       </div>

@@ -28,10 +28,10 @@ function DefaultFooter() {
                   {lists.title}
                 </h6>
                 <ul className="flex flex-col gap-3 pl-2 mt-2 border-l border-gray-300 md:items-center md:border-0 md:p-0 md:mt-1 md:text-xs">
-                  {lists.content.map((item) => {
+                  {lists.contents.map((item) => {
                     return (
                       <li key={item.href}>
-                        <Link href={`/${item.href}`} className="no-underline">
+                        <Link href={item.href} className="no-underline">
                           {item.text}
                         </Link>
                       </li>
