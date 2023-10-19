@@ -1,5 +1,4 @@
 import React from "react";
-import useSimpleFooter from "../helpers/useSimpleFooter";
 
 const copyright: string =
   "Copyright © 2023 遊人揪揪工作室 All rights reserved.";
