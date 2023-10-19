@@ -27,7 +27,7 @@ export default function Header({ pageCategory }: HeaderProps) {
   });
 
   return (
-    <header className="flex justify-center items-center bg-yellow-dark border-b-2 border-stone-950">
+    <header className="bg-yellow-dark border-b-2 border-stone-950">
       <div className="flex justify-between items-center container py-5 md:py-3">
         <Link href="/">
           <Logo width="38" height="38" />
@@ -44,6 +44,7 @@ export default function Header({ pageCategory }: HeaderProps) {
               type="button"
               appearance="yellow"
               onClick={() => console.log("開團！")}
+              className="md:hidden"
             >
               我要開團
             </Button>

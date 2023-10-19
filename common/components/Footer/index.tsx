@@ -14,8 +14,8 @@ function SimpleFooter() {
 // 基本款
 function DefaultFooter() {
   return (
-    <footer className="container flex flex-col gap-8 md:gap-6 py-9 md:pt-6 md:pb-8 bg-gray-700 text-gray-50 text-sm md:text-xs">
-      <div className="flex justify-between md:flex-col md:justify-center ">
+    <footer className="py-9 md:pt-6 md:pb-8 bg-gray-700 text-gray-50 text-sm md:text-xs">
+      <div className="container flex justify-between mb-8 md:mb-6 md:flex-col md:justify-center ">
         <div className="flex flex-col md:border-b-[1px] md:border-gray-400 md:justify-center md:items-center md:pb-4 md:mb-4">
           <div>{footerInfo.logo}</div>
           <p>{footerInfo.slogan}</p>
@@ -43,7 +43,7 @@ function DefaultFooter() {
           })}
         </div>
       </div>
-      <p className="text-center">{copyright}</p>
+      <p className="container text-center">{copyright}</p>
     </footer>
   );
 }
