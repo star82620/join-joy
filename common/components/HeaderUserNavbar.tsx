@@ -9,6 +9,9 @@ type dataType = {
   content: string;
 };
 type dataSetType = dataType[];
+type NavbarItemProps = {
+  data: dataType;
+};
 
 // 這些資料移出去 Header
 const dataSet: dataSetType = [
@@ -21,7 +24,8 @@ const dataSet: dataSetType = [
   { href: "", imageSrc: "", imageAlt: "", content: "" },
 ];
 
-function NavbarItem({ href, imageSrc, imageAlt, content }: dataType) {
+function NavbarItem({ data }: NavbarItemProps) {
+  const { href, imageSrc, imageAlt, content } = data;
   return (
     <Link
       href={`/${href}`}
@@ -40,7 +44,7 @@ export default function HeaderUserNavbar() {
         console.log(data);
         return (
           <li key={data.href}>
-            <NavbarItem {...data} />
+            <NavbarItem data={data} />
           </li>
         );
       })}
