@@ -6,8 +6,23 @@ import Link from "./GeneralLink";
 import HeaderUserNavbar from "./HeaderUserNavbar";
 
 const test = () => console.log("I see");
+type HeaderProps = {
+  pageCategory: string;
+};
 
-export default function Header() {
+// 有這兩個東西要隱藏：
+// 在揪遊上成立店家 hideCreateStore -
+// 開團按鈕 hideCreateGroup -
+
+// 還是要把這個直接改成 Head 然後傳 props 進去？
+// const hideCreateGroup = ["", "", ""];
+// const hideCreateStore = [];
+
+export default function Header({ pageCategory }: HeaderProps) {
+  // const isDefaultHeader: boolean = simplePages.includes(pageCategory)
+  // ? false
+  // : true;
+
   return (
     <header className="flex justify-center items-center bg-yellow-dark border-b-2 border-stone-950">
       <div className="flex justify-between items-center container px-12 py-5 md:px-2 md:py-3">
@@ -18,8 +33,15 @@ export default function Header() {
           <Link href="/create-group" className="md:hidden">
             在 揪遊 上成立店家
           </Link>
+          <Button
+            type="button"
+            appearance="yellow"
+            onClick={() => console.log("開團！")}
+          >
+            我要開團
+          </Button>
           <section className="flex flex-col">
-            <Button type="button" onClick={test} appearance="light">
+            <Button type="button" appearance="light" onClick={test}>
               <Image
                 src="/images/icon-header-user.svg"
                 alt="user"
