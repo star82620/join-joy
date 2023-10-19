@@ -1,5 +1,5 @@
 //使用簡易版 Footer 的頁面
-export const simplePages: Array<string> = [
+export const simpleFooterPages: Array<string> = [
   "signup",
   "login",
   "forget-password",

@@ -9,7 +9,6 @@ interface Props {
 
 export default function Layout({ children }: Props) {
   const router = useRouter();
-  console.log(router.pathname);
   return (
     <div className="min-h-screen flex flex-col">
       <Header pageCategory={router.pathname} />

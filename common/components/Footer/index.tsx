@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "../GeneralLink";
-import { simplePages, copyright, footerInfo, footerMenu } from "./data";
+import { simpleFooterPages, copyright, footerInfo, footerMenu } from "./data";
 
 // 簡易款
 function SimpleFooter() {
@@ -48,13 +48,12 @@ function DefaultFooter() {
   );
 }
 
-type footerSelectorType = "simple" | "default";
 type FooterProps = { pageCategory: string };
 
 export default function Footer({ pageCategory }: FooterProps) {
   let isDefaultFooter = true;
 
-  simplePages.forEach((page) => {
+  simpleFooterPages.forEach((page) => {
     if (pageCategory.includes(page)) {
       isDefaultFooter = false;
     }
