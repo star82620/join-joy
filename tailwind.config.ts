@@ -7,6 +7,12 @@ const config: Config = {
     "./common/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: "48px",
+        md: "8px",
+      },
+    },
     screens: {
       // desktop : lg, tablet : md, mobile: sm
       lg: { max: "1272px" },
