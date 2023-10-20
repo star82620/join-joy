@@ -21,12 +21,12 @@ export default function Header({ pageCategory }: HeaderProps) {
           <Logo width="38" height="38" />
         </Link>
         <section className="flex items-center gap-6">
-          {!isStoreButtonHidden && (
+          {isStoreButtonHidden || (
             <Link href="/create-group" className="md:hidden">
               在 揪遊 上成立店家
             </Link>
           )}
-          {!isGroupButtonHidden && (
+          {isGroupButtonHidden || (
             <Button
               type="button"
               appearance="yellow"
@@ -41,6 +41,7 @@ export default function Header({ pageCategory }: HeaderProps) {
               type="button"
               appearance="light"
               onClick={() => console.log("I see")}
+              className="w-fit"
             >
               <Image
                 src="/images/icon-header-user.svg"
@@ -54,6 +55,7 @@ export default function Header({ pageCategory }: HeaderProps) {
                 alt="menu"
                 width="24"
                 height="24"
+                className="inline"
               />
             </Button>
             {/* 點擊按鈕下拉選單，登入狀態會影響內容 */}
