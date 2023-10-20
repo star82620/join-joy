@@ -43,3 +43,8 @@ h6 {
   font-weight: 600;
   line-height: 1.4;
 }
+
+.container {
+  @apply max-w-[1176px] mx-auto 
+  px-12 md:px-6 sm:px-3;
+}

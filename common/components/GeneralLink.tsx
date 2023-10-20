@@ -8,19 +8,19 @@ interface Props {
   href: string;
   children: ReactNode;
   target?: string;
-  extraStyle?: string;
+  className?: string;
 }
 
 export default function GeneralLink({
   href,
   children,
   target,
-  extraStyle,
+  className,
 }: Props) {
   // 如果有 href 但沒有 target => 內部連結
   if (href && !target)
     return (
-      <Link className={clsx("underline", extraStyle)} href={href}>
+      <Link className={clsx("underline", className)} href={href}>
         {children}
       </Link>
     );
@@ -29,7 +29,7 @@ export default function GeneralLink({
   if (href && target)
     return (
       <a
-        className={clsx("underline", extraStyle)}
+        className={clsx("underline", className)}
         href={href}
         target={target}
         rel="noreferrer noopener"
