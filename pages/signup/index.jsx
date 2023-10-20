@@ -4,7 +4,10 @@ import Layout from "@/common/components/Layout";
 
 export default function SignupPage() {
   return (
-    <Layout pageCategory="signup" mainClassName="py-[88px]">
+    <Layout
+      pageCategory="signup"
+      mainClassName="py-[88px] lg:py-18 md:py-16 sm:py-14"
+    >
       <Signup />
     </Layout>
   );
