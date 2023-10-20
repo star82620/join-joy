@@ -5,8 +5,8 @@ import { simpleFooterPages, copyright, footerInfo, footerMenu } from "./data";
 // 簡易款
 function SimpleFooter() {
   return (
-    <footer className="container flex flex-col gap-6 py-3 md:py-2 bg-gray-700 text-gray-50 text-sm md:text-xs text-center">
-      {copyright}
+    <footer className="bg-gray-700 text-gray-50 text-sm md:text-xs py-3 md:py-2">
+      <p className="container text-center">{copyright}</p>
     </footer>
   );
 }
@@ -14,7 +14,7 @@ function SimpleFooter() {
 // 基本款
 function DefaultFooter() {
   return (
-    <footer className="py-9 md:pt-6 md:pb-8 bg-gray-700 text-gray-50 text-sm md:text-xs">
+    <footer className="bg-gray-700 text-gray-50 text-sm md:text-xs py-9 md:pt-6 md:pb-8">
       <div className="container flex justify-between mb-8 md:mb-6 md:flex-col md:justify-center ">
         <div className="flex flex-col md:border-b-[1px] md:border-gray-400 md:justify-center md:items-center md:pb-4 md:mb-4">
           <div>{footerInfo.logo}</div>
@@ -51,13 +51,7 @@ function DefaultFooter() {
 type FooterProps = { pageCategory: string };
 
 export default function Footer({ pageCategory }: FooterProps) {
-  let isDefaultFooter = true;
-
-  simpleFooterPages.forEach((page) => {
-    if (pageCategory.includes(page)) {
-      isDefaultFooter = false;
-    }
-  });
+  let isDefaultFooter = !simpleFooterPages.includes(pageCategory);
 
   return <>{isDefaultFooter ? <DefaultFooter /> : <SimpleFooter />}</>;
 }

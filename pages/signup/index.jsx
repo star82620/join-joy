@@ -1,10 +1,11 @@
 import React from "react";
 import Signup from "@/modules/Signup";
+import Layout from "@/common/components/Layout";
 
 export default function SignupPage() {
   return (
-    <div className="bg-yellow-tint py-[88px]">
+    <Layout pageCategory="signup" mainClassName="py-[88px]">
       <Signup />
-    </div>
+    </Layout>
   );
 }

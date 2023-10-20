@@ -1,5 +1,5 @@
 // 隱藏「我要開團」的頁面
-export const hideGroupPages: Array<string> = [
+export const hiddenGroupBtnPages: Array<string> = [
   "login",
   "signup",
   "forget-password",
@@ -7,4 +7,4 @@ export const hideGroupPages: Array<string> = [
 ];
 
 // 隱藏「在揪遊上成立店家」的頁面
-export const hideStorePages: Array<string> = ["login"];
+export const hiddenStoreBtnPages: Array<string> = ["login"];

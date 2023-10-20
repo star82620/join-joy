@@ -4,26 +4,15 @@ import Logo from "../WebsiteLogo";
 import Button from "../GeneralButton";
 import Link from "../GeneralLink";
 import Navbar from "../Navbar";
-import { hideGroupPages, hideStorePages } from "./data";
+import { hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 
 type HeaderProps = {
   pageCategory: string;
 };
 
 export default function Header({ pageCategory }: HeaderProps) {
-  let hideGroupBtn = true;
-  let hideStoreBtn = true;
-
-  hideGroupPages.forEach((page) => {
-    if (pageCategory.includes(page)) {
-      hideGroupBtn = false;
-    }
-  });
-  hideStorePages.forEach((page) => {
-    if (pageCategory.includes(page)) {
-      hideStoreBtn = false;
-    }
-  });
+  let isGroupButtonHidden = hiddenGroupBtnPages.includes(pageCategory);
+  let isStoreButtonHidden = hiddenStoreBtnPages.includes(pageCategory);
 
   return (
     <header className="bg-yellow-dark border-b-2 border-stone-950">
@@ -32,13 +21,12 @@ export default function Header({ pageCategory }: HeaderProps) {
           <Logo width="38" height="38" />
         </Link>
         <section className="flex items-center gap-6">
-          {/* 如果 showStoreBtn === true 出現按鈕 */}
-          {hideStoreBtn && (
+          {!isStoreButtonHidden && (
             <Link href="/create-group" className="md:hidden">
               在 揪遊 上成立店家
             </Link>
           )}
-          {hideGroupBtn && (
+          {!isGroupButtonHidden && (
             <Button
               type="button"
               appearance="yellow"
