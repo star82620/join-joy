@@ -1,10 +1,10 @@
 import React, { Children, ReactNode } from "react";
 
-interface WrapperProps {
+type WrapperProps = {
   title: string;
   titleStyle: string;
   children: ReactNode;
-}
+};
 
 // FrameWindow 框框寬度是看內容的
 
