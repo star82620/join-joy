@@ -1,12 +1,5 @@
 import { apiParamsType, InputSetType } from "@/types/types";
-
-// errorMsg
-// export interface ErrorType {
-//   nickname: string | undefined;
-//   email: string | undefined;
-//   password: string | undefined;
-//   confirmPassword: string | undefined;
-// }
+import { GeneralButtonProps } from "@/common/components/GeneralButton/data";
 
 export const title = "會員註冊";
 
@@ -44,6 +37,18 @@ export const inputSet: InputSetType = [
     errorMsg: "* 再次輸入密碼為必填項目",
   },
 ];
+
+//Form 按鈕狀態
+const t = () => console.log("我被按了");
+
+export const btnSet: GeneralButtonProps = {
+  type: "button",
+  children: "註冊",
+  onClick: t,
+  isDisabled: false,
+  appearance: "orange",
+  className: "mt-2",
+};
 
 //API
 export const apiParams: apiParamsType = {

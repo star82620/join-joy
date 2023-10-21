@@ -1,3 +1,5 @@
+import { type } from "os";
+
 //FormInput
 export interface InputType {
   label: string;
@@ -9,6 +11,8 @@ export interface InputType {
 }
 
 export type InputSetType = InputType[];
+
+export type InputErrorsType = Record<string, boolean>;
 
 //FetchApi
 export type apiParamsType = {

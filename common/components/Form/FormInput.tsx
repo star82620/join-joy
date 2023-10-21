@@ -1,27 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { InputType, InputSetType } from "@/types/types";
-
-// 如果 errorMsg 有內容，就 show errorMsg，沒有的話就隱藏
-// 如果 type === password，就 show 眼睛圖
-// 點擊 eye image 改變該 input type => useState + useRef
+import { InputType, InputSetType, InputErrorsType } from "@/types/types";
 
 type ShowPasswordType = Record<string, boolean>;
 
-type PropsType = { inputSet: InputSetType };
+type FormInputProps = {
+  inputSet: InputSetType;
+  inputErrors: InputErrorsType;
+  setInputErrors: (inputErrors: InputErrorsType) => void;
+};
 
-export default function FormInput({ inputSet }: PropsType) {
-  const initialState: ShowPasswordType = inputSet.reduce<ShowPasswordType>(
-    (obj, input) => {
-      if (input.type === "password") obj[input.inputName] = false;
-      return obj;
-    },
-    {}
-  );
+export default function FormInput({
+  inputSet,
+  inputErrors,
+  setInputErrors,
+}: FormInputProps) {
+  // 管理「顯示密碼」狀態的物件，會根據 inputSet 自動生成，預設 false
+  const initialShowPassword: ShowPasswordType = {};
+  inputSet.forEach((input) => {
+    if (input.type === "password") {
+      initialShowPassword[input.inputName] = false;
+    }
+  });
 
   const [showPassword, setShowPassword] =
-    useState<ShowPasswordType>(initialState); //預設看不到密碼
+    useState<ShowPasswordType>(initialShowPassword); //預設看不到密碼
 
   return inputSet.map((input: InputType) => {
     const { label, type, inputName, placeholder, required, errorMsg } = input;
@@ -58,7 +62,7 @@ export default function FormInput({ inputSet }: PropsType) {
           ></input>
         </div>
 
-        {errorMsg && (
+        {inputErrors[inputName] && (
           <p className="text-danger mt-2 md:mt-1 text-sm md:text-xs">
             {errorMsg}
           </p>

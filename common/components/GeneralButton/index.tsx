@@ -1,6 +1,6 @@
 import React, { Children, ReactNode } from "react";
 import clsx from "clsx";
-import { PropsType, dataSet } from "./data";
+import { GeneralButtonProps, dataSet } from "./data";
 
 // 執行此元件 function：給予對應的 props（type、text、callback function），輸出結果為 button
 // 需要判斷的東西：樣式顏色（目前有三種：白黃橘）、按鈕 type、callbackFunction、按鈕內容
@@ -12,7 +12,7 @@ export default function GeneralButton({
   isDisabled,
   appearance,
   className,
-}: PropsType) {
+}: GeneralButtonProps) {
   const defaultStyle = dataSet[appearance].default;
   const hoverStyle = dataSet[appearance].hover;
   const activeStyle = dataSet[appearance].active;

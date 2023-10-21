@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
-export type PropsType = {
+export type GeneralButtonProps = {
   type: "button" | "submit" | "reset";
+  appearance: "orange" | "yellow" | "light";
   children: ReactNode;
   onClick: (event: React.MouseEvent<HTMLElement>) => void;
   isDisabled?: boolean;
-  appearance: "orange" | "yellow" | "light";
   className?: string;
 };
 
