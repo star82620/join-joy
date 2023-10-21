@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import FormInput from "./FormInput";
 import Button from "../GeneralButton";
-import { InputType, InputSetType, InputErrorsType } from "@/types/types";
-import { GeneralButtonProps } from "../GeneralButton/data";
-
-type FormProps = {
-  inputSet: InputSetType;
-  btnSet: GeneralButtonProps;
-};
+import { InputType, InputErrorsType, FormProps } from "./data";
 
 export default function Form({ inputSet, btnSet }: FormProps) {
   //管理 error 狀態的物件，會根據 inputSet 自動生成，預設 false
