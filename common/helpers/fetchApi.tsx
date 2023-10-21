@@ -1,11 +1,5 @@
 const token = ""; //之後再補，看要用什麼方式存放 token
 
-type apiParamsType = {
-  apiPath: string;
-  method: "GET" | "POST" | "PATCH" | "DELETE";
-  data?: Record<string, string>;
-};
-
 // 要用的話要寫這一包資料
 // const apiParams = {
 //   apiPath: "/users/sign_up",
@@ -17,6 +11,12 @@ type apiParamsType = {
 //   },
 // };
 // const data = fetchApi(apiParams);
+
+export type apiParamsType = {
+  apiPath: string;
+  method: "GET" | "POST" | "PATCH" | "DELETE";
+  data?: Record<string, string>;
+};
 
 export default async function fetchApi(apiParams: apiParamsType) {
   const { apiPath, method, data } = apiParams;

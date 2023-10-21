@@ -1,5 +1,6 @@
-import { apiParamsType, InputSetType } from "@/types/types";
+import { InputSetType } from "@/common/components/Form/data";
 import { GeneralButtonProps } from "@/common/components/GeneralButton/data";
+import { apiParamsType } from "@/common/helpers/fetchApi";
 
 export const title = "會員註冊";
 
