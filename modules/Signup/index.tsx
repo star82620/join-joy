@@ -3,6 +3,7 @@ import Link from "@/common/components/GeneralLink";
 import Wrapper from "@/common/components/Wrapper";
 import FormInput from "@/common/components/FormInput";
 import { InputType, InputSetType } from "@/types/types";
+import fetchApi from "@/common/helpers/fetchApi";
 
 // errorMsg
 export interface ErrorType {
@@ -12,12 +13,31 @@ export interface ErrorType {
   confirmPassword: string | undefined;
 }
 
+type paramsType = {
+  apiPath: string;
+  method: "GET" | "POST" | "PATCH" | "DELETE";
+  data?: any;
+  // needAuth: boolean;
+};
+
 const pageTitle = "會員註冊";
 const titleTag = (
   <h2 className="text-[20px] md:text-[18px] md:leading-heading">{pageTitle}</h2>
 );
 
+const params: paramsType = {
+  apiPath: "/users/sign_up",
+  method: "POST",
+  data: {
+    email: "jjjaa@gmail.com",
+    password: "example",
+    nickname: "example",
+  },
+};
+
 export default function Signup() {
+  const ress = fetchApi(params);
+  console.log("signup", ress);
   // 如果錯誤就把 errorMsg 填入，如果 !errorMsg 就不 SHOW (待優化：這個地方可以自動 run key 嗎)
   const [error, setError] = useState<ErrorType>({
     nickname: "",
