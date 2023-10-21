@@ -20,10 +20,7 @@ type paramsType = {
   // needAuth: boolean;
 };
 
-const pageTitle = "會員註冊";
-const titleTag = (
-  <h2 className="text-[20px] md:text-[18px] md:leading-heading">{pageTitle}</h2>
-);
+const title = "會員註冊";
 
 const params: paramsType = {
   apiPath: "/users/sign_up",
@@ -83,7 +80,10 @@ export default function Signup() {
 
   return (
     <div className="m-auto w-fit">
-      <Wrapper titleTag={titleTag}>
+      <Wrapper
+        title={title}
+        titleStyle="text-[20px] md:text-[18px] md:leading-heading"
+      >
         <form className="flex flex-col gap-6 md:gap-4 w-[380px] md:w-[300px] sm:w-[280px]">
           <FormInput inputSet={inputSet} />
           <button type="button" className="mt-2">
