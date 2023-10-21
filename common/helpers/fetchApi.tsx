@@ -1,29 +1,26 @@
 const token = ""; //之後再補，看要用什麼方式存放 token
 
-type dataSetType = {
-  apiUrl: string;
+type paramsType = {
+  apiPath: string;
   method: "GET" | "POST" | "PATCH" | "DELETE";
-  requestData?: Record<string, string>;
-  // needAuth: boolean;
+  data?: Record<string, string>;
 };
 
 // 要用的話要寫這一包資料
-// const apiSet = {
-//   apiUrl: "https://todolist-api.hexschool.io/users/sign_up",
+// const params = {
+//   apiPath: "/users/sign_up",
 //   method: "POST",
-//   requestData: {
+//   data: {
 //     email: "jjjaa@gmail.com",
 //     password: "example",
 //     nickname: "example",
 //   },
 // };
-// const ress = await fetchApi(apiSet);
-// console.log("signup", ress);
+// const data = fetchApi(params);
 
-export default async function fetchApi(dataSet: dataSetType) {
-  const { apiUrl, method, requestData } = dataSet;
-  // const authHeader = needAuth ? `Authorization: ${token}` : null; //這個有必要嗎？還是沒有的話就給auth欄位空著？
-
+export default async function fetchApi(params: paramsType) {
+  const { apiPath, method, data } = params;
+  const url = process.env.NEXT_PUBLIC_API_URL + apiPath;
   const apiHeaders = {
     Authorization: token,
     "Content-Type": "application/json",
@@ -31,13 +28,13 @@ export default async function fetchApi(dataSet: dataSetType) {
   const requestOptions = {
     method: method,
     headers: apiHeaders,
-    body: JSON.stringify(requestData),
+    body: JSON.stringify(data),
   };
 
   try {
-    const res = await fetch(apiUrl, requestOptions);
+    const res = await fetch(url, requestOptions);
     const result = await res.json();
-    return result;
+    console.log(result);
   } catch (error) {
     console.log(error);
   }
