@@ -1,4 +1,4 @@
-//
+//FormInput
 export interface InputType {
   label: string;
   type: "text" | "email" | "password";
@@ -9,3 +9,10 @@ export interface InputType {
 }
 
 export type InputSetType = InputType[];
+
+//FetchApi
+export type apiParamsType = {
+  apiPath: string;
+  method: "GET" | "POST" | "PATCH" | "DELETE";
+  data?: Record<string, string>;
+};
