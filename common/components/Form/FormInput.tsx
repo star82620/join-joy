@@ -1,15 +1,11 @@
 import { useEffect, useState, ReactNode } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-import { InputType, InputSetType, InputErrorsType } from "@/types/types";
-
-type ShowPasswordType = Record<string, boolean>;
-
-type FormInputProps = {
-  inputSet: InputSetType;
-  inputErrors: InputErrorsType;
-  setInputErrors: (inputErrors: InputErrorsType) => void;
-};
+import {
+  InputType,
+  ShowPasswordType,
+  FormInputProps,
+} from "@/common/components/Form/data";
 
 export default function FormInput({
   inputSet,

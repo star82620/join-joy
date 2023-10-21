@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export type GeneralButtonProps = {
+export type ButtonType = {
   type: "button" | "submit" | "reset";
   appearance: "orange" | "yellow" | "light";
   children: ReactNode;
@@ -9,6 +9,7 @@ export type GeneralButtonProps = {
   className?: string;
 };
 
+// appearance 按鈕樣式
 export const dataSet = {
   orange: {
     default: "bg-orange-neutral",
