@@ -13,7 +13,9 @@ export type InputType = {
 export type InputSetType = InputType[];
 
 export type InputErrorsType = Record<string, boolean>;
+
 export type ShowPasswordType = Record<string, boolean | undefined>;
+
 export type InputValuesType = Record<string, string>;
 
 export type FormProps = {
