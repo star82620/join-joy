@@ -25,3 +25,4 @@ export type FormInputProps = {
 };
 
 export type ShowPasswordType = Record<string, boolean>;
+export type InputValuesType = Record<string, string>;

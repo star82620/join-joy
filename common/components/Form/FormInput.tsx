@@ -5,13 +5,16 @@ import {
   InputType,
   ShowPasswordType,
   FormInputProps,
+  InputValuesType,
 } from "@/common/components/Form/data";
 
-export default function FormInput({
-  inputSet,
-  inputErrors,
-  setInputErrors,
-}: FormInputProps) {
+const catchInputValue = (e) => {
+  setInputValues(inputValues[inputName]);
+};
+
+export default function FormInput(props: FormInputProps) {
+  const { inputSet, inputErrors, setInputErrors } = props;
+
   // 管理「顯示密碼」狀態的物件，會根據 inputSet 自動生成，預設 false
   const initialShowPassword: ShowPasswordType = {};
   inputSet.forEach((input) => {
@@ -23,7 +26,16 @@ export default function FormInput({
   const [showPassword, setShowPassword] =
     useState<ShowPasswordType>(initialShowPassword); //預設看不到密碼
 
+  //管理「input value」狀態的物件，會根據 inputSet 自動生成，預設空值
+  const initialInputValues: InputValuesType = {};
+  inputSet.forEach((input) => {
+    initialInputValues[input.inputName] = "";
+  });
+  const [inputValues, setInputValues] =
+    useState<InputValuesType>(initialInputValues);
+
   return inputSet.map((input: InputType) => {
+    //先寫，之後再拆，這裡留下拆出來的個別 input ，剩下的邏輯要丟到 Form
     const { label, type, inputName, placeholder, required, errorMsg } = input;
 
     return (
@@ -40,6 +52,8 @@ export default function FormInput({
             name={inputName}
             placeholder={placeholder}
             required={required}
+            value={inputValues[inputName]}
+            onChange={catchInputValue}
           ></input>
           <input
             className={clsx(
