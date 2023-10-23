@@ -8,10 +8,6 @@ import {
   InputValuesType,
 } from "@/common/components/Form/data";
 
-const catchInputValue = (e) => {
-  setInputValues(inputValues[inputName]);
-};
-
 export default function FormInput(props: FormInputProps) {
   const { inputSet, inputErrors, setInputErrors } = props;
 
@@ -33,6 +29,16 @@ export default function FormInput(props: FormInputProps) {
   });
   const [inputValues, setInputValues] =
     useState<InputValuesType>(initialInputValues);
+
+  console.log("i", inputValues);
+
+  const catchInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputName = e.target.name;
+    const value = e.target.value;
+    setInputValues((prevState) => ({ ...prevState, [inputName]: value }));
+  };
+
+  // -----------------
 
   return inputSet.map((input: InputType) => {
     //先寫，之後再拆，這裡留下拆出來的個別 input ，剩下的邏輯要丟到 Form
