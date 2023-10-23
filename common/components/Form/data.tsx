@@ -7,6 +7,7 @@ export type InputType = {
   placeholder: string;
   required: boolean;
   errorMsg?: string;
+  pattern?: RegExp;
 };
 
 export type InputSetType = InputType[];

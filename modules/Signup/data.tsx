@@ -12,6 +12,7 @@ export const inputSet: InputSetType = [
     placeholder: "例如：多多",
     required: true,
     errorMsg: "* 名字為必填項目",
+    // pattern: /^.+$/,
   },
   {
     label: "帳號",
@@ -20,6 +21,7 @@ export const inputSet: InputSetType = [
     placeholder: "example@mail.com",
     required: true,
     errorMsg: "* 帳號為必填項目",
+    pattern: /^[-a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
   },
   {
     label: "密碼",
@@ -28,6 +30,7 @@ export const inputSet: InputSetType = [
     placeholder: "輸入 6-12 位英數字組合",
     required: true,
     errorMsg: "* 密碼為必填項目",
+    pattern: /^(?=.*[0-9]).{6,12}$/,
   },
   {
     label: "再次輸入密碼",

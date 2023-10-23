@@ -54,18 +54,29 @@ export default function Form({ inputSet, btnSet }: FormProps) {
   };
 
   function isValidForm() {
-    const emailVerify = /^[-a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
-    const passwordVerify = /^(?=.*[0-9]).{6,12}$/;
-    const errors: InputErrorsType = { ...inputErrors };
+    const errors: InputErrorsType = {};
+    const emptyVerify = /^.+$/;
 
-    errors.email = !emailVerify.test(inputValues.email) ? true : false;
-    errors.password = !passwordVerify.test(inputValues.password) ? true : false;
-    errors.nickname = !inputValues.nickname ? true : false;
-    errors.confirmPassword =
-      !(inputValues.confirmPassword === inputValues.password) ||
-      errors.password === true
-        ? true
-        : false;
+    inputSet.map((input) => {
+      if (input.required && !input.pattern) {
+        errors[input.inputName] = !inputValues[input.inputName] ? true : false;
+      }
+      if (input.pattern) {
+        errors[input.inputName] = !input.pattern.test(
+          inputValues[input.inputName]
+        )
+          ? true
+          : false;
+      }
+      if (input.inputName === "confirmPassword") {
+        errors.confirmPassword =
+          !inputValues.confirmPassword ||
+          !(inputValues.confirmPassword === inputValues.password) ||
+          errors.password === true
+            ? true
+            : false;
+      }
+    });
 
     setInputErrors(errors);
     return !Object.values(errors).includes(true);
@@ -75,7 +86,7 @@ export default function Form({ inputSet, btnSet }: FormProps) {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // 表單驗證，如果 false 就檔掉
-    if (!isValidForm()) return;
+    if (isValidForm() === false) return;
     // 打 API
     console.log("ohoh");
     console.log(inputValues);

@@ -28,7 +28,7 @@ export default function FormInput(props: FormInputProps) {
             type={typeSelector}
             name={inputName}
             placeholder={placeholder}
-            required={required}
+            // required={required} 我自己擋，不用瀏覽器本身的
             value={inputValues[inputName]}
             onChange={handleCatchValue}
           ></input>
