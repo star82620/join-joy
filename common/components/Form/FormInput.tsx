@@ -33,9 +33,8 @@ export default function FormInput(props: FormInputProps) {
   console.log("i", inputValues);
 
   const catchInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputName = e.target.name;
-    const value = e.target.value;
-    setInputValues((prevState) => ({ ...prevState, [inputName]: value }));
+    const { name, value } = e.target;
+    setInputValues((prevState) => ({ ...prevState, [name]: value }));
   };
 
   // -----------------
