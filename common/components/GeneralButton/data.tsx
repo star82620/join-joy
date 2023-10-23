@@ -4,7 +4,7 @@ export type ButtonType = {
   type: "button" | "submit" | "reset";
   appearance: "orange" | "yellow" | "light";
   children: ReactNode;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
   isDisabled?: boolean;
   className?: string;
 };

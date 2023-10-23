@@ -43,9 +43,8 @@ export const inputSet: InputSetType = [
 const t = () => console.log("我被按了");
 
 export const btnSet: ButtonType = {
-  type: "button",
+  type: "submit",
   children: "註冊",
-  onClick: t,
   isDisabled: false,
   appearance: "orange",
   className: "mt-2",

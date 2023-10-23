@@ -12,7 +12,7 @@ export type InputType = {
 export type InputSetType = InputType[];
 
 export type InputErrorsType = Record<string, boolean>;
-export type ShowPasswordType = Record<string, boolean>;
+export type ShowPasswordType = Record<string, boolean | undefined>;
 export type InputValuesType = Record<string, string>;
 
 export type FormProps = {
@@ -23,8 +23,8 @@ export type FormProps = {
 export type FormInputProps = {
   inputSet: InputSetType;
   inputErrors: InputErrorsType;
-  catchInputValue: React.ChangeEventHandler<HTMLInputElement>;
-  togglePassword: React.ChangeEventHandler<HTMLInputElement>;
+  handleCatchValue: React.ChangeEventHandler<HTMLInputElement>;
+  handleTogglePassword: React.ChangeEventHandler<HTMLInputElement>;
   showPassword: ShowPasswordType;
   inputValues: InputValuesType;
 };

@@ -6,8 +6,8 @@ export default function FormInput(props: FormInputProps) {
   const {
     inputSet,
     inputErrors,
-    catchInputValue,
-    togglePassword,
+    handleCatchValue,
+    handleTogglePassword,
     showPassword,
     inputValues,
   } = props;
@@ -30,7 +30,7 @@ export default function FormInput(props: FormInputProps) {
             placeholder={placeholder}
             required={required}
             value={inputValues[inputName]}
-            onChange={catchInputValue}
+            onChange={handleCatchValue}
           ></input>
           <input
             className={clsx(
@@ -41,7 +41,7 @@ export default function FormInput(props: FormInputProps) {
             type="checkbox"
             data-target={inputName}
             checked={showPassword[inputName]}
-            onChange={togglePassword}
+            onChange={handleTogglePassword}
           ></input>
         </div>
 
