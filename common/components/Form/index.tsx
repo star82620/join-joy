@@ -46,37 +46,33 @@ export default function Form({ inputSet, btnSet }: FormProps) {
     }));
   };
 
-  //送出表單
+  // handle 送出表單
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // 表單驗證
+    // 打 API
     console.log(inputValues);
   };
 
-  //FormInput 要用的 props
-  const inputProps = {
-    inputSet: inputSet,
-    handleCatchValue: handleCatchValue,
-    handleTogglePassword: handleTogglePassword,
-    inputErrors: inputErrors,
-    setInputErrors: setInputErrors,
-    inputValues: inputValues,
-    showPassword: showPassword,
-  };
-
   const { type, children, onClick, isDisabled, appearance, className } = btnSet;
-
   const btnHandleSelector = type === "button" ? onClick : undefined;
   return (
     <form
       className="flex flex-col gap-6 md:gap-4 w-[380px] md:w-[300px] sm:w-[280px]"
       onSubmit={handleFormSubmit}
     >
-      <FormInput {...inputProps} />
+      <FormInput
+        inputSet={inputSet}
+        inputErrors={inputErrors}
+        inputValues={inputValues}
+        showPassword={showPassword}
+        handleCatchValue={handleCatchValue}
+        handleTogglePassword={handleTogglePassword}
+      />
       <Button
         type={type}
         appearance={appearance}
-        onClick={onClick}
+        onClick={btnHandleSelector}
         isDisabled={isDisabled}
         className={className}
       >
