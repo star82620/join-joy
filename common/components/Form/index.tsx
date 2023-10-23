@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FormInput from "./FormInput";
+import Inputs from "./Inputs";
 import Button from "../GeneralButton";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import {
@@ -48,6 +48,7 @@ export default function Form({ inputSet, btnSet }: FormProps) {
   };
 
   const apiParams: apiParamsType = {
+    //之後要拉出去 modules，這裡只留加入 data
     apiPath: "/users/sign_up",
     method: "POST",
     data: inputValues,
@@ -103,7 +104,7 @@ export default function Form({ inputSet, btnSet }: FormProps) {
       className="flex flex-col gap-6 md:gap-4 w-[380px] md:w-[300px] sm:w-[280px]"
       onSubmit={handleFormSubmit}
     >
-      <FormInput
+      <Inputs
         inputSet={inputSet}
         inputErrors={inputErrors}
         inputValues={inputValues}

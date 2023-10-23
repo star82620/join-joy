@@ -21,7 +21,7 @@ export type FormProps = {
   btnSet: ButtonType;
 };
 
-export type FormInputProps = {
+export type InputsProps = {
   inputSet: InputSetType;
   inputErrors: InputErrorsType;
   handleCatchValue: React.ChangeEventHandler<HTMLInputElement>;
