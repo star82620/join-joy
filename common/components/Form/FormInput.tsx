@@ -1,47 +1,21 @@
-import { useEffect, useState, ReactNode } from "react";
-import Image from "next/image";
+import React from "react";
 import clsx from "clsx";
-import {
-  InputType,
-  ShowPasswordType,
-  FormInputProps,
-  InputValuesType,
-} from "@/common/components/Form/data";
+import { InputType, FormInputProps } from "@/common/components/Form/data";
 
 export default function FormInput(props: FormInputProps) {
-  const { inputSet, inputErrors, setInputErrors } = props;
-
-  // 管理「顯示密碼」狀態的物件，會根據 inputSet 自動生成，預設 false
-  const initialShowPassword: ShowPasswordType = {};
-  inputSet.forEach((input) => {
-    if (input.type === "password") {
-      initialShowPassword[input.inputName] = false;
-    }
-  });
-
-  const [showPassword, setShowPassword] =
-    useState<ShowPasswordType>(initialShowPassword); //預設看不到密碼
-
-  //管理「input value」狀態的物件，會根據 inputSet 自動生成，預設空值
-  const initialInputValues: InputValuesType = {};
-  inputSet.forEach((input) => {
-    initialInputValues[input.inputName] = "";
-  });
-  const [inputValues, setInputValues] =
-    useState<InputValuesType>(initialInputValues);
-
-  console.log("i", inputValues);
-
-  const catchInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInputValues((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  // -----------------
+  const {
+    inputSet,
+    inputErrors,
+    catchInputValue,
+    togglePassword,
+    showPassword,
+    inputValues,
+  } = props;
 
   return inputSet.map((input: InputType) => {
-    //先寫，之後再拆，這裡留下拆出來的個別 input ，剩下的邏輯要丟到 Form
     const { label, type, inputName, placeholder, required, errorMsg } = input;
+    const typeSelector =
+      type === "password" && showPassword[inputName] ? "text" : type;
 
     return (
       <label key={inputName}>
@@ -51,9 +25,7 @@ export default function FormInput(props: FormInputProps) {
         <div className="flex items-center">
           <input
             className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-            type={
-              type === "password" && showPassword[inputName] ? "text" : type
-            }
+            type={typeSelector}
             name={inputName}
             placeholder={placeholder}
             required={required}
@@ -67,13 +39,9 @@ export default function FormInput(props: FormInputProps) {
               !showPassword[inputName] ? "bg-eye-hide" : "bg-eye-show"
             )}
             type="checkbox"
+            data-target={inputName}
             checked={showPassword[inputName]}
-            onChange={(e) => {
-              setShowPassword(() => ({
-                ...showPassword,
-                [inputName]: !showPassword[inputName],
-              }));
-            }}
+            onChange={togglePassword}
           ></input>
         </div>
 
