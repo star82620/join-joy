@@ -54,9 +54,4 @@ export const btnSet: ButtonType = {
 export const apiParams: apiParamsType = {
   apiPath: "/users/sign_up",
   method: "POST",
-  data: {
-    email: "jjjaa@gmail.com",
-    password: "example",
-    nickname: "example",
-  },
 };

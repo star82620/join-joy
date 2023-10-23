@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FormInput from "./FormInput";
 import Button from "../GeneralButton";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import {
   InputType,
   InputErrorsType,
@@ -46,12 +47,42 @@ export default function Form({ inputSet, btnSet }: FormProps) {
     }));
   };
 
+  const apiParams: apiParamsType = {
+    apiPath: "/users/sign_up",
+    method: "POST",
+    data: inputValues,
+  };
+
+  function isValidForm() {
+    const emailVerify = /^[-a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+    const passwordVerify = /^(?=.*[0-9]).{6,12}$/;
+    const errors: InputErrorsType = { ...inputErrors };
+
+    errors.email = !emailVerify.test(inputValues.email) ? true : false;
+    errors.password = !passwordVerify.test(inputValues.password) ? true : false;
+    errors.nickname = !inputValues.nickname ? true : false;
+    errors.confirmPassword =
+      !(inputValues.confirmPassword === inputValues.password) ||
+      errors.password === true
+        ? true
+        : false;
+
+    setInputErrors(errors);
+    return !Object.values(errors).includes(true);
+  }
+
   // handle 送出表單
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 表單驗證
+    // 表單驗證，如果 false 就檔掉
+    if (!isValidForm()) return;
     // 打 API
+    console.log("ohoh");
     console.log(inputValues);
+    const data = await fetchApi(apiParams);
+    if (data.status === false) return;
+
+    // API打出去，還沒有回覆的時候要給 loading 狀態（redux）
   };
 
   const { type, children, onClick, isDisabled, appearance, className } = btnSet;
