@@ -6,15 +6,13 @@ import fetchApi from "@/common/helpers/fetchApi";
 import { title, inputSet, btnSet, apiParams } from "./data";
 
 export default function Signup() {
-  // const resData = fetchApi(apiParams);
-
   return (
     <div className="m-auto w-fit">
       <Wrapper
         title={title}
         titleStyle="text-[20px] md:text-[18px] md:leading-heading"
       >
-        <Form inputSet={inputSet} btnSet={btnSet} />
+        <Form inputSet={inputSet} btnSet={btnSet} apiParams={apiParams} />
         <p className="mt-3 text-center text-sm md:text-xs">
           註冊即表示您閱讀並同意 <b>服務條款</b> 及 <b>隱私權政策</b>
         </p>
