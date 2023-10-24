@@ -12,7 +12,7 @@ export default function CreateGroup() {
   const activePage = "";
   return (
     <Wrapper title={title} titleStyle="font-semibold text-xl leading-[1.2]">
-      <div className="w-[688px] flex flex-col items-center gap-8">
+      <div className="w-[688px] md:w-full flex flex-col items-center gap-8">
         <ProgressBar active={activePage} />
         <div className="w-full">
           表單元件包含下一步按鈕
