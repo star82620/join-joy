@@ -5,8 +5,8 @@ import { InputType, InputsProps } from "@/common/components/Form/data";
 export default function Inputs({
   inputSet,
   inputErrors,
-  handleCatchValue,
-  handleTogglePassword,
+  handleInputValue,
+  handleShowPassword,
   showPassword,
   inputValues,
 }: InputsProps) {
@@ -16,7 +16,7 @@ export default function Inputs({
         const { label, type, inputName, placeholder, required, errorMsg } =
           input;
         const isPassword = type === "password";
-        const switchPasswordType = (type) => {
+        const switchPasswordType = (type:InputType["type"]) => {
           if (!isPassword) return;
           return showPassword[inputName] ? "text" : type;
         };
@@ -34,7 +34,7 @@ export default function Inputs({
                 placeholder={placeholder}
                 // required={required} 我自己擋，不用瀏覽器本身的
                 value={inputValues[inputName]}
-                onChange={handleCatchValue}
+                onChange={handleInputValue}
               ></input>
               <input
                 className={clsx(
@@ -45,7 +45,7 @@ export default function Inputs({
                 type="checkbox"
                 data-target={inputName}
                 checked={showPassword[inputName]}
-                onChange={handleTogglePassword}
+                onChange={handleShowPassword}
               ></input>
             </div>
 
