@@ -1,4 +1,5 @@
 import { ButtonType } from "../GeneralButton/data";
+import { apiParamsType } from "@/common/helpers/fetchApi";
 
 export type InputType = {
   label: string;
@@ -21,6 +22,7 @@ export type InputValuesType = Record<string, string>;
 export type FormProps = {
   inputSet: InputSetType;
   btnSet: ButtonType;
+  apiParams: apiParamsType;
 };
 
 export type InputsProps = {
