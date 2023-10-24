@@ -11,34 +11,40 @@ import {
 } from "./data";
 
 export default function Form({ inputSet, btnSet }: FormProps) {
-  //管理 error 狀態的物件，會根據 inputSet 自動生成，預設 false
-  const initialErrorData: InputErrorsType = {};
-  //管理「input value」狀態的物件，會根據 inputSet 自動生成，預設空值
-  const initialInputValues: InputValuesType = {};
-  //管理「顯示密碼」狀態的物件，會根據 inputSet 自動生成，預設 false
-  const initialShowPassword: ShowPasswordType = {};
+  const initializeInputStates = (inputs:InputType[])=>{
+    //管理 error 狀態的物件，會根據 inputSet 自動生成，預設 false
+    const errors: InputErrorsType = {};
+    //管理「input value」狀態的物件，會根據 inputSet 自動生成，預設空值
+    const values: InputValuesType = {};
+    //管理「顯示密碼」狀態的物件，會根據 inputSet 自動生成，預設 false
+    const show: ShowPasswordType = {};
+    
+    inputs.forEach((input: InputType) => {
+      errors[input.inputName] = false;
+      values[input.inputName] = "";
+      show[input.inputName] =
+        input.type === "password" ? false : undefined;
+    });
+    
+    return { errors, values, show };
+  }
 
-  inputSet.forEach((input: InputType) => {
-    initialErrorData[input.inputName] = false;
-    initialInputValues[input.inputName] = "";
-    initialShowPassword[input.inputName] =
-      input.type === "password" ? false : undefined;
-  });
+  const { errors, values, show } = initializeInputStates(inputSet);
   const [inputErrors, setInputErrors] =
-    useState<InputErrorsType>(initialErrorData);
+    useState<InputErrorsType>(errors);
   const [inputValues, setInputValues] =
-    useState<InputValuesType>(initialInputValues);
+    useState<InputValuesType>(values);
   const [showPassword, setShowPassword] =
-    useState<ShowPasswordType>(initialShowPassword);
+    useState<ShowPasswordType>(show);
 
   // handle 獲取欄位資料
-  const handleCatchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputValues((prevState) => ({ ...prevState, [name]: value }));
   };
 
   // handle 切換密碼顯示狀態
-  const handleTogglePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleShowPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputName = e.target.dataset.target;
     if (!inputName) return;
     setShowPassword((prevState) => ({
@@ -54,14 +60,15 @@ export default function Form({ inputSet, btnSet }: FormProps) {
     data: inputValues,
   };
 
-  function isValidForm() {
+  const checkValidForm = () =>{
     const errors: InputErrorsType = {};
-    const emptyVerify = /^.+$/;
 
-    inputSet.map((input) => {
+    inputSet.forEach((input) => {
+      // 必填但是沒有指定驗證的欄位就驗證有沒有填
       if (input.required && !input.pattern) {
         errors[input.inputName] = !inputValues[input.inputName] ? true : false;
-      }
+      };
+      // 有指定驗證內容就依照驗證內容
       if (input.pattern) {
         errors[input.inputName] = !input.pattern.test(
           inputValues[input.inputName]
@@ -69,6 +76,7 @@ export default function Form({ inputSet, btnSet }: FormProps) {
           ? true
           : false;
       }
+      // 確認密碼欄位
       if (input.inputName === "confirmPassword") {
         errors.confirmPassword =
           !inputValues.confirmPassword ||
@@ -87,12 +95,13 @@ export default function Form({ inputSet, btnSet }: FormProps) {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // 表單驗證，如果 false 就檔掉
-    if (isValidForm() === false) return;
+    const isValidForm = checkValidForm();
+    if (!isValidForm) return;
     // 打 API
     console.log("ohoh");
     console.log(inputValues);
     const data = await fetchApi(apiParams);
-    if (data.status === false) return;
+    if (!data.status) return;
 
     // API打出去，還沒有回覆的時候要給 loading 狀態（redux）
   };
@@ -109,8 +118,8 @@ export default function Form({ inputSet, btnSet }: FormProps) {
         inputErrors={inputErrors}
         inputValues={inputValues}
         showPassword={showPassword}
-        handleCatchValue={handleCatchValue}
-        handleTogglePassword={handleTogglePassword}
+        handleInputValue={handleInputValue}
+        handleShowPassword={handleShowPassword}
       />
       <Button
         type={type}

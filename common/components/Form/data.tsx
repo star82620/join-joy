@@ -26,8 +26,8 @@ export type FormProps = {
 export type InputsProps = {
   inputSet: InputSetType;
   inputErrors: InputErrorsType;
-  handleCatchValue: React.ChangeEventHandler<HTMLInputElement>;
-  handleTogglePassword: React.ChangeEventHandler<HTMLInputElement>;
+  handleInputValue: React.ChangeEventHandler<HTMLInputElement>;
+  handleShowPassword: React.ChangeEventHandler<HTMLInputElement>;
   showPassword: ShowPasswordType;
   inputValues: InputValuesType;
 };
