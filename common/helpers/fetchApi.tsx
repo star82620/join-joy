@@ -1,13 +1,7 @@
 const token = ""; //之後再補，看要用什麼方式存放 token
 
-type paramsType = {
-  apiPath: string;
-  method: "GET" | "POST" | "PATCH" | "DELETE";
-  data?: Record<string, string>;
-};
-
 // 要用的話要寫這一包資料
-// const params = {
+// const apiParams = {
 //   apiPath: "/users/sign_up",
 //   method: "POST",
 //   data: {
@@ -16,10 +10,16 @@ type paramsType = {
 //     nickname: "example",
 //   },
 // };
-// const data = fetchApi(params);
+// const data = fetchApi(apiParams);
 
-export default async function fetchApi(params: paramsType) {
-  const { apiPath, method, data } = params;
+export type apiParamsType = {
+  apiPath: string;
+  method: "GET" | "POST" | "PATCH" | "DELETE";
+  data?: Record<string, string>;
+};
+
+export default async function fetchApi(apiParams: apiParamsType) {
+  const { apiPath, method, data } = apiParams;
   const url = process.env.NEXT_PUBLIC_API_URL + apiPath;
   const apiHeaders = {
     Authorization: token,
@@ -35,7 +35,9 @@ export default async function fetchApi(params: paramsType) {
     const res = await fetch(url, requestOptions);
     const result = await res.json();
     console.log(result);
+    return result;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }

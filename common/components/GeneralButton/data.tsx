@@ -1,14 +1,15 @@
 import { ReactNode } from "react";
 
-export type PropsType = {
+export type ButtonType = {
   type: "button" | "submit" | "reset";
-  children: ReactNode;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
-  isDisabled?: boolean;
   appearance: "orange" | "yellow" | "light";
+  children: ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
+  isDisabled?: boolean;
   className?: string;
 };
 
+// appearance 按鈕樣式
 export const dataSet = {
   orange: {
     default: "bg-orange-neutral",
