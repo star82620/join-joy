@@ -22,14 +22,13 @@ export default function FormBlock({
     if (desc && descPosition === "col") return true;
   };
   const isDescCol = checkDescCol();
-  console.log(title, isDescCol);
 
   return (
     <section className="w-full">
-      <div className="mb-2">
+      <div className="">
         <h3
           className={clsx(
-            "text-lg font-semibold",
+            "text-lg font-semibold md:text-md",
             isDescCol ? "inline" : "block",
             require
               ? "after:content-['*'] after:text-danger after:text-xl"

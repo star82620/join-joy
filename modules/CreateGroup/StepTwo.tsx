@@ -1,16 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import FormBlock from "./FormBlock";
+import InputRadio from "./InputRadio";
+import { ActiveContext } from "./index";
 
-const handleBtnTwo = () => {
-  // 把資料丟進 value useState 裡
-};
-
+const radios = [
+  {
+    title: "本次開團是否設為『非公開』揪團？",
+    desc: "僅接受獲得連結的團員加入，不會在平台被找到",
+    options: [
+      { content: "公開", id: "groupPrivacy", name: "public" },
+      { content: "非公開", id: "groupPrivacy", name: "private" },
+    ],
+  },
+  {
+    title: "成團後是否接受團員進出？",
+    desc: "送出預約後系統會自動鎖定揪團，直到結團前皆可再編輯",
+    options: [
+      { content: "接受", id: "allowJoin", name: "allow" },
+      { content: "不接受", id: "allowJoin", name: "reject" },
+    ],
+  },
+];
 export default function StepTwo() {
+  const contextValue = useContext(ActiveContext);
+  const [activePage, setActivePage] = contextValue;
+  const handleBtnTwo = () => {
+    // 把資料丟進 value useState 裡
+    setActivePage(3);
+  };
   return (
     <>
-      <section className="flex flex-col w-full gap-10 border-b">
+      <section className="flex flex-col w-full gap-10">
         <label>
           <FormBlock
             title="預計要玩的遊戲"
@@ -94,65 +116,41 @@ export default function StepTwo() {
         </label>
         <label>
           <FormBlock title="遊戲整體面向">
-            <select>
+            <select className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
               <option>請選擇遊戲標籤</option>
             </select>
           </FormBlock>
         </label>
         <label>
-          <FormBlock title="遊戲整體面向">
-            <span>0/100</span>
+          <section className="w-full">
+            <div className="flex justify-between items-end ">
+              <h3 className="text-lg font-semibold md:text-md">備註</h3>
+              <span className="text-sm md:text-xs">0/100</span>
+            </div>
             <input
-              type="text"
+              type="textarea"
               placeholder="如果需要特別標註的部分，請再寫下並讓團員知道！"
+              className="w-full h-20 border-b-2 bg-yellow-tint mt-2 md:mt-1 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
             />
-          </FormBlock>
+          </section>
         </label>
-        <section className="flex justify-between">
-          <div>
-            <h3 className="text-lg font-semibold">
-              本次開團是否設為『非公開』揪團？
-            </h3>
-            <p className="text-gray-500 text-sm font-semibold mt-1">
-              僅接受獲得連結的團員加入，不會在平台被找到
-            </p>
-          </div>
-          <div className="flex items-center gap-4 text-md font-semibold">
-            <label>
-              <input type="radio" className="mr-2" />
-              公開
-            </label>
-            <label>
-              <input type="radio" className="mr-2" />
-              非公開
-            </label>
-          </div>
-        </section>
-        <section className="flex justify-between">
-          <div>
-            <h3 className="text-lg font-semibold">成團後是否接受團員進出？</h3>
-            <p className="text-gray-500 text-sm font-semibold mt-1">
-              送出預約後系統會自動鎖定揪團，直到結團前皆可再編輯
-            </p>
-          </div>
-          <div className="flex items-center gap-4 text-md font-semibold">
-            <label>
-              <input type="radio" className="mr-2" />
-              接受
-            </label>
-            <label>
-              <input type="radio" className="mr-2" />
-              不接受
-            </label>
-          </div>
-        </section>
+        {radios.map((radio, index) => {
+          return (
+            <InputRadio
+              title={radio.title}
+              desc={radio.desc}
+              options={radio.options}
+              key={index}
+            />
+          );
+        })}
 
         <div className="mt-6 flex flex-col justify-center items-center gap-4">
           <Button
             type="submit"
             appearance="orange"
             onClick={handleBtnTwo}
-            className="px-[158px]"
+            className="px-[158px] md:py-2 md:px-3 md:w-full"
           >
             完成開團
           </Button>
