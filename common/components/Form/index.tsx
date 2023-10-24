@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Inputs from "./Inputs";
 import Button from "../GeneralButton";
-import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import fetchApi from "@/common/helpers/fetchApi";
 import {
   InputType,
   InputErrorsType,
@@ -10,7 +10,7 @@ import {
   InputValuesType,
 } from "./data";
 
-export default function Form({ inputSet, btnSet }: FormProps) {
+export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
   const initializeInputStates = (inputs:InputType[])=>{
     //管理 error 狀態的物件，會根據 inputSet 自動生成，預設 false
     const errors: InputErrorsType = {};
@@ -53,13 +53,7 @@ export default function Form({ inputSet, btnSet }: FormProps) {
     }));
   };
 
-  const apiParams: apiParamsType = {
-    //之後要拉出去 modules，這裡只留加入 data
-    apiPath: "/users/sign_up",
-    method: "POST",
-    data: inputValues,
-  };
-
+  // 表單驗證
   const checkValidForm = () =>{
     const errors: InputErrorsType = {};
 
@@ -94,13 +88,13 @@ export default function Form({ inputSet, btnSet }: FormProps) {
   // handle 送出表單
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 表單驗證，如果 false 就檔掉
+    // 表單驗證，如果 false 就擋掉
     const isValidForm = checkValidForm();
     if (!isValidForm) return;
     // 打 API
-    console.log("ohoh");
-    console.log(inputValues);
+    apiParams.data=inputValues;
     const data = await fetchApi(apiParams);
+    // 如果傳回 status === false 就不做後續 loading 動作
     if (!data.status) return;
 
     // API打出去，還沒有回覆的時候要給 loading 狀態（redux）

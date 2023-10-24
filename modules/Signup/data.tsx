@@ -11,7 +11,7 @@ export const inputSet: InputSetType = [
     inputName: "nickname",
     placeholder: "例如：多多",
     required: true,
-    errorMsg: "* 名字為必填項目",
+    errorMsg: "* 名字格式錯誤",
     // pattern: /^.+$/,
   },
   {
@@ -20,7 +20,7 @@ export const inputSet: InputSetType = [
     inputName: "email",
     placeholder: "example@mail.com",
     required: true,
-    errorMsg: "* 帳號為必填項目",
+    errorMsg: "* 帳號格式錯誤",
     pattern: /^[-a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/,
   },
   {
@@ -29,7 +29,7 @@ export const inputSet: InputSetType = [
     inputName: "password",
     placeholder: "輸入 6-12 位英數字組合",
     required: true,
-    errorMsg: "* 密碼為必填項目",
+    errorMsg: "* 密碼格式錯誤",
     pattern: /^(?=.*[0-9]).{6,12}$/,
   },
   {
@@ -38,7 +38,7 @@ export const inputSet: InputSetType = [
     inputName: "confirmPassword",
     placeholder: "再次輸入您的密碼",
     required: true,
-    errorMsg: "* 再次輸入密碼為必填項目",
+    errorMsg: "* 再次輸入密碼格式錯誤",
   },
 ];
 
