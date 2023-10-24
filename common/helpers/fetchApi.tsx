@@ -4,18 +4,14 @@ const token = ""; //之後再補，看要用什麼方式存放 token
 // const apiParams = {
 //   apiPath: "/users/sign_up",
 //   method: "POST",
-//   data: {
-//     email: "jjjaa@gmail.com",
-//     password: "example",
-//     nickname: "example",
-//   },
+//   data: {...},
 // };
 // const data = fetchApi(apiParams);
 
 export type apiParamsType = {
   apiPath: string;
   method: "GET" | "POST" | "PATCH" | "DELETE";
-  data?: Record<string, string>;
+  data?: Record<string, string>|string;
 };
 
 export default async function fetchApi(apiParams: apiParamsType) {
