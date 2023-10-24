@@ -16,10 +16,6 @@ export default function CreateGroup() {
   const [activePage, setActivePage] = useState(1);
   const [value, setValue] = useState("");
 
-  useEffect(() => {
-    console.log("ooo");
-  }, [activePage]);
-
   return (
     <div className="container">
       <Wrapper title={title} titleStyle="font-semibold text-xl leading-[1.2]">

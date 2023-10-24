@@ -10,7 +10,6 @@ export default function ProgressBar() {
 
   const contextValue = useContext(ActiveContext);
   const [activePage, setActivePage] = contextValue;
-  console.log("ppp", activePage);
 
   const lastIcon = (
     <Image
