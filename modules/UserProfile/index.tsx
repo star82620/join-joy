@@ -8,10 +8,10 @@ import TagBlock from "@/common/components/TagBlock";
 export default function UserProfile() {
   return (
     <div className="container">
-      <div className="flex lg:flex-col justify-center gap-9 lg:max-w-[720px] md:w-full">
+      <div className="m-auto flex lg:flex-col justify-center gap-9 lg:max-w-[720px] md:w-full">
         <section className="w-[314px] lg:w-full">
           <Wrapper title="關於我" contentStyle="" hideShadow={true}>
-            <div className="px-9 py-12 md:px-8 md:py-4 flex flex-col justify-center items-center gap-6 lg:flex-row lg:justify-between lg:items-start md:flex-col md:justify-center md:items-center">
+            <div className="px-9 py-12 lg:px-16 md:px-8 md:py-4 flex flex-col justify-center items-center gap-6 lg:flex-row lg:justify-between lg:items-start md:flex-col md:justify-center md:items-center">
               <div className="flex flex-col justify-center items-center gap-6 lg:gap-3">
                 <div className="w-28 h-28 rounded-full border-2 border-white outline outline-2 outline-gray-950 relative">
                   <Image
@@ -43,7 +43,7 @@ export default function UserProfile() {
               <div className="flex flex-col justify-center items-center gap-6">
                 <div>
                   <h3 className="text-center lg:text-sm">喜好遊戲種類</h3>
-                  <div className="flex flex-col lg:flex-row gap-y-3 gap-x-4 mt-3 md:mt-2">
+                  <div className="flex flex-col lg:flex-row gap-y-4 gap-x-3 mt-3 md:mt-2">
                     <TagBlock content="派對遊戲" className="lg:text-sm" />
                     <TagBlock content="陣營遊戲" className="lg:text-sm" />
                     <TagBlock content="策略遊戲" className="lg:text-sm" />
@@ -65,7 +65,7 @@ export default function UserProfile() {
           <div className="flex items-start absolute">
             {/* 只有第一個才有露出左邊圓角 */}
             <span
-              className="pt-2 pb-[10px] px-6 rounded-t-md border-[3px] border-b-0 bg-yellow-dark text-lg font-semibold leading-1 z-10"
+              className="pt-2 pb-[11px] px-6 rounded-t-md border-[3px] border-b-0 bg-yellow-dark text-lg font-semibold leading-1 z-10"
               data-active="groups"
             >
               <Image
