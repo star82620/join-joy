@@ -8,7 +8,7 @@ export default function UserProfile() {
   return (
     <div className="flex md:flex-col justify-center items-start gap-9 container">
       <Wrapper title="關於我">
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6 w-[242px]">
           <div className="w-28 h-28 rounded-full border-2 border-white outline outline-2 outline-gray-950 relative">
             <Image
               src="/images/photo-user-000.png"
@@ -17,17 +17,33 @@ export default function UserProfile() {
               className="object-contain rounded-full"
             />
           </div>
-          <p>name</p>
-          <p>country</p>
-          <Button type="button" appearance="orange">
-            追蹤
+          <p>多多</p>
+          <p>台北市</p>
+          <Button
+            type="button"
+            appearance="orange"
+            className="text-lg leading-[1.2]"
+          >
+            <span className="after:contents-[''] after:w-6 after:h-6 after:bg-follow-true">
+              已追蹤
+            </span>
           </Button>
           <div>perfer games</div>
-          <div>簡介</div>
+          <div>
+            <h5>簡介</h5>{" "}
+            <p>
+              嗨！大家好，我叫多多，歡迎找我揪團喔喔喔（旺旺）
+              嗨！大家好，我叫多多，歡迎找我揪團喔喔喔（旺旺）
+              嗨！大家好，我叫多多，歡迎找我揪團喔喔喔（旺旺）
+              嗨！大家好，我叫多多，歡迎找我揪團喔喔喔（旺旺）
+              嗨！大家好，我叫多多，歡迎找我揪團喔喔喔（旺旺）
+              嗨！大家好，我叫多多，歡迎找我揪團喔喔喔（旺旺）
+            </p>
+          </div>
         </div>
       </Wrapper>
       <section className="flex flex-col w-full relative min-h-full">
-        <div className="flex items-start absolute ">
+        <div className="flex items-start absolute">
           {/* 只有第一個才有露出左邊圓角 */}
           <span
             className="pt-2 pb-[9.5px] px-6 rounded-t-md border-[3px] border-b-0 bg-yellow-dark text-lg font-semibold leading-1 z-10"
@@ -107,9 +123,7 @@ export default function UserProfile() {
               <section className="flex items-center p-4 ">
                 <div className="text-lg font-bold">10/2</div>
                 <div className="border-l-2 border-gray-500 pl-4 ml-4 grow">
-                  <p className="text-md font-bold font-semibold">
-                    輕鬆派對揪友團
-                  </p>
+                  <p className="text-md font-semibold">輕鬆派對揪友團</p>
                   <p>
                     <Image
                       src="/images/icon-location-dark.svg"
@@ -127,9 +141,7 @@ export default function UserProfile() {
               <section className="flex items-center p-4 ">
                 <div className="text-lg font-bold">10/2</div>
                 <div className="border-l-2 border-gray-500 pl-4 ml-4 grow">
-                  <p className="text-md font-bold font-semibold">
-                    輕鬆派對揪友團
-                  </p>
+                  <p className="text-md font-semibold">輕鬆派對揪友團</p>
                   <p>
                     <Image
                       src="/images/icon-location-dark.svg"
