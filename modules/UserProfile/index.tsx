@@ -4,6 +4,7 @@ import Wrapper from "@/common/components/Wrapper";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import TagBlock from "@/common/components/TagBlock";
+import WrapperFile from "@/common/components/WrapperFile";
 
 export default function UserProfile() {
   return (
@@ -62,35 +63,10 @@ export default function UserProfile() {
         </section>
         {/* 右邊檔案夾，要拆成元件 */}
         <section className="flex flex-col grow relative lg:w-full">
-          <div className="flex items-start absolute">
-            {/* 只有第一個才有露出左邊圓角 */}
-            <span
-              className="pt-2 pb-[11px] px-6 rounded-t-md border-[3px] border-b-0 bg-yellow-dark text-lg font-semibold leading-1 z-10"
-              data-active="groups"
-            >
-              <Image
-                src="/images/icon-lists.svg"
-                width="24"
-                height="24"
-                alt="list"
-                className="inline align-middle"
-              />
-              <span className="ml-2 align-middle">揪團清單</span>
-            </span>
-            <span
-              className="pt-2 pb-2 px-6 rounded-tr-md border-[3px] border-b-0 border-gray-400 border-l-0 -ml-3  text-lg font-semibold text-gray-600 bg-gray-200 leading-1"
-              data-active="comments"
-            >
-              <Image
-                src="/images/icon-comments.svg"
-                width="24"
-                height="24"
-                alt="comments"
-                className="inline align-middle"
-              />
-              <span className="ml-2 align-middle">綜合評價</span>
-            </span>
-          </div>
+          {/* <div className="flex items-start absolute"> */}
+          {/* 只有第一個才有露出左邊圓角 */}
+          <WrapperFile />
+          {/* </div> */}
           <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-12 h-full">
             <div>
               <h3 className="text-lg font-semibold">正在開團中</h3>
