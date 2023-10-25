@@ -36,7 +36,6 @@ export default function ProgressBar() {
         {steps.map((step) => {
           const { id, content, desc } = step;
           isActive = Number(activePage) >= Number(step.id) ? true : false;
-          console.log(activePage, step.id, isActive);
           return (
             <section
               key={id}

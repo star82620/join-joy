@@ -108,7 +108,7 @@ export default function StepOne() {
             type="button"
             appearance="orange"
             onClick={handleBtnOne}
-            className="px-[158px] md:py-2 md:px-3 md:w-full"
+            className="px-[158px] md:py-2 md:px-3 md:w-full text-xl md:text-md"
           >
             下一步
           </Button>

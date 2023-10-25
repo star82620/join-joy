@@ -30,6 +30,10 @@ export default function StepTwo() {
     // 把資料丟進 value useState 裡
     setActivePage(3);
   };
+  const backPrev = () => {
+    // 把資料丟進 value useState 裡
+    setActivePage(1);
+  };
   return (
     <>
       <section className="flex flex-col w-full gap-10">
@@ -155,7 +159,9 @@ export default function StepTwo() {
             完成開團
           </Button>
 
-          <Link href="/">上一頁</Link>
+          <p className="underline" onClick={backPrev}>
+            上一頁
+          </p>
           <Link href="/">返回首頁</Link>
         </div>
       </section>
