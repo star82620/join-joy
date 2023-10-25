@@ -5,7 +5,7 @@ type Props = {
   className: string;
 };
 
-export default function TagBlock({ content, className }) {
+export default function TagBlock({ content, className }: Props) {
   return (
     <div
       className={`border-2 rounded p-2 bg-yellow-tint text-center font-semibold ${className}`}
