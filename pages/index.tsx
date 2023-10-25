@@ -22,7 +22,7 @@ export default function Home() {
           <Link href="/user-center">我的個人資訊</Link>
         </li>
         <li>
-          <Link href="/create-group">我要開團</Link>
+          <Link href="/user">會員個人頁（切版示範）</Link>
         </li>
       </ul>
     </>
