@@ -11,6 +11,7 @@ export default function Signup() {
       <Wrapper
         title={title}
         titleStyle="text-[20px] md:text-[18px] md:leading-heading"
+        mainStyle="px-[100px] py-16 lg:px-14 lg:py-12 md:p-8 sm:px-4 sm:py-6"
       >
         <Form inputSet={inputSet} btnSet={btnSet} apiParams={apiParams} />
         <p className="mt-3 text-center text-sm md:text-xs">
