@@ -51,20 +51,19 @@ export default function WrapperFile({
 
     return (
       <p
-        // className={clsx(
-        //   "pt-2 px-6",
-        //   "-ml-0.5",
-        //   "text-lg font-semibold leading-1",
-        //   "border-[3px] border-l-0 border-b-0 border-r-danger",
-        //   "rounded-tr-md",
-        //   "first:rounded-tl-md first:border-l-[3px] first:ml-0",
-        //   `z-${zIndex}`,
-        //   // defaultStyle
-        //   isActive ? activeStyle : defaultStyle
-        // )}
-        className={`pt-2 px-6 -ml-0.5 text-lg font-semibold leading-1 border-[3px] border-l-0 border-b-0 border-r-danger rounded-tr-md first:rounded-tl-md first:border-l-[3px] first:ml-0 z-${zIndex} ${
+        className={clsx(
+          "pt-2 px-6",
+          "-ml-3",
+          "text-lg font-semibold leading-1",
+          "border-[3px] border-l-0 border-b-0 border-r-danger",
+          "rounded-tr-md",
+          "first:rounded-tl-md first:border-l-[3px] first:ml-0",
+          isActive ? `z-10` : `z-${zIndex}`,
           isActive ? activeStyle : defaultStyle
-        }`}
+        )}
+        // className={`pt-2 px-6 -ml-3 text-lg font-semibold leading-1 border-[3px] border-l-0 border-b-0  rounded-tr-md first:rounded-tl-md first:border-l-[3px] first:ml-0  ${
+        //   isActive ? activeStyle : defaultStyle
+        // } ${isActive ? `z-10` : `z-${zIndex}`}`}
         data-tab={tab.tabName}
         onClick={() => {
           setActiveTab(tab.tabName);
@@ -84,8 +83,6 @@ export default function WrapperFile({
       </p>
     );
   }
-
-  // const handleActiveTab = ;
 
   return (
     <div className="flex items-start absolute">
