@@ -1,39 +1,19 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
-
-type TabType = {
-  tabName: string;
-  tabText: string;
-  img: imgType;
-};
-
-type imgType = {
-  src: string;
-  alt: string;
-};
-
-type TabBlockProps = {
-  tab: TabType;
-  zIndex: number;
-  isActive: boolean;
-};
-
-// ---------一整包----------
-
-type WrapperFileProps = {
-  tabSet: TabType[];
-  activeTab: string;
-  setActiveTab: (activeTab: string) => void;
-};
+import { TabBlockProps, WrapperFileProps } from "./data";
 
 export default function WrapperFile({
   tabSet,
   activeTab,
   setActiveTab,
 }: WrapperFileProps) {
+  const handleActiveTab = (tabName: string) => {
+    setActiveTab(tabName);
+  };
+
   // 單個 tab
-  function TabBlock({ tab, zIndex, isActive }: TabBlockProps) {
+  const TabBlock = ({ tab, zIndex, isActive }: TabBlockProps) => {
     const { tabName, tabText, img } = tab;
 
     const defaultStyle =
@@ -63,9 +43,7 @@ export default function WrapperFile({
           isActive ? activeStyle : defaultStyle
         )}
         data-tab={tabName}
-        onClick={() => {
-          setActiveTab(tabName);
-        }}
+        onClick={() => handleActiveTab(tabName)}
       >
         <span className="inline-block align-middle w-6 h-6 md:w-5 md:h-5 relative">
           <Image
@@ -79,7 +57,7 @@ export default function WrapperFile({
         <span className="ml-2 align-middle">{tabText}</span>
       </p>
     );
-  }
+  };
 
   return (
     <div className="flex items-start absolute">

@@ -1,36 +1,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import Wrapper from "@/common/components/Wrapper";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
+import Wrapper from "@/common/components/Wrapper";
 import TagBlock from "@/common/components/TagBlock";
 import WrapperFile from "@/common/components/WrapperFile";
-const tabSet = [
-  {
-    tabName: "groups-list",
-    tabText: "揪團清單",
-    img: {
-      src: "/images/icon-lists-light.svg",
-      alt: "icon-lists",
-    },
-  },
-  {
-    tabName: "comments",
-    tabText: "綜合評價",
-    img: {
-      src: "/images/icon-comments-light.svg",
-      alt: "icon-comments",
-    },
-  },
-  {
-    tabName: "other",
-    tabText: "其他",
-    img: {
-      src: "/images/icon-location-light.svg",
-      alt: "icon-comments",
-    },
-  },
-];
+import GroupsList from "./GroupsList";
+import Comments from "./Comments";
+import { tabSet } from "./data";
+
 export default function UserProfile() {
   const [activeTab, setActiveTab] = useState("groups-list");
   return (
@@ -89,100 +67,13 @@ export default function UserProfile() {
         </section>
         {/* 右邊檔案夾，要拆成元件 */}
         <section className="flex flex-col grow relative lg:w-full">
-          {/* <div className="flex items-start absolute"> */}
-          {/* 只有第一個才有露出左邊圓角 */}
           <WrapperFile
             tabSet={tabSet}
             activeTab={activeTab}
             setActiveTab={setActiveTab}
           />
-          {/* </div> */}
           <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-12 h-full">
-            <div>
-              <h3 className="text-lg font-semibold">正在開團中</h3>
-              <div className="flex flex-col mt-4 gap-3">
-                <section className="flex items-center p-4 border-2 shadow-btn rounded-[4px] bg-yellow-tint">
-                  <div className="text-lg font-bold">2023/10/2</div>
-                  <div className="border-l-2 border-gray-500 pl-4 ml-4 grow">
-                    <p className="text-lg font-bold">輕鬆派對揪友團</p>
-                    <p>
-                      <Image
-                        src="/images/icon-location-light.svg"
-                        alt="location-light"
-                        width="18"
-                        height="18"
-                        className="inline align-middle"
-                      />
-                      <span className="align-middle text-xs text-gray-400 ml-2">
-                        六角學院桌遊店
-                      </span>
-                    </p>
-                  </div>
-                  <div className="font-semibold">目前人數： 6 /12</div>
-                </section>
-                <section className="flex items-center p-4 border-2 shadow-btn rounded-[4px] bg-yellow-tint">
-                  <div className="text-lg font-bold">2023/10/2</div>
-                  <div className="border-l-2 border-gray-500 pl-4 ml-4 grow">
-                    <p className="text-lg font-bold">輕鬆派對揪友團</p>
-                    <p>
-                      <Image
-                        src="/images/icon-location-light.svg"
-                        alt="location-light"
-                        width="18"
-                        height="18"
-                        className="inline align-middle"
-                      />
-                      <span className="align-middle text-xs text-gray-400 ml-2">
-                        六角學院桌遊店
-                      </span>
-                    </p>
-                  </div>
-                  <div className="font-semibold">目前人數： 6 /12</div>
-                </section>
-              </div>
-            </div>
-            <div className="mt-8">
-              <h3 className="text-lg font-semibold">過往揪團紀錄</h3>
-              <section className=" mt-4">
-                <h4 className="text-xl font-bold ml-2">2023</h4>
-                <section className="flex items-center p-4 ">
-                  <div className="text-lg font-bold">10/2</div>
-                  <div className="border-l-2 border-gray-500 pl-4 ml-4 grow">
-                    <p className="text-md font-semibold">輕鬆派對揪友團</p>
-                    <p>
-                      <Image
-                        src="/images/icon-location-dark.svg"
-                        alt="location-light"
-                        width="20"
-                        height="20"
-                        className="inline align-middle"
-                      />
-                      <span className="align-middle text-sm text-gray-400 ml-2">
-                        <Link href="/">六角學院桌遊店</Link>
-                      </span>
-                    </p>
-                  </div>
-                </section>
-                <section className="flex items-center p-4 ">
-                  <div className="text-lg font-bold">10/2</div>
-                  <div className="border-l-2 border-gray-500 pl-4 ml-4 grow">
-                    <p className="text-md font-semibold">輕鬆派對揪友團</p>
-                    <p>
-                      <Image
-                        src="/images/icon-location-dark.svg"
-                        alt="location-light"
-                        width="20"
-                        height="20"
-                        className="inline align-middle"
-                      />
-                      <span className="align-middle text-sm text-gray-400 ml-2">
-                        <Link href="/">六角學院桌遊店</Link>
-                      </span>
-                    </p>
-                  </div>
-                </section>
-              </section>
-            </div>
+            <GroupsList />
           </section>
         </section>
       </div>
