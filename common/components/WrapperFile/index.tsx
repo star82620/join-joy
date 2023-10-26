@@ -1,112 +1,105 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import clsx from "clsx";
 
-const tabSet = [
-  {
-    tabName: "groups-list",
-    tabText: "揪團清單",
-    img: {
-      src: "/images/icon-lists-light.svg",
-      alt: "icon-lists",
-      width: 24,
-      height: 24,
-    },
-  },
-  {
-    tabName: "comments",
-    tabText: "綜合評價",
-    img: {
-      src: "/images/icon-comments-light.svg",
-      alt: "icon-comments",
-      width: 24,
-      height: 24,
-    },
-  },
-  {
-    tabName: "other",
-    tabText: "其他",
-    img: {
-      src: "/images/icon-location-light.svg",
-      alt: "icon-comments",
-      width: 24,
-      height: 24,
-    },
-  },
-];
+type TabType = {
+  tabName: string;
+  tabText: string;
+  img: imgType;
+};
 
 type imgType = {
   src: string;
   alt: string;
-  width: number;
-  height: number;
 };
 
 type TabBlockProps = {
-  tabName: string;
-  tabText: string;
-  img: imgType;
+  tab: TabType;
   zIndex: number;
   isActive: boolean;
 };
 
-const activeTag = "comments";
-const TabBlock = ({
-  tabName,
-  tabText,
-  img,
-  zIndex,
-  isActive,
-}: TabBlockProps) => {
-  const activeStyle =
-    "pb-[10px] border-l-[3px] rounded-tl-md bg-yellow-dark z-10";
-  const defaultStyle = "pb-2 border-gray-400 text-gray-600 bg-gray-200";
-
-  const toggleImgSrc = () => {
-    const activeImg = img.src.replace("light", "dark");
-    const result = isActive ? activeImg : img.src;
-    return result;
-  };
-  const imgSrc = toggleImgSrc();
-
-  return (
-    <p
-      className={`pt-2 px-6 -ml-3 rounded-tr-md border-[3px] border-l-0 border-b-0 text-lg font-semibold leading-1 first:rounded-tl-md first:border-l-[3px] first:ml-0
-    ${isActive ? activeStyle : defaultStyle} z-${zIndex}`}
-      // style={{ zIndex: zIndex }}
-      data-tab={tabName}
-    >
-      <Image
-        src={imgSrc}
-        width={img.width}
-        height={img.height}
-        alt={img.alt}
-        className="inline align-middle"
-      />
-      <span className="ml-2 align-middle">{tabText}</span>
-    </p>
-  );
-};
-
 // ---------一整包----------
 
-export default function WrapperFile() {
+type WrapperFileProps = {
+  tabSet: TabType[];
+  activeTab: string;
+  setActiveTab: (activeTab: string) => void;
+};
+
+export default function WrapperFile({
+  tabSet,
+  activeTab,
+  setActiveTab,
+}: WrapperFileProps) {
+  // 單個 tab
+  function TabBlock({ tab, zIndex, isActive }: TabBlockProps) {
+    const { tabName, tabText, img } = tab;
+
+    const activeStyle =
+      "pb-[10px] border-l-[3px] rounded-tl-md bg-yellow-dark z-10";
+
+    const defaultStyle = "pb-2 border-gray-400 text-gray-600 bg-gray-200";
+
+    const toggleActiveImgSrc = () => {
+      const activeImg = img.src.replace("light", "dark");
+      const result = isActive ? activeImg : img.src;
+      return result;
+    };
+
+    const imgSrc = toggleActiveImgSrc();
+
+    return (
+      <p
+        // className={clsx(
+        //   "pt-2 px-6",
+        //   "-ml-0.5",
+        //   "text-lg font-semibold leading-1",
+        //   "border-[3px] border-l-0 border-b-0 border-r-danger",
+        //   "rounded-tr-md",
+        //   "first:rounded-tl-md first:border-l-[3px] first:ml-0",
+        //   `z-${zIndex}`,
+        //   // defaultStyle
+        //   isActive ? activeStyle : defaultStyle
+        // )}
+        className={`pt-2 px-6 -ml-0.5 text-lg font-semibold leading-1 border-[3px] border-l-0 border-b-0 border-r-danger rounded-tr-md first:rounded-tl-md first:border-l-[3px] first:ml-0 z-${zIndex} ${
+          isActive ? activeStyle : defaultStyle
+        }`}
+        data-tab={tab.tabName}
+        onClick={() => {
+          setActiveTab(tab.tabName);
+          console.log("activeTab", activeTab);
+        }}
+      >
+        <span className="inline-block align-middle w-6 h-6 md:w-5 md:h-5 relative">
+          <Image
+            src={imgSrc}
+            alt={img.alt}
+            fill
+            sizes="100%"
+            className="object-contain"
+          />
+        </span>
+        <span className="ml-2 align-middle">{tabText}</span>
+      </p>
+    );
+  }
+
+  // const handleActiveTab = ;
+
   return (
     <div className="flex items-start absolute">
       {tabSet.map((tab, index) => {
-        const isActive = activeTag === tab.tabName ? true : false;
+        const isActive = activeTab === tab.tabName ? true : false;
         return (
           <TabBlock
             key={tab.tabName}
+            tab={tab}
             zIndex={tabSet.length - index}
             isActive={isActive}
-            {...tab}
           />
         );
       })}
-
-      {/* 只有第一個才有露出左邊圓角 */}
-
-      {/* tab，跑 map 吃 children */}
     </div>
   );
 }

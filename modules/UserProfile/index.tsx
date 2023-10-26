@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Wrapper from "@/common/components/Wrapper";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import TagBlock from "@/common/components/TagBlock";
 import WrapperFile from "@/common/components/WrapperFile";
-
+const tabSet = [
+  {
+    tabName: "groups-list",
+    tabText: "揪團清單",
+    img: {
+      src: "/images/icon-lists-light.svg",
+      alt: "icon-lists",
+    },
+  },
+  {
+    tabName: "comments",
+    tabText: "綜合評價",
+    img: {
+      src: "/images/icon-comments-light.svg",
+      alt: "icon-comments",
+    },
+  },
+  {
+    tabName: "other",
+    tabText: "其他",
+    img: {
+      src: "/images/icon-location-light.svg",
+      alt: "icon-comments",
+    },
+  },
+];
 export default function UserProfile() {
+  const [activeTab, setActiveTab] = useState("groups-list");
   return (
     <div className="container">
       <div className="m-auto flex lg:flex-col justify-center gap-9 lg:max-w-[720px] md:w-full">
@@ -65,7 +91,11 @@ export default function UserProfile() {
         <section className="flex flex-col grow relative lg:w-full">
           {/* <div className="flex items-start absolute"> */}
           {/* 只有第一個才有露出左邊圓角 */}
-          <WrapperFile />
+          <WrapperFile
+            tabSet={tabSet}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+          />
           {/* </div> */}
           <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-12 h-full">
             <div>
