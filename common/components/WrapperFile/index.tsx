@@ -36,10 +36,11 @@ export default function WrapperFile({
   function TabBlock({ tab, zIndex, isActive }: TabBlockProps) {
     const { tabName, tabText, img } = tab;
 
-    const activeStyle =
-      "pb-[10px] border-l-[3px] rounded-tl-md bg-yellow-dark z-10";
+    const defaultStyle =
+      "pb-2 bg-gray-200 text-gray-600 border-gray-400 border-l-gray-400";
 
-    const defaultStyle = "pb-2 border-gray-400 text-gray-600 bg-gray-200";
+    const activeStyle =
+      "pb-[10px] bg-yellow-dark text-gray-950 border-gray-950 rounded-tl-md";
 
     const toggleActiveImgSrc = () => {
       const activeImg = img.src.replace("light", "dark");
@@ -55,19 +56,15 @@ export default function WrapperFile({
           "pt-2 px-6",
           "-ml-3",
           "text-lg font-semibold leading-1",
-          "border-[3px] border-l-0 border-b-0 border-r-danger",
+          "border-[3px] border-b-0",
           "rounded-tr-md",
           "first:rounded-tl-md first:border-l-[3px] first:ml-0",
           isActive ? `z-10` : `z-${zIndex}`,
           isActive ? activeStyle : defaultStyle
         )}
-        // className={`pt-2 px-6 -ml-3 text-lg font-semibold leading-1 border-[3px] border-l-0 border-b-0  rounded-tr-md first:rounded-tl-md first:border-l-[3px] first:ml-0  ${
-        //   isActive ? activeStyle : defaultStyle
-        // } ${isActive ? `z-10` : `z-${zIndex}`}`}
-        data-tab={tab.tabName}
+        data-tab={tabName}
         onClick={() => {
-          setActiveTab(tab.tabName);
-          console.log("activeTab", activeTab);
+          setActiveTab(tabName);
         }}
       >
         <span className="inline-block align-middle w-6 h-6 md:w-5 md:h-5 relative">
