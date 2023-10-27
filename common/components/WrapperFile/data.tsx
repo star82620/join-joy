@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type ImgType = {
   src: string;
   alt: string;
@@ -15,8 +17,15 @@ export type TabBlockProps = {
   isActive: boolean;
 };
 
+export type TabsSectionProps = {
+  tabSet: TabType[];
+  activeTab: string;
+  setActiveTab: (activeTab: string) => void;
+};
+
 export type WrapperFileProps = {
   tabSet: TabType[];
   activeTab: string;
   setActiveTab: (activeTab: string) => void;
+  children: ReactNode;
 };

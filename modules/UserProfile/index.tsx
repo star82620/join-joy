@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
@@ -11,6 +11,7 @@ import { tabSet } from "./data";
 
 export default function UserProfile() {
   const [activeTab, setActiveTab] = useState("groups-list");
+
   return (
     <div className="container">
       <div className="m-auto flex lg:flex-col justify-center gap-9 lg:max-w-[720px] md:w-full">
@@ -65,17 +66,15 @@ export default function UserProfile() {
             </div>
           </Wrapper>
         </section>
-        {/* 右邊檔案夾，要拆成元件 */}
-        <section className="flex flex-col grow relative lg:w-full">
-          <WrapperFile
-            tabSet={tabSet}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-          />
-          <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-12 h-full">
-            <GroupsList />
-          </section>
-        </section>
+
+        <WrapperFile
+          tabSet={tabSet}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        >
+          {activeTab === "groups-list" && <GroupsList />}
+          {activeTab === "comments" && <Comments />}
+        </WrapperFile>
       </div>
     </div>
   );

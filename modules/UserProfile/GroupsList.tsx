@@ -3,6 +3,7 @@ import React from "react";
 export default function GroupsList() {
   return (
     <>
+      GROUPS LIST
       {/* <div>
         <h3 className="text-lg font-semibold">正在開團中</h3>
         <div className="flex flex-col mt-4 gap-3">
