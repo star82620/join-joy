@@ -1,6 +1,7 @@
-type commentType = {
+export type CommentType = {
   userName: string;
   userImg: string;
+  userId: string;
   groupName: string;
   groupMemberQtu: number;
   groupDate: Date;
@@ -11,9 +12,10 @@ type commentType = {
   commentDate: Date;
 };
 
-const comment = {
+export const comment = {
   userName: "多多",
-  userImg: "/images/icon-header-user.svg",
+  userImg: "/images/logo.jpg",
+  userId: "1234567",
   groupName: "輕鬆派對揪友團",
   groupMemberQtu: 8,
   groupDate: "2023-01-10",
@@ -22,4 +24,10 @@ const comment = {
   msg: "藍天下的Nebula，每次Sunset都會有不同的Reflection。在此之間，橋梁Link著兩岸，如同Connectivity連結著過去與未來。花朵Bloom，傳遞Nature的語言。",
   score: 4.5,
   commentDate: "2023-10-27",
+};
+
+export type UserInfoProps = {
+  userName: CommentType["userName"];
+  userImg: CommentType["userImg"];
+  userId: CommentType["userId"];
 };
