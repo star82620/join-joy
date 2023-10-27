@@ -6,9 +6,7 @@ export default function ModalWrapper({
   children,
   layout,
 }: ModalWrapperProps) {
-  layout = layout || "default";
-
-  const { haveShadow, haveHeadDots } = layoutStyles[layout];
+  const { haveShadow, haveHeadDots } = layoutStyles[layout || "default"];
 
   return (
     <div className={`w-full rounded-t-lg ${haveShadow ? "shadow-window" : ""}`}>
