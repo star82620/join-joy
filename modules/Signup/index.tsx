@@ -7,7 +7,7 @@ import { title, inputSet, btnSet, apiParams } from "./data";
 export default function Signup() {
   return (
     <div className="m-auto w-fit">
-      <ModalWrapper title={title} layout="single">
+      <ModalWrapper title={title}>
         <div className="px-[100px] py-16 lg:px-14 lg:py-12 md:p-8 sm:px-4 sm:py-6">
           <Form inputSet={inputSet} btnSet={btnSet} apiParams={apiParams} />
           <p className="mt-3 text-center text-sm md:text-xs">
