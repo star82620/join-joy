@@ -23,7 +23,7 @@ export default function CommentCard() {
 
   return (
     <section className="flex justify-between gap-x-3 gap-y-4 border-2 rounded bg-yellow-tint p-4 md:p-3 md:flex-col">
-      <div className="flex flex-col md:order-3 md:flex-row md:flex-wrap md:justify-between md:items-end w-[126px] overflow-scroll">
+      <div className="flex flex-col md:order-3 md:flex-row md:flex-wrap md:justify-between md:items-end min-w-[126px] overflow-scroll">
         <div className="md:hidden">
           <UserInfo />
         </div>
@@ -54,7 +54,9 @@ export default function CommentCard() {
         </p>
       </div>
       <article className="border-l-2 border-gray-700 pl-4 md:border-0 md:pl-0 md:order-2">
-        <h4>輕鬆派對揪友團</h4>
+        <h4 className="text-lg md:text-md leading-[1.2] font-semibold">
+          輕鬆派對揪友團
+        </h4>
         <p className="mt-4 md:mt-2">
           藍天下的Nebula，每次Sunset都會有不同的Reflection。在此之間，橋梁Link著兩岸，如同Connectivity連結著過去與未來。花朵Bloom，傳遞Nature的語言。
         </p>

@@ -26,7 +26,9 @@ export default function Home() {
           <Link href="/create-group">我要開團</Link>
         </li>
       </ul>
-      <CommentCard />
+      <div className=" max-w-[826px]">
+        <CommentCard />
+      </div>
     </>
   );
 }
