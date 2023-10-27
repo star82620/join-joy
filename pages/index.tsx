@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import CommentCard from "@/common/components/Comments/CommentCard";
+import CommentsSection from "@/common/components/CommentsSection";
+import { commentsData } from "@/common/components/CommentsSection/data";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ export default function Home() {
         </li>
       </ul>
       <div className=" max-w-[826px]">
-        <CommentCard />
+        <CommentsSection data={commentsData} />
       </div>
     </>
   );

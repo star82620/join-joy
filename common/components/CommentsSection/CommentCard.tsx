@@ -2,22 +2,12 @@ import React from "react";
 import Image from "next/image";
 import Rating from "./Rating";
 import Link from "../GeneralLink";
-import { comment, CommentType, UserInfoProps } from "./data";
+import { CommentCardProps } from "./data";
 
-export default function CommentCard() {
-  const {
-    userName,
-    userImg,
-    userId,
-    groupName,
-    groupMemberQtu,
-    groupDate,
-    storeName,
-    storeId,
-    msg,
-    score,
-    commentDate,
-  } = comment;
+export default function CommentCard({ comment }: CommentCardProps) {
+  const { commentBy, group, msg, score, commentDate } = comment;
+  const { userId, userImg, userName } = commentBy;
+  const { storeId, storeName, memberNum, groupDate, groupName } = group;
 
   const UserInfo = () => {
     return (
@@ -26,7 +16,7 @@ export default function CommentCard() {
           <div className="relative w-10 h-10 rounded-full">
             <Image
               src={userImg}
-              alt="user-photo"
+              alt="user-img"
               fill
               sizes="100%"
               className="object-contain"
@@ -70,7 +60,7 @@ export default function CommentCard() {
       <div className="grow text-sm mt-4 md:mt-6 md:px-3 md:py-2 md:border md:border-gray-300 md:w-full">
         <p>
           <span className="font-semibold">人數：</span>
-          {groupMemberQtu}人
+          {memberNum}人
         </p>
         <p className="mt-2">
           <span className="font-semibold">時間：</span>
