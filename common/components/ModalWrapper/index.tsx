@@ -1,12 +1,12 @@
 import React from "react";
-import { ModalWrapperProps, categoryStyles } from "./data";
+import { ModalWrapperProps, layoutStyles } from "./data";
 
 export default function ModalWrapper({
   title,
   children,
-  category,
+  layout,
 }: ModalWrapperProps) {
-  const { haveShadow, haveHeadDeco } = categoryStyles[category];
+  const { haveShadow, haveHeadDeco } = layoutStyles[layout];
 
   return (
     <div className={`w-full rounded-t-lg ${haveShadow ? "shadow-window" : ""}`}>
