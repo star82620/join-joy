@@ -6,7 +6,7 @@ export default function ModalWrapper({
   children,
   layout,
 }: ModalWrapperProps) {
-  if (!layout) layout = "default";
+  layout = layout || "default";
 
   const { haveShadow, haveHeadDots } = layoutStyles[layout];
 
