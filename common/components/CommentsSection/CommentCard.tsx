@@ -10,66 +10,59 @@ export default function CommentCard({ comment }: CommentCardProps) {
   const { userId, userImg, userName } = commentBy;
   const { storeId, storeName, memberNum, groupDate, groupName } = group;
 
-  const UserInfo = () => {
-    return (
-      <Link href={`/user/${userId}`} className="no-underline">
-        <div className="flex justify-start items-center gap-4">
-          <div className="relative w-10 h-10 rounded-full">
-            <Image
-              src={userImg}
-              alt="user-img"
-              fill
-              sizes="100%"
-              className="object-contain"
-            />
-          </div>
-          <span className="font-semibold">{userName}</span>
-        </div>
-      </Link>
-    );
-  };
-  const CommentDate = () => {
-    return (
-      <p className="text-sm md:text-xs text-gray-400 whitespace-nowrap">
-        評價時間：{commentDate}
-      </p>
-    );
-  };
-  const GroupLocation = () => {
-    return (
-      <div className="whitespace-nowrap mt-12 md:mt-6">
-        <div className="relative w-5 h-5 inline-block align-middle">
-          {/* 想把這個寫成 before bg */}
+  const UserInfo = () => (
+    <Link href={`/user/${userId}`} className="no-underline">
+      <div className="flex justify-start items-center gap-4">
+        <div className="relative w-10 h-10 rounded-full">
           <Image
-            src="/images/icon-header-user.svg"
-            alt="icon-location-dark"
+            src={userImg}
+            alt={userName}
             fill
             sizes="100%"
             className="object-contain"
           />
         </div>
-        <span className="align-middle ml-2 md:ml-1 text-sm font-medium leading-[1.4]">
-          <Link href={`/store/${storeId}`} target="_blank">
-            {storeName}
-          </Link>
-        </span>
+        <span className="font-semibold">{userName}</span>
       </div>
-    );
-  };
-  const GroupInfo = () => {
-    return (
-      <div className="grow text-sm mt-4 md:mt-6 md:px-3 md:py-2 md:border md:border-gray-300 md:w-full">
-        <p>
-          <span className="font-semibold">人數：</span>
-          {memberNum}人
-        </p>
-        <p className="mt-2">
-          <span className="font-semibold">時間：</span>
-          {groupDate}
-        </p>
+    </Link>
+  );
+
+  const CommentDate = () => (
+    <p className="text-sm md:text-xs text-gray-400 whitespace-nowrap">
+      評價時間：{commentDate}
+    </p>
+  );
+  const GroupLocation = () => (
+    <div className="whitespace-nowrap mt-12 md:mt-6">
+      <div className="relative w-5 h-5 inline-block align-middle">
+        <Image
+          src="/images/icon-location-dark.svg"
+          alt="icon-location-dark"
+          fill
+          sizes="100%"
+          className="object-contain"
+        />
       </div>
-    );
-  };
+      <span className="align-middle ml-2 md:ml-1 text-sm font-medium leading-[1.4]">
+        <Link href={`/store/${storeId}`} target="_blank">
+          {storeName}
+        </Link>
+      </span>
+    </div>
+  );
+
+  const GroupInfo = () => (
+    <div className="grow text-sm mt-4 md:mt-6 md:px-3 md:py-2 md:border md:border-gray-300 md:w-full">
+      <p>
+        <span className="font-semibold">人數：</span>
+        {memberNum}人
+      </p>
+      <p className="mt-2">
+        <span className="font-semibold">時間：</span>
+        {groupDate}
+      </p>
+    </div>
+  );
 
   return (
     <section className="flex justify-between gap-x-3 border-2 rounded bg-yellow-tint p-4 md:p-3 md:flex-col shadow-btn md:shadow-none">

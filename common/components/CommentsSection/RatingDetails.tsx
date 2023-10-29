@@ -1,26 +1,16 @@
 import React from "react";
 import Image from "next/image";
-import { CommentsDataType, AverageScoreRecordType } from "./data";
-import { title } from "process";
-
-type RatingDetailsProps = {
-  averageScore: CommentsDataType["averageScore"];
-  direction?: "row" | "col";
-};
-
-const titles: Record<string, string> = {
-  environment: "環境整潔",
-  service: "服務態度",
-  game: "遊戲多樣性",
-  costValue: "性價比",
-};
+import { RatingDetailsProps, titles } from "./data";
 
 export default function RatingDetails({
   averageScore,
   direction,
 }: RatingDetailsProps) {
   if (typeof averageScore === "number") return null;
-  let isRow = direction === "col" ? false : true; //沒有指定就是預設 row
+  let isRow = !(direction === "col"); //沒有指定就是預設 row
+
+  const averageScoreAry = Object.entries(averageScore);
+  const titlesKey = Object.keys(titles);
 
   const stars = (num: number) => {
     const numStars = Math.floor(num);
@@ -49,10 +39,10 @@ export default function RatingDetails({
           isRow ? "flex-row" : "flex-col"
         }`}
       >
-        {Object.entries(averageScore).map((item, index) => {
+        {averageScoreAry.map((item) => {
           const itemTitle = item[0];
           const itemScore = item[1];
-          if (!Object.keys(titles).includes(itemTitle)) return null;
+          if (!titlesKey.includes(itemTitle)) return null;
           return (
             <div
               key={itemTitle}

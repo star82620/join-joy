@@ -7,13 +7,13 @@ import { CommentType, CommentsSectionProps } from "./data";
 export default function CommentsSection({ data }: CommentsSectionProps) {
   if (!data) return null;
   const { averageScore, comments } = data;
-  const checkAverageScore =
+  const averageScoreSelector =
     typeof averageScore === "number" ? averageScore : averageScore.overall;
 
   return (
     <section className="border">
       <div className="flex justify-start items-center gap-4 md:gap-3">
-        <Rating score={checkAverageScore} />
+        <Rating score={averageScoreSelector} />
         <span className="md:text-sm">{comments.length} 評語</span>
       </div>
       {/* 細項評分 */}
@@ -30,11 +30,9 @@ export default function CommentsSection({ data }: CommentsSectionProps) {
         </div>
 
         <div className="flex flex-col gap-3 mt-3 md:mt-4">
-          {comments.map((comment) => {
-            return (
-              <CommentCard key={comment.commentBy.userId} comment={comment} />
-            );
-          })}
+          {comments.map((comment) => (
+            <CommentCard key={comment.commentBy.userId} comment={comment} />
+          ))}
         </div>
       </div>
     </section>

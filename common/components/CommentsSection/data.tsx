@@ -14,19 +14,11 @@ export type CommentType = {
   commentDate: string;
 };
 
-// {
-//   userName: string;
-//   userImg: string;
-//   userId: string;
-//   groupName: string;
-//   memberQtu: number;
-//   groupDate: string;
-//   storeName: string;
-//   storeId: string; //用id連結去店家詳細頁
-//   msg: string;
-//   score: number;
-//   commentDate: string;
-// };
+export type RatingDetailsProps = {
+  averageScore: CommentsDataType["averageScore"];
+  direction?: "row" | "col";
+};
+
 export type AverageScoreRecordType = {
   environment: number;
   service: number;
@@ -38,6 +30,18 @@ export type AverageScoreRecordType = {
 export type CommentsDataType = {
   averageScore: number | AverageScoreRecordType;
   comments: CommentType[];
+};
+
+export type CommentCardProps = { comment: CommentType };
+export type CommentsSectionProps = { data: CommentsDataType };
+
+// ---data---
+
+export const titles: Record<string, string> = {
+  environment: "環境整潔",
+  service: "服務態度",
+  game: "遊戲多樣性",
+  costValue: "性價比",
 };
 
 export const commentsData: CommentsDataType = {
@@ -85,6 +89,21 @@ export const commentsData: CommentsDataType = {
     },
   ],
 };
+
+// {
+//   userName: string;
+//   userImg: string;
+//   userId: string;
+//   groupName: string;
+//   memberQtu: number;
+//   groupDate: string;
+//   storeName: string;
+//   storeId: string; //用id連結去店家詳細頁
+//   msg: string;
+//   score: number;
+//   commentDate: string;
+// };
+
 // export const commentsData: CommentsDataType = {
 //   averageScore: 5,
 //   comments: [
@@ -124,6 +143,3 @@ export const commentsData: CommentsDataType = {
 //     },
 //   ],
 // };
-
-export type CommentCardProps = { comment: CommentType };
-export type CommentsSectionProps = { data: CommentsDataType };
