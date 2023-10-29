@@ -5,6 +5,7 @@ import Link from "../GeneralLink";
 import { CommentCardProps } from "./data";
 
 export default function CommentCard({ comment }: CommentCardProps) {
+  if (!comment) return null;
   const { commentBy, group, msg, score, commentDate } = comment;
   const { userId, userImg, userName } = commentBy;
   const { storeId, storeName, memberNum, groupDate, groupName } = group;

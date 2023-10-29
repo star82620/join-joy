@@ -6,6 +6,7 @@ type Props = {
 };
 
 export default function Rating({ score }: Props) {
+  if (!score) return null;
   return (
     <div className="w-fit bg-yellow-second flex justify-center items-center gap-1 px-2 py-1 md:px-1 md:py-0.5">
       <span className="font-bold text-lg leading-6 md:text-sm md:leading-[1.6]">

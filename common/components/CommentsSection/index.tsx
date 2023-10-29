@@ -5,6 +5,7 @@ import RatingDetails from "./RatingDetails";
 import { CommentType, CommentsSectionProps } from "./data";
 
 export default function CommentsSection({ data }: CommentsSectionProps) {
+  if (!data) return null;
   const { averageScore, comments } = data;
   const checkAverageScore =
     typeof averageScore === "number" ? averageScore : averageScore.overall;
