@@ -5,24 +5,24 @@ import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
-import getFollowingStatus from "@/common/helpers/getFollowingStatus";
+import checkFollowed from "@/common/helpers/checkFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
 import { userData, tabSet, ActiveTabType } from "./data";
 
+function selectActiveTab(activeTab: ActiveTabType) {
+  const components = {
+    "groups-list": <GroupsList />,
+    comments: <Comments />,
+  };
+  return components[activeTab as keyof typeof components] || null;
+}
+
 export default function UserProfile() {
-  const isFollowing = getFollowingStatus();
+  const isFollowed = checkFollowed();
   const [activeTab, setActiveTab] = useState<ActiveTabType>("groups-list");
   const { userName, userImg, description, cities, gameTypes } = userData;
-
-  function selectActiveComponent(activeTab: ActiveTabType) {
-    const components = {
-      "groups-list": <GroupsList />,
-      comments: <Comments />,
-    };
-    return components[activeTab as keyof typeof components] || null;
-  }
 
   return (
     <div className="container">
@@ -57,21 +57,21 @@ export default function UserProfile() {
                 </div>
                 <Button
                   type="button"
-                  appearance={isFollowing ? "gray" : "orange"}
+                  appearance={isFollowed ? "gray" : "orange"}
                   className="text-lg lg:text-md leading-[1.2]"
                 >
                   <span
                     className={clsx(
                       "after:content-[''] after:inline-block after:align-bottom after:ml-1",
                       "after:w-6 after:h-6 md:after:w-5 md:after:h-5",
-                      isFollowing
+                      isFollowed
                         ? `after:bg-follow-true`
                         : `after:bg-follow-false`,
                       "after:bg-center after:bg-no-repeat",
                       "leading-6 font-semibold text-lg md:text-md md:leading-5"
                     )}
                   >
-                    {isFollowing ? "已追蹤" : "追蹤"}
+                    {isFollowed ? "已追蹤" : "追蹤"}
                   </span>
                 </Button>
               </div>
@@ -102,7 +102,7 @@ export default function UserProfile() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         >
-          {selectActiveComponent(activeTab)}
+          {selectActiveTab(activeTab)}
         </WrapperFile>
       </div>
     </div>

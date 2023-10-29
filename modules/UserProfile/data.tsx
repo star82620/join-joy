@@ -6,6 +6,19 @@ export type userDataType = {
   gameTypes: Array<string>;
 };
 
+export type ActiveTabType = string;
+
+type TabType = {
+  tabName: "groups-list" | "comments";
+  tabText: string;
+  img: {
+    src: string;
+    alt: string;
+  };
+};
+
+export type TabSetType = Array<TabType>;
+
 export const userData: userDataType = {
   userName: "多多",
   userImg: "/images/photo-user-000.png",
@@ -15,13 +28,13 @@ export const userData: userDataType = {
   gameTypes: ["派對遊戲", "陣營遊戲", "策略遊戲"],
 };
 
-export const tabSet = [
+export const tabSet: TabSetType = [
   {
     tabName: "groups-list",
     tabText: "揪團清單",
     img: {
       src: "/images/icon-lists-light.svg",
-      alt: "icon-lists",
+      alt: "icon-lists-light",
     },
   },
   {
@@ -29,9 +42,7 @@ export const tabSet = [
     tabText: "綜合評價",
     img: {
       src: "/images/icon-comments-light.svg",
-      alt: "icon-comments",
+      alt: "icon-comments-light",
     },
   },
 ];
-
-export type ActiveTabType = string;
