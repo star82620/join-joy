@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export type ButtonType = {
   type: "button" | "submit" | "reset";
-  appearance: "orange" | "yellow" | "light" | "black";
+  appearance: "orange" | "yellow" | "light" | "black" | "gray";
   children: ReactNode;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
   isDisabled?: boolean;
@@ -38,5 +38,12 @@ export const dataSet = {
     active: "active:bg-gray-950",
     disabled: "disabled:bg-gray-300",
     textColor: "text-white",
+  },
+  gray: {
+    default: "bg-gray-100",
+    hover: "hover:bg-gray-100",
+    active: "active:bg-gray-100",
+    disabled: "disabled:bg-gray-300",
+    textColor: "text-gray-950",
   },
 };

@@ -44,7 +44,7 @@ export default function UserProfile() {
                 </div>
                 <Button
                   type="button"
-                  appearance={isFollowed ? "light" : "orange"} //light 要換成 gray
+                  appearance={isFollowed ? "gray" : "orange"} //light 要換成 gray
                   className="text-lg lg:text-md leading-[1.2]"
                 >
                   <span
