@@ -1,10 +1,12 @@
 import React from "react";
+import Image from "next/image";
+import Link from "@/common/components/GeneralLink";
 
 export default function GroupsList() {
   return (
     <>
       GROUPS LIST
-      {/* <div>
+      <div>
         <h3 className="text-lg font-semibold">正在開團中</h3>
         <div className="flex flex-col mt-4 gap-3">
           <section className="flex items-center p-4 border-2 shadow-btn rounded-[4px] bg-yellow-tint">
@@ -88,7 +90,7 @@ export default function GroupsList() {
             </div>
           </section>
         </section>
-      </div> */}
+      </div>
       ;
     </>
   );

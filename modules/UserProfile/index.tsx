@@ -3,14 +3,18 @@ import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import Wrapper from "@/common/components/Wrapper";
-import TagBlock from "@/common/components/TagBlock";
 import WrapperFile from "@/common/components/WrapperFile";
+import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import { tabSet } from "./data";
+import checkFollow from "@/common/helpers/checkFollow";
+import { userData, tabSet } from "./data";
+import clsx from "clsx";
 
 export default function UserProfile() {
+  const isFollowed = checkFollow(); //該會員是否已經追蹤
   const [activeTab, setActiveTab] = useState("groups-list");
+  const { userName, userImg, description, districts, gameTypes } = userData;
 
   return (
     <div className="container">
@@ -19,29 +23,42 @@ export default function UserProfile() {
           <Wrapper title="關於我" contentStyle="" hideShadow={true}>
             <div className="px-9 py-12 lg:px-16 md:px-8 md:py-4 flex flex-col justify-center items-center gap-6 lg:flex-row lg:justify-between lg:items-start md:flex-col md:justify-center md:items-center">
               <div className="flex flex-col justify-center items-center gap-6 lg:gap-3">
-                <div className="w-28 h-28 rounded-full border-2 border-white outline outline-2 outline-gray-950 relative">
+                <div className="relative w-28 h-28 rounded-full border-2 border-white outline outline-2 outline-gray-950">
                   <Image
-                    src="/images/photo-user-000.png"
-                    alt="name"
-                    fill={true}
+                    src={userImg}
+                    alt={userName}
+                    fill
                     className="object-contain rounded-full"
                   />
                 </div>
                 <h1 className="text-lg lg:text-md font-semibold leading-[1.2] text-center">
-                  多多
+                  {userName}
                 </h1>
-                <div className="flex flex-col gap-1 lg:gap-0 lg:flex-row lg:text-sm font-semibold leading-6 text-center -mt-3 lg:-mt-[10px]">
-                  <p className="lg:after:content-['、']">台北市</p>
-                  <p className="lg:after:content-['、']">台北市</p>
-                  <p>台北市</p>
+                <div className="flex flex-col gap-1 lg:gap-0 lg:flex-row lg:text-sm font-semibold leading-6 text-center -mt-3 lg:-mt-[10px]  lg:last:after:text-danger">
+                  {/* lg:last:after:text-danger 一直吃不到，要把最後的[、]拿掉*/}
+                  {districts.map((district) => (
+                    <p key={district} className="lg:after:content-['、']">
+                      {district}
+                    </p>
+                  ))}
                 </div>
                 <Button
                   type="button"
-                  appearance="orange"
+                  appearance={isFollowed ? "light" : "orange"} //light 要換成 gray
                   className="text-lg lg:text-md leading-[1.2]"
                 >
-                  <span className="after:content-[''] after:inline-block after:align-bottom after:w-6 after:h-6 after:bg-follow-true after:bg-center after:bg-no-repeat after:ml-3 leading-6 font-semibold text-lg md:text-md md:leading-5 md:after:w-5 md:after:h-5">
-                    已追蹤
+                  <span
+                    className={clsx(
+                      "after:content-[''] after:inline-block after:align-bottom after:ml-1",
+                      "after:w-6 after:h-6 md:after:w-5 md:after:h-5",
+                      isFollowed
+                        ? `after:bg-follow-true`
+                        : `after:bg-follow-false`,
+                      "after:bg-center after:bg-no-repeat",
+                      "leading-6 font-semibold text-lg md:text-md md:leading-5"
+                    )}
+                  >
+                    {isFollowed ? "已追蹤" : "追蹤"}
                   </span>
                 </Button>
               </div>
@@ -50,15 +67,15 @@ export default function UserProfile() {
                 <div>
                   <h3 className="text-center lg:text-sm">喜好遊戲種類</h3>
                   <div className="flex flex-col lg:flex-row gap-y-4 gap-x-3 mt-3 md:mt-2">
-                    <TagBlock content="派對遊戲" className="lg:text-sm" />
-                    <TagBlock content="陣營遊戲" className="lg:text-sm" />
-                    <TagBlock content="策略遊戲" className="lg:text-sm" />
+                    {gameTypes.map((type) => (
+                      <TagBlock key={type} content={type} />
+                    ))}
                   </div>
                 </div>
                 <div className="lg:w-[336px] md:w-[264px]">
                   <h3 className="text-center lg:text-sm">簡介</h3>
                   <p className="text-sm mt-3 md:mt-1">
-                    嗨！大家好，我叫多多，歡迎找我揪團喔喔喔（汪汪）嗨！大家好，我叫多多，歡迎找我揪團喔喔喔...
+                    {description}
                     <span className="text-blue-dark underline">顯示更多</span>
                   </p>
                 </div>
