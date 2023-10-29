@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
 import Image from "next/image";
+import clsx from "clsx";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
-import Wrapper from "@/common/components/Wrapper";
+import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
+import checkFollow from "@/common/helpers/checkFollow";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import checkFollow from "@/common/helpers/checkFollow";
 import { userData, tabSet } from "./data";
-import clsx from "clsx";
 
 export default function UserProfile() {
   const isFollowed = checkFollow(); //該會員是否已經追蹤
@@ -20,7 +20,7 @@ export default function UserProfile() {
     <div className="container">
       <div className="m-auto flex lg:flex-col justify-center gap-9 lg:max-w-[720px] md:w-full">
         <section className="w-[314px] lg:w-full">
-          <Wrapper title="關於我" contentStyle="" hideShadow={true}>
+          <ModalWrapper title="關於我" layout="primary">
             <div className="px-9 py-12 lg:px-16 md:px-8 md:py-4 flex flex-col justify-center items-center gap-6 lg:flex-row lg:justify-between lg:items-start md:flex-col md:justify-center md:items-center">
               <div className="flex flex-col justify-center items-center gap-6 lg:gap-3">
                 <div className="relative w-28 h-28 rounded-full border-2 border-white outline outline-2 outline-gray-950">
@@ -81,7 +81,7 @@ export default function UserProfile() {
                 </div>
               </div>
             </div>
-          </Wrapper>
+          </ModalWrapper>
         </section>
 
         <WrapperFile
