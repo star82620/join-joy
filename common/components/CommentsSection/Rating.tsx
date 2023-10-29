@@ -13,8 +13,8 @@ export default function Rating({ score }: Props) {
       </span>
       <div className="relative inline-block w-6 h-6 md:w-5 md:h-5">
         <Image
-          src="/images/icon-rating-star.svg"
-          alt="icon-rating-star"
+          src="/images/icon-rating-star-light.svg"
+          alt="icon-rating-star-light"
           fill
           sizes="100%"
           className="object-contain"

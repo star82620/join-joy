@@ -71,7 +71,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
   };
 
   return (
-    <section className="flex justify-between gap-x-3 border-2 rounded bg-yellow-tint p-4 md:p-3 md:flex-col shadow-btn">
+    <section className="flex justify-between gap-x-3 border-2 rounded bg-yellow-tint p-4 md:p-3 md:flex-col shadow-btn md:shadow-none">
       <div className="flex flex-col md:order-3 md:flex-row md:flex-wrap md:justify-between md:items-end min-w-[126px] overflow-scroll">
         <div className="md:hidden">
           <UserInfo />

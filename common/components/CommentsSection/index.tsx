@@ -1,17 +1,23 @@
 import React from "react";
 import Rating from "./Rating";
 import CommentCard from "./CommentCard";
+import RatingDetails from "./RatingDetails";
 import { CommentType, CommentsSectionProps } from "./data";
 
 export default function CommentsSection({ data }: CommentsSectionProps) {
-  const comments: CommentType[] = data.comments;
+  const { averageScore, comments } = data;
+  const checkAverageScore =
+    typeof averageScore === "number" ? averageScore : averageScore.overall;
+  console.log("a", averageScore);
+  console.log("b", checkAverageScore);
   return (
     <section className="border">
       <div className="flex justify-start items-center gap-4 md:gap-3">
-        <Rating score={data.averageScore} />
+        <Rating score={checkAverageScore} />
         <span className="md:text-sm">{comments.length} 評語</span>
       </div>
       {/* 細項評分 */}
+      <RatingDetails averageScore={averageScore} />
       <div className="mt-4">
         <div className="flex justify-between items-center">
           <span className="whitespace-nowrap">看看大家都說了什麼：</span>
