@@ -7,7 +7,7 @@ export default function RatingDetails({
   direction,
 }: RatingDetailsProps) {
   if (typeof averageScore === "number") return null;
-  let isRow = !!direction && direction !== "col"; //如果 direction 沒有值且不是 col
+  let isRow = !direction || direction !== "col";
 
   const generateStars = (num: number) => {
     const numStars = Math.floor(num);
