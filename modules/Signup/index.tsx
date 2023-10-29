@@ -7,14 +7,7 @@ import { title, inputSet, btnSet, apiParams } from "./data";
 export default function Signup() {
   return (
     <div className="m-auto w-fit">
-<<<<<<< HEAD
-      <Wrapper
-        title={title}
-        titleStyle="text-[20px] md:text-[18px] md:leading-heading"
-      >
-=======
       <ModalWrapper title={title}>
->>>>>>> dev
         <div className="px-[100px] py-16 lg:px-14 lg:py-12 md:p-8 sm:px-4 sm:py-6">
           <Form inputSet={inputSet} btnSet={btnSet} apiParams={apiParams} />
           <p className="mt-3 text-center text-sm md:text-xs">
@@ -24,11 +17,7 @@ export default function Signup() {
             已有帳號？ <Link href="/login">點擊登入</Link>
           </p>
         </div>
-<<<<<<< HEAD
-      </Wrapper>
-=======
       </ModalWrapper>
->>>>>>> dev
     </div>
   );
 }
