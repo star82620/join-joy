@@ -9,19 +9,25 @@ import checkFollowed from "@/common/helpers/checkFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import { userData, tabSet, ActiveTabType } from "./data";
+import {
+  userData,
+  tabSet,
+  ActiveTabType,
+  UserActiveTabType,
+  ReturnComponentType,
+} from "./data";
 
-function selectActiveTab(activeTab: ActiveTabType) {
-  const components = {
+function selectActiveTab(activeTab: UserActiveTabType) {
+  const returnComponent: ReturnComponentType = {
     "groups-list": <GroupsList />,
     comments: <Comments />,
   };
-  return components[activeTab as keyof typeof components] || null;
+  return returnComponent[activeTab] || null;
 }
 
 export default function UserProfile() {
   const isFollowed = checkFollowed();
-  const [activeTab, setActiveTab] = useState<ActiveTabType>("groups-list");
+  const [activeTab, setActiveTab] = useState<UserActiveTabType>("groups-list");
   const { userName, userImg, description, cities, gameTypes } = userData;
 
   return (

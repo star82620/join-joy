@@ -1,3 +1,4 @@
+import { UserActiveTabType } from "@/modules/UserProfile/data";
 import { ReactNode } from "react";
 
 export type ImgType = {
@@ -26,7 +27,7 @@ export type TabsSectionProps = {
 
 export type WrapperFileProps = {
   tabSet: TabType[];
-  activeTab: string;
-  setActiveTab: (activeTab: string) => void;
+  activeTab: UserActiveTabType; //
+  setActiveTab: (activeTab: UserActiveTabType) => void;
   children: ReactNode;
 };

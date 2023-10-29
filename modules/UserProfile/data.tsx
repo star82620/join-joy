@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type userDataType = {
   userName: string;
   userImg: string;
@@ -18,6 +20,17 @@ type TabType = {
 };
 
 export type TabSetType = Array<TabType>;
+
+export type UserActiveTabType = "groups-list" | "comments";
+
+// export type ReturnComponentType = {
+//   "groups-list": ReactNode;
+//   comments: ReactNode;
+// };
+
+export type ReturnComponentType = Record<UserActiveTabType, ReactNode>;
+
+// ---data----
 
 export const userData: userDataType = {
   userName: "多多",
