@@ -3,7 +3,7 @@ import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
-import checkFollowed from "@/common/helpers/checkFollowed";
+import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
@@ -18,7 +18,7 @@ function selectActiveTab(activeTab: UserTabNameType) {
 }
 
 export default function UserProfile() {
-  const isFollowed = checkFollowed();
+  const isFollowed = checkIsFollowed();
   const [activeTab, setActiveTab] = useState<UserTabNameType>("groups-list");
   const { userName, userImg, description, cities, gameTypes } = userData;
 
