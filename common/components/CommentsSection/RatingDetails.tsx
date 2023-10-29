@@ -4,19 +4,18 @@ import { RatingDetailsProps, titles } from "./data";
 
 export default function RatingDetails({
   averageScore,
-  direction,
-}: RatingDetailsProps) {
+}: // direction,
+RatingDetailsProps) {
+  const direction = "row";
   if (typeof averageScore === "number") return null;
-  let isRow = !(direction === "col"); //沒有指定就是預設 row
+  let isRow = !!(direction === "col"); //沒有指定就是預設 row
+  console.log(direction, isRow);
 
-  const averageScoreAry = Object.entries(averageScore);
-  const titlesKey = Object.keys(titles);
-
-  const stars = (num: number) => {
+  const generateStars = (num: number) => {
     const numStars = Math.floor(num);
     return (
       <div className="flex flex-nowrap justify-start items-center gap-[2px] w-32 md:w-[108px]">
-        {Array.from({ length: numStars }).map((_, index) => (
+        {[...Array(numStars)].map((_, index) => (
           <span key={index} className="relative w-6 h-6 md:w-5 md:h-5">
             <Image
               src="/images/icon-rating-star-dark.svg"
@@ -31,6 +30,9 @@ export default function RatingDetails({
     );
   };
 
+  const averageScoreAry = Object.entries(averageScore);
+  const titleKeys = Object.keys(titles);
+
   return (
     <section>
       <p className="font-semibold leading-[1.2]">各項目評分：</p>
@@ -40,24 +42,25 @@ export default function RatingDetails({
         }`}
       >
         {averageScoreAry.map((item) => {
-          const itemTitle = item[0];
-          const itemScore = item[1];
-          if (!titlesKey.includes(itemTitle)) return null;
+          const title = item[0];
+          const score = item[1];
+          const isValidTitle = titleKeys.includes(title);
+          if (!isValidTitle) return null;
           return (
             <div
-              key={itemTitle}
+              key={title}
               className={`flex ${
                 isRow ? "justify-start" : "justify-between"
               } text-md md:text-sm`}
             >
               <span className={`font-semibold whitespace-nowrap`}>
-                {titles[itemTitle]}
+                {titles[title]}
               </span>
               <div className="flex flex-nowrap gap-1 ml-2 ">
                 <span className={`font-bold ${!isRow ? "w-6 text-right" : ""}`}>
-                  {[itemScore]}
+                  {[score]}
                 </span>
-                {stars(itemScore)}
+                {generateStars(score)}
               </div>
             </div>
           );
