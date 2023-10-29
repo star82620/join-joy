@@ -1,5 +1,8 @@
-import { UserActiveTabType } from "@/modules/UserProfile/data";
 import { ReactNode } from "react";
+import { UserTabNameType } from "@/modules/UserProfile/data";
+
+//有增加的就 ＆ 擴展進來
+type TabNameType = UserTabNameType;
 
 export type ImgType = {
   src: string;
@@ -7,27 +10,26 @@ export type ImgType = {
 };
 
 export type TabType = {
-  tabName: string;
+  tabName: TabNameType;
   tabText: string;
   img: ImgType;
 };
+
+type SetActiveTabType = (activeTab: TabNameType) => void;
 
 export type TabBlockProps = {
   tab: TabType;
   zIndex: number;
   isActive: boolean;
-  setActiveTab: (activeTab: string) => void;
+  setActiveTab: SetActiveTabType;
 };
 
 export type TabsSectionProps = {
   tabSet: TabType[];
-  activeTab: string;
-  setActiveTab: (activeTab: string) => void;
+  activeTab: TabNameType;
+  setActiveTab: SetActiveTabType;
 };
 
-export type WrapperFileProps = {
-  tabSet: TabType[];
-  activeTab: UserActiveTabType; //
-  setActiveTab: (activeTab: UserActiveTabType) => void;
+export type WrapperFileProps = TabsSectionProps & {
   children: ReactNode;
 };

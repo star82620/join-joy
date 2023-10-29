@@ -1,23 +1,15 @@
 import React, { useContext, useState } from "react";
 import Image from "next/image";
-import clsx from "clsx";
 import Button from "@/common/components/GeneralButton";
-import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
 import checkFollowed from "@/common/helpers/checkFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import {
-  userData,
-  tabSet,
-  ActiveTabType,
-  UserActiveTabType,
-  ReturnComponentType,
-} from "./data";
+import { userData, tabSet, UserTabNameType, ReturnComponentType } from "./data";
 
-function selectActiveTab(activeTab: UserActiveTabType) {
+function selectActiveTab(activeTab: UserTabNameType) {
   const returnComponent: ReturnComponentType = {
     "groups-list": <GroupsList />,
     comments: <Comments />,
@@ -27,7 +19,7 @@ function selectActiveTab(activeTab: UserActiveTabType) {
 
 export default function UserProfile() {
   const isFollowed = checkFollowed();
-  const [activeTab, setActiveTab] = useState<UserActiveTabType>("groups-list");
+  const [activeTab, setActiveTab] = useState<UserTabNameType>("groups-list");
   const { userName, userImg, description, cities, gameTypes } = userData;
 
   return (
@@ -66,18 +58,21 @@ export default function UserProfile() {
                   appearance={isFollowed ? "gray" : "orange"}
                   className="text-lg lg:text-md leading-[1.2]"
                 >
-                  <span
-                    className={clsx(
-                      "after:content-[''] after:inline-block after:align-bottom after:ml-1",
-                      "after:w-6 after:h-6 md:after:w-5 md:after:h-5",
-                      isFollowed
-                        ? `after:bg-follow-true`
-                        : `after:bg-follow-false`,
-                      "after:bg-center after:bg-no-repeat",
-                      "leading-6 font-semibold text-lg md:text-md md:leading-5"
-                    )}
-                  >
+                  <span className="flex items-center leading-6 font-semibold text-lg md:text-md md:leading-5">
                     {isFollowed ? "已追蹤" : "追蹤"}
+                    <span className="relative inline-block w-6 h-6 md:w-5 md:h-5 ml-1">
+                      <Image
+                        src={
+                          isFollowed
+                            ? "/images/icon-check.svg"
+                            : "/images/icon-plus.svg"
+                        }
+                        alt={isFollowed ? "icon-check" : "icon-plus"}
+                        fill
+                        sizes="100%"
+                        className="object-contain align-middle"
+                      />
+                    </span>
                   </span>
                 </Button>
               </div>

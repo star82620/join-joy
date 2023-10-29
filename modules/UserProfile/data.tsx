@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 
+export type UserTabNameType = "groups-list" | "comments";
+
 export type userDataType = {
   userName: string;
   userImg: string;
@@ -8,10 +10,10 @@ export type userDataType = {
   gameTypes: Array<string>;
 };
 
-export type ActiveTabType = string;
+// export type ActiveTabType = string;
 
 type TabType = {
-  tabName: "groups-list" | "comments";
+  tabName: UserTabNameType;
   tabText: string;
   img: {
     src: string;
@@ -21,14 +23,7 @@ type TabType = {
 
 export type TabSetType = Array<TabType>;
 
-export type UserActiveTabType = "groups-list" | "comments";
-
-// export type ReturnComponentType = {
-//   "groups-list": ReactNode;
-//   comments: ReactNode;
-// };
-
-export type ReturnComponentType = Record<UserActiveTabType, ReactNode>;
+export type ReturnComponentType = Record<UserTabNameType, ReactNode>;
 
 // ---data----
 
