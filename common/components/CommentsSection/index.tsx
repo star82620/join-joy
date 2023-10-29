@@ -8,8 +8,7 @@ export default function CommentsSection({ data }: CommentsSectionProps) {
   const { averageScore, comments } = data;
   const checkAverageScore =
     typeof averageScore === "number" ? averageScore : averageScore.overall;
-  console.log("a", averageScore);
-  console.log("b", checkAverageScore);
+
   return (
     <section className="border">
       <div className="flex justify-start items-center gap-4 md:gap-3">
@@ -17,7 +16,7 @@ export default function CommentsSection({ data }: CommentsSectionProps) {
         <span className="md:text-sm">{comments.length} 評語</span>
       </div>
       {/* 細項評分 */}
-      <RatingDetails averageScore={averageScore} />
+      <RatingDetails averageScore={averageScore} direction="col" />
       <div className="mt-4">
         <div className="flex justify-between items-center">
           <span className="whitespace-nowrap">看看大家都說了什麼：</span>

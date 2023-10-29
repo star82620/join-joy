@@ -1,9 +1,18 @@
 import React from "react";
+import Image from "next/image";
 import { CommentsDataType, AverageScoreRecordType } from "./data";
+import { title } from "process";
 
 type RatingDetailsProps = {
   averageScore: CommentsDataType["averageScore"];
   direction?: "row" | "col";
+};
+
+const titles: Record<string, string> = {
+  environment: "環境整潔",
+  service: "服務態度",
+  game: "遊戲多樣性",
+  costValue: "性價比",
 };
 
 export default function RatingDetails({
@@ -11,31 +20,59 @@ export default function RatingDetails({
   direction,
 }: RatingDetailsProps) {
   if (typeof averageScore === "number") return null;
-  const { environment, service, game, costValue }: AverageScoreRecordType =
-    averageScore;
+  let isRow = direction === "col" ? false : true; //沒有指定就是預設 row
+
+  const stars = (num: number) => {
+    const numStars = Math.floor(num);
+    return (
+      <div className="flex flex-nowrap justify-start items-center gap-[2px] w-32 md:w-[108px]">
+        {Array.from({ length: numStars }).map((_, index) => (
+          <span key={index} className="relative w-6 h-6 md:w-5 md:h-5">
+            <Image
+              src="/images/icon-rating-star-dark.svg"
+              alt="icon-rating-star-dark"
+              fill
+              sizes="100%"
+              className="object-contain align-middle"
+            />
+          </span>
+        ))}
+      </div>
+    );
+  };
+
   return (
-    <div>
-      <p>各項目評分：</p>
-      <p>
-        <span>環境整潔</span>
-        <span>{environment}</span>
-        <span>星星星星星</span>
-      </p>
-      <p>
-        <span>服務態度</span>
-        <span>{service}</span>
-        <span>星星星星星</span>
-      </p>
-      <p>
-        <span>遊戲多樣性</span>
-        <span>{game}</span>
-        <span>星星星星星</span>
-      </p>
-      <p>
-        <span>性價比</span>
-        <span>{costValue}</span>
-        <span>星星星星星</span>
-      </p>
-    </div>
+    <section>
+      <p className="font-semibold leading-[1.2]">各項目評分：</p>
+      <div
+        className={`flex gap-6 md:gap-2 mt-4 md:flex-col ${
+          isRow ? "flex-row" : "flex-col"
+        }`}
+      >
+        {Object.entries(averageScore).map((item, index) => {
+          const itemTitle = item[0];
+          const itemScore = item[1];
+          if (!Object.keys(titles).includes(itemTitle)) return null;
+          return (
+            <div
+              key={itemTitle}
+              className={`flex ${
+                isRow ? "justify-start" : "justify-between"
+              } text-md md:text-sm`}
+            >
+              <span className={`font-semibold whitespace-nowrap`}>
+                {titles[itemTitle]}
+              </span>
+              <div className="flex flex-nowrap gap-1 ml-2 ">
+                <span className={`font-bold ${!isRow ? "w-6 text-right" : ""}`}>
+                  {[itemScore]}
+                </span>
+                {stars(itemScore)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 }

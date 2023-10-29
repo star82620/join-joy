@@ -42,11 +42,11 @@ export type CommentsDataType = {
 
 export const commentsData: CommentsDataType = {
   averageScore: {
-    environment: 4,
-    service: 3,
-    game: 4,
-    costValue: 3,
-    overall: 4,
+    environment: 1,
+    service: 2.3,
+    game: 5,
+    costValue: 4.4,
+    overall: 2,
   },
   comments: [
     {
