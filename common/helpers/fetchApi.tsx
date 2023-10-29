@@ -33,7 +33,6 @@ export default async function fetchApi(apiParams: apiParamsType) {
     console.log(result);
     return result;
   } catch (error) {
-    console.log(error.json());
-    throw error;
+    console.log(error);
   }
 }
