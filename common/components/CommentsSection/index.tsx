@@ -16,7 +16,7 @@ export default function CommentsSection({ data }: CommentsSectionProps) {
         <span className="md:text-sm">{comments.length} 評語</span>
       </div>
       {/* 細項評分 */}
-      <RatingDetails averageScore={averageScore} direction="col" />
+      <RatingDetails averageScore={averageScore} />
       <div className="mt-4">
         <div className="flex justify-between items-center">
           <span className="whitespace-nowrap">看看大家都說了什麼：</span>
