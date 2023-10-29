@@ -4,12 +4,10 @@ import { RatingDetailsProps, titles } from "./data";
 
 export default function RatingDetails({
   averageScore,
-}: // direction,
-RatingDetailsProps) {
-  const direction = "row";
+  direction,
+}: RatingDetailsProps) {
   if (typeof averageScore === "number") return null;
-  let isRow = !!(direction === "col"); //沒有指定就是預設 row
-  console.log(direction, isRow);
+  let isRow = !!direction && direction !== "col"; //如果 direction 沒有值且不是 col
 
   const generateStars = (num: number) => {
     const numStars = Math.floor(num);
