@@ -7,7 +7,6 @@ export default function RatingDetails({
   direction,
 }: RatingDetailsProps) {
   if (typeof averageScore === "number") return null;
-  let isRow = direction === "row";
 
   const generateStars = (num: number) => {
     const numStars = Math.floor(num);
@@ -30,6 +29,7 @@ export default function RatingDetails({
 
   const averageScoreAry = Object.entries(averageScore);
   const titleKeys = Object.keys(titles);
+  const isRow = direction === "row";
 
   return (
     <section>
