@@ -5,16 +5,24 @@ import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
-import checkFollow from "@/common/helpers/checkFollow";
+import getFollowingStatus from "@/common/helpers/getFollowingStatus";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import { userData, tabSet } from "./data";
+import { userData, tabSet, ActiveTabType } from "./data";
 
 export default function UserProfile() {
-  const isFollowed = checkFollow(); //該會員是否已經追蹤
-  const [activeTab, setActiveTab] = useState("groups-list");
-  const { userName, userImg, description, districts, gameTypes } = userData;
+  const isFollowing = getFollowingStatus();
+  const [activeTab, setActiveTab] = useState<ActiveTabType>("groups-list");
+  const { userName, userImg, description, cities, gameTypes } = userData;
+
+  function selectActiveComponent(activeTab: ActiveTabType) {
+    const components = {
+      "groups-list": <GroupsList />,
+      comments: <Comments />,
+    };
+    return components[activeTab as keyof typeof components] || null;
+  }
 
   return (
     <div className="container">
@@ -34,31 +42,36 @@ export default function UserProfile() {
                 <h1 className="text-lg lg:text-md font-semibold leading-[1.2] text-center">
                   {userName}
                 </h1>
-                <div className="flex flex-col gap-1 lg:gap-0 lg:flex-row lg:text-sm font-semibold leading-6 text-center -mt-3 lg:-mt-[10px]  lg:last:after:text-danger">
-                  {/* lg:last:after:text-danger 一直吃不到，要把最後的[、]拿掉*/}
-                  {districts.map((district) => (
-                    <p key={district} className="lg:after:content-['、']">
-                      {district}
-                    </p>
-                  ))}
+                <div className="flex flex-col gap-1 lg:gap-0 lg:flex-row lg:text-sm font-semibold leading-6 text-center -mt-3 lg:-mt-[10px]">
+                  {cities.map((city, index) => {
+                    const cityStyle =
+                      index !== cities.length - 1
+                        ? "lg:after:content-['、']"
+                        : "";
+                    return (
+                      <p key={city} className={cityStyle}>
+                        {city}
+                      </p>
+                    );
+                  })}
                 </div>
                 <Button
                   type="button"
-                  appearance={isFollowed ? "gray" : "orange"} //light 要換成 gray
+                  appearance={isFollowing ? "gray" : "orange"}
                   className="text-lg lg:text-md leading-[1.2]"
                 >
                   <span
                     className={clsx(
                       "after:content-[''] after:inline-block after:align-bottom after:ml-1",
                       "after:w-6 after:h-6 md:after:w-5 md:after:h-5",
-                      isFollowed
+                      isFollowing
                         ? `after:bg-follow-true`
                         : `after:bg-follow-false`,
                       "after:bg-center after:bg-no-repeat",
                       "leading-6 font-semibold text-lg md:text-md md:leading-5"
                     )}
                   >
-                    {isFollowed ? "已追蹤" : "追蹤"}
+                    {isFollowing ? "已追蹤" : "追蹤"}
                   </span>
                 </Button>
               </div>
@@ -89,8 +102,7 @@ export default function UserProfile() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         >
-          {activeTab === "groups-list" && <GroupsList />}
-          {activeTab === "comments" && <Comments />}
+          {selectActiveComponent(activeTab)}
         </WrapperFile>
       </div>
     </div>
