@@ -28,9 +28,9 @@ export default function TabBlock({
   return (
     <p
       className={clsx(
-        "pt-2 px-6",
-        "-ml-3",
-        "text-lg font-semibold leading-1",
+        "pt-2 px-6 md:px-3",
+        "-ml-3 md:-ml-2",
+        "text-lg font-semibold leading-[1.5] md:text-sm",
         "border-[3px] border-b-0",
         "rounded-tr-md",
         "first:rounded-tl-md first:border-l-[3px] first:ml-0",
