@@ -1,8 +1,11 @@
 import { ReactNode } from "react";
 import { UserTabNameType } from "@/modules/UserProfile/data";
+import { StoreTabNameType } from "@/modules/StoreProfile/data";
 
 //有增加的就 ＆ 擴展進來
-type TabNameType = UserTabNameType;
+type TabNameType = UserTabNameType | StoreTabNameType;
+
+export type SetActiveTabType = (activeTab: TabNameType) => void;
 
 export type ImgType = {
   src: string;
@@ -14,8 +17,6 @@ export type TabType = {
   tabText: string;
   img: ImgType;
 };
-
-type SetActiveTabType = (activeTab: TabNameType) => void;
 
 export type TabBlockProps = {
   tab: TabType;

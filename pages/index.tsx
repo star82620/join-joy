@@ -24,7 +24,10 @@ export default function Home() {
           <Link href="/user-center">我的個人資訊</Link>
         </li>
         <li>
-          <Link href="/user">會員個人頁（切版示範）</Link>
+          <Link href="/user">會員詳細頁（切版示範）</Link>
+        </li>
+        <li>
+          <Link href="/store">店家詳細頁（切版示範）</Link>
         </li>
       </ul>
       <div className=" max-w-[826px]">
