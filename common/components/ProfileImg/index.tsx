@@ -5,13 +5,13 @@ import { ProfileImgProps } from "./data";
 export default function ProfileImg({
   img,
   userName,
-  width,
-  height,
+  widthStyle,
+  heightStyle,
 }: ProfileImgProps) {
   return (
     <div
       className={`relative rounded-full border-2 border-white outline outline-2
-  outline-gray-950 ${width} ${height}`}
+  outline-gray-950 ${widthStyle} ${heightStyle}`}
     >
       <Image
         src={img}
