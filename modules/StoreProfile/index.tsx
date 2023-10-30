@@ -1,7 +1,10 @@
 import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
 import React, { useState } from "react";
-import { activeTabType, tabSet } from "./data";
+import RatingDetails from "@/common/components/CommentsSection/RatingDetails";
+import Rating from "@/common/components/CommentsSection/Rating";
+import { AverageScoreRecordType } from "@/common/components/CommentsSection/data";
+import { activeTabType, tabSet, commentsData } from "./data";
 
 // run 要出哪個元件的，可以寫成一個通用元件
 // function selectActiveTab(activeTab: UserTabNameType) {
@@ -13,7 +16,10 @@ import { activeTabType, tabSet } from "./data";
 // }
 
 export default function StoreProfile() {
+  const { comments, averageScore } = commentsData;
   const [activeTab, setActiveTab] = useState<activeTabType>("schedule");
+  const overallScore =
+    typeof averageScore !== "number" ? averageScore.overall : averageScore; //這有點奇怪
 
   return (
     <section className="container flex flex-wrap gap-6">
@@ -24,10 +30,19 @@ export default function StoreProfile() {
       </div>
       <div className="flex flex-col gap-6 md:hidden">
         <ModalWrapper title="地圖" layout="secondary">
-          iframe
+          <div className="w-[304px] h-[208px] bg-gray-200 text-center">map</div>
         </ModalWrapper>
         <ModalWrapper title="綜合評價" layout="secondary">
-          <div className="px-4 py-6"></div>
+          <div className="px-4 py-6">
+            <div className="flex items-center p-2 bg-yellow-tint rounded border-2 shadow-window  mb-6">
+              <div className="grow">
+                <p className="text-lg font-semibold leading-[1.2]">整體評分</p>
+                <p className="mt-2">{comments.length} 評語</p>
+              </div>
+              <Rating score={overallScore} />
+            </div>
+            <RatingDetails averageScore={averageScore} direction="col" />
+          </div>
         </ModalWrapper>
       </div>
       <div className="w-full h-full">
