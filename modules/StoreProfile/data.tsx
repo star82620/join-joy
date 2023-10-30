@@ -11,11 +11,17 @@ type StoreDataType = {
   address: string;
   // map: ???;
   openingHours: string;
-  phoneNum: string;
+  phone: string;
   cost: string; //這個欄位有點問題，每個店家的收費方式不同，可能有的是小時計價、上限多少...也有可能不同，如果之後要能夠在填表單時自動計算就會有比較複雜的狀況
   highlights: Array<string>; //["免費自助吧","",...] 可給我英文代號我自己轉換，或者每個欄位 ture,false，包在陣列裡
   description: string;
   photos: Array<string>; //["照片A路徑","照片A路徑",...]
+};
+
+type IconType = {
+  key: "address" | "phone" | "openingHours" | "cost";
+  src: string;
+  alt: string;
 };
 
 // ---data---
@@ -41,10 +47,10 @@ export const tabSet: TabType[] = [
 // 店家資料，來自 API
 export const storeData: StoreDataType = {
   storeName: "六角學院桌遊店",
-  profileImg: "/images/store-profile/photo-store-s0001-0.png",
+  profileImg: "/images/store/photo-store-s0001-0.png",
   address: "高雄市新興區民生一路56號",
   openingHours: "12:00 - 20:00",
-  phoneNum: "07-12345678",
+  phone: "07-12345678",
   cost: "每小時 35 元/人",
   highlights: [""],
   description:
@@ -102,3 +108,26 @@ export const commentsData: CommentsDataType = {
     },
   ],
 };
+
+export const icons: IconType[] = [
+  {
+    key: "address",
+    src: "/images/icon-location-dark.svg",
+    alt: "icon-location-dark",
+  },
+  {
+    key: "openingHours",
+    src: "/images/store/icon-opening-hours.svg",
+    alt: "icon-opening-hours",
+  },
+  {
+    key: "phone",
+    src: "/images/store/icon-phone.svg",
+    alt: "icon-phone",
+  },
+  {
+    key: "cost",
+    src: "/images/store/icon-cost.svg",
+    alt: "icon-cost",
+  },
+];

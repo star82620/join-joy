@@ -51,6 +51,7 @@ const config: Config = {
       white: "#FFFFFF",
     },
     fontSize: {
+      xxl: "24px",
       xl: "20px",
       lg: "18px",
       md: "16px",
