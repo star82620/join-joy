@@ -5,6 +5,7 @@ import RatingDetails from "@/common/components/CommentsSection/RatingDetails";
 import Rating from "@/common/components/CommentsSection/Rating";
 import { AverageScoreRecordType } from "@/common/components/CommentsSection/data";
 import { activeTabType, tabSet, commentsData } from "./data";
+import ProfileImg from "@/common/components/ProfileImg";
 
 // run 要出哪個元件的，可以寫成一個通用元件
 // function selectActiveTab(activeTab: UserTabNameType) {
@@ -15,17 +16,22 @@ import { activeTabType, tabSet, commentsData } from "./data";
 //   return returnComponent[activeTab] || null;
 // }
 
+// 會用到的資料：店家資料、Tab、評價、是否已追蹤、
 export default function StoreProfile() {
-  const { comments, averageScore } = commentsData;
   const [activeTab, setActiveTab] = useState<activeTabType>("schedule");
+
+  const { comments, averageScore } = commentsData;
   const overallScore =
-    typeof averageScore !== "number" ? averageScore.overall : averageScore; //這有點奇怪
+    typeof averageScore !== "number" ? averageScore.overall : averageScore; //這有點奇怪？
 
   return (
     <section className="container flex flex-wrap gap-6">
       <div className="grow">
         <ModalWrapper title="店家資訊" layout="primary">
-          <div className="px-8 py-6 md:px-3 md:py-4">六角桌遊店</div>
+          <div className="px-8 py-6 md:px-3 md:py-4">
+            <ProfileImg imgSet={} />
+            六角桌遊店
+          </div>
         </ModalWrapper>
       </div>
       <div className="flex flex-col gap-6 md:hidden">

@@ -1,10 +1,6 @@
-export type ImgSetType = {
-  userImg: string;
-  userName: string;
-};
-
 export type ProfileImgProps = {
-  imgSet: ImgSetType;
+  userName: string;
+  img: string;
   width: string;
   height: string;
 };

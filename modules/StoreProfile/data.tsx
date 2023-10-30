@@ -5,6 +5,19 @@ export type StoreTabNameType = "schedule" | "games" | "comments";
 
 export type activeTabType = StoreTabNameType;
 
+type StoreDataType = {
+  storeName: string;
+  profileImg: string;
+  address: string;
+  // map: ???;
+  openingHours: string;
+  tel: string;
+  cost: string; //這個欄位有點問題，每個店家的收費方式不同，可能有的是小時計價、上限多少...也有可能不同，如果之後要能夠在填表單時自動計算就會有比較複雜的狀況
+  highlights: Array<string>; //["免費自助吧","",...] 可給我英文代號我自己轉換，或者每個欄位 ture,false，包在陣列裡
+  description: string;
+  photo: Array<string>; //["照片A路徑","照片A路徑",...]
+};
+
 // ---data---
 
 export const tabSet: TabType[] = [
@@ -25,6 +38,25 @@ export const tabSet: TabType[] = [
   },
 ];
 
+// 店家資料，來自 API
+export const storeData: StoreDataType = {
+  storeName: "六角學院桌遊店",
+  profileImg: "/images/store-profile/photo-store-0001-0.png",
+  address: "高雄市新興區民生一路56號",
+  openingHours: "12:00 - 20:00",
+  tel: "07-12345678",
+  cost: "每小時 35 元/人",
+  highlights: [""],
+  description:
+    "我們擁有超過1000款各式各樣的桌遊，適合所有年齡層和遊戲水平的人們。不管你是初學者還是老手，我們的工作人員都會樂意幫助你找到合適的遊戲，並解釋規則。店內提供舒適的座位和美味的小吃，讓你可以長時間享受遊戲。歡迎來到我們的桌遊店，一起創造美好的遊戲回憶！",
+  photo: [
+    "/images/store-profile/photo-store-0001-1.png",
+    "/images/store-profile/photo-store-0001-2.png",
+    "/images/store-profile/photo-store-0001-3.png",
+  ],
+};
+
+// 評價資料，來自 API
 export const commentsData: CommentsDataType = {
   averageScore: {
     environment: 1,
