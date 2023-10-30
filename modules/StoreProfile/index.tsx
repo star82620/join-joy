@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import RatingDetails from "@/common/components/CommentsSection/RatingDetails";
 import Rating from "@/common/components/CommentsSection/Rating";
 import { AverageScoreRecordType } from "@/common/components/CommentsSection/data";
-import { activeTabType, tabSet, commentsData } from "./data";
+import { activeTabType, tabSet, commentsData, storeData } from "./data";
 import ProfileImg from "@/common/components/ProfileImg";
+import Image from "next/image";
 
 // run 要出哪個元件的，可以寫成一個通用元件
 // function selectActiveTab(activeTab: UserTabNameType) {
@@ -19,6 +20,16 @@ import ProfileImg from "@/common/components/ProfileImg";
 // 會用到的資料：店家資料、Tab、評價、是否已追蹤、
 export default function StoreProfile() {
   const [activeTab, setActiveTab] = useState<activeTabType>("schedule");
+  const {
+    storeName,
+    profileImg,
+    address,
+    openingHours,
+    phoneNum,
+    cost,
+    highlights,
+    description,
+  } = storeData;
 
   const { comments, averageScore } = commentsData;
   const overallScore =
@@ -28,9 +39,30 @@ export default function StoreProfile() {
     <section className="container flex flex-wrap gap-6">
       <div className="grow">
         <ModalWrapper title="店家資訊" layout="primary">
-          <div className="px-8 py-6 md:px-3 md:py-4">
-            <ProfileImg imgSet={} />
-            六角桌遊店
+          <div className="flex">
+            <div className="flex px-8 py-6 md:px-3 md:py-4">
+              <ProfileImg
+                img={profileImg}
+                profileName={storeName}
+                widthStyle="w-30 md:w-19"
+                heightStyle="h-30 md:h-19"
+              />
+              <div>
+                <h1>六角學院桌遊店</h1>
+                <div>
+                  <div className="relative inline-block w-6 h-6 md:w-5 md:h-5">
+                    <Image
+                      src="./images/icon-location-dark.svg"
+                      alt="icon-location-dark"
+                      fill
+                      sizes="100%"
+                      className="object-contain"
+                    />
+                  </div>
+                  高雄市新興區民生一路56號
+                </div>
+              </div>
+            </div>
           </div>
         </ModalWrapper>
       </div>

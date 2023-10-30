@@ -4,7 +4,7 @@ import { ProfileImgProps } from "./data";
 
 export default function ProfileImg({
   img,
-  userName,
+  profileName,
   widthStyle,
   heightStyle,
 }: ProfileImgProps) {
@@ -15,7 +15,7 @@ export default function ProfileImg({
     >
       <Image
         src={img}
-        alt={userName}
+        alt={profileName}
         fill
         className="object-contain rounded-full"
       />
