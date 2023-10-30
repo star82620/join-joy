@@ -42,7 +42,7 @@ export default function StoreProfile() {
           <ModalWrapper title="店家資訊" layout="primary">
             <div className="flex flex-col gap-8 md:gap-4 px-8 py-6 md:px-3 md:py-4">
               <div>人氣店家</div>
-              <div className="flex items-center md:flex-col md:justify-center gap-8 md:gap-4 -mt-5 md:mt-0">
+              <div className="flex items-center flex-wrap md:flex-col md:justify-center gap-8 md:gap-4 -mt-5 md:mt-0">
                 <ProfileImg
                   img={profileImg}
                   profileName={storeName}
@@ -50,7 +50,7 @@ export default function StoreProfile() {
                   heightStyle="h-30 md:h-19"
                 />
                 <div className="grow">
-                  <div className="flex justify-between md:flex-col md:items-center mb-3 md:mb-4">
+                  <div className="flex justify-between lg:flex-wrap md:flex-col md:items-center mb-3 md:mb-4">
                     <h1 className="text-xxl md:text-xl">六角學院桌遊店</h1>
                     <div>追蹤、分享</div>
                   </div>
