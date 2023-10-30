@@ -56,7 +56,7 @@ export default function RatingDetails({
               </span>
               <div className="flex flex-nowrap gap-1 ml-2 ">
                 <span className={`font-bold ${!isRow ? "w-6 text-right" : ""}`}>
-                  {[score]}
+                  {score.toFixed(1)}
                 </span>
                 {generateStars(score)}
               </div>
