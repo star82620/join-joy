@@ -1,12 +1,14 @@
+import React, { useState } from "react";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
-import React, { useState } from "react";
 import RatingDetails from "@/common/components/CommentsSection/RatingDetails";
 import Rating from "@/common/components/CommentsSection/Rating";
 import { AverageScoreRecordType } from "@/common/components/CommentsSection/data";
 import { activeTabType, tabSet, commentsData, storeData, icons } from "./data";
 import ProfileImg from "@/common/components/ProfileImg";
 import Image from "next/image";
+import Comments from "./Comments";
+import Schedule from "./Schedule";
 
 // run 要出哪個元件的，可以寫成一個通用元件
 // function selectActiveTab(activeTab: UserTabNameType) {
@@ -152,7 +154,7 @@ export default function StoreProfile() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         >
-          可預約時間
+          <Schedule />
         </WrapperFile>
       </div>
     </section>
