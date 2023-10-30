@@ -1,5 +1,11 @@
 import React from "react";
+import GameList from "@/common/components/GameList";
 
 export default function Comments() {
-  return <div>Comments</div>;
+  return (
+    <div>
+      <GameList />
+      Comments
+    </div>
+  );
 }
