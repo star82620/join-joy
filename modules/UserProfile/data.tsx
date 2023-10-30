@@ -1,4 +1,7 @@
 import { ReactNode } from "react";
+import { TabType } from "@/common/components/WrapperFile/data";
+import GroupsList from "./GroupsList";
+import Comments from "./Comments";
 
 export type UserTabNameType = "groups-list" | "comments";
 
@@ -12,14 +15,14 @@ export type userDataType = {
 
 // export type ActiveTabType = string;
 
-type TabType = {
-  tabName: UserTabNameType;
-  tabText: string;
-  img: {
-    src: string;
-    alt: string;
-  };
-};
+// type TabType = {
+//   tabName: UserTabNameType;
+//   tabText: string;
+//   img: {
+//     src: string;
+//     alt: string;
+//   };
+// };
 
 export type TabSetType = Array<TabType>;
 
@@ -44,6 +47,7 @@ export const tabSet: TabSetType = [
       src: "/images/icon-lists-light.svg",
       alt: "icon-lists-light",
     },
+    target: <GroupsList />,
   },
   {
     tabName: "comments",
@@ -52,5 +56,6 @@ export const tabSet: TabSetType = [
       src: "/images/icon-comments-light.svg",
       alt: "icon-comments-light",
     },
+    target: <Comments />,
   },
 ];

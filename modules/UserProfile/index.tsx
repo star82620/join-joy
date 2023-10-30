@@ -5,17 +5,7 @@ import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
 import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
-import GroupsList from "./GroupsList";
-import Comments from "./Comments";
-import { userData, tabSet, UserTabNameType, ReturnComponentType } from "./data";
-
-function selectActiveTab(activeTab: UserTabNameType) {
-  const returnComponent: ReturnComponentType = {
-    "groups-list": <GroupsList />,
-    comments: <Comments />,
-  };
-  return returnComponent[activeTab] || null;
-}
+import { userData, tabSet, UserTabNameType } from "./data";
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
@@ -102,9 +92,7 @@ export default function UserProfile() {
           tabSet={tabSet}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-        >
-          {selectActiveTab(activeTab)}
-        </WrapperFile>
+        />
       </div>
     </div>
   );

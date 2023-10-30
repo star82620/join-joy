@@ -13,6 +13,7 @@ export type TabType = {
   tabName: TabNameType;
   tabText: string;
   img: ImgType;
+  target: ReactNode;
 };
 
 type SetActiveTabType = (activeTab: TabNameType) => void;
