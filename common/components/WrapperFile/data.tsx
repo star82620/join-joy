@@ -1,8 +1,7 @@
 import { ReactNode } from "react";
-import { UserTabNameType } from "@/modules/UserProfile/data";
 
 //有增加的就 ＆ 擴展進來
-type TabNameType = UserTabNameType;
+export type TabNameType = string;
 
 export type ImgType = {
   src: string;
@@ -15,6 +14,8 @@ export type TabType = {
   img: ImgType;
   target: ReactNode;
 };
+
+export type TabSetType = Array<TabType>;
 
 type SetActiveTabType = (activeTab: TabNameType) => void;
 

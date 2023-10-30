@@ -7,11 +7,11 @@ export default function WrapperFile({
   activeTab,
   setActiveTab,
 }: TabsSectionProps) {
-  const component = tabSet.map((tab) => {
+  const activeComponent = tabSet.map((tab) => {
     if (tab.tabName !== activeTab) return null;
     return tab.target;
   });
-  console.log(component);
+  console.log(activeComponent);
   return (
     <section className="flex flex-col grow relative lg:w-full">
       <TabsSection
@@ -19,8 +19,8 @@ export default function WrapperFile({
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-[48.5pxs] md:mt-[41.5px]">
-        {component}
+      <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-[48.5px] md:mt-[41.5px]">
+        {activeComponent}
       </section>
     </section>
   );
