@@ -14,11 +14,12 @@ export default function GameList({ category }: GameListProps) {
   // 得到 selectItems 類別篩選內容
   let selectItems: Array<string> = [];
   gamesData.forEach((game) => {
-    if (selectItems.includes(game.gameType)) return;
+    const isInclude = selectItems.includes(game.gameType);
+    if (isInclude) return;
     selectItems.push(game.gameType);
   });
 
-  const handleTypeSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectType(e.target.value);
   };
 
@@ -60,7 +61,7 @@ export default function GameList({ category }: GameListProps) {
       >
         <label className="flex items-center gap-2">
           <span className="md:hidden text-lg font-semibold">類別：</span>
-          <select className="px-3 py-2" onChange={handleTypeSelector}>
+          <select className="px-3 py-2" onChange={handleSelectType}>
             <option value="all">全部</option>
             {selectItems.map((type, index) => (
               <option key={index} value={type}>
