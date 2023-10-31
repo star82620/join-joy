@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { TabNameType, TabSetType } from "@/common/components/WrapperFile/data";
+import { TabNameType, TabSetType } from "@/common/components/FileWrapper/data";
 
 // export type UserTabNameType = "groups-list" | "comments";
 export type ActiveTabType = TabNameType;

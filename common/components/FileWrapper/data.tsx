@@ -33,6 +33,6 @@ export type TabsSectionProps = {
   setActiveTab: SetActiveTabType;
 };
 
-export type WrapperFileProps = TabsSectionProps & {
+export type FileWrapperProps = TabsSectionProps & {
   children: ReactNode;
 };

@@ -1,13 +1,13 @@
 import React, { Children } from "react";
 import TabsSection from "./TabsSection";
-import { WrapperFileProps } from "./data";
+import { FileWrapperProps } from "./data";
 
-export default function WrapperFile({
+export default function FileWrapper({
   tabSet,
   activeTab,
   setActiveTab,
   children,
-}: WrapperFileProps) {
+}: FileWrapperProps) {
   return (
     <section className="flex flex-col grow relative lg:w-full">
       <TabsSection

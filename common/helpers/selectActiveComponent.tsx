@@ -1,7 +1,7 @@
 import {
   ReturnComponentType,
   TabNameType,
-} from "../components/WrapperFile/data";
+} from "../components/FileWrapper/data";
 
 export default function selectActiveComponent(
   activeTab: TabNameType,
