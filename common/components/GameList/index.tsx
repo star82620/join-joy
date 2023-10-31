@@ -1,7 +1,8 @@
 import TagBlock from "@/modules/UserProfile/TagBlock";
 import React, { useEffect, useState } from "react";
-import { gamesData } from "./data";
+import { gamesData, SelectedGamesType } from "./data";
 import GameItem from "./GameItem";
+import EmptyResult from "./EmptyResult";
 
 const isReadOnly = true;
 
@@ -9,6 +10,8 @@ export default function GameList() {
   const [renderData, setRenderData] = useState(gamesData);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
+  const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
+  const isEmptyResult = renderData.length === 0;
 
   // 得到 gameType 類別篩選內容
   let gameTypes: Array<string> = [];
@@ -23,6 +26,17 @@ export default function GameList() {
 
   const handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
+  };
+
+  const handleSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      setSelectedGames([...selectedGames, e.target.name]);
+    } else {
+      const index = selectedGames.findIndex((game) => game === e.target.name);
+      const newData = [...selectedGames];
+      newData.splice(index, 1);
+      setSelectedGames(newData);
+    }
   };
 
   useEffect(() => {
@@ -85,8 +99,16 @@ export default function GameList() {
           </div>
           <ul className="border-t-2 border-gray-400 mt-4 pt-4 md:mt-2 md:pt-2">
             {renderData.map((game) => (
-              <GameItem key={game.gameId} game={game} isReadOnly={isReadOnly} />
+              <GameItem
+                key={game.gameId}
+                game={game}
+                isReadOnly={isReadOnly}
+                selectedGames={selectedGames}
+                setSelectedGames={setSelectedGames}
+                handleSelected={handleSelected}
+              />
             ))}
+            {isEmptyResult && <EmptyResult />}
           </ul>
         </div>
       </div>
