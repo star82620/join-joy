@@ -1,10 +1,13 @@
 import React from "react";
 import GroupProfile from "@/modules/GroupProfile";
+import Layout from "@/common/components/Layout";
 
 export default function GroupProfilePage() {
   return (
-    <div>
-      <GroupProfile />
-    </div>
+    <>
+      <Layout pageCategory="group">
+        <GroupProfile />
+      </Layout>
+    </>
   );
 }
