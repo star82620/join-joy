@@ -12,10 +12,11 @@ export type TabType = {
   tabName: TabNameType;
   tabText: string;
   img: ImgType;
-  target: ReactNode;
 };
 
 export type TabSetType = Array<TabType>;
+
+export type ReturnComponentType = Record<string, ReactNode>;
 
 type SetActiveTabType = (activeTab: TabNameType) => void;
 

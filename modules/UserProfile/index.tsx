@@ -5,12 +5,26 @@ import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
 import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
+import GroupsList from "./GroupsList";
+import Comments from "./Comments";
+import {
+  ReturnComponentType,
+  TabNameType,
+} from "@/common/components/WrapperFile/data";
 import { userData, tabSet, ActiveTabType } from "./data";
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
   const [activeTab, setActiveTab] = useState<ActiveTabType>("groups-list");
   const { userName, userImg, description, cities, gameTypes } = userData;
+
+  function selectActiveTab(activeTab: TabNameType) {
+    const returnComponent: ReturnComponentType = {
+      "groups-list": <GroupsList />,
+      comments: <Comments />,
+    };
+    return returnComponent[activeTab] || null;
+  }
 
   return (
     <div className="container">
@@ -92,7 +106,9 @@ export default function UserProfile() {
           tabSet={tabSet}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-        />
+        >
+          {selectActiveTab(activeTab)}
+        </WrapperFile>
       </div>
     </div>
   );
