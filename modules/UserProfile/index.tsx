@@ -3,13 +3,22 @@ import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import FileWrapper from "@/common/components/FileWrapper";
-import selectActiveComponent from "@/common/helpers/selectActiveComponent";
 import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import { ReturnComponentType } from "@/common/components/FileWrapper/data";
+import {
+  TabNameType,
+  ReturnComponentType,
+} from "@/common/components/FileWrapper/data";
 import { userData, tabSet, ActiveTabType } from "./data";
+
+function selectActiveComponent(
+  activeTab: TabNameType,
+  returnComponent: ReturnComponentType
+) {
+  return returnComponent[activeTab] || null;
+}
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
