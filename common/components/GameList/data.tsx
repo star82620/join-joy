@@ -1,3 +1,7 @@
+export type GameListProps = {
+  category: "view" | "form";
+};
+
 type GameType = {
   gameId: string;
   type: string;
@@ -12,8 +16,6 @@ export type SelectedGamesType = Array<string>;
 export type GameItemProps = {
   game: GameType;
   isReadOnly: boolean;
-  selectedGames: SelectedGamesType;
-  setSelectedGames: (selectedGames: SelectedGamesType) => void;
   handleSelected: React.ChangeEventHandler;
 };
 
@@ -38,7 +40,7 @@ export const gamesData: GameType[] = [
     gameId: "g133",
     type: "派對遊戲",
     gameName: "你畫我猜",
-    peopleNum: "5-6",
+    peopleNum: "5-6人",
     version: "中文",
     qtu: 1,
   },
@@ -46,7 +48,7 @@ export const gamesData: GameType[] = [
     gameId: "g433",
     type: "派對遊戲",
     gameName: "大富翁 Battle",
-    peopleNum: "5-6",
+    peopleNum: "5-6人",
     version: "中文",
     qtu: 1,
   },

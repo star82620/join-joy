@@ -1,12 +1,10 @@
-import TagBlock from "@/modules/UserProfile/TagBlock";
 import React, { useEffect, useState } from "react";
-import { gamesData, SelectedGamesType } from "./data";
+import { gamesData, SelectedGamesType, GameListProps } from "./data";
 import GameItem from "./GameItem";
 import EmptyResult from "./EmptyResult";
 
-const isReadOnly = true;
-
-export default function GameList() {
+export default function GameList({ category }: GameListProps) {
+  const isReadOnly = category === "view";
   const [renderData, setRenderData] = useState(gamesData);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
@@ -103,8 +101,6 @@ export default function GameList() {
                 key={game.gameId}
                 game={game}
                 isReadOnly={isReadOnly}
-                selectedGames={selectedGames}
-                setSelectedGames={setSelectedGames}
                 handleSelected={handleSelected}
               />
             ))}

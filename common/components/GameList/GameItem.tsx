@@ -4,8 +4,6 @@ import { GameItemProps } from "./data";
 export default function GameItem({
   game,
   isReadOnly,
-  selectedGames,
-  setSelectedGames,
   handleSelected,
 }: GameItemProps) {
   const { gameId, type, gameName, peopleNum, version, qtu } = game;

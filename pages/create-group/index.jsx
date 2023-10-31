@@ -6,7 +6,7 @@ export default function CreateGroup() {
     <div>
       CreateGroup
       <div className="container">
-        <GameList />
+        <GameList category="view" />
       </div>
     </div>
   );
