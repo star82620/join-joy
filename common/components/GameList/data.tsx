@@ -7,7 +7,12 @@ type GameType = {
   qtu: number;
 };
 
-export const games: GameType[] = [
+export type GameItemProps = {
+  game: GameType;
+  isReadOnly: boolean;
+};
+
+export const gamesData: GameType[] = [
   {
     gameId: "g131",
     type: "派對遊戲",
