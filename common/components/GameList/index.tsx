@@ -1,8 +1,7 @@
 import TagBlock from "@/modules/UserProfile/TagBlock";
 import React, { useEffect, useState } from "react";
 import { gamesData } from "./data";
-// import Button from "../GeneralButton";
-import GameItem from "./gameItem";
+import GameItem from "./GameItem";
 
 const isReadOnly = true;
 
@@ -18,12 +17,11 @@ export default function GameList() {
     gameTypes.push(game.type);
   });
 
-  // 類別篩選觸發動作
-  const handleTypeSelector = (e) => {
+  const handleTypeSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectType(e.target.value);
   };
 
-  const handleSearchValue = (e) => {
+  const handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
