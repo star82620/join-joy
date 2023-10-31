@@ -1,30 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import WrapperFile from "@/common/components/WrapperFile";
+import selectActiveComponent from "@/common/helpers/selectActiveComponent";
 import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import {
-  ReturnComponentType,
-  TabNameType,
-} from "@/common/components/WrapperFile/data";
+import { ReturnComponentType } from "@/common/components/WrapperFile/data";
 import { userData, tabSet, ActiveTabType } from "./data";
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
   const [activeTab, setActiveTab] = useState<ActiveTabType>("groups-list");
   const { userName, userImg, description, cities, gameTypes } = userData;
-
-  function selectActiveTab(activeTab: TabNameType) {
-    const returnComponent: ReturnComponentType = {
-      "groups-list": <GroupsList />,
-      comments: <Comments />,
-    };
-    return returnComponent[activeTab] || null;
-  }
+  const returnComponent: ReturnComponentType = {
+    "groups-list": <GroupsList />,
+    comments: <Comments />,
+  };
 
   return (
     <div className="container">
@@ -107,7 +101,7 @@ export default function UserProfile() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         >
-          {selectActiveTab(activeTab)}
+          {selectActiveComponent(activeTab, returnComponent)}
         </WrapperFile>
       </div>
     </div>
