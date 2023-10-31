@@ -6,7 +6,7 @@ export default function GameItem({
   isReadOnly,
   handleSelected,
 }: GameItemProps) {
-  const { gameId, type, gameName, peopleNum, version, qtu } = game;
+  const { gameId, gameType, gameName, peopleNum, version, qtu } = game;
   return (
     <li>
       <label className="flex justify-between md:gap-3 py-2 bg-white text-center md:text-sm">
@@ -17,12 +17,16 @@ export default function GameItem({
         )}
         <div className="w-[20%] min-w-[52px]">
           <span className="text-xs border-[0.5px] rounded p-1 whitespace-nowrap md:px-0.5 md:py-1">
-            {type}
+            {gameType}
           </span>
         </div>
         <div className="w-[50%] min-w-[120px] text-left">{gameName}</div>
-        {isReadOnly && <div className="w-[30%] min-w-[84px]">{peopleNum}</div>}
-        {isReadOnly && <div className="w-[20%] min-w-[28px]">{version}</div>}
+        {isReadOnly && (
+          <>
+            <div className="w-[30%] min-w-[84px]">{peopleNum}</div>
+            <div className="w-[20%] min-w-[28px]">{version}</div>
+          </>
+        )}
         <div className="w-[20%] min-w-[28px]">{qtu}</div>
       </label>
     </li>

@@ -2,9 +2,9 @@ export type GameListProps = {
   category: "view" | "form";
 };
 
-type GameType = {
+type GameItemType = {
   gameId: string;
-  type: string;
+  gameType: string;
   gameName: string;
   peopleNum: string;
   version: string;
@@ -14,15 +14,15 @@ type GameType = {
 export type SelectedGamesType = Array<string>;
 
 export type GameItemProps = {
-  game: GameType;
+  game: GameItemType;
   isReadOnly: boolean;
   handleSelected: React.ChangeEventHandler;
 };
 
-export const gamesData: GameType[] = [
+export const gamesData: GameItemType[] = [
   {
     gameId: "g131",
-    type: "派對遊戲",
+    gameType: "派對遊戲",
     gameName: "矮人礦坑",
     peopleNum: "7-8人",
     version: "中文",
@@ -30,7 +30,7 @@ export const gamesData: GameType[] = [
   },
   {
     gameId: "g231",
-    type: "陣營遊戲",
+    gameType: "陣營遊戲",
     gameName: "大富翁",
     peopleNum: "4人",
     version: "中文",
@@ -38,7 +38,7 @@ export const gamesData: GameType[] = [
   },
   {
     gameId: "g133",
-    type: "派對遊戲",
+    gameType: "派對遊戲",
     gameName: "你畫我猜",
     peopleNum: "5-6人",
     version: "中文",
@@ -46,7 +46,7 @@ export const gamesData: GameType[] = [
   },
   {
     gameId: "g433",
-    type: "派對遊戲",
+    gameType: "派對遊戲",
     gameName: "大富翁 Battle",
     peopleNum: "5-6人",
     version: "中文",

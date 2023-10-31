@@ -11,11 +11,11 @@ export default function GameList({ category }: GameListProps) {
   const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
   const isEmptyResult = renderData.length === 0;
 
-  // 得到 gameType 類別篩選內容
-  let gameTypes: Array<string> = [];
+  // 得到 selectItems 類別篩選內容
+  let selectItems: Array<string> = [];
   gamesData.forEach((game) => {
-    if (gameTypes.includes(game.type)) return;
-    gameTypes.push(game.type);
+    if (selectItems.includes(game.gameType)) return;
+    selectItems.push(game.gameType);
   });
 
   const handleTypeSelector = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -40,7 +40,7 @@ export default function GameList({ category }: GameListProps) {
   useEffect(() => {
     const selectedData = gamesData.filter((game) => {
       // 類型篩選
-      const typeFilter = selectType === "all" || game.type === selectType;
+      const typeFilter = selectType === "all" || game.gameType === selectType;
       // 關鍵字篩選
       const searchFilter = game.gameName.includes(searchValue);
 
@@ -62,7 +62,7 @@ export default function GameList({ category }: GameListProps) {
           <span className="md:hidden text-lg font-semibold">類別：</span>
           <select className="px-3 py-2" onChange={handleTypeSelector}>
             <option value="all">全部</option>
-            {gameTypes.map((type, index) => (
+            {selectItems.map((type, index) => (
               <option key={index} value={type}>
                 {type}
               </option>
