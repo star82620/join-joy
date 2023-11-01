@@ -23,7 +23,7 @@ function selectActiveComponent(
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
   const [activeTab, setActiveTab] = useState<ActiveTabType>("groups-list");
-  const { userName, userImg, description, cities, gameTypes } = userData;
+  const { userName, profileImg, description, cities, gameTypes } = userData;
   const returnComponent: ReturnComponentType = {
     "groups-list": <GroupsList />,
     comments: <Comments />,
@@ -38,7 +38,7 @@ export default function UserProfile() {
               <div className="flex flex-col justify-center items-center gap-6 lg:gap-3">
                 <div className="relative w-28 h-28 rounded-full border-2 border-white outline outline-2 outline-gray-950">
                   <Image
-                    src={userImg}
+                    src={profileImg}
                     alt={userName}
                     fill
                     className="object-contain rounded-full"
