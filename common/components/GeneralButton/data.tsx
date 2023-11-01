@@ -7,6 +7,7 @@ export type ButtonType = {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
   isDisabled?: boolean;
   className?: string;
+  wrapper?: "rounded" | "square";
 };
 
 // appearance 按鈕樣式
