@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
+import { TabNameType, TabSetType } from "@/common/components/FileWrapper/data";
 
-export type UserTabNameType = "groups-list" | "comments";
+// export type UserTabNameType = "groups-list" | "comments";
+export type ActiveTabType = TabNameType;
 
 export type userDataType = {
   userName: string;
@@ -9,21 +11,6 @@ export type userDataType = {
   cities: Array<string>;
   gameTypes: Array<string>;
 };
-
-// export type ActiveTabType = string;
-
-type TabType = {
-  tabName: UserTabNameType;
-  tabText: string;
-  img: {
-    src: string;
-    alt: string;
-  };
-};
-
-export type TabSetType = Array<TabType>;
-
-export type ReturnComponentType = Record<UserTabNameType, ReactNode>;
 
 // ---data----
 

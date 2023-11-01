@@ -1,13 +1,13 @@
 import React, { Children } from "react";
 import TabsSection from "./TabsSection";
-import { WrapperFileProps } from "./data";
+import { FileWrapperProps } from "./data";
 
-export default function WrapperFile({
+export default function FileWrapper({
   tabSet,
   activeTab,
   setActiveTab,
   children,
-}: WrapperFileProps) {
+}: FileWrapperProps) {
   return (
     <section className="flex flex-col grow relative lg:w-full">
       <TabsSection
@@ -15,7 +15,7 @@ export default function WrapperFile({
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-12 h-full">
+      <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-[48px] md:mt-[41px]">
         {children}
       </section>
     </section>

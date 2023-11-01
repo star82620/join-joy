@@ -1,26 +1,24 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import WrapperFile from "@/common/components/WrapperFile";
+import FileWrapper from "@/common/components/FileWrapper";
 import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import { userData, tabSet, UserTabNameType, ReturnComponentType } from "./data";
+import { selectActiveComponent } from "@/common/helpers/selectActiveComponent";
+import { ReturnComponentType } from "@/common/components/FileWrapper/data";
+import { userData, tabSet, ActiveTabType } from "./data";
 
-function selectActiveTab(activeTab: UserTabNameType) {
+export default function UserProfile() {
+  const isFollowed = checkIsFollowed();
+  const [activeTab, setActiveTab] = useState<ActiveTabType>("groups-list");
+  const { userName, profileImg, description, cities, gameTypes } = userData;
   const returnComponent: ReturnComponentType = {
     "groups-list": <GroupsList />,
     comments: <Comments />,
   };
-  return returnComponent[activeTab] || null;
-}
-
-export default function UserProfile() {
-  const isFollowed = checkIsFollowed();
-  const [activeTab, setActiveTab] = useState<UserTabNameType>("groups-list");
-  const { userName, profileImg, description, cities, gameTypes } = userData;
 
   return (
     <div className="container">
@@ -98,13 +96,13 @@ export default function UserProfile() {
           </ModalWrapper>
         </section>
 
-        <WrapperFile
+        <FileWrapper
           tabSet={tabSet}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         >
-          {selectActiveTab(activeTab)}
-        </WrapperFile>
+          {selectActiveComponent(activeTab, returnComponent)}
+        </FileWrapper>
       </div>
     </div>
   );
