@@ -9,7 +9,11 @@ export default function ModalWrapper({
   const { haveShadow, haveHeadDots } = layoutStyles[layout || "default"];
 
   return (
-    <div className={`w-full rounded-t-lg ${haveShadow ? "shadow-window" : ""}`}>
+    <div
+      className={`w-full flex flex-col rounded-t-lg ${
+        haveShadow ? "shadow-window" : ""
+      }`}
+    >
       <section className="flex justify-between items-center bg-yellow-neutral border-[3px] border-b-2 rounded-t-lg px-3 py-2 text-center">
         {haveHeadDots && <div className="w-6 h-6 rounded-full bg-white"></div>}
         <h2 className="w-full text-center font-semibold text-xl md:text-lg">
@@ -17,7 +21,7 @@ export default function ModalWrapper({
         </h2>
         {haveHeadDots && <div className="w-6 h-6 rounded-full bg-white"></div>}
       </section>
-      <section className="bg-yellow-dark border-[3px] border-t-0">
+      <section className="bg-yellow-dark border-[3px] border-t-0 grow">
         {children}
       </section>
     </div>
