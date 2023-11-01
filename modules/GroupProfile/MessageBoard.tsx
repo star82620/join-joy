@@ -1,20 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 
 export default function MessageBoard() {
+  const [textLength, setTextLength] = useState(0);
+  const [msgValue, setMsgValue] = useState("");
+
   return (
     <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
       <div className="flex items-center gap-2 border-b border-gray-300 pb-6 md:pb-4">
         <div className="grow">
-          <input
-            type="textarea"
-            placeholder="輸入你想說的話！"
-            className="h-15 px-3 py-2 border-b-2 w-full placeholder:text-start"
-          />
-          <p className="text-right text-xs font-bold mt-1">0/100</p>
+          <form
+            id="submitMsg"
+            onSubmit={(e) => {
+              e.preventDefault();
+              console.log(msgValue);
+            }}
+          >
+            <input
+              type="textarea"
+              maxLength={100}
+              placeholder="輸入你想說的話！"
+              className="h-15 px-3 py-2 border-b-2 w-full placeholder:text-start"
+              onChange={(e) => {
+                setMsgValue(e.target.value);
+                setTextLength(e.target.value.length);
+              }}
+            />
+          </form>
+          <p className="text-right text-xs font-bold mt-1">{textLength}/100</p>
         </div>
         <button
+          form="submitMsg"
           type="submit"
           className="bg-gray-950 text-white px-4 py-2 text-sm font-semibold rounded"
         >
