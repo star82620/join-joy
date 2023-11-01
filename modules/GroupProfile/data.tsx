@@ -42,6 +42,8 @@ export type StoreLocationProps = {
   store: StoreType;
 };
 
+export type MemberCardProps = { member: MemberType; index: number };
+
 export type GroupDataType = {
   groupName: string;
   groupStatus: "opening" | "closed";
