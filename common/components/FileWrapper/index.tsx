@@ -15,7 +15,7 @@ export default function FileWrapper({
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-[48.5px] md:mt-[41.5px]">
+      <section className="p-6 bg-yellow-dark border-[3px] border-t-2 w-full mt-[48px] md:mt-[41px]">
         {children}
       </section>
     </section>
