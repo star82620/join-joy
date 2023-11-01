@@ -126,7 +126,15 @@ export default function StoreProfile() {
           <div>
             <ModalWrapper title="地圖" layout="secondary">
               <div className="w-[304px] h-[208px] bg-gray-200 text-center">
-                map
+                <iframe
+                  width="304"
+                  height="208"
+                  frameborder="0"
+                  style={{ border: "0" }}
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyCKi69OQzm0biwWiO1tQTzAaX5rgt3fx1k&q=${address}`}
+                  allowfullscreen
+                ></iframe>
               </div>
             </ModalWrapper>
           </div>
