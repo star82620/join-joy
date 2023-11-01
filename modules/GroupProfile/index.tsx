@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import Share from "@/common/components/Share";
+import GroupInformation from "./GroupInformation";
+import MembersList from "./MembersList";
+import MessageBoard from "./MessageBoard";
 import {
   groupData,
   icons,
@@ -10,25 +13,25 @@ import {
   GameItemProps,
   StoreLocationProps,
 } from "./data";
-import Link from "@/common/components/GeneralLink";
 
-function StoreLocation({ store }: StoreLocationProps) {
+export function StoreLocation({ store }: StoreLocationProps) {
   return (
     <p className="leading-6">
-      <span className="font-medium">
+      <span className="font-medium whitespace-nowrap">
         <Link href={`/store/${store.storeId}`} target="_blank">
           {store.storeName}
         </Link>
       </span>
-      <span className="ml-2 text-sm ">（{store.address}）</span>
+      <span className="text-sm whitespace-nowrap ml-2 md:ml-0">
+        （{store.address}）
+      </span>
     </p>
   );
 }
-function Title({ content }: TitleProps) {
+export function Title({ content }: TitleProps) {
   const icon = icons[content];
-  console.log(content);
-  console.log(icon);
   const { title, src, alt } = icon;
+
   return (
     <div className="flex items-center gap-2 text-lg md:text-md mb-2">
       <span className="relative w-5 h-5">
@@ -44,7 +47,7 @@ function Title({ content }: TitleProps) {
     </div>
   );
 }
-function TagItem({ tag }: TagItemProps) {
+export function TagItem({ tag }: TagItemProps) {
   return (
     <p className="flex items-center gap-0.5 p-1 bg-white text-sm">
       <span className="relative inline-block w-4 h-4">
@@ -60,7 +63,7 @@ function TagItem({ tag }: TagItemProps) {
     </p>
   );
 }
-function GameItem({ game }: GameItemProps) {
+export function GameItem({ game }: GameItemProps) {
   return (
     <li className="flex items-center gap-2">
       <span className="border-[0.5px] rounded bg-white p-1 text-xs text-gray-800 font-semibold">
@@ -72,22 +75,13 @@ function GameItem({ game }: GameItemProps) {
 }
 
 export default function GroupProfile() {
-  const {
-    groupName,
-    groupStatus,
-    date,
-    store,
-    members,
-    startTime,
-    endTime,
-    cost,
-    place,
-    totalMemberNum,
-    games,
-    description,
-    tags,
-  } = groupData;
-  const isPlace = place !== "NULL";
+  const [applyNum, setApplyNum] = useState<number>(1);
+
+  function handleJoinSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log("handleJoinSubmit", e.target);
+    // 按下送出 API
+  }
 
   return (
     <section className="container py-14 md:py-9">
@@ -95,77 +89,26 @@ export default function GroupProfile() {
         <div className="flex flex-col gap-9 md:gap-8 grow">
           <div className="grow">
             <ModalWrapper title="揪團資訊" layout="primary">
-              <section className="px-12 py-8 md:px-3 md:py-4">
-                <div className="flex items-center gap-2">
-                  <h1 className="whitespace-nowrap text-xxxl md:text-xxl">
-                    {groupName}
-                  </h1>
-                  <span className="grow">{groupStatus}</span>
-                  <span
-                    className="relative w-6 h-6 md:w-5 md:h-5 cursor-pointer"
-                    onClick={Share}
-                  >
-                    <Image
-                      src="/images/group-profile/icon-share.svg"
-                      alt="icon-share"
-                      fill
-                      sizes="100%"
-                      className="object-contain"
-                    />
-                  </span>
-                </div>
-                <div className="flex flex-col gap-6 mt-6">
-                  <div>
-                    <Title content="location" />
-                    {isPlace ? place : <StoreLocation store={store} />}
-                  </div>
-                  <div>
-                    <Title content="date" />
-                    {date}
-                  </div>
-                  <div>
-                    <Title content="time" />
-                    {startTime}-{endTime}
-                  </div>
-                  <div>
-                    <Title content="cost" />
-                    {cost}
-                  </div>
-                  <div>
-                    <Title content="totalMembers" />
-                    {totalMemberNum} 人
-                  </div>
-                  <div>
-                    <Title content="games" />
-                    <ul className="flex flex-col gap-4 md:gap-2">
-                      {games.map((game) => (
-                        <GameItem key={game.gameId} game={game} />
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <Title content="description" />
-                    <span className="text-sm">{description}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    {tags.map((tag) => (
-                      <TagItem key={tag} tag={tag} />
-                    ))}
-                  </div>
-                  <div>加入：這個要有會員且未加入</div>
-                </div>
-              </section>
+              <GroupInformation
+                groupData={groupData}
+                applyNum={applyNum}
+                setApplyNum={setApplyNum}
+                handleJoinSubmit={handleJoinSubmit}
+              />
             </ModalWrapper>
           </div>
           <div>
             <ModalWrapper title="留言板" layout="secondary">
-              <section className="px-12 pt-8 pb-10 md:px-3 md:py-4"></section>
+              <MessageBoard />
             </ModalWrapper>
           </div>
         </div>
-        <div className="w-[304px]">
+        <div className="w-[304px] md:w-full">
           <ModalWrapper title="參加者列表" layout="secondary">
-            <section className="p-4 md:px-3 md:py-4">fff</section>
+            <MembersList
+              members={groupData.members}
+              totalMemberNum={groupData.totalMemberNum}
+            />
           </ModalWrapper>
         </div>
       </div>
