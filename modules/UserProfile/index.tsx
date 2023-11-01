@@ -7,18 +7,9 @@ import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
-import {
-  TabNameType,
-  ReturnComponentType,
-} from "@/common/components/FileWrapper/data";
+import { selectActiveComponent } from "@/common/helpers/selectActiveComponent";
+import { ReturnComponentType } from "@/common/components/FileWrapper/data";
 import { userData, tabSet, ActiveTabType } from "./data";
-
-function selectActiveComponent(
-  activeTab: TabNameType,
-  returnComponent: ReturnComponentType
-) {
-  return returnComponent[activeTab] || null;
-}
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
