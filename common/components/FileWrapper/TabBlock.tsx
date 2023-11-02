@@ -12,7 +12,7 @@ export default function TabBlock({
   const { tabName, tabText, img } = tab;
 
   const defaultStyle =
-    "pb-2 bg-gray-200 text-gray-600 border-gray-400 border-l-gray-400";
+    "pb-[7px] bg-gray-200 text-gray-600 border-gray-400 border-l-gray-400";
 
   const activeStyle =
     "pb-[10px] bg-yellow-dark text-gray-950 border-gray-950 rounded-tl-md";
