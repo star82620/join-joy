@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import Link from "@/common/components/GeneralLink";
 import { memberStatusFormat } from "@/constants/memberStatusFormat";
-import { MembersListProps, MemberCardProps } from "./data";
+import { GroupDataContext } from "./index";
+import { MemberCardProps } from "./data";
 
 function MemberCard({ member, index }: MemberCardProps) {
   const { userId, userName, status, initNum } = member;
@@ -38,14 +39,9 @@ function MemberCard({ member, index }: MemberCardProps) {
   );
 }
 
-export default function MembersList({
-  members,
-  totalMemberNum,
-}: MembersListProps) {
-  const currentMemberNum = members.reduce((sum, member) => {
-    sum += member.initNum;
-    return sum;
-  }, 0);
+export default function MembersList() {
+  const { groupData, currentMemberNum } = useContext(GroupDataContext);
+  const { totalMemberNum, members } = groupData;
   return (
     <section className="p-4 md:px-3 md:py-4">
       <h3 className="text-md leading-6 text-center">

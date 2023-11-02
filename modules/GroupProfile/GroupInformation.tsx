@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import Share from "@/common/components/Share";
 import { groupStatusFormat } from "@/constants/groupStatusFormat";
-import { StoreLocation, Title, TagItem, GameItem } from "./index";
+import {
+  StoreLocation,
+  Title,
+  TagItem,
+  GameItem,
+  GroupDataContext,
+} from "./index";
 import { GroupInformationProps, GameItemType } from "./data";
 
 export default function GroupInformation({
-  groupData,
-  applyNum,
   setApplyNum,
   handleJoinSubmit,
 }: GroupInformationProps) {
+  const { groupData, currentMemberNum } = useContext(GroupDataContext);
   const {
     groupName,
     groupStatus,
@@ -28,6 +33,13 @@ export default function GroupInformation({
   } = groupData;
   const isPlace = place !== "NULL";
   const groupStatusText = groupStatusFormat[groupStatus];
+  const remainingNum = totalMemberNum - currentMemberNum;
+  const numOptions = Array.from({ length: remainingNum }).map((_, index) => (
+    <option key={index} value={index + 1}>
+      {index + 1}
+    </option>
+  ));
+
   return (
     <section className="px-12 py-8 md:px-3 md:py-4">
       <div className="flex items-center gap-2">
@@ -101,11 +113,7 @@ export default function GroupInformation({
               setApplyNum(Number(e.target.value));
             }}
           >
-            {/* 要根據目前最大可加入人數給選項，會有那種同時送出的狀況？=>未來展望 */}
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            {numOptions}
           </select>
         </div>
         <Button type="submit" appearance="orange" className="grow md:w-full">

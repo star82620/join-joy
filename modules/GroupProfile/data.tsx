@@ -1,5 +1,3 @@
-import GroupInformation from "./GroupInformation";
-
 type IconKeyType =
   | "location"
   | "date"
@@ -20,29 +18,19 @@ export type IconType = { IconKeyType: IconItemType };
 export type TitleProps = { content: IconKeyType };
 
 export type StoreType = { storeName: string; storeId: string; address: string };
+
 export type GameItemType = {
   gameName: string;
   gameId: string;
   gameType: string;
 };
+
 export type MemberType = {
   userId: string;
   userName: string;
   status: "leader" | "member";
   initNum: number;
 };
-
-export type TagItemProps = {
-  tag: string;
-};
-export type GameItemProps = {
-  game: GameItemType;
-};
-export type StoreLocationProps = {
-  store: StoreType;
-};
-
-export type MemberCardProps = { member: MemberType; index: number };
 
 export type GroupDataType = {
   groupName: string;
@@ -60,16 +48,23 @@ export type GroupDataType = {
   tags: Array<string>;
 };
 
-export type GroupInformationProps = {
-  groupData: GroupDataType;
-  applyNum: number;
-  setApplyNum: (applyNum: number) => void;
-  handleJoinSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+export type TagItemProps = {
+  tag: string;
 };
 
-export type MembersListProps = {
-  members: MemberType[];
-  totalMemberNum: GroupDataType["totalMemberNum"];
+export type GameItemProps = {
+  game: GameItemType;
+};
+
+export type StoreLocationProps = {
+  store: StoreType;
+};
+
+export type MemberCardProps = { member: MemberType; index: number };
+
+export type GroupInformationProps = {
+  setApplyNum: (applyNum: number) => void;
+  handleJoinSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 // ---data---
@@ -77,7 +72,7 @@ export type MembersListProps = {
 export const groupData: GroupDataType = {
   groupName: "輕鬆派對揪遊團",
   groupStatus: "opening",
-  place: "NULL", //如果是自宅團就 show 開團當時寫的
+  place: "NULL",
   store: {
     storeId: "s123",
     storeName: "六角學院桌遊店",
@@ -98,7 +93,7 @@ export const groupData: GroupDataType = {
   members: [
     { userId: "a00012", userName: "多多", status: "leader", initNum: 2 },
     { userId: "a00019", userName: "皮卡秋", status: "member", initNum: 3 },
-    { userId: "a00041", userName: "少少", status: "member", initNum: 1 },
+    { userId: "a00041", userName: "少少", status: "member", initNum: 4 },
     { userId: "a00033", userName: "巧虎", status: "member", initNum: 1 },
   ],
   tags: ["新手團", "經驗切磋"],
