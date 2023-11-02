@@ -15,13 +15,14 @@ export default function MessageBoard() {
             onSubmit={(e) => {
               e.preventDefault();
               console.log(msgValue);
+              //送出 API
             }}
           >
-            <input
-              type="textarea"
+            <textarea
               maxLength={100}
+              rows={3}
               placeholder="輸入你想說的話！"
-              className="h-15 px-3 py-2 border-b-2 w-full placeholder:text-start"
+              className="px-3 py-2 border-b-2 w-full placeholder:text-start"
               onChange={(e) => {
                 setMsgValue(e.target.value);
                 setTextLength(e.target.value.length);
