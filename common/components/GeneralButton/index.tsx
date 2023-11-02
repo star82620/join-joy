@@ -25,9 +25,7 @@ export default function GeneralButton({
   return (
     <button
       className={`border-2  px-3 py-2 h-fit font-semibold
-          ${btnStyle}
-          ${textColor} ${defaultColor} ${hoverColor} ${activeColor} ${disabledStyle}
-          ${className}
+          ${btnStyle} ${textColor} ${defaultColor} ${hoverColor} ${activeColor} ${disabledStyle} ${className}
           `}
       type={type}
       onClick={onClick}
