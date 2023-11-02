@@ -1,15 +1,7 @@
-import React from "react";
-import { InputSetType } from "@/types/types";
+import { InputSetType } from "@/common/components/Form/data";
+import { ButtonType } from "@/common/components/GeneralButton/data";
+import { apiParamsType } from "@/common/helpers/fetchApi";
 
-// ErrorType 也要拆在 Form component 裡面
-export type ErrorType = {
-  nickname: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
-  confirmPassword: string | undefined;
-};
-
-//之後這個 InputSetType 要拆在 Form component 裡面
 export const inputSet: InputSetType = [
   {
     label: "帳號",
@@ -17,7 +9,7 @@ export const inputSet: InputSetType = [
     inputName: "email",
     placeholder: "example@mail.com",
     required: true,
-    errorMsg: "", // error.email，把 data 分開，這個 useState 要怎麼辦？
+    errorMsg: "帳號輸入錯誤",
   },
   {
     label: "密碼",
@@ -25,13 +17,20 @@ export const inputSet: InputSetType = [
     inputName: "password",
     placeholder: "輸入6-12位英數字組合",
     required: true,
-    errorMsg: "",
+    errorMsg: "密碼輸入錯誤",
   },
 ];
 
-// export const ErrorMsg = {
-//   nickname: "",
-//   email: "",
-//   password: "",
-//   confirmPassword: "",
-// };
+export const btnSet: ButtonType = {
+  type: "submit",
+  children: "登入",
+  isDisabled: false,
+  appearance: "orange",
+  className: "mt-2",
+};
+
+//API
+export const apiParams: apiParamsType = {
+  apiPath: "/auth/login",
+  method: "POST",
+};

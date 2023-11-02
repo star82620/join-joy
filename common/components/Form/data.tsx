@@ -7,7 +7,7 @@ export type InputType = {
   inputName: string;
   placeholder: string;
   required: boolean;
-  errorMsg?: string;
+  errorMsg?: string | Record<string, string>;
   pattern?: RegExp;
 };
 

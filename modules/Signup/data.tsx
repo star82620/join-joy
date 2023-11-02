@@ -42,9 +42,6 @@ export const inputSet: InputSetType = [
   },
 ];
 
-//Form 按鈕狀態
-const t = () => console.log("我被按了");
-
 export const btnSet: ButtonType = {
   type: "submit",
   children: "註冊",
