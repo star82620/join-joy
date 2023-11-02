@@ -7,7 +7,7 @@ export default function GeneralButton({
   children,
   onClick,
   isDisabled,
-  wrapper,
+  shape,
   className,
 }: ButtonType) {
   const defaultColor = dataSet[appearance].default || null;
@@ -19,7 +19,7 @@ export default function GeneralButton({
   const roundedBtnStyle = "rounded text-sm";
   const squareBtnStyle =
     "shadow-btn text-xl md:text-xs active:shadow-none active:translate-x-0.5 active:translate-y-0.5 disabled:shadow-none disabled:translate-x-0.5 disabled:translate-y-0.5";
-  const isRounded = wrapper === "rounded";
+  const isRounded = shape === "rounded";
   const btnStyle = isRounded ? roundedBtnStyle : squareBtnStyle;
 
   return (
