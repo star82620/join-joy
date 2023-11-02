@@ -49,8 +49,9 @@ export const btnSet: ButtonType = {
   type: "submit",
   children: "註冊",
   isDisabled: false,
-  appearance: "orange",
+  appearance: "white",
   className: "mt-2",
+  wrapper: "rounded",
 };
 
 //API
