@@ -3,8 +3,8 @@ import Image from "next/image";
 import { ProfileImgProps } from "./data";
 
 export default function ProfileImg({
-  img,
-  profileName,
+  src,
+  alt,
   widthStyle,
   heightStyle,
 }: ProfileImgProps) {
@@ -14,9 +14,10 @@ export default function ProfileImg({
   outline-gray-950 ${widthStyle} ${heightStyle}`}
     >
       <Image
-        src={img}
-        alt={profileName}
+        src={src}
+        alt={alt}
         fill
+        sizes="100%"
         className="object-contain rounded-full"
       />
     </div>

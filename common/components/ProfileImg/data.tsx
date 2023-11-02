@@ -1,6 +1,6 @@
 export type ProfileImgProps = {
-  profileName: string;
-  img: string;
+  alt: string;
+  src: string;
   widthStyle: string;
   heightStyle: string;
 };
