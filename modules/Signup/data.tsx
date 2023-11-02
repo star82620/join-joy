@@ -42,9 +42,6 @@ export const inputSet: InputSetType = [
   },
 ];
 
-//Form 按鈕狀態
-const t = () => console.log("我被按了");
-
 export const btnSet: ButtonType = {
   type: "submit",
   children: "註冊",
@@ -55,6 +52,6 @@ export const btnSet: ButtonType = {
 
 //API
 export const apiParams: apiParamsType = {
-  apiPath: "/users/sign_up",
+  apiPath: "/auth/register",
   method: "POST",
 };
