@@ -32,7 +32,6 @@ export default function Inputs({
                 type={switchPasswordType(type)}
                 name={inputName}
                 placeholder={placeholder}
-                // required={required} 我自己擋，不用瀏覽器本身的
                 value={inputValues[inputName]}
                 onChange={handleInputValue}
               ></input>

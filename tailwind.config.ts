@@ -49,6 +49,7 @@ const config: Config = {
       "purple-dark": "#9354A9",
       danger: "#DD240B",
       white: "#FFFFFF",
+      transparent: "transparent",
     },
     fontSize: {
       xl: "20px",
@@ -66,10 +67,23 @@ const config: Config = {
       backgroundImage: {
         "eye-hide": 'url("/images/input-password-hide.svg")',
         "eye-show": 'url("/images/input-password-show.svg")',
+        "follow-true": 'url("/images/icon-check.svg")',
+        "follow-false": 'url("/images/icon-plus.svg")',
       },
       lineHeight: {
         heading: "1.4rem",
         text: "1.2rem",
+      },
+      zIndex: {
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
       },
     },
   },
