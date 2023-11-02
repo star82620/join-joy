@@ -2,8 +2,9 @@ import { ReactNode } from "react";
 import { UserTabNameType } from "@/modules/UserProfile/data";
 import { StoreTabNameType } from "@/modules/StoreProfile/data";
 
-//有增加的就 ＆ 擴展進來
-type TabNameType = UserTabNameType | StoreTabNameType;
+// export type TabNameType = UserTabNameType | StoreTabNameType;
+
+export type TabNameType = string;
 
 export type SetActiveTabType = (activeTab: TabNameType) => void;
 
@@ -34,3 +35,5 @@ export type TabsSectionProps = {
 export type WrapperFileProps = TabsSectionProps & {
   children: ReactNode;
 };
+
+export type ReturnComponentType = Record<string, ReactNode>;
