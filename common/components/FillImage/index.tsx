@@ -1,7 +1,8 @@
 import React from "react";
 import NextImage from "next/image";
+import { FillImageProps } from "./date";
 
-export default function FillImage({ src, alt, className }) {
+export default function FillImage({ src, alt, className }: FillImageProps) {
   return (
     <div className={`relative ${className}`}>
       <NextImage
