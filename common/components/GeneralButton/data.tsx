@@ -2,42 +2,38 @@ import { ReactNode } from "react";
 
 export type ButtonType = {
   type: "button" | "submit" | "reset";
-  appearance: "orange" | "yellow" | "light" | "black" | "gray";
+  appearance: "orange" | "yellow" | "white" | "black" | "gray";
   children: ReactNode;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
   isDisabled?: boolean;
+  shape?: "rounded" | "square";
   className?: string;
 };
 
 // appearance 按鈕樣式
 export const dataSet = {
   orange: {
-    default: "bg-orange-neutral",
-    hover: "hover:bg-orange-tone",
-    active: "active:bg-orange-tone",
-    disabled: "disabled:bg-gray-300",
+    default: "bg-orange-second border-gray-950",
+    hover: "hover:bg-orange-neutral",
+    active: "active:bg-orange-second",
+    disabled:
+      "disabled:bg-gray-300 disabled:text-gray-500 disabled:border-gray-500 ",
     textColor: "text-gray-950",
   },
   yellow: {
     default: "bg-yellow-neutral",
-    hover: "hover:bg-yellow-neutral",
+    hover: "hover:bg-yellow-tone",
     active: "active:bg-yellow-neutral",
-    disabled: "disabled:bg-gray-300",
+    disabled:
+      "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
     textColor: "text-gray-950",
   },
-  light: {
-    default: "bg-yellow-tint",
-    hover: "hover:bg-orange-tint",
-    active: "active:bg-yellow-primary",
+  white: {
+    default: "bg-white border-gray-950",
+    hover: "hover:bg-gray-100",
+    active: "active:bg-gray-200",
     disabled: "disabled:bg-gray-300",
     textColor: "text-gray-950",
-  },
-  black: {
-    default: "bg-gray-950",
-    hover: "hover:bg-gray-950",
-    active: "active:bg-gray-950",
-    disabled: "disabled:bg-gray-300",
-    textColor: "text-white",
   },
   gray: {
     default: "bg-gray-100",
@@ -45,5 +41,13 @@ export const dataSet = {
     active: "active:bg-gray-100",
     disabled: "disabled:bg-gray-300",
     textColor: "text-gray-950",
+  },
+  black: {
+    default: "bg-gray-950 border-gray-950",
+    hover: "hover:bg-gray-800 hover:border-gray-800",
+    active: "active:bg-gray-900 active:border-gray-900",
+    disabled:
+      "disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-400",
+    textColor: "text-gray-50",
   },
 };
