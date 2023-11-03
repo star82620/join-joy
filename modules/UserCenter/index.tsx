@@ -9,90 +9,85 @@ import MyGroupsMember from "./MyGroupsMember";
 import { userNavIcons } from "@/constants/iconsPackage";
 import MyFollowing from "./MyFollowing";
 import MyNotification from "./MyNotification";
-import { NavSetType, NavIdType, ActiveNavIdType } from "./date";
+import {
+  NavSetType,
+  NavIdType,
+  SubItemType,
+  ActiveNavIdType,
+  SetIconAttrType,
+} from "./date";
+import UserNavBar from "./UserNavBar";
+
+const navSet: NavSetType[] = [
+  { id: "profile-setting", text: "個人檔案", component: <ProfileSetting /> },
+  {
+    id: "my-groups",
+    text: "我的揪團",
+    subItem: [
+      {
+        id: "my-groups-leader",
+        text: "我開的揪團",
+        component: <MyGroupsLeader />,
+      },
+      {
+        id: "my-groups-member",
+        text: "我加入的揪團",
+        component: <MyGroupsMember />,
+      },
+    ],
+  },
+  { id: "my-following", text: "我的追蹤", component: <MyFollowing /> },
+  { id: "my-notification", text: "我的通知", component: <MyNotification /> },
+];
 
 export default function UserCenter() {
-  const [activeTab, setActiveTab] = useState("profile-setting");
+  const [activeNav, setActiveNav] = useState<NavIdType>("my-groups-leader");
+  const [openSubList, setOpenSubList] = useState(true);
 
-  const navSet: NavSetType[] = [
-    { id: "profile-setting", text: "個人檔案", component: <ProfileSetting /> },
-    {
-      id: "my-groups",
-      text: "我的揪團",
-      subItem: [
-        { id: "leader", text: "我開的揪團", component: <MyGroupsLeader /> },
-        { id: "member", text: "我加入的揪團", component: <MyGroupsMember /> },
-      ],
-    },
-    { id: "my-following", text: "我的追蹤", component: <MyFollowing /> },
-    { id: "my-notification", text: "我的通知", component: <MyNotification /> },
-  ];
-  const d = () => {};
-  const defaultStyle = "";
-  const activeStyle = "";
-  const setIconSrc = (nav: NavSetType) => {
-    if (!nav.id) return "";
+  const toggleActiveNav = (nav: NavSetType): void => {
+    if (nav.subItem) {
+      setOpenSubList(!openSubList);
+      setActiveNav(nav.subItem[0].id);
+      return;
+    }
+
+    setActiveNav(nav.id);
+    setOpenSubList(false);
+  };
+
+  const toggleActiveSubNav = (subNav: SubItemType): void =>
+    setActiveNav(subNav.id);
+
+  const setIconImg = (nav: NavSetType, attr: SetIconAttrType) => {
+    if (!nav.id) return "profile-center";
     const id: NavIdType = nav.id;
     const activeId: ActiveNavIdType = `${nav.id}-active`;
-    const iconSrc =
-      activeTab === id ? userNavIcons[activeId].src : userNavIcons[id].src;
-    return iconSrc;
-  };
-  const setIconAlt = (nav: NavSetType) => {
-    if (!nav.id) return "";
-    return userNavIcons[nav.id].alt;
+    const isActive = nav.subItem
+      ? activeNav.includes(nav.id)
+      : activeNav === nav.id;
+    const result = isActive
+      ? userNavIcons[activeId][attr]
+      : userNavIcons[id][attr];
+    return result;
   };
 
   return (
     <section className="container flex items-start gap-9">
-      <div className="w-[216px]">
+      <div className="w-[216px] h-[1500px]">
         <ModalWrapper title="" layout="secondary">
-          <section className="flex flex-col">
-            <div className="flex flex-col items-center py-4">
-              <ProfileImg
-                src="/images/photo-user-000.png"
-                alt="userName"
-                widthStyle="w-16 md:w-10"
-                heightStyle="h-16 md:h-16"
-              />
-              <p className="mt-3 text-center text-lg font-semibold">多多</p>
-            </div>
-            <nav className="px-1">
-              <ul className="flex flex-col gap-1">
-                {navSet.map((nav: NavSetType) => {
-                  return (
-                    <li
-                      key={nav.id}
-                      className={`p-3 flex gap-3 ${defaultStyle} rounded bg-yellow-tint`}
-                      onClick={d}
-                    >
-                      <FillImage
-                        src={setIconSrc(nav)}
-                        alt={setIconAlt(nav)}
-                        widthStyle="w-6"
-                        heightStyle="h-6"
-                      />
-                      <span className="font-semibold ">{nav.text}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-            <div>
-              <FillImage
-                src={userNavIcons["logout"].src}
-                alt={userNavIcons.logout.alt}
-                widthStyle="w-6"
-                heightStyle="w-6"
-              />
-              登出
-            </div>
-          </section>
+          <UserNavBar
+            navSet={navSet}
+            activeNav={activeNav}
+            openSubList={openSubList}
+            setIconImg={setIconImg}
+            toggleActiveNav={toggleActiveNav}
+            toggleActiveSubNav={toggleActiveSubNav}
+          />
         </ModalWrapper>
       </div>
       <div className="grow">
         <ModalWrapper title="我的個人檔案" layout="primary">
-          content
+          content： {activeNav}
         </ModalWrapper>
       </div>
     </section>

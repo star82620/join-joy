@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 
-type SubItemIdType = "leader" | "member";
+export type SubItemIdType = "my-groups-leader" | "my-groups-member";
 
-type SubItemType = {
+export type SubItemType = {
   id: SubItemIdType;
   text: string;
   component: ReactNode;
@@ -22,4 +22,13 @@ export type ActiveNavIdType =
   | "my-following-active"
   | "my-notification-active";
 
-// const ReturnComponentType
+export type SetIconAttrType = "src" | "alt";
+
+export type UserNavBarProps = {
+  navSet: NavSetType[];
+  activeNav: NavIdType;
+  openSubList: boolean;
+  setIconImg: (nav: NavSetType, attr: SetIconAttrType) => string;
+  toggleActiveNav: (nav: NavSetType) => void;
+  toggleActiveSubNav: (subNav: SubItemType) => void;
+};

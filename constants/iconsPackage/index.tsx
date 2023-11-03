@@ -37,4 +37,12 @@ export const userNavIcons: UserNavIconsType = {
     src: "/images/user-center/icon-logout.svg",
     alt: "icon-logout",
   },
+  "sub-opening": {
+    src: "/images/user-center/icon-sub-opening.svg",
+    alt: "icon-sub-opening",
+  },
+  "sub-closing": {
+    src: "/images/user-center/icon-sub-closing.svg",
+    alt: "icon-sub-closing",
+  },
 };

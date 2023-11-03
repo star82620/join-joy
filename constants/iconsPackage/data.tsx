@@ -12,6 +12,8 @@ type IconIdType =
   | "profile-setting-active"
   | "my-notification"
   | "my-notification-active"
-  | "logout";
+  | "logout"
+  | "sub-closing"
+  | "sub-opening";
 
 export type UserNavIconsType = Record<IconIdType, IconType>;
