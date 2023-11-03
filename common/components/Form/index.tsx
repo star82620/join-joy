@@ -22,7 +22,7 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     inputs.forEach((input: InputType) => {
       errors[input.inputName] = false;
       values[input.inputName] = "";
-      show[input.inputName] = input.type === "password" ? false : null;
+      show[input.inputName] = input.type === "password" ? false : undefined;
     });
 
     return { errors, values, show };
