@@ -22,7 +22,7 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     inputs.forEach((input: InputType) => {
       errors[input.inputName] = false;
       values[input.inputName] = "";
-      show[input.inputName] = input.type === "password" ? false : undefined;
+      show[input.inputName] = input.type === "password" ? false : null;
     });
 
     return { errors, values, show };
@@ -54,15 +54,16 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     const errors: InputErrorsType = {};
 
     inputSet.forEach((input) => {
+      const isRequired = input.required;
+      const isMatch = input.pattern;
+
       // 必填但是沒有指定驗證的欄位就驗證有沒有填
-      if (input.required && !input.pattern) {
+      if (isRequired && !isMatch) {
         errors[input.inputName] = !inputValues[input.inputName] ? true : false;
       }
       // 有指定驗證內容就依照驗證內容
-      if (input.pattern) {
-        errors[input.inputName] = !input.pattern.test(
-          inputValues[input.inputName]
-        )
+      if (isMatch) {
+        errors[input.inputName] = !isMatch.test(inputValues[input.inputName])
           ? true
           : false;
       }
