@@ -47,10 +47,18 @@ export default function UserNavBar({
                     heightStyle="h-6"
                   />
                   <span className="grow">{nav.text}</span>
-                  {haveSubItem && (
+                  {haveSubItem && !openSubList && (
                     <FillImage
                       src={userNavIcons["sub-opening"].src}
                       alt={userNavIcons["sub-opening"]["alt"]}
+                      widthStyle="w-6"
+                      heightStyle="h-6"
+                    />
+                  )}
+                  {haveSubItem && openSubList && (
+                    <FillImage
+                      src={userNavIcons["sub-closing"].src}
+                      alt={userNavIcons["sub-closing"]["alt"]}
                       widthStyle="w-6"
                       heightStyle="h-6"
                     />
