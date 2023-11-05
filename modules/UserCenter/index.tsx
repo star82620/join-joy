@@ -107,7 +107,7 @@ export default function UserCenter() {
 
   return (
     <section className="container flex items-start gap-9">
-      <div className="w-[216px] h-[1500px]">
+      <div className="w-[216px] h-[1500px] md:hidden">
         <ModalWrapper title="" layout="secondary">
           <UserNavBar
             navSet={navSet}
