@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { apiParamsType } from "@/common/helpers/fetchApi";
 
 export type SubItemIdType = "my-groups-leader" | "my-groups-member";
 
@@ -31,4 +32,10 @@ export type UserNavBarProps = {
   setIconImg: (nav: NavSetType, attr: SetIconAttrType) => string;
   toggleActiveNav: (nav: NavSetType) => void;
   toggleActiveSubNav: (subNav: SubItemType) => void;
+};
+
+// 獲取會員詳細資料
+export const userDataKey: apiParamsType = {
+  apiPath: "/member/memberDetails",
+  method: "GET",
 };

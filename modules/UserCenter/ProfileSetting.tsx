@@ -1,5 +1,10 @@
 import React from "react";
+import fetchApi from "@/common/helpers/fetchApi";
+import { userDataKey } from "./date";
 
 export default function ProfileSetting() {
-  return <div>ProfileSetting</div>;
+  const data = fetchApi(userDataKey);
+  console.log("data", data);
+
+  return <div>ProfileSetting{data[0]}</div>;
 }

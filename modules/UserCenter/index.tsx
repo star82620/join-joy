@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import Link from "@/common/components/GeneralLink";
-import ProfileImg from "@/common/components/ProfileImg";
-import FillImage from "@/common/components/FillImage";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileSetting from "./ProfileSetting";
 import MyGroupsLeader from "./MyGroupsLeader";
@@ -17,6 +14,7 @@ import {
   SetIconAttrType,
 } from "./date";
 import UserNavBar from "./UserNavBar";
+import fetchApi from "@/common/helpers/fetchApi";
 
 const navSet: NavSetType[] = [
   { id: "profile-setting", text: "個人檔案", component: <ProfileSetting /> },
@@ -41,7 +39,7 @@ const navSet: NavSetType[] = [
 ];
 
 export default function UserCenter() {
-  const [activeNav, setActiveNav] = useState<NavIdType>("my-groups-leader");
+  const [activeNav, setActiveNav] = useState<NavIdType>("profile-setting");
   const [openSubList, setOpenSubList] = useState(true);
 
   const toggleActiveNav = (nav: NavSetType): void => {
@@ -53,6 +51,8 @@ export default function UserCenter() {
 
     setActiveNav(nav.id);
     setOpenSubList(false);
+
+    // 優化項目：點擊有 subItem、已經作用的 Nav 時，不要改變 activeNav
   };
 
   const toggleActiveSubNav = (subNav: SubItemType): void =>
@@ -71,6 +71,40 @@ export default function UserCenter() {
     return result;
   };
 
+  const selectActiveComponent = () => {
+    // 先找出有符合 activeNav 的項目，find 會回傳第一個 true 的值，所以我得到的是一個符合的物件
+    // 如果有 subItem 的話，確定這些 subItem 中有沒有符合的項目，有的話回傳 true 的值，我得到一整包 item 物件
+    const activeItem = navSet.find((item) => {
+      if (item.id === activeNav) return true;
+      if (item.subItem) {
+        const isSubItemActive = item.subItem.some((subItem) => {
+          return subItem.id === activeNav;
+        });
+
+        return isSubItemActive;
+      }
+      return false;
+    });
+
+    if (activeItem && activeItem.id === activeNav) return activeItem.component;
+
+    // 如果有 activeItem 且有 subItem
+    if (activeItem && activeItem.subItem) {
+      const activeSubItem = activeItem.subItem.find((subItem) => {
+        if (subItem.id === activeNav) return true;
+      });
+
+      if (!activeSubItem) return navSet[0].component;
+
+      return activeSubItem.component;
+    }
+
+    // 如果上述都不成立，就預設回傳第一筆項目
+    return navSet[0].component;
+  };
+
+  selectActiveComponent();
+
   return (
     <section className="container flex items-start gap-9">
       <div className="w-[216px] h-[1500px]">
@@ -87,7 +121,7 @@ export default function UserCenter() {
       </div>
       <div className="grow">
         <ModalWrapper title="我的個人檔案" layout="primary">
-          content： {activeNav}
+          {selectActiveComponent()}
         </ModalWrapper>
       </div>
     </section>
