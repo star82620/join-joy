@@ -16,16 +16,16 @@ export default function UserNavBar({
     <Image
       src={icons["sub-opening"].src}
       alt={icons["sub-opening"]["alt"]}
-      widthStyle="w-6"
-      heightStyle="h-6"
+      widthProp="w-6"
+      heightProp="h-6"
     />
   );
   const subNavCloseIcon = (
     <Image
       src={icons["sub-closing"].src}
       alt={icons["sub-closing"]["alt"]}
-      widthStyle="w-6"
-      heightStyle="h-6"
+      widthProp="w-6"
+      heightProp="h-6"
     />
   );
 
@@ -56,8 +56,8 @@ export default function UserNavBar({
         <ProfileImg
           src="/images/photo-user-000.png"
           alt="userName"
-          widthStyle="w-16 md:w-10"
-          heightStyle="h-16 md:h-16"
+          widthProp="w-16 md:w-10"
+          heightProp="h-16 md:h-16"
         />
         <p className="mt-3 text-center text-lg font-semibold">多多</p>
       </div>
@@ -82,8 +82,8 @@ export default function UserNavBar({
                   <Image
                     src={setIconImg(nav, "src")}
                     alt={setIconImg(nav, "alt")}
-                    widthStyle="w-6"
-                    heightStyle="h-6"
+                    widthProp="w-6"
+                    heightProp="h-6"
                   />
                   <span className="grow">{nav.text}</span>
                   {haveSubItem && !openSubList && subNavOpenIcon}
@@ -98,8 +98,8 @@ export default function UserNavBar({
           <Image
             src={icons.logout.src}
             alt={icons.logout.alt}
-            widthStyle="w-6"
-            heightStyle="h-6"
+            widthProp="w-6"
+            heightProp="h-6"
           />
           登出
         </div>

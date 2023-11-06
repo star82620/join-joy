@@ -49,8 +49,8 @@ export default function ProfileSetting() {
               <Image
                 src=""
                 alt="userName"
-                widthStyle="w-[145px] md:w-[108px]"
-                heightStyle="h-[145px] md:h-[108px]"
+                widthProp="w-[145px] md:w-[108px]"
+                heightProp="h-[145px] md:h-[108px]"
               />
               <Button type="submit" appearance="light">
                 {/* BTN shape="rounded" */}

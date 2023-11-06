@@ -5,11 +5,11 @@ import { FillImageProps } from "./date";
 export default function FillImage({
   src,
   alt,
-  widthStyle,
-  heightStyle,
+  widthProp,
+  heightProp,
 }: FillImageProps) {
   return (
-    <div className={`relative ${widthStyle} ${heightStyle}`}>
+    <div className={`relative ${widthProp} ${heightProp}`}>
       <NextImage
         src={src}
         alt={alt}
