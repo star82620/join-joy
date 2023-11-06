@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import CommentsSection from "@/common/components/CommentsSection";
 import { commentsData } from "@/common/components/CommentsSection/data";
+import { setCookie } from "@/modules/Login/setCookie";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,9 @@ export default function Home() {
         </li>
       </ul>
       <div className=" max-w-[826px]">
-        <CommentsSection data={commentsData} />
+        <button type="button" onClick={setCookie("a", "abc")}>
+          click
+        </button>
       </div>
     </>
   );

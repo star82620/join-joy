@@ -9,6 +9,7 @@ import {
   ShowPasswordType,
   InputValuesType,
 } from "@/common/components/Form/data";
+import { setCookie } from "./setCookie";
 
 export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
   const initializeInputStates = (inputs: InputType[]) => {
@@ -90,6 +91,10 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     // 打 API
     apiParams.data = inputValues;
     const data = await fetchApi(apiParams);
+    // 儲存 token
+    const authToken = `Bearer ${data.jwtToken}`;
+    setCookie("authToken", authToken);
+
     // 如果傳回 status === false 就不做後續 loading 動作
     if (!data.status) return;
 

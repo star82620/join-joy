@@ -30,10 +30,10 @@ export default async function fetchApi(apiParams: apiParamsType) {
   try {
     const res = await fetch(url, requestOptions);
     const result = await res.json();
-    console.log(result);
+    console.log("result", result);
+
     return result;
   } catch (error) {
     console.log(error);
-    throw error;
   }
 }
