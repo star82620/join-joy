@@ -41,7 +41,7 @@ const navSet: NavSetType[] = [
 export default function UserCenter() {
   const [activeNav, setActiveNav] = useState<NavIdType>("profile-setting");
   const [openSubList, setOpenSubList] = useState(false);
-  console.log(openSubList);
+
   const toggleActiveNav = (nav: NavSetType): void => {
     if (nav.subItem) {
       setOpenSubList(!openSubList);
@@ -84,10 +84,10 @@ export default function UserCenter() {
       return false;
     });
 
-    if (activeItem && activeItem.id === activeNav) return activeItem.component;
+    if (activeItem?.id === activeNav) return activeItem.component;
 
     // 如果有 activeItem 且有 subItem
-    if (activeItem && activeItem.subItem) {
+    if (activeItem?.subItem) {
       const activeSubItem = activeItem.subItem.find((subItem) => {
         if (subItem.id === activeNav) return true;
       });
@@ -100,8 +100,6 @@ export default function UserCenter() {
     // 如果上述都不成立，就預設回傳第一筆項目
     return navSet[0].component;
   };
-
-  selectActiveComponent();
 
   return (
     <section className="container flex items-start gap-9">

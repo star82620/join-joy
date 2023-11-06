@@ -7,7 +7,7 @@ import Link from "@/common/components/GeneralLink";
 
 export default function ProfileSetting() {
   const data = fetchApi(userDataKey);
-  console.log("data", data);
+
   const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
   const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
@@ -18,7 +18,7 @@ export default function ProfileSetting() {
           <div className="flex flex-col gap-10 md:gap-6 md:order-2">
             <div>
               <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>你的名字</h3>
-              <input type="text" />
+              <input type="text" defaultValue={data} />
             </div>
             <div>
               <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>帳號</h3>

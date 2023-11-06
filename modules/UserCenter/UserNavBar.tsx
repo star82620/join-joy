@@ -4,6 +4,23 @@ import Image from "@/common/components/FillImage";
 import icons from "@/constants/iconsPackage/userNavIcons";
 import { UserNavBarProps, NavSetType } from "./date";
 
+const subNavOpenIcon = (
+  <Image
+    src={icons["sub-opening"].src}
+    alt={icons["sub-opening"]["alt"]}
+    widthProp="w-6"
+    heightProp="h-6"
+  />
+);
+const subNavCloseIcon = (
+  <Image
+    src={icons["sub-closing"].src}
+    alt={icons["sub-closing"]["alt"]}
+    widthProp="w-6"
+    heightProp="h-6"
+  />
+);
+
 export default function UserNavBar({
   navSet,
   activeNav,
@@ -12,23 +29,6 @@ export default function UserNavBar({
   toggleActiveNav,
   toggleActiveSubNav,
 }: UserNavBarProps) {
-  const subNavOpenIcon = (
-    <Image
-      src={icons["sub-opening"].src}
-      alt={icons["sub-opening"]["alt"]}
-      widthProp="w-6"
-      heightProp="h-6"
-    />
-  );
-  const subNavCloseIcon = (
-    <Image
-      src={icons["sub-closing"].src}
-      alt={icons["sub-closing"]["alt"]}
-      widthProp="w-6"
-      heightProp="h-6"
-    />
-  );
-
   const subNavList = (nav: NavSetType) => {
     if (!nav.subItem) return null;
     return (
