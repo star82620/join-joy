@@ -20,7 +20,6 @@ export default function UserNavBar({
       heightStyle="h-6"
     />
   );
-
   const subNavCloseIcon = (
     <Image
       src={icons["sub-closing"].src}
@@ -68,11 +67,11 @@ export default function UserNavBar({
             const isActive = nav.subItem
               ? activeNav.includes(nav.id)
               : activeNav === nav.id;
+            const haveSubItem = !!nav.subItem;
+            const showSubNav = isActive && haveSubItem && openSubList;
             const defaultStyle = "";
             const activeStyle = "font-semibold rounded-md bg-yellow-tint";
             const navStyle = isActive ? activeStyle : defaultStyle;
-            const haveSubItem = !!nav.subItem;
-            const showSubNav = isActive && haveSubItem && openSubList;
 
             return (
               <li key={nav.id}>
