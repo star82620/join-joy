@@ -25,7 +25,7 @@ export type ActiveNavIdType =
 
 export type SetIconAttrType = "src" | "alt";
 
-export type UserNavBarrProps = {
+export type UserNavBarProps = {
   navSet: NavSetType[];
   activeNav: NavIdType;
   openSubList: boolean;

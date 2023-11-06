@@ -13,7 +13,7 @@ import {
   ActiveNavIdType,
   SetIconAttrType,
 } from "./date";
-import UserNavBarr from "./UserNavBarr";
+import UserNavBar from "./UserNavBar";
 import fetchApi from "@/common/helpers/fetchApi";
 
 const navSet: NavSetType[] = [
@@ -107,7 +107,7 @@ export default function UserCenter() {
     <section className="container flex items-start gap-9">
       <div className="w-[216px] h-[1500px] md:hidden min-w-[150px]">
         <ModalWrapper title="" layout="secondary">
-          <UserNavBarr
+          <UserNavBar
             navSet={navSet}
             activeNav={activeNav}
             openSubList={openSubList}
