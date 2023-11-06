@@ -18,7 +18,7 @@ export default function ProfileSetting() {
           <div className="flex flex-col gap-10 md:gap-6 md:order-2">
             <div>
               <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>你的名字</h3>
-              <input type="text" defaultValue={data} />
+              <input type="text" />
             </div>
             <div>
               <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>帳號</h3>
