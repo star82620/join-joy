@@ -3,7 +3,7 @@ import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileSetting from "./ProfileSetting";
 import MyGroupsLeader from "./MyGroupsLeader";
 import MyGroupsMember from "./MyGroupsMember";
-import { userNavIcons } from "@/constants/iconsPackage";
+import icons from "@/constants/iconsPackage/userNavIcons";
 import MyFollowing from "./MyFollowing";
 import MyNotification from "./MyNotification";
 import {
@@ -40,8 +40,8 @@ const navSet: NavSetType[] = [
 
 export default function UserCenter() {
   const [activeNav, setActiveNav] = useState<NavIdType>("profile-setting");
-  const [openSubList, setOpenSubList] = useState(true);
-
+  const [openSubList, setOpenSubList] = useState(false);
+  console.log(openSubList);
   const toggleActiveNav = (nav: NavSetType): void => {
     if (nav.subItem) {
       setOpenSubList(!openSubList);
@@ -65,9 +65,7 @@ export default function UserCenter() {
     const isActive = nav.subItem
       ? activeNav.includes(nav.id)
       : activeNav === nav.id;
-    const result = isActive
-      ? userNavIcons[activeId][attr]
-      : userNavIcons[id][attr];
+    const result = isActive ? icons[activeId][attr] : icons[id][attr];
     return result;
   };
 
@@ -107,7 +105,7 @@ export default function UserCenter() {
 
   return (
     <section className="container flex items-start gap-9">
-      <div className="w-[216px] h-[1500px] md:hidden">
+      <div className="w-[216px] h-[1500px] md:hidden min-w-[150px]">
         <ModalWrapper title="" layout="secondary">
           <UserNavBar
             navSet={navSet}

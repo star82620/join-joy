@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileImg from "@/common/components/ProfileImg";
 import FillImage from "@/common/components/FillImage";
-import { userNavIcons } from "@/constants/iconsPackage";
+import icons from "@/constants/iconsPackage/userNavIcons";
 import { UserNavBarProps, NavSetType } from "./date";
 
 export default function UserNavBar({
@@ -12,6 +12,27 @@ export default function UserNavBar({
   toggleActiveNav,
   toggleActiveSubNav,
 }: UserNavBarProps) {
+  const subNavList = (nav: NavSetType) => {
+    if (!nav.subItem) return null;
+    return (
+      <ul className="block font-normal">
+        {nav.subItem.map((subNav) => {
+          const isActiveSub = activeNav.includes(subNav.id);
+          const activeSubNavStyle = isActiveSub ? "text-purple-dark" : "";
+          return (
+            <li
+              key={subNav.id}
+              className={`p-3 ml-9 text-sm cursor-pointer ${activeSubNavStyle}`}
+              onClick={() => toggleActiveSubNav(subNav)}
+            >
+              {subNav.text}
+            </li>
+          );
+        })}
+      </ul>
+    );
+  };
+
   return (
     <section className="flex flex-col">
       <div className="flex flex-col items-center py-4">
@@ -33,6 +54,7 @@ export default function UserNavBar({
             const activeStyle = "font-semibold rounded-md bg-yellow-tint";
             const navStyle = isActive ? activeStyle : defaultStyle;
             const haveSubItem = !!nav.subItem;
+            const showSubNav = isActive && haveSubItem && openSubList;
 
             return (
               <li key={nav.id}>
@@ -49,48 +71,30 @@ export default function UserNavBar({
                   <span className="grow">{nav.text}</span>
                   {haveSubItem && !openSubList && (
                     <FillImage
-                      src={userNavIcons["sub-opening"].src}
-                      alt={userNavIcons["sub-opening"]["alt"]}
+                      src={icons["sub-opening"].src}
+                      alt={icons["sub-opening"]["alt"]}
                       widthStyle="w-6"
                       heightStyle="h-6"
                     />
                   )}
-                  {haveSubItem && openSubList && (
+                  {showSubNav && (
                     <FillImage
-                      src={userNavIcons["sub-closing"].src}
-                      alt={userNavIcons["sub-closing"]["alt"]}
+                      src={icons["sub-closing"].src}
+                      alt={icons["sub-closing"]["alt"]}
                       widthStyle="w-6"
                       heightStyle="h-6"
                     />
                   )}
                 </div>
-                {isActive && haveSubItem && openSubList && (
-                  <ul className="block font-normal">
-                    {nav.subItem.map((subNav) => {
-                      const isActiveSub = activeNav.includes(subNav.id);
-                      const activeSubNavStyle = isActiveSub
-                        ? "text-purple-dark"
-                        : "";
-                      return (
-                        <li
-                          key={subNav.id}
-                          className={`p-3 ml-9 text-sm cursor-pointer ${activeSubNavStyle}`}
-                          onClick={() => toggleActiveSubNav(subNav)}
-                        >
-                          {subNav.text}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
+                {showSubNav && subNavList(nav)}
               </li>
             );
           })}
         </ul>
         <div className="p-3 flex gap-3 grow">
           <FillImage
-            src={userNavIcons.logout.src}
-            alt={userNavIcons.logout.alt}
+            src={icons.logout.src}
+            alt={icons.logout.alt}
             widthStyle="w-6"
             heightStyle="h-6"
           />

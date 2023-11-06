@@ -1,6 +1,6 @@
-import { UserNavIconsType } from "./data";
+import { UserNavIconsType } from "./types";
 
-export const userNavIcons: UserNavIconsType = {
+const userNavIcons: UserNavIconsType = {
   "my-following": {
     src: "/images/user-center/icon-my-following.svg",
     alt: "icon-my-following",
@@ -46,3 +46,5 @@ export const userNavIcons: UserNavIconsType = {
     alt: "icon-sub-closing",
   },
 };
+
+export default userNavIcons;
