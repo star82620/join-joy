@@ -2,9 +2,14 @@ import React from "react";
 import NextImage from "next/image";
 import { FillImageProps } from "./date";
 
-export default function FillImage({ src, alt, className }: FillImageProps) {
+export default function FillImage({
+  src,
+  alt,
+  widthProp,
+  heightProp,
+}: FillImageProps) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative ${widthProp} ${heightProp}`}>
       <NextImage
         src={src}
         alt={alt}
