@@ -2,16 +2,16 @@ import React from "react";
 import ProfileImg from "@/common/components/ProfileImg";
 import Image from "@/common/components/FillImage";
 import icons from "@/constants/iconsPackage/userNavIcons";
-import { UserNavBarProps, NavSetType } from "./date";
+import { UserNavBarrProps, NavSetType } from "./date";
 
-export default function UserNavBar({
+export default function UserNavBarr({
   navSet,
   activeNav,
   openSubList,
   setIconImg,
   toggleActiveNav,
   toggleActiveSubNav,
-}: UserNavBarProps) {
+}: UserNavBarrProps) {
   const subNavOpenIcon = (
     <Image
       src={icons["sub-opening"].src}
