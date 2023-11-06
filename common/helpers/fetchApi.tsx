@@ -1,4 +1,6 @@
-const token = ""; //之後再補，看要用什麼方式存放 token
+import getToken from "@/common/helpers/getToken";
+
+const token = getToken();
 
 // 要用的話要寫這一包資料
 // const apiParams = {
