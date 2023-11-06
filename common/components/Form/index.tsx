@@ -97,8 +97,15 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     // API打出去，還沒有回覆的時候要給 loading 狀態（redux）
   };
 
-  const { type, children, onClick, isDisabled, appearance, className, shape } =
-    btnSet;
+  const {
+    type,
+    children,
+    onClick,
+    isDisabled,
+    appearance,
+    className,
+    rounded,
+  } = btnSet;
   const btnHandleSelector = type === "button" ? onClick : undefined;
   return (
     <form
@@ -119,7 +126,7 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
         onClick={btnHandleSelector}
         isDisabled={isDisabled}
         className={className}
-        shape={shape}
+        rounded={rounded}
       >
         {children}
       </Button>

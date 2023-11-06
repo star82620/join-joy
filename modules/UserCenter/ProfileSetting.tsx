@@ -52,8 +52,7 @@ export default function ProfileSetting() {
                 widthProp="w-[145px] md:w-[108px]"
                 heightProp="h-[145px] md:h-[108px]"
               />
-              <Button type="submit" appearance="light">
-                {/* BTN shape="rounded" */}
+              <Button type="submit" appearance="white" rounded>
                 <span className="font-semibold text-sm md:text-xs ">
                   變更大頭貼
                 </span>
@@ -78,11 +77,10 @@ export default function ProfileSetting() {
         </div>
       </form>
       <div className="flex gap-6 md:gap-4 justify-center items-center mt-10 md:mt-8">
-        {/* Button 合併後修改 rounded light->white */}
-        <Button type="submit" appearance="light" className="w-full">
+        <Button type="submit" appearance="white" className="w-full" rounded>
           放棄變更
         </Button>
-        <Button type="submit" appearance="black" className="w-full">
+        <Button type="submit" appearance="black" className="w-full" rounded>
           儲存
         </Button>
       </div>
