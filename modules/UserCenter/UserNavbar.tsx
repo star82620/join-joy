@@ -20,6 +20,7 @@ export default function UserNavBar({
       heightStyle="h-6"
     />
   );
+
   const subNavCloseIcon = (
     <Image
       src={icons["sub-closing"].src}
@@ -28,6 +29,7 @@ export default function UserNavBar({
       heightStyle="h-6"
     />
   );
+
   const subNavList = (nav: NavSetType) => {
     if (!nav.subItem) return null;
     return (
