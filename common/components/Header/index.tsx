@@ -39,7 +39,7 @@ export default function Header({ pageCategory }: HeaderProps) {
           <section className="flex flex-col">
             <Button
               type="button"
-              appearance="light"
+              appearance="white"
               onClick={() => console.log("I see")}
               className="w-fit"
             >

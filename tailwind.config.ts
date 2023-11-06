@@ -69,6 +69,13 @@ const config: Config = {
         "eye-show": 'url("/images/input-password-show.svg")',
         "follow-true": 'url("/images/icon-check.svg")',
         "follow-false": 'url("/images/icon-plus.svg")',
+        "radio-true": 'url("/images/icon-radio-true.svg")',
+        "radio-false": 'url("/images/icon-radio-false.svg")',
+        "checkbox-true": 'url("/images/icon-checkbox-true.svg")',
+        "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
+      },
+      backgroundSize: {
+        "20px": "20px",
       },
       lineHeight: {
         heading: "1.4rem",
