@@ -1,6 +1,6 @@
 import React from "react";
 import ProfileImg from "@/common/components/ProfileImg";
-import FillImage from "@/common/components/FillImage";
+import Image from "@/common/components/FillImage";
 import icons from "@/constants/iconsPackage/userNavIcons";
 import { UserNavBarProps, NavSetType } from "./date";
 
@@ -12,6 +12,22 @@ export default function UserNavBar({
   toggleActiveNav,
   toggleActiveSubNav,
 }: UserNavBarProps) {
+  const subNavOpenIcon = (
+    <Image
+      src={icons["sub-opening"].src}
+      alt={icons["sub-opening"]["alt"]}
+      widthStyle="w-6"
+      heightStyle="h-6"
+    />
+  );
+  const subNavCloseIcon = (
+    <Image
+      src={icons["sub-closing"].src}
+      alt={icons["sub-closing"]["alt"]}
+      widthStyle="w-6"
+      heightStyle="h-6"
+    />
+  );
   const subNavList = (nav: NavSetType) => {
     if (!nav.subItem) return null;
     return (
@@ -62,29 +78,15 @@ export default function UserNavBar({
                   className={`flex gap-3 p-3 cursor-pointer ${navStyle} `}
                   onClick={() => toggleActiveNav(nav)}
                 >
-                  <FillImage
+                  <Image
                     src={setIconImg(nav, "src")}
                     alt={setIconImg(nav, "alt")}
                     widthStyle="w-6"
                     heightStyle="h-6"
                   />
                   <span className="grow">{nav.text}</span>
-                  {haveSubItem && !openSubList && (
-                    <FillImage
-                      src={icons["sub-opening"].src}
-                      alt={icons["sub-opening"]["alt"]}
-                      widthStyle="w-6"
-                      heightStyle="h-6"
-                    />
-                  )}
-                  {showSubNav && (
-                    <FillImage
-                      src={icons["sub-closing"].src}
-                      alt={icons["sub-closing"]["alt"]}
-                      widthStyle="w-6"
-                      heightStyle="h-6"
-                    />
-                  )}
+                  {haveSubItem && !openSubList && subNavOpenIcon}
+                  {showSubNav && subNavCloseIcon}
                 </div>
                 {showSubNav && subNavList(nav)}
               </li>
@@ -92,7 +94,7 @@ export default function UserNavBar({
           })}
         </ul>
         <div className="p-3 flex gap-3 grow">
-          <FillImage
+          <Image
             src={icons.logout.src}
             alt={icons.logout.alt}
             widthStyle="w-6"

@@ -1,7 +1,7 @@
 import React, { Children } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
 import { userDataKey } from "./date";
-import FillImage from "@/common/components/FillImage";
+import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 
@@ -46,7 +46,7 @@ export default function ProfileSetting() {
               </p>
             </div>
             <div className="flex flex-col gap-3">
-              <FillImage
+              <Image
                 src=""
                 alt="userName"
                 widthStyle="w-[145px] md:w-[108px]"
