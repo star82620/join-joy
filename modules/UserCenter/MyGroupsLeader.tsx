@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import groupStatus from "@/constants/groupStatus";
 
 const tabs = [
   {
@@ -15,7 +16,6 @@ export default function MyGroupsLeader() {
   const [activeTab, setActiveTab] = useState("upcoming");
   const defaultTabStyle = "text-gray-500";
   const activeTabStyle = "border-b-[3px] border-purple-dark";
-  const tableHeadStyle = "font-semibold leading-[1.2]";
 
   const handleSetTab = (tab) => {
     setActiveTab(tab.tabId);
@@ -39,15 +39,29 @@ export default function MyGroupsLeader() {
         })}
       </div>
       <div className="mt-10 md:mt-4">
-        <div className="w-full flex gap-3 md:gap-2 py-2 md:hidden">
-          <p className={tableHeadStyle}>狀態</p>
-          <p className={tableHeadStyle}>名稱</p>
-          <p className={tableHeadStyle}>地點</p>
-          <p className={tableHeadStyle}>時間</p>
-          <p className={tableHeadStyle}>人數</p>
-          <p className={tableHeadStyle}>取消/退出</p>
+        <div className="w-full flex justify-between gap-3 md:gap-2 p-2 mb-3 border-b-2 text-center font-semibold leading-[1.2] md:hidden">
+          <p className="min-w-[64px]">狀態</p>
+          <p className="min-w-[208px]">名稱</p>
+          <p className="min-w-[208px]">地點</p>
+          <p className="min-w-[176px]">時間</p>
+          <p className="min-w-[64px]">人數</p>
+          <p className="min-w-[80px]">取消/退出</p>
         </div>
-        <div>content</div>
+        <div>
+          content
+          <div className="w-full flex justify-between gap-3 md:gap-2 p-2 mb-3 text-center text-sm md:hidden">
+            <p className={`min-w-[64px] text-xs`}>
+              <span className="groupStatusLight before:bg-green-light">
+                審核中
+              </span>
+            </p>
+            <p className="min-w-[208px] text-">輕鬆派對揪友團</p>
+            <p className="min-w-[208px]">地點</p>
+            <p className="min-w-[176px]">時間</p>
+            <p className="min-w-[64px]">人數</p>
+            <p className="min-w-[80px]">取消/退出</p>
+          </div>
+        </div>
       </div>
     </section>
   );

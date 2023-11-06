@@ -27,7 +27,7 @@ h6 {
 }
 
 .container {
-  @apply max-w-[1176px] mx-auto 
+  @apply max-w-[1272px] mx-auto 
   px-12 md:px-6 sm:px-3;
 }
 
@@ -56,4 +56,12 @@ h6 {
   after:align-middle 
   after:bg-contain after:bg-no-repeat 
   after:bg-radio-false checked:after:bg-radio-true;
+}
+
+.groupStatusLight {
+  @apply align-middle
+  before:content-[''] before:inline-block 
+  before:w-2.5 before:h-2.5 before:mr-1
+  before:align-baseline
+  before:rounded-full;
 }

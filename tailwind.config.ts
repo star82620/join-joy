@@ -92,6 +92,12 @@ const config: Config = {
         "8": "8",
         "9": "9",
       },
+      width: {
+        "14": "64px",
+      },
+      height: {
+        "14": "64px",
+      },
     },
   },
   plugins: [],
