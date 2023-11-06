@@ -6,7 +6,7 @@ export type ButtonType = {
   children: ReactNode;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void | undefined;
   isDisabled?: boolean;
-  shape?: "rounded" | "square";
+  rounded?: boolean;
   className?: string;
 };
 
