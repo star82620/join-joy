@@ -1,7 +1,4 @@
-export type IconType = {
-  src: string;
-  alt: string;
-};
+import { ImgType } from "../globalType";
 
 type IconIdType =
   | "my-following"
@@ -16,4 +13,4 @@ type IconIdType =
   | "sub-closing"
   | "sub-opening";
 
-export type UserNavIconsType = Record<IconIdType, IconType>;
+export type UserNavIconsType = Record<IconIdType, ImgType>;
