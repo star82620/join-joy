@@ -10,8 +10,11 @@ import {
   InputValuesType,
 } from "@/common/components/Form/data";
 import { setCookie } from "./setCookie";
+import { useRouter } from "next/router";
 
 export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
+  const router = useRouter();
+
   const initializeInputStates = (inputs: InputType[]) => {
     //管理 error 狀態的物件，會根據 inputSet 自動生成，預設 false
     const errors: InputErrorsType = {};
@@ -91,13 +94,14 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     // 打 API
     apiParams.data = inputValues;
     const data = await fetchApi(apiParams);
-    // 儲存 token
-    setCookie("authToken", data.jwtToken);
-
-    // 如果傳回 status === false 就不做後續 loading 動作
-    if (!data.status) return;
 
     // API打出去，還沒有回覆的時候要給 loading 狀態（redux）
+    // 如果傳回 status === false (api回應登入失敗)
+    if (!data.status) return;
+
+    // 成功登入，儲存 token
+    setCookie("authToken", data.jwtToken);
+    router.push("/");
   };
 
   const { type, children, onClick, isDisabled, appearance, className } = btnSet;
