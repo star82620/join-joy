@@ -1,6 +1,6 @@
 import getToken from "@/common/helpers/getToken";
 
-const token = getToken();
+const token: string | undefined = getToken();
 
 // 要用的話要寫這一包資料
 // const apiParams = {
@@ -18,14 +18,16 @@ export type apiParamsType = {
 
 export default async function fetchApi(apiParams: apiParamsType) {
   const { apiPath, method, data } = apiParams;
-  const url = process.env.NEXT_PUBLIC_API_URL + apiPath;
-  const apiHeaders = {
-    Authorization: token,
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
+  if (token) {
+    headers["Authorization"] = token;
+  }
   const requestOptions = {
     method: method,
-    headers: apiHeaders,
+    headers: headers,
     body: JSON.stringify(data),
   };
 
