@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
 
-export function setCookie(name, value) {
-  Cookies.set(name, value);
+export function setCookie(key, value) {
+  Cookies.set(key, value);
 }
