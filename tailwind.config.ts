@@ -63,6 +63,8 @@ const config: Config = {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
         window: "3px 2px 0 0 #504F4E",
+        prefer: "2px 2px 0 0 #6F6E6B",
+        "prefer-active": "2px 2px 0 0 #272725",
       },
       backgroundImage: {
         "eye-hide": 'url("/images/input-password-hide.svg")',

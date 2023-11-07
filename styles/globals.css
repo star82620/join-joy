@@ -27,7 +27,7 @@ h6 {
 }
 
 .container {
-  @apply max-w-[1176px] mx-auto 
+  @apply max-w-[1296px] mx-auto 
   px-12 md:px-6 sm:px-3;
 }
 
@@ -56,4 +56,8 @@ h6 {
   after:align-middle 
   after:bg-contain after:bg-no-repeat 
   after:bg-radio-false checked:after:bg-radio-true;
+}
+
+.preferBlocks > :first-child {
+  @apply w-full;
 }

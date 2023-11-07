@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
-import { userDataKey } from "./date";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
-// import { userData } from "../UserProfile/data";
+import PreferBlock from "@/common/components/PreferBlock";
+import {
+  gameTypeKey,
+  userDataKey,
+  GameType,
+  UserDataType,
+  ValueType,
+} from "./date";
 
 const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
 const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
 export default function ProfileSetting() {
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<UserDataType>({
     userId: 0,
     nickname: "",
     account: "",
@@ -18,6 +24,8 @@ export default function ProfileSetting() {
     gamePref: [],
     cityPref: [],
   });
+  const [gameTypes, setGameTypes] = useState<GameType[]>();
+  const [value, setValue] = useState<ValueType>();
 
   useEffect(() => {
     async function getUserData() {
@@ -26,11 +34,16 @@ export default function ProfileSetting() {
         setUserData(res.data);
       }
     }
+    async function getGameTypes() {
+      const res = await fetchApi(gameTypeKey);
+      if (res?.data) {
+        setGameTypes(res.data);
+      }
+    }
 
     getUserData();
+    getGameTypes();
   }, []);
-
-  console.log(userData);
 
   const userId = userData.userId;
   const nickName = userData.nickname;
@@ -42,7 +55,7 @@ export default function ProfileSetting() {
   return (
     <section className="p-8 md:px-4">
       <form className="flex flex-col gap-10">
-        <div className="flex md:flex-col justify-between gap-6">
+        <div className="flex md:flex-col justify-between items-start gap-6">
           <div className="w-full flex flex-col gap-10 md:gap-6 md:order-2">
             <div>
               <h3 className={`${inputTitleStyle} `}>你的名字</h3>
@@ -72,7 +85,7 @@ export default function ProfileSetting() {
             <div>
               <h3 className={`${inputTitleStyle}`}>地區</h3>
               <p className={`${inputDescStyle} mt-2 md:mt-1`}>最多選擇 3 個</p>
-              <select className="mt-2">
+              <select className="inputStyle mt-2 ">
                 <option>city</option>
               </select>
             </div>
@@ -103,7 +116,25 @@ export default function ProfileSetting() {
           <div>
             <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>喜好遊戲種類</h3>
             <p className={`${inputDescStyle} mb-4 md:mb-2`}>最多選擇3個</p>
-            <div>一顆一顆</div>
+            <div className="flex flex-wrap gap-x-3 gap-y-2 preferBlocks">
+              {gameTypes?.map((gameType) => {
+                const typeName = gameType.TypeName;
+                let isActive = false;
+                games.forEach((game) => {
+                  if (game === typeName) return (isActive = true);
+                });
+
+                return (
+                  <PreferBlock
+                    key={typeName}
+                    content={typeName}
+                    isActive={isActive}
+                  />
+                );
+              })}
+
+              {/* <PreferBlock isActive={true} /> */}
+            </div>
           </div>
           <div>
             <h3 className={`${inputTitleStyle}`}>個人簡介</h3>
