@@ -6,15 +6,17 @@ import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 
 async function getData() {
-  const data = await fetchApi(userDataKey);
-  console.log("s", data);
+  const res = await fetchApi(userDataKey);
+  console.log("data", res.data);
+  if (res.status) return res.data;
+  return null;
 }
 
 export default function ProfileSetting() {
   const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
   const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
-  getData();
+  const data = getData();
   return (
     <section className="p-8 md:px-4">
       <form className="flex flex-col gap-10">
