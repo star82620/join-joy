@@ -68,12 +68,11 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
       }
       // 確認密碼欄位
       if (input.inputName === "confirmPassword") {
-        errors.confirmPassword =
-          !inputValues.confirmPassword ||
-          !(inputValues.confirmPassword === inputValues.password) ||
-          errors.password === true
-            ? true
-            : false;
+        const emptyValue = !inputValues.confirmPassword;
+        const isMatch = inputValues.confirmPassword === inputValues.password;
+        const passwordError = !!errors.password;
+
+        errors.confirmPassword = emptyValue || !isMatch || passwordError;
       }
     });
 

@@ -20,6 +20,11 @@ export default function Inputs({
           if (!isPassword) return;
           return showPassword[inputName] ? "text" : type;
         };
+        const displayStyle = isPassword ? "inline-block" : "hidden";
+        const eyeIcon = !showPassword[inputName]
+          ? "bg-eye-hide"
+          : "bg-eye-show";
+        const isError = inputErrors[inputName];
 
         return (
           <label key={inputName}>
@@ -37,11 +42,7 @@ export default function Inputs({
               ></input>
               {isPassword && (
                 <input
-                  className={clsx(
-                    isPassword ? "inline-block" : "hidden",
-                    "appearance-none w-11 h-7 -ml-11 mt-2 z-10 bg-center bg-no-repeat bg-yellow-tint",
-                    !showPassword[inputName] ? "bg-eye-hide" : "bg-eye-show"
-                  )}
+                  className={`${displayStyle} ${eyeIcon} appearance-none w-11 h-7 -ml-11 mt-2 z-10 bg-center bg-no-repeat bg-yellow-tint`}
                   type="checkbox"
                   data-target={inputName}
                   checked={showPassword[inputName]}
@@ -50,7 +51,7 @@ export default function Inputs({
               )}
             </div>
 
-            {inputErrors[inputName] && (
+            {isError && (
               <p className="text-danger mt-2 md:mt-1 text-sm md:text-xs">
                 {errorMsg}
               </p>
