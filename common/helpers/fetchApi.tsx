@@ -1,5 +1,6 @@
 const token =
-  "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6NiwiQWNjb3VudCI6InRlc3QwM0BnbWFpbC5jb20iLCJJc1N0b3JlT3duZXIiOmZhbHNlLCJOaWNrTmFtZSI6IuS5g-iDliIsIkV4cCI6IjExLzcvMjAyMyAxMToxNDoxMSBQTSJ9.De34qCu8lTOW0Sase72JHd_EDKqzL7i19c-ukZYJpvf1imofQcxwnsbDN5O2hAuwHksVRezkzDpdDZDyTHze2A";
+  "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6NiwiQWNjb3VudCI6InRlc3QwM0BnbWFpbC5jb20iLCJJc1N0b3JlT3duZXIiOmZhbHNlLCJOaWNrTmFtZSI6IuS5g-iDliIsIkV4cCI6IjExLzcvMjAyMyAxMTo0ODo1OSBQTSJ9.kKWMOo6spiPCu--84B51-m_dFGsUk4hyST9UblVwtwzsvEQlNki2op65KeRapjAbtJU0SClsUJ9rq24ZrB9ZZg";
+
 // 要用的話要寫這一包資料
 // const apiParams = {
 //   apiPath: "/users/sign_up",
@@ -48,7 +49,7 @@ export default async function fetchApi(apiParams: apiParamsType) {
     console.log(result);
     return result;
   } catch (error) {
-    console.error("Fetch API error:", error.message);
+    console.log("Fetch API error:", error);
     throw error;
   }
 }

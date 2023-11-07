@@ -1,22 +1,44 @@
-import React, { Children } from "react";
+import React, { useEffect, useState } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
 import { userDataKey } from "./date";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
+// import { userData } from "../UserProfile/data";
 
-async function getData() {
-  const res = await fetchApi(userDataKey);
-  console.log("data", res.data);
-  if (res.status) return res.data;
-  return null;
-}
+const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
+const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
 export default function ProfileSetting() {
-  const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
-  const inputDescStyle = "text-sm md:text-xs text-gray-500";
+  const [userData, setUserData] = useState({
+    userId: 0,
+    nickname: "",
+    account: "",
+    introduce: "",
+    gamePref: [],
+    cityPref: [],
+  });
 
-  const data = getData();
+  useEffect(() => {
+    async function getUserData() {
+      const res = await fetchApi(userDataKey);
+      if (res?.data) {
+        setUserData(res.data);
+      }
+    }
+
+    getUserData();
+  }, []);
+
+  console.log(userData);
+
+  const userId = userData.userId;
+  const nickName = userData.nickname;
+  const email = userData.account;
+  const description = userData.introduce;
+  const games = userData.gamePref;
+  const cities = userData.cityPref;
+
   return (
     <section className="p-8 md:px-4">
       <form className="flex flex-col gap-10">
@@ -24,13 +46,18 @@ export default function ProfileSetting() {
           <div className="w-full flex flex-col gap-10 md:gap-6 md:order-2">
             <div>
               <h3 className={`${inputTitleStyle} `}>你的名字</h3>
-              <input type="text" className="inputStyle mt-2 md:mt-1" />
+              <input
+                type="text"
+                className="inputStyle mt-2 md:mt-1"
+                defaultValue={nickName}
+              />
             </div>
             <div>
               <h3 className={`${inputTitleStyle}`}>帳號</h3>
               <input
                 type="email"
                 className="inputStyle mt-2 md:mt-1"
+                defaultValue={email}
                 readOnly
               />
             </div>
@@ -87,6 +114,7 @@ export default function ProfileSetting() {
             <textarea
               className="inputStyle mt-2"
               placeholder="輸入你的自我介紹"
+              defaultValue={description}
             ></textarea>
           </div>
         </div>
