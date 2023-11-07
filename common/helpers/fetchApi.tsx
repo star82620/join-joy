@@ -1,4 +1,5 @@
-const token = ""; //之後再補，看要用什麼方式存放 token
+const token =
+  "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6NiwiQ…NYIWhRl3b9zdHCaJJx7rn-XuEyO3HDrYtd4fx20e70-LMSJfQ";
 
 // 要用的話要寫這一包資料
 // const apiParams = {
@@ -8,24 +9,39 @@ const token = ""; //之後再補，看要用什麼方式存放 token
 // };
 // const data = fetchApi(apiParams);
 
+type methodType = "GET" | "POST" | "PATCH" | "DELETE";
+
 export type apiParamsType = {
   apiPath: string;
-  method: "GET" | "POST" | "PATCH" | "DELETE";
+  method: methodType;
   data?: Record<string, string> | string;
+};
+
+type apiHeadersType = {
+  Authorization: string;
+  "Content-Type": "application/json";
+};
+
+type requestOptionsType = {
+  method: methodType;
+  headers: apiHeadersType;
+  body?: string;
 };
 
 export default async function fetchApi(apiParams: apiParamsType) {
   const { apiPath, method, data } = apiParams;
   const url = process.env.NEXT_PUBLIC_API_URL + apiPath;
-  const apiHeaders = {
+  const apiHeaders: apiHeadersType = {
     Authorization: token,
     "Content-Type": "application/json",
   };
-  const requestOptions = {
+  const requestOptions: requestOptionsType = {
     method: method,
     headers: apiHeaders,
-    body: JSON.stringify(data),
   };
+  if (data) {
+    requestOptions.body = JSON.stringify(data);
+  }
 
   try {
     const res = await fetch(url, requestOptions);

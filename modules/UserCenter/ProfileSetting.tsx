@@ -5,12 +5,16 @@ import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 
-export default function ProfileSetting() {
-  // const data = fetchApi(userDataKey);
+async function getData() {
+  const data = await fetchApi(userDataKey);
+  console.log("s", data);
+}
 
+export default function ProfileSetting() {
   const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
   const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
+  getData();
   return (
     <section className="p-8 md:px-4">
       <form className="flex flex-col gap-10">

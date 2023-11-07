@@ -38,4 +38,5 @@ export type UserNavBarProps = {
 export const userDataKey: apiParamsType = {
   apiPath: "/member/memberDetails",
   method: "GET",
+  data: {},
 };
