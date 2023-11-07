@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import TabSection from "../TabSection";
-import GroupsList from "./GroupsList";
 import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
+import TabSection from "../TabSection";
+import GroupsList from "./GroupsList";
+import formatDate from "@/common/helpers/formateDate";
 import groupStatus from "@/constants/groupStatus";
 import { groupsData, tabs, tabIdType } from "../date";
 
@@ -67,11 +68,12 @@ export default function MyGroups({}) {
 
             const isPlace = place === "NULL";
             const location = isPlace ? store.storeName : place;
-            const groupDate = startTime.split("T")[0];
-            const formatStartTime = startTime.split("T")[1].substring(0, 5);
-            const formatEndTime = endTime.split("T")[1].substring(0, 5);
-            const groupTime = `${groupDate} ${formatStartTime} - ${formatEndTime}`;
-            // 寫一個 helper formatTime
+
+            const { groupDate, formatStartTime, formatEndTime } = formatDate(
+              startTime,
+              endTime
+            );
+            const groupTime = `${formatStartTime} - ${formatEndTime}`;
 
             return (
               <li
@@ -87,7 +89,10 @@ export default function MyGroups({}) {
                   <Link href={`/group/${groupId}`}>{groupName}</Link>
                 </p>
                 <p className="w-[20%] truncate">{location}</p>
-                <p className="w-[20%]">{groupTime}</p>
+                <p className="w-[20%] flex flex-wrap justify-center gap-2">
+                  <span className=" whitespace-nowrap">{groupDate}</span>
+                  <span className=" whitespace-nowrap">{groupTime}</span>
+                </p>
                 <p className="w-[10%]">
                   {currentNum}/{totalMemberNum}
                 </p>
