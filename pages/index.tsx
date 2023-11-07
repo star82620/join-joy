@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { AuthContext } from "@/common/contexts/AuthProvider";
-import Image from "next/image";
-import setPhotoPath from "@/common/helpers/setPhotoPath";
 import Layout from "@/common/components/Layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { userData } = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  if (!authContext) return null;
+  const { userData } = authContext;
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function Home() {
         </ul>
 
         <div className=" max-w-[826px]">
-          hi!{userData.nickName}
+          hi!{userData?.nickName}
           {/* <Image src={a} alt={userData.nickName} width="100" height="100" /> */}
         </div>
       </Layout>
