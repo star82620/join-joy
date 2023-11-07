@@ -25,7 +25,6 @@ export default function ProfileSetting() {
     cityPref: [],
   });
   const [gameTypes, setGameTypes] = useState<GameType[]>();
-  const [value, setValue] = useState<ValueType>();
 
   useEffect(() => {
     async function getUserData() {
@@ -51,6 +50,14 @@ export default function ProfileSetting() {
   const description = userData.introduce;
   const games = userData.gamePref;
   const cities = userData.cityPref;
+  const defaultValues = {
+    nickName: nickName,
+    introduct: description,
+    gamePrefId: games,
+    cityPreId: cities,
+  };
+  // const [value, setValue] = useState<ValueType>(defaultValues);
+  // setValue(defaultValues);
 
   return (
     <section className="p-8 md:px-4">
@@ -62,6 +69,7 @@ export default function ProfileSetting() {
               <input
                 type="text"
                 className="inputStyle mt-2 md:mt-1"
+                name="nickName"
                 defaultValue={nickName}
               />
             </div>
@@ -71,7 +79,7 @@ export default function ProfileSetting() {
                 type="email"
                 className="inputStyle mt-2 md:mt-1"
                 defaultValue={email}
-                readOnly
+                disabled
               />
             </div>
             <div>
@@ -85,8 +93,10 @@ export default function ProfileSetting() {
             <div>
               <h3 className={`${inputTitleStyle}`}>地區</h3>
               <p className={`${inputDescStyle} mt-2 md:mt-1`}>最多選擇 3 個</p>
-              <select className="inputStyle mt-2 ">
-                <option>city</option>
+              <select className="inputStyle mt-2">
+                <option>cityㄅ</option>
+                <option>cityˇ</option>
+                <option>cityㄑ</option>
               </select>
             </div>
           </div>
@@ -132,8 +142,6 @@ export default function ProfileSetting() {
                   />
                 );
               })}
-
-              {/* <PreferBlock isActive={true} /> */}
             </div>
           </div>
           <div>
