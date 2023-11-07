@@ -142,7 +142,7 @@ export default function MyGroups({}) {
                     isDisabled={actionBtns[btnId].disabled}
                     onClick={actionBtns[btnId].func}
                   >
-                    {actionBtns[btnId].text}
+                    <span className="text-sm">{actionBtns[btnId].text}</span>
                   </Button>
                 </p>
               </li>

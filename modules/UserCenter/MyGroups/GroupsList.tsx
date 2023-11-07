@@ -64,7 +64,7 @@ export default function GroupsList({ activeTab }) {
             rounded
             onClick={handleCancelApply}
           >
-            取消申請
+            <span className="text-sm">取消申請</span>
           </Button>
         </p>
       </li>

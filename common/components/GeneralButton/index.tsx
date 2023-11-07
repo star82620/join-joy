@@ -16,17 +16,15 @@ export default function GeneralButton({
   const disabledColor = dataSet[appearance].disabled || null;
   const textColor = dataSet[appearance].textColor || null;
   const disabledStyle = isDisabled ? disabledColor : "";
-  const roundedBtnStyle = "rounded text-sm";
+  const roundedBtnStyle = "rounded";
   const squareBtnStyle =
-    "shadow-btn text-xl md:text-xs active:shadow-none active:translate-x-0.5 active:translate-y-0.5 disabled:shadow-none disabled:translate-x-0.5 disabled:translate-y-0.5";
+    "shadow-btn active:shadow-none active:translate-x-0.5 active:translate-y-0.5 disabled:shadow-none disabled:translate-x-0.5 disabled:translate-y-0.5";
   const isRounded = !!rounded;
   const btnStyle = isRounded ? roundedBtnStyle : squareBtnStyle;
 
   return (
     <button
-      className={`border-2  px-3 py-2 h-fit font-semibold
-          ${btnStyle} ${textColor} ${defaultColor} ${hoverColor} ${activeColor} ${disabledStyle} ${className}
-          `}
+      className={`border-2 px-3 py-2 h-fit font-semibold ${btnStyle} ${textColor} ${defaultColor} ${hoverColor} ${activeColor} ${disabledStyle} ${className}`}
       type={type}
       onClick={onClick}
       disabled={isDisabled}

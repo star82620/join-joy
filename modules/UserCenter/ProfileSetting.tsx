@@ -78,10 +78,10 @@ export default function ProfileSetting() {
       </form>
       <div className="flex gap-6 md:gap-4 justify-center items-center mt-10 md:mt-8">
         <Button type="submit" appearance="white" className="w-full" rounded>
-          放棄變更
+          <span className="text-xl md:text-md">放棄變更</span>
         </Button>
         <Button type="submit" appearance="black" className="w-full" rounded>
-          儲存
+          <span className="text-xl md:text-md">儲存</span>
         </Button>
       </div>
     </section>
