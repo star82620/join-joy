@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import { InputType, InputsProps } from "@/common/components/Form/data";
 
 export default function Inputs({
