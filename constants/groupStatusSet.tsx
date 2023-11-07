@@ -1,4 +1,4 @@
-const groupStatus = {
+const groupStatusSet = {
   pending: {
     text: "審核中",
     style: "groupStatusPending",
@@ -13,4 +13,4 @@ const groupStatus = {
   },
 };
 
-export default groupStatus;
+export default groupStatusSet;

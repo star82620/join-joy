@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import MyGroups from "./MyGroups";
+import GroupsList from "./GroupsList";
 
 export default function MyGroupsLeader() {
   const memberStatus = "leader";
 
-  return <MyGroups />;
+  return <GroupsList />;
 }
