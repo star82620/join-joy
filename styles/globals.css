@@ -58,10 +58,22 @@ h6 {
   after:bg-radio-false checked:after:bg-radio-true;
 }
 
-.groupStatusLight {
+.groupStatusDot {
   @apply align-middle
   before:content-[''] before:inline-block 
   before:w-2.5 before:h-2.5 before:mr-1
   before:align-baseline
   before:rounded-full;
+}
+
+.groupStatusPending {
+  @apply before:bg-green-light;
+}
+
+.groupStatusOver {
+  @apply before:bg-gray-900;
+}
+
+.groupStatusMember {
+  @apply before:bg-orange-primary;
 }

@@ -1,24 +1,16 @@
-const groupStatus = [
-  {
-    id: "pending",
+const groupStatus = {
+  pending: {
     text: "審核中",
-    color: "green-light",
+    style: "groupStatusPending",
   },
-  {
-    id: "join",
+  member: {
     text: "已加入",
-    color: "orange-primary",
+    style: "groupStatusMember",
   },
-  {
-    id: "over",
+  over: {
     text: "已結束",
-    color: "gray-900",
+    style: "groupStatusOver",
   },
-  {
-    id: "cancel",
-    text: "已取消",
-    color: "gray-200",
-  },
-];
+};
 
 export default groupStatus;

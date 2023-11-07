@@ -10,6 +10,7 @@ const config: Config = {
     screens: {
       // desktop : lg, tablet : md, mobile: sm
       lg: { max: "1272px" },
+      mdg: { max: "1024px" },
       md: { max: "768px" },
       sm: { max: "375px" },
     },

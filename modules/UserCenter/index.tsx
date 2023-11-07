@@ -69,7 +69,7 @@ export default function UserCenter() {
     return result;
   };
 
-  const selectActiveComponent = () => {
+  const selectActive = () => {
     // 先找出有符合 activeNav 的項目，find 會回傳第一個 true 的值，所以我得到的是一個符合的物件
     // 如果有 subItem 的話，確定這些 subItem 中有沒有符合的項目，有的話回傳 true 的值，我得到一整包 item 物件
     const activeItem = navSet.find((item) => {
@@ -84,7 +84,7 @@ export default function UserCenter() {
       return false;
     });
 
-    if (activeItem?.id === activeNav) return activeItem.component;
+    if (activeItem?.id === activeNav) return activeItem;
 
     // 如果有 activeItem 且有 subItem
     if (activeItem?.subItem) {
@@ -92,18 +92,18 @@ export default function UserCenter() {
         if (subItem.id === activeNav) return true;
       });
 
-      if (!activeSubItem) return navSet[0].component;
+      if (!activeSubItem) return navSet[0];
 
-      return activeSubItem.component;
+      return activeSubItem;
     }
 
     // 如果上述都不成立，就預設回傳第一筆項目
-    return navSet[0].component;
+    return navSet[0];
   };
 
   return (
-    <section className="container flex items-start gap-9">
-      <div className="w-[216px] h-[1500px] md:hidden flex-shrink-0">
+    <section className="container flex items-start gap-9 lg:gap-6">
+      <div className="w-[216px] h-[1500px] md:hidden">
         <ModalWrapper title="" layout="secondary">
           <UserNavBar
             navSet={navSet}
@@ -116,8 +116,8 @@ export default function UserCenter() {
         </ModalWrapper>
       </div>
       <div className="grow">
-        <ModalWrapper title="我的個人檔案" layout="primary">
-          {selectActiveComponent()}
+        <ModalWrapper title={selectActive().text} layout="primary">
+          {selectActive().component}
         </ModalWrapper>
       </div>
     </section>
