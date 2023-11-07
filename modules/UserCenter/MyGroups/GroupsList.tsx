@@ -3,8 +3,9 @@ import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import TabSection from "../TabSection";
 import formatDate from "@/common/helpers/formateDate";
-import groupStatusSet from "@/constants/groupStatusSet";
-import { groupsData, tabs } from "./data";
+import statusSet from "@/constants/groupStatusSet";
+import { groupsData, tabs, ActionBtnType } from "./data";
+import { useRouter } from "next/router";
 
 // 是哪一種狀態
 const setStatus = (endTime: string, status: string) => {
@@ -16,10 +17,47 @@ const setStatus = (endTime: string, status: string) => {
 };
 
 export default function GroupsList({}) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
-  const handleCancelApply = () => {};
-  const handleQuitGroup = () => {};
+  const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {};
+  const handleQuitGroup = (event: React.MouseEvent<HTMLElement>) => {};
+  const handleToComment = (event: React.MouseEvent<HTMLElement>) => {
+    router.push("/about");
+  };
+
+  const actionBtns: Record<string, ActionBtnType> = {
+    pending: {
+      text: "取消申請",
+      func: handleQuitGroup,
+      disabled: false,
+    },
+    member: {
+      text: "退出揪團",
+      func: handleCancelApply,
+      disabled: false,
+    },
+    over: {
+      text: "評價",
+      func: handleToComment,
+      disabled: false,
+    },
+    commented: {
+      text: "已評價",
+      disabled: true,
+    },
+  };
+
+  const isActiveOver = activeTab === "over";
+  const upcomingActionTitle = (
+    <>
+      <span className="whitespace-nowrap after:content-['/'] after:font-normal">
+        取消
+      </span>
+      <span className="whitespace-nowrap">退出</span>
+    </>
+  );
+  const OverActionTitle = "評價";
 
   return (
     <section className="px-6 py-8 md:p-4">
@@ -36,14 +74,10 @@ export default function GroupsList({}) {
           <p className="w-[20%]">時間</p>
           <p className="w-[10%]">人數</p>
           <p className="w-[10%]">
-            <span className="whitespace-nowrap after:content-['/'] after:font-normal">
-              取消
-            </span>
-            <span className="whitespace-nowrap">退出</span>
+            {isActiveOver ? OverActionTitle : upcomingActionTitle}
           </p>
         </div>
         <ul>
-          {/* <GroupsList activeTab={activeTab} /> */}
           {groupsData.map((group) => {
             const {
               groupId,
@@ -58,54 +92,33 @@ export default function GroupsList({}) {
               commented,
             } = group;
 
+            // 得到狀態："pending" "member" "over"
             const groupStatus = setStatus(endTime, status);
+            // 狀態表示
+            const statusStyle = statusSet[groupStatus].style;
+            const statusText = statusSet[groupStatus].text;
 
             const isActive =
-              (activeTab === "over" && groupStatus === "over") ||
-              (activeTab === "upcoming" && groupStatus !== "over");
+              (isActiveOver && groupStatus === "over") ||
+              (!isActiveOver && groupStatus !== "over");
             if (!isActive) return;
-            //
 
-            const actionBtns = {
-              member: {
-                text: "取消申請",
-                func: console.log("取消 apply"),
-                disabled: false,
-              },
-              pending: {
-                text: "退出揪團",
-                func: console.log("quit"),
-                disabled: false,
-              },
-              over: {
-                text: "評價",
-                func: console.log("over"),
-                disabled: false,
-              },
-              commented: {
-                text: "已評價",
-                func: console.log("commen"),
-                disabled: true,
-              },
-            };
+            // ----
+
+            // 目前的評價狀態如何，會從 API 得取
             const isCommented = commented;
 
             // 自動抓取對應的按鈕
-            const selectBtn = () => {
-              if (activeTab === "over" && isCommented) return "commented";
-
-              // if (activeTab === "over" && !isCommented) return "over";
-              console.log("ff");
-              // return groupStatus;
-            };
-            const btnId = groupStatus;
-            console.log(commented, "isCommented:" + isCommented, btnId);
-
             //如果是 activeTab === over，看是否已有評價？
-
-            // 審核中的圖案
-            const statusStyle = groupStatusSet[groupStatus].style;
-            const statusText = groupStatusSet[groupStatus].text;
+            const selectBtn = () => {
+              if (!isActiveOver) return groupStatus;
+              if (isCommented) return "commented";
+              return "over";
+            };
+            const actionBtnId = selectBtn();
+            const btnDisabled = actionBtns[actionBtnId].disabled;
+            const btnOnClick = actionBtns[actionBtnId].func;
+            const btnText = actionBtns[actionBtnId].text;
 
             const isPlace = place === "NULL";
             const location = isPlace ? store.storeName : place;
@@ -119,7 +132,7 @@ export default function GroupsList({}) {
             return (
               <li
                 key={groupId}
-                className="w-full flex justify-between items-center gap-3 md:gap-2 p-2 mb-3 bg-yellow-tint text-center text-sm"
+                className="w-full flex justify-between items-center p-2 mb-3 bg-yellow-tint text-center text-sm"
               >
                 <p className="w-[10%] text-xs">
                   <span className={`groupStatusDot ${statusStyle}`}>
@@ -137,17 +150,18 @@ export default function GroupsList({}) {
                 <p className="w-[10%]">
                   {currentNum}/{totalMemberNum}
                 </p>
-                <p className="w-[10%]">
+                <div className="w-[10%]">
                   <Button
                     type="button"
                     appearance="black"
                     rounded
-                    isDisabled={actionBtns[btnId].disabled}
-                    onClick={actionBtns[btnId].func}
+                    className="w-full"
+                    isDisabled={btnDisabled}
+                    onClick={btnOnClick}
                   >
-                    <span className="text-sm">{actionBtns[btnId].text}</span>
+                    <p className="text-sm">{btnText}</p>
                   </Button>
-                </p>
+                </div>
               </li>
             );
           })}

@@ -1,8 +1,10 @@
+import { tabType } from "../date";
+
 export type StatusType = "pending" | "member" | "leader";
 
-export type storeType = { storeId: number; storeName: string; address: string };
+export type StoreType = { storeId: number; storeName: string; address: string };
 
-export type groupsDataType = {
+export type GroupsDataType = {
   groupId: number;
   groupName: string;
   startTime: string;
@@ -11,10 +13,16 @@ export type groupsDataType = {
   currentNum: number;
   description: string;
   place: string | "NULL";
-  store: storeType | "NULL";
+  store: StoreType | "NULL";
   status: StatusType;
   commented: boolean;
   createDate: string;
+};
+
+export type ActionBtnType = {
+  text: string;
+  func?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled: boolean;
 };
 
 // ----data----
