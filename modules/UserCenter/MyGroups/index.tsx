@@ -48,6 +48,7 @@ export default function MyGroups({}) {
               startTime,
               endTime,
               status,
+              commented,
             } = group;
 
             const setStatus = () => {
@@ -62,6 +63,43 @@ export default function MyGroups({}) {
               (activeTab === "over" && setStatus() === "over") ||
               (activeTab === "upcoming" && setStatus() !== "over");
             if (!isActive) return;
+            //
+
+            const actionBtns = {
+              member: {
+                text: "取消申請",
+                func: console.log("取消 apply"),
+                disabled: false,
+              },
+              pending: {
+                text: "退出揪團",
+                func: console.log("quit"),
+                disabled: false,
+              },
+              over: {
+                text: "評價",
+                func: console.log("over"),
+                disabled: false,
+              },
+              commented: {
+                text: "已評價",
+                func: console.log("commen"),
+                disabled: true,
+              },
+            };
+            const isCommented = commented;
+
+            const selectBtn = () => {
+              if (activeTab === "over" && isCommented) return "commented";
+
+              // if (activeTab === "over" && !isCommented) return "over";
+              console.log("ff");
+              // return setStatus();
+            };
+            const btnId = setStatus();
+            console.log(commented, "isCommented:" + isCommented, btnId);
+
+            //如果是 activeTab === over，看是否已有評價？
 
             const statusStyle = groupStatus[setStatus()].style;
             const statusText = groupStatus[setStatus()].text;
@@ -101,10 +139,10 @@ export default function MyGroups({}) {
                     type="button"
                     appearance="black"
                     rounded
-                    onClick={handleCancelApply}
+                    isDisabled={actionBtns[btnId].disabled}
+                    onClick={actionBtns[btnId].func}
                   >
-                    取消申請
-                    {/* 這個要改 */}
+                    {actionBtns[btnId].text}
                   </Button>
                 </p>
               </li>

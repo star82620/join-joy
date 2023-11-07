@@ -81,7 +81,8 @@ export const groupsData = [
       storeName: "六角桌遊店",
       address: "1111111111",
     },
-    status: "leader",
+    status: "member",
+    commented: false,
     createDate: "2023-11-04T15:28:16.497",
   },
   {
@@ -99,6 +100,7 @@ export const groupsData = [
       address: "粗粗樹左邊樹洞",
     },
     status: "member",
+    commented: true,
     createDate: "2023-11-04T15:28:16.497",
   },
   {
@@ -116,6 +118,7 @@ export const groupsData = [
       address: "粗粗樹左邊樹洞",
     },
     status: "member",
+    commented: false,
     createDate: "2023-11-04T15:28:16.497",
   },
   {
@@ -133,6 +136,7 @@ export const groupsData = [
       address: "粗粗樹左邊樹洞",
     },
     status: "pending",
+    commented: false,
     createDate: "2023-11-04T15:28:16.497",
   },
 ];
