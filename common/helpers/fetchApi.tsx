@@ -1,6 +1,5 @@
 const token =
-  "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6NiwiQ…NYIWhRl3b9zdHCaJJx7rn-XuEyO3HDrYtd4fx20e70-LMSJfQ";
-
+  "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJJZCI6NiwiQWNjb3VudCI6InRlc3QwM0BnbWFpbC5jb20iLCJJc1N0b3JlT3duZXIiOmZhbHNlLCJOaWNrTmFtZSI6IuS5g-iDliIsIkV4cCI6IjExLzcvMjAyMyAxMToxNDoxMSBQTSJ9.De34qCu8lTOW0Sase72JHd_EDKqzL7i19c-ukZYJpvf1imofQcxwnsbDN5O2hAuwHksVRezkzDpdDZDyTHze2A";
 // 要用的話要寫這一包資料
 // const apiParams = {
 //   apiPath: "/users/sign_up",
@@ -17,27 +16,27 @@ export type apiParamsType = {
   data?: Record<string, string> | string;
 };
 
-type apiHeadersType = {
+type headersType = {
   Authorization: string;
   "Content-Type": "application/json";
 };
 
 type requestOptionsType = {
   method: methodType;
-  headers: apiHeadersType;
+  headers: headersType;
   body?: string;
 };
 
 export default async function fetchApi(apiParams: apiParamsType) {
   const { apiPath, method, data } = apiParams;
-  const url = process.env.NEXT_PUBLIC_API_URL + apiPath;
-  const apiHeaders: apiHeadersType = {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
+  const headers: headersType = {
     Authorization: token,
     "Content-Type": "application/json",
   };
   const requestOptions: requestOptionsType = {
     method: method,
-    headers: apiHeaders,
+    headers: headers,
   };
   if (data) {
     requestOptions.body = JSON.stringify(data);
@@ -49,7 +48,7 @@ export default async function fetchApi(apiParams: apiParamsType) {
     console.log(result);
     return result;
   } catch (error) {
-    console.log(error);
+    console.error("Fetch API error:", error.message);
     throw error;
   }
 }
