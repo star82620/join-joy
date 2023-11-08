@@ -26,8 +26,12 @@ h6 {
   line-height: 1.4;
 }
 
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
 .container {
-  @apply max-w-[1176px] mx-auto 
+  @apply max-w-[1296px] mx-auto 
   px-12 md:px-6 sm:px-3;
 }
 
