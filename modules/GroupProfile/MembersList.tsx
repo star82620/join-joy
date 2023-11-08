@@ -4,6 +4,7 @@ import Link from "@/common/components/GeneralLink";
 import { memberStatusFormat } from "@/constants/memberStatusFormat";
 import { GroupDataContext } from "./index";
 import { MemberCardProps } from "./data";
+import ProfileImg from "@/common/components/ProfileImg";
 
 function MemberCard({ member, index }: MemberCardProps) {
   const { userId, userName, status, initNum } = member;
@@ -14,15 +15,12 @@ function MemberCard({ member, index }: MemberCardProps) {
   return (
     <Link href={`/user/${userId}`} target="_blank" className="no-underline">
       <section className="flex justify-between items-center gap-4 md:gap-2 p-2 border-2 rounded shadow-btn bg-yellow-tint">
-        <p className="relative w-16 h-16 rounded-full border-2 border-white outline outline-2 outline-gray-950">
-          <Image
-            src="/images/photo-user-000.png"
-            alt="user"
-            fill
-            sizes="100%"
-            className="object-contain rounded-full"
-          />
-        </p>
+        <ProfileImg
+          src="/images/photo-user-000.png"
+          alt="user"
+          widthProp="w-16"
+          heightProp="h-16"
+        />
         <div className="grow">
           <p className="text-gray-600 md:text-xs">{statusText}</p>
           <p className="md:text-sm mt-1 md:mt-0">
