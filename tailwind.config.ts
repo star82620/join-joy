@@ -53,6 +53,8 @@ const config: Config = {
       transparent: "transparent",
     },
     fontSize: {
+      "3xl": "28px",
+      "2xl": "24px",
       xl: "20px",
       lg: "18px",
       md: "16px",
@@ -94,10 +96,14 @@ const config: Config = {
         "9": "9",
       },
       width: {
-        "14": "64px",
+        "14": "56px",
+        "15": "60px",
+        "22": "88px",
       },
       height: {
-        "14": "64px",
+        "14": "56px",
+        "15": "60px",
+        "22": "88px",
       },
     },
   },

@@ -9,6 +9,7 @@ export default function GeneralButton({
   isDisabled,
   rounded,
   className,
+  form,
 }: ButtonType) {
   const defaultColor = dataSet[appearance].default || null;
   const hoverColor = dataSet[appearance].hover || null;
@@ -28,6 +29,7 @@ export default function GeneralButton({
       type={type}
       onClick={onClick}
       disabled={isDisabled}
+      form={form}
     >
       {children}
     </button>

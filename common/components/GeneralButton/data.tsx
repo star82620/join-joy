@@ -8,6 +8,7 @@ export type ButtonType = {
   isDisabled?: boolean;
   rounded?: boolean;
   className?: string;
+  form?: string;
 };
 
 // appearance 按鈕樣式
