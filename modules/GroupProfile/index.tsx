@@ -22,8 +22,8 @@ export function StoreLocation({ store }: StoreLocationProps) {
           {store.storeName}
         </Link>
       </span>
-      <span className="text-sm whitespace-nowrap ml-2 md:ml-0">
-        （{store.address}）
+      <span className="text-sm whitespace-nowrap ml-2 md:ml-0 before:content-['（'] after:content-['）']">
+        {store.address}
       </span>
     </p>
   );
