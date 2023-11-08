@@ -4,10 +4,8 @@ import Layout from "@/common/components/Layout";
 
 export default function GroupProfilePage() {
   return (
-    <>
-      <Layout pageCategory="group">
-        <GroupProfile />
-      </Layout>
-    </>
+    <Layout pageCategory="group">
+      <GroupProfile />
+    </Layout>
   );
 }

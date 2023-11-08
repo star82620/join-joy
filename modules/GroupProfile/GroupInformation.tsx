@@ -43,7 +43,7 @@ export default function GroupInformation({
   return (
     <section className="px-12 py-8 md:px-3 md:py-4">
       <div className="flex items-center gap-2">
-        <h1 className="whitespace-nowrap text-xxxl md:text-xxl">{groupName}</h1>
+        <h1 className="whitespace-nowrap text-3xl md:text-2xl">{groupName}</h1>
         <span className="grow before:content-[''] before:w-2.5 before:h-2.5 before:rounded-full before:bg-green-light before:inline-block before:mr-1">
           {groupStatusText}
         </span>

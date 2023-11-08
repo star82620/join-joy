@@ -30,7 +30,8 @@ export function StoreLocation({ store }: StoreLocationProps) {
 }
 export function Title({ content }: TitleProps) {
   const icon = icons[content];
-  const { title, src, alt } = icon;
+  const { title, img } = icon;
+  const { src, alt } = img;
 
   return (
     <div className="flex items-center gap-2 text-lg md:text-md mb-2">

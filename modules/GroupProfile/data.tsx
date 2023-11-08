@@ -9,11 +9,13 @@ type IconKeyType =
 
 export type IconItemType = {
   title: string;
-  src: string;
-  alt: string;
+  img: {
+    src: string;
+    alt: string;
+  };
 };
 
-export type IconType = { IconKeyType: IconItemType };
+export type IconType = Record<IconKeyType, IconItemType>;
 
 export type TitleProps = { content: IconKeyType };
 
@@ -99,40 +101,54 @@ export const groupData: GroupDataType = {
   tags: ["新手團", "經驗切磋"],
 };
 
-export const icons = {
+export const icons: IconType = {
   location: {
     title: "地點",
-    src: "/images/group-profile/icon-location.svg",
-    alt: "icon-location",
+    img: {
+      src: "/images/group-profile/icon-location.svg",
+      alt: "icon-location",
+    },
   },
   date: {
     title: "日期",
-    src: "/images/group-profile/icon-date.svg",
-    alt: "icon-date",
+    img: {
+      src: "/images/group-profile/icon-date.svg",
+      alt: "icon-date",
+    },
   },
   time: {
     title: "時間",
-    src: "/images/group-profile/icon-time.svg",
-    alt: "icon-time",
+    img: {
+      src: "/images/group-profile/icon-time.svg",
+      alt: "icon-time",
+    },
   },
   cost: {
     title: "收費",
-    src: "/images/group-profile/icon-cost.svg",
-    alt: "icon-cost",
+    img: {
+      src: "/images/group-profile/icon-cost.svg",
+      alt: "icon-cost",
+    },
   },
   totalMembers: {
     title: "預計揪團人數",
-    src: "/images/group-profile/icon-members.svg",
-    alt: "icon-members",
+    img: {
+      src: "/images/group-profile/icon-members.svg",
+      alt: "icon-members",
+    },
   },
   games: {
     title: "預計要玩的遊戲",
-    src: "/images/group-profile/icon-games.svg",
-    alt: "icon-games",
+    img: {
+      src: "/images/group-profile/icon-games.svg",
+      alt: "icon-games",
+    },
   },
   description: {
     title: "備註",
-    src: "/images/group-profile/icon-description.svg",
-    alt: "icon-description",
+    img: {
+      src: "/images/group-profile/icon-description.svg",
+      alt: "icon-description",
+    },
   },
 };
