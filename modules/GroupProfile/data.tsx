@@ -62,7 +62,7 @@ export type StoreLocationProps = {
   store: StoreType;
 };
 
-export type MemberCardProps = { member: MemberType; index: number };
+export type MemberCardProps = { member: MemberType; subNum: number };
 
 export type GroupInformationProps = {
   setApplyNum: (applyNum: number) => void;

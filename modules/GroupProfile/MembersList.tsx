@@ -6,10 +6,9 @@ import { GroupDataContext } from "./index";
 import { MemberCardProps } from "./data";
 import ProfileImg from "@/common/components/ProfileImg";
 
-function MemberCard({ member, index }: MemberCardProps) {
+function MemberCard({ member, subNum }: MemberCardProps) {
   const { userId, userName, status, initNum } = member;
-  const orderNo = index;
-  const isSubmember = orderNo > 0;
+  const isSubmember = subNum > 0;
   const isSingle = initNum === 1;
   const statusText = memberStatusFormat[status];
   return (
@@ -27,7 +26,7 @@ function MemberCard({ member, index }: MemberCardProps) {
             {userName}
             {!isSingle && isSubmember && (
               <span className="text-xs text-gray-600 ml-2 before:content-['的朋友'] before:mr-1">
-                {orderNo}
+                {subNum}
               </span>
             )}
           </p>
@@ -48,7 +47,7 @@ export default function MembersList() {
       <div className="mt-4 flex flex-col gap-4 md:gap-3">
         {members.map((member) => {
           return [...Array(member.initNum)].map((_, index) => (
-            <MemberCard key={index} member={member} index={index} />
+            <MemberCard key={index} member={member} subNum={index} />
           ));
         })}
       </div>
