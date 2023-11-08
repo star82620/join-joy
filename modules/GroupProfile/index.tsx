@@ -75,9 +75,9 @@ export function GameItem({ game }: GameItemProps) {
   );
 }
 
-const currentMemberNum = groupData.members.reduce((sum, member) => {
-  sum += member.initNum;
-  return sum;
+const currentMemberNum = groupData.members.reduce((counter, member) => {
+  counter += member.initNum;
+  return counter;
 }, 0);
 
 export const GroupDataContext = createContext({
