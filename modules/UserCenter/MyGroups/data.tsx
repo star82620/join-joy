@@ -29,12 +29,12 @@ export type ActionBtnsType = Record<string, ActionBtnType>;
 
 export type GroupItemProps = {
   group: GroupsDataType;
-  isActiveOver: boolean;
+  isOverActive: boolean;
   actionBtns: ActionBtnsType;
 };
 
 export type GroupListProps = {
-  memberStatus: "leader" | "member";
+  pageStatus: "leader" | "member";
 };
 
 // ----data----

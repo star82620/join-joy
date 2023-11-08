@@ -3,20 +3,12 @@ import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import formatDate from "@/common/helpers/formateDate";
 import statusSet from "@/constants/groupStatusSet";
+import { setStatus } from "./GroupsList";
 import { GroupItemProps } from "./data";
-
-// 是哪一種狀態
-const setStatus = (endTime: string, status: string) => {
-  const now = new Date();
-  const today = now.toISOString();
-  if (status === "pending") return "pending";
-  if (endTime < today) return "over";
-  return "member";
-};
 
 export default function GroupItem({
   group,
-  isActiveOver,
+  isOverActive,
   actionBtns,
 }: GroupItemProps) {
   const {
@@ -32,23 +24,16 @@ export default function GroupItem({
     commented,
   } = group;
 
-  // 得到狀態："pending" "member" "over"
-  const groupStatus = setStatus(endTime, status);
-
+  const groupStatus = setStatus(group.endTime, group.status);
   // 狀態表示
   const statusStyle = statusSet[groupStatus].style;
   const statusText = statusSet[groupStatus].text;
-
-  const isActive =
-    (isActiveOver && groupStatus === "over") ||
-    (!isActiveOver && groupStatus !== "over");
-  if (!isActive) return;
 
   const isCommented = commented;
 
   // 抓取對應的按鈕
   const selectBtn = () => {
-    if (!isActiveOver) return groupStatus;
+    if (!isOverActive) return groupStatus;
     if (isCommented) return "commented";
     return "over";
   };

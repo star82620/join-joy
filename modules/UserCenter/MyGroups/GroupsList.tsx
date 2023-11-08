@@ -4,7 +4,16 @@ import TabSection from "../TabSection";
 import GroupItem from "./GroupItem";
 import { groupsData, tabs, ActionBtnsType, GroupListProps } from "./data";
 
-export default function GroupsList({ memberStatus }: GroupListProps) {
+// 是哪一種狀態
+export const setStatus = (endTime: string, status: string) => {
+  const now = new Date();
+  const today = now.toISOString();
+  if (status === "pending") return "pending";
+  if (endTime < today) return "over";
+  return "member";
+};
+
+export default function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
@@ -36,7 +45,7 @@ export default function GroupsList({ memberStatus }: GroupListProps) {
     },
   };
 
-  const isActiveOver = activeTab === "over";
+  const isOverActive = activeTab === "over";
   const upcomingActionTitle = (
     <>
       <span className="whitespace-nowrap after:content-['/'] after:font-normal">
@@ -46,7 +55,23 @@ export default function GroupsList({ memberStatus }: GroupListProps) {
     </>
   );
   const OverActionTitle = "評價";
-  // const emptyList =
+
+  const isLeaderPage = pageStatus === "leader";
+
+  const filterData = groupsData.filter((group) => {
+    const isLeaderGroup = group.status === "leader";
+    if (isLeaderPage && !isLeaderGroup) return false;
+    if (!isLeaderPage && isLeaderGroup) return false;
+
+    const groupStatus = setStatus(group.endTime, group.status);
+    const isOverStatus = groupStatus === "over";
+    if (!isOverActive && isOverStatus) return false;
+    if (isOverActive && !isOverStatus) return false;
+
+    return true;
+  });
+
+  const isEmptyList = filterData.length === 0;
 
   return (
     <section className="px-6 py-8 md:p-4">
@@ -63,26 +88,21 @@ export default function GroupsList({ memberStatus }: GroupListProps) {
           <p className="w-[20%]">時間</p>
           <p className="w-[10%]">人數</p>
           <p className="w-[10%]">
-            {isActiveOver ? OverActionTitle : upcomingActionTitle}
+            {isOverActive ? OverActionTitle : upcomingActionTitle}
           </p>
         </div>
         <ul>
-          {groupsData.map((group) => {
-            const isLeaderPage = memberStatus === "leader";
-            const isLeaderList = group.status === "leader";
-            const skipItem = isLeaderPage ? !isLeaderList : isLeaderList;
-            if (skipItem) return;
-
-            return (
-              <GroupItem
-                key={group.groupId}
-                group={group}
-                isActiveOver={isActiveOver}
-                actionBtns={actionBtns}
-              />
-            );
-          })}
-          {/* { isEmptyList &&"目前沒有任何紀錄唷！"} */}
+          {filterData.map((group) => (
+            <GroupItem
+              key={group.groupId}
+              group={group}
+              isOverActive={isOverActive}
+              actionBtns={actionBtns}
+            />
+          ))}
+          {isEmptyList && (
+            <p className="text-center text-gray-600">目前沒有任何紀錄唷！</p>
+          )}
         </ul>
       </div>
     </section>
