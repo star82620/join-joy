@@ -17,9 +17,14 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
-  const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {};
-  const handleQuitGroup = (event: React.MouseEvent<HTMLElement>) => {};
+  const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
+    console.log("取消加入揪團申請");
+  };
+  const handleQuitGroup = (event: React.MouseEvent<HTMLElement>) => {
+    console.log("退出揪團");
+  };
   const handleToComment = (event: React.MouseEvent<HTMLElement>) => {
+    console.log("跳到評價頁面");
     router.push("/about");
   };
 
