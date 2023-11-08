@@ -23,7 +23,7 @@ export default async function fetchApi(apiParams: apiParamsType) {
     "Content-Type": "application/json",
   };
   if (token) {
-    headers["Authorization"] = token;
+    headers["Authorization"] = token ? token : "";
   }
   const requestOptions = {
     method: method,
