@@ -26,11 +26,38 @@ h6 {
   line-height: 1.4;
 }
 
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+
 .container {
-  @apply max-w-[1176px] mx-auto 
+  @apply max-w-[1296px] mx-auto 
   px-12 md:px-6 sm:px-3;
 }
 
-.whitespace-pre-wrap {
-  white-space: pre-wrap;
+.inputStyle {
+  @apply w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm;
+}
+
+.inputErrorMsgStyle {
+  @apply text-danger mt-2 md:mt-1 text-sm md:text-xs;
+}
+
+.checkboxIcon {
+  @apply appearance-none 
+  after:content-[''] after:inline-block 
+  after:w-5 after:h-5 
+  after:align-middle 
+  after:bg-contain after:bg-no-repeat 
+  after:bg-checkbox-false
+  checked:after:bg-checkbox-true;
+}
+
+.radioIcon {
+  @apply appearance-none 
+  after:content-[''] after:inline-block 
+  after:w-5 after:h-5 
+  after:align-middle 
+  after:bg-contain after:bg-no-repeat 
+  after:bg-radio-false checked:after:bg-radio-true;
 }
