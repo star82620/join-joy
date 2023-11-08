@@ -34,7 +34,7 @@ export default function GroupInformation({
   const isPlace = place !== "NULL";
   const groupStatusText = groupStatusFormat[groupStatus];
   const remainingNum = totalMemberNum - currentMemberNum;
-  const numOptions = Array.from({ length: remainingNum }).map((_, index) => (
+  const numOptions = [...Array(remainingNum)].map((_, index) => (
     <option key={index} value={index + 1}>
       {index + 1}
     </option>
