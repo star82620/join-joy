@@ -25,6 +25,14 @@ export type ActionBtnType = {
   disabled: boolean;
 };
 
+export type ActionBtnsType = Record<string, ActionBtnType>;
+
+export type GroupItemProps = {
+  group: GroupsDataType;
+  isActiveOver: boolean;
+  actionBtns: ActionBtnsType;
+};
+
 // ----data----
 
 // 列表篩選
@@ -39,7 +47,7 @@ export const tabs: tabType[] = [
   },
 ];
 
-export const groupsData = [
+export const groupsData: GroupsDataType[] = [
   {
     groupId: 7,
     groupName: "測試修改團",
@@ -50,7 +58,7 @@ export const groupsData = [
     description: "測試測試",
     place: "NULL",
     store: {
-      storeId: "5",
+      storeId: 5,
       storeName: "六角桌遊店",
       address: "1111111111",
     },
@@ -68,7 +76,7 @@ export const groupsData = [
     description: "測試測試",
     place: "NULL",
     store: {
-      storeId: "56",
+      storeId: 56,
       storeName: "天邊一隻鳩桌遊店",
       address: "粗粗樹左邊樹洞",
     },
@@ -86,7 +94,7 @@ export const groupsData = [
     description: "測試測試",
     place: "NULL",
     store: {
-      storeId: "56",
+      storeId: 56,
       storeName: "天邊一隻鳩桌遊店",
       address: "粗粗樹左邊樹洞",
     },
@@ -104,7 +112,7 @@ export const groupsData = [
     description: "測試測試",
     place: "NULL",
     store: {
-      storeId: "56",
+      storeId: 56,
       storeName: "天邊一隻鳩桌遊店",
       address: "粗粗樹左邊樹洞",
     },
