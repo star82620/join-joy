@@ -22,7 +22,7 @@ export default function ModalWrapper({
         <h2
           className={`w-full text-center font-semibold ${
             isSecondary ? "text-lg" : "text-xl"
-          } md:text-lg`}
+          } md:text-lg h-6`}
         >
           {title}
         </h2>

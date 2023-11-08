@@ -52,6 +52,8 @@ const config: Config = {
       transparent: "transparent",
     },
     fontSize: {
+      "3xl": "28px",
+      "2xl": "24px",
       xl: "20px",
       lg: "18px",
       md: "16px",
@@ -69,6 +71,13 @@ const config: Config = {
         "eye-show": 'url("/images/input-password-show.svg")',
         "follow-true": 'url("/images/icon-check.svg")',
         "follow-false": 'url("/images/icon-plus.svg")',
+        "radio-true": 'url("/images/icon-radio-true.svg")',
+        "radio-false": 'url("/images/icon-radio-false.svg")',
+        "checkbox-true": 'url("/images/icon-checkbox-true.svg")',
+        "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
+      },
+      backgroundSize: {
+        "20px": "20px",
       },
       lineHeight: {
         heading: "1.4rem",
@@ -84,6 +93,14 @@ const config: Config = {
         "7": "7",
         "8": "8",
         "9": "9",
+      },
+      width: {
+        "15": "60px",
+        "22": "88px",
+      },
+      height: {
+        "15": "60px",
+        "22": "88px",
       },
     },
   },

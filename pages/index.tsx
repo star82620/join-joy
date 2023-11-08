@@ -32,6 +32,9 @@ export default function Home() {
           <li>
             <Link href="/user">會員個人頁（切版示範）</Link>
           </li>
+          <li>
+            <Link href="/group">揪團詳細頁（切版示範）</Link>
+          </li>
         </ul>
 
         <div className=" max-w-[826px]">hi!{userData?.nickName}</div>
