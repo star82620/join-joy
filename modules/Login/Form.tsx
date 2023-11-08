@@ -64,11 +64,8 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
       }
       // 有指定驗證內容就依照驗證內容
       if (input.pattern) {
-        errors[input.inputName] = !input.pattern.test(
-          inputValues[input.inputName]
-        )
-          ? true
-          : false;
+        const isTestPass = input.pattern.test(inputValues[input.inputName]);
+        errors[input.inputName] = !isTestPass;
       }
       // 確認密碼欄位
       if (input.inputName === "confirmPassword") {
