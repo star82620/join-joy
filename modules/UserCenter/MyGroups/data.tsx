@@ -21,7 +21,7 @@ export type GroupsDataType = {
 
 export type ActionBtnType = {
   text: string;
-  func?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  func?: (event: React.MouseEvent<HTMLElement>) => void;
   disabled: boolean;
 };
 
