@@ -160,8 +160,7 @@ export default function ProfileSetting() {
                 return (
                   <PreferenceBlock
                     key={typeName}
-                    inputName="games"
-                    value={typeId}
+                    id={typeId}
                     content={typeName}
                     isActive={isActive}
                     handle={handleSelectGames}
