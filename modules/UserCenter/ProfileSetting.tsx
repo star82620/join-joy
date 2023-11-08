@@ -3,7 +3,7 @@ import fetchApi from "@/common/helpers/fetchApi";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
-import PreferBlock from "@/common/components/PreferBlock";
+import PreferenceBlock from "@/common/components/PreferenceBlock";
 import {
   gameTypeKey,
   userDataKey,
@@ -18,21 +18,24 @@ const inputDescStyle = "text-sm md:text-xs text-gray-500";
 export default function ProfileSetting() {
   const [userData, setUserData] = useState<UserDataType>({
     userId: 0,
-    nickname: "",
-    account: "",
-    introduce: "",
-    gamePref: [],
-    cityPref: [],
+    email: "",
+    nickName: "",
+    description: "",
+    games: [],
+    cities: [],
   });
   const [gameTypes, setGameTypes] = useState<GameType[]>();
 
   useEffect(() => {
+    // 獲取使用者資料
     async function getUserData() {
       const res = await fetchApi(userDataKey);
       if (res?.data) {
         setUserData(res.data);
       }
     }
+
+    // 獲取所有遊戲類型
     async function getGameTypes() {
       const res = await fetchApi(gameTypeKey);
       if (res?.data) {
@@ -44,20 +47,18 @@ export default function ProfileSetting() {
     getGameTypes();
   }, []);
 
-  const userId = userData.userId;
-  const nickName = userData.nickname;
-  const email = userData.account;
-  const description = userData.introduce;
-  const games = userData.gamePref;
-  const cities = userData.cityPref;
-  const defaultValues = {
+  const { userId, nickName, email, description, games, cities } = userData;
+  const defaultValues: ValueType = {
     nickName: nickName,
-    introduct: description,
-    gamePrefId: games,
-    cityPreId: cities,
+    description: description,
+    games: games,
+    cities: cities,
   };
-  // const [value, setValue] = useState<ValueType>(defaultValues);
-  // setValue(defaultValues);
+  const [inputValues, setInputValues] = useState<ValueType>(defaultValues);
+  console.log("i", inputValues);
+
+  // 被選中的
+  const [activeGames, setActiveGames] = useState<ValueType["games"]>(games);
 
   return (
     <section className="p-8 md:px-4">
@@ -71,6 +72,12 @@ export default function ProfileSetting() {
                 className="inputStyle mt-2 md:mt-1"
                 name="nickName"
                 defaultValue={nickName}
+                onChange={(e) =>
+                  setInputValues((prevState) => ({
+                    ...prevState,
+                    nickName: e.target.value,
+                  }))
+                }
               />
             </div>
             <div>
@@ -84,7 +91,7 @@ export default function ProfileSetting() {
             </div>
             <div>
               <h3 className={`${inputTitleStyle}`}>密碼</h3>
-              <Link href="/" className="no-underline">
+              <Link href="/forget-password" className="no-underline">
                 <span className="text-blue-dark md:text-sm mt-4">
                   重設新的密碼
                 </span>
@@ -126,19 +133,38 @@ export default function ProfileSetting() {
           <div>
             <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>喜好遊戲種類</h3>
             <p className={`${inputDescStyle} mb-4 md:mb-2`}>最多選擇3個</p>
-            <div className="flex flex-wrap gap-x-3 gap-y-2 preferBlocks">
+            <div className="flex flex-wrap gap-x-3 gap-y-2 preferenceBlocks">
               {gameTypes?.map((gameType) => {
                 const typeName = gameType.TypeName;
+                const typeId = gameType.Id;
                 let isActive = false;
+
+                // 喜歡的遊戲
                 games.forEach((game) => {
-                  if (game === typeName) return (isActive = true);
+                  if (game === typeId) return (isActive = true);
                 });
 
+                console.log(typeId, isActive);
+
+                const handleSelectGames = (e) => {
+                  console.log("1", e.target.checked);
+                  // if (isActive) {
+                  //   isActive = e.target.checked;
+                  // }
+                  console.log("2", isActive);
+                  // 點擊:
+                  // 如果是 isActive狀態，將此狀態改成 !isActive，並移除該資料、寫入 setActiveGame
+                  // 如果是 !isActive 加入
+                };
+
                 return (
-                  <PreferBlock
+                  <PreferenceBlock
                     key={typeName}
+                    inputName="games"
+                    value={typeId}
                     content={typeName}
                     isActive={isActive}
+                    handle={handleSelectGames}
                   />
                 );
               })}
@@ -154,6 +180,12 @@ export default function ProfileSetting() {
               className="inputStyle mt-2"
               placeholder="輸入你的自我介紹"
               defaultValue={description}
+              onChange={(e) =>
+                setInputValues((prevState) => ({
+                  ...prevState,
+                  description: e.target.value,
+                }))
+              }
             ></textarea>
           </div>
         </div>

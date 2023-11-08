@@ -58,6 +58,6 @@ h6 {
   after:bg-radio-false checked:after:bg-radio-true;
 }
 
-.preferBlocks > :first-child {
+.preferenceBlocks > :first-child {
   @apply w-full;
 }

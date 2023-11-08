@@ -34,22 +34,18 @@ export type UserNavBarProps = {
   toggleActiveSubNav: (subNav: SubItemType) => void;
 };
 
-// GET
-export type UserDataType = {
-  userId: number;
-  account: string;
-  nickname: string;
-  introduce: string;
-  gamePref: Array<string>;
-  cityPref: Array<string>;
-};
-
 // POST
 export type ValueType = {
   nickName: string;
-  introduct: string;
-  gamePrefId: Array<number>;
-  cityPreId: Array<number>;
+  description: string;
+  games: Array<number>;
+  cities: Array<number>;
+};
+
+// GET
+export type UserDataType = ValueType & {
+  userId: number;
+  email: string;
 };
 
 export type GameType = {
