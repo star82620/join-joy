@@ -7,7 +7,7 @@ import MembersList from "./MembersList";
 import MessageBoard from "./MessageBoard";
 import {
   groupData,
-  icons,
+  titles,
   TitleProps,
   TagItemProps,
   GameItemProps,
@@ -29,8 +29,8 @@ export function StoreLocation({ store }: StoreLocationProps) {
   );
 }
 export function Title({ content }: TitleProps) {
-  const icon = icons[content];
-  const { title, img } = icon;
+  const titleItem = titles[content];
+  const { title, img } = titleItem;
   const { src, alt } = img;
 
   return (

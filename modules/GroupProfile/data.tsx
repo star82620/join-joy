@@ -7,7 +7,7 @@ type IconKeyType =
   | "games"
   | "description";
 
-export type IconItemType = {
+export type TitleItemType = {
   title: string;
   img: {
     src: string;
@@ -15,7 +15,7 @@ export type IconItemType = {
   };
 };
 
-export type IconType = Record<IconKeyType, IconItemType>;
+export type TitlesType = Record<IconKeyType, TitleItemType>;
 
 export type TitleProps = { content: IconKeyType };
 
@@ -101,7 +101,7 @@ export const groupData: GroupDataType = {
   tags: ["新手團", "經驗切磋"],
 };
 
-export const icons: IconType = {
+export const titles: TitlesType = {
   location: {
     title: "地點",
     img: {
