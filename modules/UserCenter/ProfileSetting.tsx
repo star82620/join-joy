@@ -16,6 +16,7 @@ const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
 const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
 export default function ProfileSetting() {
+  // 使用者資料
   const [userData, setUserData] = useState<UserDataType>({
     userId: 0,
     email: "",
@@ -24,14 +25,36 @@ export default function ProfileSetting() {
     games: [],
     cities: [],
   });
+
+  // 所有的遊戲類型資料
   const [gameTypes, setGameTypes] = useState<GameType[]>();
+
+  // 被選中的喜好遊戲資料
+  const [activeGames, setActiveGames] = useState<ValueType["games"]>();
+
+  // input 的資料，之後要 POST API
+  const [inputValues, setInputValues] = useState<ValueType>({
+    nickName: "",
+    description: "",
+    games: [],
+    cities: [],
+  });
 
   useEffect(() => {
     // 獲取使用者資料
     async function getUserData() {
       const res = await fetchApi(userDataKey);
       if (res?.data) {
+        const { nickName, description, cities, games } = res.data;
+        const defaultValues: ValueType = {
+          nickName: nickName,
+          description: description,
+          games: games,
+          cities: cities,
+        };
         setUserData(res.data);
+        setActiveGames(games);
+        setInputValues(defaultValues);
       }
     }
 
@@ -47,18 +70,9 @@ export default function ProfileSetting() {
     getGameTypes();
   }, []);
 
-  const { userId, nickName, email, description, games, cities } = userData;
-  const defaultValues: ValueType = {
-    nickName: nickName,
-    description: description,
-    games: games,
-    cities: cities,
-  };
-  const [inputValues, setInputValues] = useState<ValueType>(defaultValues);
-  console.log("i", inputValues);
-
-  // 被選中的
-  const [activeGames, setActiveGames] = useState<ValueType["games"]>(games);
+  const { userId, nickName, email, description, cities } = userData;
+  const gamesPref = userData.games;
+  console.log("activeGames", activeGames);
 
   return (
     <section className="p-8 md:px-4">
@@ -101,9 +115,9 @@ export default function ProfileSetting() {
               <h3 className={`${inputTitleStyle}`}>地區</h3>
               <p className={`${inputDescStyle} mt-2 md:mt-1`}>最多選擇 3 個</p>
               <select className="inputStyle mt-2">
-                <option>cityㄅ</option>
-                <option>cityˇ</option>
-                <option>cityㄑ</option>
+                <option>cityA</option>
+                <option>cityB</option>
+                <option>cityC</option>
               </select>
             </div>
           </div>
@@ -139,19 +153,24 @@ export default function ProfileSetting() {
                 const typeId = gameType.Id;
                 let isActive = false;
 
-                // 喜歡的遊戲
-                games.forEach((game) => {
+                // 喜歡的遊戲 => isActive
+                gamesPref.forEach((game) => {
                   if (game === typeId) return (isActive = true);
                 });
 
-                console.log(typeId, isActive);
-
                 const handleSelectGames = (e) => {
-                  console.log("1", e.target.checked);
-                  // if (isActive) {
-                  //   isActive = e.target.checked;
-                  // }
-                  console.log("2", isActive);
+                  const id = Number(e.target.dataset.id);
+
+                  // 目前這個 id 在
+                  if (isActive) {
+                    const newValue = activeGames;
+                    const index = activeGames?.indexOf(id);
+                    newValue?.splice(index, 1);
+                    setActiveGames(newValue);
+                  }
+                  // newValue.splice()
+                  // setActiveGames()
+
                   // 點擊:
                   // 如果是 isActive狀態，將此狀態改成 !isActive，並移除該資料、寫入 setActiveGame
                   // 如果是 !isActive 加入
