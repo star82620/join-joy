@@ -3,14 +3,14 @@ import React, { MouseEventHandler } from "react";
 type Props = {
   id: number;
   content: string;
-  handle: MouseEventHandler;
+  onClick: MouseEventHandler;
   isActive: boolean;
 };
 
 export default function PreferenceBlock({
   id,
   content,
-  handle,
+  onClick,
   isActive,
 }: Props) {
   const defaultStyle =
@@ -24,7 +24,7 @@ export default function PreferenceBlock({
       <p
         className={`w-20 h-[52px] flex justify-center items-center font-semibold rounded border-2 ${style}`}
         data-id={id}
-        onClick={handle}
+        onClick={onClick}
       >
         {content}
       </p>

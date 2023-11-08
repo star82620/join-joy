@@ -27,10 +27,10 @@ export default function ProfileSetting() {
   });
 
   // 所有的遊戲類型資料
-  const [gameTypes, setGameTypes] = useState<GameType[]>();
+  const [gameTypes, setGameTypes] = useState<GameType[]>([]);
 
   // 被選中的喜好遊戲資料
-  const [activeGames, setActiveGames] = useState<ValueType["games"]>();
+  const [activeGames, setActiveGames] = useState<ValueType["games"]>([]);
 
   // input 的資料，之後要 POST API
   const [inputValues, setInputValues] = useState<ValueType>({
@@ -69,6 +69,8 @@ export default function ProfileSetting() {
     getUserData();
     getGameTypes();
   }, []);
+
+  useEffect(() => {}, [activeGames]);
 
   const { userId, nickName, email, description, cities } = userData;
   const gamesPref = userData.games;
@@ -148,7 +150,7 @@ export default function ProfileSetting() {
             <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>喜好遊戲種類</h3>
             <p className={`${inputDescStyle} mb-4 md:mb-2`}>最多選擇3個</p>
             <div className="flex flex-wrap gap-x-3 gap-y-2 preferenceBlocks">
-              {gameTypes?.map((gameType) => {
+              {gameTypes.map((gameType) => {
                 const typeName = gameType.TypeName;
                 const typeId = gameType.Id;
                 let isActive = false;
@@ -158,22 +160,26 @@ export default function ProfileSetting() {
                   if (game === typeId) return (isActive = true);
                 });
 
-                const handleSelectGames = (e) => {
-                  const id = Number(e.target.dataset.id);
+                const handleSelectGames = (gameId: number) => {
+                  // 檢查選中的遊戲是否已經在列表中
+                  const isAlreadyActive = activeGames.includes(gameId);
+                  const isInLimit = activeGames.length < 3;
 
-                  // 目前這個 id 在
-                  if (isActive) {
-                    const newValue = activeGames;
-                    const index = activeGames?.indexOf(id);
-                    newValue?.splice(index, 1);
-                    setActiveGames(newValue);
+                  // 如果已經在列表中，找出不包含被點擊這個 id 的選項並塞進 activeGames
+                  if (isAlreadyActive) {
+                    const filterItem = activeGames.filter(
+                      (id) => id !== gameId
+                    );
+                    setActiveGames(filterItem);
                   }
-                  // newValue.splice()
-                  // setActiveGames()
 
-                  // 點擊:
-                  // 如果是 isActive狀態，將此狀態改成 !isActive，並移除該資料、寫入 setActiveGame
-                  // 如果是 !isActive 加入
+                  // 如果不在列表中，則添加到列表中，但要確保列表不超過3個
+                  if (!isAlreadyActive && isInLimit) {
+                    return setActiveGames([...activeGames, gameId]);
+                  }
+
+                  // 如果已經有3個遊戲，可以選擇提示用戶或者替換掉一個
+                  alert("最多只能選擇3個喜好遊戲");
                 };
 
                 return (
@@ -182,7 +188,7 @@ export default function ProfileSetting() {
                     id={typeId}
                     content={typeName}
                     isActive={isActive}
-                    handle={handleSelectGames}
+                    onClick={() => handleSelectGames(typeId)}
                   />
                 );
               })}
