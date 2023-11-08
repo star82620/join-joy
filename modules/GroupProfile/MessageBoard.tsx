@@ -33,13 +33,9 @@ export default function MessageBoard() {
         </div>
 
         {/* 這個按鈕之後改成 Button */}
-        <button
-          form="submitMsg"
-          type="submit"
-          className="bg-gray-950 text-white px-4 py-2 text-sm font-semibold rounded"
-        >
-          送出
-        </button>
+        <Button type="submit" appearance="black" rounded form="submitMsg">
+          <span className="text-sm">送出</span>
+        </Button>
       </div>
       <div className="pt-6 md:pt-4">
         <div className="flex items-start gap-8">
