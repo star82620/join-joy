@@ -31,6 +31,8 @@ export default function MessageBoard() {
           </form>
           <p className="text-right text-xs font-bold mt-1">{textLength}/100</p>
         </div>
+
+        {/* 這個按鈕之後改成 Button */}
         <button
           form="submitMsg"
           type="submit"
@@ -40,7 +42,7 @@ export default function MessageBoard() {
         </button>
       </div>
       <div className="pt-6 md:pt-4">
-        <section className="flex items-start gap-8">
+        <div className="flex items-start gap-8">
           <p className="relative w-16 h-16 md:w-9 md:h-9 rounded-full border-2 border-white outline outline-2 outline-gray-950">
             <Image
               src="/images/photo-user-000.png"
@@ -63,7 +65,7 @@ export default function MessageBoard() {
               {`嗨！我有興趣參加，請團主審核我的申請！\n嗨！我有興趣參加，請團主審核我的申請！`}
             </p>
           </div>
-        </section>
+        </div>
       </div>
     </section>
   );
