@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import TabSection from "../TabSection";
 import GroupItem from "./GroupItem";
-import { groupsData, tabs, ActionBtnsType } from "./data";
+import { groupsData, tabs, ActionBtnsType, GroupListProps } from "./data";
 
-export default function GroupsList({}) {
+export default function GroupsList({ memberStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
@@ -46,6 +46,7 @@ export default function GroupsList({}) {
     </>
   );
   const OverActionTitle = "評價";
+  // const emptyList =
 
   return (
     <section className="px-6 py-8 md:p-4">
@@ -67,6 +68,11 @@ export default function GroupsList({}) {
         </div>
         <ul>
           {groupsData.map((group) => {
+            const isLeaderPage = memberStatus === "leader";
+            const isLeaderList = group.status === "leader";
+            const skipItem = isLeaderPage ? !isLeaderList : isLeaderList;
+            if (skipItem) return;
+
             return (
               <GroupItem
                 key={group.groupId}
@@ -76,6 +82,7 @@ export default function GroupsList({}) {
               />
             );
           })}
+          {/* { isEmptyList &&"目前沒有任何紀錄唷！"} */}
         </ul>
       </div>
     </section>

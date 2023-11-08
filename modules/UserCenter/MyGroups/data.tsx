@@ -33,6 +33,10 @@ export type GroupItemProps = {
   actionBtns: ActionBtnsType;
 };
 
+export type GroupListProps = {
+  memberStatus: "leader" | "member";
+};
+
 // ----data----
 
 // 列表篩選
@@ -68,7 +72,7 @@ export const groupsData: GroupsDataType[] = [
   },
   {
     groupId: 71,
-    groupName: "鳩鳩軍團：重策動腦咕咕咕",
+    groupName: "團長鳩鳩：重策動腦咕咕咕",
     startTime: "2023-11-03T09:25:40.657",
     endTime: "2023-11-03T09:25:40.657",
     totalMemberNum: 12,
@@ -80,13 +84,13 @@ export const groupsData: GroupsDataType[] = [
       storeName: "天邊一隻鳩桌遊店",
       address: "粗粗樹左邊樹洞",
     },
-    status: "member",
+    status: "leader",
     commented: true,
     createDate: "2023-11-04T15:28:16.497",
   },
   {
     groupId: 61,
-    groupName: "鳩鳩軍團：重策動腦咕咕咕",
+    groupName: "已加入鳩鳩：重策動腦咕咕咕",
     startTime: "2023-11-09T09:25:40.657",
     endTime: "2023-11-09T09:25:40.657",
     totalMemberNum: 12,
@@ -104,7 +108,7 @@ export const groupsData: GroupsDataType[] = [
   },
   {
     groupId: 1,
-    groupName: "鳩鳩軍團：重策動腦咕咕咕",
+    groupName: "審核中鳩鳩軍團：重策動腦咕咕咕",
     startTime: "2023-11-09T09:25:40.657",
     endTime: "2023-11-09T09:25:40.657",
     totalMemberNum: 12,

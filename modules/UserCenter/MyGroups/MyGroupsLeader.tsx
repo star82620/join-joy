@@ -4,5 +4,5 @@ import GroupsList from "./GroupsList";
 export default function MyGroupsLeader() {
   const memberStatus = "leader";
 
-  return <GroupsList />;
+  return <GroupsList memberStatus={memberStatus} />;
 }

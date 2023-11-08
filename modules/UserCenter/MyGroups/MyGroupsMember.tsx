@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import GroupsList from "./GroupsList";
 
 export default function MyGroupsMember() {
-  return <div>MyGroupsMember</div>;
+  const memberStatus = "member";
+
+  return <GroupsList memberStatus={memberStatus} />;
 }
