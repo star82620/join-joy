@@ -81,15 +81,16 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     });
 
     setInputErrors(errors);
-    return !Object.values(errors).includes(true);
+    const isVerifyPass = !Object.values(errors).includes(true);
+    return isVerifyPass;
   };
 
   // handle 送出表單
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // 表單驗證，如果 false 就擋掉
-    const isValidForm = checkValidForm();
-    if (!isValidForm) return;
+    const isVerifyPass = checkValidForm();
+    if (!isVerifyPass) return;
     // 打 API
     apiParams.data = inputValues;
     const data = await fetchApi(apiParams);
