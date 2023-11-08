@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
+import ProfileImg from "@/common/components/ProfileImg";
 
 export default function MessageBoard() {
   const [textLength, setTextLength] = useState(0);
@@ -43,15 +43,12 @@ export default function MessageBoard() {
       </div>
       <div className="pt-6 md:pt-4">
         <div className="flex items-start gap-8">
-          <p className="relative w-16 h-16 md:w-9 md:h-9 rounded-full border-2 border-white outline outline-2 outline-gray-950">
-            <Image
-              src="/images/photo-user-000.png"
-              alt="user"
-              fill
-              sizes="100%"
-              className="object-contain rounded-full"
-            />
-          </p>
+          <ProfileImg
+            src="/images/photo-user-000.png"
+            alt="user"
+            widthProp="w-16 md:w-9"
+            heightProp="h-16 md:h-9"
+          />
           <div className="grow">
             <div>
               <p className="font-semibold leading-[1.2] md:text-sm md:leading-6 ">
