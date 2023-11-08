@@ -1,6 +1,6 @@
 import getToken from "@/common/helpers/getToken";
 
-const token: string | undefined = getToken();
+const token: string | null = getToken();
 
 // 要用的話要寫這一包資料
 // const apiParams = {
