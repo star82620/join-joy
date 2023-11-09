@@ -1,6 +1,7 @@
 import { InputSetType } from "@/common/components/Form/data";
 import { ButtonType } from "@/common/components/GeneralButton/data";
 import { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 
 export const title = "會員註冊";
 
@@ -52,6 +53,6 @@ export const btnSet: ButtonType = {
 
 //API
 export const apiParams: apiParamsType = {
-  apiPath: "/auth/register",
+  apiPath: apiPaths.signup,
   method: "POST",
 };
