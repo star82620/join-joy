@@ -49,10 +49,11 @@ export async function getStaticProps({ params }: getStaticPropsProps) {
   };
 
   const msgRes = await fetchApi(msgApiParams);
-  const msgData: msgDataType[] = (await msgRes.data) || [];
+
+  const msgData: msgDataType[] = Array.isArray(msgRes.data) ? msgRes.data : [];
 
   return {
-    props: { groupId: id, groupData: groupData, msgData: msgData },
+    props: { groupId: id, groupData, msgData },
   };
 }
 

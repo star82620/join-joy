@@ -16,13 +16,13 @@ export type GroupDataContextType = {
   groupId: GroupIdType;
   groupData: GroupDataType;
   currentMemberNum: number;
-  msgData: msgDataType[] | [];
+  msgData: msgDataType[];
 };
 
 export type GroupProfilePageProps = {
   groupId: GroupIdType;
   groupData: GroupDataType;
-  msgData: msgDataType;
+  msgData: msgDataType[];
 };
 
 export type GroupProfileProps = {
