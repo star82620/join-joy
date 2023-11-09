@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
-import formatDate from "@/common/helpers/formateDate";
+import formatGroupDate from "@/common/helpers/formateDate";
 import statusSet from "@/constants/groupStatusSet";
 import { setStatus } from "./GroupsList";
 import { GroupItemProps } from "./data";
@@ -32,12 +32,12 @@ export default function GroupItem({
   const isCommented = commented;
 
   // 抓取對應的按鈕
-  const selectBtn = () => {
+  const setActionBtn = () => {
     if (!isOverActive) return groupStatus;
     if (isCommented) return "commented";
     return "over";
   };
-  const actionBtnId = selectBtn();
+  const actionBtnId = setActionBtn();
   const btnDisabled = actionBtns[actionBtnId].disabled;
   const btnOnClick = actionBtns[actionBtnId].func;
   const btnText = actionBtns[actionBtnId].text;
@@ -45,11 +45,11 @@ export default function GroupItem({
   const isStore = store !== "NULL";
   const location = isStore ? store.storeName : place;
 
-  const { groupDate, formatStartTime, formatEndTime } = formatDate(
+  const { groupDate, formattedStartTime, formattedEndTime } = formatGroupDate(
     startTime,
     endTime
   );
-  const groupTime = `${formatStartTime} - ${formatEndTime}`;
+  const groupTime = `${formattedStartTime} - ${formattedEndTime}`;
 
   return (
     <li
