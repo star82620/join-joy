@@ -5,7 +5,7 @@ import GroupItem from "./GroupItem";
 import { groupsData, tabs, ActionBtnsType, GroupListProps } from "./data";
 
 // 是哪一種狀態
-export const setStatus = (endTime: string, status: string) => {
+export const setGroupStatus = (endTime: string, status: string) => {
   const now = new Date();
   const today = now.toISOString();
   if (status === "pending") return "pending";
@@ -50,8 +50,8 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
     },
   };
 
-  const isOverActive = activeTab === "over";
-  const upcomingActionTitle = (
+  const isOverTabActive = activeTab === "over";
+  const upcomingPageBtn = (
     <>
       <span className="whitespace-nowrap after:content-['/'] after:font-normal">
         取消
@@ -59,7 +59,7 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
       <span className="whitespace-nowrap">退出</span>
     </>
   );
-  const OverActionTitle = "評價";
+  const OverPageBtn = "評價";
 
   const isLeaderPage = pageStatus === "leader";
 
@@ -68,10 +68,10 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
     if (isLeaderPage && !isLeaderGroup) return false;
     if (!isLeaderPage && isLeaderGroup) return false;
 
-    const groupStatus = setStatus(group.endTime, group.status);
+    const groupStatus = setGroupStatus(group.endTime, group.status);
     const isOverStatus = groupStatus === "over";
-    if (!isOverActive && isOverStatus) return false;
-    if (isOverActive && !isOverStatus) return false;
+    if (!isOverTabActive && isOverStatus) return false;
+    if (isOverTabActive && !isOverStatus) return false;
 
     return true;
   });
@@ -93,7 +93,7 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
           <p className="w-[20%]">時間</p>
           <p className="w-[10%]">人數</p>
           <p className="w-[10%]">
-            {isOverActive ? OverActionTitle : upcomingActionTitle}
+            {isOverTabActive ? OverPageBtn : upcomingPageBtn}
           </p>
         </div>
         <ul>
@@ -101,7 +101,7 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
             <GroupItem
               key={group.groupId}
               group={group}
-              isOverActive={isOverActive}
+              isOverTabActive={isOverTabActive}
               actionBtns={actionBtns}
             />
           ))}
