@@ -5,13 +5,16 @@ import ModalWrapper from "@/common/components/ModalWrapper";
 import GroupInformation from "./GroupInformation";
 import MembersList from "./MembersList";
 import MessageBoard from "./MessageBoard";
+import { gameTypeIndex } from "@/constants/wordIndexes";
 import {
-  groupData,
   titles,
   TitleProps,
   TagItemProps,
   GameItemProps,
+  GroupDataType,
   StoreLocationProps,
+  GroupDataContextType,
+  GroupProfileProps,
 } from "./data";
 
 export function StoreLocation({ store }: StoreLocationProps) {
@@ -68,24 +71,24 @@ export function GameItem({ game }: GameItemProps) {
   return (
     <li className="flex items-center gap-2">
       <span className="border-[0.5px] rounded bg-white p-1 text-xs text-gray-800 font-semibold">
-        {game.gameType}
+        {gameTypeIndex[game.gameType]}
       </span>
       <span className="font-medium md:text-sm">{game.gameName}</span>
     </li>
   );
 }
 
-const currentMemberNum = groupData.members.reduce((counter, member) => {
-  counter += member.initNum;
-  return counter;
-}, 0);
+export const GroupDataContext = createContext<GroupDataContextType>(
+  {} as GroupDataContextType
+);
 
-export const GroupDataContext = createContext({
-  groupData: groupData,
-  currentMemberNum: currentMemberNum,
-});
+export default function GroupProfile({ data }: GroupProfileProps) {
+  const groupData: GroupDataType = data;
+  const currentMemberNum = groupData.members.reduce((counter, member) => {
+    counter += member.initNum;
+    return counter;
+  }, 0);
 
-export default function GroupProfile({ data }) {
   const [applyNum, setApplyNum] = useState<number>(1);
 
   function handleJoinSubmit(e: React.FormEvent<HTMLFormElement>) {

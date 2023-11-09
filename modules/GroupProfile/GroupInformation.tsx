@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import Share from "@/common/components/Share";
-import { groupStatusFormat } from "@/constants/groupStatusFormat";
+import { groupStatusIndex } from "@/constants/wordIndexes";
 import {
   StoreLocation,
   Title,
@@ -31,14 +31,19 @@ export default function GroupInformation({
     description,
     tags,
   } = groupData;
-  const isPlace = place !== "NULL";
-  const groupStatusText = groupStatusFormat[groupStatus];
+  const isPlace = place !== null;
+  const groupStatusText = groupStatusIndex[groupStatus];
   const remainingNum = totalMemberNum - currentMemberNum;
-  const numOptions = [...Array(remainingNum)].map((_, index) => (
-    <option key={index} value={index + 1}>
-      {index + 1}
-    </option>
-  ));
+  const isFull = remainingNum <= 0;
+
+  const NumOptions = () => {
+    if (isFull) return null;
+    return [...Array(remainingNum)].map((_, index) => (
+      <option key={index} value={index + 1}>
+        {index + 1}
+      </option>
+    ));
+  };
 
   return (
     <section className="px-12 py-8 md:px-3 md:py-4">
@@ -73,22 +78,27 @@ export default function GroupInformation({
           <Title content="time" />
           {startTime}-{endTime}
         </li>
-        <li>
-          <Title content="cost" />
-          {cost}
-        </li>
+        {!isPlace && (
+          <li>
+            <Title content="cost" />
+            {cost}
+          </li>
+        )}
         <li>
           <Title content="totalMembers" />
           {totalMemberNum} 人
         </li>
-        <li>
-          <Title content="games" />
-          <ul className="flex flex-col gap-4 md:gap-2">
-            {games.map((game: GameItemType) => (
-              <GameItem key={game.gameId} game={game} />
-            ))}
-          </ul>
-        </li>
+
+        {!isPlace && (
+          <li>
+            <Title content="games" />
+            <ul className="flex flex-col gap-4 md:gap-2">
+              {games.map((game: GameItemType) => (
+                <GameItem key={game.gameId} game={game} />
+              ))}
+            </ul>
+          </li>
+        )}
         <li>
           <Title content="description" />
           <span className="whitespace-pre-wrap text-sm">{description}</span>
@@ -99,27 +109,29 @@ export default function GroupInformation({
           <TagItem key={tag} tag={tag} />
         ))}
       </div>
-      <form
-        className="flex flex-wrap gap-10 md:flex-col md:items-start md:gap-4 mt-8 md:mt-6"
-        onSubmit={handleJoinSubmit}
-      >
-        <div className="flex items-center">
-          <span className="text-lg md:text-md font-semibold whitespace-nowrap">
-            人數：
-          </span>
-          <select
-            className="w-22 px-3 py-2 md:text-xs grow"
-            onChange={(e) => {
-              setApplyNum(Number(e.target.value));
-            }}
-          >
-            {numOptions}
-          </select>
-        </div>
-        <Button type="submit" appearance="orange" className="grow md:w-full">
-          加入揪團
-        </Button>
-      </form>
+      {!isFull && (
+        <form
+          className="flex flex-wrap gap-10 md:flex-col md:items-start md:gap-4 mt-8 md:mt-6"
+          onSubmit={handleJoinSubmit}
+        >
+          <div className="flex items-center">
+            <span className="text-lg md:text-md font-semibold whitespace-nowrap">
+              人數：
+            </span>
+            <select
+              className="w-22 px-3 py-2 md:text-xs grow"
+              onChange={(e) => {
+                setApplyNum(Number(e.target.value));
+              }}
+            >
+              <NumOptions />
+            </select>
+          </div>
+          <Button type="submit" appearance="orange" className="grow md:w-full">
+            加入揪團
+          </Button>
+        </form>
+      )}
     </section>
   );
 }

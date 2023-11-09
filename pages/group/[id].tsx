@@ -2,6 +2,11 @@ import React from "react";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import GroupProfile from "@/modules/GroupProfile";
 import Layout from "@/common/components/Layout";
+import {
+  GroupType,
+  getStaticPropsProps,
+  GroupDataType,
+} from "@/modules/GroupProfile/data";
 
 export async function getStaticPaths() {
   const apiParams: apiParamsType = {
@@ -12,7 +17,7 @@ export async function getStaticPaths() {
   const res = await fetchApi(apiParams);
   const data = res.data;
 
-  const paths = data.map((group) => {
+  const paths = data.map((group: GroupType) => {
     return {
       params: {
         id: group.groupId.toString(),
@@ -25,7 +30,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }: getStaticPropsProps) {
   const { id } = params;
 
   const apiParams: apiParamsType = {
@@ -41,7 +46,7 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function GroupProfilePage(props) {
+export default function GroupProfilePage(props: Record<string, GroupDataType>) {
   const { groupData } = props;
 
   return (
