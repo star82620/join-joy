@@ -34,6 +34,20 @@ export type UserNavBarProps = {
   toggleActiveSubNav: (subNav: SubItemType) => void;
 };
 
+// 因為要共用，所以 tabId 使用 string
+export type tabType = {
+  tabId: string;
+  text: string;
+};
+
+export type TabSectionProps = {
+  tabs: tabType[];
+  activeTab: string;
+  setActiveTab: (activeTab: string) => void;
+};
+
+// ----data----
+
 // 獲取會員詳細資料
 export const userDataKey: apiParamsType = {
   apiPath: "/member/memberDetails",

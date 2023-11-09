@@ -31,7 +31,7 @@ h6 {
 }
 
 .container {
-  @apply max-w-[1296px] mx-auto 
+  @apply max-w-[1272px] mx-auto 
   px-12 md:px-6 sm:px-3;
 }
 
@@ -60,4 +60,24 @@ h6 {
   after:align-middle 
   after:bg-contain after:bg-no-repeat 
   after:bg-radio-false checked:after:bg-radio-true;
+}
+
+.groupStatusDot {
+  @apply align-middle
+  before:content-[''] before:inline-block 
+  before:w-2.5 before:h-2.5 before:mr-1
+  before:align-baseline
+  before:rounded-full;
+}
+
+.groupStatusPending {
+  @apply before:bg-green-light;
+}
+
+.groupStatusOver {
+  @apply before:bg-gray-900;
+}
+
+.groupStatusMember {
+  @apply before:bg-orange-primary;
 }
