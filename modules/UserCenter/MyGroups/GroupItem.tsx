@@ -45,8 +45,10 @@ export default function GroupItem({
   const isStore = store !== null;
   const location = isStore ? store.storeName : place;
 
-  const { formattedGroupDate, formattedStartTime, formattedEndTime } =
-    formatGroupDate(startTime, endTime);
+  const { groupDate, formattedStartTime, formattedEndTime } = formatGroupDate(
+    startTime,
+    endTime
+  );
   const groupTime = `${formattedStartTime} - ${formattedEndTime}`;
 
   return (
@@ -62,7 +64,7 @@ export default function GroupItem({
       </p>
       <p className="w-[20%] truncate">{location}</p>
       <p className="w-[20%] flex flex-wrap justify-center gap-2">
-        <span className=" whitespace-nowrap">{formattedGroupDate}</span>
+        <span className=" whitespace-nowrap">{groupDate}</span>
         <span className=" whitespace-nowrap">{groupTime}</span>
       </p>
       <p className="w-[10%]">
