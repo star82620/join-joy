@@ -29,7 +29,7 @@ export type ActionBtnsType = Record<string, ActionBtnType>;
 
 export type GroupItemProps = {
   group: GroupsDataType;
-  isOverActive: boolean;
+  isOverTab: boolean;
   actionBtns: ActionBtnsType;
 };
 

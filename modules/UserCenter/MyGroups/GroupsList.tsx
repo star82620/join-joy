@@ -50,7 +50,7 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
     },
   };
 
-  const isOverTabActive = activeTab === "over";
+  const isOverTab = activeTab === "over";
   const upcomingPageBtn = (
     <>
       <span className="whitespace-nowrap after:content-['/'] after:font-normal">
@@ -62,16 +62,18 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
   const OverPageBtn = "評價";
 
   const isLeaderPage = pageStatus === "leader";
+  const isMemberPage = pageStatus === "member";
+  const isUpcomingActive = activeTab === "upcoming";
 
   const filterData = groupsData.filter((group) => {
     const isLeaderGroup = group.status === "leader";
     if (isLeaderPage && !isLeaderGroup) return false;
-    if (!isLeaderPage && isLeaderGroup) return false;
+    if (isMemberPage && isLeaderGroup) return false;
 
     const groupStatus = setGroupStatus(group.endTime, group.status);
     const isOverStatus = groupStatus === "over";
-    if (!isOverTabActive && isOverStatus) return false;
-    if (isOverTabActive && !isOverStatus) return false;
+    if (isUpcomingActive && isOverStatus) return false;
+    if (isOverTab && !isOverStatus) return false;
 
     return true;
   });
@@ -92,16 +94,14 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
           <p className="w-[20%]">地點</p>
           <p className="w-[20%]">時間</p>
           <p className="w-[10%]">人數</p>
-          <p className="w-[10%]">
-            {isOverTabActive ? OverPageBtn : upcomingPageBtn}
-          </p>
+          <p className="w-[10%]">{isOverTab ? OverPageBtn : upcomingPageBtn}</p>
         </div>
         <ul>
           {filterData.map((group) => (
             <GroupItem
               key={group.groupId}
               group={group}
-              isOverTabActive={isOverTabActive}
+              isOverTab={isOverTab}
               actionBtns={actionBtns}
             />
           ))}

@@ -3,12 +3,12 @@ import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import formatGroupDate from "@/common/helpers/formateDate";
 import statusSet from "@/constants/groupStatusSet";
-import { setStatus } from "./GroupsList";
+import { setGroupStatus } from "./GroupsList";
 import { GroupItemProps } from "./data";
 
 export default function GroupItem({
   group,
-  isOverActive,
+  isOverTab,
   actionBtns,
 }: GroupItemProps) {
   const {
@@ -24,7 +24,7 @@ export default function GroupItem({
     commented,
   } = group;
 
-  const groupStatus = setStatus(group.endTime, group.status);
+  const groupStatus = setGroupStatus(group.endTime, group.status);
   // 狀態表示
   const statusStyle = statusSet[groupStatus].style;
   const statusText = statusSet[groupStatus].text;
@@ -33,7 +33,7 @@ export default function GroupItem({
 
   // 抓取對應的按鈕
   const setActionBtn = () => {
-    if (!isOverActive) return groupStatus;
+    if (!isOverTab) return groupStatus;
     if (isCommented) return "commented";
     return "over";
   };
