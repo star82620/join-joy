@@ -3,18 +3,19 @@ import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import GroupProfile from "@/modules/GroupProfile";
 import Layout from "@/common/components/Layout";
 
-async function getStaticPath() {
+export async function getStaticPaths() {
   const apiParams: apiParamsType = {
     apiPath: "/group/getallgroupid",
     method: "GET",
   };
 
-  const data = await fetchApi(apiParams);
+  const res = await fetchApi(apiParams);
+  const data = res.data;
 
   const paths = data.map((group) => {
     return {
       params: {
-        groupId: group,
+        id: group.groupId.toString(),
       },
     };
   });
@@ -24,32 +25,28 @@ async function getStaticPath() {
   };
 }
 
-async function getStaticProps({ params }) {
-  const { groupId } = params;
+export async function getStaticProps({ params }) {
+  const { id } = params;
 
-  const url = `/group/easydetail/${groupId}`;
-  // const apiParams: apiParamsType = {
-  //   apiPath: url,
-  //   method: "GET",
-  // };
+  const apiParams: apiParamsType = {
+    apiPath: `/group/easydetail/${id}`,
+    method: "GET",
+  };
 
-  // const data = await fetchApi(apiParams);
-  // const a = data ? "yes" : "aaaa";
-
-  const res = await fetch(url);
-  const data = await res.json();
+  const res = await fetchApi(apiParams);
+  const data = await res.data.groupWithGames;
 
   return {
-    props: { groupData: data, id: url },
+    props: { groupData: data },
   };
 }
 
-export default function GroupProfilePage({ groupData, id }) {
-  console.log(groupData, id);
+export default function GroupProfilePage(props) {
+  const { groupData } = props;
+
   return (
     <Layout pageCategory="group">
-      <GroupProfile />
-      {/* {groupData.groupId} */}
+      <GroupProfile data={groupData} />
     </Layout>
   );
 }

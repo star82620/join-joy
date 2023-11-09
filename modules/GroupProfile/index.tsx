@@ -85,7 +85,7 @@ export const GroupDataContext = createContext({
   currentMemberNum: currentMemberNum,
 });
 
-export default function GroupProfile() {
+export default function GroupProfile({ data }) {
   const [applyNum, setApplyNum] = useState<number>(1);
 
   function handleJoinSubmit(e: React.FormEvent<HTMLFormElement>) {
