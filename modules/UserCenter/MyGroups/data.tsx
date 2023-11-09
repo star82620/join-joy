@@ -12,8 +12,8 @@ export type GroupsDataType = {
   totalMemberNum: number;
   currentNum: number;
   description: string;
-  place: string | "NULL";
-  store: StoreType | "NULL";
+  place: string | null;
+  store: StoreType | null;
   status: StatusType;
   commented: boolean;
   createDate: string;
@@ -29,7 +29,7 @@ export type ActionBtnsType = Record<string, ActionBtnType>;
 
 export type GroupItemProps = {
   group: GroupsDataType;
-  isOverTab: boolean;
+  isExpired: boolean;
   actionBtns: ActionBtnsType;
 };
 
@@ -46,7 +46,7 @@ export const tabs: tabType[] = [
     text: "未開始",
   },
   {
-    tabId: "over",
+    tabId: "expired",
     text: "已結束",
   },
 ];
@@ -60,7 +60,7 @@ export const groupsData: GroupsDataType[] = [
     totalMemberNum: 8,
     currentNum: 5,
     description: "測試測試",
-    place: "NULL",
+    place: null,
     store: {
       storeId: 5,
       storeName: "六角桌遊店",
@@ -78,7 +78,7 @@ export const groupsData: GroupsDataType[] = [
     totalMemberNum: 12,
     currentNum: 12,
     description: "測試測試",
-    place: "NULL",
+    place: null,
     store: {
       storeId: 56,
       storeName: "天邊一隻鳩桌遊店",
@@ -96,7 +96,7 @@ export const groupsData: GroupsDataType[] = [
     totalMemberNum: 12,
     currentNum: 3,
     description: "測試測試",
-    place: "NULL",
+    place: null,
     store: {
       storeId: 56,
       storeName: "天邊一隻鳩桌遊店",
@@ -115,7 +115,7 @@ export const groupsData: GroupsDataType[] = [
     currentNum: 3,
     description: "測試測試",
     place: "蒼鷺家西邊那棵樹上的果實店",
-    store: "NULL",
+    store: null,
     status: "pending",
     commented: false,
     createDate: "2023-11-04T15:28:16.497",
@@ -129,7 +129,7 @@ export const groupsData: GroupsDataType[] = [
     currentNum: 3,
     description: "測試測試",
     place: "蒼鷺家西邊那棵樹上的果實店",
-    store: "NULL",
+    store: null,
     status: "leader",
     commented: false,
     createDate: "2023-11-04T15:28:16.497",

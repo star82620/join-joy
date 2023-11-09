@@ -8,7 +8,7 @@ import { GroupItemProps } from "./data";
 
 export default function GroupItem({
   group,
-  isOverTab,
+  isExpired,
   actionBtns,
 }: GroupItemProps) {
   const {
@@ -24,7 +24,7 @@ export default function GroupItem({
     commented,
   } = group;
 
-  const groupStatus = setGroupStatus(group.endTime, group.status);
+  const groupStatus = setGroupStatus(endTime, status);
   // 狀態表示
   const statusStyle = statusSet[groupStatus].style;
   const statusText = statusSet[groupStatus].text;
@@ -32,23 +32,21 @@ export default function GroupItem({
   const isCommented = commented;
 
   // 抓取對應的按鈕
-  const setActionBtn = () => {
-    if (!isOverTab) return groupStatus;
+  const setBtn = () => {
+    if (!isExpired) return groupStatus;
     if (isCommented) return "commented";
-    return "over";
+    return "closed";
   };
-  const actionBtnId = setActionBtn();
-  const btnDisabled = actionBtns[actionBtnId].disabled;
-  const btnOnClick = actionBtns[actionBtnId].func;
-  const btnText = actionBtns[actionBtnId].text;
+  const btnId = setBtn();
+  const btnDisabled = actionBtns[btnId].disabled;
+  const btnOnClick = actionBtns[btnId].func;
+  const btnText = actionBtns[btnId].text;
 
-  const isStore = store !== "NULL";
+  const isStore = store !== null;
   const location = isStore ? store.storeName : place;
 
-  const { groupDate, formattedStartTime, formattedEndTime } = formatGroupDate(
-    startTime,
-    endTime
-  );
+  const { formattedGroupDate, formattedStartTime, formattedEndTime } =
+    formatGroupDate(startTime, endTime);
   const groupTime = `${formattedStartTime} - ${formattedEndTime}`;
 
   return (
@@ -64,7 +62,7 @@ export default function GroupItem({
       </p>
       <p className="w-[20%] truncate">{location}</p>
       <p className="w-[20%] flex flex-wrap justify-center gap-2">
-        <span className=" whitespace-nowrap">{groupDate}</span>
+        <span className=" whitespace-nowrap">{formattedGroupDate}</span>
         <span className=" whitespace-nowrap">{groupTime}</span>
       </p>
       <p className="w-[10%]">

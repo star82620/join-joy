@@ -7,7 +7,7 @@ const groupStatusSet = {
     text: "已加入",
     style: "groupStatusMember",
   },
-  over: {
+  closed: {
     text: "已結束",
     style: "groupStatusOver",
   },

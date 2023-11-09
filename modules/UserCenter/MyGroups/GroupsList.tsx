@@ -9,7 +9,7 @@ export const setGroupStatus = (endTime: string, status: string) => {
   const now = new Date();
   const today = now.toISOString();
   if (status === "pending") return "pending";
-  if (endTime < today) return "over";
+  if (endTime < today) return "closed";
   return "member";
 };
 
@@ -39,7 +39,7 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
       func: handleCancelApply,
       disabled: false,
     },
-    over: {
+    closed: {
       text: "評價",
       func: handleToComment,
       disabled: false,
@@ -50,8 +50,8 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
     },
   };
 
-  const isOverTab = activeTab === "over";
-  const upcomingPageBtn = (
+  const isExpired = activeTab === "Expired";
+  const upcomingBtnTitle = (
     <>
       <span className="whitespace-nowrap after:content-['/'] after:font-normal">
         取消
@@ -59,26 +59,26 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
       <span className="whitespace-nowrap">退出</span>
     </>
   );
-  const OverPageBtn = "評價";
+  const expiredBtnTitle = "評價";
 
   const isLeaderPage = pageStatus === "leader";
   const isMemberPage = pageStatus === "member";
-  const isUpcomingActive = activeTab === "upcoming";
+  const isUpcoming = activeTab === "upcoming";
 
-  const filterData = groupsData.filter((group) => {
+  const filteredData = groupsData.filter((group) => {
     const isLeaderGroup = group.status === "leader";
     if (isLeaderPage && !isLeaderGroup) return false;
     if (isMemberPage && isLeaderGroup) return false;
 
     const groupStatus = setGroupStatus(group.endTime, group.status);
-    const isOverStatus = groupStatus === "over";
-    if (isUpcomingActive && isOverStatus) return false;
-    if (isOverTab && !isOverStatus) return false;
+    const isClosed = groupStatus === "closed";
+    if (isUpcoming && isClosed) return false;
+    if (isExpired && !isClosed) return false;
 
     return true;
   });
 
-  const isEmptyList = filterData.length === 0;
+  const isEmptyList = filteredData.length === 0;
 
   return (
     <section className="px-6 py-8 md:p-4">
@@ -94,14 +94,16 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
           <p className="w-[20%]">地點</p>
           <p className="w-[20%]">時間</p>
           <p className="w-[10%]">人數</p>
-          <p className="w-[10%]">{isOverTab ? OverPageBtn : upcomingPageBtn}</p>
+          <p className="w-[10%]">
+            {isExpired ? expiredBtnTitle : upcomingBtnTitle}
+          </p>
         </div>
         <ul>
-          {filterData.map((group) => (
+          {filteredData.map((group) => (
             <GroupItem
               key={group.groupId}
               group={group}
-              isOverTab={isOverTab}
+              isExpired={isExpired}
               actionBtns={actionBtns}
             />
           ))}
