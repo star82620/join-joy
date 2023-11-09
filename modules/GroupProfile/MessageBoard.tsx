@@ -3,6 +3,7 @@ import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
 import { GroupDataContext } from "./index";
 import { MsgCardProps, msgDataType } from "./data";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 
 const MsgCard = ({ msg }: MsgCardProps) => {
   const { userId, userName, userPhoto, commentContent, commentDate } = msg;
@@ -31,23 +32,33 @@ const MsgCard = ({ msg }: MsgCardProps) => {
 };
 
 export default function MessageBoard() {
-  const { msgData } = useContext(GroupDataContext);
+  const { msgData, groupId } = useContext(GroupDataContext);
   const [textLength, setTextLength] = useState(0);
   const [msgValue, setMsgValue] = useState("");
   const isEmpty = msgData.length === 0;
+
+  const handleSubmitMsg = async (e) => {
+    e.preventDefault();
+    console.log(msgValue);
+    const msg = {
+      groupId: groupId,
+      commentTxt: "string",
+    };
+
+    const submitMsgKey: apiParamsType = {
+      apiPath: "/group/comments",
+      method: "POST",
+      data: msg,
+    };
+
+    const data = await fetchApi(submitMsgKey);
+  };
 
   return (
     <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
       <div className="flex items-center gap-2 border-b border-gray-300 pb-6 md:pb-4">
         <div className="grow">
-          <form
-            id="submitMsg"
-            onSubmit={(e) => {
-              e.preventDefault();
-              console.log(msgValue);
-              //送出 API
-            }}
-          >
+          <form id="submitMsg" onSubmit={handleSubmitMsg}>
             <textarea
               maxLength={100}
               rows={3}

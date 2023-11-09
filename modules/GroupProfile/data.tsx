@@ -2,6 +2,8 @@ export type GroupType = { groupId: number; groupName: string };
 
 export type getStaticPropsProps = { params: Record<string, string> };
 
+export type GroupIdType = number;
+
 export type msgDataType = {
   userId: number;
   userName: string;
@@ -11,12 +13,14 @@ export type msgDataType = {
 };
 
 export type GroupDataContextType = {
+  groupId: GroupIdType;
   groupData: GroupDataType;
   currentMemberNum: number;
   msgData: msgDataType[] | [];
 };
 
 export type GroupProfilePageProps = {
+  groupId: GroupIdType;
   groupData: GroupDataType;
   msgData: msgDataType;
 };

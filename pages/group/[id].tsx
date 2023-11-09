@@ -52,15 +52,16 @@ export async function getStaticProps({ params }: getStaticPropsProps) {
   const msgData: msgDataType[] = (await msgRes.data) || [];
 
   return {
-    props: { groupData: groupData, msgData: msgData },
+    props: { groupId: id, groupData: groupData, msgData: msgData },
   };
 }
 
 export default function GroupProfilePage({
+  groupId,
   groupData,
   msgData,
 }: GroupProfilePageProps) {
-  const data = { groupData, msgData };
+  const data = { groupId, groupData, msgData };
   return (
     <Layout pageCategory="group">
       <GroupProfile data={data} />
