@@ -57,7 +57,9 @@ export default function UserProfile() {
                   className="text-lg lg:text-md leading-[1.2]"
                 >
                   <span className="flex items-center leading-6 font-semibold text-lg md:text-md md:leading-5">
-                    {isFollowed ? "已追蹤" : "追蹤"}
+                    <span className="text-sm">
+                      {isFollowed ? "已追蹤" : "追蹤"}
+                    </span>
                     <span className="relative inline-block w-6 h-6 md:w-5 md:h-5 ml-1">
                       <Image
                         src={

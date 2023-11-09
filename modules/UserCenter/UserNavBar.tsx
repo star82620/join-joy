@@ -39,7 +39,7 @@ export default function UserNavBar({
           return (
             <li
               key={subNav.id}
-              className={`p-3 ml-9 text-sm cursor-pointer ${activeSubNavStyle}`}
+              className={`p-3 ml-9 text-sm mdg:text-xs cursor-pointer whitespace-nowrap ${activeSubNavStyle}`}
               onClick={() => toggleActiveSubNav(subNav)}
             >
               {subNav.text}
@@ -76,7 +76,7 @@ export default function UserNavBar({
             return (
               <li key={nav.id}>
                 <div
-                  className={`flex gap-3 p-3 cursor-pointer ${navStyle} `}
+                  className={`flex gap-3 p-3 mdg:text-sm cursor-pointer ${navStyle} `}
                   onClick={() => toggleActiveNav(nav)}
                 >
                   <Image
@@ -85,7 +85,7 @@ export default function UserNavBar({
                     widthProp="w-6"
                     heightProp="h-6"
                   />
-                  <span className="grow">{nav.text}</span>
+                  <span className="grow whitespace-nowrap">{nav.text}</span>
                   {haveSubItem && !openSubList && subNavOpenIcon}
                   {showSubNav && subNavCloseIcon}
                 </div>

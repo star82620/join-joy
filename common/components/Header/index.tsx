@@ -33,7 +33,7 @@ export default function Header({ pageCategory }: HeaderProps) {
               onClick={() => console.log("開團！")}
               className="md:hidden"
             >
-              我要開團
+              <span className="text-xl md:text-xs">我要開團</span>
             </Button>
           )}
           <section className="flex flex-col">
