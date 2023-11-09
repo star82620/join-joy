@@ -6,6 +6,8 @@ import {
   GroupType,
   getStaticPropsProps,
   GroupDataType,
+  msgDataType,
+  GroupProfilePageProps,
 } from "@/modules/GroupProfile/data";
 
 export async function getStaticPaths() {
@@ -33,25 +35,35 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: getStaticPropsProps) {
   const { id } = params;
 
-  const apiParams: apiParamsType = {
+  const groupApiParams: apiParamsType = {
     apiPath: `/group/easydetail/${id}`,
     method: "GET",
   };
 
-  const res = await fetchApi(apiParams);
-  const data = await res.data.groupWithGames;
+  const groupRes = await fetchApi(groupApiParams);
+  const groupData: GroupDataType = await groupRes.data.groupWithGames;
+
+  const msgApiParams: apiParamsType = {
+    apiPath: `/group/comments/${id}`,
+    method: "GET",
+  };
+
+  const msgRes = await fetchApi(msgApiParams);
+  const msgData: msgDataType[] = (await msgRes.data) || [];
 
   return {
-    props: { groupData: data },
+    props: { groupData: groupData, msgData: msgData },
   };
 }
 
-export default function GroupProfilePage(props: Record<string, GroupDataType>) {
-  const { groupData } = props;
-
+export default function GroupProfilePage({
+  groupData,
+  msgData,
+}: GroupProfilePageProps) {
+  const data = { groupData, msgData };
   return (
     <Layout pageCategory="group">
-      <GroupProfile data={groupData} />
+      <GroupProfile data={data} />
     </Layout>
   );
 }

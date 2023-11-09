@@ -11,7 +11,6 @@ import {
   TitleProps,
   TagItemProps,
   GameItemProps,
-  GroupDataType,
   StoreLocationProps,
   GroupDataContextType,
   GroupProfileProps,
@@ -83,7 +82,7 @@ export const GroupDataContext = createContext<GroupDataContextType>(
 );
 
 export default function GroupProfile({ data }: GroupProfileProps) {
-  const groupData: GroupDataType = data;
+  const { groupData, msgData } = data;
   const currentMemberNum = groupData.members.reduce((counter, member) => {
     counter += member.initNum;
     return counter;
@@ -100,7 +99,9 @@ export default function GroupProfile({ data }: GroupProfileProps) {
   return (
     <section className="container py-14 md:py-9">
       <div className="flex justify-center items-stretch gap-9 md:flex-col">
-        <GroupDataContext.Provider value={{ groupData, currentMemberNum }}>
+        <GroupDataContext.Provider
+          value={{ groupData, currentMemberNum, msgData }}
+        >
           <div className="flex flex-col gap-9 md:gap-8 grow">
             <div className="grow">
               <ModalWrapper title="揪團資訊" layout="primary">

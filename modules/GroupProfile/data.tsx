@@ -2,14 +2,38 @@ export type GroupType = { groupId: number; groupName: string };
 
 export type getStaticPropsProps = { params: Record<string, string> };
 
+export type msgDataType = {
+  userId: number;
+  userName: string;
+  userPhoto: string;
+  commentContent: string;
+  commentDate: string;
+};
+
 export type GroupDataContextType = {
   groupData: GroupDataType;
   currentMemberNum: number;
+  msgData: msgDataType[] | [];
+};
+
+export type GroupProfilePageProps = {
+  groupData: GroupDataType;
+  msgData: msgDataType;
 };
 
 export type GroupProfileProps = {
-  data: GroupDataType;
+  data: GroupProfilePageProps;
 };
+
+export type MessageBoardProps = {
+  data: msgDataType;
+};
+
+export type MsgCardProps = {
+  msg: msgDataType;
+};
+
+//
 
 type IconKeyType =
   | "location"
@@ -62,8 +86,6 @@ export type GroupDataType = {
   members: MemberType[];
   tags: Array<string>;
 };
-
-// export GroupDataContext
 
 export type TagItemProps = {
   tag: string;
