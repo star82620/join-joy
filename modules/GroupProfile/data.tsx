@@ -4,7 +4,7 @@ export type getStaticPropsProps = { params: Record<string, string> };
 
 export type GroupIdType = number;
 
-export type msgDataType = {
+export type CommentsDataType = {
   userId: number;
   userName: string;
   userPhoto: string;
@@ -16,13 +16,13 @@ export type GroupDataContextType = {
   groupId: GroupIdType;
   groupData: GroupDataType;
   currentMemberNum: number;
-  msgData: msgDataType[];
+  commentsData: CommentsDataType[];
 };
 
 export type GroupProfilePageProps = {
   groupId: GroupIdType;
   groupData: GroupDataType;
-  msgData: msgDataType[];
+  commentsData: CommentsDataType[];
 };
 
 export type GroupProfileProps = {
@@ -30,11 +30,11 @@ export type GroupProfileProps = {
 };
 
 export type MessageBoardProps = {
-  data: msgDataType;
+  data: CommentsDataType;
 };
 
-export type MsgCardProps = {
-  msg: msgDataType;
+export type CommentCardProps = {
+  comment: CommentsDataType;
 };
 
 //

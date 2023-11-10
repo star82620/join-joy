@@ -4,7 +4,7 @@ import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import GroupInformation from "./GroupInformation";
 import MembersList from "./MembersList";
-import MessageBoard from "./MessageBoard";
+import CommentsBoard from "./CommentsBoard";
 import { gameTypeIndex } from "@/constants/wordIndexes";
 import {
   titles,
@@ -82,7 +82,7 @@ export const GroupDataContext = createContext<GroupDataContextType>(
 );
 
 export default function GroupProfile({ data }: GroupProfileProps) {
-  const { groupId, groupData, msgData } = data;
+  const { groupId, groupData, commentsData } = data;
   const currentMemberNum = groupData.members.reduce((counter, member) => {
     counter += member.initNum;
     return counter;
@@ -100,7 +100,7 @@ export default function GroupProfile({ data }: GroupProfileProps) {
     <section className="container py-14 md:py-9">
       <div className="flex justify-center items-stretch gap-9 md:flex-col">
         <GroupDataContext.Provider
-          value={{ groupId, groupData, currentMemberNum, msgData }}
+          value={{ groupId, groupData, currentMemberNum, commentsData }}
         >
           <div className="flex flex-col gap-9 md:gap-8 grow">
             <div className="grow">
@@ -113,7 +113,7 @@ export default function GroupProfile({ data }: GroupProfileProps) {
             </div>
             <div>
               <ModalWrapper title="留言板" layout="secondary">
-                <MessageBoard />
+                <CommentsBoard />
               </ModalWrapper>
             </div>
           </div>

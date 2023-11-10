@@ -2,11 +2,13 @@ import React, { useState, useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
 import { GroupDataContext } from "./index";
-import { MsgCardProps, msgDataType } from "./data";
+import { CommentCardProps, CommentsDataType } from "./data";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 
-const MsgCard = ({ msg }: MsgCardProps) => {
-  const { userId, userName, userPhoto, commentContent, commentDate } = msg;
+const authData = { userId: "" };
+
+const CommentCard = ({ comment }: CommentCardProps) => {
+  const { userId, userName, userPhoto, commentContent, commentDate } = comment;
 
   return (
     <div className="flex items-start gap-8">
@@ -31,15 +33,15 @@ const MsgCard = ({ msg }: MsgCardProps) => {
   );
 };
 
-export default function MessageBoard() {
-  const { msgData, groupId } = useContext(GroupDataContext);
+export default function CommentsBoard() {
+  const { commentsData, groupId } = useContext(GroupDataContext);
   const [textLength, setTextLength] = useState(0);
-  const [msgValue, setMsgValue] = useState("");
-  const isEmpty = msgData.length === 0;
+  const [commentValue, setCommentValue] = useState("");
+  const isEmpty = commentsData.length === 0;
 
-  async function handleSubmitMsg(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmitComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(msgValue);
+    console.log(commentValue);
     const msg = {
       groupId: groupId,
       commentTxt: "string",
@@ -53,19 +55,18 @@ export default function MessageBoard() {
 
     const data = await fetchApi(submitMsgKey);
   }
-
-  return (
-    <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
+  const CommentTextArea = () => {
+    return (
       <div className="flex items-center gap-2 border-b border-gray-300 pb-6 md:pb-4">
         <div className="grow">
-          <form id="submitMsg" onSubmit={handleSubmitMsg}>
+          <form id="submitComment" onSubmit={handleSubmitComment}>
             <textarea
               maxLength={100}
               rows={3}
               placeholder="輸入你想說的話！"
               className="px-3 py-2 border-b-2 w-full placeholder:text-start"
               onChange={(e) => {
-                setMsgValue(e.target.value);
+                setCommentValue(e.target.value);
                 setTextLength(e.target.value.length);
               }}
             />
@@ -73,17 +74,23 @@ export default function MessageBoard() {
           <p className="text-right text-xs font-bold mt-1">{textLength}/100</p>
         </div>
 
-        <Button type="submit" appearance="black" rounded form="submitMsg">
+        <Button type="submit" appearance="black" rounded form="submitComment">
           <span className="text-sm">送出</span>
         </Button>
       </div>
+    );
+  };
+
+  return (
+    <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
+      {authData && <CommentTextArea />}
 
       <div className="pt-6 md:pt-4">
         {isEmpty && (
           <p className="text-center text-gray-600">目前還沒有留言唷！</p>
         )}
-        {msgData.map((msg: msgDataType) => (
-          <MsgCard key={msg.commentDate} msg={msg} />
+        {commentsData.map((comment: CommentsDataType) => (
+          <CommentCard key={comment.commentDate} comment={comment} />
         ))}
       </div>
     </section>
