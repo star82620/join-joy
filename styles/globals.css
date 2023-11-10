@@ -25,7 +25,7 @@ h6 {
   font-weight: 600;
   line-height: 1.4;
 }
-*/ .whitespace-pre-wrap {
+.whitespace-pre-wrap {
   white-space: pre-wrap;
 }
 
