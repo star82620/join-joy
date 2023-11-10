@@ -23,6 +23,8 @@ export async function getServerSideProps(context) {
 }
 
 export default function CreateGroupPage(props) {
+  const { res } = props;
+  console.log("res", res);
   return (
     <Layout
       pageCategory="create-group"
