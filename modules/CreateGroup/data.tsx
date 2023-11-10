@@ -24,6 +24,7 @@ export type OptionType = {
   content: string;
   name: string;
   value: string;
+  checked?: boolean;
 };
 
 export type QuestionType = {
@@ -34,22 +35,20 @@ export type QuestionType = {
 
 type QuestionsWithRadioType = QuestionType[];
 
+export type InputRadioProps = QuestionType & {
+  onChange: React.ChangeEventHandler;
+};
+
+//----data----
+
 // StepTwo
 export const questionsWithRadio: QuestionsWithRadioType = [
   {
     title: "本次開團是否設為『非公開』揪團？",
     description: "僅接受獲得連結的團員加入，不會在平台被找到",
     options: [
-      { content: "公開", name: "groupPrivacy", value: "public" },
+      { content: "公開", name: "groupPrivacy", value: "public", checked: true },
       { content: "非公開", name: "groupPrivacy", value: "private" },
-    ],
-  },
-  {
-    title: "成團後是否接受團員進出？",
-    description: "送出預約後系統會自動鎖定揪團，直到結團前皆可再編輯",
-    options: [
-      { content: "接受", name: "allowJoin", value: "allow" },
-      { content: "不接受", name: "allowJoin", value: "reject" },
     ],
   },
 ];

@@ -14,7 +14,7 @@ export const ActiveContext =
 export default function CreateGroup() {
   const title = "開團表單";
   const [activePage, setActivePage] = useState(1);
-  const [value, setValue] = useState("");
+  const [values, setValues] = useState();
 
   return (
     <div className="container">

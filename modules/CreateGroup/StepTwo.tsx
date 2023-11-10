@@ -122,12 +122,14 @@ export default function StepTwo() {
           </section>
         </label>
         {questionsWithRadio.map((question, index) => {
+          const onChange = () => {};
           return (
             <InputRadio
               title={question.title}
               description={question.description}
               options={question.options}
               key={index}
+              onChange={onChange}
             />
           );
         })}
