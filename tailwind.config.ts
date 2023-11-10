@@ -10,6 +10,7 @@ const config: Config = {
     screens: {
       // desktop : lg, tablet : md, mobile: sm
       lg: { max: "1272px" },
+      mdg: { max: "1024px" },
       md: { max: "768px" },
       sm: { max: "375px" },
     },
@@ -49,8 +50,11 @@ const config: Config = {
       "purple-dark": "#9354A9",
       danger: "#DD240B",
       white: "#FFFFFF",
+      transparent: "transparent",
     },
     fontSize: {
+      "3xl": "28px",
+      "2xl": "24px",
       xl: "20px",
       lg: "18px",
       md: "16px",
@@ -66,10 +70,40 @@ const config: Config = {
       backgroundImage: {
         "eye-hide": 'url("/images/input-password-hide.svg")',
         "eye-show": 'url("/images/input-password-show.svg")',
+        "follow-true": 'url("/images/icon-check.svg")',
+        "follow-false": 'url("/images/icon-plus.svg")',
+        "radio-true": 'url("/images/icon-radio-true.svg")',
+        "radio-false": 'url("/images/icon-radio-false.svg")',
+        "checkbox-true": 'url("/images/icon-checkbox-true.svg")',
+        "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
+      },
+      backgroundSize: {
+        "20px": "20px",
       },
       lineHeight: {
         heading: "1.4rem",
         text: "1.2rem",
+      },
+      zIndex: {
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+      },
+      width: {
+        "14": "56px",
+        "15": "60px",
+        "22": "88px",
+      },
+      height: {
+        "14": "56px",
+        "15": "60px",
+        "22": "88px",
       },
     },
   },

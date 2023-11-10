@@ -13,38 +13,70 @@ body {
   outline: none;
 }
 
-/* h1 {
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 1.2;
-}
-h2 {
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.2;
-}
-h3 {
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.2;
-}
+h1,
+h2,
+h3,
 h4 {
-  font-size: 20px;
   font-weight: 600;
   line-height: 1.2;
 }
-h5 {
-  font-size: 18px;
+h5,
+h6 {
   font-weight: 600;
   line-height: 1.4;
 }
-h6 {
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.4;
-} */
+*/ .whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
 
 .container {
-  @apply max-w-[1176px] mx-auto 
+  @apply max-w-[1272px] mx-auto 
   px-12 md:px-6 sm:px-3;
+}
+
+.inputStyle {
+  @apply w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm;
+}
+
+.inputErrorMsgStyle {
+  @apply text-danger mt-2 md:mt-1 text-sm md:text-xs;
+}
+
+.checkboxIcon {
+  @apply appearance-none 
+  after:content-[''] after:inline-block 
+  after:w-5 after:h-5 
+  after:align-middle 
+  after:bg-contain after:bg-no-repeat 
+  after:bg-checkbox-false
+  checked:after:bg-checkbox-true;
+}
+
+.radioIcon {
+  @apply appearance-none 
+  after:content-[''] after:inline-block 
+  after:w-5 after:h-5 
+  after:align-middle 
+  after:bg-contain after:bg-no-repeat 
+  after:bg-radio-false checked:after:bg-radio-true;
+}
+
+.groupStatusDot {
+  @apply align-middle
+  before:content-[''] before:inline-block 
+  before:w-2.5 before:h-2.5 before:mr-1
+  before:align-baseline
+  before:rounded-full;
+}
+
+.groupStatusPending {
+  @apply before:bg-green-light;
+}
+
+.groupStatusOver {
+  @apply before:bg-gray-900;
+}
+
+.groupStatusMember {
+  @apply before:bg-orange-primary;
 }
