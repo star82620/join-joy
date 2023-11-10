@@ -3,12 +3,14 @@ import { Inter } from "next/font/google";
 import Link from "next/link";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import Layout from "@/common/components/Layout";
+import useLogout from "@/common/hooks/useLogout";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const authContext = useContext(AuthContext);
   const { authData } = authContext;
+  const logout = useLogout();
 
   return (
     <>
@@ -36,6 +38,9 @@ export default function Home() {
         </ul>
 
         <div className=" max-w-[826px]">hi!{authData?.nickName}</div>
+        <div className="p-4 border cursor-pointer" onClick={logout}>
+          登出
+        </div>
       </Layout>
     </>
   );
