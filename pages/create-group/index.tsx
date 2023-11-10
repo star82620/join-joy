@@ -7,24 +7,21 @@ export async function getServerSideProps(context) {
   const { req } = context;
   const { authToken } = req.cookies;
 
-  const apiParams: apiParamsType = {
-    apiPath: "/auth/checkLoginStatus",
-    method: "GET",
-  };
-  const res = await fetchApi(apiParams);
-  const data = res ? res : null;
+  if (!authToken) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 
   return {
-    props: {
-      res: data,
-      authToken: authToken,
-    },
+    props: {},
   };
 }
 
-export default function CreateGroupPage(props) {
-  const { res } = props;
-  console.log("res", res);
+export default function CreateGroupPage() {
   return (
     <Layout
       pageCategory="create-group"
