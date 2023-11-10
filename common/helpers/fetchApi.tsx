@@ -11,7 +11,7 @@ const token = ""; //之後再補，看要用什麼方式存放 token
 export type apiParamsType = {
   apiPath: string;
   method: "GET" | "POST" | "PATCH" | "DELETE";
-  data?: Record<string, string> | string;
+  data?: unknown;
 };
 
 export default async function fetchApi(apiParams: apiParamsType) {
@@ -21,12 +21,20 @@ export default async function fetchApi(apiParams: apiParamsType) {
     Authorization: token,
     "Content-Type": "application/json",
   };
+
+  let body;
+
+  if (typeof data === "object" && data !== null) {
+    body = JSON.stringify(data);
+  } else if (typeof data === "string") {
+    body = data;
+  }
+
   const requestOptions = {
     method: method,
     headers: apiHeaders,
-    body: JSON.stringify(data),
+    body: body,
   };
-
   try {
     const res = await fetch(url, requestOptions);
     const result = await res.json();

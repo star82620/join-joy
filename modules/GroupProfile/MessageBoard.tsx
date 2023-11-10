@@ -37,7 +37,7 @@ export default function MessageBoard() {
   const [msgValue, setMsgValue] = useState("");
   const isEmpty = msgData.length === 0;
 
-  const handleSubmitMsg = async (e) => {
+  async function handleSubmitMsg(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log(msgValue);
     const msg = {
@@ -52,7 +52,7 @@ export default function MessageBoard() {
     };
 
     const data = await fetchApi(submitMsgKey);
-  };
+  }
 
   return (
     <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
