@@ -1,28 +1,11 @@
 import React, { useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
-import FormBlock from "./FormBlock";
+import InputBlock from "./InputBlock";
 import InputRadio from "./InputRadio";
 import { ActiveContext } from "./index";
+import { questionsWithRadio } from "./data";
 
-const radios = [
-  {
-    title: "本次開團是否設為『非公開』揪團？",
-    desc: "僅接受獲得連結的團員加入，不會在平台被找到",
-    options: [
-      { content: "公開", id: "groupPrivacy", name: "public" },
-      { content: "非公開", id: "groupPrivacy", name: "private" },
-    ],
-  },
-  {
-    title: "成團後是否接受團員進出？",
-    desc: "送出預約後系統會自動鎖定揪團，直到結團前皆可再編輯",
-    options: [
-      { content: "接受", id: "allowJoin", name: "allow" },
-      { content: "不接受", id: "allowJoin", name: "reject" },
-    ],
-  },
-];
 export default function StepTwo() {
   const contextValue = useContext(ActiveContext);
   const [activePage, setActivePage] = contextValue;
@@ -38,10 +21,10 @@ export default function StepTwo() {
     <>
       <section className="flex flex-col w-full gap-10">
         <label>
-          <FormBlock
+          <InputBlock
             title="預計要玩的遊戲"
             titleStyle="block"
-            desc="最多5款，僅通知店家，實際以現場狀況為主"
+            description="最多5款，僅通知店家，實際以現場狀況為主"
           >
             <input
               type="text"
@@ -116,14 +99,14 @@ export default function StepTwo() {
                 <hr className="border-t-2 border-gray-100 my-0.5" />
               </div>
             </section>
-          </FormBlock>
+          </InputBlock>
         </label>
         <label>
-          <FormBlock title="遊戲整體面向">
+          <InputBlock title="遊戲整體面向">
             <select className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
               <option>請選擇遊戲標籤</option>
             </select>
-          </FormBlock>
+          </InputBlock>
         </label>
         <label>
           <section className="w-full">
@@ -138,12 +121,12 @@ export default function StepTwo() {
             />
           </section>
         </label>
-        {radios.map((radio, index) => {
+        {questionsWithRadio.map((question, index) => {
           return (
             <InputRadio
-              title={radio.title}
-              desc={radio.desc}
-              options={radio.options}
+              title={question.title}
+              description={question.description}
+              options={question.options}
               key={index}
             />
           );

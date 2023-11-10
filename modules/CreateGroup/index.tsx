@@ -1,13 +1,13 @@
 import React, { useState, createContext, useEffect } from "react";
-import Form from "@/common/components/Form";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProgressBar from "./ProgressBar";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import { ActiveContextType } from "./data";
 
-type ActiveContextType = [number, React.Dispatch<React.SetStateAction<number>>];
 const defaultContextValue: ActiveContextType = [0, () => {}];
+
 export const ActiveContext =
   createContext<ActiveContextType>(defaultContextValue);
 
