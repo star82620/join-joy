@@ -11,10 +11,16 @@ function MemberCard({ member, subNum }: MemberCardProps) {
   const isSubmember = subNum > 0;
   const isSingle = initNum === 1;
   const statusText = memberStatusIndex[status];
+  const cardShadow = !isSubmember ? "shadow-btn" : "";
+  const profileImgSrc = !isSubmember
+    ? "/images/photo-user-000.png"
+    : "/images/logo.jpg";
   const CardContent = () => (
-    <section className="flex justify-between items-center gap-4 md:gap-2 p-2 border-2 rounded shadow-btn bg-yellow-tint">
+    <section
+      className={`flex justify-between items-center gap-4 md:gap-2 p-2 border-2 rounded  bg-yellow-tint ${cardShadow}`}
+    >
       <ProfileImg
-        src="/images/photo-user-000.png"
+        src={profileImgSrc}
         alt="user"
         widthProp="w-16"
         heightProp="h-16"

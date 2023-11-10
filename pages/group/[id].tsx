@@ -41,7 +41,7 @@ export async function getStaticProps({ params }: getStaticPropsProps) {
   };
 
   const groupRes = await fetchApi(groupApiParams);
-  const groupData: GroupDataType = await groupRes.data.groupWithGames;
+  const groupData: GroupDataType = groupRes.data.groupWithGames;
 
   const commentsApiParams: apiParamsType = {
     apiPath: `/group/comments/${id}`,

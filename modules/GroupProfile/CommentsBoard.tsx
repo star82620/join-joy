@@ -4,8 +4,9 @@ import ProfileImg from "@/common/components/ProfileImg";
 import { GroupDataContext } from "./index";
 import { CommentCardProps, CommentsDataType } from "./data";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import Link from "@/common/components/GeneralLink";
 
-const authData = { userId: "" };
+const authData = null;
 
 const CommentCard = ({ comment }: CommentCardProps) => {
   const { userId, userName, userPhoto, commentContent, commentDate } = comment;
@@ -33,6 +34,12 @@ const CommentCard = ({ comment }: CommentCardProps) => {
   );
 };
 
+const InputWithoutAuth = () => (
+  <p className="text-gray-500">
+    <Link href="/login">登入</Link>以留言
+  </p>
+);
+
 export default function CommentsBoard() {
   const { commentsData, groupId } = useContext(GroupDataContext);
   const [textLength, setTextLength] = useState(0);
@@ -57,7 +64,7 @@ export default function CommentsBoard() {
   }
   const CommentTextArea = () => {
     return (
-      <div className="flex items-center gap-2 border-b border-gray-300 pb-6 md:pb-4">
+      <div className="flex items-center gap-2">
         <div className="grow">
           <form id="submitComment" onSubmit={handleSubmitComment}>
             <textarea
@@ -83,9 +90,11 @@ export default function CommentsBoard() {
 
   return (
     <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
-      {authData && <CommentTextArea />}
+      <div className="pb-6 md:pb-4">
+        {authData ? <CommentTextArea /> : <InputWithoutAuth />}
+      </div>
 
-      <div className="pt-6 md:pt-4">
+      <div className="pt-6 md:pt-4 border-t border-gray-300">
         {isEmpty && (
           <p className="text-center text-gray-600">目前還沒有留言唷！</p>
         )}
