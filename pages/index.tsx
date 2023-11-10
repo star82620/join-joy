@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import Image from "next/image";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import Layout from "@/common/components/Layout";
 
@@ -9,8 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const authContext = useContext(AuthContext);
-  if (!authContext) return null;
-  const { userData } = authContext;
+  const { authData } = authContext;
 
   return (
     <>
@@ -37,7 +35,7 @@ export default function Home() {
           </li>
         </ul>
 
-        <div className=" max-w-[826px]">hi!{userData?.nickName}</div>
+        <div className=" max-w-[826px]">hi!{authData?.nickName}</div>
       </Layout>
     </>
   );
