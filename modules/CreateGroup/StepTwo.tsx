@@ -8,14 +8,14 @@ import { questionsWithRadio } from "./data";
 
 export default function StepTwo() {
   const contextValue = useContext(ActiveContext);
-  const [activePage, setActivePage] = contextValue;
+  const [activeStep, setActiveStep] = contextValue;
   const handleBtnTwo = () => {
     // 把資料丟進 value useState 裡
-    setActivePage(3);
+    setActiveStep(3);
   };
   const backPrev = () => {
     // 把資料丟進 value useState 裡
-    setActivePage(1);
+    setActiveStep(1);
   };
   return (
     <>

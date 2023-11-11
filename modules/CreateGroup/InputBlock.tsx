@@ -16,7 +16,7 @@ export default function InputBlock({
     return "row";
   };
   const isCol = checkDirection() === "col";
-  const colTitleStyle = isCol ? "inline" : "block";
+  const colTitleStyle = isCol ? "block" : "inline";
   const colDescriptionStyle = isCol ? "mt-1" : "";
   const requiredStyle = require
     ? "after:content-['*'] after:text-danger after:text-xl"
@@ -31,7 +31,7 @@ export default function InputBlock({
           {title}
         </h3>
         {description && (
-          <span className={`text-md ${colDescriptionStyle}`}>
+          <span className={`text-sm text-gray-800 ${colDescriptionStyle}`}>
             {description}
           </span>
         )}

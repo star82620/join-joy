@@ -1,7 +1,28 @@
 import React from "react";
+import { TextInputProps } from "./data";
 
-export default function TextInput() {
-  return <div>TextInput</div>;
+export default function TextInput({
+  id,
+  inputName,
+  placeholder,
+  value,
+  onChange,
+  required,
+  disabled,
+}: TextInputProps) {
+  return (
+    <input
+      type="text"
+      className="inputStyle"
+      id={id}
+      name={inputName}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      required={required}
+      disabled={disabled}
+    />
+  );
 }
 
 // const Select = () => {

@@ -1,17 +1,112 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import InputBlock from "./InputBlock";
-import { ActiveContext } from "./index";
+import { ActiveContext, ValuesContext } from "./index";
+import apiPaths from "@/constants/apiPaths";
+import {
+  StepOneProps,
+  HandleInputValueType,
+  HandleLocationKindType,
+  handleCityType,
+  handleStoreType,
+} from "./data";
 
-export default function StepOne() {
-  const contextValue = useContext(ActiveContext);
-  const [activePage, setActivePage] = contextValue;
+export default function StepOne({
+  chainKeys,
+  setChainKeys,
+  citiesData,
+}: StepOneProps) {
+  const activeContext = useContext(ActiveContext);
+  const [activeStep, setActiveStep] = activeContext;
 
-  const handleBtnOne = () => {
-    // 把資料丟進 value useState 裡
-    setActivePage(2);
+  const valuesContext = useContext(ValuesContext);
+  const [values, setValues] = valuesContext;
+
+  // API 來的店家資料，需要先選擇地點才會拿到
+  const [storesData, setStoresData] = useState([]);
+
+  console.log("storesData", storesData);
+
+  const storesKey: apiParamsType = {
+    apiPath: apiPaths.getCityStores,
+    method: "GET",
+    data: chainKeys.cityId,
   };
+
+  const isPlace = chainKeys.locationKind === "place";
+
+  // 換頁按鈕
+  const handleBtnOne = () => {
+    setActiveStep(2);
+  };
+
+  // 儲存 input value
+  const handleInputValue: HandleInputValueType = (e, inputName) => {
+    setValues((prevState) => ({ ...prevState, [inputName]: e.target.value }));
+  };
+
+  // 選擇地點類型
+  const handleLocationKind: HandleLocationKindType = (e) => {
+    setChainKeys((chainKeys) => ({
+      ...chainKeys,
+      locationKind: e.target.value,
+    }));
+  };
+
+  // 選擇城市
+  const handleCity: handleCityType = async (e) => {
+    const value = Number(e.target.value);
+    setChainKeys((chainKeys) => ({
+      ...chainKeys,
+      locationCity: value,
+    }));
+
+    if (!isPlace) {
+      // 打 API 取得店家列表
+      const res = await fetchApi(storesKey);
+      const data = res?.data;
+      setStoresData(data);
+    }
+  };
+
+  // 選擇店家
+  const handleStoreId: handleStoreType = (e) => {
+    const value = Number(e.target.value);
+    setValues((prevState) => ({ ...prevState, storeId: value }));
+  };
+
+  const StoreSelector = () => (
+    <select
+      className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+      name="storeId"
+      onChange={handleStoreId}
+    >
+      <option value="">請選擇店家</option>
+      {/* 到時根據 API 再修正 {storesData.map((store) => {
+    const id = store.Id;
+    const storeName = store.storeName;
+    return (
+      <option key={id} value={id}>
+        {storeName}
+      </option>
+    );
+  })} */}
+    </select>
+  );
+
+  const PlaceInput = () => (
+    <input
+      type="text"
+      className="inputStyle"
+      name="place"
+      value={values.place}
+      onChange={() => handleInputValue}
+      placeholder="請選擇輸入詳細地址"
+    />
+  );
+
   return (
     <>
       <section className="flex flex-col w-full gap-10">
@@ -21,37 +116,74 @@ export default function StepOne() {
               type="text"
               placeholder="請幫你的揪團取一個酷酷的名字！"
               className="inputStyle"
+              name="groupName"
+              value={values.groupName}
+              onChange={(e) => handleInputValue(e, "groupName")}
             />
           </InputBlock>
         </label>
 
-        <InputBlock title="地點" require={true}>
+        <InputBlock
+          title="地點"
+          description="（揪團成立後不可更改）"
+          direction="row"
+          require={true}
+        >
           {/* 用於辨識是否要選擇店家、 */}
-          <div className="mt-1">
+          <div className="mt-3">
             <label>
-              <input type="radio" id="" name="groupType" className="" />
+              <input
+                type="radio"
+                className="radioIcon"
+                name="locationKind"
+                value="store"
+                onChange={handleLocationKind}
+                defaultChecked
+              />
               <span className="ml-2">店家</span>
             </label>
             <label className="ml-4">
-              <input type="radio" name="groupType" className="" />
+              <input
+                type="radio"
+                className="radioIcon"
+                name="locationKind"
+                value="place"
+                onChange={handleLocationKind}
+              />
               <span className="ml-2">自行輸入</span>
             </label>
           </div>
           {/* 兩個並排下拉式選單 */}
-          <div className="flex gap-3 md:flex-col">
-            <select className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
+          <div className="flex gap-3 h-[50px] md:flex-col">
+            <select
+              className="w-[45%] border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+              name="city"
+              onChange={handleCity}
+            >
               <option value="">請選擇城市/地區</option>
+              {citiesData.map((city) => {
+                const id = city.Id;
+                const cityName = city.CityName;
+                return (
+                  <option key={id} value={id}>
+                    {cityName}
+                  </option>
+                );
+              })}
             </select>
             {/* 店家的選項必須先選城市才會出現 */}
-            <select className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
-              <option value="">請選擇店家</option>
-            </select>
+            {isPlace ? <PlaceInput /> : <StoreSelector />}
           </div>
         </InputBlock>
 
         {/* 可怕的行事曆來了 */}
         <label>
-          <InputBlock title="日期" require={true}>
+          <InputBlock
+            title="日期"
+            description="（揪團成立後不可更改）"
+            direction="row"
+            require={true}
+          >
             <input
               placeholder="請選擇日期"
               className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
@@ -59,7 +191,12 @@ export default function StepOne() {
           </InputBlock>
         </label>
 
-        <InputBlock title="遊戲時段" require={true}>
+        <InputBlock
+          title="遊戲時段"
+          description="（揪團成立後不可更改）"
+          direction="row"
+          require={true}
+        >
           {/* 下拉式選單？？：time */}
           <label>
             開始時間
@@ -98,7 +235,6 @@ export default function StepOne() {
           >
             <input
               type="number"
-              placeholder="請幫你的揪團取一個酷酷的名字！"
               className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
             />
           </InputBlock>

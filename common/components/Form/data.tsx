@@ -33,3 +33,14 @@ export type InputsProps = {
   showPassword: ShowPasswordType;
   inputValues: InputValuesType;
 };
+
+// TextInput
+export type TextInputProps = {
+  inputName: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id?: string;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+};
