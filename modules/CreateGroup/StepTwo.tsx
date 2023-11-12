@@ -3,12 +3,12 @@ import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import InputBlock from "./InputBlock";
 import InputRadio from "./InputRadio";
-import { ActiveContext } from "./index";
+import { StepContext } from "./index";
 import { questionsWithRadio } from "./data";
 
 export default function StepTwo() {
-  const contextValue = useContext(ActiveContext);
-  const [activeStep, setActiveStep] = contextValue;
+  const stepContext = useContext(StepContext);
+  const [activeStep, setActiveStep] = stepContext;
   const handleBtnTwo = () => {
     // 把資料丟進 value useState 裡
     setActiveStep(3);

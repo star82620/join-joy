@@ -12,9 +12,10 @@ import {
   defaultChainValue,
 } from "./data";
 
-const defaultActiveContextValue: ActiveContextType = [1, () => {}];
-export const ActiveContext = createContext<ActiveContextType>(
-  defaultActiveContextValue
+// 切換 step
+const defaultStepContextValue: StepContextType = [1, () => {}];
+export const StepContext = createContext<StepContextType>(
+  defaultStepContextValue
 );
 
 const defaultValuesContextValue: ValuesContextType = [defaultValues, () => {}];
@@ -52,7 +53,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
       <div className="m-auto max-w-[936px]">
         <ModalWrapper title="開團表單">
           <div className="px-[124px] pt-12 pb-14 lg:px-24 md:px-4 md:pt-8 md:pb-12 flex flex-col items-center gap-8 md:gap-6">
-            <ActiveContext.Provider value={[activeStep, setActiveStep]}>
+            <StepContext.Provider value={[activeStep, setActiveStep]}>
               <ProgressBar />
               <div className="w-full">
                 <ValuesContext.Provider value={[values, setValues]}>
@@ -69,7 +70,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
                   </form>
                 </ValuesContext.Provider>
               </div>
-            </ActiveContext.Provider>
+            </StepContext.Provider>
           </div>
         </ModalWrapper>
       </div>

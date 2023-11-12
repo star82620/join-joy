@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import Image from "next/image";
-import { ActiveContext } from "./index";
+import { StepContext } from "./index";
 
 export default function ProgressBar() {
-  // 利用傳入的 active 判斷 dot line 亮不亮
+  // 利用傳入的 activeStep 判斷 dot line 亮不亮
   // active = 1  dot 亮 1    line 0
   // active = 2  dot 亮 1,2  line 1
   // active = 3
 
-  const contextValue = useContext(ActiveContext);
-  const [activePage, setActivePage] = contextValue;
+  const contextValue = useContext(StepContext);
+  const [activeStep, setActiveStep] = contextValue;
 
   const lastIcon = (
     <Image
@@ -21,8 +21,8 @@ export default function ProgressBar() {
   );
 
   let isActive = true;
-  const isFirstActive = Number(activePage) >= 2;
-  const isSecondActive = Number(activePage) === 3;
+  const isFirstActive = Number(activeStep) >= 2;
+  const isSecondActive = Number(activeStep) === 3;
 
   const steps = [
     { id: "1", content: "1", desc: "基本資訊" },
@@ -35,7 +35,7 @@ export default function ProgressBar() {
       <div className="w-full flex justify-between items-center z-10">
         {steps.map((step) => {
           const { id, content, desc } = step;
-          isActive = Number(activePage) >= Number(step.id) ? true : false;
+          isActive = Number(activeStep) >= Number(step.id) ? true : false;
           return (
             <section
               key={id}

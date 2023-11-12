@@ -3,7 +3,7 @@ import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import InputBlock from "./InputBlock";
-import { ActiveContext, ValuesContext } from "./index";
+import { StepContext, ValuesContext } from "./index";
 import apiPaths from "@/constants/apiPaths";
 import {
   StepOneProps,
@@ -18,8 +18,8 @@ export default function StepOne({
   setChainKeys,
   citiesData,
 }: StepOneProps) {
-  const activeContext = useContext(ActiveContext);
-  const [activeStep, setActiveStep] = activeContext;
+  const stepContext = useContext(StepContext);
+  const [activeStep, setActiveStep] = stepContext;
 
   const valuesContext = useContext(ValuesContext);
   const [values, setValues] = valuesContext;
@@ -73,6 +73,10 @@ export default function StepOne({
 
   // 選擇店家
   const handleStoreId: handleStoreType = (e) => {
+    // 選擇店家之後
+    // 1. 將 storeId 存入 values
+    // 2. 打 API 獲得該店家的可預約日期、時間
+
     const value = Number(e.target.value);
     setValues((prevState) => ({ ...prevState, storeId: value }));
   };
@@ -96,6 +100,7 @@ export default function StepOne({
     </select>
   );
 
+  // 輸入自行輸入地點
   const PlaceInput = () => (
     <input
       type="text"
@@ -110,6 +115,7 @@ export default function StepOne({
   return (
     <>
       <section className="flex flex-col w-full gap-10">
+        {/* 揪團主旨 */}
         <label>
           <InputBlock title={"揪團主旨"} require={true}>
             <input
@@ -153,8 +159,9 @@ export default function StepOne({
               <span className="ml-2">自行輸入</span>
             </label>
           </div>
-          {/* 兩個並排下拉式選單 */}
+          {/* 選擇城市、店家 or 輸入自填地點 */}
           <div className="flex gap-3 h-[50px] md:flex-col">
+            {/* 選擇城市 */}
             <select
               className="w-[45%] border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
               name="city"
@@ -191,6 +198,13 @@ export default function StepOne({
           </InputBlock>
         </label>
 
+        <div className="bg-yellow-tone border-l-[3px] border-yellow-primary">
+          <h3 className="px-3 py-2">各時段可容納人數</h3>
+          <div className="px-6 py-3">
+            <p>時間 可容納人數 人數</p>
+          </div>
+        </div>
+
         <InputBlock
           title="遊戲時段"
           description="（揪團成立後不可更改）"
@@ -198,7 +212,7 @@ export default function StepOne({
           require={true}
         >
           {/* 下拉式選單？？：time */}
-          <label>
+          <label className="mt-2">
             開始時間
             <input
               placeholder="請選擇開始時間"
