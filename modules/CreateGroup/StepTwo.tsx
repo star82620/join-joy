@@ -50,6 +50,8 @@ export default function StepTwo() {
     }
   }, []);
 
+  useEffect(() => {}, [selectedGames]);
+
   const handleBtnTwo = () => {
     setActiveStep(3);
   };
@@ -68,6 +70,9 @@ export default function StepTwo() {
                 最多5款，僅通知店家，實際以現場狀況為主
               </p>
               <div className="inputStyle h-12 flex items-center text-gray-400">
+                {selectedGames.map((game) => {
+                  return <div key="" className=""></div>;
+                })}
                 {isGamesEmpty && <p>請在下列表單選擇預計要玩的遊戲</p>}
               </div>
               <div className="mt-3">

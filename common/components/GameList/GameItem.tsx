@@ -12,7 +12,12 @@ export default function GameItem({
       <label className="flex justify-between md:gap-3 py-2 bg-white text-center md:text-sm">
         {!isReadOnly && (
           <div className="w-[10%]">
-            <input type="checkbox" value={gameId} onChange={handleSelected} />
+            <input
+              type="checkbox"
+              value={gameId}
+              data-gamename={gameName}
+              onChange={handleSelected}
+            />
           </div>
         )}
         <div className="w-[20%] min-w-[52px]">

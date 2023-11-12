@@ -1,6 +1,11 @@
 import { GameType } from "@/constants/globalType";
 
-export type SelectedGamesType = Array<number>;
+export type SelectedGameType = {
+  gameId: GameType["gameId"];
+  gameName: GameType["gameName"];
+};
+
+export type SelectedGamesType = SelectedGameType[];
 
 export type GameListProps = {
   category: "view" | "form";

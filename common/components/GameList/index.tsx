@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { SelectedGamesType, GameListProps } from "./data";
 import GameItem from "./GameItem";
-import EmptyResult from "./EmptyResult";
 
 export default function GameList({
   category,
@@ -20,6 +19,8 @@ export default function GameList({
     setRenderData(gamesData);
   }, [gamesData]);
 
+  console.log("searchValue", searchValue);
+  console.log("selectedGames", selectedGames);
   console.log("GamesList", gamesData);
   console.log("RD", renderData);
 
@@ -41,11 +42,16 @@ export default function GameList({
 
   const handleSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const gameId = Number(e.target.value);
+    const gameName = e.target.dataset.gamename;
+    console.log("gameNNName", gameName);
     if (!setSelectedGames || !selectedGames) return;
-    if (e.target.checked) {
-      setSelectedGames([...selectedGames, gameId]);
+    if (e.target.checked && gameName) {
+      setSelectedGames([
+        ...selectedGames,
+        { gameId: gameId, gameName: gameName },
+      ]);
     } else {
-      const index = selectedGames.findIndex((game) => game === gameId);
+      const index = selectedGames.findIndex((game) => game.gameId === gameId);
       const newData = [...selectedGames];
       newData.splice(index, 1);
       setSelectedGames(newData);
@@ -98,7 +104,7 @@ export default function GameList({
       </div>
       <div className="w-full overflow-scroll">
         <div className="w-full bg-yellow-tint md:bg-transparent px-6 py-4 md:pt-0 md:px-1  md:min-w-[420px]">
-          <div className="flex justify-between md:gap-3 md:text-sm font-semibold leading-[1.2] text-center">
+          <div className="flex justify-between md:gap-3 pb-4 md:pb-2 md:text-sm font-semibold leading-[1.2] text-center border-b-2 border-gray-400 ">
             {!isReadOnly && <div className="w-[10%]"></div>}
             <div className="w-[20%] min-w-[52px]">類別</div>
             <div className="w-[50%] min-w-[120px] text-left">名稱</div>
@@ -110,7 +116,7 @@ export default function GameList({
             {isReadOnly && <div className="w-[20%] min-w-[28px]">版本</div>}
             <div className="w-[20%] min-w-[28px]">數量</div>
           </div>
-          <ul className="border-t-2 border-gray-400 mt-4 pt-4 md:mt-2 md:pt-2">
+          <ul className="mt-4 md:mt-2 h-60 overflow-scroll">
             {renderData.map((game) => (
               <GameItem
                 key={game.gameId}
