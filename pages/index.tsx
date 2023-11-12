@@ -1,18 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
-import Image from "next/image";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import Layout from "@/common/components/Layout";
-import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import apiPaths from "@/constants/apiPaths";
+
+import useLogout from "@/common/hooks/useLogout";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const authContext = useContext(AuthContext);
-  if (!authContext) return null;
-  const { userData } = authContext;
+  const { authData } = authContext;
+  const logout = useLogout();
 
   const storesKey: apiParamsType = {
     apiPath: `${apiPaths.getCityStores}?city=1`,
@@ -49,7 +48,10 @@ export default function Home() {
           </li>
         </ul>
 
-        <div className=" max-w-[826px]">hi!{userData?.nickName}</div>
+        <div className=" max-w-[826px]">hi!{authData?.nickName}</div>
+        <div className="p-4 border cursor-pointer" onClick={logout}>
+          登出
+        </div>
       </Layout>
     </>
   );
