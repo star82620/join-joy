@@ -5,9 +5,10 @@ import { apiParamsType } from "@/common/helpers/fetchApi";
 import {
   ChangeInputHandler,
   ChangeSelectHandler,
+  ChangeTextAreaHandler,
   GameType,
   StoreType,
-} from "@/constants/globalType";
+} from "@/constants/globalTypes";
 
 // page
 export type cityType = {
@@ -36,30 +37,46 @@ export type StepContextType = [
 
 export type ValuesContextType = [
   ValuesType,
-  React.Dispatch<React.SetStateAction<ValuesType>>,
-  ChainKeysType,
-  React.Dispatch<React.SetStateAction<ChainKeysType>>
+  React.Dispatch<React.SetStateAction<ValuesType>>
 ];
+
+// 要給 api 的資料重新寫一份
+// export type ValuesType = {
+//   groupName: string;
+//   startTime: string;
+//   endTime: string;
+//   isHomeGroup: boolean;
+//   place: string;
+//   storeId: number;
+//   totalMemberNum: number;
+//   initNum: number;
+//   description: string;
+//   private: string;
+//   GameIds: Array<number>;
+//   beginnerTag: boolean;
+//   expertTag: boolean;
+//   practiceTag: boolean;
+//   openTag: boolean;
+//   tutorialTag: boolean;
+//   casualTag: boolean;
+//   competitiveTag: boolean;
+// };
 
 export type ValuesType = {
   groupName: string;
-  startTime: string;
-  endTime: string;
-  isHomeGroup: boolean;
+  locationKind: string;
+  cityId: number;
   place: string;
   storeId: number;
+  date: string;
+  startTime: string;
+  endTime: string;
   totalMemberNum: number;
   initNum: number;
+  gameIds: Array<number>;
+  tags: Array<number>;
   description: string;
-  isPrivate: boolean;
-  GameIds: Array<number>;
-  beginnerTag: boolean;
-  expertTag: boolean;
-  practiceTag: boolean;
-  openTag: boolean;
-  tutorialTag: boolean;
-  casualTag: boolean;
-  competitiveTag: boolean;
+  private: string;
 };
 
 export type LocationKindType = "store" | "place";
@@ -121,28 +138,27 @@ export type InputRadioProps = QuestionType & {
   onChange: ChangeInputHandler;
 };
 
+export type handlePrivateGroupType = ChangeInputHandler;
+export type handlePDescriptionValueType = ChangeTextAreaHandler;
+
 //----data----
 
 // index
 export const defaultValues: ValuesType = {
   groupName: "",
-  startTime: "",
-  endTime: "",
-  isHomeGroup: false,
+  locationKind: "store",
+  cityId: 0,
   place: "",
   storeId: 0,
+  date: "",
+  startTime: "",
+  endTime: "",
   totalMemberNum: 2,
   initNum: 1,
+  gameIds: [],
+  tags: [],
   description: "",
-  isPrivate: false,
-  GameIds: [],
-  beginnerTag: false,
-  expertTag: false,
-  practiceTag: false,
-  openTag: false,
-  tutorialTag: false,
-  casualTag: false,
-  competitiveTag: false,
+  private: "public",
 };
 
 export const questionsWithRadio: QuestionsWithRadioType = [

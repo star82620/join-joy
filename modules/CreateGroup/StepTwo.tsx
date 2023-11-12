@@ -1,24 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 import InputBlock from "./InputBlock";
 import InputRadio from "./InputRadio";
 import { StepContext, ValuesContext } from "./index";
-import { questionsWithRadio, GamesDataType } from "./data";
+import {
+  questionsWithRadio,
+  GamesDataType,
+  handlePrivateGroupType,
+  handlePDescriptionValueType,
+} from "./data";
 import GameList from "@/common/components/GameList";
 import { SelectedGamesType } from "@/common/components/GameList/data";
-import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import apiPaths from "@/constants/apiPaths";
+import { groupTags } from "@/constants/wordsIndex";
 
 export default function StepTwo() {
   const stepContext = useContext(StepContext);
   const [activeStep, setActiveStep] = stepContext;
 
   const valuesContext = useContext(ValuesContext);
-  const [values, setValues, chainKeys, setChainKeys] = valuesContext;
+  const [values, setValues] = valuesContext;
 
-  const isStore = chainKeys.locationKind === "store";
-  const storeId = chainKeys.storeId;
+  const isStore = values.locationKind === "store";
+  const storeId = values.storeId;
+  const descriptionLength = values.description.length;
 
   // 遊戲列表的資料
   const [gamesData, setGamesData] = useState<GamesDataType>([]);
@@ -50,14 +57,17 @@ export default function StepTwo() {
     }
   }, []);
 
-  useEffect(() => {}, [selectedGames]);
-
   const handleBtnTwo = () => {
     setActiveStep(3);
   };
 
   const backPrev = () => {
     setActiveStep(1);
+  };
+
+  // 儲存 input value
+  const handleDescriptionValue: handlePDescriptionValueType = (e) => {
+    setValues((prevState) => ({ ...prevState, description: e.target.value }));
   };
 
   return (
@@ -96,8 +106,14 @@ export default function StepTwo() {
         )}
         <label>
           <InputBlock title="遊戲整體面向">
-            <select className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
+            {/* <div className="w-full h-10 border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"></div> */}
+            <select className="appearance-none w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
               <option>請選擇遊戲標籤</option>
+              {groupTags.map((tag) => (
+                <option key={tag.id} value={tag.text}>
+                  {tag.text}
+                </option>
+              ))}
             </select>
           </InputBlock>
         </label>
@@ -105,24 +121,35 @@ export default function StepTwo() {
           <section className="w-full">
             <div className="flex justify-between items-end ">
               <h3 className="text-lg font-semibold md:text-md">備註</h3>
-              <span className="text-sm md:text-xs">0/100</span>
+              <span className="text-sm md:text-xs">
+                {descriptionLength}/100
+              </span>
             </div>
-            <input
-              type="textarea"
-              placeholder="如果需要特別標註的部分，請再寫下並讓團員知道！"
+            <textarea
               className="w-full h-20 border-b-2 bg-yellow-tint mt-2 md:mt-1 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+              name="description"
+              value={values.description}
+              onChange={handleDescriptionValue}
+              maxLength={100}
+              rows={4}
+              placeholder="如果需要特別標註的部分，請再寫下並讓團員知道！"
             />
           </section>
         </label>
         {questionsWithRadio.map((question, index) => {
-          const onChange = () => {};
+          const handlePrivateGroup: handlePrivateGroupType = (e) => {
+            setValues((prevState) => ({
+              ...prevState,
+              private: e.target.value,
+            }));
+          };
           return (
             <InputRadio
               title={question.title}
               description={question.description}
               options={question.options}
               key={index}
-              onChange={onChange}
+              onChange={handlePrivateGroup}
             />
           );
         })}

@@ -19,7 +19,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
   const [activeStep, setActiveStep] = stepContext;
 
   const valuesContext = useContext(ValuesContext);
-  const [values, setValues, chainKeys, setChainKeys] = valuesContext;
+  const [values, setValues] = valuesContext;
 
   // API 來的店家資料，需要先選擇地點才會拿到
   const [storesData, setStoresData] = useState<StoreDataType>([]);
@@ -28,22 +28,23 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   // 取得店家列表
   const storesKey: apiParamsType = {
-    apiPath: `${apiPaths.getCityStores}?city=${chainKeys.cityId}`,
+    apiPath: `${apiPaths.getCityStores}?city=${values.cityId}`,
     method: "GET",
   };
 
-  const isPlace = chainKeys.locationKind === "place";
+  const isPlace = values.locationKind === "place";
 
   const getCityStores = async () => {
-    if (!isPlace && chainKeys.cityId) {
-      const data = await fetchApi(storesKey);
+    if (!isPlace && values.cityId) {
+      const res = await fetchApi(storesKey);
+      const data = res ? res : [];
       setStoresData(data);
     }
   };
 
   useEffect(() => {
     getCityStores();
-  }, [chainKeys.cityId]);
+  }, [values.cityId, values.locationKind]);
 
   // 換頁按鈕
   const handleBtnOne = () => {
@@ -59,25 +60,25 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   // 選擇地點類型
   const handleLocationKind: HandleLocationKindType = (e) => {
-    setChainKeys((chainKeys) => ({
-      ...chainKeys,
+    setValues((values) => ({
+      ...values,
       locationKind: e.target.value,
     }));
   };
 
   // 選擇城市
   const handleCity: handleCityType = async (e) => {
-    // 將 cityId 存入 chainKeys.cityId
+    // 將 cityId 存入 values.cityId
     const value = Number(e.target.value);
-    setChainKeys((chainKeys) => ({
-      ...chainKeys,
+    setValues((values) => ({
+      ...values,
       cityId: value,
     }));
 
     console.log("isPlace", isPlace);
-    console.log("cityId", chainKeys.cityId);
+    console.log("cityId", values.cityId);
 
-    if (!isPlace && chainKeys.cityId) {
+    if (!isPlace && values.cityId) {
       // 打 API 取得店家列表
       const res = await fetchApi(storesKey);
       const data = res?.data;
@@ -93,14 +94,14 @@ export default function StepOne({ citiesData }: StepOneProps) {
     // 2. 打 API 獲得該店家的可預約日期、時間、可選擇的遊戲
 
     const value = Number(e.target.value);
-    setChainKeys((prevState) => ({ ...prevState, storeId: value }));
+    setValues((prevState) => ({ ...prevState, storeId: value }));
   };
 
   const StoreSelector = () => (
     <select
       className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
       name="storeId"
-      value={chainKeys.storeId}
+      value={values.storeId}
       onChange={handleStoreId}
     >
       <option value="">請選擇店家</option>
