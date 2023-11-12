@@ -26,18 +26,19 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   console.log("storesData", storesData);
 
-  // 取得店家列表
-  const storesKey: apiParamsType = {
-    apiPath: `${apiPaths.getCityStores}?city=${values.cityId}`,
-    method: "GET",
-  };
-
   const isPlace = values.locationKind === "place";
+  const isStore = values.locationKind === "store";
 
+  // 取得店家列表
   const getCityStores = async () => {
-    if (!isPlace && values.cityId) {
+    const storesKey: apiParamsType = {
+      apiPath: `${apiPaths.getCityStores}?city=${values.cityId}`,
+      method: "GET",
+    };
+
+    if (isStore && values.cityId) {
       const res = await fetchApi(storesKey);
-      const data = res ? res : [];
+      const data = res.data ? res.data.matchedStores : [];
       setStoresData(data);
     }
   };
@@ -45,6 +46,24 @@ export default function StepOne({ citiesData }: StepOneProps) {
   useEffect(() => {
     getCityStores();
   }, [values.cityId, values.locationKind]);
+
+  // 取得指定日期的剩餘座位
+  const getRemainingSeats = async () => {
+    const remainingSeatsKey: apiParamsType = {
+      apiPath: `${apiPaths.getRemainingSeats}/${values.storeId}/${values.date}`,
+      method: "GET",
+    };
+
+    if (isStore && values.storeId && values.date) {
+      const res = await fetchApi(remainingSeatsKey);
+      const data = res.data ? res.data : [];
+      setStoresData(data);
+    }
+  };
+
+  useEffect(() => {
+    getRemainingSeats();
+  }, [values.date]);
 
   // 換頁按鈕
   const handleBtnOne = () => {
@@ -78,7 +97,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     console.log("isPlace", isPlace);
     console.log("cityId", values.cityId);
 
-    if (!isPlace && values.cityId) {
+    if (isStore && values.cityId) {
       // 打 API 取得店家列表
       const res = await fetchApi(storesKey);
       const data = res?.data;
@@ -212,6 +231,8 @@ export default function StepOne({ citiesData }: StepOneProps) {
             <input
               placeholder="請選擇日期"
               className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+              value={values.date}
+              onChange={(e) => handleInputValue(e, "date")}
             />
           </InputBlock>
         </label>

@@ -5,6 +5,7 @@ const apiPaths = {
   getCities: "/member/city",
   getCityStores: "/search/search/stores",
   getGames: "/storeinfo/gamelist",
+  getRemainingSeats: "/group/checkability",
 };
 
 export default apiPaths;
