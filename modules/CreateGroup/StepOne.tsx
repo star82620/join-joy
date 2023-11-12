@@ -14,16 +14,12 @@ import {
   handleStoreType,
 } from "./data";
 
-export default function StepOne({
-  chainKeys,
-  setChainKeys,
-  citiesData,
-}: StepOneProps) {
+export default function StepOne({ citiesData }: StepOneProps) {
   const stepContext = useContext(StepContext);
   const [activeStep, setActiveStep] = stepContext;
 
   const valuesContext = useContext(ValuesContext);
-  const [values, setValues] = valuesContext;
+  const [values, setValues, chainKeys, setChainKeys] = valuesContext;
 
   // API 來的店家資料，需要先選擇地點才會拿到
   const [storesData, setStoresData] = useState<StoreDataType>([]);

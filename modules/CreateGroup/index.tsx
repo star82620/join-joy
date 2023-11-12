@@ -18,7 +18,12 @@ export const StepContext = createContext<StepContextType>(
   defaultStepContextValue
 );
 
-const defaultValuesContextValue: ValuesContextType = [defaultValues, () => {}];
+const defaultValuesContextValue: ValuesContextType = [
+  defaultValues,
+  () => {},
+  defaultChainValue,
+  () => {},
+];
 export const ValuesContext = createContext<ValuesContextType>(
   defaultValuesContextValue
 );
@@ -26,7 +31,6 @@ export const ValuesContext = createContext<ValuesContextType>(
 export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
   const [activeStep, setActiveStep] = useState(1);
   const [values, setValues] = useState(defaultValues); //要給 api data 的資料
-
   const [chainKeys, setChainKeys] = useState(defaultChainValue);
 
   console.log("values", values);
@@ -53,15 +57,11 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
             <StepContext.Provider value={[activeStep, setActiveStep]}>
               <ProgressBar />
               <div className="w-full">
-                <ValuesContext.Provider value={[values, setValues]}>
+                <ValuesContext.Provider
+                  value={[values, setValues, chainKeys, setChainKeys]}
+                >
                   <form onSubmit={submitCreateGroupHandler}>
-                    {activeStep === 1 && (
-                      <StepOne
-                        chainKeys={chainKeys}
-                        setChainKeys={setChainKeys}
-                        citiesData={citiesData}
-                      />
-                    )}
+                    {activeStep === 1 && <StepOne citiesData={citiesData} />}
                     {activeStep === 2 && <StepTwo />}
                     {activeStep === 3 && <StepThree />}
                   </form>

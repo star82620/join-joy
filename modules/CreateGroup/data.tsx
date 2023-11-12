@@ -20,6 +20,13 @@ export type CreateGroupPageProps = {
 };
 
 // index
+export type ChainKeysType = {
+  locationKind: string;
+  cityId: number;
+  storeId: number;
+  date: string;
+};
+
 export type StepContextType = [
   number,
   React.Dispatch<React.SetStateAction<number>>
@@ -27,7 +34,9 @@ export type StepContextType = [
 
 export type ValuesContextType = [
   ValuesType,
-  React.Dispatch<React.SetStateAction<ValuesType>>
+  React.Dispatch<React.SetStateAction<ValuesType>>,
+  ChainKeysType,
+  React.Dispatch<React.SetStateAction<ChainKeysType>>
 ];
 
 export type ValuesType = {
@@ -55,13 +64,6 @@ export type LocationKindType = "store" | "place";
 
 export type cityIdType = number;
 
-export type ChainKeysType = {
-  locationKind: string;
-  cityId: number;
-  storeId: number;
-  date: string;
-};
-
 export type HandleInputValueType = (
   e: React.ChangeEvent<HTMLInputElement>,
   inputName: string
@@ -86,8 +88,6 @@ export type InputBlockProps = {
 // StepOne
 export type StepOneProps = {
   citiesData: citiesDataType;
-  chainKeys: ChainKeysType;
-  setChainKeys: React.Dispatch<React.SetStateAction<ChainKeysType>>;
 };
 
 export type StoreDataItemType = { Id: number; Name: string; Address: string };
