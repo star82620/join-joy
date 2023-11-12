@@ -5,6 +5,7 @@ import { apiParamsType } from "@/common/helpers/fetchApi";
 import {
   ChangeInputHandler,
   ChangeSelectHandler,
+  GameType,
 } from "@/constants/globalType";
 
 // page
@@ -95,6 +96,13 @@ export type StoreDataItemType = { Id: number; Name: string; Address: string };
 export type StoreDataType = StoreDataItemType[];
 
 // StepTwo
+
+export type GameItemType = GameType & {
+  qtu: number;
+};
+
+export type GamesDataType = GameItemType[];
+
 export type OptionType = {
   content: string;
   name: string;

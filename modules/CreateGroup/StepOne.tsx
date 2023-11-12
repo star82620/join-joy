@@ -36,9 +36,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   const getCityStores = async () => {
     if (!isPlace && chainKeys.cityId) {
-      // 打 API 取得店家列表
       const data = await fetchApi(storesKey);
-
       setStoresData(data);
     }
   };
@@ -49,6 +47,8 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   // 換頁按鈕
   const handleBtnOne = () => {
+    // 要做一些驗證，必填項目沒填不能按下一頁
+
     setActiveStep(2);
   };
 
@@ -93,7 +93,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     // 2. 打 API 獲得該店家的可預約日期、時間、可選擇的遊戲
 
     const value = Number(e.target.value);
-    setValues((prevState) => ({ ...prevState, storeId: value }));
+    setChainKeys((prevState) => ({ ...prevState, storeId: value }));
   };
 
   const StoreSelector = () => (

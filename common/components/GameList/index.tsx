@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { gamesData, SelectedGamesType, GameListProps } from "./data";
+import { SelectedGamesType, GameListProps } from "./data";
 import GameItem from "./GameItem";
 import EmptyResult from "./EmptyResult";
 
 export default function GameList({
   category,
+  gamesData,
   selectedGames,
   setSelectedGames,
 }: GameListProps) {
@@ -15,13 +16,20 @@ export default function GameList({
 
   const isEmptyResult = renderData.length === 0;
 
+  console.log("GamesList", gamesData);
+
   // 得到 selectItems 類別篩選內容
-  let selectItems: Array<string> = [];
-  gamesData.forEach((game) => {
-    const isInclude = selectItems.includes(game.gameType);
-    if (isInclude) return;
-    selectItems.push(game.gameType);
-  });
+  const [selectItems, setSelectItems] = useState<Array<string>>([]);
+  // let selectItems: Array<string> = [];
+
+  useEffect(() => {
+    gamesData.forEach((game) => {
+      const isInclude = selectItems.includes(game.gametype);
+      if (isInclude) return;
+      setSelectItems((prev) => [...prev, game.gametype]);
+      // selectItems.push(game.gametype);
+    });
+  }, [gamesData]);
 
   const handleSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectType(e.target.value);
@@ -47,7 +55,7 @@ export default function GameList({
   useEffect(() => {
     const selectedData = gamesData.filter((game) => {
       // 類型篩選
-      const typeFilter = selectType === "all" || game.gameType === selectType;
+      const typeFilter = selectType === "all" || game.gametype === selectType;
       // 關鍵字篩選
       const searchFilter = game.gameName.includes(searchValue);
 
