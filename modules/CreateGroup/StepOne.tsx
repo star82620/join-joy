@@ -100,7 +100,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     <select
       className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
       name="storeId"
-      value={values.storeId}
+      value={chainKeys.storeId}
       onChange={handleStoreId}
     >
       <option value="">請選擇店家</option>
