@@ -10,7 +10,7 @@ import {
   StoreDataType,
   defaultStoreData,
   HandleInputValueType,
-  HandleSelectedIdType,
+  HandleSelectedNumType,
   HandleSelectedTimeType,
 } from "./data";
 
@@ -83,7 +83,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
   };
 
   // 選擇城市、店家 id
-  const handleSelectedId: HandleSelectedIdType = async (e) => {
+  const handleSelectedNum: HandleSelectedNumType = async (e) => {
     const inputName = e.target.name;
     const value = Number(e.target.value);
     setValues((prevState) => ({ ...prevState, [inputName]: value }));
@@ -103,7 +103,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
         className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
         name="storeId"
         value={values.storeId}
-        onChange={handleSelectedId}
+        onChange={handleSelectedNum}
       >
         <option value="">請選擇店家</option>
         {stores.map((store) => {
@@ -233,7 +233,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
             <select
               className="w-[45%] border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
               name="cityId"
-              onChange={handleSelectedId}
+              onChange={handleSelectedNum}
             >
               <option value="">請選擇城市/地區</option>
               {citiesData.map((city) => {
@@ -355,18 +355,29 @@ export default function StepOne({ citiesData }: StepOneProps) {
         {/* 下拉式選單：totalNum */}
         <label>
           <InputBlock title="預計揪團人數" require={true}>
-            <input
-              // type="number"
+            <select
               className="inputStyle"
               name="totalMemberNum"
-              value={values.totalMemberNum}
-              onChange={handleInputValue}
-              list="totalNum"
-            />
-            <datalist id="totalNum">
-              <option value="">請選擇人數</option>
-              {/* {[...Array(acceptedNum)].map()} */}
-            </datalist>
+              value={values.totalMemberNum.toString()}
+              onChange={handleSelectedNum}
+            >
+              <option value="">
+                {values.endTime && acceptedNum === 0
+                  ? "無可預約人數，請重新選擇時段"
+                  : "請選擇人數"}
+              </option>
+
+              {values.endTime &&
+                [...Array(acceptedNum)].map((_, index) => {
+                  const num = index + 1;
+                  if (num < 2) return;
+                  return (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  );
+                })}
+            </select>
           </InputBlock>
         </label>
 
@@ -378,12 +389,23 @@ export default function StepOne({ citiesData }: StepOneProps) {
             direction="row"
             require={true}
           >
-            <input
-              type="number"
+            <select
               className="inputStyle"
-              // value={values.initNum}
-              // onChange={}
-            />
+              name="initNum"
+              value={values.initNum}
+              onChange={handleSelectedNum}
+            >
+              {values.totalMemberNum &&
+                [...Array(values.totalMemberNum)].map((_, index) => {
+                  const num = index + 1;
+                  if (num < 1) return;
+                  return (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
+                  );
+                })}
+            </select>
           </InputBlock>
         </label>
         <div className="mt-6 flex flex-col justify-center items-center gap-4">

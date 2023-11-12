@@ -108,12 +108,11 @@ export type StoreDataType = {
 
 export type HandleInputValueType = ChangeInputHandler;
 
-export type HandleSelectedIdType = ChangeSelectHandler;
+export type HandleSelectedNumType = ChangeSelectHandler;
 
 export type HandleSelectedTimeType = ChangeSelectHandler;
 
 // StepTwo
-
 export type GameItemType = GameType;
 
 export type GamesDataType = GameItemType[];
