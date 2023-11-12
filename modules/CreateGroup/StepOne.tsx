@@ -117,17 +117,13 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   // 輸入自行輸入地點
   const PlaceInput = () => {
-    // if (values.place === null) {
-    //   setValues((prevState) => ({ ...prevState, place: "" }));
-    // }
-
     return (
       <input
         type="text"
         className="inputStyle"
         name="place"
         value={values.place}
-        onChange={() => handleInputValue}
+        onChange={(e) => handleInputValue(e, "place")}
         placeholder="請選擇輸入詳細地址"
       />
     );
