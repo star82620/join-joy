@@ -4,8 +4,9 @@ import CreateGroup from "@/modules/CreateGroup";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import { CreateGroupPageProps } from "@/modules/CreateGroup/data";
+import { GetServerSidePropsContext } from "next";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
   const { authToken } = req.cookies;
 
