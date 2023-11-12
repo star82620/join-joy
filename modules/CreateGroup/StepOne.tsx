@@ -75,7 +75,7 @@ export default function StepOne({
   const handleStoreId: handleStoreType = (e) => {
     // 選擇店家之後
     // 1. 將 storeId 存入 values
-    // 2. 打 API 獲得該店家的可預約日期、時間
+    // 2. 打 API 獲得該店家的可預約日期、時間、可選擇的遊戲
 
     const value = Number(e.target.value);
     setValues((prevState) => ({ ...prevState, storeId: value }));
@@ -101,16 +101,22 @@ export default function StepOne({
   );
 
   // 輸入自行輸入地點
-  const PlaceInput = () => (
-    <input
-      type="text"
-      className="inputStyle"
-      name="place"
-      value={values.place}
-      onChange={() => handleInputValue}
-      placeholder="請選擇輸入詳細地址"
-    />
-  );
+  const PlaceInput = () => {
+    // if (values.place === null) {
+    //   setValues((prevState) => ({ ...prevState, place: "" }));
+    // }
+
+    return (
+      <input
+        type="text"
+        className="inputStyle"
+        name="place"
+        value={values.place}
+        onChange={() => handleInputValue}
+        placeholder="請選擇輸入詳細地址"
+      />
+    );
+  };
 
   return (
     <>

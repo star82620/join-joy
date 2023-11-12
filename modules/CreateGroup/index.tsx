@@ -7,7 +7,7 @@ import StepThree from "./StepThree";
 import {
   defaultValues,
   ValuesContextType,
-  ActiveContextType,
+  StepContextType,
   CreateGroupPageProps,
   defaultChainValue,
 } from "./data";

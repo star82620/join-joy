@@ -3,12 +3,16 @@ import { gamesData, SelectedGamesType, GameListProps } from "./data";
 import GameItem from "./GameItem";
 import EmptyResult from "./EmptyResult";
 
-export default function GameList({ category }: GameListProps) {
+export default function GameList({
+  category,
+  selectedGames,
+  setSelectedGames,
+}: GameListProps) {
   const isReadOnly = category === "view";
   const [renderData, setRenderData] = useState(gamesData);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
-  const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
+
   const isEmptyResult = renderData.length === 0;
 
   // 得到 selectItems 類別篩選內容
@@ -28,10 +32,12 @@ export default function GameList({ category }: GameListProps) {
   };
 
   const handleSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const gameId = Number(e.target.value);
+    if (!setSelectedGames || !selectedGames) return;
     if (e.target.checked) {
-      setSelectedGames([...selectedGames, e.target.name]);
+      setSelectedGames([...selectedGames, gameId]);
     } else {
-      const index = selectedGames.findIndex((game) => game === e.target.name);
+      const index = selectedGames.findIndex((game) => game === gameId);
       const newData = [...selectedGames];
       newData.splice(index, 1);
       setSelectedGames(newData);
@@ -53,7 +59,7 @@ export default function GameList({ category }: GameListProps) {
   // ---------
 
   return (
-    <section className="flex flex-col justify-center items-center border">
+    <section className="flex flex-col justify-center items-center">
       <div
         className={`flex justify-between w-full pb-6 md:px-0  ${
           isReadOnly ? "px-14 pb-8 md:pb-6" : " bg-yellow-tint px-6 pb-2"

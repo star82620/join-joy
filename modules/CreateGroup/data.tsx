@@ -20,7 +20,7 @@ export type CreateGroupPageProps = {
 };
 
 // index
-export type ActiveContextType = [
+export type StepContextType = [
   number,
   React.Dispatch<React.SetStateAction<number>>
 ];
