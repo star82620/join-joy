@@ -16,20 +16,20 @@ export default function GameList({
 
   const isEmptyResult = renderData.length === 0;
 
+  useEffect(() => {
+    setRenderData(gamesData);
+  }, [gamesData]);
+
   console.log("GamesList", gamesData);
+  console.log("RD", renderData);
 
   // 得到 selectItems 類別篩選內容
-  const [selectItems, setSelectItems] = useState<Array<string>>([]);
-  // let selectItems: Array<string> = [];
-
-  useEffect(() => {
-    gamesData.forEach((game) => {
-      const isInclude = selectItems.includes(game.gametype);
-      if (isInclude) return;
-      setSelectItems((prev) => [...prev, game.gametype]);
-      // selectItems.push(game.gametype);
-    });
-  }, [gamesData]);
+  let selectItems: Array<string> = [];
+  gamesData.forEach((game) => {
+    const isInclude = selectItems.includes(game.gametype);
+    if (isInclude) return;
+    selectItems.push(game.gametype);
+  });
 
   const handleSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectType(e.target.value);
@@ -119,7 +119,7 @@ export default function GameList({
                 handleSelected={handleSelected}
               />
             ))}
-            {isEmptyResult && <EmptyResult />}
+            {isEmptyResult && <li className="text-center">沒有符合的項目</li>}
           </ul>
         </div>
       </div>

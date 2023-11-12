@@ -10,6 +10,7 @@ export type GameType = {
   gameName: string;
   version: string;
   peopleNum: string;
+  qtu: number;
 };
 
 // 事件
