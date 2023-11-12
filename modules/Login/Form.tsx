@@ -9,7 +9,7 @@ import {
   ShowPasswordType,
   InputValuesType,
 } from "@/common/components/Form/data";
-import { setCookie } from "./setCookie";
+import { setCookie } from "@/common/helpers/setCookie";
 import { useRouter } from "next/router";
 
 export default function Form({ inputSet, btnSet, apiParams }: FormProps) {

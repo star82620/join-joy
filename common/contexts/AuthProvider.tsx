@@ -1,42 +1,37 @@
 import { useState, useEffect, createContext, Children, ReactNode } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
+import {
+  AuthDataType,
+  AuthContextType,
+  AuthProviderProps,
+} from "@/constants/globalTypes";
 
-type Props = {
-  children: ReactNode;
-};
-type userDataType = {
-  nickName: string;
-  photo: String;
-  userId: number;
-};
-type AuthContextType = {
-  userData: userDataType | null;
-  setUserData: React.Dispatch<React.SetStateAction<userDataType | null>>;
-};
+export const AuthContext = createContext<AuthContextType>({
+  authData: null,
+  setAuthData: () => {},
+});
 
-export const AuthContext = createContext<AuthContextType | null>(null);
-
-export default function AuthProvider({ children }: Props) {
-  const [userData, setUserData] = useState<userDataType | null>(null);
+export default function AuthProvider({ children }: AuthProviderProps) {
+  const [authData, setAuthData] = useState<AuthDataType | null>(null);
 
   // 每次進入頁面時就跑一次
   useEffect(() => {
-    async function fetchUserData() {
+    async function fetchAuthData() {
       const res = await fetchApi({
         apiPath: apiPaths.checkLoginStatus,
         method: "GET",
       });
       if (res?.data) {
-        setUserData(res.data);
+        setAuthData(res.data);
       }
     }
 
-    fetchUserData();
+    fetchAuthData();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData }}>
+    <AuthContext.Provider value={{ authData, setAuthData }}>
       {children}
     </AuthContext.Provider>
   );
