@@ -10,7 +10,7 @@ export async function getServerSideProps(context) {
   const { authToken } = req.cookies;
 
   const citiesKey: apiParamsType = {
-    apiPath: apiPaths.taiwanCities,
+    apiPath: apiPaths.getCities,
     method: "GET",
   };
 
