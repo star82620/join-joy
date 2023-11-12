@@ -69,9 +69,17 @@ export default function StepTwo() {
               <p className="text-gray-500 text-sm font-semibold mt-1 md:text-xs">
                 最多5款，僅通知店家，實際以現場狀況為主
               </p>
-              <div className="inputStyle h-12 flex items-center text-gray-400">
+              <div className="inputStyle h-12 flex gap-2 items-center text-gray-400">
                 {selectedGames.map((game) => {
-                  return <div key="" className=""></div>;
+                  const { gameId, gameName } = game;
+                  return (
+                    <div
+                      key={gameId}
+                      className="px-2 py-1 rounded-sm border border-gray-800 text-gray-950 font-medium"
+                    >
+                      {gameName}
+                    </div>
+                  );
                 })}
                 {isGamesEmpty && <p>請在下列表單選擇預計要玩的遊戲</p>}
               </div>
