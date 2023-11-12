@@ -1,7 +1,4 @@
 import React, { ReactNode } from "react";
-import { InputSetType } from "@/common/components/Form/data";
-import { ButtonType } from "@/common/components/GeneralButton/data";
-import { apiParamsType } from "@/common/helpers/fetchApi";
 import {
   ChangeInputHandler,
   ChangeSelectHandler,
@@ -11,15 +8,15 @@ import {
 } from "@/constants/globalTypes";
 
 // page
-export type cityType = {
+export type CityType = {
   Id: number;
   CityName: string;
 };
 
-export type citiesDataType = cityType[];
+export type CitiesDataType = CityType[];
 
 export type CreateGroupPageProps = {
-  citiesData: citiesDataType;
+  citiesData: CitiesDataType;
 };
 
 // index
@@ -81,18 +78,7 @@ export type ValuesType = {
 
 export type LocationKindType = "store" | "place";
 
-export type cityIdType = number;
-
-export type HandleInputValueType = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  inputName: string
-) => void;
-
-export type HandleLocationKindType = ChangeInputHandler;
-
-export type handleCityType = ChangeSelectHandler;
-
-export type handleStoreType = ChangeSelectHandler;
+export type CityIdType = number;
 
 // InputBlock
 export type InputBlockProps = {
@@ -106,16 +92,35 @@ export type InputBlockProps = {
 
 // StepOne
 export type StepOneProps = {
-  citiesData: citiesDataType;
+  citiesData: CitiesDataType;
 };
 
-export type StoreDataType = StoreType[];
+export type RemainingSeatsType = {
+  time: string;
+  seats: number;
+};
+
+export type StoreDataType = {
+  stores: StoreType[];
+  remainingSeats: RemainingSeatsType[];
+};
+
+export type HandleInputValueType = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  inputName: string
+) => void;
+
+export type HandleLocationKindType = ChangeInputHandler;
+
+export type HandleCityType = ChangeSelectHandler;
+
+export type HandleStoreType = ChangeSelectHandler;
+
+export type HandleSelectedTimeType = ChangeSelectHandler;
 
 // StepTwo
 
-export type GameItemType = GameType & {
-  qtu: number;
-};
+export type GameItemType = GameType;
 
 export type GamesDataType = GameItemType[];
 
@@ -138,8 +143,8 @@ export type InputRadioProps = QuestionType & {
   onChange: ChangeInputHandler;
 };
 
-export type handlePrivateGroupType = ChangeInputHandler;
-export type handlePDescriptionValueType = ChangeTextAreaHandler;
+export type HandlePrivateGroupType = ChangeInputHandler;
+export type HandlePDescriptionValueType = ChangeTextAreaHandler;
 
 //----data----
 
@@ -172,11 +177,10 @@ export const questionsWithRadio: QuestionsWithRadioType = [
   },
 ];
 
-export const defaultChainValue = {
-  locationKind: "store",
-  cityId: 0,
-  storeId: 0,
-  date: "",
+// StepOne
+export const defaultStoreData: StoreDataType = {
+  stores: [],
+  remainingSeats: [],
 };
 
 // -

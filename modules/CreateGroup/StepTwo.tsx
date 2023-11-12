@@ -9,8 +9,8 @@ import { StepContext, ValuesContext } from "./index";
 import {
   questionsWithRadio,
   GamesDataType,
-  handlePrivateGroupType,
-  handlePDescriptionValueType,
+  HandlePrivateGroupType,
+  HandlePDescriptionValueType,
 } from "./data";
 import GameList from "@/common/components/GameList";
 import { SelectedGamesType } from "@/common/components/GameList/data";
@@ -66,7 +66,7 @@ export default function StepTwo() {
   };
 
   // 儲存 input value
-  const handleDescriptionValue: handlePDescriptionValueType = (e) => {
+  const handleDescriptionValue: HandlePDescriptionValueType = (e) => {
     setValues((prevState) => ({ ...prevState, description: e.target.value }));
   };
 
@@ -137,7 +137,7 @@ export default function StepTwo() {
           </section>
         </label>
         {questionsWithRadio.map((question, index) => {
-          const handlePrivateGroup: handlePrivateGroupType = (e) => {
+          const handlePrivateGroup: HandlePrivateGroupType = (e) => {
             setValues((prevState) => ({
               ...prevState,
               private: e.target.value,

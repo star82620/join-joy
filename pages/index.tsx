@@ -13,16 +13,6 @@ export default function Home() {
   const { authData } = authContext;
   const logout = useLogout();
 
-  const storesKey: apiParamsType = {
-    apiPath: `${apiPaths.getCityStores}?city=1`,
-    method: "GET",
-  };
-  async function text() {
-    const res = await fetchApi(storesKey);
-    console.log("rrrrres", res);
-  }
-  text();
-
   return (
     <>
       <Layout pageCategory="landingpage">

@@ -8,10 +8,12 @@ import apiPaths from "@/constants/apiPaths";
 import {
   StepOneProps,
   StoreDataType,
+  defaultStoreData,
   HandleInputValueType,
   HandleLocationKindType,
-  handleCityType,
-  handleStoreType,
+  HandleCityType,
+  HandleStoreType,
+  HandleSelectedTimeType,
 } from "./data";
 
 export default function StepOne({ citiesData }: StepOneProps) {
@@ -22,12 +24,13 @@ export default function StepOne({ citiesData }: StepOneProps) {
   const [values, setValues] = valuesContext;
 
   // API 來的店家資料，需要先選擇地點才會拿到
-  const [storesData, setStoresData] = useState<StoreDataType>([]);
+  const [storesData, setStoresData] = useState<StoreDataType>(defaultStoreData);
 
   console.log("storesData", storesData);
 
   const isPlace = values.locationKind === "place";
   const isStore = values.locationKind === "store";
+  const formattedDate = values.date.replaceAll("-", "/");
 
   // 取得店家列表
   const getCityStores = async () => {
@@ -39,7 +42,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     if (isStore && values.cityId) {
       const res = await fetchApi(storesKey);
       const data = res.data ? res.data.matchedStores : [];
-      setStoresData(data);
+      setStoresData((prevStep) => ({ ...prevStep, stores: data }));
     }
   };
 
@@ -56,14 +59,17 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
     if (isStore && values.storeId && values.date) {
       const res = await fetchApi(remainingSeatsKey);
-      const data = res.data ? res.data : [];
-      setStoresData(data);
+      const data = res?.data;
+      if (!data) return;
+      setStoresData((prevStep) => ({ ...prevStep, remainingSeats: data }));
     }
   };
 
   useEffect(() => {
     getRemainingSeats();
-  }, [values.date]);
+  }, [values.cityId, values.locationKind, values.date]);
+
+  const { stores, remainingSeats } = storesData;
 
   // 換頁按鈕
   const handleBtnOne = () => {
@@ -86,28 +92,17 @@ export default function StepOne({ citiesData }: StepOneProps) {
   };
 
   // 選擇城市
-  const handleCity: handleCityType = async (e) => {
+  const handleCity: HandleCityType = async (e) => {
     // 將 cityId 存入 values.cityId
     const value = Number(e.target.value);
     setValues((values) => ({
       ...values,
       cityId: value,
     }));
-
-    console.log("isPlace", isPlace);
-    console.log("cityId", values.cityId);
-
-    if (isStore && values.cityId) {
-      // 打 API 取得店家列表
-      const res = await fetchApi(storesKey);
-      const data = res?.data;
-      console.log("getStore", data);
-      setStoresData(data);
-    }
   };
 
   // 選擇店家
-  const handleStoreId: handleStoreType = (e) => {
+  const handleStoreId: HandleStoreType = (e) => {
     // 選擇店家之後
     // 1. 將 storeId 存入 values
     // 2. 打 API 獲得該店家的可預約日期、時間、可選擇的遊戲
@@ -116,24 +111,34 @@ export default function StepOne({ citiesData }: StepOneProps) {
     setValues((prevState) => ({ ...prevState, storeId: value }));
   };
 
-  const StoreSelector = () => (
-    <select
-      className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-      name="storeId"
-      value={values.storeId}
-      onChange={handleStoreId}
-    >
-      <option value="">請選擇店家</option>
-      {storesData?.map((store) => {
-        const { storeId, storeName } = store;
-        return (
-          <option key={storeId} value={storeId}>
-            {storeName}
-          </option>
-        );
-      })}
-    </select>
-  );
+  // 選擇時間
+  const handleSelectedTime: HandleSelectedTimeType = (e) => {
+    const inputName = e.target.name;
+    const value = e.target.value;
+    setValues((prevState) => ({ ...prevState, [inputName]: value }));
+  };
+
+  // 輸入店家
+  const StoreSelector = () => {
+    return (
+      <select
+        className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+        name="storeId"
+        value={values.storeId}
+        onChange={handleStoreId}
+      >
+        <option value="">請選擇店家</option>
+        {stores.map((store) => {
+          const { storeId, storeName } = store;
+          return (
+            <option key={storeId} value={storeId}>
+              {storeName}
+            </option>
+          );
+        })}
+      </select>
+    );
+  };
 
   // 輸入自行輸入地點
   const PlaceInput = () => {
@@ -147,6 +152,14 @@ export default function StepOne({ citiesData }: StepOneProps) {
         placeholder="請選擇輸入詳細地址"
       />
     );
+  };
+
+  //
+  const TotalHours = () => {
+    const startTime = Number(values.startTime.split(":")[0]);
+    const endTime = Number(values.endTime.split(":")[0]);
+    const hours = endTime - startTime;
+    return <p className="text-sm text-gray-500 mt-2">共計 {hours} 小時</p>;
   };
 
   return (
@@ -238,9 +251,21 @@ export default function StepOne({ citiesData }: StepOneProps) {
         </label>
 
         <div className="bg-yellow-tone border-l-[3px] border-yellow-primary">
-          <h3 className="px-3 py-2">各時段可容納人數</h3>
-          <div className="px-6 py-3">
-            <p>時間 可容納人數 人數</p>
+          <h3 className="px-3 py-2">{formattedDate} 各時段可預約人數</h3>
+          <div className="px-6 pb-3">
+            {remainingSeats.map((item) => {
+              const { time, seats } = item;
+              const formattedTime = time.replace("~", "-");
+              const isFull = seats === 0;
+              const textColor = isFull ? "text-danger" : "";
+              return (
+                <p key={time} className={`text-sm ${textColor}`}>
+                  {formattedTime}
+                  <span className="ml-4 mr-2">可預約人數</span>
+                  {seats}
+                </p>
+              );
+            })}
           </div>
         </div>
 
@@ -251,22 +276,57 @@ export default function StepOne({ citiesData }: StepOneProps) {
           require={true}
         >
           {/* 下拉式選單？？：time */}
-          <label className="mt-2">
-            開始時間
-            <input
-              placeholder="請選擇開始時間"
-              className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-            />
-          </label>
-          <label>
-            結束時間
-            <input
-              placeholder="請選擇結束時間"
-              className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-            />
-          </label>
+          <div className="flex gap-4 mt-2">
+            <label className="w-full">
+              開始時間
+              <select
+                className="inputStyle h-10"
+                placeholder="請選擇開始時間"
+                name="startTime"
+                value={values.startTime}
+                onChange={handleSelectedTime}
+              >
+                <option value="">請選擇</option>
+                {remainingSeats.map((item) => {
+                  const { time, seats } = item;
+                  const formattedTime = time.split("~")[0];
+                  if (seats === 0) return;
+                  return (
+                    <option key={formattedTime} value={formattedTime}>
+                      {formattedTime}
+                    </option>
+                  );
+                })}
+              </select>
+            </label>
+            <label className="w-full">
+              結束時間
+              <select
+                className="inputStyle h-10"
+                placeholder="請選擇結束時間"
+                name="endTime"
+                value={values.endTime}
+                onChange={handleSelectedTime}
+              >
+                <option value="">請選擇</option>
+                {values.startTime !== "" &&
+                  // 如果沒有選擇 startTime 就不顯示時間選項
+                  remainingSeats.map((item) => {
+                    const { time, seats } = item;
+                    const formattedTime = time.split("~")[1];
+                    if (seats === 0) return;
+                    if (formattedTime <= values.startTime) return;
+                    return (
+                      <option key={formattedTime} value={formattedTime}>
+                        {formattedTime}
+                      </option>
+                    );
+                  })}
+              </select>
+            </label>
+          </div>
           {/* 店家才有這條錢錢 */}
-          <p>預計 - 小時（總共 NT$ - /人）</p>
+          {values.startTime && values.endTime && <TotalHours />}
         </InputBlock>
 
         {/* 下拉式選單：totalNum */}
