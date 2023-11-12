@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
@@ -7,6 +7,7 @@ import { StepContext, ValuesContext } from "./index";
 import apiPaths from "@/constants/apiPaths";
 import {
   StepOneProps,
+  StoreDataType,
   HandleInputValueType,
   HandleLocationKindType,
   handleCityType,
@@ -25,17 +26,30 @@ export default function StepOne({
   const [values, setValues] = valuesContext;
 
   // API 來的店家資料，需要先選擇地點才會拿到
-  const [storesData, setStoresData] = useState([]);
+  const [storesData, setStoresData] = useState<StoreDataType>([]);
 
   console.log("storesData", storesData);
 
+  // 取得店家列表
   const storesKey: apiParamsType = {
-    apiPath: apiPaths.getCityStores,
+    apiPath: `${apiPaths.getCityStores}?city=${chainKeys.cityId}`,
     method: "GET",
-    data: chainKeys.cityId,
   };
 
   const isPlace = chainKeys.locationKind === "place";
+
+  const getCityStores = async () => {
+    if (!isPlace && chainKeys.cityId) {
+      // 打 API 取得店家列表
+      const data = await fetchApi(storesKey);
+
+      setStoresData(data);
+    }
+  };
+
+  useEffect(() => {
+    getCityStores();
+  }, [chainKeys.cityId]);
 
   // 換頁按鈕
   const handleBtnOne = () => {
@@ -57,16 +71,21 @@ export default function StepOne({
 
   // 選擇城市
   const handleCity: handleCityType = async (e) => {
+    // 將 cityId 存入 chainKeys.cityId
     const value = Number(e.target.value);
     setChainKeys((chainKeys) => ({
       ...chainKeys,
-      locationCity: value,
+      cityId: value,
     }));
 
-    if (!isPlace) {
+    console.log("isPlace", isPlace);
+    console.log("cityId", chainKeys.cityId);
+
+    if (!isPlace && chainKeys.cityId) {
       // 打 API 取得店家列表
       const res = await fetchApi(storesKey);
       const data = res?.data;
+      console.log("getStore", data);
       setStoresData(data);
     }
   };
@@ -88,15 +107,15 @@ export default function StepOne({
       onChange={handleStoreId}
     >
       <option value="">請選擇店家</option>
-      {/* 到時根據 API 再修正 {storesData.map((store) => {
-    const id = store.Id;
-    const storeName = store.storeName;
-    return (
-      <option key={id} value={id}>
-        {storeName}
-      </option>
-    );
-  })} */}
+      {storesData?.map((store) => {
+        const id = store.Id;
+        const storeName = store.Name;
+        return (
+          <option key={id} value={id}>
+            {storeName}
+          </option>
+        );
+      })}
     </select>
   );
 

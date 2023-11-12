@@ -3,7 +3,7 @@ const apiPaths = {
   signup: "/auth/register",
   checkLoginStatus: "/auth/checkLoginStatus",
   taiwanCities: "/member/city",
-  getCityStores: "",
+  getCityStores: "/search/search/stores",
 };
 
 export default apiPaths;

@@ -35,8 +35,8 @@ export type ValuesType = {
   startTime: string;
   endTime: string;
   isHomeGroup: boolean;
-  place: string | null;
-  storeId: number | null;
+  place: string;
+  storeId: number;
   totalMemberNum: number;
   initNum: number;
   description: string;
@@ -53,7 +53,7 @@ export type ValuesType = {
 
 export type LocationKindType = "store" | "place";
 
-export type LocationCityType = number;
+export type cityIdType = number;
 
 export type ChainKeysType = {
   locationKind: string;
@@ -89,6 +89,10 @@ export type StepOneProps = {
   chainKeys: ChainKeysType;
   setChainKeys: React.Dispatch<React.SetStateAction<ChainKeysType>>;
 };
+
+export type StoreDataItemType = { Id: number; Name: string; Address: string };
+
+export type StoreDataType = StoreDataItemType[];
 
 // StepTwo
 export type OptionType = {

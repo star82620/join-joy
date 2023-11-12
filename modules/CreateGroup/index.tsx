@@ -29,9 +29,6 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
 
   const [chainKeys, setChainKeys] = useState(defaultChainValue);
 
-  // const [locationKind, setLocationKind] = useState("store");
-  // const [locationCity, setLocationCity] = useState(0);
-
   console.log("values", values);
   console.log("chainKeys", chainKeys);
 

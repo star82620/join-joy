@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import Layout from "@/common/components/Layout";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,6 +13,16 @@ export default function Home() {
   const authContext = useContext(AuthContext);
   if (!authContext) return null;
   const { userData } = authContext;
+
+  const storesKey: apiParamsType = {
+    apiPath: `${apiPaths.getCityStores}?city=1`,
+    method: "GET",
+  };
+  async function text() {
+    const res = await fetchApi(storesKey);
+    console.log("rrrrres", res);
+  }
+  text();
 
   return (
     <>
