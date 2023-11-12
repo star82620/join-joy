@@ -67,7 +67,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     getRemainingSeats();
   }, [values.cityId, values.locationKind, values.date]);
 
-  const { stores, remainingSeats } = storesData;
+  const { stores, remainingSeats, acceptedNum } = storesData;
 
   // 換頁按鈕
   const handleBtnOne = () => {
@@ -94,7 +94,6 @@ export default function StepOne({ citiesData }: StepOneProps) {
     const inputName = e.target.name;
     const value = e.target.value;
     setValues((prevState) => ({ ...prevState, [inputName]: value }));
-    console.log("handleSelectedTime", value);
   };
 
   // 輸入店家
@@ -138,36 +137,47 @@ export default function StepOne({ citiesData }: StepOneProps) {
     const startTime = Number(values.startTime.split(":")[0]);
     const endTime = Number(values.endTime.split(":")[0]);
     const hours = endTime - startTime;
-    return <p className="text-sm text-gray-500 mt-2">共計 {hours} 小時</p>;
+    const acceptedNum = storesData.acceptedNum;
+    return (
+      <p className="text-sm text-gray-500 mt-2">
+        共計 {hours} 小時，最多可預約 {acceptedNum} 人
+      </p>
+    );
   };
 
-  // 可接受的人數：把選擇的時間段跑一次，找出最少的人數
-  // 跑 remainingSeats 把有符合的時間段的撈出來看 seats
-  // { seats: 75, time: "12:00~13:00" }
-  // endTime - 1
-  const acceptedNum = 10;
+  // 可接受的人數
+  const maxAcceptedNum = 12;
   const countAcceptedNum = () => {
-    const startTime = values.startTime; //14:00
-    const endTime = values.endTime; //17:00
-    const endTimeNum = Number(endTime.split(":")[0]);
-    const lastStartTimeNum = endTimeNum - 1; //16
-    const lastStartTime = `${lastStartTimeNum}:00`; //16:00
+    // 轉換時間格式為可以比較的數字
+    const convertTimeToNumber = (time: string) => {
+      const [hours, minutes] = time.split(":").map(Number);
+      return hours * 60 + minutes;
+    };
 
-    console.log("startTime", startTime, "endTime", endTime);
-    console.log("endTimeNum", endTimeNum, "lastStartTime", lastStartTime);
+    const times = remainingSeats;
+    const { startTime, endTime } = values;
+    const startTimeNumber = convertTimeToNumber(startTime);
+    const endTimeNumber = convertTimeToNumber(endTime);
 
-    // 找出 item.time 開頭有 lastStartTime 的項目
-    const y = remainingSeats.filter((item) => {
-      const { time, seats } = item;
-      const Reg = new RegExp(lastStartTime);
-      const result = Reg.test(time);
-      return result;
+    // 篩選落在這個範圍的時間
+    const filteredTimes = times.filter((item) => {
+      const [itemStart, itemEnd] = item.time
+        .split("~")
+        .map(convertTimeToNumber);
+      return itemStart >= startTimeNumber && itemEnd <= endTimeNumber;
     });
-    console.log("yy", y);
+    const allSeatsNum = filteredTimes.map((item) => item.seats);
+    const minSeatsNum = allSeatsNum.sort((a, b) => a - b)[0];
+
+    if (minSeatsNum > maxAcceptedNum) return maxAcceptedNum;
+    return minSeatsNum;
   };
 
   useEffect(() => {
-    countAcceptedNum();
+    setStoresData((prevState) => ({
+      ...prevState,
+      acceptedNum: countAcceptedNum(),
+    }));
   }, [values.startTime, values.endTime]);
 
   return (

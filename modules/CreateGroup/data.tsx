@@ -103,6 +103,7 @@ export type RemainingSeatsType = {
 export type StoreDataType = {
   stores: StoreType[];
   remainingSeats: RemainingSeatsType[];
+  acceptedNum: number;
 };
 
 export type HandleInputValueType = ChangeInputHandler;
@@ -174,6 +175,7 @@ export const questionsWithRadio: QuestionsWithRadioType = [
 export const defaultStoreData: StoreDataType = {
   stores: [],
   remainingSeats: [],
+  acceptedNum: 0,
 };
 
 // -
