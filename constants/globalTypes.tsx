@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ChangeEventHandler, ReactNode } from "react";
 
 export type ImgType = {
   src: string;

@@ -105,16 +105,9 @@ export type StoreDataType = {
   remainingSeats: RemainingSeatsType[];
 };
 
-export type HandleInputValueType = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  inputName: string
-) => void;
+export type HandleInputValueType = ChangeInputHandler;
 
-export type HandleLocationKindType = ChangeInputHandler;
-
-export type HandleCityType = ChangeSelectHandler;
-
-export type HandleStoreType = ChangeSelectHandler;
+export type HandleSelectedIdType = ChangeSelectHandler;
 
 export type HandleSelectedTimeType = ChangeSelectHandler;
 

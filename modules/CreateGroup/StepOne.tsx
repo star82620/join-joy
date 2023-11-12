@@ -10,9 +10,7 @@ import {
   StoreDataType,
   defaultStoreData,
   HandleInputValueType,
-  HandleLocationKindType,
-  HandleCityType,
-  HandleStoreType,
+  HandleSelectedIdType,
   HandleSelectedTimeType,
 } from "./data";
 
@@ -79,36 +77,16 @@ export default function StepOne({ citiesData }: StepOneProps) {
   };
 
   // 儲存 input value
-  const handleInputValue: HandleInputValueType = (e, inputName) => {
+  const handleInputValue: HandleInputValueType = (e) => {
+    const inputName = e.target.name;
     setValues((prevState) => ({ ...prevState, [inputName]: e.target.value }));
   };
 
-  // 選擇地點類型
-  const handleLocationKind: HandleLocationKindType = (e) => {
-    setValues((values) => ({
-      ...values,
-      locationKind: e.target.value,
-    }));
-  };
-
-  // 選擇城市
-  const handleCity: HandleCityType = async (e) => {
-    // 將 cityId 存入 values.cityId
+  // 選擇城市、店家 id
+  const handleSelectedId: HandleSelectedIdType = async (e) => {
+    const inputName = e.target.name;
     const value = Number(e.target.value);
-    setValues((values) => ({
-      ...values,
-      cityId: value,
-    }));
-  };
-
-  // 選擇店家
-  const handleStoreId: HandleStoreType = (e) => {
-    // 選擇店家之後
-    // 1. 將 storeId 存入 values
-    // 2. 打 API 獲得該店家的可預約日期、時間、可選擇的遊戲
-
-    const value = Number(e.target.value);
-    setValues((prevState) => ({ ...prevState, storeId: value }));
+    setValues((prevState) => ({ ...prevState, [inputName]: value }));
   };
 
   // 選擇時間
@@ -125,7 +103,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
         className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
         name="storeId"
         value={values.storeId}
-        onChange={handleStoreId}
+        onChange={handleSelectedId}
       >
         <option value="">請選擇店家</option>
         {stores.map((store) => {
@@ -148,7 +126,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
         className="inputStyle"
         name="place"
         value={values.place}
-        onChange={(e) => handleInputValue(e, "place")}
+        onChange={handleInputValue}
         placeholder="請選擇輸入詳細地址"
       />
     );
@@ -174,7 +152,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
               className="inputStyle"
               name="groupName"
               value={values.groupName}
-              onChange={(e) => handleInputValue(e, "groupName")}
+              onChange={(e) => handleInputValue}
             />
           </InputBlock>
         </label>
@@ -193,7 +171,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
                 className="radioIcon"
                 name="locationKind"
                 value="store"
-                onChange={handleLocationKind}
+                onChange={handleInputValue}
                 defaultChecked
               />
               <span className="ml-2">店家</span>
@@ -204,7 +182,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
                 className="radioIcon"
                 name="locationKind"
                 value="place"
-                onChange={handleLocationKind}
+                onChange={handleInputValue}
               />
               <span className="ml-2">自行輸入</span>
             </label>
@@ -214,8 +192,8 @@ export default function StepOne({ citiesData }: StepOneProps) {
             {/* 選擇城市 */}
             <select
               className="w-[45%] border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-              name="city"
-              onChange={handleCity}
+              name="cityId"
+              onChange={handleSelectedId}
             >
               <option value="">請選擇城市/地區</option>
               {citiesData.map((city) => {
@@ -245,7 +223,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
               placeholder="請選擇日期"
               className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
               value={values.date}
-              onChange={(e) => handleInputValue(e, "date")}
+              onChange={handleInputValue}
             />
           </InputBlock>
         </label>
@@ -332,9 +310,16 @@ export default function StepOne({ citiesData }: StepOneProps) {
         {/* 下拉式選單：totalNum */}
         <label>
           <InputBlock title="預計揪團人數" require={true}>
-            <select className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
+            <input
+              type="number"
+              className="inputStyle"
+              name="totalMemberNum"
+              value={values.totalMemberNum}
+              // onChange={}
+            />
+            <datalist id="totalNum">
               <option value="">請選擇人數</option>
-            </select>
+            </datalist>
           </InputBlock>
         </label>
 
@@ -348,7 +333,9 @@ export default function StepOne({ citiesData }: StepOneProps) {
           >
             <input
               type="number"
-              className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+              className="inputStyle"
+              value={values.initNum}
+              // onChange={}
             />
           </InputBlock>
         </label>
