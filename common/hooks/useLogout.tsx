@@ -5,8 +5,8 @@ export default function useLogout() {
   const router = useRouter();
 
   return function logout() {
-    alert("登出了！");
     deleteCookie("authToken");
+    alert("登出了！");
     router.push("/");
   };
 }
