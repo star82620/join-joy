@@ -6,6 +6,7 @@ import {
   ChangeInputHandler,
   ChangeSelectHandler,
   GameType,
+  StoreType,
 } from "@/constants/globalType";
 
 // page
@@ -91,9 +92,7 @@ export type StepOneProps = {
   citiesData: citiesDataType;
 };
 
-export type StoreDataItemType = { Id: number; Name: string; Address: string };
-
-export type StoreDataType = StoreDataItemType[];
+export type StoreDataType = StoreType[];
 
 // StepTwo
 

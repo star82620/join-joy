@@ -105,10 +105,9 @@ export default function StepOne({ citiesData }: StepOneProps) {
     >
       <option value="">請選擇店家</option>
       {storesData?.map((store) => {
-        const id = store.Id;
-        const storeName = store.Name;
+        const { storeId, storeName } = store;
         return (
-          <option key={id} value={id}>
+          <option key={storeId} value={storeId}>
             {storeName}
           </option>
         );

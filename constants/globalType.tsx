@@ -3,6 +3,24 @@ export type ImgType = {
   alt: string;
 };
 
+export type StoreType = {
+  storeId: number;
+  storeName: string;
+  address: string;
+  profileImg: string;
+  cover: string | null;
+  score: number;
+  tag: {
+    wifiTag: boolean;
+    teachTag: boolean;
+    meal: boolean;
+    mealout: boolean;
+    buffet: boolean;
+    hqTag: boolean;
+    popTag: boolean;
+  };
+};
+
 // 這裡的 gameType 是小寫 t（from API）
 export type GameType = {
   gameId: number;
