@@ -94,6 +94,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     const inputName = e.target.name;
     const value = e.target.value;
     setValues((prevState) => ({ ...prevState, [inputName]: value }));
+    console.log("handleSelectedTime", value);
   };
 
   // 輸入店家
@@ -140,6 +141,35 @@ export default function StepOne({ citiesData }: StepOneProps) {
     return <p className="text-sm text-gray-500 mt-2">共計 {hours} 小時</p>;
   };
 
+  // 可接受的人數：把選擇的時間段跑一次，找出最少的人數
+  // 跑 remainingSeats 把有符合的時間段的撈出來看 seats
+  // { seats: 75, time: "12:00~13:00" }
+  // endTime - 1
+  const acceptedNum = 10;
+  const countAcceptedNum = () => {
+    const startTime = values.startTime; //14:00
+    const endTime = values.endTime; //17:00
+    const endTimeNum = Number(endTime.split(":")[0]);
+    const lastStartTimeNum = endTimeNum - 1; //16
+    const lastStartTime = `${lastStartTimeNum}:00`; //16:00
+
+    console.log("startTime", startTime, "endTime", endTime);
+    console.log("endTimeNum", endTimeNum, "lastStartTime", lastStartTime);
+
+    // 找出 item.time 開頭有 lastStartTime 的項目
+    const y = remainingSeats.filter((item) => {
+      const { time, seats } = item;
+      const Reg = new RegExp(lastStartTime);
+      const result = Reg.test(time);
+      return result;
+    });
+    console.log("yy", y);
+  };
+
+  useEffect(() => {
+    countAcceptedNum();
+  }, [values.startTime, values.endTime]);
+
   return (
     <>
       <section className="flex flex-col w-full gap-10">
@@ -152,7 +182,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
               className="inputStyle"
               name="groupName"
               value={values.groupName}
-              onChange={(e) => handleInputValue}
+              onChange={handleInputValue}
             />
           </InputBlock>
         </label>
@@ -220,11 +250,17 @@ export default function StepOne({ citiesData }: StepOneProps) {
             require={true}
           >
             <input
+              list="data"
               placeholder="請選擇日期"
               className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+              name="date"
               value={values.date}
               onChange={handleInputValue}
             />
+            <datalist id="data">
+              <option value="2023-11-01">2023-11-01</option>
+              <option value="2023-11-07">2023-11-07</option>
+            </datalist>
           </InputBlock>
         </label>
 
@@ -288,7 +324,6 @@ export default function StepOne({ citiesData }: StepOneProps) {
               >
                 <option value="">請選擇</option>
                 {values.startTime !== "" &&
-                  // 如果沒有選擇 startTime 就不顯示時間選項
                   remainingSeats.map((item) => {
                     const { time, seats } = item;
                     const formattedTime = time.split("~")[1];
@@ -311,14 +346,16 @@ export default function StepOne({ citiesData }: StepOneProps) {
         <label>
           <InputBlock title="預計揪團人數" require={true}>
             <input
-              type="number"
+              // type="number"
               className="inputStyle"
               name="totalMemberNum"
               value={values.totalMemberNum}
-              // onChange={}
+              onChange={handleInputValue}
+              list="totalNum"
             />
             <datalist id="totalNum">
               <option value="">請選擇人數</option>
+              {/* {[...Array(acceptedNum)].map()} */}
             </datalist>
           </InputBlock>
         </label>
@@ -334,7 +371,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
             <input
               type="number"
               className="inputStyle"
-              value={values.initNum}
+              // value={values.initNum}
               // onChange={}
             />
           </InputBlock>
