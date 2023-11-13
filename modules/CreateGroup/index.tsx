@@ -4,12 +4,16 @@ import ProgressBar from "./ProgressBar";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import { SelectedGamesType } from "@/common/components/GameList/data";
 import {
   defaultValues,
   ValuesContextType,
   StepContextType,
   CreateGroupPageProps,
+  PostDataType,
+  SelectedTagsType,
 } from "./data";
+import convertToISO from "@/common/helpers/convertToISO";
 
 // 切換 step
 const defaultStepContextValue: StepContextType = [1, () => {}];
@@ -26,17 +30,59 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
   const [activeStep, setActiveStep] = useState(1);
   const [values, setValues] = useState(defaultValues); //要給 api data 的資料
 
+  console.log(values);
+
+  // 被選到的遊戲
+  const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
+
+  const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
+
   const submitCreateGroupHandler = () => {
     // 送出開團表單
+    const {
+      groupName,
+      locationKind,
+      city,
+      place,
+      storeId,
+      date,
+      startTime,
+      endTime,
+      totalMemberNum,
+      initNum,
+      description,
+      seletedPrivate,
+    } = values;
+    // const;
 
-    const isHomeGroup = values.locationKind === "place";
-    const city = values.cityId;
-    if (isHomeGroup) {
-      // 把 values 裡面的 place 加上...可以在
-    }
-    // place store 的 null 要在這裡處理
+    const formattedStartTime = convertToISO(date, startTime);
+    const formattedEndTime = convertToISO(date, endTime);
+    const isHomeGroup = locationKind === "place";
+    const cityName = city.cityName;
+    const setPlace = isHomeGroup ? `${cityName}${place}` : null;
+    const setStoreId = !isHomeGroup ? storeId : null;
+    const isPrivate = seletedPrivate === "private";
 
-    // setValues((prevState) => ({ ...prevState, isHomeGroup: "locationKind" }));
+    const postData: PostDataType = {
+      groupName: groupName,
+      startTime: formattedStartTime,
+      endTime: formattedEndTime,
+      isHomeGroup: isHomeGroup,
+      place: setPlace,
+      storeId: setStoreId,
+      totalMemberNum: totalMemberNum,
+      initNum: initNum,
+      isPrivate: isPrivate,
+      gameId: [0],
+      description: description,
+      beginnerTag: true,
+      expertTag: true,
+      practiceTag: true,
+      openTag: true,
+      tutorialTag: true,
+      casualTag: true,
+      competitiveTag: true,
+    };
   };
 
   return (
@@ -50,7 +96,14 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
                 <ValuesContext.Provider value={[values, setValues]}>
                   <form onSubmit={submitCreateGroupHandler}>
                     {activeStep === 1 && <StepOne citiesData={citiesData} />}
-                    {activeStep === 2 && <StepTwo />}
+                    {activeStep === 2 && (
+                      <StepTwo
+                        selectedGames={selectedGames}
+                        setSelectedGames={setSelectedGames}
+                        selectedTags={selectedTags}
+                        setSelectedTags={setSelectedTags}
+                      />
+                    )}
                     {activeStep === 3 && <StepThree />}
                   </form>
                 </ValuesContext.Provider>

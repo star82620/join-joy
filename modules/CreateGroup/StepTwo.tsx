@@ -9,19 +9,24 @@ import { StepContext, ValuesContext } from "./index";
 import {
   questionsWithRadio,
   GamesDataType,
-  SelectedTagsType,
   HandlePrivateGroupType,
   HandlePDescriptionValueType,
   HandleSelectedTag,
   ToggleTagsBlockType,
+  StepTwoProps,
 } from "./data";
 import GameList from "@/common/components/GameList";
-import { SelectedGamesType } from "@/common/components/GameList/data";
+
 import { groupTags } from "@/constants/wordsIndex";
 import FillImage from "@/common/components/FillImage";
 import icons from "@/constants/iconsPackage/createGroupIcons";
 
-export default function StepTwo() {
+export default function StepTwo({
+  selectedGames,
+  setSelectedGames,
+  selectedTags,
+  setSelectedTags,
+}: StepTwoProps) {
   const stepContext = useContext(StepContext);
   const [activeStep, setActiveStep] = stepContext;
 
@@ -34,10 +39,6 @@ export default function StepTwo() {
 
   // 遊戲列表的資料
   const [gamesData, setGamesData] = useState<GamesDataType>([]);
-  console.log("gamesData", gamesData);
-
-  // 被選到的遊戲
-  const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
 
   const isGamesEmpty = gamesData.length === 0;
 
@@ -47,9 +48,7 @@ export default function StepTwo() {
       method: "GET",
     };
     const res = await fetchApi(gamesKey);
-    if (res.data) {
-    }
-    const data = res.data?.gamelist;
+    const data = res.data ? res.data.gamelist : [];
     setGamesData(data);
   };
 
@@ -72,9 +71,9 @@ export default function StepTwo() {
     setValues((prevState) => ({ ...prevState, description: e.target.value }));
   };
 
-  const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
   const [isTagsHidden, setIsTagsHidden] = useState<boolean>(true);
-  console.log("ssss", selectedTags);
+
+  const isEmptySelectedTags = selectedTags.length === 0;
   const toggleIcon = isTagsHidden ? "arrow-down" : "arrow-up";
   const toggleTagsBlock: ToggleTagsBlockType = (e) => {
     setIsTagsHidden(!isTagsHidden);
@@ -82,8 +81,21 @@ export default function StepTwo() {
   const handleSelectedTag: HandleSelectedTag = (e) => {
     const { id, text } = e.currentTarget.dataset;
     if (!id || !text) return;
+    const tagValue = { id, text };
 
-    setSelectedTags((prevState) => [...prevState, { id, text }]);
+    const index = selectedTags.findIndex((item) => {
+      return item.id === id;
+    });
+
+    if (index < 0) {
+      setSelectedTags((prevState) => [...prevState, tagValue]);
+    }
+
+    if (index >= 0) {
+      const newValue = [...selectedTags];
+      newValue.splice(index, 1);
+      setSelectedTags(newValue);
+    }
   };
 
   return (
@@ -124,6 +136,9 @@ export default function StepTwo() {
           <InputBlock title="揪團整體面向">
             <div className="relative" onClick={(e) => toggleTagsBlock(e)}>
               <div className="w-full h-10 inputStyle last:after:content-['']">
+                {isEmptySelectedTags && (
+                  <span className="text-gray-500">可複選</span>
+                )}
                 {selectedTags.map((tag, index, ary) => {
                   const tagStyle =
                     index !== ary.length - 1 ? "after:content-['、']" : "";
@@ -186,7 +201,7 @@ export default function StepTwo() {
           const handlePrivateGroup: HandlePrivateGroupType = (e) => {
             setValues((prevState) => ({
               ...prevState,
-              private: e.target.value,
+              seletedPrivate: e.target.value,
             }));
           };
           return (

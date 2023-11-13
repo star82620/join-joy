@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { SelectedGamesType } from "@/common/components/GameList/data";
 import {
   ChangeInputHandler,
   ChangeSelectHandler,
@@ -9,24 +10,18 @@ import {
 } from "@/constants/globalTypes";
 
 // page
-export type CityType = {
+export type CityDataType = {
   Id: number;
   CityName: string;
 };
 
-export type CitiesDataType = CityType[];
+export type CitiesDataType = CityDataType[];
 
 export type CreateGroupPageProps = {
   citiesData: CitiesDataType;
 };
 
 // index
-export type ChainKeysType = {
-  locationKind: string;
-  cityId: number;
-  storeId: number;
-  date: string;
-};
 
 export type StepContextType = [
   number,
@@ -38,32 +33,36 @@ export type ValuesContextType = [
   React.Dispatch<React.SetStateAction<ValuesType>>
 ];
 
+export type SelectedTagsType = { id: string; text: string };
+
 // 要給 api 的資料重新寫一份
-// export type ValuesType = {
-//   groupName: string;
-//   startTime: string;
-//   endTime: string;
-//   isHomeGroup: boolean;
-//   place: string;
-//   storeId: number;
-//   totalMemberNum: number;
-//   initNum: number;
-//   description: string;
-//   private: string;
-//   GameIds: Array<number>;
-//   beginnerTag: boolean;
-//   expertTag: boolean;
-//   practiceTag: boolean;
-//   openTag: boolean;
-//   tutorialTag: boolean;
-//   casualTag: boolean;
-//   competitiveTag: boolean;
-// };
+export type PostDataType = {
+  groupName: string;
+  startTime: string;
+  endTime: string;
+  isHomeGroup: boolean;
+  place: string | null;
+  storeId: number | null;
+  totalMemberNum: number;
+  initNum: number;
+  description: string;
+  isPrivate: boolean;
+  gameId: Array<number>;
+  beginnerTag: boolean;
+  expertTag: boolean;
+  practiceTag: boolean;
+  openTag: boolean;
+  tutorialTag: boolean;
+  casualTag: boolean;
+  competitiveTag: boolean;
+};
+
+export type CityValueType = { cityId: number; cityName: string };
 
 export type ValuesType = {
   groupName: string;
   locationKind: string;
-  cityId: number;
+  city: CityValueType;
   place: string;
   storeId: number;
   date: string;
@@ -71,10 +70,8 @@ export type ValuesType = {
   endTime: string;
   totalMemberNum: number;
   initNum: number;
-  gameIds: Array<number>;
-  tags: Array<number>;
   description: string;
-  private: string;
+  seletedPrivate: string;
 };
 
 export type LocationKindType = "store" | "place";
@@ -137,12 +134,20 @@ export type InputRadioProps = QuestionType & {
   onChange: ChangeInputHandler;
 };
 
-export type SelectedTagsType = { id: string; text: string };
-
 export type HandlePrivateGroupType = ChangeInputHandler;
+
 export type HandlePDescriptionValueType = ChangeTextAreaHandler;
+
 export type HandleSelectedTag = ClickHandler;
+
 export type ToggleTagsBlockType = ClickHandler;
+
+export type StepTwoProps = {
+  selectedGames: SelectedGamesType;
+  setSelectedGames: React.Dispatch<React.SetStateAction<SelectedGamesType>>;
+  selectedTags: SelectedTagsType[];
+  setSelectedTags: React.Dispatch<React.SetStateAction<SelectedTagsType[]>>;
+};
 
 //----data----
 
@@ -150,7 +155,7 @@ export type ToggleTagsBlockType = ClickHandler;
 export const defaultValues: ValuesType = {
   groupName: "",
   locationKind: "store",
-  cityId: 0,
+  city: { cityId: 0, cityName: "" },
   place: "",
   storeId: 0,
   date: "",
@@ -158,10 +163,8 @@ export const defaultValues: ValuesType = {
   endTime: "",
   totalMemberNum: 2,
   initNum: 1,
-  gameIds: [],
-  tags: [],
   description: "",
-  private: "public",
+  seletedPrivate: "public",
 };
 
 export const questionsWithRadio: QuestionsWithRadioType = [
@@ -174,6 +177,27 @@ export const questionsWithRadio: QuestionsWithRadioType = [
     ],
   },
 ];
+
+export const defaultPostData: PostDataType = {
+  groupName: "string",
+  startTime: "2023-11-13T07:33:30.710Z",
+  endTime: "2023-11-13T07:33:30.710Z",
+  isHomeGroup: true,
+  place: "string",
+  storeId: 0,
+  totalMemberNum: 0,
+  initNum: 0,
+  isPrivate: false,
+  gameId: [0],
+  description: "string",
+  beginnerTag: true,
+  expertTag: true,
+  practiceTag: true,
+  openTag: true,
+  tutorialTag: true,
+  casualTag: true,
+  competitiveTag: true,
+};
 
 // StepOne
 export const defaultStoreData: StoreDataType = {

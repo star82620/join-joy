@@ -31,15 +31,16 @@ export default function StepOne({ citiesData }: StepOneProps) {
   const isPlace = values.locationKind === "place";
   const isStore = values.locationKind === "store";
   const formattedDate = values.date.replaceAll("-", "/");
+  const cityId = values.city.cityId;
 
   // 取得店家列表
   const getCityStores = async () => {
     const storesKey: apiParamsType = {
-      apiPath: `${apiPaths.getCityStores}?city=${values.cityId}`,
+      apiPath: `${apiPaths.getCityStores}?city=${cityId}`,
       method: "GET",
     };
 
-    if (isStore && values.cityId) {
+    if (isStore && cityId) {
       const res = await fetchApi(storesKey);
       const data = res.data ? res.data.matchedStores : [];
       setStoresData((prevStep) => ({ ...prevStep, stores: data }));
@@ -48,7 +49,11 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   useEffect(() => {
     getCityStores();
-  }, [values.cityId, values.locationKind]);
+  }, [cityId, values.locationKind]);
+
+  useEffect(() => {
+    setValues((prevState) => ({ ...prevState, date: "" }));
+  }, [cityId, values.storeId]);
 
   // 取得指定日期的剩餘座位
   const getRemainingSeats = async () => {
@@ -57,7 +62,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
       method: "GET",
     };
 
-    if (isStore && values.storeId && values.date) {
+    if (isStore && !!values.storeId && !!values.date) {
       const res = await fetchApi(remainingSeatsKey);
       const data = res?.data;
       if (!data) return;
@@ -67,7 +72,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   useEffect(() => {
     getRemainingSeats();
-  }, [values.cityId, values.locationKind, values.date]);
+  }, [cityId, values.locationKind, values.date]);
 
   const { stores, remainingSeats, acceptedNum } = storesData;
 
@@ -84,7 +89,18 @@ export default function StepOne({ citiesData }: StepOneProps) {
     setValues((prevState) => ({ ...prevState, [inputName]: e.target.value }));
   };
 
-  // 選擇城市、店家 id
+  // 選擇城市
+  const handleSelectedCity: HandleSelectedNumType = async (e) => {
+    const inputName = e.target.name;
+    const cityId = Number(e.target.value);
+    const cityName = e.target.dataset.cityname;
+    setValues((prevState) => ({
+      ...prevState,
+      [inputName]: { cityId, cityName },
+    }));
+  };
+
+  // 選擇店家 id
   const handleSelectedNum: HandleSelectedNumType = async (e) => {
     const inputName = e.target.name;
     const value = Number(e.target.value);
@@ -100,6 +116,11 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   // 輸入店家
   const StoreSelector = () => {
+    const isEmpty = stores.length === 0;
+    const defaultText =
+      !!cityId && isEmpty
+        ? "這個地區還沒有店家・゜・(PД`q｡)・゜・"
+        : "請選擇店家";
     return (
       <select
         className="inputStyle h-10"
@@ -107,7 +128,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
         value={values.storeId}
         onChange={handleSelectedNum}
       >
-        <option value="">請選擇店家</option>
+        <option value="">{defaultText}</option>
         {stores.map((store) => {
           const { storeId, storeName } = store;
           return (
@@ -242,15 +263,15 @@ export default function StepOne({ citiesData }: StepOneProps) {
             {/* 選擇城市 */}
             <select
               className="w-[45%] md:w-full h-10 inputStyle"
-              name="cityId"
-              onChange={handleSelectedNum}
+              name="city"
+              onChange={handleSelectedCity}
             >
               <option value="">請選擇城市</option>
               {citiesData.map((city) => {
                 const id = city.Id;
                 const cityName = city.CityName;
                 return (
-                  <option key={id} value={id}>
+                  <option key={id} value={id} data-cityname={cityName}>
                     {cityName}
                   </option>
                 );
@@ -326,7 +347,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           {/* 下拉式選單？？：time */}
           <div className="flex gap-4 mt-2">
             <label className="w-full">
-              開始時間
+              <h4>開始時間</h4>
               <select
                 className="inputStyle h-10"
                 placeholder="請選擇開始時間"
@@ -348,7 +369,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
               </select>
             </label>
             <label className="w-full">
-              結束時間
+              <h4>結束時間</h4>
               <select
                 className="inputStyle h-10"
                 placeholder="請選擇結束時間"
@@ -386,7 +407,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
               onChange={handleSelectedNum}
             >
               <option value="">
-                {values.endTime && acceptedNum === 0
+                {!!values.endTime && acceptedNum === 0
                   ? "無可預約人數，請重新選擇時段"
                   : "請選擇人數"}
               </option>
