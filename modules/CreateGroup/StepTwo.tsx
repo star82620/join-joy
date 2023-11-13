@@ -49,10 +49,7 @@ export default function StepTwo() {
   };
 
   useEffect(() => {
-    console.log("isStore", isStore);
-    console.log("storeId", storeId);
     if (isStore && storeId) {
-      // 抓 API data
       getGamesData();
     }
   }, []);
@@ -105,16 +102,22 @@ export default function StepTwo() {
           </label>
         )}
         <label>
-          <InputBlock title="遊戲整體面向">
-            {/* <div className="w-full h-10 border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"></div> */}
-            <select className="appearance-none w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm">
-              <option>請選擇遊戲標籤</option>
+          <InputBlock title="揪團整體面向">
+            <div className="w-full h-10 inputStyle" onClick={() => {}}></div>
+
+            {/* <select
+              className="appearance-none inputStyle"
+              name="tags"
+              value={values.tags}
+              onChange={(e) => {}}
+            > */}
+            {/* <option>請選擇標籤</option>
               {groupTags.map((tag) => (
                 <option key={tag.id} value={tag.text}>
                   {tag.text}
                 </option>
-              ))}
-            </select>
+              ))} */}
+            {/* </select> */}
           </InputBlock>
         </label>
         <label>
