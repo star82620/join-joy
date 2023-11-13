@@ -1,4 +1,4 @@
-import { GameType } from "@/constants/globalType";
+import { GameType } from "@/constants/globalTypes";
 
 export type SelectedGameType = {
   gameId: GameType["gameId"];
