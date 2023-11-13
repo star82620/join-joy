@@ -1,9 +1,13 @@
 function convertToISO(date: String, time: String) {
-  const dateTime = `${date}T${time}`;
+  if (!date || !time) return "";
 
-  const dateObj = new Date(dateTime);
+  const dateTime = `${date}T${time}:00.000Z`;
+  console.log("date:" + date, "time:" + time);
+  console.log("dateTime", dateTime);
 
-  return dateObj.toISOString();
+  // const dateObj = new Date(dateTime);
+
+  return dateTime;
 }
 
 export default convertToISO;

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { FormEvent, ReactNode } from "react";
 import { SelectedGamesType } from "@/common/components/GameList/data";
 import {
   ChangeInputHandler,
@@ -33,10 +33,12 @@ export type ValuesContextType = [
   React.Dispatch<React.SetStateAction<ValuesType>>
 ];
 
+// export type SelectedTagIdType = "beginnerTag"|"expertTag"|"practiceTag"|"openTag"|"tutorialTag"|"casualTag"|"competitiveTag";
+
 export type SelectedTagsType = { id: string; text: string };
 
 // 要給 api 的資料重新寫一份
-export type PostDataType = {
+export type PostValuesType = {
   groupName: string;
   startTime: string;
   endTime: string;
@@ -77,6 +79,8 @@ export type ValuesType = {
 export type LocationKindType = "store" | "place";
 
 export type CityIdType = number;
+
+export type SubmitCreateGroupHandlerType = (e: FormEvent) => void;
 
 // InputBlock
 export type InputBlockProps = {
@@ -178,7 +182,7 @@ export const questionsWithRadio: QuestionsWithRadioType = [
   },
 ];
 
-export const defaultPostData: PostDataType = {
+export const defaultPostValues: PostValuesType = {
   groupName: "string",
   startTime: "2023-11-13T07:33:30.710Z",
   endTime: "2023-11-13T07:33:30.710Z",

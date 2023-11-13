@@ -90,10 +90,12 @@ export default function StepOne({ citiesData }: StepOneProps) {
   };
 
   // 選擇城市
-  const handleSelectedCity: HandleSelectedNumType = async (e) => {
+  const handleSelectedCity: HandleSelectedNumType = (e) => {
     const inputName = e.target.name;
     const cityId = Number(e.target.value);
-    const cityName = e.target.dataset.cityname;
+    const index = e.target.selectedIndex;
+    const cityName = e.target.options[index].text;
+
     setValues((prevState) => ({
       ...prevState,
       [inputName]: { cityId, cityName },
@@ -271,7 +273,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
                 const id = city.Id;
                 const cityName = city.CityName;
                 return (
-                  <option key={id} value={id} data-cityname={cityName}>
+                  <option key={id} value={id}>
                     {cityName}
                   </option>
                 );

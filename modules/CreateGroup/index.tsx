@@ -4,16 +4,23 @@ import ProgressBar from "./ProgressBar";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import { SelectedGamesType } from "@/common/components/GameList/data";
+import {
+  SelectedGamesType,
+  SelectedGameType,
+} from "@/common/components/GameList/data";
 import {
   defaultValues,
   ValuesContextType,
   StepContextType,
   CreateGroupPageProps,
-  PostDataType,
+  PostValuesType,
   SelectedTagsType,
+  SubmitCreateGroupHandlerType,
 } from "./data";
 import convertToISO from "@/common/helpers/convertToISO";
+import apiPaths from "@/constants/apiPaths";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import { useRouter } from "next/router";
 
 // 切換 step
 const defaultStepContextValue: StepContextType = [1, () => {}];
@@ -27,6 +34,8 @@ export const ValuesContext = createContext<ValuesContextType>(
 );
 
 export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
+  const router = useRouter();
+
   const [activeStep, setActiveStep] = useState(1);
   const [values, setValues] = useState(defaultValues); //要給 api data 的資料
 
@@ -37,8 +46,9 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
 
   const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
 
-  const submitCreateGroupHandler = () => {
-    // 送出開團表單
+  console.log(selectedGames);
+
+  const formatPostValues = () => {
     const {
       groupName,
       locationKind,
@@ -53,17 +63,26 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
       description,
       seletedPrivate,
     } = values;
-    // const;
 
     const formattedStartTime = convertToISO(date, startTime);
     const formattedEndTime = convertToISO(date, endTime);
     const isHomeGroup = locationKind === "place";
     const cityName = city.cityName;
+    console.log(cityName);
     const setPlace = isHomeGroup ? `${cityName}${place}` : null;
     const setStoreId = !isHomeGroup ? storeId : null;
     const isPrivate = seletedPrivate === "private";
 
-    const postData: PostDataType = {
+    const formattedGames = selectedGames.reduce(
+      (games, game: SelectedGameType) => {
+        const { gameId } = game;
+        games.push(gameId);
+        return games;
+      },
+      [] as number[]
+    );
+
+    const postValues: PostValuesType = {
       groupName: groupName,
       startTime: formattedStartTime,
       endTime: formattedEndTime,
@@ -75,14 +94,44 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
       isPrivate: isPrivate,
       gameId: [0],
       description: description,
-      beginnerTag: true,
-      expertTag: true,
-      practiceTag: true,
-      openTag: true,
-      tutorialTag: true,
-      casualTag: true,
-      competitiveTag: true,
+      beginnerTag: false,
+      expertTag: false,
+      practiceTag: false,
+      openTag: false,
+      tutorialTag: false,
+      casualTag: false,
+      competitiveTag: false,
     };
+
+    postValues.gameId = formattedGames;
+
+    // 如果裡面有，就跑成 true 不然 false
+    const formattedValues = selectedTags.reduce((values, tag) => {
+      const { id } = tag;
+      values[id] = true;
+      return values;
+    }, postValues);
+
+    return formattedValues;
+  };
+
+  // 送出開團表單
+  const submitCreateGroupHandler: SubmitCreateGroupHandlerType = async (e) => {
+    e.preventDefault();
+    const postValues = formatPostValues();
+
+    const apiParams: apiParamsType = {
+      apiPath: apiPaths["submit-create-group"],
+      method: "POST",
+      data: postValues,
+    };
+
+    const res = await fetchApi(apiParams);
+
+    if (res.status) {
+      const groupId = res.groupId;
+      router.push(`/group/${groupId}`);
+    }
   };
 
   return (
@@ -94,7 +143,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
               <ProgressBar />
               <div className="w-full">
                 <ValuesContext.Provider value={[values, setValues]}>
-                  <form onSubmit={submitCreateGroupHandler}>
+                  <form id="create-group" onSubmit={submitCreateGroupHandler}>
                     {activeStep === 1 && <StepOne citiesData={citiesData} />}
                     {activeStep === 2 && (
                       <StepTwo

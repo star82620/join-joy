@@ -144,7 +144,7 @@ export default function StepTwo({
                     index !== ary.length - 1 ? "after:content-['、']" : "";
                   return (
                     <span
-                      key={tag.id}
+                      key={tag.text}
                       className={`before:content-['#'] ${tagStyle} `}
                     >
                       {tag.text}
@@ -218,8 +218,9 @@ export default function StepTwo({
         <div className="mt-6 flex flex-col justify-center items-center gap-4">
           <Button
             type="submit"
+            form="create-group"
             appearance="orange"
-            onClick={handleBtnTwo}
+            // onClick={handleBtnTwo}
             className="px-[158px] md:py-2 md:px-3 md:w-full"
           >
             完成開團
