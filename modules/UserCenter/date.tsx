@@ -1,5 +1,40 @@
 import { ReactNode } from "react";
 import { apiParamsType } from "@/common/helpers/fetchApi";
+import { StoreType } from "@/constants/globalTypes";
+
+// page
+export type ProfileDataType = {
+  userId: number;
+  nickName: string;
+  email: string;
+  description: string;
+  games: Array<number>;
+  cities: Array<number>;
+};
+
+export type GroupsDataType = {
+  groupId: number;
+  groupName: string;
+  startTime: string;
+  endTime: string;
+  totalMemberNum: number;
+  currentPeople: number;
+  place: string | null;
+  store: StoreType;
+  status: "member" | "leader" | "pending";
+};
+
+export type UserCenterPageProps = {
+  profileData: ProfileDataType;
+  groupsData: GroupsDataType;
+};
+
+export type DataContextType = {
+  // profileData: ProfileDataType;
+  // groupsData: GroupsDataType;
+};
+
+// ------
 
 export type SubItemIdType = "my-groups-leader" | "my-groups-member";
 

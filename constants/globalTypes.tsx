@@ -5,6 +5,12 @@ export type ImgType = {
   alt: string;
 };
 
+export type StoreType = {
+  storeId: number;
+  storeName: string;
+  address: string;
+};
+
 // AuthProvider
 export type AuthProviderProps = {
   children: ReactNode;
