@@ -14,11 +14,11 @@ export const setGroupStatus = (endTime: string, status: string) => {
   return "member";
 };
 
-export default function GroupsList({ pageStatus }: GroupListProps) {
+function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
-  const { profileData, groupsData } = useContext(DataContext);
+  const { profileData, groupsData, groupRatingSet } = useContext(DataContext);
 
   const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
     console.log("取消加入揪團申請");
@@ -118,3 +118,5 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
     </section>
   );
 }
+
+export default GroupsList;

@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import formatGroupDate from "@/common/helpers/formateDate";
 import statusSet from "@/constants/groupStatusSet";
 import { setGroupStatus } from "./GroupsList";
+import { DataContext } from "@/pages/user-center";
 import { GroupItemProps } from "./data";
+import { GroupRatingsType } from "../date";
 
-export default function GroupItem({
-  group,
-  isExpired,
-  actionBtns,
-}: GroupItemProps) {
+function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
+  const { groupRatingSet } = useContext(DataContext);
   const {
     groupId,
     groupName,
@@ -24,12 +23,16 @@ export default function GroupItem({
     commented,
   } = group;
 
+  // 從整包的 groupRatingSet 裡面找到符合的 groupRating
+  const groupRating = groupRatingSet.filter((item) => item.id === groupId);
+  console.log("aaa", groupRatingSet);
+
   const groupStatus = setGroupStatus(endTime, status);
   // 狀態表示
   const statusStyle = statusSet[groupStatus].style;
   const statusText = statusSet[groupStatus].text;
 
-  const isCommented = commented;
+  const isCommented = true;
 
   // 抓取對應的按鈕
   const setBtn = () => {
@@ -85,3 +88,5 @@ export default function GroupItem({
     </li>
   );
 }
+
+export default GroupItem;

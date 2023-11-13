@@ -49,8 +49,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const groupsData: GroupsDataType[] = await groupsJson.data.info;
 
   // 取得個別揪團的評價狀態
-  const groupRatingSet: GroupRatingsType[] = [];
-  groupsData.reduce((set, group) => {
+  const groupRatingSet: GroupRatingsType[] = groupsData.reduce<
+    GroupRatingsType[]
+  >((set, group) => {
     const id = group.groupId;
     const url = `${envUrl}${apiPaths["check-group-rating"]}/${id}`;
 
@@ -58,11 +59,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       .then((res) => res.json())
       .then((result) => {
         const data: GroupRatingType[] = result.data;
-        set.push({ id: id, data: data });
+        const value = { id: id, data: data };
+        set.push(value);
       });
 
     return set;
-  }, groupRatingSet);
+  }, []);
 
   return {
     props: { profileData, groupsData, groupRatingSet },
@@ -83,6 +85,7 @@ export default function UserCenterPage({
   const datas = { profileData, groupsData, groupRatingSet };
   console.log(profileData);
   console.log(groupsData);
+  console.log(groupRatingSet);
 
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">
