@@ -26,14 +26,31 @@ export type GroupsDataType = {
   status: StatusType;
 };
 
-export type UserCenterPageProps = {
-  profileData: ProfileDataType;
-  groupsData: GroupsDataType;
-};
+export type UserCenterPageProps = DataContextType;
 
 export type DataContextType = {
   profileData: ProfileDataType[];
   groupsData: GroupsDataType[];
+  groupRatingSet: GroupRatingsType[];
+};
+
+export type RatingContentType = {
+  memberId: number;
+  memberName: string;
+  memberPhoto: string | null;
+  isRated: boolean;
+  score: number;
+  comment: string | null;
+};
+
+export type GroupRatingType = {
+  isAllRated: boolean;
+  ratingStatus: RatingContentType[];
+};
+
+export type GroupRatingsType = {
+  id: number;
+  data: GroupRatingType[];
 };
 
 // UserNavBar
@@ -79,3 +96,47 @@ export type TabSectionProps = {
 };
 
 // ----data----
+
+export const defaultProfileData: ProfileDataType = {
+  userId: 0,
+  nickName: "",
+  email: "",
+  description: "",
+  games: [],
+  cities: [],
+};
+
+export const defaultGroupsData: GroupsDataType = {
+  groupId: 0,
+  groupName: "",
+  startTime: "",
+  endTime: "",
+  totalMemberNum: 0,
+  currentPeople: 0,
+  place: null,
+  store: {
+    storeId: 0,
+    storeName: "",
+    address: "",
+  },
+  status: "member",
+};
+
+export const defaultGroupRatingSet: GroupRatingsType = {
+  id: 0,
+  data: [
+    {
+      isAllRated: false,
+      ratingStatus: [
+        {
+          memberId: 0,
+          memberName: "",
+          memberPhoto: null,
+          isRated: false,
+          score: 0,
+          comment: null,
+        },
+      ],
+    },
+  ],
+};
