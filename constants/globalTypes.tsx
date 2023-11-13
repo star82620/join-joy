@@ -5,6 +5,8 @@ export type ImgType = {
   alt: string;
 };
 
+export type IconsType = Record<string, ImgType>;
+
 // AuthProvider
 export type AuthProviderProps = {
   children: ReactNode;

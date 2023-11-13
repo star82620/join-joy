@@ -13,6 +13,8 @@ import {
   HandleSelectedNumType,
   HandleSelectedTimeType,
 } from "./data";
+import FillImage from "@/common/components/FillImage";
+import icons from "@/constants/iconsPackage/createGroupIcons";
 
 export default function StepOne({ citiesData }: StepOneProps) {
   const stepContext = useContext(StepContext);
@@ -100,7 +102,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
   const StoreSelector = () => {
     return (
       <select
-        className="inputStyle h-[50px] md:h-10"
+        className="inputStyle h-10"
         name="storeId"
         value={values.storeId}
         onChange={handleSelectedNum}
@@ -123,7 +125,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     return (
       <input
         type="text"
-        className="inputStyle h-[50px] md:h-10"
+        className="inputStyle h-10"
         name="place"
         value={values.place}
         onChange={handleInputValue}
@@ -180,12 +182,12 @@ export default function StepOne({ citiesData }: StepOneProps) {
     }));
   }, [values.startTime, values.endTime]);
 
-  const remainingBlock = useRef<HTMLDivElement>(null);
+  const [remainingBlockHidden, setRemainingBlockHidden] =
+    useState<boolean>(false);
+  const remainingIconKey = remainingBlockHidden ? "arrow-down" : "arrow-up";
+
   const toggleRemainingBlock = () => {
-    if (remainingBlock.current) {
-      const isOpened = remainingBlock.current.style.display === "block";
-      remainingBlock.current.style.display = isOpened ? "none" : "block";
-    }
+    setRemainingBlockHidden(!remainingBlockHidden);
   };
 
   return (
@@ -239,7 +241,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           <div className="flex gap-3 md:flex-col">
             {/* 選擇城市 */}
             <select
-              className="w-[45%] md:w-full h-[50px] md:h-10 border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+              className="w-[45%] md:w-full h-10 inputStyle"
               name="cityId"
               onChange={handleSelectedNum}
             >
@@ -270,7 +272,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
             <input
               list="data"
               placeholder="請選擇日期"
-              className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+              className="inputStyle"
               name="date"
               value={values.date}
               onChange={handleInputValue}
@@ -282,27 +284,38 @@ export default function StepOne({ citiesData }: StepOneProps) {
           </InputBlock>
         </label>
 
-        <div className="bg-yellow-tone border-l-[3px] border-yellow-primary py-3">
-          <h3 className="px-3 relative" onClick={toggleRemainingBlock}>
-            {formattedDate} 各時段可預約人數
-            <span className="absolute top-0 right-0">+</span>
-          </h3>
-          <div className="hidden px-6 pt-3" ref={remainingBlock}>
-            {remainingSeats.map((item) => {
-              const { time, seats } = item;
-              const formattedTime = time.replace("~", "-");
-              const isFull = seats === 0;
-              const textColor = isFull ? "text-danger" : "";
-              return (
-                <p key={time} className={`text-sm ${textColor}`}>
-                  {formattedTime}
-                  <span className="ml-4 mr-2">可預約人數</span>
-                  {seats}
-                </p>
-              );
-            })}
+        {isStore && values.date && (
+          <div className="bg-yellow-tone border-l-[3px] border-yellow-primary py-3">
+            <h3 className="px-3 relative" onClick={toggleRemainingBlock}>
+              {formattedDate} 各時段可預約人數
+              <span className="absolute top-0 right-3">
+                <FillImage
+                  src={icons[remainingIconKey].src}
+                  alt={icons[remainingIconKey].alt}
+                  widthProp="w-6 md:w-5"
+                  heightProp="h-6 md:h-5"
+                />
+              </span>
+            </h3>
+            {!remainingBlockHidden && (
+              <div className="px-6 pt-3">
+                {remainingSeats.map((item) => {
+                  const { time, seats } = item;
+                  const formattedTime = time.replace("~", "-");
+                  const isFull = seats === 0;
+                  const textColor = isFull ? "text-danger" : "";
+                  return (
+                    <p key={time} className={`text-sm ${textColor}`}>
+                      {formattedTime}
+                      <span className="ml-4 mr-2">可預約人數</span>
+                      {seats}
+                    </p>
+                  );
+                })}
+              </div>
+            )}
           </div>
-        </div>
+        )}
 
         <InputBlock
           title="遊戲時段"
