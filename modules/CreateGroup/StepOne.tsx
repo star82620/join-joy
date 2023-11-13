@@ -419,10 +419,11 @@ export default function StepOne({ citiesData }: StepOneProps) {
               value={values.initNum}
               onChange={handleSelectedNum}
             >
+              <option value={1}>1</option>
               {values.totalMemberNum &&
                 [...Array(values.totalMemberNum)].map((_, index) => {
                   const num = index + 1;
-                  if (num < 1) return;
+                  if (index < 1) return;
                   return (
                     <option key={num} value={num}>
                       {num}
