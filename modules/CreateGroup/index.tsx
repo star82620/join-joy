@@ -26,8 +26,6 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
   const [activeStep, setActiveStep] = useState(1);
   const [values, setValues] = useState(defaultValues); //要給 api data 的資料
 
-  console.log("values", values);
-
   const submitCreateGroupHandler = () => {
     // 送出開團表單
 

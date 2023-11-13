@@ -65,3 +65,5 @@ export type ChangeSelectHandler = (
 export type ChangeTextAreaHandler = (
   e: React.ChangeEvent<HTMLTextAreaElement>
 ) => void;
+
+export type ClickHandler = (e: React.MouseEvent<HTMLElement>) => void;

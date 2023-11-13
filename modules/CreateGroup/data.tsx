@@ -3,6 +3,7 @@ import {
   ChangeInputHandler,
   ChangeSelectHandler,
   ChangeTextAreaHandler,
+  ClickHandler,
   GameType,
   StoreType,
 } from "@/constants/globalTypes";
@@ -136,8 +137,12 @@ export type InputRadioProps = QuestionType & {
   onChange: ChangeInputHandler;
 };
 
+export type SelectedTagsType = { id: string; text: string };
+
 export type HandlePrivateGroupType = ChangeInputHandler;
 export type HandlePDescriptionValueType = ChangeTextAreaHandler;
+export type HandleSelectedTag = ClickHandler;
+export type ToggleTagsBlockType = ClickHandler;
 
 //----data----
 

@@ -19,11 +19,6 @@ export default function GameList({
     setRenderData(gamesData);
   }, [gamesData]);
 
-  console.log("searchValue", searchValue);
-  console.log("selectedGames", selectedGames);
-  console.log("GamesList", gamesData);
-  console.log("RD", renderData);
-
   // 得到 selectItems 類別篩選內容
   let selectItems: Array<string> = [];
   gamesData.forEach((game) => {

@@ -184,7 +184,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
 
   const [remainingBlockHidden, setRemainingBlockHidden] =
     useState<boolean>(false);
-  const remainingIconKey = remainingBlockHidden ? "arrow-down" : "arrow-up";
+  const toggleIcon = remainingBlockHidden ? "arrow-down" : "arrow-up";
 
   const toggleRemainingBlock = () => {
     setRemainingBlockHidden(!remainingBlockHidden);
@@ -290,8 +290,8 @@ export default function StepOne({ citiesData }: StepOneProps) {
               {formattedDate} 各時段可預約人數
               <span className="absolute top-0 right-3">
                 <FillImage
-                  src={icons[remainingIconKey].src}
-                  alt={icons[remainingIconKey].alt}
+                  src={icons[toggleIcon].src}
+                  alt={icons[toggleIcon].alt}
                   widthProp="w-6 md:w-5"
                   heightProp="h-6 md:h-5"
                 />

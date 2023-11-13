@@ -9,12 +9,17 @@ import { StepContext, ValuesContext } from "./index";
 import {
   questionsWithRadio,
   GamesDataType,
+  SelectedTagsType,
   HandlePrivateGroupType,
   HandlePDescriptionValueType,
+  HandleSelectedTag,
+  ToggleTagsBlockType,
 } from "./data";
 import GameList from "@/common/components/GameList";
 import { SelectedGamesType } from "@/common/components/GameList/data";
 import { groupTags } from "@/constants/wordsIndex";
+import FillImage from "@/common/components/FillImage";
+import icons from "@/constants/iconsPackage/createGroupIcons";
 
 export default function StepTwo() {
   const stepContext = useContext(StepContext);
@@ -67,6 +72,20 @@ export default function StepTwo() {
     setValues((prevState) => ({ ...prevState, description: e.target.value }));
   };
 
+  const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
+  const [isTagsHidden, setIsTagsHidden] = useState<boolean>(true);
+  console.log("ssss", selectedTags);
+  const toggleIcon = isTagsHidden ? "arrow-down" : "arrow-up";
+  const toggleTagsBlock: ToggleTagsBlockType = (e) => {
+    setIsTagsHidden(!isTagsHidden);
+  };
+  const handleSelectedTag: HandleSelectedTag = (e) => {
+    const { id, text } = e.currentTarget.dataset;
+    if (!id || !text) return;
+
+    setSelectedTags((prevState) => [...prevState, { id, text }]);
+  };
+
   return (
     <>
       <section className="flex flex-col w-full gap-10">
@@ -103,21 +122,45 @@ export default function StepTwo() {
         )}
         <label>
           <InputBlock title="揪團整體面向">
-            <div className="w-full h-10 inputStyle" onClick={() => {}}></div>
-
-            {/* <select
-              className="appearance-none inputStyle"
-              name="tags"
-              value={values.tags}
-              onChange={(e) => {}}
-            > */}
-            {/* <option>請選擇標籤</option>
-              {groupTags.map((tag) => (
-                <option key={tag.id} value={tag.text}>
-                  {tag.text}
-                </option>
-              ))} */}
-            {/* </select> */}
+            <div className="relative" onClick={(e) => toggleTagsBlock(e)}>
+              <div className="w-full h-10 inputStyle last:after:content-['']">
+                {selectedTags.map((tag, index, ary) => {
+                  const tagStyle =
+                    index !== ary.length - 1 ? "after:content-['、']" : "";
+                  return (
+                    <span
+                      key={tag.id}
+                      className={`before:content-['#'] ${tagStyle} `}
+                    >
+                      {tag.text}
+                    </span>
+                  );
+                })}
+              </div>
+              <span className="absolute top-2 right-3">
+                <FillImage
+                  src={icons[toggleIcon].src}
+                  alt={icons[toggleIcon].alt}
+                  widthProp="w-6 md:w-5"
+                  heightProp="h-6 md:h-5"
+                />
+              </span>
+              {!isTagsHidden && (
+                <div className="w-full bg-white py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm absolute left-0 top-10">
+                  {groupTags.map((tag) => (
+                    <p
+                      key={tag.id}
+                      className="p-2 hover:bg-gray-50"
+                      data-id={tag.id}
+                      data-text={tag.text}
+                      onClick={(e) => handleSelectedTag(e)}
+                    >
+                      #{tag.text}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
           </InputBlock>
         </label>
         <label>

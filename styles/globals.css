@@ -20,11 +20,13 @@ h4 {
   font-weight: 600;
   line-height: 1.2;
 }
+
 h5,
 h6 {
   font-weight: 600;
   line-height: 1.4;
 }
+
 .whitespace-pre-wrap {
   white-space: pre-wrap;
 }
