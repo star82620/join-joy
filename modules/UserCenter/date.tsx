@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { apiParamsType } from "@/common/helpers/fetchApi";
-import { StoreType } from "@/constants/globalTypes";
+import { StoreType, TabType } from "@/constants/globalTypes";
 
 // page
 export type ProfileDataType = {
@@ -12,6 +12,8 @@ export type ProfileDataType = {
   cities: Array<number>;
 };
 
+export type StatusType = "pending" | "member" | "leader";
+
 export type GroupsDataType = {
   groupId: number;
   groupName: string;
@@ -21,7 +23,7 @@ export type GroupsDataType = {
   currentPeople: number;
   place: string | null;
   store: StoreType;
-  status: "member" | "leader" | "pending";
+  status: StatusType;
 };
 
 export type UserCenterPageProps = {
@@ -30,12 +32,11 @@ export type UserCenterPageProps = {
 };
 
 export type DataContextType = {
-  // profileData: ProfileDataType;
-  // groupsData: GroupsDataType;
+  profileData: ProfileDataType[];
+  groupsData: GroupsDataType[];
 };
 
-// ------
-
+// UserNavBar
 export type SubItemIdType = "my-groups-leader" | "my-groups-member";
 
 export type SubItemType = {
@@ -52,6 +53,7 @@ export type NavSetType = {
 };
 
 export type NavIdType = NavSetType["id"] | SubItemIdType;
+
 export type ActiveNavIdType =
   | "profile-setting-active"
   | "my-groups-active"
@@ -69,22 +71,11 @@ export type UserNavBarProps = {
   toggleActiveSubNav: (subNav: SubItemType) => void;
 };
 
-// 因為要共用，所以 tabId 使用 string
-export type tabType = {
-  tabId: string;
-  text: string;
-};
-
+// TabSection
 export type TabSectionProps = {
-  tabs: tabType[];
+  tabs: TabType[];
   activeTab: string;
   setActiveTab: (activeTab: string) => void;
 };
 
 // ----data----
-
-// 獲取會員詳細資料
-export const userDataKey: apiParamsType = {
-  apiPath: "/member/memberDetails",
-  method: "GET",
-};

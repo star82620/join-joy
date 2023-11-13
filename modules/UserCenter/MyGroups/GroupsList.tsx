@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import TabSection from "../TabSection";
 import GroupItem from "./GroupItem";
-import { groupsData, tabs, ActionBtnsType, GroupListProps } from "./data";
+import { DataContext } from "@/pages/user-center";
+import { tabs, ActionBtnsType, GroupListProps } from "./data";
 
 // 是哪一種狀態
 export const setGroupStatus = (endTime: string, status: string) => {
@@ -16,6 +17,8 @@ export const setGroupStatus = (endTime: string, status: string) => {
 export default function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
+
+  const { profileData, groupsData } = useContext(DataContext);
 
   const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
     console.log("取消加入揪團申請");

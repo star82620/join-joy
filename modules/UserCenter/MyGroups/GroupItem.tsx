@@ -17,7 +17,7 @@ export default function GroupItem({
     store,
     place,
     totalMemberNum,
-    currentNum,
+    currentPeople,
     startTime,
     endTime,
     status,
@@ -68,7 +68,7 @@ export default function GroupItem({
         <span className=" whitespace-nowrap">{groupTime}</span>
       </p>
       <p className="w-[10%]">
-        {currentNum}/{totalMemberNum}
+        {currentPeople}/{totalMemberNum}
       </p>
       <div className="w-[10%]">
         <Button

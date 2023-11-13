@@ -6,6 +6,7 @@ import MyGroupsMember from "./MyGroups/MyGroupsMember";
 import icons from "@/constants/iconsPackage/userNavIcons";
 import MyFollowing from "./MyFollowing";
 import MyNotification from "./MyNotification";
+import UserNavBar from "./UserNavBar";
 import {
   NavSetType,
   NavIdType,
@@ -13,9 +14,6 @@ import {
   ActiveNavIdType,
   SetIconAttrType,
 } from "./date";
-import UserNavBar from "./UserNavBar";
-import fetchApi from "@/common/helpers/fetchApi";
-import { DataContext } from "@/pages/user-center";
 
 const navSet: NavSetType[] = [
   { id: "profile-setting", text: "個人檔案", component: <ProfileSetting /> },
@@ -40,10 +38,6 @@ const navSet: NavSetType[] = [
 ];
 
 export default function UserCenter() {
-  const dataContext = useContext(DataContext);
-  // const { profileData, groupsData } = dataContext;
-  console.log(dataContext);
-
   const [activeNav, setActiveNav] = useState<NavIdType>("profile-setting");
   const [openSubList, setOpenSubList] = useState(false);
 

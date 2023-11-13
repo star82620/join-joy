@@ -11,6 +11,11 @@ export type StoreType = {
   address: string;
 };
 
+export type TabType = {
+  tabId: string;
+  text: string;
+};
+
 // AuthProvider
 export type AuthProviderProps = {
   children: ReactNode;
