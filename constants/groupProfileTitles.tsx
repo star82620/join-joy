@@ -51,3 +51,5 @@ export const groupProfileTitles: TitlesType = {
     },
   },
 };
+
+export default groupProfileTitles;
