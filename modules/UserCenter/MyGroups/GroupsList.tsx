@@ -9,16 +9,19 @@ export const setGroupStatus = (endTime: string, status: string) => {
   const now = new Date();
   const today = now.toISOString();
 
-  // 審核中的團員
-  if (status === "pending") return "pending";
   // 時間已過
   if (endTime < today || status === "已結束") return "closed";
+
+  // 審核中的團員
+  if (status === "pending") return "pending";
+
   return "member";
 };
 
 function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
+  console.log("activeTab", activeTab);
 
   const isLeaderPage = pageStatus === "leader";
   const isMemberPage = pageStatus === "member";
@@ -75,16 +78,16 @@ function GroupsList({ pageStatus }: GroupListProps) {
 
   // 篩選要跑出來的列表內容
   const filteredData = groupsData.filter((group) => {
-    // const isLeaderGroup = group.status === "leader";
-    // if (isLeaderPage && !isLeaderGroup) return false;
-    // if (isMemberPage && isLeaderGroup) return false;
-
     const groupStatus = setGroupStatus(group.endTime, group.status);
     const isClosed = groupStatus === "closed";
-    if (isUpcoming && isClosed) return false;
-    if (isExpired && !isClosed) return false;
 
-    return true;
+    if (activeTab === "upcoming") {
+      if (isClosed) return false;
+      return true;
+    } else {
+      if (isClosed) return true;
+      return false;
+    }
   });
 
   const isEmptyList = filteredData.length === 0;

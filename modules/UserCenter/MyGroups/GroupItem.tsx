@@ -10,6 +10,8 @@ import { GroupItemProps } from "./data";
 function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
   const { groupRatingsSet } = useContext(DataContext);
 
+  console.log("RRRRRRRRRR", groupRatingsSet);
+
   const {
     groupId,
     groupName,

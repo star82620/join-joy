@@ -49,7 +49,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const groupsData: GroupDataSetType = await groupsJson.data;
 
   // 取得個別揪團的評價狀態（揪團紀錄中全部的揪團）
-
   async function fetchGroupRatings(
     groupsData: GroupDataItemType[]
   ): Promise<GroupRatingsType[]> {
