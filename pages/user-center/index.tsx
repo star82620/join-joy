@@ -9,7 +9,7 @@ import {
   ProfileDataType,
   GroupDataItemType,
   GroupRatingsType,
-  GroupRatingItemType,
+  GroupDataSetType,
   defaultProfileData,
   defaultGroupsData,
   defaultGroupRatingsSet,
@@ -46,9 +46,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const groupsUrl = `${envUrl}${apiPaths["my-groups-list"]}`;
   const groupsRes = await fetch(groupsUrl, apiHeaders);
   const groupsJson = await groupsRes.json();
-  const groupsData: GroupDataItemType[] = await groupsJson.data;
+  const groupsData: GroupDataSetType = await groupsJson.data;
 
   // 取得個別揪團的評價狀態（揪團紀錄中全部的揪團）
+
   async function fetchGroupRatings(
     groupsData: GroupDataItemType[]
   ): Promise<GroupRatingsType[]> {
@@ -66,9 +67,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return await Promise.all(fetchPromises);
   }
 
+  const leaderGroupsData = groupsData["leader"];
+  const memberGroupsData = groupsData["member"];
+
   let groupRatingsSet: GroupRatingsType[] = [];
+  let leaderGroupRatingsSet: GroupRatingsType[] = [];
+  let memberGroupRatingsSet: GroupRatingsType[] = [];
   try {
-    groupRatingsSet = await fetchGroupRatings(groupsData);
+    leaderGroupRatingsSet = await fetchGroupRatings(leaderGroupsData);
+    memberGroupRatingsSet = await fetchGroupRatings(memberGroupsData);
+    groupRatingsSet = leaderGroupRatingsSet.concat(memberGroupRatingsSet);
   } catch (error) {
     console.error("Error fetching group ratings:", error);
   }
@@ -81,7 +89,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export const DataContext = createContext<DataContextType>({
   profileData: [defaultProfileData],
   groupsData: defaultGroupsData,
-  groupRatingsSet: [defaultGroupRatingsSet],
+  groupRatingsSet: defaultGroupRatingsSet,
 });
 
 function UserCenterPage({

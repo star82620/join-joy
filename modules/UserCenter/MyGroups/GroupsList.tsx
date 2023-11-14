@@ -5,12 +5,14 @@ import GroupItem from "./GroupItem";
 import { DataContext } from "@/pages/user-center";
 import { tabs, ActionBtnsType, GroupListProps } from "./data";
 
-// 是哪一種狀態
 export const setGroupStatus = (endTime: string, status: string) => {
   const now = new Date();
   const today = now.toISOString();
+
+  // 審核中的團員
   if (status === "pending") return "pending";
-  if (endTime < today) return "closed";
+  // 時間已過
+  if (endTime < today || status === "已結束") return "closed";
   return "member";
 };
 
@@ -18,7 +20,15 @@ function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
-  const { groupsData } = useContext(DataContext);
+  const isLeaderPage = pageStatus === "leader";
+  const isMemberPage = pageStatus === "member";
+  const isExpired = activeTab === "Expired";
+  const isUpcoming = activeTab === "upcoming";
+
+  const groupsSetData = useContext(DataContext).groupsData;
+  const groupsData = isLeaderPage
+    ? groupsSetData["leader"]
+    : groupsSetData["member"];
 
   const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
     console.log("取消加入揪團申請");
@@ -53,7 +63,6 @@ function GroupsList({ pageStatus }: GroupListProps) {
     },
   };
 
-  const isExpired = activeTab === "Expired";
   const upcomingBtnTitle = (
     <>
       <span className="whitespace-nowrap after:content-['/'] after:font-normal">
@@ -64,17 +73,11 @@ function GroupsList({ pageStatus }: GroupListProps) {
   );
   const expiredBtnTitle = "評價";
 
-  const isLeaderPage = pageStatus === "leader";
-  const isMemberPage = pageStatus === "member";
-  const isUpcoming = activeTab === "upcoming";
-
   // 篩選要跑出來的列表內容
-  //
-  const originData = isLeaderPage ? groupsData.leader : groupsData.member;
-  const filteredData = originData.filter((group) => {
-    const isLeaderGroup = group.status === "leader";
-    if (isLeaderPage && !isLeaderGroup) return false;
-    if (isMemberPage && isLeaderGroup) return false;
+  const filteredData = groupsData.filter((group) => {
+    // const isLeaderGroup = group.status === "leader";
+    // if (isLeaderPage && !isLeaderGroup) return false;
+    // if (isMemberPage && isLeaderGroup) return false;
 
     const groupStatus = setGroupStatus(group.endTime, group.status);
     const isClosed = groupStatus === "closed";

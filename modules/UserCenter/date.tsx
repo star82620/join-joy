@@ -33,7 +33,7 @@ export type GroupDataItemType = {
   status: StatusType;
 };
 
-export type GroupDataType = {
+export type GroupDataSetType = {
   member: GroupDataItemType[];
   leader: GroupDataItemType[];
 };
@@ -42,7 +42,7 @@ export type UserCenterPageProps = DataContextType;
 
 export type DataContextType = {
   profileData: ProfileDataType[];
-  groupsData: GroupDataType;
+  groupsData: GroupDataSetType;
   groupRatingsSet: GroupRatingsType[];
 };
 
@@ -64,6 +64,11 @@ export type GroupRatingsType = {
   id: number;
   data: GroupRatingItemType;
 };
+
+// export type GroupRatingsType[] = {
+//   leader: GroupRatingsType[];
+//   member: GroupRatingsType[];
+// };
 
 // UserNavBar
 export type SubItemIdType = "my-groups-leader" | "my-groups-member";
@@ -118,7 +123,7 @@ export const defaultProfileData: ProfileDataType = {
   cities: [],
 };
 
-export const defaultGroupsData: GroupDataType = {
+export const defaultGroupsData: GroupDataSetType = {
   leader: [
     {
       groupId: 0,
@@ -155,19 +160,21 @@ export const defaultGroupsData: GroupDataType = {
   ],
 };
 
-export const defaultGroupRatingsSet: GroupRatingsType = {
-  id: 0,
-  data: {
-    isAllRated: false,
-    ratingStatus: [
-      {
-        memberId: 0,
-        memberName: "",
-        memberPhoto: null,
-        isRated: false,
-        score: 0,
-        comment: null,
-      },
-    ],
+export const defaultGroupRatingsSet: GroupRatingsType[] = [
+  {
+    id: 0,
+    data: {
+      isAllRated: false,
+      ratingStatus: [
+        {
+          memberId: 0,
+          memberName: "",
+          memberPhoto: null,
+          isRated: false,
+          score: 0,
+          comment: null,
+        },
+      ],
+    },
   },
-};
+];
