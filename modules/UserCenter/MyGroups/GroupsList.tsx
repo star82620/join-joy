@@ -18,7 +18,7 @@ function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
-  const { profileData, groupsData, groupRatingSet } = useContext(DataContext);
+  const { profileData, groupsData, groupRatingsSet } = useContext(DataContext);
 
   const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
     console.log("取消加入揪團申請");

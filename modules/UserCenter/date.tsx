@@ -14,7 +14,7 @@ export type ProfileDataType = {
 
 export type StatusType = "pending" | "member" | "leader";
 
-export type GroupsDataType = {
+export type GroupDataItemType = {
   groupId: number;
   groupName: string;
   startTime: string;
@@ -30,8 +30,8 @@ export type UserCenterPageProps = DataContextType;
 
 export type DataContextType = {
   profileData: ProfileDataType[];
-  groupsData: GroupsDataType[];
-  groupRatingSet: GroupRatingsType[];
+  groupsData: GroupDataItemType[];
+  groupRatingsSet: GroupRatingsType[];
 };
 
 export type RatingContentType = {
@@ -43,14 +43,14 @@ export type RatingContentType = {
   comment: string | null;
 };
 
-export type GroupRatingType = {
+export type GroupRatingItemType = {
   isAllRated: boolean;
   ratingStatus: RatingContentType[];
 };
 
 export type GroupRatingsType = {
   id: number;
-  data: GroupRatingType[];
+  data: GroupRatingItemType;
 };
 
 // UserNavBar
@@ -106,7 +106,7 @@ export const defaultProfileData: ProfileDataType = {
   cities: [],
 };
 
-export const defaultGroupsData: GroupsDataType = {
+export const defaultGroupsData: GroupDataItemType = {
   groupId: 0,
   groupName: "",
   startTime: "",
@@ -122,21 +122,19 @@ export const defaultGroupsData: GroupsDataType = {
   status: "member",
 };
 
-export const defaultGroupRatingSet: GroupRatingsType = {
+export const defaultGroupRatingsSet: GroupRatingsType = {
   id: 0,
-  data: [
-    {
-      isAllRated: false,
-      ratingStatus: [
-        {
-          memberId: 0,
-          memberName: "",
-          memberPhoto: null,
-          isRated: false,
-          score: 0,
-          comment: null,
-        },
-      ],
-    },
-  ],
+  data: {
+    isAllRated: false,
+    ratingStatus: [
+      {
+        memberId: 0,
+        memberName: "",
+        memberPhoto: null,
+        isRated: false,
+        score: 0,
+        comment: null,
+      },
+    ],
+  },
 };

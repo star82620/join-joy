@@ -9,7 +9,7 @@ import { GroupItemProps } from "./data";
 import { GroupRatingsType } from "../date";
 
 function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
-  const { groupRatingSet } = useContext(DataContext);
+  const { groupRatingsSet } = useContext(DataContext);
   const {
     groupId,
     groupName,
@@ -23,9 +23,9 @@ function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
     commented,
   } = group;
 
-  // 從整包的 groupRatingSet 裡面找到符合的 groupRating
-  const groupRating = groupRatingSet.filter((item) => item.id === groupId);
-  console.log("aaa", groupRatingSet);
+  // 從整包的 groupRatingsSet 裡面找到符合的 groupRating
+  const groupRating = groupRatingsSet.filter((item) => item.id === groupId);
+  console.log("aaa", groupRatingsSet);
 
   const groupStatus = setGroupStatus(endTime, status);
   // 狀態表示

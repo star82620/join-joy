@@ -7,12 +7,12 @@ import {
   UserCenterPageProps,
   DataContextType,
   ProfileDataType,
-  GroupsDataType,
+  GroupDataItemType,
   GroupRatingsType,
-  GroupRatingType,
+  GroupRatingItemType,
   defaultProfileData,
   defaultGroupsData,
-  defaultGroupRatingSet,
+  defaultGroupRatingsSet,
 } from "@/modules/UserCenter/date";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -46,46 +46,53 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const groupsUrl = `${envUrl}${apiPaths["my-groups-list"]}`;
   const groupsRes = await fetch(groupsUrl, apiHeaders);
   const groupsJson = await groupsRes.json();
-  const groupsData: GroupsDataType[] = await groupsJson.data.info;
+  const groupsData: GroupDataItemType[] = await groupsJson.data.info;
 
-  // 取得個別揪團的評價狀態
-  const groupRatingSet: GroupRatingsType[] = groupsData.reduce<
-    GroupRatingsType[]
-  >((set, group) => {
-    const id = group.groupId;
-    const url = `${envUrl}${apiPaths["check-group-rating"]}/${id}`;
+  // 取得個別揪團的評價狀態（揪團紀錄中全部的揪團）
+  async function fetchGroupRatings(
+    groupsData: GroupDataItemType[]
+  ): Promise<GroupRatingsType[]> {
+    const fetchPromises = groupsData.map(async (group) => {
+      const url = `${envUrl}${apiPaths["check-group-rating"]}/${group.groupId}`;
+      const res = await fetch(url, apiHeaders);
+      const result = await res.json();
+      const data = result.data ? result.data : null;
+      return {
+        id: group.groupId,
+        data: data,
+      };
+    });
 
-    fetch(url, apiHeaders)
-      .then((res) => res.json())
-      .then((result) => {
-        const data: GroupRatingType[] = result.data;
-        const value = { id: id, data: data };
-        set.push(value);
-      });
+    return await Promise.all(fetchPromises);
+  }
 
-    return set;
-  }, []);
+  let groupRatingsSet: GroupRatingsType[] = [];
+  try {
+    groupRatingsSet = await fetchGroupRatings(groupsData);
+  } catch (error) {
+    console.error("Error fetching group ratings:", error);
+  }
 
   return {
-    props: { profileData, groupsData, groupRatingSet },
+    props: { profileData, groupsData, groupRatingsSet },
   };
 }
 
 export const DataContext = createContext<DataContextType>({
   profileData: [defaultProfileData],
   groupsData: [defaultGroupsData],
-  groupRatingSet: [defaultGroupRatingSet],
+  groupRatingsSet: [defaultGroupRatingsSet],
 });
 
-export default function UserCenterPage({
+function UserCenterPage({
   profileData,
   groupsData,
-  groupRatingSet,
+  groupRatingsSet,
 }: UserCenterPageProps) {
-  const datas = { profileData, groupsData, groupRatingSet };
+  const datas = { profileData, groupsData, groupRatingsSet };
   console.log(profileData);
   console.log(groupsData);
-  console.log(groupRatingSet);
+  console.log(groupRatingsSet);
 
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">
@@ -95,3 +102,5 @@ export default function UserCenterPage({
     </Layout>
   );
 }
+
+export default UserCenterPage;
