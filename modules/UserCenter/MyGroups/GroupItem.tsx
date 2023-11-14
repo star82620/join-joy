@@ -6,7 +6,6 @@ import statusSet from "@/constants/groupStatusSet";
 import { setGroupStatus } from "./GroupsList";
 import { DataContext } from "@/pages/user-center";
 import { GroupItemProps } from "./data";
-import { GroupRatingsType } from "../date";
 
 function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
   const { groupRatingsSet } = useContext(DataContext);
@@ -20,7 +19,6 @@ function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
     startTime,
     endTime,
     status,
-    commented,
   } = group;
 
   // 從整包的 groupRatingsSet 裡面找到符合的 groupRating

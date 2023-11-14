@@ -1,5 +1,5 @@
 import { TabType } from "@/constants/globalTypes";
-import { GroupsDataType } from "../date";
+import { GroupDataItemType } from "../date";
 
 export type ActionBtnType = {
   text: string;
@@ -14,7 +14,7 @@ export type GroupListProps = {
 };
 
 export type GroupItemProps = {
-  group: GroupsDataType;
+  group: GroupDataItemType;
   isExpired: boolean;
   actionBtns: ActionBtnsType;
 };

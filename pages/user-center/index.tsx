@@ -90,9 +90,6 @@ function UserCenterPage({
   groupRatingsSet,
 }: UserCenterPageProps) {
   const datas = { profileData, groupsData, groupRatingsSet };
-  console.log(profileData);
-  console.log(groupsData);
-  console.log(groupRatingsSet);
 
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">
