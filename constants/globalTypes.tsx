@@ -6,6 +6,8 @@ export type ImgType = {
 };
 
 // iconsPackage
+export type IconsPackageType = Record<string, ImgType>;
+
 type IconIdType =
   | "my-following"
   | "my-following-active"

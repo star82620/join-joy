@@ -9,7 +9,7 @@ import Comments from "./Comments";
 import { selectActiveComponent } from "@/common/helpers/selectActiveComponent";
 import { ReturnComponentType } from "@/common/components/FileWrapper/data";
 import { userData, tabSet, ActiveTabType } from "./data";
-import FollowingButton from "@/common/components/FollowButton";
+import FollowingButton from "@/common/components/FollowingButton";
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
