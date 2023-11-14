@@ -1,38 +1,39 @@
 import React, { useState, useContext } from "react";
-import Button from "@/common/components/GeneralButton";
-import ProfileImg from "@/common/components/ProfileImg";
-import { GroupDataContext } from "./index";
-import { CommentCardProps, CommentsDataType } from "./data";
-import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import Link from "@/common/components/GeneralLink";
+import Button from "@/common/components/GeneralButton";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import ProfileImg from "@/common/components/ProfileImg";
+import CommentCard from "./CommentCard";
+import { GroupDataContext } from "../index";
+import { CommentCardProps, CommentsDataItemType } from "../data";
 
 const authData = null;
 
-const CommentCard = ({ comment }: CommentCardProps) => {
-  const { userId, userName, userPhoto, commentContent, commentDate } = comment;
+// const CommentCard = ({ comment }: CommentCardProps) => {
+//   const { userId, userName, userPhoto, commentContent, commentDate } = comment;
 
-  return (
-    <div className="flex items-start gap-8">
-      <ProfileImg
-        src="/images/photo-user-000.png"
-        alt="user"
-        widthProp="w-16 md:w-9"
-        heightProp="h-16 md:h-9"
-      />
-      <div className="grow">
-        <div>
-          <p className="font-semibold leading-[1.2] md:text-sm md:leading-6 ">
-            {userName}
-          </p>
-          <p className="text-gray-400 text-xs after:content-['前'] after:ml-0.5">
-            {commentDate}
-          </p>
-        </div>
-        <p className="whitespace-pre-wrap mt-2">{commentContent}</p>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className="flex items-start gap-8">
+//       <ProfileImg
+//         src="/images/photo-user-000.png"
+//         alt="user"
+//         widthProp="w-16 md:w-9"
+//         heightProp="h-16 md:h-9"
+//       />
+//       <div className="grow">
+//         <div>
+//           <p className="font-semibold leading-[1.2] md:text-sm md:leading-6 ">
+//             {userName}
+//           </p>
+//           <p className="text-gray-400 text-xs after:content-['前'] after:ml-0.5">
+//             {commentDate}
+//           </p>
+//         </div>
+//         <p className="whitespace-pre-wrap mt-2">{commentContent}</p>
+//       </div>
+//     </div>
+//   );
+// };
 
 const InputWithoutAuth = () => (
   <p className="text-gray-500">
@@ -98,7 +99,7 @@ export default function CommentsBoard() {
         {isEmpty && (
           <p className="text-center text-gray-600">目前還沒有留言唷！</p>
         )}
-        {commentsData.map((comment: CommentsDataType) => (
+        {commentsData.map((comment: CommentsDataItemType) => (
           <CommentCard key={comment.commentDate} comment={comment} />
         ))}
       </div>

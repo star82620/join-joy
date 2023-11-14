@@ -1,10 +1,12 @@
-export type GroupType = { groupId: number; groupName: string };
-
+// page
 export type getStaticPropsProps = { params: Record<string, string> };
+
+//
+export type GroupType = { groupId: number; groupName: string };
 
 export type GroupIdType = number;
 
-export type CommentsDataType = {
+export type CommentsDataItemType = {
   userId: number;
   userName: string;
   userPhoto: string;
@@ -16,25 +18,21 @@ export type GroupDataContextType = {
   groupId: GroupIdType;
   groupData: GroupDataType;
   currentMemberNum: number;
-  commentsData: CommentsDataType[];
+  commentsData: CommentsDataItemType[];
 };
 
 export type GroupProfilePageProps = {
   groupId: GroupIdType;
   groupData: GroupDataType;
-  commentsData: CommentsDataType[];
+  commentsData: CommentsDataItemType[];
 };
 
 export type GroupProfileProps = {
   data: GroupProfilePageProps;
 };
 
-export type MessageBoardProps = {
-  data: CommentsDataType;
-};
-
 export type CommentCardProps = {
-  comment: CommentsDataType;
+  comment: CommentsDataItemType;
 };
 
 //
