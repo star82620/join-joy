@@ -24,15 +24,14 @@ function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
   } = group;
 
   // 從整包的 groupRatingsSet 裡面找到符合的 groupRating
-  const groupRating = groupRatingsSet.filter((item) => item.id === groupId);
-  console.log("aaa", groupRatingsSet);
+  const [groupRating] = groupRatingsSet.filter((item) => item.id === groupId);
+
+  const isCommented = groupRating.data ? groupRating.data.isAllRated : false;
 
   const groupStatus = setGroupStatus(endTime, status);
   // 狀態表示
   const statusStyle = statusSet[groupStatus].style;
   const statusText = statusSet[groupStatus].text;
-
-  const isCommented = true;
 
   // 抓取對應的按鈕
   const setBtn = () => {
