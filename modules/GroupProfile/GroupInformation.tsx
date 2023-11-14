@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
+import Image from "@/common/components/FillImage";
 import Share from "@/common/components/Share";
 import { groupStatusIndex } from "@/constants/wordIndexes";
 import {
@@ -45,6 +45,30 @@ export default function GroupInformation({
     ));
   };
 
+  const JoinForm = () => (
+    <form
+      className="flex flex-wrap gap-10 md:flex-col md:items-start md:gap-4 mt-8 md:mt-6"
+      onSubmit={handleJoinSubmit}
+    >
+      <div className="flex items-center">
+        <span className="text-lg md:text-md font-semibold whitespace-nowrap">
+          人數：
+        </span>
+        <select
+          className="w-22 px-3 py-2 md:text-xs grow"
+          onChange={(e) => {
+            setApplyNum(Number(e.target.value));
+          }}
+        >
+          <NumOptions />
+        </select>
+      </div>
+      <Button type="submit" appearance="orange" className="grow md:w-full">
+        加入揪團
+      </Button>
+    </form>
+  );
+
   return (
     <section className="px-12 py-8 md:px-3 md:py-4">
       <div className="flex items-center gap-2">
@@ -52,18 +76,14 @@ export default function GroupInformation({
         <span className="grow before:content-[''] before:w-2.5 before:h-2.5 before:rounded-full before:bg-green-light before:inline-block before:mr-1">
           {groupStatusText}
         </span>
-        <span
-          className="relative w-6 h-6 md:w-5 md:h-5 cursor-pointer"
-          onClick={Share}
-        >
+        <div className=" cursor-pointer">
           <Image
             src="/images/group-profile/icon-share.svg"
             alt="icon-share"
-            fill
-            sizes="100%"
-            className="object-contain"
+            widthProp="w-6 md:w-5"
+            heightProp="h-6 md:h-5"
           />
-        </span>
+        </div>
       </div>
       <ul className="flex flex-col gap-6 mt-6">
         <li>
@@ -109,29 +129,7 @@ export default function GroupInformation({
           <TagItem key={tag} tag={tag} />
         ))}
       </div>
-      {!isFull && (
-        <form
-          className="flex flex-wrap gap-10 md:flex-col md:items-start md:gap-4 mt-8 md:mt-6"
-          onSubmit={handleJoinSubmit}
-        >
-          <div className="flex items-center">
-            <span className="text-lg md:text-md font-semibold whitespace-nowrap">
-              人數：
-            </span>
-            <select
-              className="w-22 px-3 py-2 md:text-xs grow"
-              onChange={(e) => {
-                setApplyNum(Number(e.target.value));
-              }}
-            >
-              <NumOptions />
-            </select>
-          </div>
-          <Button type="submit" appearance="orange" className="grow md:w-full">
-            加入揪團
-          </Button>
-        </form>
-      )}
+      {!isFull && <JoinForm />}
     </section>
   );
 }

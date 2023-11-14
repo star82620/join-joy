@@ -1,7 +1,6 @@
 // page
 export type getStaticPropsProps = { params: Record<string, string> };
 
-//
 export type GroupType = { groupId: number; groupName: string };
 
 export type GroupIdType = number;
@@ -101,8 +100,10 @@ export type StoreLocationProps = {
   store: StoreType;
 };
 
+// MemberList
 export type MemberCardProps = { member: MemberType; subNum: number };
 
+// GroupInformation
 export type GroupInformationProps = {
   setApplyNum: (applyNum: number) => void;
   handleJoinSubmit: (e: React.FormEvent<HTMLFormElement>) => void;

@@ -2,6 +2,7 @@ import React from "react";
 import Link from "@/common/components/GeneralLink";
 import ProfileImg from "@/common/components/ProfileImg";
 import { memberStatusIndex } from "@/constants/wordIndexes";
+import defaultImages from "@/constants/defaultImages";
 import { MemberCardProps } from "../data";
 
 export default function MemberCard({ member, subNum }: MemberCardProps) {
@@ -10,16 +11,18 @@ export default function MemberCard({ member, subNum }: MemberCardProps) {
   const isSingle = initNum === 1;
   const statusText = memberStatusIndex[status];
   const cardShadow = !isSubmember ? "shadow-btn" : "";
+  const subMemberPhoto = defaultImages["subMemberPhoto"];
   const profileImgSrc = !isSubmember
     ? "/images/photo-user-000.png"
-    : "/images/logo.jpg";
+    : subMemberPhoto.src;
+  const profileImgAlt = !isSubmember ? userName : subMemberPhoto.alt;
   const CardContent = () => (
     <section
       className={`flex justify-between items-center gap-4 md:gap-2 p-2 border-2 rounded  bg-yellow-tint ${cardShadow}`}
     >
       <ProfileImg
         src={profileImgSrc}
-        alt="user"
+        alt={profileImgAlt}
         widthProp="w-16"
         heightProp="h-16"
       />
@@ -28,7 +31,7 @@ export default function MemberCard({ member, subNum }: MemberCardProps) {
         <p className="md:text-sm mt-1 md:mt-0">
           {userName}
           {!isSingle && isSubmember && (
-            <span className="text-xs text-gray-600 ml-2 before:content-['的朋友'] before:mr-1">
+            <span className="text-xs text-gray-600 ml-2 whitespace-nowrap before:content-['的朋友'] before:mr-1">
               {subNum}
             </span>
           )}
