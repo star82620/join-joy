@@ -5,6 +5,14 @@ export type ImgType = {
   alt: string;
 };
 
+// groupProfileTitles
+export type TitleItemType = {
+  title: string;
+  img: ImgType;
+};
+
+export type TitlesType = Record<string, TitleItemType>;
+
 // AuthProvider
 export type AuthProviderProps = {
   children: ReactNode;
