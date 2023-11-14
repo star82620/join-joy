@@ -1,16 +1,73 @@
 import React, { useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
+import Link from "@/common/components/GeneralLink";
 import Share from "@/common/components/Share";
 import { groupStatusIndex } from "@/constants/wordIndexes";
+import { GroupDataContext } from "./index";
+import { gameTypeIndex } from "@/constants/wordIndexes";
 import {
-  StoreLocation,
-  Title,
-  TagItem,
-  GameItem,
-  GroupDataContext,
-} from "./index";
-import { GroupInformationProps, GameItemType } from "./data";
+  titles,
+  TitleProps,
+  GroupInformationProps,
+  StoreLocationProps,
+  GameItemType,
+  TagItemProps,
+  GameItemProps,
+} from "./data";
+
+export function StoreLocation({ store }: StoreLocationProps) {
+  return (
+    <p className="leading-6">
+      <span className="font-medium whitespace-nowrap">
+        <Link href={`/store/${store.storeId}`} target="_blank">
+          {store.storeName}
+        </Link>
+      </span>
+      <span className="text-sm whitespace-nowrap ml-2 md:ml-0 before:content-['（'] after:content-['）']">
+        {store.address}
+      </span>
+    </p>
+  );
+}
+
+export function Title({ content }: TitleProps) {
+  const titleItem = titles[content];
+  const { title, img } = titleItem;
+  const { src, alt } = img;
+
+  return (
+    <div className="flex items-center gap-2 text-lg md:text-md mb-2 ">
+      <Image src={src} alt={alt} widthProp="w-5" heightProp="h-5" />
+      <h3>{title}</h3>
+    </div>
+  );
+}
+
+export function GameItem({ game }: GameItemProps) {
+  return (
+    <li className="flex items-center gap-2">
+      <span className="border-[0.5px] rounded bg-white p-1 text-xs text-gray-800 font-semibold">
+        {gameTypeIndex[game.gameType]}
+      </span>
+      <span className="font-medium md:text-sm">{game.gameName}</span>
+    </li>
+  );
+}
+
+export function TagItem({ tag }: TagItemProps) {
+  return (
+    <div className="flex items-center gap-0.5 p-1 bg-white text-sm whitespace-nowrap">
+      <Image
+        src="/images/group-profile/icon-tag.svg"
+        alt="icon-tag"
+        widthProp="w-4"
+        heightProp="h-4"
+      />
+      {tag}
+    </div>
+  );
+}
 
 export default function GroupInformation({
   setApplyNum,
@@ -124,7 +181,7 @@ export default function GroupInformation({
           <span className="whitespace-pre-wrap text-sm">{description}</span>
         </li>
       </ul>
-      <div className="flex gap-2 mt-3">
+      <div className="flex gap-2 mt-3 flex-wrap">
         {tags.map((tag) => (
           <TagItem key={tag} tag={tag} />
         ))}

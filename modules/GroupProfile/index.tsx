@@ -1,81 +1,9 @@
 import React, { createContext, useState } from "react";
-import Image from "next/image";
-import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import GroupInformation from "./GroupInformation";
 import MembersList from "./MembersList";
 import CommentsBoard from "./CommentsBoard";
-import { gameTypeIndex } from "@/constants/wordIndexes";
-import {
-  titles,
-  TitleProps,
-  TagItemProps,
-  GameItemProps,
-  StoreLocationProps,
-  GroupDataContextType,
-  GroupProfileProps,
-} from "./data";
-
-export function StoreLocation({ store }: StoreLocationProps) {
-  return (
-    <p className="leading-6">
-      <span className="font-medium whitespace-nowrap">
-        <Link href={`/store/${store.storeId}`} target="_blank">
-          {store.storeName}
-        </Link>
-      </span>
-      <span className="text-sm whitespace-nowrap ml-2 md:ml-0 before:content-['（'] after:content-['）']">
-        {store.address}
-      </span>
-    </p>
-  );
-}
-export function Title({ content }: TitleProps) {
-  const titleItem = titles[content];
-  const { title, img } = titleItem;
-  const { src, alt } = img;
-
-  return (
-    <div className="flex items-center gap-2 text-lg md:text-md mb-2">
-      <span className="relative w-5 h-5">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="100%"
-          className="object-contain"
-        />
-      </span>
-      <h3>{title}</h3>
-    </div>
-  );
-}
-export function TagItem({ tag }: TagItemProps) {
-  return (
-    <p className="flex items-center gap-0.5 p-1 bg-white text-sm">
-      <span className="relative inline-block w-4 h-4">
-        <Image
-          src="/images/group-profile/icon-tag.svg"
-          alt="icon-tag"
-          fill
-          sizes="100%"
-          className="object-contain"
-        />
-      </span>
-      {tag}
-    </p>
-  );
-}
-export function GameItem({ game }: GameItemProps) {
-  return (
-    <li className="flex items-center gap-2">
-      <span className="border-[0.5px] rounded bg-white p-1 text-xs text-gray-800 font-semibold">
-        {gameTypeIndex[game.gameType]}
-      </span>
-      <span className="font-medium md:text-sm">{game.gameName}</span>
-    </li>
-  );
-}
+import { GroupDataContextType, GroupProfileProps } from "./data";
 
 export const GroupDataContext = createContext<GroupDataContextType>(
   {} as GroupDataContextType
