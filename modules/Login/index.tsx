@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import Form from "@/common/components/Form";
+import Form from "./Form";
 import { inputSet, btnSet, apiParams } from "./data";
 
-export default function Signup() {
+export default function Login() {
   return (
     <div className="m-auto w-fit">
       <ModalWrapper title="會員登入">

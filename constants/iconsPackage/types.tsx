@@ -1,4 +1,4 @@
-import { ImgType } from "../globalType";
+import { ImgType } from "../globalTypes";
 
 type IconIdType =
   | "my-following"

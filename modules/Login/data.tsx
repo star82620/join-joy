@@ -1,6 +1,7 @@
 import { InputSetType } from "@/common/components/Form/data";
 import { ButtonType } from "@/common/components/GeneralButton/data";
 import { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 
 export const inputSet: InputSetType = [
   {
@@ -31,6 +32,6 @@ export const btnSet: ButtonType = {
 
 //API
 export const apiParams: apiParamsType = {
-  apiPath: "/auth/login",
+  apiPath: apiPaths.login,
   method: "POST",
 };

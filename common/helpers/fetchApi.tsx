@@ -1,12 +1,4 @@
-const token = ""; //之後再補，看要用什麼方式存放 token
-
-// 要用的話要寫這一包資料
-// const apiParams = {
-//   apiPath: "/users/sign_up",
-//   method: "POST",
-//   data: {...},
-// };
-// const data = fetchApi(apiParams);
+import getToken from "@/common/helpers/getToken";
 
 export type apiParamsType = {
   apiPath: string;
@@ -14,13 +6,20 @@ export type apiParamsType = {
   data?: unknown;
 };
 
+const token: string | null = getToken();
+
 export default async function fetchApi(apiParams: apiParamsType) {
   const { apiPath, method, data } = apiParams;
-  const url = process.env.NEXT_PUBLIC_API_URL + apiPath;
-  const apiHeaders = {
-    Authorization: token,
+
+  const url = `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
+
+  const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
+
+  if (token) {
+    headers["Authorization"] = token;
+  }
 
   let body;
 
@@ -32,16 +31,19 @@ export default async function fetchApi(apiParams: apiParamsType) {
 
   const requestOptions = {
     method: method,
-    headers: apiHeaders,
+
+    headers: headers,
+
     body: body,
   };
   try {
     const res = await fetch(url, requestOptions);
     const result = await res.json();
-    console.log(result);
+
+    console.log("fetchApi", result);
+
     return result;
   } catch (error) {
     console.log(error);
-    throw error;
   }
 }
