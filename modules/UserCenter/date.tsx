@@ -12,7 +12,14 @@ export type ProfileDataType = {
   cities: Array<number>;
 };
 
-export type StatusType = "pending" | "member" | "leader";
+export type StatusType =
+  | "pending"
+  | "member"
+  | "leader"
+  | "已失效"
+  | "已結束"
+  | "開團中"
+  | "已預約";
 
 export type GroupDataItemType = {
   groupId: number;
@@ -22,15 +29,20 @@ export type GroupDataItemType = {
   totalMemberNum: number;
   currentPeople: number;
   place: string | null;
-  store: StoreType;
+  store: StoreType | null;
   status: StatusType;
+};
+
+export type GroupDataType = {
+  member: GroupDataItemType[];
+  leader: GroupDataItemType[];
 };
 
 export type UserCenterPageProps = DataContextType;
 
 export type DataContextType = {
   profileData: ProfileDataType[];
-  groupsData: GroupDataItemType[];
+  groupsData: GroupDataType;
   groupRatingsSet: GroupRatingsType[];
 };
 
@@ -106,20 +118,41 @@ export const defaultProfileData: ProfileDataType = {
   cities: [],
 };
 
-export const defaultGroupsData: GroupDataItemType = {
-  groupId: 0,
-  groupName: "",
-  startTime: "",
-  endTime: "",
-  totalMemberNum: 0,
-  currentPeople: 0,
-  place: null,
-  store: {
-    storeId: 0,
-    storeName: "",
-    address: "",
-  },
-  status: "member",
+export const defaultGroupsData: GroupDataType = {
+  leader: [
+    {
+      groupId: 0,
+      groupName: "",
+      startTime: "",
+      endTime: "",
+      totalMemberNum: 0,
+      currentPeople: 0,
+      place: null,
+      store: {
+        storeId: 0,
+        storeName: "",
+        address: "",
+      },
+      status: "member",
+    },
+  ],
+  member: [
+    {
+      groupId: 0,
+      groupName: "",
+      startTime: "",
+      endTime: "",
+      totalMemberNum: 0,
+      currentPeople: 0,
+      place: null,
+      store: {
+        storeId: 0,
+        storeName: "",
+        address: "",
+      },
+      status: "member",
+    },
+  ],
 };
 
 export const defaultGroupRatingsSet: GroupRatingsType = {

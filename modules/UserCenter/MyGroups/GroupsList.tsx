@@ -18,7 +18,7 @@ function GroupsList({ pageStatus }: GroupListProps) {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
-  const { profileData, groupsData, groupRatingsSet } = useContext(DataContext);
+  const { groupsData } = useContext(DataContext);
 
   const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
     console.log("取消加入揪團申請");
@@ -68,7 +68,10 @@ function GroupsList({ pageStatus }: GroupListProps) {
   const isMemberPage = pageStatus === "member";
   const isUpcoming = activeTab === "upcoming";
 
-  const filteredData = groupsData.filter((group) => {
+  // 篩選要跑出來的列表內容
+  //
+  const originData = isLeaderPage ? groupsData.leader : groupsData.member;
+  const filteredData = originData.filter((group) => {
     const isLeaderGroup = group.status === "leader";
     if (isLeaderPage && !isLeaderGroup) return false;
     if (isMemberPage && isLeaderGroup) return false;

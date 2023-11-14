@@ -42,11 +42,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const profileJson = await profileRes.json();
   const profileData: ProfileDataType = await profileJson.data;
 
-  // 取得揪團資料
+  // 取得所有揪團資料
   const groupsUrl = `${envUrl}${apiPaths["my-groups-list"]}`;
   const groupsRes = await fetch(groupsUrl, apiHeaders);
   const groupsJson = await groupsRes.json();
-  const groupsData: GroupDataItemType[] = await groupsJson.data.info;
+  const groupsData: GroupDataItemType[] = await groupsJson.data;
 
   // 取得個別揪團的評價狀態（揪團紀錄中全部的揪團）
   async function fetchGroupRatings(
@@ -80,7 +80,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 export const DataContext = createContext<DataContextType>({
   profileData: [defaultProfileData],
-  groupsData: [defaultGroupsData],
+  groupsData: defaultGroupsData,
   groupRatingsSet: [defaultGroupRatingsSet],
 });
 
