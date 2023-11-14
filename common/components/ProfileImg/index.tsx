@@ -11,7 +11,7 @@ export default function ProfileImg({
   return (
     <div
       className={`relative rounded-full border-2 border-white outline outline-2
-  outline-gray-950 ${widthProp} ${heightProp}`}
+  outline-gray-950 flex-shrink-0 ${widthProp} ${heightProp}`}
     >
       <Image
         src={src}
