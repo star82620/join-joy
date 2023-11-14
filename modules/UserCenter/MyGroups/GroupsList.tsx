@@ -66,24 +66,30 @@ function GroupsList({ pageStatus }: GroupListProps) {
     },
   };
 
-  const upcomingBtnTitle = (
-    <>
-      <span className="whitespace-nowrap after:content-['/'] after:font-normal">
-        取消
-      </span>
-      <span className="whitespace-nowrap">退出</span>
-    </>
-  );
-  const expiredBtnTitle = "評價";
+  const setBtnTitle = () => {
+    const upcomingBtnTitle = (
+      <>
+        <span className="whitespace-nowrap after:content-['/'] after:font-normal">
+          取消
+        </span>
+        <span className="whitespace-nowrap">退出</span>
+      </>
+    );
+    if (isLeaderPage && isUpcoming) return "管理";
+    if (isMemberPage && isUpcoming) return upcomingBtnTitle;
+    return "評價";
+  };
+
+  const btnTitle = setBtnTitle();
 
   // 篩選要跑出來的列表內容
   const filteredData = groupsData.filter((group) => {
     const groupStatus = setGroupStatus(group.endTime, group.status);
     const isClosed = groupStatus === "closed";
 
-    if (activeTab === "upcoming") {
-      if (isClosed) return false;
-      return true;
+    if (isUpcoming) {
+      if (!isClosed) return true;
+      return false;
     } else {
       if (isClosed) return true;
       return false;
@@ -106,9 +112,7 @@ function GroupsList({ pageStatus }: GroupListProps) {
           <p className="w-[20%]">地點</p>
           <p className="w-[20%]">時間</p>
           <p className="w-[10%]">人數</p>
-          <p className="w-[10%]">
-            {isExpired ? expiredBtnTitle : upcomingBtnTitle}
-          </p>
+          <p className="w-[10%]">{btnTitle}</p>
         </div>
         <ul>
           {filteredData.map((group) => (

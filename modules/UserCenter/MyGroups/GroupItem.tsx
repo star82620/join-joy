@@ -28,6 +28,7 @@ function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
   const [groupRating] = groupRatingsSet.filter((item) => item.id === groupId);
 
   const isCommented = groupRating.data ? groupRating.data.isAllRated : false;
+  console.log("67777", groupId, isCommented);
 
   const groupStatus = setGroupStatus(endTime, status);
   // 狀態表示
@@ -37,7 +38,7 @@ function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
   // 抓取對應的按鈕
   const setBtn = () => {
     if (!isExpired) return groupStatus;
-    if (isCommented) return "commented";
+    if (isExpired && !!isCommented) return "commented";
     return "closed";
   };
   const btnId = setBtn();
