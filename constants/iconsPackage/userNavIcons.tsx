@@ -1,4 +1,4 @@
-import { UserNavIconsType } from "./types";
+import { UserNavIconsType } from "../globalTypes";
 
 const userNavIcons: UserNavIconsType = {
   "my-following": {
