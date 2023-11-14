@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Image from "next/image";
-import Button from "@/common/components/GeneralButton";
+import Image from "@/common/components/FillImage";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import FileWrapper from "@/common/components/FileWrapper";
 import checkIsFollowed from "@/common/helpers/checkIsFollowed";
@@ -10,6 +9,7 @@ import Comments from "./Comments";
 import { selectActiveComponent } from "@/common/helpers/selectActiveComponent";
 import { ReturnComponentType } from "@/common/components/FileWrapper/data";
 import { userData, tabSet, ActiveTabType } from "./data";
+import FollowingButton from "@/common/components/FollowButton";
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
@@ -51,30 +51,7 @@ export default function UserProfile() {
                     );
                   })}
                 </div>
-                <Button
-                  type="button"
-                  appearance={isFollowed ? "gray" : "orange"}
-                  className="text-lg lg:text-md leading-[1.2]"
-                >
-                  <span className="flex items-center leading-6 font-semibold text-lg md:text-md md:leading-5">
-                    <span className="text-sm">
-                      {isFollowed ? "已追蹤" : "追蹤"}
-                    </span>
-                    <span className="relative inline-block w-6 h-6 md:w-5 md:h-5 ml-1">
-                      <Image
-                        src={
-                          isFollowed
-                            ? "/images/icon-check.svg"
-                            : "/images/icon-plus.svg"
-                        }
-                        alt={isFollowed ? "icon-check" : "icon-plus"}
-                        fill
-                        sizes="100%"
-                        className="object-contain align-middle"
-                      />
-                    </span>
-                  </span>
-                </Button>
+                <FollowingButton isFollowed={isFollowed} />
               </div>
 
               <div className="flex flex-col justify-center items-center gap-6">
