@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
-import Image from "@/common/components/FillImage";
-import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import titles from "@/constants/groupProfileTitles";
-import GameList from "@/common/components/GameList";
+
 import MemberCard from "./MemberCard";
 import { GroupDataContext } from "@/pages/user-center/group/[id]";
-import TitleBlock from "./TitleBlock";
+
 import Link from "@/common/components/GeneralLink";
 import ReserverInfo from "./ReserverInfo";
+import GroupDetailForm from "./GroupDetailForm";
 
 // 審核團員列表會在團的狀態為已成團、已預約後消失
 // 參加者列表的按鈕會在活動時間開始前一小時開放
@@ -52,10 +50,7 @@ export default function ManageGroup() {
           <ReserverInfo />
         </ModalWrapper>
         <ModalWrapper title="編輯揪團詳細資訊" layout="primary">
-          <div className="px-14 py-10 md:p-4">
-            就很開團表單
-            <GameList category="form"></GameList>
-          </div>
+          <GroupDetailForm />
         </ModalWrapper>
       </div>
       <div className="w-[304px] md:w-full flex flex-col gap-9 md:gap-4">

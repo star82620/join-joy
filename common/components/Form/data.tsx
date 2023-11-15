@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
 import { ButtonType } from "../GeneralButton/data";
 import { apiParamsType } from "@/common/helpers/fetchApi";
+import { ChangeInputHandler } from "@/constants/globalTypes";
 
 export type InputType = {
   label: string;
@@ -32,4 +34,34 @@ export type InputsProps = {
   handleShowPassword: React.ChangeEventHandler<HTMLInputElement>;
   showPassword: ShowPasswordType;
   inputValues: InputValuesType;
+};
+
+// InputBlock
+export type InputBlockProps = {
+  title: string;
+  titleStyle?: string;
+  description?: string;
+  direction?: "row" | "col";
+  require?: boolean;
+  children: ReactNode;
+};
+
+//InputRadio
+export type OptionType = {
+  content: string;
+  name: string;
+  value: string;
+  checked?: boolean;
+};
+
+export type QuestionType = {
+  title: string;
+  description: string;
+  options: OptionType[];
+};
+
+type QuestionsWithRadioType = QuestionType[];
+
+export type InputRadioProps = QuestionType & {
+  onChange: ChangeInputHandler;
 };

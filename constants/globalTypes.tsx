@@ -28,3 +28,18 @@ export type AuthContextType = {
   authData: AuthDataType | null;
   setAuthData: React.Dispatch<React.SetStateAction<AuthDataType | null>>;
 };
+
+// 事件
+export type ChangeInputHandler = (
+  e: React.ChangeEvent<HTMLInputElement>
+) => void;
+
+export type ChangeSelectHandler = (
+  e: React.ChangeEvent<HTMLSelectElement>
+) => void;
+
+export type ChangeTextAreaHandler = (
+  e: React.ChangeEvent<HTMLTextAreaElement>
+) => void;
+
+export type ClickHandler = (e: React.MouseEvent<HTMLElement>) => void;
