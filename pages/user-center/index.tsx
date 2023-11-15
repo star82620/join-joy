@@ -17,6 +17,7 @@ import {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
+
   const { authToken } = req.cookies;
   if (!authToken) {
     return {

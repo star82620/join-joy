@@ -1,22 +1,23 @@
 import { TabType } from "@/constants/globalTypes";
 import { GroupDataItemType } from "../date";
 
-export type ActionBtnType = {
+export type BtnItemType = {
   text: string;
   func?: (event: React.MouseEvent<HTMLElement>) => void;
   disabled: boolean;
 };
 
-export type ActionBtnsType = Record<string, ActionBtnType>;
+export type BtnSetType = Record<string, BtnItemType>;
 
 export type GroupListProps = {
-  pageStatus: "leader" | "member";
+  category: "leader" | "member";
 };
 
+// GroupItem
 export type GroupItemProps = {
   group: GroupDataItemType;
   isExpired: boolean;
-  actionBtns: ActionBtnsType;
+  btnSet: BtnSetType;
 };
 
 // ----data----

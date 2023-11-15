@@ -3,11 +3,11 @@ import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import formatGroupDate from "@/common/helpers/formateDate";
 import statusSet from "@/constants/groupStatusSet";
-import { setGroupStatus } from "./GroupsList";
+import setGroupStatus from "./setGroupStatus";
 import { DataContext } from "@/pages/user-center";
 import { GroupItemProps } from "./data";
 
-function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
+function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
   const { groupRatingsSet } = useContext(DataContext);
 
   console.log("RRRRRRRRRR", groupRatingsSet);
@@ -42,9 +42,9 @@ function GroupItem({ group, isExpired, actionBtns }: GroupItemProps) {
     return "closed";
   };
   const btnId = setBtn();
-  const btnDisabled = actionBtns[btnId].disabled;
-  const btnOnClick = actionBtns[btnId].func;
-  const btnText = actionBtns[btnId].text;
+  const btnDisabled = btnSet[btnId].disabled;
+  const btnOnClick = btnSet[btnId].func;
+  const btnText = btnSet[btnId].text;
 
   const isStore = store !== null;
   const location = isStore ? store.storeName : place;

@@ -3,48 +3,42 @@ import { useRouter } from "next/router";
 import TabSection from "../TabSection";
 import GroupItem from "./GroupItem";
 import { DataContext } from "@/pages/user-center";
-import { tabs, ActionBtnsType, GroupListProps } from "./data";
+import setGroupStatus from "./setGroupStatus";
+import { tabs, BtnSetType, GroupListProps } from "./data";
 
-export const setGroupStatus = (endTime: string, status: string) => {
-  const now = new Date();
-  const today = now.toISOString();
-
-  // 時間已過
-  if (endTime < today || status === "已結束") return "closed";
-
-  // 審核中的團員
-  if (status === "pending") return "pending";
-
-  return "member";
+const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
+  console.log("取消加入揪團申請");
+};
+const handleQuitGroup = (event: React.MouseEvent<HTMLElement>) => {
+  console.log("退出揪團");
+};
+const handleToComment = (event: React.MouseEvent<HTMLElement>) => {
+  console.log("跳到評價頁面");
+  router.push("/about");
 };
 
-function GroupsList({ pageStatus }: GroupListProps) {
+function GroupsList({ category }: GroupListProps) {
   const router = useRouter();
+
+  // Tab 控制 state，預設 upcoming
   const [activeTab, setActiveTab] = useState<string>("upcoming");
-  console.log("activeTab", activeTab);
 
-  const isLeaderPage = pageStatus === "leader";
-  const isMemberPage = pageStatus === "member";
-  const isExpired = activeTab === "Expired";
+  // 我開的揪團（團主）
+  const isLeaderPage = category === "leader";
+  // 我加入的揪團（團員）
+  const isMemberPage = category === "member";
+  // 尚未開始 tab
   const isUpcoming = activeTab === "upcoming";
+  // 已結束 tab
+  const isExpired = activeTab === "Expired";
 
+  // 取得 groupSet，根據角色分別抓對應的資料群
   const groupsSetData = useContext(DataContext).groupsData;
   const groupsData = isLeaderPage
     ? groupsSetData["leader"]
     : groupsSetData["member"];
 
-  const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("取消加入揪團申請");
-  };
-  const handleQuitGroup = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("退出揪團");
-  };
-  const handleToComment = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("跳到評價頁面");
-    router.push("/about");
-  };
-
-  const actionBtns: ActionBtnsType = {
+  const btnSet: BtnSetType = {
     pending: {
       text: "取消申請",
       func: handleQuitGroup,
@@ -120,7 +114,7 @@ function GroupsList({ pageStatus }: GroupListProps) {
               key={group.groupId}
               group={group}
               isExpired={isExpired}
-              actionBtns={actionBtns}
+              btnSet={btnSet}
             />
           ))}
           {isEmptyList && (
