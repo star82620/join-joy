@@ -58,10 +58,6 @@ export default function StepTwo({
     }
   }, []);
 
-  const handleBtnTwo = () => {
-    setActiveStep(3);
-  };
-
   const backPrev = () => {
     setActiveStep(1);
   };
@@ -220,7 +216,6 @@ export default function StepTwo({
             type="submit"
             form="create-group"
             appearance="orange"
-            // onClick={handleBtnTwo}
             className="px-[158px] md:py-2 md:px-3 md:w-full"
           >
             完成開團

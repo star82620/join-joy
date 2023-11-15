@@ -301,8 +301,8 @@ export default function StepOne({ citiesData }: StepOneProps) {
               onChange={handleInputValue}
             />
             <datalist id="data">
-              <option value="2023-11-01">2023-11-01</option>
-              <option value="2023-11-07">2023-11-07</option>
+              <option value="2023-11-20">2023-11-20</option>
+              <option value="2023-12-01">2023-12-01</option>
             </datalist>
           </InputBlock>
         </label>

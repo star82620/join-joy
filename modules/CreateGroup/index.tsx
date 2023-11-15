@@ -38,6 +38,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
 
   const [activeStep, setActiveStep] = useState(1);
   const [values, setValues] = useState(defaultValues); //要給 api data 的資料
+  const [successfulId, setSuccessfulId] = useState(0);
 
   console.log(values);
 
@@ -45,8 +46,6 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
   const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
 
   const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
-
-  console.log(selectedGames);
 
   const formatPostValues = () => {
     const {
@@ -68,7 +67,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
     const formattedEndTime = convertToISO(date, endTime);
     const isHomeGroup = locationKind === "place";
     const cityName = city.cityName;
-    console.log(cityName);
+
     const setPlace = isHomeGroup ? `${cityName}${place}` : null;
     const setStoreId = !isHomeGroup ? storeId : null;
     const isPrivate = seletedPrivate === "private";
@@ -129,8 +128,9 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
     const res = await fetchApi(apiParams);
 
     if (res.status) {
-      const groupId = res.groupId;
-      router.push(`/group/${groupId}`);
+      const { groupId } = res;
+      setSuccessfulId(groupId);
+      setActiveStep(3);
     }
   };
 
@@ -153,7 +153,9 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
                         setSelectedTags={setSelectedTags}
                       />
                     )}
-                    {activeStep === 3 && <StepThree />}
+                    {activeStep === 3 && (
+                      <StepThree successfulId={successfulId} />
+                    )}
                   </form>
                 </ValuesContext.Provider>
               </div>
