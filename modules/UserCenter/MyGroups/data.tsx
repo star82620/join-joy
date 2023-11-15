@@ -3,7 +3,7 @@ import { MyGroupsItemType, TabType } from "@/constants/globalTypes";
 // GroupsList
 export type BtnItemType = {
   text: string;
-  func?: (event: React.MouseEvent<HTMLElement>) => void;
+  func?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   disabled: boolean;
 };
 

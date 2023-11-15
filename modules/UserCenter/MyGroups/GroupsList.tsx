@@ -6,19 +6,23 @@ import { DataContext } from "@/pages/user-center";
 import setGroupStatus from "./setGroupStatus";
 import { tabs, BtnSetType, GroupListProps } from "./data";
 
-const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
-  console.log("取消加入揪團申請");
-};
-const handleQuitGroup = (event: React.MouseEvent<HTMLElement>) => {
-  console.log("退出揪團");
-};
-const handleToComment = (event: React.MouseEvent<HTMLElement>) => {
-  console.log("跳到評價頁面");
-  router.push("/about");
-};
-
 function GroupsList({ category }: GroupListProps) {
   const router = useRouter();
+  const handleCancelApply = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("取消加入揪團申請");
+  };
+  const handleQuitGroup = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log("退出揪團");
+  };
+  const pushToComment = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = e.currentTarget.value;
+    console.log("跳到評價頁面");
+    router.push(`/user-center/group/${id}`);
+  };
+  const pushToManagement = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = e.currentTarget.value;
+    router.push(`/user-center/group/${id}`);
+  };
 
   // Tab 控制 state，預設 upcoming
   const [activeTab, setActiveTab] = useState<string>("upcoming");
@@ -53,9 +57,14 @@ function GroupsList({ category }: GroupListProps) {
       func: handleCancelApply,
       disabled: false,
     },
+    leader: {
+      text: "管理",
+      func: pushToManagement,
+      disabled: false,
+    },
     closed: {
       text: "評價",
-      func: handleToComment,
+      func: pushToComment,
       disabled: false,
     },
     commented: {

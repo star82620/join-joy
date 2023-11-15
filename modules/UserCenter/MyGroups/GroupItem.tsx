@@ -36,13 +36,22 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
 
   // 抓取對應的按鈕
   const setBtn = () => {
+    // 如果狀態是已結束，查看是否有評價
+    // 如果不是已結束，那就用 setGroupList 的結果去搜
+    if (groupStatus === "closed") {
+      if (isCommented) {
+      }
+    }
+
     if (!isExpired) return status;
     if (isExpired && !!isCommented) return "commented";
     return "closed";
   };
-  const btnId = setBtn();
+
+  // const btnId = setBtn();
+  // console.log("btnId", btnId);
   // const btnDisabled = btnSet[btnId].disabled;
-  // const btnOnClick = btnSet[btnId].func;
+  const btnOnClick = btnSet["leader"].func;
   // const btnText = btnSet[btnId].text;
 
   const isStore = store !== null;
@@ -53,6 +62,7 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
     endTime
   );
   const groupTime = `${formattedStartTime} - ${formattedEndTime}`;
+  const groupIdString = groupId.toString();
 
   return (
     <li
@@ -80,10 +90,12 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
             appearance="black"
             rounded
             className="w-full"
+            value={groupIdString}
             // isDisabled={btnDisabled}
-            // onClick={btnOnClick}
+            onClick={btnOnClick}
           >
-            {/* <span className="text-sm">{btnText}</span> */}dd
+            <span data-id={groupId}>fff</span>
+            {/* <span className="text-sm">{btnText}</span> */}
           </Button>
         )}
       </div>
