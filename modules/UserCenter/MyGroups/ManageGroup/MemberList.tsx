@@ -7,6 +7,13 @@ export default function MemberList() {
   const dataContext = useContext(GroupDataContext);
   const { memberData } = dataContext;
 
+  const pendingData = memberData.filter(
+    (member) => member.status === "pending"
+  );
+  const membersData = memberData.filter(
+    (member) => member.status !== "pending"
+  );
+
   return (
     <>
       <ModalWrapper title="審核團員列表" layout="secondary">
@@ -14,9 +21,13 @@ export default function MemberList() {
           <p className="font-semibold">申請人數總共 0 人</p>
           <p className="text-sm text-blue-dark font-semibold ">全部確認</p>
 
-          <ul className="w-full">
-            {memberData.map((member) => (
-              <MemberCard key={member.memberId} category="pending" />
+          <ul className="w-full flex flex-col gap-4 md:gap-3">
+            {pendingData.map((member) => (
+              <MemberCard
+                key={member.memberId}
+                category="pending"
+                member={member}
+              />
             ))}
           </ul>
         </div>
@@ -29,8 +40,12 @@ export default function MemberList() {
           </p>
 
           <ul className="w-full flex flex-col gap-4 md:gap-3">
-            {memberData.map((member) => (
-              <MemberCard key={member.memberId} category="member" />
+            {membersData.map((member) => (
+              <MemberCard
+                key={member.memberId}
+                category="member"
+                member={member}
+              />
             ))}
           </ul>
         </div>
