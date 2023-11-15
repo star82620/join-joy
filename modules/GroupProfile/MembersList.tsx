@@ -17,8 +17,7 @@ function MemberCard({ member, subNum }: MemberCardProps) {
         <ProfileImg
           src="/images/photo-user-000.png"
           alt="user"
-          widthProp="w-16"
-          heightProp="h-16"
+          sizeStyle="w-16 h-16"
         />
         <div className="grow">
           <p className="text-gray-600 md:text-xs">{statusText}</p>
