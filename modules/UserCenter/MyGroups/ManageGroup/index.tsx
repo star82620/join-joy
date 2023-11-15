@@ -7,6 +7,7 @@ import { GroupDataContext } from "@/pages/user-center/group/[id]";
 import Link from "@/common/components/GeneralLink";
 import ReserverInfo from "./ReserverInfo";
 import GroupDetailForm from "./GroupDetailForm";
+import MemberList from "./MemberList";
 
 // 審核團員列表會在團的狀態為已成團、已預約後消失
 // 參加者列表的按鈕會在活動時間開始前一小時開放
@@ -54,33 +55,7 @@ export default function ManageGroup() {
         </ModalWrapper>
       </div>
       <div className="w-[304px] md:w-full flex flex-col gap-9 md:gap-4">
-        <ModalWrapper title="審核團員列表" layout="secondary">
-          <div className="flex flex-col items-center gap-2 p-4">
-            <p className="font-semibold">申請人數總共 0 人</p>
-            <p className="text-sm text-blue-dark font-semibold ">全部確認</p>
-
-            <ul className="w-full">
-              {memberData.map((member) => (
-                <div key={member.userName}>
-                  {" "}
-                  {member.userName} {member.status}
-                </div>
-              ))}
-
-              {/* <MemberCard /> */}
-            </ul>
-          </div>
-        </ModalWrapper>
-        <ModalWrapper title="參加者列表" layout="secondary">
-          <div className="flex flex-col items-center gap-2 p-4">
-            <p className="font-semibold ">目前人數： 0 人</p>
-            <p className="text-sm font-semibold text-gray-800">
-              活動當天前1小時開放點名
-            </p>
-
-            <ul className="w-full">{/* <MemberCard /> */}</ul>
-          </div>
-        </ModalWrapper>
+        <MemberList />
       </div>
     </section>
   );

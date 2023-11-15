@@ -1,8 +1,14 @@
 import React from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
+import { GroupDataType } from "./data";
 
-export default function MemberCard({ groupStatus, userData }) {
+type Props = {
+  category: "pending" | "member";
+  userData: GroupDataType;
+};
+
+export default function MemberCard({ category, userData }) {
   // 按鈕狀態改變
   // 如果是 "pending"：拒絕、接受
   // 如果是 "member"：缺席、出席
@@ -25,7 +31,7 @@ export default function MemberCard({ groupStatus, userData }) {
     ],
   };
 
-  const displayBtn = btns["member"];
+  const displayBtn = btns[category];
   const rejectBtnAppearance = displayBtn[0].appearance;
   const rejectBtnText = displayBtn[0].text;
   const rejectBtnHandler = displayBtn[0].handler;
