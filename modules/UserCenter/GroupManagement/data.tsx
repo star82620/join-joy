@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 // page
 export type GroupStatusType = string;
@@ -19,19 +19,12 @@ export type GameItemType = {
 export type MemberType = {
   userId: number;
   userName: string;
-  status: "leader" | "member";
-  initNum: number;
-};
-
-// 請洛陽換成 userId 跟上面共用
-export type MembersDataItemType = {
-  memberId: number;
-  userName: string;
+  profileImg: string;
   status: "leader" | "member" | "pending";
   initNum: number;
 };
 
-export type MembersDataType = MembersDataItemType[];
+export type MembersDataType = MemberType[];
 
 export type GroupDataType = {
   groupName: string;
@@ -76,6 +69,23 @@ export type TitleBlockProps = {
   children: ReactNode;
 };
 
+// MemberCard
+export type MemberCardProps = {
+  category: "pending" | "member";
+  member: MemberType;
+};
+
+export type MemberCardBtnsType = {
+  pending: MemberCardBtnsItemType[];
+  member: MemberCardBtnsItemType[];
+};
+
+export type MemberCardBtnsItemType = {
+  text: "拒絕" | "接受" | "缺席" | "出席";
+  appearance: "white" | "black";
+  handler: MouseEventHandler;
+};
+
 // ---data---
 
 // page
@@ -102,10 +112,11 @@ export const defaultGroupsData: GroupDataType = {
 
 export const defaultMembersData: MembersDataType = [
   {
-    memberId: 0,
+    userId: 0,
     userName: "",
     status: "pending",
     initNum: 0,
+    profileImg: "",
   },
 ];
 

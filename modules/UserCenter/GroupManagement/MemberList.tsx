@@ -26,7 +26,7 @@ export default function MemberList() {
           <ul className="w-full flex flex-col gap-4 md:gap-3">
             {pendingListData.map((member) => (
               <MemberCard
-                key={member.memberId}
+                key={member.userId}
                 category="pending"
                 member={member}
               />
@@ -44,7 +44,7 @@ export default function MemberList() {
           <ul className="w-full flex flex-col gap-4 md:gap-3">
             {membersListData.map((member) => (
               <MemberCard
-                key={member.memberId}
+                key={member.userId}
                 category="member"
                 member={member}
               />

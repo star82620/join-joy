@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
-import ModalWrapper from "@/common/components/ModalWrapper";
-
-import MemberCard from "./MemberCard";
 import { GroupDataContext } from "@/pages/user-center/group/[id]";
-
+import ModalWrapper from "@/common/components/ModalWrapper";
+import MemberCard from "./MemberCard";
 import Link from "@/common/components/GeneralLink";
 import ReserverInfo from "./ReserverInfo";
 import GroupDetailForm from "./GroupDetailForm";
@@ -28,7 +26,7 @@ const isWithinOneHour = (time: Date) => {
 
 export default function GroupManagement() {
   const dataContext = useContext(GroupDataContext);
-  const { groupId, groupData, memberData } = dataContext;
+  const { groupId, groupData, membersData } = dataContext;
   const {
     groupName,
     groupStatus,
