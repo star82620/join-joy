@@ -36,14 +36,14 @@ export default function GroupDetailForm() {
         <input
           type="text"
           className="inputStyle"
-          value={values["totalMemberNum"]}
+          // value={values["totalMemberNum"]}
         />
       </InputBlock>
       <InputBlock title="預計要玩的遊戲">
         <p className="mt-1 text-gray-500 font-semibold text-sm md:text-xs">
           最多5款，僅通知店家，實際以現場狀況為主
         </p>
-        <GameList category="form"></GameList>
+        {/* <GameList category="form"></GameList> */}
       </InputBlock>
     </div>
   );

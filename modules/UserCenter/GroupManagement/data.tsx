@@ -24,14 +24,14 @@ export type MemberType = {
 };
 
 // 請洛陽換成 userId 跟上面共用
-export type MemberDataItemType = {
+export type MembersDataItemType = {
   memberId: number;
   userName: string;
   status: "leader" | "member" | "pending";
   initNum: number;
 };
 
-export type MemberDataType = MemberDataItemType[];
+export type MembersDataType = MembersDataItemType[];
 
 export type GroupDataType = {
   groupName: string;
@@ -50,10 +50,22 @@ export type GroupDataType = {
   tags: Array<string> | [];
 };
 
+export type GamesDataItemType = {
+  gameId: number;
+  gametype: string;
+  gameName: string;
+  version: string;
+  peopleNum: string;
+  qtu: number;
+};
+
+export type GamesDataType = GamesDataItemType[];
+
 export type GroupDataContextType = {
   groupId: number;
   groupData: GroupDataType;
-  memberData: MemberDataType;
+  membersData: MembersDataType;
+  gamesData: GamesDataType;
 };
 
 export type GroupManagePageProps = GroupDataContextType;
@@ -88,11 +100,22 @@ export const defaultGroupsData: GroupDataType = {
   tags: [],
 };
 
-export const defaultMemberData: MemberDataType = [
+export const defaultMembersData: MembersDataType = [
   {
     memberId: 0,
     userName: "",
     status: "pending",
     initNum: 0,
+  },
+];
+
+export const defaultGamesData: GamesDataType = [
+  {
+    gameId: 0,
+    gametype: "",
+    gameName: "",
+    version: "",
+    peopleNum: "",
+    qtu: 0,
   },
 ];

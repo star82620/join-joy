@@ -26,7 +26,7 @@ const isWithinOneHour = (time: Date) => {
   return result;
 };
 
-export default function ManageGroup() {
+export default function GroupManagement() {
   const dataContext = useContext(GroupDataContext);
   const { groupId, groupData, memberData } = dataContext;
   const {

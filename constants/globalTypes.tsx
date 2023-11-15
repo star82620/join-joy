@@ -5,15 +5,28 @@ export type ImgType = {
   alt: string;
 };
 
-// groupProfileTitles
-export type TitleItemType = {
+export type StoreType = {
+  storeId: number;
+  storeName: string;
+  address: string;
+};
+
+export type GameItemType = {
+  gameId: number;
+  gameName: string;
+  gameType: string;
+};
+
+// ----- groupProfileTitles -----
+
+type TitleItemType = {
   title: string;
   img: ImgType;
 };
 
 export type TitlesType = Record<string, TitleItemType>;
 
-// AuthProvider
+// ----- AuthProvider -----
 export type AuthProviderProps = {
   children: ReactNode;
 };
@@ -29,7 +42,7 @@ export type AuthContextType = {
   setAuthData: React.Dispatch<React.SetStateAction<AuthDataType | null>>;
 };
 
-// 事件
+// ----- 事件 -----
 export type ChangeInputHandler = (
   e: React.ChangeEvent<HTMLInputElement>
 ) => void;

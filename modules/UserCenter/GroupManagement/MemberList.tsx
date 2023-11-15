@@ -5,12 +5,12 @@ import MemberCard from "./MemberCard";
 
 export default function MemberList() {
   const dataContext = useContext(GroupDataContext);
-  const { memberData } = dataContext;
+  const { membersData } = dataContext;
 
-  const pendingListData = memberData.filter(
+  const pendingListData = membersData.filter(
     (member) => member.status === "pending"
   );
-  const membersListData = memberData.filter(
+  const membersListData = membersData.filter(
     (member) => member.status !== "pending"
   );
   const pendingNum = pendingListData.length;

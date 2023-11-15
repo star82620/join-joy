@@ -1,19 +1,21 @@
 import React, { createContext } from "react";
+import { GetServerSidePropsContext } from "next";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 import Layout from "@/common/components/Layout";
-import ManageGroup from "@/modules/UserCenter/MyGroups/ManageGroup";
+import GroupManagement from "@/modules/UserCenter/GroupManagement";
 import {
   GroupDataContextType,
   GroupDataType,
   GroupManagePageProps,
+  defaultGamesData,
   defaultGroupsData,
-  defaultMemberData,
-} from "@/modules/UserCenter/MyGroups/ManageGroup/data";
-import apiPaths from "@/constants/apiPaths";
+  defaultMembersData,
+} from "@/modules/UserCenter/GroupManagement/data";
 
-export async function getServerSideProps(context) {
-  // 從訪問內容獲取 id
-  const { id } = context.params;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // 獲取 id
+  const { id } = context.params as { id: string };
 
   // 獲取該揪團資訊
   const groupApiParams: apiParamsType = {
@@ -22,38 +24,56 @@ export async function getServerSideProps(context) {
   };
 
   const groupRes = await fetchApi(groupApiParams);
-  const groupData: GroupDataType = groupRes.data.groupWithGames;
+  const groupData: GroupDataType = groupRes?.data?.groupWithGames ?? [];
 
-  // 獲取該揪團審核即未審核成員
-
-  // 獲取該揪團資訊
+  // 獲取該揪團審核 & 未審核成員
   const memberApiParams: apiParamsType = {
     apiPath: `${apiPaths["getGroupAllMember"]}?groupId=${id}`,
     method: "GET",
   };
   const memberRes = await fetchApi(memberApiParams);
-  const memberData = memberRes.data;
+  const membersData = memberRes?.data ?? [];
+
+  // 獲取該揪團店家擁有遊戲列表
+  const storeId = groupData.store?.storeId;
+  let gamesData = [];
+  if (storeId) {
+    const gamesApiParams: apiParamsType = {
+      apiPath: `${apiPaths["getStoreGames"]}/${storeId}`,
+      method: "GET",
+    };
+    const gamesRes = await fetchApi(gamesApiParams);
+    gamesData = gamesRes?.data?.gamelist ?? [];
+  }
 
   return {
-    props: { groupId: id, groupData, memberData },
+    props: { groupId: id, groupData, membersData, gamesData },
   };
 }
 
 export const GroupDataContext = createContext<GroupDataContextType>({
   groupId: 0,
   groupData: defaultGroupsData,
-  memberData: defaultMemberData,
+  membersData: defaultMembersData,
+  gamesData: defaultGamesData,
 });
 
 export default function GroupManagePage({
   groupId,
   groupData,
-  memberData,
+  membersData,
+  gamesData,
 }: GroupManagePageProps) {
+  console.log("groupId", groupId);
+  console.log("groupData", groupData);
+  console.log("membersData", membersData);
+  console.log("gamesData", gamesData);
   return (
     <Layout pageCategory="user-center">
-      <GroupDataContext.Provider value={{ groupId, groupData, memberData }}>
-        <ManageGroup />
+      <GroupDataContext.Provider
+        value={{ groupId, groupData, membersData, gamesData }}
+      >
+        <GroupManagement />
       </GroupDataContext.Provider>
     </Layout>
   );

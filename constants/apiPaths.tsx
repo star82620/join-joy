@@ -4,6 +4,7 @@ const apiPaths = {
   checkLoginStatus: "/auth/checkLoginStatus",
   getGroupInfo: "/group/easydetail/",
   getGroupAllMember: "/group/joinList",
+  getStoreGames: "/storeinfo/gamelist",
 };
 
 export default apiPaths;
