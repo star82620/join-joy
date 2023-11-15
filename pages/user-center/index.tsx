@@ -7,13 +7,14 @@ import {
   UserCenterPageProps,
   DataContextType,
   ProfileDataType,
-  GroupDataItemType,
   GroupRatingsType,
   GroupDataSetType,
   defaultProfileData,
   defaultGroupsData,
   defaultGroupRatingsSet,
 } from "@/modules/UserCenter/date";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import { MyGroupsItemType } from "@/constants/globalTypes";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
@@ -28,39 +29,42 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const envUrl = process.env.NEXT_PUBLIC_API_URL;
-  const apiHeaders = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${authToken}`,
-    },
-  };
-
   // 取得會員資料
-  const profileUrl = `${envUrl}${apiPaths["my-profile"]}`;
-  const profileRes = await fetch(profileUrl, apiHeaders);
-  const profileJson = await profileRes.json();
-  const profileData: ProfileDataType = await profileJson.data;
+  const profileApiParams: apiParamsType = {
+    apiPath: apiPaths["get-my-profile"],
+    method: "GET",
+    authToken: authToken,
+  };
+  const profileRes = await fetchApi(profileApiParams);
+  const profileData: ProfileDataType = await profileRes?.data;
 
   // 取得所有揪團資料
-  const groupsUrl = `${envUrl}${apiPaths["my-groups-list"]}`;
-  const groupsRes = await fetch(groupsUrl, apiHeaders);
-  const groupsJson = await groupsRes.json();
-  const groupsData: GroupDataSetType = await groupsJson.data;
+  const groupsApiParams: apiParamsType = {
+    apiPath: apiPaths["my-groups-list"],
+    method: "GET",
+    authToken: authToken,
+  };
+  const groupsRes = await fetchApi(groupsApiParams);
+  const groupsData: GroupDataSetType = await groupsRes.data;
 
   // 取得個別揪團的評價狀態（揪團紀錄中全部的揪團）
+  // 這支 API 還要修，先不要動
   async function fetchGroupRatings(
-    groupsData: GroupDataItemType[]
+    groupsData: MyGroupsItemType[]
   ): Promise<GroupRatingsType[]> {
     const fetchPromises = groupsData.map(async (group) => {
-      const url = `${envUrl}${apiPaths["check-group-rating"]}/${group.groupId}`;
-      const res = await fetch(url, apiHeaders);
-      const result = await res.json();
-      const data = result.data ? result.data : null;
+      const commentsApiParams: apiParamsType = {
+        apiPath: `${apiPaths["check-group-rating"]}/${group.groupId}`,
+        method: "GET",
+        authToken: authToken,
+      };
+      const commentsRes = await fetchApi(commentsApiParams);
+      const commentsData = (await commentsRes?.data) ?? commentsRes.message;
+
       return {
         id: group.groupId,
-        data: data,
+        groupStatus: group.status,
+        data: commentsData,
       };
     });
 
@@ -97,11 +101,14 @@ function UserCenterPage({
   groupsData,
   groupRatingsSet,
 }: UserCenterPageProps) {
-  const datas = { profileData, groupsData, groupRatingsSet };
+  const dataSet = { profileData, groupsData, groupRatingsSet };
 
+  console.log("profileData", profileData);
+  console.log("groupsData", groupsData);
+  console.log("groupRatingsSet", groupRatingsSet);
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">
-      <DataContext.Provider value={datas}>
+      <DataContext.Provider value={dataSet}>
         <UserCenter />
       </DataContext.Provider>
     </Layout>

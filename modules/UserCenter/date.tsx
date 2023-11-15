@@ -1,50 +1,26 @@
 import { ReactNode } from "react";
-import { apiParamsType } from "@/common/helpers/fetchApi";
-import { StoreType, TabType } from "@/constants/globalTypes";
+import {
+  MyGroupsItemType,
+  StatusType,
+  TabType,
+  UserProfileType,
+} from "@/constants/globalTypes";
 
 // page
-export type ProfileDataType = {
-  userId: number;
-  nickName: string;
-  email: string;
-  description: string;
-  games: Array<number>;
-  cities: Array<number>;
-};
-
-export type StatusType =
-  | "pending"
-  | "member"
-  | "leader"
-  | "已失效"
-  | "已結束"
-  | "開團中"
-  | "已預約";
-
-export type GroupDataItemType = {
-  groupId: number;
-  groupName: string;
-  startTime: string;
-  endTime: string;
-  totalMemberNum: number;
-  currentPeople: number;
-  place: string | null;
-  store: StoreType | null;
-  status: StatusType;
-};
+export type ProfileDataType = UserProfileType;
 
 export type GroupDataSetType = {
-  member: GroupDataItemType[];
-  leader: GroupDataItemType[];
+  member: MyGroupsItemType[];
+  leader: MyGroupsItemType[];
 };
 
-export type UserCenterPageProps = DataContextType;
-
-export type DataContextType = {
+export type UserCenterPageProps = {
   profileData: ProfileDataType[];
   groupsData: GroupDataSetType;
   groupRatingsSet: GroupRatingsType[];
 };
+
+export type DataContextType = UserCenterPageProps;
 
 export type RatingContentType = {
   memberId: number;
@@ -62,13 +38,9 @@ export type GroupRatingItemType = {
 
 export type GroupRatingsType = {
   id: number;
+  groupStatus: StatusType;
   data: GroupRatingItemType;
 };
-
-// export type GroupRatingsType[] = {
-//   leader: GroupRatingsType[];
-//   member: GroupRatingsType[];
-// };
 
 // UserNavBar
 export type SubItemIdType = "my-groups-leader" | "my-groups-member";
@@ -163,6 +135,7 @@ export const defaultGroupsData: GroupDataSetType = {
 export const defaultGroupRatingsSet: GroupRatingsType[] = [
   {
     id: 0,
+    groupStatus: "pending",
     data: {
       isAllRated: false,
       ratingStatus: [

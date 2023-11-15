@@ -4,12 +4,13 @@ export type apiParamsType = {
   apiPath: string;
   method: "GET" | "POST" | "PATCH" | "DELETE";
   data?: unknown;
+  authToken?: string;
 };
 
-const token: string | null = getToken();
-
 export default async function fetchApi(apiParams: apiParamsType) {
-  const { apiPath, method, data } = apiParams;
+  const { apiPath, method, data, authToken } = apiParams;
+
+  const token: string | null = authToken ? `Bearer ${authToken}` : getToken();
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
 
