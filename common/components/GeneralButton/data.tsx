@@ -33,8 +33,17 @@ export const dataSet = {
     default: "bg-white border-gray-950",
     hover: "hover:bg-gray-100",
     active: "active:bg-gray-200",
-    disabled: "disabled:bg-gray-300",
+    disabled:
+      "disabled:bg-gray-300 disabled:border-gray-400 disabled:text-gray-400",
     textColor: "text-gray-950",
+  },
+  "white-gray": {
+    default: "bg-white border-gray-500",
+    hover: "hover:bg-gray-100",
+    active: "active:bg-gray-200",
+    disabled:
+      "disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-400",
+    textColor: "text-gray-500",
   },
   gray: {
     default: "bg-gray-100",
