@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
 import { GroupDataType, MemberDataItemType } from "./data";
+import { memberStatusFormat } from "@/constants/memberStatusFormat";
 
 type Props = {
   category: "pending" | "member";
@@ -43,7 +44,8 @@ export default function MemberCard({ category, member }) {
 
   const { memberId, userName, status, initNum } = member;
 
-  const memberStatus = "";
+  const memberStatus =
+    status === "pending" ? "申請者" : memberStatusFormat[status];
 
   return (
     <li className="w-full flex flex-col md:flex-row md:justify-between gap-2 p-2 rounded border-2 bg-yellow-tint shadow-btn">
@@ -55,8 +57,13 @@ export default function MemberCard({ category, member }) {
           heightProp="h-10 md:h-9"
         />
         <div className="font-semibold">
-          <p className="text-gray-600 md:text-xs">{status}</p>
-          <p className="md:text-sm">{userName}</p>
+          <p className="text-gray-600 md:text-xs">{memberStatus}</p>
+          <p className="flex flex-wrap gap-2">
+            <span className="whitespace-nowrap md:text-sm">{userName}</span>
+            <span className="text-gray-600 font-medium whitespace-nowrap">
+              共{initNum}人
+            </span>
+          </p>
         </div>
       </div>
       <div className="flex gap-2 md:w-[128px]">
