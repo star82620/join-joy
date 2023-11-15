@@ -6,11 +6,10 @@ import statusSet from "@/constants/groupStatusSet";
 import setGroupStatus from "./setGroupStatus";
 import { DataContext } from "@/pages/user-center";
 import { GroupItemProps } from "./data";
+import { StatusType } from "@/constants/globalTypes";
 
 function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
   const { groupRatingsSet } = useContext(DataContext);
-
-  console.log("RRRRRRRRRR", groupRatingsSet);
 
   const {
     groupId,
@@ -27,24 +26,24 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
   // 從整包的 groupRatingsSet 裡面找到符合的 groupRating
   const [groupRating] = groupRatingsSet.filter((item) => item.id === groupId);
 
-  const isCommented = groupRating.data ? groupRating.data.isAllRated : false;
-  console.log("67777", groupId, isCommented);
+  const isCommented = groupRating.data?.isAllRated ?? false;
+
+  const isCancel = status === "已失效";
 
   const groupStatus = setGroupStatus(endTime, status);
-  // 狀態表示
   const statusStyle = statusSet[groupStatus].style;
   const statusText = statusSet[groupStatus].text;
 
   // 抓取對應的按鈕
   const setBtn = () => {
-    if (!isExpired) return groupStatus;
+    if (!isExpired) return status;
     if (isExpired && !!isCommented) return "commented";
     return "closed";
   };
   const btnId = setBtn();
-  const btnDisabled = btnSet[btnId].disabled;
-  const btnOnClick = btnSet[btnId].func;
-  const btnText = btnSet[btnId].text;
+  // const btnDisabled = btnSet[btnId].disabled;
+  // const btnOnClick = btnSet[btnId].func;
+  // const btnText = btnSet[btnId].text;
 
   const isStore = store !== null;
   const location = isStore ? store.storeName : place;
@@ -75,16 +74,18 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
         {currentPeople}/{totalMemberNum}
       </p>
       <div className="w-[10%]">
-        <Button
-          type="button"
-          appearance="black"
-          rounded
-          className="w-full"
-          isDisabled={btnDisabled}
-          onClick={btnOnClick}
-        >
-          <span className="text-sm">{btnText}</span>
-        </Button>
+        {!isCancel && (
+          <Button
+            type="button"
+            appearance="black"
+            rounded
+            className="w-full"
+            // isDisabled={btnDisabled}
+            // onClick={btnOnClick}
+          >
+            {/* <span className="text-sm">{btnText}</span> */}dd
+          </Button>
+        )}
       </div>
     </li>
   );

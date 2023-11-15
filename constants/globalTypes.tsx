@@ -20,7 +20,6 @@ export type TabType = {
 export type StatusType =
   | "pending"
   | "member"
-  | "leader"
   | "已失效"
   | "已結束"
   | "開團中"

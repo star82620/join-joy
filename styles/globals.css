@@ -70,14 +70,23 @@ h6 {
   before:rounded-full;
 }
 
-.groupStatusPending {
+.groupStatusPending,
+.groupStatusOpening {
   @apply before:bg-green-light;
-}
-
-.groupStatusOver {
-  @apply before:bg-gray-900;
 }
 
 .groupStatusMember {
   @apply before:bg-orange-primary;
+}
+
+.groupStatusReserved {
+  @apply before:bg-yellow-primary;
+}
+
+.groupStatusClosed {
+  @apply before:bg-gray-900;
+}
+
+.groupStatusCancel {
+  @apply before:bg-gray-200;
 }

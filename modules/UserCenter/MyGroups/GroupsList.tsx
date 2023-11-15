@@ -32,6 +32,10 @@ function GroupsList({ category }: GroupListProps) {
   // 已結束 tab
   const isExpired = activeTab === "Expired";
 
+  console.log("isLeaderPage", isLeaderPage);
+  console.log("isMemberPage", isMemberPage);
+  console.log("isUpcoming", isUpcoming);
+
   // 取得 groupSet，根據角色分別抓對應的資料群
   const groupsSetData = useContext(DataContext).groupsData;
   const groupsData = isLeaderPage
@@ -61,7 +65,15 @@ function GroupsList({ category }: GroupListProps) {
   };
 
   const setBtnTitle = () => {
-    const upcomingBtnTitle = (
+    const leaderBtnTitle = (
+      <>
+        <span className="whitespace-nowrap after:content-['/'] after:font-normal">
+          預約
+        </span>
+        <span className="whitespace-nowrap">審核</span>
+      </>
+    );
+    const memberBtnTitle = (
       <>
         <span className="whitespace-nowrap after:content-['/'] after:font-normal">
           取消
@@ -69,9 +81,14 @@ function GroupsList({ category }: GroupListProps) {
         <span className="whitespace-nowrap">退出</span>
       </>
     );
-    if (isLeaderPage && isUpcoming) return "管理";
-    if (isMemberPage && isUpcoming) return upcomingBtnTitle;
-    return "評價";
+
+    if (isLeaderPage) {
+      if (isUpcoming) return leaderBtnTitle;
+      return "評價";
+    } else if (isMemberPage) {
+      if (isUpcoming) return memberBtnTitle;
+      return "評價";
+    }
   };
 
   const btnTitle = setBtnTitle();

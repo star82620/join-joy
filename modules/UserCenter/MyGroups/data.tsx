@@ -1,6 +1,6 @@
-import { TabType } from "@/constants/globalTypes";
-import { GroupDataItemType } from "../date";
+import { MyGroupsItemType, TabType } from "@/constants/globalTypes";
 
+// GroupsList
 export type BtnItemType = {
   text: string;
   func?: (event: React.MouseEvent<HTMLElement>) => void;
@@ -15,7 +15,7 @@ export type GroupListProps = {
 
 // GroupItem
 export type GroupItemProps = {
-  group: GroupDataItemType;
+  group: MyGroupsItemType;
   isExpired: boolean;
   btnSet: BtnSetType;
 };
