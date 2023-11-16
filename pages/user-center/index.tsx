@@ -63,7 +63,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
       return {
         id: group.groupId,
-        groupStatus: group.status,
+        groupStatus: group.groupStatus,
         data: commentsData,
       };
     });

@@ -5,6 +5,7 @@ import GroupItem from "./GroupItem";
 import { DataContext } from "@/pages/user-center";
 import setGroupStatus from "./setGroupStatus";
 import { tabs, BtnSetType, GroupListProps } from "./data";
+import { defaultGroupsData } from "../date";
 
 function GroupsList({ category }: GroupListProps) {
   const router = useRouter();
@@ -41,7 +42,8 @@ function GroupsList({ category }: GroupListProps) {
   console.log("isUpcoming", isUpcoming);
 
   // 取得 groupSet，根據角色分別抓對應的資料群
-  const groupsSetData = useContext(DataContext).groupsData;
+  const groupsSetData =
+    useContext(DataContext)?.groupsData || defaultGroupsData;
   const groupsData = isLeaderPage
     ? groupsSetData["leader"]
     : groupsSetData["member"];
@@ -104,8 +106,9 @@ function GroupsList({ category }: GroupListProps) {
 
   // 篩選要跑出來的列表內容
   const filteredData = groupsData.filter((group) => {
-    const groupStatus = setGroupStatus(group.endTime, group.status);
-    const isClosed = groupStatus === "closed";
+    const { endTime, groupStatus, memberStatus } = group;
+    const status = setGroupStatus(endTime, groupStatus, memberStatus);
+    const isClosed = status === "closed";
 
     if (isUpcoming) {
       if (!isClosed) return true;

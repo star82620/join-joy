@@ -17,13 +17,9 @@ export type TabType = {
 };
 
 // group
-export type StatusType =
-  | "pending"
-  | "member"
-  | "已失效"
-  | "已結束"
-  | "開團中"
-  | "已預約";
+export type GroupStatusType = "已失效" | "已結束" | "開團中" | "已預約";
+
+export type MemberStatusType = "pending" | "member" | "leader";
 
 // 取得我的所有揪團紀錄API的資料，沒有 isPrivate
 export type MyGroupsItemType = {
@@ -35,7 +31,8 @@ export type MyGroupsItemType = {
   currentPeople: number;
   place: string | null;
   store: StoreType | null;
-  status: StatusType;
+  memberStatus: MemberStatusType;
+  groupStatus: GroupStatusType;
 };
 
 // user profile

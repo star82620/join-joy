@@ -7,9 +7,11 @@ import setGroupStatus from "./setGroupStatus";
 import { DataContext } from "@/pages/user-center";
 import { GroupItemProps } from "./data";
 import { StatusType } from "@/constants/globalTypes";
+import { defaultGroupRatingsSet } from "../date";
 
 function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
-  const { groupRatingsSet } = useContext(DataContext);
+  const groupRatingsSet =
+    useContext(DataContext)?.groupRatingsSet || defaultGroupRatingsSet;
 
   const {
     groupId,

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import {
   MyGroupsItemType,
-  StatusType,
+  GroupStatusType,
   TabType,
   UserProfileType,
 } from "@/constants/globalTypes";
@@ -38,7 +38,7 @@ export type GroupRatingItemType = {
 
 export type GroupRatingsType = {
   id: number;
-  groupStatus: StatusType;
+  groupStatus: GroupStatusType;
   data: GroupRatingItemType;
 };
 
@@ -110,7 +110,8 @@ export const defaultGroupsData: GroupDataSetType = {
         storeName: "",
         address: "",
       },
-      status: "member",
+      memberStatus: "leader",
+      groupStatus: "已結束",
     },
   ],
   member: [
@@ -127,7 +128,8 @@ export const defaultGroupsData: GroupDataSetType = {
         storeName: "",
         address: "",
       },
-      status: "member",
+      memberStatus: "member",
+      groupStatus: "已結束",
     },
   ],
 };
@@ -135,7 +137,7 @@ export const defaultGroupsData: GroupDataSetType = {
 export const defaultGroupRatingsSet: GroupRatingsType[] = [
   {
     id: 0,
-    groupStatus: "pending",
+    groupStatus: "已結束",
     data: {
       isAllRated: false,
       ratingStatus: [

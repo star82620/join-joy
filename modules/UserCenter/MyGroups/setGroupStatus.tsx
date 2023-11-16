@@ -1,15 +1,26 @@
-import { StatusType } from "@/constants/globalTypes";
+import { GroupStatusType, MemberStatusType } from "@/constants/globalTypes";
 
-export default function setGroupStatus(endTime: string, status: StatusType) {
+// 團的狀態 groupStatus
+export default function setGroupStatus(
+  endTime: string,
+  groupStatus: GroupStatusType,
+  memberStatus: MemberStatusType
+) {
   const now = new Date();
   const today = now.toISOString();
+  const isLeader = memberStatus === "leader";
+  const isMember = memberStatus === "member";
 
   // 時間已過或者團的狀態為已結束
-  if (endTime < today || status === "已結束") return "closed";
+  if (endTime > today || groupStatus === "已結束") return "closed";
 
-  if (status === "已失效") return "cancel";
-  if (status === "已預約") return "reserved";
-  if (status === "開團中") return "opening";
+  if (groupStatus === "開團中" && isLeader) return "opening";
 
-  return status;
+  if (groupStatus === "開團中" && isMember) return "member";
+
+  if (groupStatus === "已失效") return "cancel";
+
+  if (groupStatus === "已預約") return "reserved";
+
+  return memberStatus;
 }
