@@ -1,9 +1,12 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext, FormEventHandler } from "react";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import convertToISO from "@/common/helpers/convertToISO";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProgressBar from "./ProgressBar";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import apiPaths from "@/constants/apiPaths";
 import {
   SelectedGamesType,
   SelectedGameType,
@@ -15,38 +18,32 @@ import {
   CreateGroupPageProps,
   PostValuesType,
   SelectedTagsType,
-  SubmitCreateGroupHandlerType,
 } from "./data";
-import convertToISO from "@/common/helpers/convertToISO";
-import apiPaths from "@/constants/apiPaths";
-import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import { useRouter } from "next/router";
 
 // 切換 step
-const defaultStepContextValue: StepContextType = [1, () => {}];
-export const StepContext = createContext<StepContextType>(
-  defaultStepContextValue
-);
+const defaultStepContext: StepContextType = [1, () => {}];
 
-const defaultValuesContextValue: ValuesContextType = [defaultValues, () => {}];
-export const ValuesContext = createContext<ValuesContextType>(
-  defaultValuesContextValue
-);
+export const StepContext = createContext<StepContextType>(defaultStepContext);
+
+// input values
+const defaultValuesContext: ValuesContextType = [defaultValues, () => {}];
+
+export const ValuesContext =
+  createContext<ValuesContextType>(defaultValuesContext);
 
 export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
-  const router = useRouter();
-
   const [activeStep, setActiveStep] = useState(1);
-  const [values, setValues] = useState(defaultValues); //要給 api data 的資料
-  const [successfulId, setSuccessfulId] = useState(0);
+  const [values, setValues] = useState(defaultValues);
+  const [createdGroupId, setCreatedGroupId] = useState(0);
 
-  console.log(values);
+  console.log("values", values);
 
   // 被選到的遊戲
   const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
-
+  // 被選到的 Tag
   const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
 
+  // 整理表單內容變成 POST 用資料
   const formatPostValues = () => {
     const {
       groupName,
@@ -104,7 +101,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
 
     postValues.gameId = formattedGames;
 
-    // 如果裡面有，就跑成 true 不然 false
+    // 如果有在 selectedTags 裡面，該 tag 就變成 true 不然 false
     const formattedValues = selectedTags.reduce((values, tag) => {
       const { id } = tag;
       values[id] = true;
@@ -115,7 +112,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
   };
 
   // 送出開團表單
-  const submitCreateGroupHandler: SubmitCreateGroupHandlerType = async (e) => {
+  const submitCreateGroupHandler: FormEventHandler = async (e) => {
     e.preventDefault();
     const postValues = formatPostValues();
 
@@ -129,7 +126,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
 
     if (res.status) {
       const { groupId } = res;
-      setSuccessfulId(groupId);
+      setCreatedGroupId(groupId);
       setActiveStep(3);
     }
   };
@@ -141,24 +138,26 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
           <div className="px-[124px] pt-12 pb-14 lg:px-24 md:px-4 md:pt-8 md:pb-12 flex flex-col items-center gap-8 md:gap-6">
             <StepContext.Provider value={[activeStep, setActiveStep]}>
               <ProgressBar />
-              <div className="w-full">
-                <ValuesContext.Provider value={[values, setValues]}>
-                  <form id="create-group" onSubmit={submitCreateGroupHandler}>
-                    {activeStep === 1 && <StepOne citiesData={citiesData} />}
-                    {activeStep === 2 && (
-                      <StepTwo
-                        selectedGames={selectedGames}
-                        setSelectedGames={setSelectedGames}
-                        selectedTags={selectedTags}
-                        setSelectedTags={setSelectedTags}
-                      />
-                    )}
-                    {activeStep === 3 && (
-                      <StepThree successfulId={successfulId} />
-                    )}
-                  </form>
-                </ValuesContext.Provider>
-              </div>
+              <ValuesContext.Provider value={[values, setValues]}>
+                <form
+                  className="w-full"
+                  id="create-group"
+                  onSubmit={submitCreateGroupHandler}
+                >
+                  {activeStep === 1 && <StepOne citiesData={citiesData} />}
+                  {activeStep === 2 && (
+                    <StepTwo
+                      selectedGames={selectedGames}
+                      setSelectedGames={setSelectedGames}
+                      selectedTags={selectedTags}
+                      setSelectedTags={setSelectedTags}
+                    />
+                  )}
+                  {activeStep === 3 && (
+                    <StepThree createdGroupId={createdGroupId} />
+                  )}
+                </form>
+              </ValuesContext.Provider>
             </StepContext.Provider>
           </div>
         </ModalWrapper>

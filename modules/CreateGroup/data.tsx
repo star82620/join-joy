@@ -1,13 +1,6 @@
-import React, { FormEvent, ReactNode } from "react";
+import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from "react";
 import { SelectedGamesType } from "@/common/components/GameList/data";
-import {
-  ChangeInputHandler,
-  ChangeSelectHandler,
-  ChangeTextAreaHandler,
-  ClickHandler,
-  GameType,
-  StoreType,
-} from "@/constants/globalTypes";
+import { GameType, StoreType } from "@/constants/globalTypes";
 
 // page
 export type CityDataType = {
@@ -22,7 +15,6 @@ export type CreateGroupPageProps = {
 };
 
 // index
-
 export type StepContextType = [
   number,
   React.Dispatch<React.SetStateAction<number>>
@@ -33,11 +25,37 @@ export type ValuesContextType = [
   React.Dispatch<React.SetStateAction<ValuesType>>
 ];
 
-// export type SelectedTagIdType = "beginnerTag"|"expertTag"|"practiceTag"|"openTag"|"tutorialTag"|"casualTag"|"competitiveTag";
+export type SelectedTagIdType =
+  | "beginnerTag"
+  | "expertTag"
+  | "practiceTag"
+  | "openTag"
+  | "tutorialTag"
+  | "casualTag"
+  | "competitiveTag";
 
-export type SelectedTagsType = { id: string; text: string };
+export type SelectedTagsType = { id: SelectedTagIdType; text: string };
 
-// 要給 api 的資料重新寫一份
+export type LocationKindType = "store" | "place";
+
+export type CityIdType = number;
+export type CityValueType = { cityId: number; cityName: string };
+
+export type ValuesType = {
+  groupName: string;
+  locationKind: LocationKindType;
+  city: CityValueType;
+  place: string;
+  storeId: number;
+  date: string;
+  startTime: string;
+  endTime: string;
+  totalMemberNum: number;
+  initNum: number;
+  description: string;
+  seletedPrivate: string;
+};
+
 export type PostValuesType = {
   groupName: string;
   startTime: string;
@@ -58,29 +76,6 @@ export type PostValuesType = {
   casualTag: boolean;
   competitiveTag: boolean;
 };
-
-export type CityValueType = { cityId: number; cityName: string };
-
-export type ValuesType = {
-  groupName: string;
-  locationKind: string;
-  city: CityValueType;
-  place: string;
-  storeId: number;
-  date: string;
-  startTime: string;
-  endTime: string;
-  totalMemberNum: number;
-  initNum: number;
-  description: string;
-  seletedPrivate: string;
-};
-
-export type LocationKindType = "store" | "place";
-
-export type CityIdType = number;
-
-export type SubmitCreateGroupHandlerType = (e: FormEvent) => void;
 
 // InputBlock
 export type InputBlockProps = {
@@ -108,11 +103,11 @@ export type StoreDataType = {
   acceptedNum: number;
 };
 
-export type HandleInputValueType = ChangeInputHandler;
+export type HandleInputValueType = ChangeEventHandler;
 
-export type HandleSelectedNumType = ChangeSelectHandler;
+export type HandleSelectedNumType = ChangeEventHandler;
 
-export type HandleSelectedTimeType = ChangeSelectHandler;
+export type HandleSelectedTimeType = ChangeEventHandler;
 
 // StepTwo
 export type GameItemType = GameType;
@@ -135,22 +130,26 @@ export type QuestionType = {
 type QuestionsWithRadioType = QuestionType[];
 
 export type InputRadioProps = QuestionType & {
-  onChange: ChangeInputHandler;
+  onChange: ChangeEventHandler;
 };
 
-export type HandlePrivateGroupType = ChangeInputHandler;
+export type HandlePrivateGroupType = ChangeEventHandler;
 
-export type HandlePDescriptionValueType = ChangeTextAreaHandler;
+export type HandlePDescriptionValueType = ChangeEventHandler;
 
-export type HandleSelectedTag = ClickHandler;
+export type HandleSelectedTag = MouseEventHandler;
 
-export type ToggleTagsBlockType = ClickHandler;
+export type ToggleTagsBlockType = MouseEventHandler;
 
 export type StepTwoProps = {
   selectedGames: SelectedGamesType;
   setSelectedGames: React.Dispatch<React.SetStateAction<SelectedGamesType>>;
   selectedTags: SelectedTagsType[];
   setSelectedTags: React.Dispatch<React.SetStateAction<SelectedTagsType[]>>;
+};
+
+export type StepThreeProps = {
+  createdGroupId: number;
 };
 
 //----data----

@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 export type ImgType = {
   src: string;
@@ -52,18 +52,3 @@ export type GameType = {
   peopleNum: string;
   qtu: number;
 };
-
-// 事件
-export type ChangeInputHandler = (
-  e: React.ChangeEvent<HTMLInputElement>
-) => void;
-
-export type ChangeSelectHandler = (
-  e: React.ChangeEvent<HTMLSelectElement>
-) => void;
-
-export type ChangeTextAreaHandler = (
-  e: React.ChangeEvent<HTMLTextAreaElement>
-) => void;
-
-export type ClickHandler = (e: React.MouseEvent<HTMLElement>) => void;

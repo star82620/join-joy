@@ -9,15 +9,6 @@ import { GetServerSidePropsContext } from "next";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
   const { authToken } = req.cookies;
-
-  const citiesKey: apiParamsType = {
-    apiPath: apiPaths.getCities,
-    method: "GET",
-  };
-
-  const citiesRes = await fetchApi(citiesKey);
-  const citiesData = citiesRes?.data;
-
   if (!authToken) {
     return {
       redirect: {
@@ -26,6 +17,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
+
+  const citiesApiParams: apiParamsType = {
+    apiPath: apiPaths.getCities,
+    method: "GET",
+  };
+
+  const citiesRes = await fetchApi(citiesApiParams);
+  const citiesData = citiesRes?.data ?? [];
 
   return {
     props: { citiesData },
