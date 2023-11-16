@@ -9,6 +9,9 @@ export default function GameList({
   setSelectedGames,
 }: GameListProps) {
   const isReadOnly = category === "view";
+
+  gamesData = gamesData ? gamesData : [];
+
   const [renderData, setRenderData] = useState(gamesData);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
@@ -46,6 +49,7 @@ export default function GameList({
     if (!setSelectedGames || !selectedGames) return;
 
     if (e.target.checked && gameName) {
+      if (selectedGames.length > 5) return;
       setSelectedGames([
         ...selectedGames,
         { gameId: gameId, gameName: gameName },
@@ -70,15 +74,34 @@ export default function GameList({
     setRenderData(selectedData);
   }, [selectType, searchValue]);
 
+  const isGamesEmpty = selectedGames?.length === 0;
+
+  const headStyle = isReadOnly
+    ? "px-14 pb-8 md:pb-6"
+    : "bg-yellow-tint md:bg-transparent px-6 pt-4 md:pt-0 md:mb-3";
+
   // ---------
 
   return (
     <section className="flex flex-col justify-center items-center">
-      <div
-        className={`flex justify-between w-full pb-6 md:px-0  ${
-          isReadOnly ? "px-14 pb-8 md:pb-6" : " bg-yellow-tint px-6 pb-2"
-        }`}
-      >
+      {!isReadOnly && (
+        <div className="inputStyle h-12 flex gap-2 items-center text-gray-400 mb-3">
+          {selectedGames?.map((game) => {
+            const { gameId, gameName } = game;
+            return (
+              <div
+                key={gameId}
+                className="px-2 py-1 rounded-sm border border-gray-800 text-gray-950 font-medium"
+              >
+                {gameName}
+              </div>
+            );
+          })}
+          {isGamesEmpty && <p>請在下列表單選擇預計要玩的遊戲</p>}
+        </div>
+      )}
+
+      <div className={`flex justify-between w-full md:px-0 ${headStyle}`}>
         <label className="flex items-center gap-2">
           <span className="md:hidden text-lg font-semibold">類別：</span>
           <select className="px-3 py-2" onChange={handleSelectType}>

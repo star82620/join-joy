@@ -18,9 +18,10 @@ export default function GameItem({
     <li>
       <label className="flex justify-between md:gap-3 py-2 bg-white text-center md:text-sm">
         {!isReadOnly && (
-          <div className="w-[10%]">
+          <div className="w-[10%] ">
             <input
               type="checkbox"
+              className="checkboxIcon"
               value={gameId}
               data-gamename={gameName}
               checked={isDefaultChecked}
