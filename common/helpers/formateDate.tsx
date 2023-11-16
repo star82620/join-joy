@@ -5,8 +5,6 @@ function formatGroupDate(startTime: string, endTime: string) {
       formattedStartTime: "",
       formattedEndTime: "",
     };
-  console.log(startTime);
-  console.log(endTime);
 
   const groupDate = startTime.split("T")[0].replaceAll("-", "/");
   const formattedStartTime = startTime.split("T")[1].substring(0, 5);

@@ -4,20 +4,27 @@ import TabSection from "../TabSection";
 import GroupItem from "./GroupItem";
 import { DataContext } from "@/pages/user-center";
 import setGroupStatus from "./setGroupStatus";
-import { tabs, BtnSetType, GroupListProps } from "./data";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import { defaultGroupsData } from "../date";
+import { tabs, BtnSetType, GroupListProps } from "./data";
+import apiPaths from "@/constants/apiPaths";
 
 function GroupsList({ category }: GroupListProps) {
   const router = useRouter();
-  const handleCancelApply = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCancelApply = async (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log("取消加入揪團申請");
   };
-  const handleQuitGroup = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("退出揪團");
+  const handleQuitGroup = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const groupId = Number(e.currentTarget.value);
+    const apiParams: apiParamsType = {
+      apiPath: `${apiPaths["leave-group"]}/${groupId}`,
+      method: "POST",
+    };
+
+    const res = fetchApi(apiParams);
   };
   const pushToComment = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.value;
-    console.log("跳到評價頁面");
     router.push(`/user-center/group/${id}`);
   };
   const pushToManagement = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,10 +44,6 @@ function GroupsList({ category }: GroupListProps) {
   // 已結束 tab
   const isExpired = activeTab === "Expired";
 
-  console.log("isLeaderPage", isLeaderPage);
-  console.log("isMemberPage", isMemberPage);
-  console.log("isUpcoming", isUpcoming);
-
   // 取得 groupSet，根據角色分別抓對應的資料群
   const groupsSetData =
     useContext(DataContext)?.groupsData || defaultGroupsData;
@@ -51,12 +54,12 @@ function GroupsList({ category }: GroupListProps) {
   const btnSet: BtnSetType = {
     pending: {
       text: "取消申請",
-      func: handleQuitGroup,
+      func: handleCancelApply,
       disabled: false,
     },
     member: {
       text: "退出揪團",
-      func: handleCancelApply,
+      func: handleQuitGroup,
       disabled: false,
     },
     leader: {
@@ -140,7 +143,7 @@ function GroupsList({ category }: GroupListProps) {
       />
       <div className="mt-10 md:mt-4">
         <div className="w-full flex justify-between items-center gap-3 md:gap-2 p-2 mb-3 border-b-2 text-center font-semibold leading-[1.2] mdg:text-sm md:hidden">
-          <p className="w-[10%]">狀態</p>
+          <p className="w-[8%]">狀態</p>
           <p className="w-[20%]">名稱</p>
           <p className="w-[20%]">地點</p>
           <p className="w-[20%]">時間</p>

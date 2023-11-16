@@ -60,9 +60,9 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
   };
 
   const btnId = setBtn();
-  console.log("btnId", btnId);
+
   const btnDisabled = btnSet[btnId].disabled;
-  const btnOnClick = btnSet["leader"].func;
+  const btnOnClick = btnSet[btnId].func;
   const btnText = btnSet[btnId].text;
 
   const isStore = store !== null;
@@ -80,7 +80,7 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
       key={groupId}
       className="w-full flex justify-between items-center p-2 mb-3 bg-yellow-tint text-center text-sm"
     >
-      <p className="w-[10%] text-xs">
+      <p className="w-[8%] text-xs">
         <span className={`groupStatusDot ${statusStyle}`}>{statusText}</span>
       </p>
       <p className="w-[20%] truncate text-sm">
@@ -94,7 +94,7 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
       <p className="w-[10%]">
         {currentPeople}/{totalMemberNum}
       </p>
-      <div className="w-[10%]">
+      <div className="flex items-center w-[10%] min-h-[42px]">
         {!isCancel && (
           <Button
             type="button"
