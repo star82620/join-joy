@@ -5,6 +5,17 @@ export type ImgType = {
   alt: string;
 };
 
+// game
+// 這裡的 gameType 是小寫 t（from API）
+export type GameType = {
+  gameId: number;
+  gameType: string;
+  gameName: string;
+  version: string;
+  peopleNum: string;
+  qtu: number;
+};
+
 // AuthProvider
 export type AuthProviderProps = {
   children: ReactNode;

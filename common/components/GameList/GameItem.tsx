@@ -4,15 +4,28 @@ import { GameItemProps } from "./data";
 export default function GameItem({
   game,
   isReadOnly,
+  selectedGames,
   handleSelected,
 }: GameItemProps) {
   const { gameId, gameType, gameName, peopleNum, version, qtu } = game;
+
+  const a = selectedGames?.find((item) => {
+    return item.gameId === gameId;
+  });
+  const isDefaultChecked = a !== undefined;
+
   return (
     <li>
       <label className="flex justify-between md:gap-3 py-2 bg-white text-center md:text-sm">
         {!isReadOnly && (
           <div className="w-[10%]">
-            <input type="checkbox" name={gameId} onChange={handleSelected} />
+            <input
+              type="checkbox"
+              value={gameId}
+              data-gamename={gameName}
+              checked={isDefaultChecked}
+              onChange={handleSelected}
+            />
           </div>
         )}
         <div className="w-[20%] min-w-[52px]">
@@ -23,7 +36,9 @@ export default function GameItem({
         <div className="w-[50%] min-w-[120px] text-left">{gameName}</div>
         {isReadOnly && (
           <>
-            <div className="w-[30%] min-w-[84px]">{peopleNum}</div>
+            <div className="w-[30%] min-w-[84px] after:content-['人'] after:ml-1">
+              {peopleNum}
+            </div>
             <div className="w-[20%] min-w-[28px]">{version}</div>
           </>
         )}

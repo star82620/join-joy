@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { gamesData, SelectedGamesType, GameListProps } from "./data";
+import { SelectedGamesType, GameListProps } from "./data";
 import GameItem from "./GameItem";
-import EmptyResult from "./EmptyResult";
 
-export default function GameList({ category }: GameListProps) {
+export default function GameList({
+  category,
+  gamesData,
+  selectedGames,
+  setSelectedGames,
+}: GameListProps) {
   const isReadOnly = category === "view";
   const [renderData, setRenderData] = useState(gamesData);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
-  const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
+
   const isEmptyResult = renderData.length === 0;
+
+  useEffect(() => {
+    setRenderData(gamesData);
+  }, [gamesData]);
 
   // 得到 selectItems 類別篩選內容
   let selectItems: Array<string> = [];
@@ -19,19 +27,31 @@ export default function GameList({ category }: GameListProps) {
     selectItems.push(game.gameType);
   });
 
+  // 類別篩選
   const handleSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectType(e.target.value);
   };
 
+  // 關鍵字搜尋
   const handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
+  // 選擇
   const handleSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setSelectedGames([...selectedGames, e.target.name]);
+    const gameId = Number(e.target.value);
+    const gameName = e.target.dataset.gamename;
+    console.log("ffff", gameName);
+
+    if (!setSelectedGames || !selectedGames) return;
+
+    if (e.target.checked && gameName) {
+      setSelectedGames([
+        ...selectedGames,
+        { gameId: gameId, gameName: gameName },
+      ]);
     } else {
-      const index = selectedGames.findIndex((game) => game === e.target.name);
+      const index = selectedGames.findIndex((game) => game.gameId === gameId);
       const newData = [...selectedGames];
       newData.splice(index, 1);
       setSelectedGames(newData);
@@ -53,7 +73,7 @@ export default function GameList({ category }: GameListProps) {
   // ---------
 
   return (
-    <section className="flex flex-col justify-center items-center border">
+    <section className="flex flex-col justify-center items-center">
       <div
         className={`flex justify-between w-full pb-6 md:px-0  ${
           isReadOnly ? "px-14 pb-8 md:pb-6" : " bg-yellow-tint px-6 pb-2"
@@ -84,7 +104,7 @@ export default function GameList({ category }: GameListProps) {
       </div>
       <div className="w-full overflow-scroll">
         <div className="w-full bg-yellow-tint md:bg-transparent px-6 py-4 md:pt-0 md:px-1  md:min-w-[420px]">
-          <div className="flex justify-between md:gap-3 md:text-sm font-semibold leading-[1.2] text-center">
+          <div className="flex justify-between md:gap-3 pb-4 md:pb-2 md:text-sm font-semibold leading-[1.2] text-center border-b-2 border-gray-400 ">
             {!isReadOnly && <div className="w-[10%]"></div>}
             <div className="w-[20%] min-w-[52px]">類別</div>
             <div className="w-[50%] min-w-[120px] text-left">名稱</div>
@@ -96,16 +116,17 @@ export default function GameList({ category }: GameListProps) {
             {isReadOnly && <div className="w-[20%] min-w-[28px]">版本</div>}
             <div className="w-[20%] min-w-[28px]">數量</div>
           </div>
-          <ul className="border-t-2 border-gray-400 mt-4 pt-4 md:mt-2 md:pt-2">
+          <ul className="mt-4 md:mt-2 h-60 overflow-scroll">
             {renderData.map((game) => (
               <GameItem
                 key={game.gameId}
                 game={game}
                 isReadOnly={isReadOnly}
+                selectedGames={selectedGames}
                 handleSelected={handleSelected}
               />
             ))}
-            {isEmptyResult && <EmptyResult />}
+            {isEmptyResult && <li className="text-center">沒有符合的項目</li>}
           </ul>
         </div>
       </div>
