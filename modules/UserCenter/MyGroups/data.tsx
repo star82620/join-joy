@@ -7,7 +7,23 @@ export type BtnItemType = {
   disabled: boolean;
 };
 
-export type BtnSetType = Record<string, BtnItemType>;
+export type GroupStatusKeyType =
+  | "pending"
+  | "member"
+  | "opening"
+  | "reserved"
+  | "closed"
+  | "cancel";
+
+export type BtnTextType =
+  | "pending"
+  | "member"
+  | "leader"
+  | "closed"
+  | "commented"
+  | "cancel";
+
+export type BtnSetType = Record<BtnTextType, BtnItemType>;
 
 export type GroupListProps = {
   category: "leader" | "member";

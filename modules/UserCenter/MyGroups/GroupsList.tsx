@@ -73,6 +73,10 @@ function GroupsList({ category }: GroupListProps) {
       text: "已評價",
       disabled: true,
     },
+    cancel: {
+      text: "",
+      disabled: true,
+    },
   };
 
   const setBtnTitle = () => {
@@ -109,14 +113,20 @@ function GroupsList({ category }: GroupListProps) {
     const { endTime, groupStatus, memberStatus } = group;
     const status = setGroupStatus(endTime, groupStatus, memberStatus);
     const isClosed = status === "closed";
+    const now = new Date();
+    const today = now.toISOString();
+    const isExpiredGroup = endTime < today;
 
     if (isUpcoming) {
-      if (!isClosed) return true;
-      return false;
-    } else {
-      if (isClosed) return true;
-      return false;
+      if (isExpiredGroup) return false;
+      if (isClosed) return false;
+      return true;
     }
+
+    if (isExpiredGroup) return true;
+    if (isClosed) return true;
+
+    return false;
   });
 
   const isEmptyList = filteredData.length === 0;

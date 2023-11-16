@@ -5,9 +5,9 @@ import formatGroupDate from "@/common/helpers/formateDate";
 import statusSet from "@/constants/groupStatusSet";
 import setGroupStatus from "./setGroupStatus";
 import { DataContext } from "@/pages/user-center";
-import { GroupItemProps } from "./data";
-import { StatusType } from "@/constants/globalTypes";
+import { BtnTextType, GroupItemProps, GroupStatusKeyType } from "./data";
 import { defaultGroupRatingsSet } from "../date";
+import { MemberStatusType } from "@/constants/globalTypes";
 
 function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
   const groupRatingsSet =
@@ -22,39 +22,48 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
     currentPeople,
     startTime,
     endTime,
-    status,
+    groupStatus,
+    memberStatus,
   } = group;
 
   // 從整包的 groupRatingsSet 裡面找到符合的 groupRating
   const [groupRating] = groupRatingsSet.filter((item) => item.id === groupId);
 
+  // 如果有撈到 isAllRates
   const isCommented = groupRating.data?.isAllRated ?? false;
 
-  const isCancel = status === "已失效";
+  const status = setGroupStatus(endTime, groupStatus, memberStatus);
+  const statusStyle = statusSet[status].style;
+  const statusText = statusSet[status].text;
 
-  const groupStatus = setGroupStatus(endTime, status);
-  const statusStyle = statusSet[groupStatus].style;
-  const statusText = statusSet[groupStatus].text;
+  const isCancel = status === "cancel" || status === "reserved";
 
   // 抓取對應的按鈕
   const setBtn = () => {
-    // 如果狀態是已結束，查看是否有評價
-    // 如果不是已結束，那就用 setGroupList 的結果去搜
-    if (groupStatus === "closed") {
-      if (isCommented) {
-      }
+    const isLeader = memberStatus === "leader";
+
+    if (status === "cancel") return "cancel";
+
+    if (status === "closed") {
+      if (isCommented) return "commented";
+      return "closed";
     }
 
-    if (!isExpired) return status;
-    if (isExpired && !!isCommented) return "commented";
-    return "closed";
+    if (status === "reserved") {
+      if (isLeader) return "leader";
+      return "cancel";
+    }
+
+    if (status === "opening") return "leader";
+
+    return status;
   };
 
-  // const btnId = setBtn();
-  // console.log("btnId", btnId);
-  // const btnDisabled = btnSet[btnId].disabled;
+  const btnId = setBtn();
+  console.log("btnId", btnId);
+  const btnDisabled = btnSet[btnId].disabled;
   const btnOnClick = btnSet["leader"].func;
-  // const btnText = btnSet[btnId].text;
+  const btnText = btnSet[btnId].text;
 
   const isStore = store !== null;
   const location = isStore ? store.storeName : place;
@@ -93,11 +102,10 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
             rounded
             className="w-full"
             value={groupIdString}
-            // isDisabled={btnDisabled}
+            isDisabled={btnDisabled}
             onClick={btnOnClick}
           >
-            <span data-id={groupId}>fff</span>
-            {/* <span className="text-sm">{btnText}</span> */}
+            <span className="text-sm">{btnText}</span>
           </Button>
         )}
       </div>
