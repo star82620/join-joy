@@ -15,6 +15,7 @@ export default function GameList({
   const [renderData, setRenderData] = useState(gamesData);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
+  const [isFull, setIsFull] = useState(false);
 
   const isEmptyResult = renderData.length === 0;
 
@@ -42,23 +43,31 @@ export default function GameList({
 
   // 選擇
   const handleSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const gameId = Number(e.target.value);
+    const selectedGameId = parseInt(e.target.value);
     const gameName = e.target.dataset.gamename;
-    console.log("ffff", gameName);
+    const isSelected = e.target.checked;
 
     if (!setSelectedGames || !selectedGames) return;
 
-    if (e.target.checked && gameName) {
-      if (selectedGames.length > 5) return;
+    if (isSelected && selectedGames.length === 5) {
+      e.preventDefault();
+      setIsFull(true);
+      return;
+    } else {
+      setIsFull(false);
+    }
+
+    if (isSelected) {
+      if (!gameName) return;
       setSelectedGames([
         ...selectedGames,
-        { gameId: gameId, gameName: gameName },
+        { gameId: selectedGameId, gameName: gameName },
       ]);
     } else {
-      const index = selectedGames.findIndex((game) => game.gameId === gameId);
-      const newData = [...selectedGames];
-      newData.splice(index, 1);
-      setSelectedGames(newData);
+      const updatedSelectedGames = selectedGames.filter(
+        (item) => item.gameId !== selectedGameId
+      );
+      setSelectedGames(updatedSelectedGames);
     }
   };
 
@@ -97,6 +106,7 @@ export default function GameList({
               </div>
             );
           })}
+          {isFull && <span className="text-danger">最多選擇五款 (=´ω`=)</span>}
           {isGamesEmpty && <p>請在下列表單選擇預計要玩的遊戲</p>}
         </div>
       )}
