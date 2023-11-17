@@ -1,14 +1,14 @@
 import React, { Children, ReactNode } from "react";
-import { InputBlockProps } from "./data";
+import { TitleBlockProps } from "./data";
 
-export default function InputBlock({
+export default function TitleBlock({
   title,
   titleStyle,
   description,
   direction,
   require,
   children,
-}: InputBlockProps) {
+}: TitleBlockProps) {
   const checkDirection = () => {
     const isCol = direction === "col";
     if (!description) return;

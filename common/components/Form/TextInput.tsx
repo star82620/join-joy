@@ -2,58 +2,41 @@ import React from "react";
 import { TextInputProps } from "./data";
 
 export default function TextInput({
-  id,
-  inputName,
-  placeholder,
-  value,
-  onChange,
-  required,
-  disabled,
+  textInputParams,
+  isInputErrors,
 }: TextInputProps) {
+  const {
+    id,
+    type,
+    inputName,
+    placeholder,
+    value,
+    onChange,
+    required,
+    disabled,
+    errorMsg,
+  } = textInputParams;
+  const isEmpty = value.length === 0;
+  const isError = required && isEmpty;
+  const errorStyle = isError ? "border-danger" : "";
   return (
-    <input
-      type="text"
-      className="inputStyle"
-      id={id}
-      name={inputName}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={required}
-      disabled={disabled}
-    />
+    <>
+      <input
+        type={type}
+        className={`inputStyle ${errorStyle}`}
+        id={id}
+        name={inputName}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        required={required}
+        disabled={disabled}
+      />
+      {isError && (
+        <p className="text-danger mt-2 md:mt-1 text-sm md:text-xs">
+          {errorMsg}
+        </p>
+      )}
+    </>
   );
 }
-
-// const Select = () => {
-//   return (
-//     <select
-//       className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-//       id={id}
-//       name=""
-//     >
-//       <option>daaa</option>
-//     </select>
-//   );
-// };
-
-// export default function TextInput({
-//   label,
-//   type,
-//   inputName,
-//   placeholder,
-//   required,
-//   errorMsg,
-// }) {
-//   return (
-//     <>
-//       <input
-//         className="w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-//         type={type}
-//         name={inputName}
-//         placeholder={placeholder}
-//       ></input>
-//       ;
-//     </>
-//   );
-// }

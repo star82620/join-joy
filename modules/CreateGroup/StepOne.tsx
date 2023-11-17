@@ -1,8 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
+import Image from "@/common/components/FillImage";
+import icons from "@/constants/iconsPackage/createGroupIcons";
+import TitleBlock from "@/common/components/Form/TitleBlock";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import InputBlock from "./InputBlock";
 import { StepContext, ValuesContext } from "./index";
 import apiPaths from "@/constants/apiPaths";
 import {
@@ -12,9 +14,24 @@ import {
   HandleInputValueType,
   HandleSelectedNumType,
   HandleSelectedTimeType,
+  PlaceInputProps,
 } from "./data";
-import FillImage from "@/common/components/FillImage";
-import icons from "@/constants/iconsPackage/createGroupIcons";
+import TextInput from "@/common/components/Form/TextInput";
+import { TextInputParamsType } from "@/common/components/Form/data";
+
+// 輸入自行輸入地點 input
+const PlaceInput = ({ place, handleInputValue }: PlaceInputProps) => {
+  const textInputParams: Record<string, TextInputParamsType> = {
+    place: {
+      type: "text",
+      inputName: "place",
+      value: place,
+      onChange: handleInputValue,
+      placeholder: "請選擇輸入詳細地址",
+    },
+  };
+  return <TextInput textInputParams={textInputParams.place} />;
+};
 
 export default function StepOne({ citiesData }: StepOneProps) {
   const stepContext = useContext(StepContext);
@@ -26,55 +43,61 @@ export default function StepOne({ citiesData }: StepOneProps) {
   // API 來的店家資料，需要先選擇地點才會拿到
   const [storesData, setStoresData] = useState<StoreDataType>(defaultStoreData);
 
+  const { locationKind, date, city, storeId, place, startTime, endTime } =
+    values;
+  const { stores, remainingSeats, acceptedNum } = storesData;
+
   console.log("storesData", storesData);
 
-  const isPlace = values.locationKind === "place";
-  const isStore = values.locationKind === "store";
-  const formattedDate = values.date.replaceAll("-", "/");
-  const cityId = values.city.cityId;
+  const isStore = locationKind === "store";
+  const formattedDate = date.replaceAll("-", "/");
+  const cityId = city.cityId;
 
   // 取得店家列表
-  const getCityStores = async () => {
-    const storesKey: apiParamsType = {
-      apiPath: `${apiPaths.getCityStores}?city=${cityId}`,
-      method: "GET",
+  useEffect(() => {
+    const getCityStores = async () => {
+      const isStore = locationKind === "store";
+
+      const storesKey: apiParamsType = {
+        apiPath: `${apiPaths.getCityStores}?city=${cityId}`,
+        method: "GET",
+      };
+
+      if (isStore && cityId) {
+        const res = await fetchApi(storesKey);
+        const data = res.data ? res.data.matchedStores : [];
+        setStoresData((prevStep) => ({ ...prevStep, stores: data }));
+      }
     };
 
-    if (isStore && cityId) {
-      const res = await fetchApi(storesKey);
-      const data = res.data ? res.data.matchedStores : [];
-      setStoresData((prevStep) => ({ ...prevStep, stores: data }));
-    }
-  };
-
-  useEffect(() => {
     getCityStores();
-  }, [cityId, values.locationKind]);
+  }, [locationKind, cityId]);
 
+  // 如果城市或店家有變，將日期歸零
   useEffect(() => {
     setValues((prevState) => ({ ...prevState, date: "" }));
-  }, [cityId, values.storeId]);
+  }, [cityId, storeId]);
 
   // 取得指定日期的剩餘座位
-  const getRemainingSeats = async () => {
-    const remainingSeatsKey: apiParamsType = {
-      apiPath: `${apiPaths.getRemainingSeats}/${values.storeId}/${values.date}`,
-      method: "GET",
+  useEffect(() => {
+    const getRemainingSeats = async () => {
+      const isStore = locationKind === "store";
+
+      const remainingSeatsKey: apiParamsType = {
+        apiPath: `${apiPaths.getRemainingSeats}/${storeId}/${date}`,
+        method: "GET",
+      };
+
+      if (isStore && !!storeId && !!date) {
+        const res = await fetchApi(remainingSeatsKey);
+        const data = res?.data;
+        if (!data) return;
+        setStoresData((prevStep) => ({ ...prevStep, remainingSeats: data }));
+      }
     };
 
-    if (isStore && !!values.storeId && !!values.date) {
-      const res = await fetchApi(remainingSeatsKey);
-      const data = res?.data;
-      if (!data) return;
-      setStoresData((prevStep) => ({ ...prevStep, remainingSeats: data }));
-    }
-  };
-
-  useEffect(() => {
     getRemainingSeats();
-  }, [cityId, values.locationKind, values.date]);
-
-  const { stores, remainingSeats, acceptedNum } = storesData;
+  }, [locationKind, cityId, storeId, date]);
 
   // 換頁按鈕
   const handleBtnOne = () => {
@@ -102,21 +125,21 @@ export default function StepOne({ citiesData }: StepOneProps) {
     }));
   };
 
-  // 選擇店家 id
-  const handleSelectedNum: HandleSelectedNumType = async (e) => {
+  // 選擇店家 id => 數字
+  const handleSelectedNum: HandleSelectedNumType = (e) => {
     const inputName = e.target.name;
     const value = Number(e.target.value);
     setValues((prevState) => ({ ...prevState, [inputName]: value }));
   };
 
-  // 選擇時間
+  // 選擇時間 => string
   const handleSelectedTime: HandleSelectedTimeType = (e) => {
     const inputName = e.target.name;
     const value = e.target.value;
     setValues((prevState) => ({ ...prevState, [inputName]: value }));
   };
 
-  // 輸入店家
+  // 輸入店家 input
   const StoreSelector = () => {
     const isEmpty = stores.length === 0;
     const defaultText =
@@ -127,7 +150,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
       <select
         className="inputStyle h-10"
         name="storeId"
-        value={values.storeId}
+        value={storeId}
         onChange={handleSelectedNum}
       >
         <option value="">{defaultText}</option>
@@ -143,25 +166,11 @@ export default function StepOne({ citiesData }: StepOneProps) {
     );
   };
 
-  // 輸入自行輸入地點
-  const PlaceInput = () => {
-    return (
-      <input
-        type="text"
-        className="inputStyle h-10"
-        name="place"
-        value={values.place}
-        onChange={handleInputValue}
-        placeholder="請選擇輸入詳細地址"
-      />
-    );
-  };
-
-  //
+  //時數人數提示
   const TotalHours = () => {
-    const startTime = Number(values.startTime.split(":")[0]);
-    const endTime = Number(values.endTime.split(":")[0]);
-    const hours = endTime - startTime;
+    const formattedStartTime = Number(startTime.split(":")[0]);
+    const formattedEndTime = Number(endTime.split(":")[0]);
+    const hours = formattedEndTime - formattedStartTime;
     const acceptedNum = storesData.acceptedNum;
     return (
       <p className="text-sm text-gray-500 mt-2">
@@ -171,42 +180,43 @@ export default function StepOne({ citiesData }: StepOneProps) {
   };
 
   // 可接受的人數
-  const maxAcceptedNum = 12;
-  const countAcceptedNum = () => {
-    // 轉換時間格式為可以比較的數字
-    const convertTimeToNumber = (time: string) => {
-      const [hours, minutes] = time.split(":").map(Number);
-      return hours * 60 + minutes;
-    };
-
-    const times = remainingSeats;
-    const { startTime, endTime } = values;
-    const startTimeNumber = convertTimeToNumber(startTime);
-    const endTimeNumber = convertTimeToNumber(endTime);
-
-    // 篩選落在這個範圍的時間
-    const filteredTimes = times.filter((item) => {
-      const [itemStart, itemEnd] = item.time
-        .split("~")
-        .map(convertTimeToNumber);
-      return itemStart >= startTimeNumber && itemEnd <= endTimeNumber;
-    });
-    const allSeatsNum = filteredTimes.map((item) => item.seats);
-    const minSeatsNum = allSeatsNum.sort((a, b) => a - b)[0];
-
-    if (minSeatsNum > maxAcceptedNum) return maxAcceptedNum;
-    return minSeatsNum;
-  };
-
   useEffect(() => {
+    const countAcceptedNum = () => {
+      const maxAcceptedNum = 12;
+      // 轉換時間格式為可以比較的數字
+      const convertTimeToNumber = (time: string) => {
+        const [hours, minutes] = time.split(":").map(Number);
+        return hours * 60 + minutes;
+      };
+
+      const times = remainingSeats;
+      const startTimeNumber = convertTimeToNumber(startTime);
+      const endTimeNumber = convertTimeToNumber(endTime);
+
+      // 篩選落在這個範圍的時間
+      const filteredTimes = times.filter((item) => {
+        const [itemStart, itemEnd] = item.time
+          .split("~")
+          .map(convertTimeToNumber);
+        const result = itemStart >= startTimeNumber && itemEnd <= endTimeNumber;
+        return result;
+      });
+
+      const allSeatsNum = filteredTimes.map((item) => item.seats);
+      const [minSeatsNum] = allSeatsNum.sort((a, b) => a - b);
+
+      if (minSeatsNum > maxAcceptedNum) return maxAcceptedNum;
+      return minSeatsNum;
+    };
     setStoresData((prevState) => ({
       ...prevState,
       acceptedNum: countAcceptedNum(),
     }));
-  }, [values.startTime, values.endTime]);
+  }, [startTime, endTime, remainingSeats]);
 
   const [remainingBlockHidden, setRemainingBlockHidden] =
     useState<boolean>(false);
+
   const toggleIcon = remainingBlockHidden ? "arrow-down" : "arrow-up";
 
   const toggleRemainingBlock = () => {
@@ -218,25 +228,25 @@ export default function StepOne({ citiesData }: StepOneProps) {
       <section className="flex flex-col w-full gap-10">
         {/* 揪團主旨 */}
         <label>
-          <InputBlock title={"揪團主旨"} require={true}>
+          <TitleBlock title={"揪團主旨"} require={true}>
+            <TextInput />
             <input
               type="text"
-              placeholder="請幫你的揪團取一個酷酷的名字！"
+              placeholder="幫你的揪團取一個酷酷的名字吧！(๑•̀ㅂ•́)و✧"
               className="inputStyle"
               name="groupName"
               value={values.groupName}
               onChange={handleInputValue}
             />
-          </InputBlock>
+          </TitleBlock>
         </label>
 
-        <InputBlock
+        <TitleBlock
           title="地點"
           description="（揪團成立後不可更改）"
           direction="row"
           require={true}
         >
-          {/* 用於辨識是否要選擇店家、 */}
           <div className="mt-3">
             <label>
               <input
@@ -280,13 +290,17 @@ export default function StepOne({ citiesData }: StepOneProps) {
               })}
             </select>
             {/* 店家的選項必須先選城市才會出現 */}
-            {isPlace ? <PlaceInput /> : <StoreSelector />}
+            {isStore ? (
+              <StoreSelector />
+            ) : (
+              <PlaceInput place={place} handleInputValue={handleInputValue} />
+            )}
           </div>
-        </InputBlock>
+        </TitleBlock>
 
         {/* 可怕的行事曆來了 */}
         <label>
-          <InputBlock
+          <TitleBlock
             title="日期"
             description="（揪團成立後不可更改）"
             direction="row"
@@ -304,7 +318,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
               <option value="2023-11-20">2023-11-20</option>
               <option value="2023-12-01">2023-12-01</option>
             </datalist>
-          </InputBlock>
+          </TitleBlock>
         </label>
 
         {isStore && values.date && (
@@ -312,7 +326,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
             <h3 className="px-3 relative" onClick={toggleRemainingBlock}>
               {formattedDate} 各時段可預約人數
               <span className="absolute top-0 right-3">
-                <FillImage
+                <Image
                   src={icons[toggleIcon].src}
                   alt={icons[toggleIcon].alt}
                   widthProp="w-6 md:w-5"
@@ -340,7 +354,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           </div>
         )}
 
-        <InputBlock
+        <TitleBlock
           title="遊戲時段"
           description="（揪團成立後不可更改）"
           direction="row"
@@ -397,11 +411,11 @@ export default function StepOne({ citiesData }: StepOneProps) {
           </div>
           {/* 店家才有這條錢錢 */}
           {values.startTime && values.endTime && <TotalHours />}
-        </InputBlock>
+        </TitleBlock>
 
         {/* 下拉式選單：totalNum */}
         <label>
-          <InputBlock title="預計揪團人數" require={true}>
+          <TitleBlock title="預計揪團人數" require={true}>
             <select
               className="inputStyle"
               name="totalMemberNum"
@@ -425,12 +439,12 @@ export default function StepOne({ citiesData }: StepOneProps) {
                   );
                 })}
             </select>
-          </InputBlock>
+          </TitleBlock>
         </label>
 
         {/* 下拉式選單： */}
         <label>
-          <InputBlock
+          <TitleBlock
             title="內建人數"
             description="（包含自己）"
             direction="row"
@@ -454,7 +468,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
                   );
                 })}
             </select>
-          </InputBlock>
+          </TitleBlock>
         </label>
         <div className="mt-6 flex flex-col justify-center items-center gap-4">
           <Button

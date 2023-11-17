@@ -1,4 +1,6 @@
-export const groupTags = [
+import { GroupTagItemType } from "./globalTypes";
+
+export const groupTags: GroupTagItemType[] = [
   { id: "beginnerTag", text: "新手團" },
   { id: "expertTag", text: "老手團" },
   { id: "practiceTag", text: "經驗切磋" },

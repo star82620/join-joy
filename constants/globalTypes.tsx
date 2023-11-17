@@ -52,3 +52,15 @@ export type GameType = {
   peopleNum: string;
   qtu: number;
 };
+
+// GroupTagSelector
+export type GroupTagIdType =
+  | "beginnerTag"
+  | "expertTag"
+  | "practiceTag"
+  | "openTag"
+  | "tutorialTag"
+  | "casualTag"
+  | "competitiveTag";
+
+export type GroupTagItemType = { id: GroupTagIdType; text: string };

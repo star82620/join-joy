@@ -57,7 +57,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
       totalMemberNum,
       initNum,
       description,
-      seletedPrivate,
+      groupPrivacy,
     } = values;
 
     const formattedStartTime = convertToISO(date, startTime);
@@ -67,7 +67,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
 
     const setPlace = isHomeGroup ? `${cityName}${place}` : null;
     const setStoreId = !isHomeGroup ? storeId : null;
-    const isPrivate = seletedPrivate === "private";
+    const isPrivate = groupPrivacy === "private";
 
     const formattedGames = selectedGames.reduce(
       (games, game: SelectedGameType) => {

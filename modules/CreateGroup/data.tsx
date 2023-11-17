@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from "react";
 import { SelectedGamesType } from "@/common/components/GameList/data";
 import { GameType, StoreType } from "@/constants/globalTypes";
+import { OptionItemType } from "@/common/components/Form/data";
 
 // page
 export type CityDataType = {
@@ -53,7 +54,7 @@ export type ValuesType = {
   totalMemberNum: number;
   initNum: number;
   description: string;
-  seletedPrivate: string;
+  groupPrivacy: string;
 };
 
 export type PostValuesType = {
@@ -77,16 +78,6 @@ export type PostValuesType = {
   competitiveTag: boolean;
 };
 
-// InputBlock
-export type InputBlockProps = {
-  title: string;
-  titleStyle?: string;
-  description?: string;
-  direction?: "row" | "col";
-  require?: boolean;
-  children: ReactNode;
-};
-
 // StepOne
 export type StepOneProps = {
   citiesData: CitiesDataType;
@@ -103,28 +94,26 @@ export type StoreDataType = {
   acceptedNum: number;
 };
 
-export type HandleInputValueType = ChangeEventHandler;
+export type HandleInputValueType = ChangeEventHandler<HTMLInputElement>;
 
-export type HandleSelectedNumType = ChangeEventHandler;
+export type HandleSelectedNumType = ChangeEventHandler<HTMLSelectElement>;
 
-export type HandleSelectedTimeType = ChangeEventHandler;
+export type HandleSelectedTimeType = ChangeEventHandler<HTMLSelectElement>;
+
+export type PlaceInputProps = {
+  place: ValuesType["place"];
+  handleInputValue: HandleInputValueType;
+};
 
 // StepTwo
 export type GameItemType = GameType;
 
 export type GamesDataType = GameItemType[];
 
-export type OptionType = {
-  content: string;
-  name: string;
-  value: string;
-  checked?: boolean;
-};
-
 export type QuestionType = {
   title: string;
   description: string;
-  options: OptionType[];
+  options: OptionItemType[];
 };
 
 type QuestionsWithRadioType = QuestionType[];
@@ -133,9 +122,10 @@ export type InputRadioProps = QuestionType & {
   onChange: ChangeEventHandler;
 };
 
-export type HandlePrivateGroupType = ChangeEventHandler;
+export type HandlePrivateGroupType = ChangeEventHandler<HTMLInputElement>;
 
-export type HandlePDescriptionValueType = ChangeEventHandler;
+export type HandlePDescriptionValueType =
+  ChangeEventHandler<HTMLTextAreaElement>;
 
 export type HandleSelectedTag = MouseEventHandler;
 
@@ -167,7 +157,7 @@ export const defaultValues: ValuesType = {
   totalMemberNum: 2,
   initNum: 1,
   description: "",
-  seletedPrivate: "public",
+  groupPrivacy: "public",
 };
 
 export const questionsWithRadio: QuestionsWithRadioType = [
@@ -175,8 +165,8 @@ export const questionsWithRadio: QuestionsWithRadioType = [
     title: "本次開團是否設為『非公開』揪團？",
     description: "僅接受獲得連結的團員加入，不會在平台被找到",
     options: [
-      { content: "公開", name: "groupPrivacy", value: "public", checked: true },
-      { content: "非公開", name: "groupPrivacy", value: "private" },
+      { text: "公開", name: "groupPrivacy", value: "public", checked: true },
+      { text: "非公開", name: "groupPrivacy", value: "private" },
     ],
   },
 ];
@@ -258,4 +248,9 @@ export const defaultStoreData: StoreDataType = {
 //   competitiveTag: false,
 // };
 
-// StepTwo
+// StepOne
+// const inputParamsSet = {
+//   groupName:{
+
+//   }
+// }

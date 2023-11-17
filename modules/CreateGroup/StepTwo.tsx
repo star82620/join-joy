@@ -3,9 +3,13 @@ import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-import InputBlock from "./InputBlock";
-import InputRadio from "./InputRadio";
 import { StepContext, ValuesContext } from "./index";
+import GameList from "@/common/components/GameList";
+import TitleBlock from "@/common/components/Form/TitleBlock";
+import RadioInput from "@/common/components/Form/RadioInput";
+import GroupTagSelector from "@/common/components/Form/GroupTagSelector";
+import TextArea from "@/common/components/Form/TextArea";
+import { TextAreaParamsType } from "@/common/components/Form/data";
 import {
   questionsWithRadio,
   GamesDataType,
@@ -15,11 +19,6 @@ import {
   ToggleTagsBlockType,
   StepTwoProps,
 } from "./data";
-import GameList from "@/common/components/GameList";
-
-import { groupTags } from "@/constants/wordsIndex";
-import FillImage from "@/common/components/FillImage";
-import icons from "@/constants/iconsPackage/createGroupIcons";
 
 export default function StepTwo({
   selectedGames,
@@ -35,63 +34,54 @@ export default function StepTwo({
 
   const isStore = values.locationKind === "store";
   const storeId = values.storeId;
-  const descriptionLength = values.description.length;
 
-  // 遊戲列表的資料
+  // 取得遊戲列表的資料
   const [gamesData, setGamesData] = useState<GamesDataType>([]);
 
   const isGamesEmpty = gamesData.length === 0;
 
-  const getGamesData = async () => {
-    const gamesKey: apiParamsType = {
-      apiPath: `${apiPaths.getGames}/${storeId}`,
-      method: "GET",
-    };
-    const res = await fetchApi(gamesKey);
-    const data = res.data ? res.data.gamelist : [];
-    setGamesData(data);
-  };
-
   useEffect(() => {
+    const getGamesData = async () => {
+      const gamesKey: apiParamsType = {
+        apiPath: `${apiPaths.getGames}/${storeId}`,
+        method: "GET",
+      };
+      const res = await fetchApi(gamesKey);
+      const data = res.data ? res.data.gamelist : [];
+      setGamesData(data);
+    };
+
     if (isStore && storeId) {
       getGamesData();
     }
   }, []);
 
+  // 上一頁
   const backPrev = () => {
     setActiveStep(1);
   };
 
-  // 儲存 input value
+  // 儲存 textArea value
   const handleDescriptionValue: HandlePDescriptionValueType = (e) => {
     setValues((prevState) => ({ ...prevState, description: e.target.value }));
   };
 
-  const [isTagsHidden, setIsTagsHidden] = useState<boolean>(true);
-
-  const isEmptySelectedTags = selectedTags.length === 0;
-  const toggleIcon = isTagsHidden ? "arrow-down" : "arrow-up";
-  const toggleTagsBlock: ToggleTagsBlockType = (e) => {
-    setIsTagsHidden(!isTagsHidden);
+  // 儲存 groupPrivacy value
+  const handlePrivateGroup: HandlePrivateGroupType = (e) => {
+    const inputName = e.target.name;
+    setValues((prevState) => ({
+      ...prevState,
+      [inputName]: e.target.value,
+    }));
   };
-  const handleSelectedTag: HandleSelectedTag = (e) => {
-    const { id, text } = e.currentTarget.dataset;
-    if (!id || !text) return;
-    const tagValue = { id, text };
 
-    const index = selectedTags.findIndex((item) => {
-      return item.id === id;
-    });
-
-    if (index < 0) {
-      setSelectedTags((prevState) => [...prevState, tagValue]);
-    }
-
-    if (index >= 0) {
-      const newValue = [...selectedTags];
-      newValue.splice(index, 1);
-      setSelectedTags(newValue);
-    }
+  const descriptionInputParams: TextAreaParamsType = {
+    inputName: "description",
+    value: values.description,
+    onChange: handleDescriptionValue,
+    maxLength: 100,
+    rows: 4,
+    placeholder: "如果需要特別標註的部分，請再寫下並讓團員知道！",
   };
 
   return (
@@ -99,7 +89,7 @@ export default function StepTwo({
       <section className="flex flex-col w-full gap-10">
         {isStore && (
           <label>
-            <InputBlock title="預計要玩的遊戲" titleStyle="block">
+            <TitleBlock title="預計要玩的遊戲" titleStyle="block">
               <p className="text-gray-500 text-sm font-semibold mt-1 md:text-xs">
                 最多5款，僅通知店家，實際以現場狀況為主
               </p>
@@ -125,89 +115,36 @@ export default function StepTwo({
                   setSelectedGames={setSelectedGames}
                 />
               </div>
-            </InputBlock>
+            </TitleBlock>
           </label>
         )}
-        <label>
-          <InputBlock title="揪團整體面向">
-            <div className="relative" onClick={(e) => toggleTagsBlock(e)}>
-              <div className="w-full h-10 inputStyle last:after:content-['']">
-                {isEmptySelectedTags && (
-                  <span className="text-gray-500">可複選</span>
-                )}
-                {selectedTags.map((tag, index, ary) => {
-                  const tagStyle =
-                    index !== ary.length - 1 ? "after:content-['、']" : "";
-                  return (
-                    <span
-                      key={tag.text}
-                      className={`before:content-['#'] ${tagStyle} `}
-                    >
-                      {tag.text}
-                    </span>
-                  );
-                })}
-              </div>
-              <span className="absolute top-2 right-3">
-                <FillImage
-                  src={icons[toggleIcon].src}
-                  alt={icons[toggleIcon].alt}
-                  widthProp="w-6 md:w-5"
-                  heightProp="h-6 md:h-5"
-                />
-              </span>
-              {!isTagsHidden && (
-                <div className="w-full bg-white py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm absolute left-0 top-10">
-                  {groupTags.map((tag) => (
-                    <p
-                      key={tag.id}
-                      className="p-2 hover:bg-gray-50"
-                      data-id={tag.id}
-                      data-text={tag.text}
-                      onClick={(e) => handleSelectedTag(e)}
-                    >
-                      #{tag.text}
-                    </p>
-                  ))}
-                </div>
-              )}
-            </div>
-          </InputBlock>
-        </label>
-        <label>
-          <section className="w-full">
-            <div className="flex justify-between items-end ">
-              <h3 className="text-lg font-semibold md:text-md">備註</h3>
-              <span className="text-sm md:text-xs">
-                {descriptionLength}/100
-              </span>
-            </div>
-            <textarea
-              className="w-full h-20 border-b-2 bg-yellow-tint mt-2 md:mt-1 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
-              name="description"
-              value={values.description}
-              onChange={handleDescriptionValue}
-              maxLength={100}
-              rows={4}
-              placeholder="如果需要特別標註的部分，請再寫下並讓團員知道！"
-            />
-          </section>
-        </label>
+        <GroupTagSelector
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+        />
+
+        <TextArea title="備註" textAreaParams={descriptionInputParams} />
+
         {questionsWithRadio.map((question, index) => {
-          const handlePrivateGroup: HandlePrivateGroupType = (e) => {
-            setValues((prevState) => ({
-              ...prevState,
-              seletedPrivate: e.target.value,
-            }));
-          };
+          const { title, description } = question;
           return (
-            <InputRadio
-              title={question.title}
-              description={question.description}
-              options={question.options}
+            <section
               key={index}
-              onChange={handlePrivateGroup}
-            />
+              className="flex justify-between gap-3 md:flex-col"
+            >
+              <div>
+                <h3 className="text-lg font-semibold md:text-sm">{title}</h3>
+                <p className="text-gray-500 text-sm font-semibold mt-1 md:text-xs">
+                  {description}
+                </p>
+              </div>
+              <div className="flex items-center gap-4 text-md font-semibold md:text-sm">
+                <RadioInput
+                  options={question.options}
+                  onChange={handlePrivateGroup}
+                />
+              </div>
+            </section>
           );
         })}
 
