@@ -66,6 +66,8 @@ const config: Config = {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
         window: "3px 2px 0 0 #504F4E",
+        "profile-img":
+          "2px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
       },
       backgroundImage: {
         "eye-hide": 'url("/images/input-password-hide.svg")',

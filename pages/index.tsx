@@ -4,6 +4,7 @@ import Link from "next/link";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import Layout from "@/common/components/Layout";
 import useLogout from "@/common/hooks/useLogout";
+import Landing from "@/modules/Landing";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,7 +16,10 @@ export default function Home() {
   return (
     <>
       <Layout pageCategory="landingpage">
-        <div>index</div>
+        <Landing />
+      </Layout>
+      <div>
+        index
         <ul>
           <li>
             <Link href="/create-group">我要開團</Link>
@@ -36,12 +40,11 @@ export default function Home() {
             <Link href="/group">揪團詳細頁（切版示範）</Link>
           </li>
         </ul>
-
         <div className=" max-w-[826px]">hi!{authData?.nickName}</div>
         <div className="p-4 border cursor-pointer" onClick={logout}>
           登出
         </div>
-      </Layout>
+      </div>
     </>
   );
 }

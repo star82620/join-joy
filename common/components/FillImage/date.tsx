@@ -3,4 +3,5 @@ export type FillImageProps = {
   alt: string;
   widthProp: string;
   heightProp: string;
+  rounded?: boolean;
 };
