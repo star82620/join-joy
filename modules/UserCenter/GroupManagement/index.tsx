@@ -3,7 +3,7 @@ import { GroupDataContext } from "@/pages/user-center/group/[id]";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import MemberCard from "./MemberCard";
 import Link from "@/common/components/GeneralLink";
-import ReserverInfo from "./ReserverInfo";
+import ReserveInfo from "./ReserveInfo";
 import GroupDetailForm from "./GroupDetailForm";
 import MemberList from "./MemberList";
 
@@ -46,7 +46,7 @@ export default function GroupManagement() {
     <section className="container flex md:flex-col gap-9 md:gap-4 pt-8 pb-15">
       <div className="flex flex-col gap-9 md:gap-4 grow">
         <ModalWrapper title="店家預約資訊" layout="primary">
-          <ReserverInfo />
+          <ReserveInfo />
         </ModalWrapper>
         <ModalWrapper title="編輯揪團詳細資訊" layout="primary">
           <GroupDetailForm />

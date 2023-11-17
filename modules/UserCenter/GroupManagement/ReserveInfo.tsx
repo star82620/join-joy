@@ -4,14 +4,28 @@ import Link from "@/common/components/GeneralLink";
 import titles from "@/constants/groupProfileTitles";
 import { GroupDataContext } from "@/pages/user-center/group/[id]";
 import TitleBlock from "./TitleBlock";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 
-// 送出預約
-const handleSubmitReserve = () => {};
-
-export default function ReserverInfo() {
+export default function ReserveInfo() {
   const dataContext = useContext(GroupDataContext);
-  const { groupData } = dataContext;
+  const { groupId, groupData } = dataContext;
   const { place, store, date, startTime, endTime, cost } = groupData;
+
+  const postReserve = async () => {
+    const apiParams: apiParamsType = {
+      apiPath: `${apiPaths["submitReserve"]}/${groupId}`,
+      method: "POST",
+    };
+    const res = await fetchApi(apiParams);
+  };
+
+  // 送出預約
+  const handleSubmitReserve = () => {
+    // 如果團員人數和總人數不符，要先改總人數
+    // 如果還有審核中人員， return
+    postReserve();
+  };
 
   const StoreLocation = () => (
     <>

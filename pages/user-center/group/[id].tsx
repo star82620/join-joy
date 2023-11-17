@@ -17,6 +17,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // 獲取 id
   const { id } = context.params as { id: string };
 
+  // 如果沒有 token => login
+  // 如果不是團主 => landingPage
+
   // 獲取該揪團資訊
   const groupApiParams: apiParamsType = {
     apiPath: `${apiPaths["getGroupInfo"]}/${id}`,

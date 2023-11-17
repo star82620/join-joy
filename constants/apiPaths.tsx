@@ -5,6 +5,7 @@ const apiPaths = {
   getGroupInfo: "/group/easydetail/",
   getGroupAllMember: "/group/joinList",
   getStoreGames: "/storeinfo/gamelist",
+  submitReserve: "/group/reservegroup",
 };
 
 export default apiPaths;

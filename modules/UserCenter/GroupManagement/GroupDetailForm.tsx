@@ -23,28 +23,5 @@ export default function GroupDetailForm() {
   const requiredStyle = "mb-1 after:content-['*'] after:text-danger";
   const titleStyle = "mb-1";
 
-  return (
-    <div className="flex flex-col gap-8 px-14 py-10 md:p-4">
-      <InputBlock title="揪團主旨" require>
-        <input type="text" className="inputStyle" value={values["groupName"]} />
-      </InputBlock>
-      <InputBlock
-        title="預計揪團人數"
-        description="（如有審核中的團員則不可變更）"
-        require
-      >
-        <input
-          type="text"
-          className="inputStyle"
-          // value={values["totalMemberNum"]}
-        />
-      </InputBlock>
-      <InputBlock title="預計要玩的遊戲">
-        <p className="mt-1 text-gray-500 font-semibold text-sm md:text-xs">
-          最多5款，僅通知店家，實際以現場狀況為主
-        </p>
-        {/* <GameList category="form"></GameList> */}
-      </InputBlock>
-    </div>
-  );
+  return <div className="flex flex-col gap-8 px-14 py-10 md:p-4"></div>;
 }
