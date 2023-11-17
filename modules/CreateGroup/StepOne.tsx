@@ -15,9 +15,13 @@ import {
   HandleSelectedNumType,
   HandleSelectedTimeType,
   PlaceInputProps,
+  locationOptions,
+  // inputParamsSet,
 } from "./data";
 import TextInput from "@/common/components/Form/TextInput";
 import { TextInputParamsType } from "@/common/components/Form/data";
+import SelectInput from "@/common/components/Form/SelectInput";
+import RadioInput from "@/common/components/Form/RadioInput";
 
 // 輸入自行輸入地點 input
 const PlaceInput = ({ place, handleInputValue }: PlaceInputProps) => {
@@ -112,19 +116,6 @@ export default function StepOne({ citiesData }: StepOneProps) {
     setValues((prevState) => ({ ...prevState, [inputName]: e.target.value }));
   };
 
-  // 選擇城市
-  const handleSelectedCity: HandleSelectedNumType = (e) => {
-    const inputName = e.target.name;
-    const cityId = Number(e.target.value);
-    const index = e.target.selectedIndex;
-    const cityName = e.target.options[index].text;
-
-    setValues((prevState) => ({
-      ...prevState,
-      [inputName]: { cityId, cityName },
-    }));
-  };
-
   // 選擇店家 id => 數字
   const handleSelectedNum: HandleSelectedNumType = (e) => {
     const inputName = e.target.name;
@@ -139,30 +130,60 @@ export default function StepOne({ citiesData }: StepOneProps) {
     setValues((prevState) => ({ ...prevState, [inputName]: value }));
   };
 
+  // 輸入城市
+  const CitySelector = () => {
+    // 選擇城市
+    const handleSelectedCity: HandleSelectedNumType = (e) => {
+      const inputName = e.target.name;
+      const cityId = Number(e.target.value);
+      const index = e.target.selectedIndex;
+      const cityName = e.target.options[index].text;
+
+      setValues((prevState) => ({
+        ...prevState,
+        [inputName]: { cityId, cityName },
+      }));
+    };
+
+    const formattedData = citiesData.map((city) => ({
+      value: city.Id.toString(),
+      text: city.CityName,
+    }));
+    return (
+      <div className="w-full">
+        <SelectInput
+          inputName="city"
+          options={formattedData}
+          onChange={handleSelectedCity}
+          defaultText="請選擇城市"
+          value={city.cityName}
+          required={true}
+        />
+      </div>
+    );
+  };
+
   // 輸入店家 input
   const StoreSelector = () => {
-    const isEmpty = stores.length === 0;
+    const formattedStores = stores.map((store) => ({
+      value: store.storeId.toString(),
+      text: store.storeName,
+    }));
+    const storeIdOptions = cityId ? formattedStores : [];
+    const isEmpty = storeIdOptions.length === 0;
     const defaultText =
-      !!cityId && isEmpty
-        ? "這個地區還沒有店家・゜・(PД`q｡)・゜・"
-        : "請選擇店家";
+      cityId && isEmpty ? "這個地區還沒有店家・゜・(PД`q｡)・゜・" : undefined;
+
     return (
-      <select
-        className="inputStyle h-10"
-        name="storeId"
-        value={storeId}
-        onChange={handleSelectedNum}
-      >
-        <option value="">{defaultText}</option>
-        {stores.map((store) => {
-          const { storeId, storeName } = store;
-          return (
-            <option key={storeId} value={storeId}>
-              {storeName}
-            </option>
-          );
-        })}
-      </select>
+      <div className="w-full">
+        <SelectInput
+          inputName="storeId"
+          value={storeId.toString()}
+          options={storeIdOptions}
+          onChange={handleSelectedNum}
+          defaultText={defaultText}
+        />
+      </div>
     );
   };
 
@@ -223,24 +244,25 @@ export default function StepOne({ citiesData }: StepOneProps) {
     setRemainingBlockHidden(!remainingBlockHidden);
   };
 
+  const groupNameInputParams: TextInputParamsType = {
+    type: "text",
+    inputName: "groupName",
+    value: values.groupName,
+    onChange: handleInputValue,
+    placeholder: "幫你的揪團取一個酷酷的名字吧！(๑•̀ㅂ•́)و✧",
+    required: true,
+  };
+
   return (
     <>
       <section className="flex flex-col w-full gap-10">
-        {/* 揪團主旨 */}
         <label>
-          <TitleBlock title={"揪團主旨"} require={true}>
-            <TextInput />
-            <input
-              type="text"
-              placeholder="幫你的揪團取一個酷酷的名字吧！(๑•̀ㅂ•́)و✧"
-              className="inputStyle"
-              name="groupName"
-              value={values.groupName}
-              onChange={handleInputValue}
-            />
+          <TitleBlock title="揪團主旨" require={true}>
+            <TextInput textInputParams={groupNameInputParams} />
           </TitleBlock>
         </label>
 
+        {/* 選擇城市、店家 or 輸入自填地點 */}
         <TitleBlock
           title="地點"
           description="（揪團成立後不可更改）"
@@ -248,47 +270,11 @@ export default function StepOne({ citiesData }: StepOneProps) {
           require={true}
         >
           <div className="mt-3">
-            <label>
-              <input
-                type="radio"
-                className="radioIcon"
-                name="locationKind"
-                value="store"
-                onChange={handleInputValue}
-                defaultChecked
-              />
-              <span className="ml-2">店家</span>
-            </label>
-            <label className="ml-4">
-              <input
-                type="radio"
-                className="radioIcon"
-                name="locationKind"
-                value="place"
-                onChange={handleInputValue}
-              />
-              <span className="ml-2">自行輸入</span>
-            </label>
+            <RadioInput options={locationOptions} onChange={handleInputValue} />
           </div>
-          {/* 選擇城市、店家 or 輸入自填地點 */}
           <div className="flex gap-3 md:flex-col">
             {/* 選擇城市 */}
-            <select
-              className="w-[45%] md:w-full h-10 inputStyle"
-              name="city"
-              onChange={handleSelectedCity}
-            >
-              <option value="">請選擇城市</option>
-              {citiesData.map((city) => {
-                const id = city.Id;
-                const cityName = city.CityName;
-                return (
-                  <option key={id} value={id}>
-                    {cityName}
-                  </option>
-                );
-              })}
-            </select>
+            <CitySelector />
             {/* 店家的選項必須先選城市才會出現 */}
             {isStore ? (
               <StoreSelector />
@@ -360,7 +346,6 @@ export default function StepOne({ citiesData }: StepOneProps) {
           direction="row"
           require={true}
         >
-          {/* 下拉式選單？？：time */}
           <div className="flex gap-4 mt-2">
             <label className="w-full">
               <h4>開始時間</h4>
@@ -409,11 +394,9 @@ export default function StepOne({ citiesData }: StepOneProps) {
               </select>
             </label>
           </div>
-          {/* 店家才有這條錢錢 */}
           {values.startTime && values.endTime && <TotalHours />}
         </TitleBlock>
 
-        {/* 下拉式選單：totalNum */}
         <label>
           <TitleBlock title="預計揪團人數" require={true}>
             <select

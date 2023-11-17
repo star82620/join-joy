@@ -7,7 +7,7 @@ export default function RadioInput({
   required,
   errorMsg,
   className,
-  isInputErrors,
+  isError,
 }: RadioInputProps) {
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -18,31 +18,35 @@ export default function RadioInput({
     }
   };
 
-  const isError = required && selectedValue === null;
+  // const isError = required && selectedValue === null;
 
   const errorText = errorMsg ?? defaultErrorText;
 
   return (
-    <div className={`flex justify-center items-center gap-4 ${className}`}>
-      {options.map((option) => {
-        const { name, value, text, checked } = option;
-        return (
-          <label key={value}>
-            <input
-              type="radio"
-              className="radioIcon mr-2"
-              name={name}
-              value={value}
-              defaultChecked={!!checked}
-              onChange={handleInputChange}
-              required={required}
-            />
-            {text}
-          </label>
-        );
-      })}
+    <div className="flex">
+      <div
+        className={`flex flex-wrap justify-end items-center gap-4 ${className}`}
+      >
+        {options.map((option) => {
+          const { inputName, value, text, checked } = option;
+          return (
+            <label key={value}>
+              <input
+                type="radio"
+                className="radioIcon mr-2"
+                name={inputName}
+                value={value}
+                defaultChecked={!!checked}
+                onChange={handleInputChange}
+                required={required}
+              />
+              {text}
+            </label>
+          );
+        })}
+      </div>
       {isError && (
-        <p className="text-danger mt-2 md:mt-1 text-sm md:text-xs">
+        <p className=" text-danger mt-2 md:mt-1 text-sm md:text-xs">
           {errorText}
         </p>
       )}

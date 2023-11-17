@@ -3,7 +3,7 @@ import { TextInputProps } from "./data";
 
 export default function TextInput({
   textInputParams,
-  isInputErrors,
+  isError,
 }: TextInputProps) {
   const {
     id,
@@ -16,9 +16,8 @@ export default function TextInput({
     disabled,
     errorMsg,
   } = textInputParams;
-  const isEmpty = value.length === 0;
-  const isError = required && isEmpty;
-  const errorStyle = isError ? "border-danger" : "";
+
+  const errorStyle = !!isError ? "border-danger" : "";
   return (
     <>
       <input

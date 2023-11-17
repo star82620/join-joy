@@ -52,8 +52,8 @@ export type IsInputErrorsType = Record<string, boolean>;
 
 // TextInput
 export type TextInputParamsType = {
-  inputName: string;
   type: "text" | "email" | "number";
+  inputName: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   id?: string;
@@ -66,13 +66,13 @@ export type TextInputParamsType = {
 
 export type TextInputProps = {
   textInputParams: TextInputParamsType;
-  isInputErrors?: IsInputErrorsType;
+  isError?: boolean;
 };
 
 // RadioInput
 export type OptionItemType = {
   text: string;
-  name: string;
+  inputName: string;
   value: string;
   checked?: boolean;
 };
@@ -83,7 +83,7 @@ export type RadioInputProps = {
   required?: boolean;
   errorMsg?: string;
   className?: string;
-  isInputErrors?: IsInputErrorsType;
+  isError?: boolean;
 };
 
 // TextArea
@@ -104,7 +104,26 @@ export type TextAreaParamsType = {
 export type TextAreaProps = {
   title: string;
   textAreaParams: TextAreaParamsType;
-  isInputErrors?: IsInputErrorsType;
+  isError?: boolean;
+};
+
+// SelectInput
+export type SelectOptionType = {
+  value: string;
+  text: string;
+  checked?: boolean;
+};
+
+export type SelectInputProps = {
+  inputName: string;
+  value: string;
+  options: SelectOptionType[];
+  onChange: ChangeEventHandler<HTMLSelectElement>;
+  defaultText?: string;
+  required?: boolean;
+  disabled?: boolean;
+  errorMsg?: string;
+  isError?: boolean;
 };
 
 // GroupTagSelector

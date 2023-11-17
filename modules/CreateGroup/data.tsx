@@ -160,17 +160,6 @@ export const defaultValues: ValuesType = {
   groupPrivacy: "public",
 };
 
-export const questionsWithRadio: QuestionsWithRadioType = [
-  {
-    title: "本次開團是否設為『非公開』揪團？",
-    description: "僅接受獲得連結的團員加入，不會在平台被找到",
-    options: [
-      { text: "公開", name: "groupPrivacy", value: "public", checked: true },
-      { text: "非公開", name: "groupPrivacy", value: "private" },
-    ],
-  },
-];
-
 export const defaultPostValues: PostValuesType = {
   groupName: "string",
   startTime: "2023-11-13T07:33:30.710Z",
@@ -199,58 +188,24 @@ export const defaultStoreData: StoreDataType = {
   acceptedNum: 0,
 };
 
-// -
+export const locationOptions: OptionItemType[] = [
+  { inputName: "locationKind", value: "store", text: "店家", checked: true },
+  { inputName: "locationKind", value: "place", text: "自行輸入" },
+];
 
-// export const textInputSet = {
-//   groupName: {
-//     inputName: "groupName",
-//     placeholder: "請幫你的揪團取一個酷酷的名字！",
-//     value: "",
-//     onChange: () => {},
-//     require: true,
-//   },
-//   date: {
-//     inputName: "groupName",
-//     placeholder: "請幫你的揪團取一個酷酷的名字！",
-//     value: "",
-//     onChange: () => {},
-//     require: true,
-//   },
-//   startTime: {
-//     inputName: "groupName",
-//     placeholder: "請幫你的揪團取一個酷酷的名字！",
-//     value: "",
-//     onChange: () => {},
-//     require: true,
-//   },
-//   endTime: {
-//     inputName: "groupName",
-//     placeholder: "請幫你的揪團取一個酷酷的名字！",
-//     value: "",
-//     onChange: () => {},
-//     require: true,
-//   },
-
-//   isHomeGroup: false,
-//   place: null,
-//   storeId: 0,
-//   totalMemberNum: 2,
-//   initNum: 1,
-//   description: "",
-//   isPrivate: false,
-//   GameIds: [],
-//   beginnerTag: false,
-//   expertTag: false,
-//   practiceTag: false,
-//   openTag: false,
-//   tutorialTag: false,
-//   casualTag: false,
-//   competitiveTag: false,
-// };
-
-// StepOne
-// const inputParamsSet = {
-//   groupName:{
-
-//   }
-// }
+// StepTwo
+export const questionsWithRadio: QuestionsWithRadioType = [
+  {
+    title: "本次開團是否設為『非公開』揪團？",
+    description: "僅接受獲得連結的團員加入，不會在平台被找到",
+    options: [
+      {
+        text: "公開",
+        inputName: "groupPrivacy",
+        value: "public",
+        checked: true,
+      },
+      { text: "非公開", inputName: "groupPrivacy", value: "private" },
+    ],
+  },
+];
