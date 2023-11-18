@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TitleBlock from "./TitleBlock";
 import Image from "../FillImage";
 import icons from "@/constants/iconsPackage/createGroupIcons";
+import { GroupTagItemType } from "@/constants/globalTypes";
 import { groupTags } from "@/constants/wordsIndex";
 import {
   GroupTagSelectorProps,
@@ -23,7 +24,8 @@ export default function GroupTagSelector({
   };
 
   const handleSelectedTag: HandleSelectedTagType = (e) => {
-    const { id, text } = e.currentTarget.dataset;
+    const { id, text } = e.currentTarget.dataset as GroupTagItemType;
+
     if (!id || !text) return;
     const tagValue = { id, text };
 
