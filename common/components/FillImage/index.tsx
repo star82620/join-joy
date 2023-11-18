@@ -11,7 +11,9 @@ export default function FillImage({
 }: FillImageProps) {
   const roundedStyle = !!rounded ? "rounded-full" : "";
   return (
-    <div className={`relative ${widthProp} ${heightProp} ${roundedStyle}`}>
+    <div
+      className={`relative flex-shrink-0 ${widthProp} ${heightProp} ${roundedStyle}`}
+    >
       <NextImage
         src={src}
         alt={alt}

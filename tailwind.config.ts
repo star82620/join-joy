@@ -22,6 +22,7 @@ const config: Config = {
       "yellow-tone": "#FFF4C6",
       "yellow-tint": "#FEFAF2",
       "yellow-dark": "#FAF2E2",
+
       // secondary-orange
       "orange-primary": "#FF8356",
       "orange-second": "#FFA584",
@@ -48,6 +49,9 @@ const config: Config = {
       "green-dark": "#3B956B",
       "purple-light": "#DD84FC",
       "purple-dark": "#9354A9",
+      "brown-light": "#C9B896",
+      "brown-dark": "#5F584A",
+
       danger: "#DD240B",
       white: "#FFFFFF",
       transparent: "transparent",

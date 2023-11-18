@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import Layout from "@/common/components/Layout";
 import useLogout from "@/common/hooks/useLogout";
-import Landing from "@/modules/Landing";
+import LandingPage from "@/modules/LandingPage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Layout pageCategory="landingpage">
-        <Landing />
+        <LandingPage />
       </Layout>
       <div>
         index
