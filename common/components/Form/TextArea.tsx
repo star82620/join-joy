@@ -1,11 +1,7 @@
 import React from "react";
 import { TextAreaProps, defaultErrorText } from "./data";
 
-export default function TextArea({
-  title,
-  textAreaParams,
-  isInputErrors,
-}: TextAreaProps) {
+export default function TextArea({ title, textAreaParams }: TextAreaProps) {
   const {
     maxLength,
     inputName,
