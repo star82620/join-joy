@@ -58,6 +58,14 @@ h6 {
   z-index: 9;
 }
 
+/* 隱藏滾動軸 */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 .container {
   @apply max-w-[1272px] mx-auto 
   px-12 md:px-6 sm:px-3;

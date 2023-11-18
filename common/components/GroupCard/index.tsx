@@ -37,7 +37,7 @@ export default function GroupCard({ data }) {
 
   return (
     <Link href={`/group/${groupId}`} className="no-underline">
-      <div className="w-full bg-yellow-tint shadow-btn rounded-md border-2 px-3 py-4">
+      <div className="w-full bg-yellow-tint shadow-btn rounded-md border-2 px-3 py-4 flex-shrink-0">
         <div className="flex justify-between">
           <h3 className="grow text-lg whitespace-nowrap text-ellipsis overflow-hidden">
             {groupName}

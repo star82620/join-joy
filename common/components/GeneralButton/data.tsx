@@ -62,4 +62,13 @@ export const dataSet = {
       "disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-400",
     textColor: "text-gray-50",
   },
+  brown: {
+    default: "bg-brown-dark border-gray-50",
+    hover: "hover:border-brown-light hover:text-brown-light",
+    active:
+      "active:bg-brown-light active:border-brown-light active:text-gray-50",
+    disabled:
+      "disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-400",
+    textColor: "text-gray-50",
+  },
 };
