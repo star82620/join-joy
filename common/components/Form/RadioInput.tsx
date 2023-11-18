@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, useState } from "react";
 import { RadioInputProps, defaultErrorText } from "./data";
 
 export default function RadioInput({
@@ -9,9 +9,9 @@ export default function RadioInput({
   className,
   isError,
 }: RadioInputProps) {
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
-  const handleInputChange = (e) => {
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSelectedValue(e.target.value);
     if (onChange) {
       onChange(e);
