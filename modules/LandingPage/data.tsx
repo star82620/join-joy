@@ -123,7 +123,7 @@ export const groupSet = [
           "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
       },
     ],
-    tags: ["老手團", "教學團"],
+    tags: ["不限定"],
   },
   {
     groupId: 22,

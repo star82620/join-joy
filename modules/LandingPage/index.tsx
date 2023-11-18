@@ -33,7 +33,7 @@ const CardsSection = ({
     ? "md:max-w-full"
     : "snap-start snap-normal scroll-ml-12 md:scroll-ml-6 sm:scroll-ml-3";
 
-  const storeCardStyle = "";
+  const storeCardStyle = "h-[360px]";
 
   const cardStyle = isStore ? storeCardStyle : groupCardStyle;
 
@@ -78,8 +78,9 @@ const CardsSection = ({
         )}
       </div>
       {/* 卡片列表 */}
-      <div className={`container flex h-[360px] ${listStyle}`}>
+      <div className={`container flex ${listStyle}`}>
         {cardsData.map((item) => {
+          // 卡片本人
           if (isStore) {
             return (
               <div
@@ -92,7 +93,6 @@ const CardsSection = ({
           }
 
           return (
-            // 卡片本人
             <div
               key={item.groupId}
               className={`w-full min-w-[284px] max-w-[284px] ${cardStyle}`}

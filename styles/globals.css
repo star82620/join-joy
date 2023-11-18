@@ -126,3 +126,8 @@ h6 {
 .groupStatusReserved {
   @apply before:bg-yellow-primary;
 }
+
+.aheadIcon {
+  @apply before:content-[''] before:bg-no-repeat before:align-middle before:mb-[0.2rem]
+  before:bg-center before:inline-block before:mr-1;
+}

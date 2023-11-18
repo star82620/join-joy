@@ -74,6 +74,7 @@ const config: Config = {
           "2px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
       },
       backgroundImage: {
+        // input
         "eye-hide": 'url("/images/input-password-hide.svg")',
         "eye-show": 'url("/images/input-password-show.svg")',
         "follow-true": 'url("/images/icon-check.svg")',
@@ -82,6 +83,11 @@ const config: Config = {
         "radio-false": 'url("/images/icon-radio-false.svg")',
         "checkbox-true": 'url("/images/icon-checkbox-true.svg")',
         "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
+        // group
+        "group-time": 'url("/images/group-card/icon-time.svg")',
+        "group-member": 'url("/images/group-card/icon-members.svg")',
+        "group-location": 'url("/images/group-card/icon-location.svg")',
+        "group-tag": 'url("/images/group-card/icon-tag.svg")',
       },
       backgroundSize: {
         "20px": "20px",
