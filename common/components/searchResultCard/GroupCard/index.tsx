@@ -1,9 +1,9 @@
 import React from "react";
-import Image from "../FillImage";
+import Image from "../../FillImage";
 import icons from "@/constants/iconsPackage/groupCardIcons";
-import Link from "../GeneralLink";
+import Link from "../../GeneralLink";
 import { defaultImages } from "@/constants/defaultImages";
-import GroupStatusSign from "../GroupStatusSign";
+import GroupStatusSign from "../../GroupStatusSign";
 
 export default function GroupCard({ data }) {
   const {

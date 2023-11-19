@@ -1,12 +1,12 @@
 import React from "react";
 import NextImage from "next/image";
-import ProfileImg from "../ProfileImg";
+import ProfileImg from "../../ProfileImg";
 
-import Image from "../FillImage";
+import Image from "../../FillImage";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { storeTagsIndex } from "@/constants/storeTagsIndex";
 import { storeIcons } from "@/constants/iconsPackage/storeIcons";
-import Link from "../GeneralLink";
+import Link from "../../GeneralLink";
 
 export default function StoreCard({ data }) {
   const {
