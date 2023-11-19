@@ -78,6 +78,7 @@ const config: Config = {
           "0px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
       },
       backgroundImage: {
+        "landing-banner-bg": 'url("/images/landing-page/bg-banner-notext.svg")',
         "brackets-start": 'url("/images/landing-page/icon-brackets-start.svg")',
         "brackets-end": 'url("/images/landing-page/icon-brackets-end.svg")',
         // input

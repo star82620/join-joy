@@ -3,11 +3,24 @@ import { commentSet, groupSet, storeSet } from "./data";
 import Image from "@/common/components/FillImage";
 import CardsSection from "./CardsSection";
 import CommentCard from "./CommentCard";
+import SearchBar from "./SearchBar";
 
 export default function LandingPage() {
   return (
-    <section className="">
-      <div className="container pb-[164px] md:pb-[120px]">search bar</div>
+    <section className="bg-landing-banner-bg bg-contain bg-no-repeat">
+      <div className="container flex flex-col items-center pt-11 md:pt-12 pb-[164px] md:pb-[120px]">
+        <div className="mb-10">
+          <Image
+            src="/images/landing-page/banner-slogan.svg"
+            alt="banner-slogan"
+            widthProp="w-[372px]"
+            heightProp="h-[190px]"
+          />
+        </div>
+        <div>
+          <SearchBar />
+        </div>
+      </div>
       {/* 卡片列表 */}
       <div className="bg-brown-dark pt-[72px] pb-[120px] md:pt-6 md:mb-8">
         <div className="flex flex-col gap-[96px] md:gap-6 bg-brown-dark">
