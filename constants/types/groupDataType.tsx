@@ -1,5 +1,7 @@
 // 來自搜尋揪團 API
 
+import { GroupStatusKeyType } from "../groupStatusSet";
+
 export type StoreType = {
   storeId: number;
   storeName: string;
@@ -18,7 +20,7 @@ export type UserType = {
   userName: string;
   status: MemberStatusType;
   initNum: number;
-  profileImg: string | null;
+  profileImg: null;
 };
 
 export type GroupTagType =
@@ -34,7 +36,7 @@ export type GroupDataType = {
   groupId: number;
   groupName: string;
   place: string | null;
-  groupStatus: string; // 之後要改成定義好的
+  groupStatus: GroupStatusKeyType; // 之後要改成定義好的
   isPrivate: boolean;
   isHomeGroup: boolean;
   store: StoreType | null;
