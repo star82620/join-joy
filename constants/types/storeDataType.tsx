@@ -9,8 +9,8 @@ export type StoreDataType = {
   storeId: number;
   storeName: string;
   address: string;
-  profileImg: string;
-  cover: string;
+  profileImg: string | null;
+  cover: string | null;
   openHours: string;
   score: number;
   description: string;

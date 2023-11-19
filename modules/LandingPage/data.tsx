@@ -10,15 +10,16 @@ export type CardsSectionProps = {
   cardsData: GroupDataType[] | StoreDataType[];
 };
 
-// ----data----
+// ----test data----
 
-export const groupSet = [
+export const groupSet: GroupDataType[] = [
   {
     groupId: 18,
     groupName: "咕咕咕咕",
     groupStatus: "已預約",
     place: null,
     isPrivate: false,
+    isHomeGroup: false,
     store: {
       storeId: 7,
       storeName: "天邊一隻鳩桌遊店",
@@ -27,21 +28,22 @@ export const groupSet = [
     date: "2023/12/01",
     startTime: "14:00",
     endTime: "17:00",
-    cost: "NT$35 元 / 每人每小時",
+    // cost: "NT$35 元 / 每人每小時",
     totalMemberNum: 5,
+    currentpeople: 2,
     games: [
       {
-        gameId: 3,
+        // gameId: 3,
         gameName: "獨家暗語",
         gameType: 2,
       },
       {
-        gameId: 10,
+        // gameId: 10,
         gameName: "璀璨寶石",
         gameType: 10,
       },
     ],
-    description: "咕咕咕咕",
+    // description: "咕咕咕咕",
     leader: {
       userId: 6,
       userName: "乃胖胖胖",
@@ -78,21 +80,23 @@ export const groupSet = [
     date: "2023/12/01",
     startTime: "12:00",
     endTime: "14:00",
-    cost: "",
+    // cost: "",
     totalMemberNum: 2,
+    currentpeople: 2,
+    isHomeGroup: false,
     games: [
       {
-        gameId: 5,
+        // gameId: 5,
         gameName: "阿瓦隆",
         gameType: 3,
       },
       {
-        gameId: 7,
+        // gameId: 7,
         gameName: "BANG!西部槍戰",
         gameType: 3,
       },
     ],
-    description: "ffff",
+    // description: "ffff",
     leader: {
       userId: 81,
       userName: "阿鳩鳩",
@@ -109,6 +113,7 @@ export const groupSet = [
     groupStatus: "開團中",
     place: null,
     isPrivate: false,
+    isHomeGroup: false,
     store: {
       storeId: 7,
       storeName: "天邊一隻鳩桌遊店",
@@ -117,21 +122,22 @@ export const groupSet = [
     date: "2023/12/01",
     startTime: "12:00",
     endTime: "14:00",
-    cost: "NT$35 元 / 每人每小時",
+    // cost: "NT$35 元 / 每人每小時",
     totalMemberNum: 6,
+    currentpeople: 3,
     games: [
       {
-        gameId: 5,
+        // gameId: 5,
         gameName: "阿瓦隆",
         gameType: 3,
       },
       {
-        gameId: 7,
+        // gameId: 7,
         gameName: "BANG!西部槍戰",
         gameType: 3,
       },
     ],
-    description: "ffff",
+    // description: "ffff",
     leader: {
       userId: 6,
       userName: "乃胖胖胖",
@@ -157,6 +163,7 @@ export const groupSet = [
     groupStatus: "開團中",
     place: null,
     isPrivate: false,
+    isHomeGroup: false,
     store: {
       storeId: 7,
       storeName: "六角學院桌遊店",
@@ -165,21 +172,22 @@ export const groupSet = [
     date: "2023/12/01",
     startTime: "12:00",
     endTime: "14:00",
-    cost: "NT$35 元 / 每人每小時",
+    // cost: "NT$35 元 / 每人每小時",
     totalMemberNum: 6,
+    currentpeople: 2,
     games: [
       {
-        gameId: 5,
+        // gameId: 5,
         gameName: "阿瓦隆",
         gameType: 3,
       },
       {
-        gameId: 7,
+        // gameId: 7,
         gameName: "BANG!西部槍戰",
         gameType: 3,
       },
     ],
-    description: "ffff",
+    // description: "ffff",
     leader: {
       userId: 6,
       userName: "乃胖胖胖",
@@ -201,7 +209,7 @@ export const groupSet = [
   },
 ];
 
-export const storeSet = [
+export const storeSet: StoreDataType[] = [
   {
     storeId: 3,
     storeName: "進來就要咕咕咕的店",
@@ -225,6 +233,9 @@ export const storeSet = [
     openHours: "12:00 - 20:00",
     score: 4.9375,
     tags: ["wifiTag"],
+    description: "",
+    hqTag: true,
+    popTag: true,
   },
   {
     storeId: 37,
@@ -236,5 +247,8 @@ export const storeSet = [
     openHours: "12:00 - 20:00",
     score: 4.9375,
     tags: ["wifiTag"],
+    description: "",
+    hqTag: true,
+    popTag: true,
   },
 ];
