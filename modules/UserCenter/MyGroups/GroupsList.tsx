@@ -11,9 +11,13 @@ import apiPaths from "@/constants/apiPaths";
 
 function GroupsList({ pageCategory }: GroupListProps) {
   const router = useRouter();
-  const handleCancelApply = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("取消加入揪團申請");
-  };
+
+  // 取消加入揪團申請
+  const handleCancelApply = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {};
+
+  // 退出揪團
   const handleQuitGroup = (e: React.MouseEvent<HTMLButtonElement>) => {
     const groupId = Number(e.currentTarget.value);
     const apiParams: apiParamsType = {
@@ -21,13 +25,19 @@ function GroupsList({ pageCategory }: GroupListProps) {
       method: "POST",
     };
 
-    const res = fetchApi(apiParams);
+    try{
+      const res = fetchApi(apiParams);
+
+    }
   };
-  const pushToComment = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+  const pushToCommentPage = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.value;
     router.push(`/user-center/group/${id}`);
   };
-  const pushToManagement = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const pushToManagementGroupPage = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     const id = e.currentTarget.value;
     router.push(`/user-center/group/${id}`);
   };
@@ -64,12 +74,12 @@ function GroupsList({ pageCategory }: GroupListProps) {
     },
     leader: {
       text: "管理",
-      func: pushToManagement,
+      func: pushToManagementGroupPage,
       disabled: false,
     },
     closed: {
       text: "評價",
-      func: pushToComment,
+      func: pushToCommentPage,
       disabled: false,
     },
     commented: {
@@ -114,7 +124,7 @@ function GroupsList({ pageCategory }: GroupListProps) {
   // 篩選要跑出來的列表內容
   const filteredData = groupsData.filter((group) => {
     const { endTime, groupStatus, memberStatus } = group;
-    const status = setGroupStatus(endTime, groupStatus, memberStatus);
+    const status = setGroupStatus(groupStatus, memberStatus);
     const isClosed = status === "closed";
     const now = new Date();
     const today = now.toISOString();
@@ -152,12 +162,7 @@ function GroupsList({ pageCategory }: GroupListProps) {
         </div>
         <ul>
           {filteredData.map((group) => (
-            <GroupItem
-              key={group.groupId}
-              group={group}
-              isExpired={isExpired}
-              btnSet={btnSet}
-            />
+            <GroupItem key={group.groupId} group={group} btnSet={btnSet} />
           ))}
           {isEmptyList && (
             <p className="text-center text-gray-600">目前沒有任何紀錄唷！</p>

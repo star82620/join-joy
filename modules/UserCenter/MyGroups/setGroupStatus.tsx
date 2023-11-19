@@ -2,12 +2,9 @@ import { GroupStatusType, MemberStatusType } from "@/constants/globalTypes";
 
 // 團的狀態 groupStatus
 export default function setGroupStatus(
-  endTime: string,
   groupStatus: GroupStatusType,
   memberStatus: MemberStatusType
 ) {
-  const now = new Date();
-  const today = now.toISOString();
   const isLeader = memberStatus === "leader";
   const isMember = memberStatus === "member";
 

@@ -32,7 +32,6 @@ export type GroupListProps = {
 // GroupItem
 export type GroupItemProps = {
   group: MyGroupsItemType;
-  isExpired: boolean;
   btnSet: BtnSetType;
 };
 
