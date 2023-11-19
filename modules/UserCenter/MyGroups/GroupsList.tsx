@@ -9,7 +9,7 @@ import { defaultGroupsData } from "../date";
 import { tabs, BtnSetType, GroupListProps } from "./data";
 import apiPaths from "@/constants/apiPaths";
 
-function GroupsList({ category }: GroupListProps) {
+function GroupsList({ pageCategory }: GroupListProps) {
   const router = useRouter();
   const handleCancelApply = async (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log("取消加入揪團申請");
@@ -36,9 +36,9 @@ function GroupsList({ category }: GroupListProps) {
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
   // 我開的揪團（團主）
-  const isLeaderPage = category === "leader";
+  const isLeaderPage = pageCategory === "leader";
   // 我加入的揪團（團員）
-  const isMemberPage = category === "member";
+  const isMemberPage = pageCategory === "member";
   // 尚未開始 tab
   const isUpcoming = activeTab === "upcoming";
   // 已結束 tab
