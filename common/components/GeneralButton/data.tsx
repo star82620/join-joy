@@ -2,7 +2,7 @@ import { MouseEventHandler, ReactNode } from "react";
 
 export type ButtonType = {
   type: "button" | "submit" | "reset";
-  appearance: "orange" | "yellow" | "white" | "black" | "gray";
+  appearance: "orange" | "yellow" | "white" | "black" | "gray" | "brown";
   children: ReactNode;
   onClick?: MouseEventHandler | undefined;
   isDisabled?: boolean;

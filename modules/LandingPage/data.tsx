@@ -1,3 +1,14 @@
+// CardsSectionProps
+export type CardsSectionProps = {
+  layout: "swipe" | "block";
+  cardCategory: "group" | "store";
+  title: string;
+  moreHref: string;
+  cardsData: [];
+};
+
+// ----data----
+
 export const groupSet = [
   {
     groupId: 18,
@@ -164,7 +175,7 @@ export const groupSet = [
           "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
       },
     ],
-    tags: ["老手團", "教學團", "老手團", "教學團", "老手團", "教學團"],
+    tags: ["老手團", "教學團", "不限定", "競技", "經驗切磋"],
   },
 ];
 
@@ -184,6 +195,17 @@ export const storeSet = [
   },
   {
     storeId: 7,
+    storeName: "六角學院桌遊店店店店店店店",
+    address:
+      "高雄市民生一路56號2樓雄市民生一路56號2雄市民生一路56號2雄市民生一路56號2",
+    profileImg: "/upload/store/Store_7_20231111205949.png",
+    cover: null,
+    openHours: "12:00 - 20:00",
+    score: 4.9375,
+    tags: ["wifiTag"],
+  },
+  {
+    storeId: 37,
     storeName: "六角學院桌遊店店店店店店店",
     address:
       "高雄市民生一路56號2樓雄市民生一路56號2雄市民生一路56號2雄市民生一路56號2",
