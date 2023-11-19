@@ -1,4 +1,5 @@
 import { StoreDataType } from "@/constants/types/StoreDataType";
+import { CommentDataType } from "@/constants/types/commentDataType";
 import { GroupDataType } from "@/constants/types/groupDataType";
 
 // CardsSectionProps
@@ -250,5 +251,116 @@ export const storeSet: StoreDataType[] = [
     description: "",
     hqTag: true,
     popTag: true,
+  },
+];
+
+export const commentSet: CommentDataType[] = [
+  {
+    commentBy: {
+      userId: 7,
+      userName: "0test04",
+      profileImg: null,
+    },
+    group: {
+      groupName: "string",
+      groupDate: "2023-11-10T15:48:17.373",
+      memberNum: 2,
+      storeId: 7,
+      storeName: "六角學院桌遊店",
+    },
+    commentId: 4,
+    msg: "讚讚",
+    commentDate: "2023-11-10T15:55:51.233",
+    score: 5,
+  },
+  {
+    commentBy: {
+      userId: 8,
+      userName: "1黑柴老大",
+      profileImg: null,
+    },
+    group: {
+      groupName: "測試",
+      groupDate: "2023-11-06T03:27:20.15",
+      memberNum: 7,
+      storeId: 7,
+      storeName: "六角學院桌遊店",
+    },
+    commentId: 23,
+    msg: "棒",
+    commentDate: "2023-11-10T15:43:17.87",
+    score: 4.75,
+  },
+  {
+    commentBy: {
+      userId: 10,
+      userName: "2黑柴老大",
+      profileImg: null,
+    },
+    group: {
+      groupName: "測試",
+      groupDate: "2023-11-06T03:27:20.15",
+      memberNum: 7,
+      storeId: 77,
+      storeName: "咕咕咕咕估的店",
+    },
+    commentId: 26,
+    msg: "棒",
+    commentDate: "2023-11-10T15:43:17.87",
+    score: 3.9,
+  },
+  {
+    commentBy: {
+      userId: 38,
+      userName: "4黑柴老大",
+      profileImg: null,
+    },
+    group: {
+      groupName: "測試",
+      groupDate: "2023-11-06T03:27:20.15",
+      memberNum: 7,
+      storeId: 7,
+      storeName: "六角學院桌遊店",
+    },
+    commentId: 2,
+    msg: "棒",
+    commentDate: "2023-11-10T15:43:17.87",
+    score: 4.75,
+  },
+  {
+    commentBy: {
+      userId: 38,
+      userName: "鳩鳩",
+      profileImg: "/images/photo-user-demo.png",
+    },
+    group: {
+      groupName: "測試",
+      groupDate: "2023-11-06T03:27:20.15",
+      memberNum: 7,
+      storeId: 7,
+      storeName: "六角學院桌遊店",
+    },
+    commentId: 14,
+    msg: "咕咕咕",
+    commentDate: "2023-11-10T15:43:17.87",
+    score: 2,
+  },
+  {
+    commentBy: {
+      userId: 78,
+      userName: "3鳩鳩",
+      profileImg: "/images/photo-user-demo.png",
+    },
+    group: {
+      groupName: "測試",
+      groupDate: "2023-11-06T03:27:20.15",
+      memberNum: 7,
+      storeId: 7,
+      storeName: "六角學院桌遊店",
+    },
+    commentId: 22,
+    msg: "咕咕咕",
+    commentDate: "2023-11-10T15:43:17.87",
+    score: 2,
   },
 ];

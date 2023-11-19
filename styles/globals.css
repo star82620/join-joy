@@ -66,6 +66,10 @@ h6 {
   display: none;
 }
 
+.landingBottomBg {
+  background-image: linear-gradient(transparent 30%, #f2e1be 30%);
+}
+
 .container {
   @apply max-w-[1272px] mx-auto 
   px-12 md:px-6 sm:px-3;

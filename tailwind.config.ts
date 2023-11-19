@@ -22,6 +22,8 @@ const config: Config = {
       "yellow-tone": "#FFF4C6",
       "yellow-tint": "#FEFAF2",
       "yellow-dark": "#FAF2E2",
+      "yellow-light": "#FFFAF2",
+      "yellow-landing-bg": "#F2E1BE",
 
       // secondary-orange
       "orange-primary": "#FF8356",
@@ -72,8 +74,12 @@ const config: Config = {
         window: "3px 2px 0 0 #504F4E",
         "profile-img":
           "2px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
+        "comment-card":
+          "0px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
       },
       backgroundImage: {
+        "brackets-start": 'url("/images/landing-page/icon-brackets-start.svg")',
+        "brackets-end": 'url("/images/landing-page/icon-brackets-end.svg")',
         // input
         "eye-hide": 'url("/images/input-password-hide.svg")',
         "eye-show": 'url("/images/input-password-show.svg")',
@@ -91,6 +97,7 @@ const config: Config = {
       },
       backgroundSize: {
         "20px": "20px",
+        "70%": "70%",
       },
       lineHeight: {
         heading: "1.4rem",
