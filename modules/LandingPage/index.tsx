@@ -4,6 +4,7 @@ import Image from "@/common/components/FillImage";
 import CardsSection from "./CardsSection";
 import CommentCard from "./CommentCard";
 import SearchBar from "./SearchBar";
+import SearchProvider from "@/common/contexts/SearchProvider";
 
 export default function LandingPage() {
   return (
@@ -18,7 +19,9 @@ export default function LandingPage() {
           />
         </div>
         <div className="w-full">
-          <SearchBar />
+          <SearchProvider>
+            <SearchBar />
+          </SearchProvider>
           <div className="mt-[108px] md:mt-11 font-semibold text-center">
             <a id="scroll-btn" href="#groups-list"></a>
             <p className="mt-4 md:mt-3">立即瀏覽</p>

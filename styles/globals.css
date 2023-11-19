@@ -166,7 +166,7 @@ a#scroll-btn:before {
   width: 8px;
   background-color: #272725;
   border-radius: 50%;
-  animation: move-down 2.5s infinite;
+  animation: move-down 2s infinite;
 }
 
 @keyframes move-down {

@@ -83,6 +83,9 @@ const config: Config = {
           'url("/images/landing-page/bg-banner-notext-md.svg")',
         "brackets-start": 'url("/images/landing-page/icon-brackets-start.svg")',
         "brackets-end": 'url("/images/landing-page/icon-brackets-end.svg")',
+        // search
+        "search-location": 'url("/images/icon-search-location.svg")',
+        "search-date": 'url("/images/icon-search-date.svg")',
         // input
         "eye-hide": 'url("/images/input-password-hide.svg")',
         "eye-show": 'url("/images/input-password-show.svg")',
