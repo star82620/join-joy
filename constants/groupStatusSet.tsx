@@ -1,5 +1,11 @@
 // 我的揪團列表
-export type MyGroupStatusKeyType = "pending" | "member" | "closed";
+export type MyGroupStatusKeyType =
+  | "pending"
+  | "member"
+  | "closed"
+  | "opening"
+  | "reserved"
+  | "cancel";
 
 export type IndexContentType = {
   text: string;
