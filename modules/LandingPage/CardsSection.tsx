@@ -6,8 +6,6 @@ import GroupCard from "@/common/components/searchResultCard/GroupCard";
 import StoreCard from "@/common/components/searchResultCard/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { CardsSectionProps } from "./data";
-import { GroupDataType } from "@/constants/types/groupDataType";
-import { StoreDataType } from "@/constants/types/StoreDataType";
 
 const arrowBtnStyle =
   "border-2 p-2 md:p-1 shadow-btn active:shadow-none active:translate-x-0.5 active:translate-y-0.5 disabled:shadow-none disabled:translate-x-0.5 disabled:translate-y-0.5 bg-gray-100 hover:bg-gray-100 active:bg-gray-100 disabled:bg-gray-300 text-gray-950";
