@@ -39,15 +39,15 @@ export const groupSet = [
       },
     ],
     description: "咕咕咕咕",
+    leader: {
+      userId: 6,
+      userName: "乃胖胖胖",
+      status: "leader",
+      initNum: 2,
+      profileImg:
+        "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+    },
     members: [
-      {
-        userId: 6,
-        userName: "乃胖胖胖",
-        status: "leader",
-        initNum: 3,
-        profileImg:
-          "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
-      },
       {
         userId: 8,
         userName: "黑柴老大",
@@ -55,12 +55,19 @@ export const groupSet = [
         initNum: 2,
         profileImg: null,
       },
+      {
+        userId: 81,
+        userName: "阿鳩鳩",
+        status: "member",
+        initNum: 3,
+        profileImg: "/images/photo-user-demo.png",
+      },
     ],
     tags: ["新手團", "教學團"],
   },
   {
     groupId: 28,
-    groupName: "團長鳩鳩：邊吃邊動腦咕咕咕",
+    groupName: "鳩鳩軍團：邊吃邊動腦咕咕咕",
     groupStatus: "開團中",
     place: "蒼鷺家西邊那棵樹上的果實店",
     isPrivate: false,
@@ -69,7 +76,7 @@ export const groupSet = [
     startTime: "12:00",
     endTime: "14:00",
     cost: "",
-    totalMemberNum: 6,
+    totalMemberNum: 2,
     games: [
       {
         gameId: 5,
@@ -83,21 +90,19 @@ export const groupSet = [
       },
     ],
     description: "ffff",
-    members: [
-      {
-        userId: 6,
-        userName: "乃胖胖胖",
-        status: "leader",
-        initNum: 3,
-        profileImg:
-          "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
-      },
-    ],
-    tags: ["老手團", "教學團"],
+    leader: {
+      userId: 81,
+      userName: "阿鳩鳩",
+      status: "member",
+      initNum: 1,
+      profileImg: "/images/photo-user-demo.png",
+    },
+    members: [],
+    tags: [],
   },
   {
     groupId: 58,
-    groupName: "審核中鳩鳩軍團：重策動腦咕咕咕",
+    groupName: "鳩鳩軍團：重策動腦咕咕咕",
     groupStatus: "開團中",
     place: null,
     isPrivate: false,
@@ -124,14 +129,21 @@ export const groupSet = [
       },
     ],
     description: "ffff",
+    leader: {
+      userId: 6,
+      userName: "乃胖胖胖",
+      status: "leader",
+      initNum: 2,
+      profileImg:
+        "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+    },
     members: [
       {
-        userId: 6,
-        userName: "乃胖胖胖",
-        status: "leader",
+        userId: 81,
+        userName: "阿鳩鳩",
+        status: "member",
         initNum: 3,
-        profileImg:
-          "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+        profileImg: "/images/photo-user-demo.png",
       },
     ],
     tags: ["不限定"],
@@ -165,14 +177,21 @@ export const groupSet = [
       },
     ],
     description: "ffff",
+    leader: {
+      userId: 6,
+      userName: "乃胖胖胖",
+      status: "leader",
+      initNum: 2,
+      profileImg:
+        "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+    },
     members: [
       {
-        userId: 6,
-        userName: "乃胖胖胖",
-        status: "leader",
+        userId: 81,
+        userName: "阿鳩鳩",
+        status: "member",
         initNum: 3,
-        profileImg:
-          "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+        profileImg: "/images/photo-user-demo.png",
       },
     ],
     tags: ["老手團", "教學團", "不限定", "競技", "經驗切磋"],

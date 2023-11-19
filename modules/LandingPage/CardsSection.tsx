@@ -7,6 +7,9 @@ import StoreCard from "@/common/components/searchResultCard/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { CardsSectionProps } from "./data";
 
+const arrowBtnStyle =
+  "border-2 p-2 md:p-1 shadow-btn active:shadow-none active:translate-x-0.5 active:translate-y-0.5 disabled:shadow-none disabled:translate-x-0.5 disabled:translate-y-0.5 bg-gray-100 hover:bg-gray-100 active:bg-gray-100 disabled:bg-gray-300 text-gray-950";
+
 export default function CardsSection({
   layout,
   cardCategory,
@@ -17,15 +20,16 @@ export default function CardsSection({
   const isStore = cardCategory === "store";
   const isSwipe = layout === "swipe";
 
+  // 卡片列表
   const listStyle = !isSwipe
-    ? "md:flex-col "
-    : "gap-4 md:gap-3 overflow-auto snap-x scrollbar-none";
+    ? "md:flex-col flex-wrap"
+    : "overflow-auto snap-x scrollbar-none";
+
+  const storeCardStyle = "h-[360px]";
 
   const groupCardStyle = !isSwipe
     ? "md:max-w-full"
     : "snap-start snap-normal scroll-ml-12 md:scroll-ml-6 sm:scroll-ml-3";
-
-  const storeCardStyle = "h-[360px]";
 
   const cardStyle = isStore ? storeCardStyle : groupCardStyle;
 
@@ -34,15 +38,12 @@ export default function CardsSection({
 
   const titleStyle = !isStore ? titleStyleWithBorder : "";
 
-  const color = isStore ? "" : "text-white";
-
-  const arrowBtnStyle =
-    "border-2 p-2 md:p-1 shadow-btn active:shadow-none active:translate-x-0.5 active:translate-y-0.5 disabled:shadow-none disabled:translate-x-0.5 disabled:translate-y-0.5 bg-gray-100 hover:bg-gray-100 active:bg-gray-100 disabled:bg-gray-300 text-gray-950";
+  const titleColor = isStore ? "" : "text-white";
 
   return (
     <div>
       <div
-        className={`container flex justify-between items-center font-semibold mb-10 md:mb-6 ${color}`}
+        className={`container flex justify-between items-center font-semibold mb-10 md:mb-6 ${titleColor}`}
       >
         <h2 className={`text-3xl md:text-xl ${titleStyle}`}>{title}</h2>
         {isSwipe && (
@@ -70,9 +71,10 @@ export default function CardsSection({
         )}
       </div>
       {/* 卡片列表 */}
-      <div className={`container flex ${listStyle}`}>
+      <div className={`container flex gap-4 md:gap-3  ${listStyle}`}>
         {cardsData.map((item) => {
           // 卡片本人
+          // 店家卡片
           if (isStore) {
             return (
               <div
@@ -84,16 +86,18 @@ export default function CardsSection({
             );
           }
 
+          // 揪團卡片
           return (
             <div
               key={item.groupId}
-              className={`w-full min-w-[284px] max-w-[284px] ${cardStyle}`}
+              className={`w-full max-w-[280px] min-w-[280px] ${cardStyle}`}
             >
               <GroupCard data={item} />
             </div>
           );
         })}
       </div>
+
       {!isSwipe && (
         <div className="mt-8 md:mt-4 text-center">
           <Button
