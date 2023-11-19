@@ -7,22 +7,30 @@ import SearchBar from "./SearchBar";
 
 export default function LandingPage() {
   return (
-    <section className="bg-landing-banner-bg bg-contain bg-no-repeat">
+    <section className="bg-contain bg-no-repeat bg-landing-banner-bg md:bg-landing-banner-bg-md md:bg-[center_top_-54px]">
       <div className="container flex flex-col items-center pt-11 md:pt-12 pb-[164px] md:pb-[120px]">
         <div className="mb-10">
           <Image
             src="/images/landing-page/banner-slogan.svg"
             alt="banner-slogan"
-            widthProp="w-[372px]"
-            heightProp="h-[190px]"
+            widthProp="w-[372px] md:w-[200px]"
+            heightProp="h-[190px] md:h-[110px]"
           />
         </div>
-        <div>
+        <div className="w-full">
           <SearchBar />
+          <div className="mt-[108px] md:mt-11 font-semibold text-center">
+            <a id="scroll-btn" href="#groups-list"></a>
+            <p className="mt-4 md:mt-3">立即瀏覽</p>
+            <p className="mt-2 md:mt-1">現在正在進行的揪團</p>
+          </div>
         </div>
       </div>
       {/* 卡片列表 */}
-      <div className="bg-brown-dark pt-[72px] pb-[120px] md:pt-6 md:mb-8">
+      <div
+        className="bg-brown-dark pt-[72px] pb-[120px] md:pt-6 md:mb-8"
+        id="groups-list"
+      >
         <div className="flex flex-col gap-[96px] md:gap-6 bg-brown-dark">
           <CardsSection
             title="就差你一個成團"

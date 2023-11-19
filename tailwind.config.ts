@@ -79,6 +79,8 @@ const config: Config = {
       },
       backgroundImage: {
         "landing-banner-bg": 'url("/images/landing-page/bg-banner-notext.svg")',
+        "landing-banner-bg-md":
+          'url("/images/landing-page/bg-banner-notext-md.svg")',
         "brackets-start": 'url("/images/landing-page/icon-brackets-start.svg")',
         "brackets-end": 'url("/images/landing-page/icon-brackets-end.svg")',
         // input
@@ -98,7 +100,6 @@ const config: Config = {
       },
       backgroundSize: {
         "20px": "20px",
-        "70%": "70%",
       },
       lineHeight: {
         heading: "1.4rem",

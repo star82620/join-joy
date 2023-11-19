@@ -4,6 +4,8 @@ export const globalIcons = {
   "rating-star-dark": "/images/icon-rating-star-dark.svg",
   search: "/images/icon-search.svg",
   "search-white": "/images/icon-search-white.svg",
-  "search-group": "/images/icon-search-group.svg",
-  "search-store": "/images/icon-search-store.svg",
+  "search-group-light": "/images/icon-search-group-light.svg",
+  "search-group-dark": "/images/icon-search-group-dark.svg",
+  "search-store-light": "/images/icon-search-store-light.svg",
+  "search-store-dark": "/images/icon-search-store-dark.svg",
 };

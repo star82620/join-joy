@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Lato, Inter, Roboto, San Francisco, Segoe UI, "Ping fang",
     Microsoft JhengHei, "微軟正黑體", sans-serif;
@@ -79,6 +83,10 @@ h6 {
   @apply w-full border-b-2 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm;
 }
 
+.inputStyle:focus {
+  @apply border-gray-400;
+}
+
 .inputErrorMsgStyle {
   @apply text-danger mt-2 md:mt-1 text-sm md:text-xs;
 }
@@ -134,4 +142,39 @@ h6 {
 .aheadIcon {
   @apply before:content-[''] before:bg-no-repeat before:align-middle before:mb-[0.2rem]
   before:bg-center before:inline-block before:mr-1;
+}
+
+/*  */
+a#scroll-btn {
+  position: relative;
+  display: block;
+  height: 44px;
+  width: 28px;
+  border: 3px solid #272725;
+  margin: auto;
+  border-radius: 2em;
+}
+
+a#scroll-btn:before {
+  position: absolute;
+  content: "";
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 8px;
+  height: 8px;
+  width: 8px;
+  background-color: #272725;
+  border-radius: 50%;
+  animation: move-down 2.5s infinite;
+}
+
+@keyframes move-down {
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
 }

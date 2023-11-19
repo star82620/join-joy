@@ -12,10 +12,10 @@ export default function TabBlock({
 }: TabBlockProps) {
   const { tabName, tabText, img } = tab;
 
+  const activeBgColor = activeColor ?? "bg-yellow-dark";
+
   const defaultStyle =
     "pb-[7px] bg-gray-200 text-gray-600 border-gray-400 border-l-gray-400";
-
-  const activeBgColor = activeColor ?? "bg-yellow-dark";
 
   const activeStyle = `pb-[10px] ${activeBgColor} text-gray-950 border-gray-950 rounded-tl-md`;
 
