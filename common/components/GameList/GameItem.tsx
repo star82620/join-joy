@@ -13,7 +13,7 @@ export default function GameItem({
   const selectedItem = selectedGames?.find((item) => {
     return item.gameId === gameId;
   });
-  const isDefaultChecked = selectedItem !== undefined;
+  const isDefault = selectedItem !== undefined;
 
   return (
     <li>
@@ -25,7 +25,7 @@ export default function GameItem({
               className="checkboxIcon"
               value={gameId}
               data-gamename={gameName}
-              checked={isDefaultChecked}
+              checked={isDefault}
               onChange={handleSelected}
             />
           </div>
