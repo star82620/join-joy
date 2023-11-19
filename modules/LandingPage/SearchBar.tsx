@@ -48,14 +48,14 @@ export default function SearchBar() {
 
     const value = isCityId ? Number(e.target.value) : e.target.value;
 
-    setSearchValues((prevState) => ({ ...prevState, [inputName]: value }));
+    setSearchValues({ ...searchValues, [inputName]: value });
   };
 
   const setInputValue: ChangeEventHandler<HTMLInputElement> = (e) => {
     const inputName = e.target.name;
     const value = e.target.value;
 
-    setSearchValues((prevState) => ({ ...prevState, [inputName]: value }));
+    setSearchValues({ ...searchValues, [inputName]: value });
   };
 
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
