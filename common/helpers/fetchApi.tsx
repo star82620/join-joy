@@ -47,5 +47,6 @@ export default async function fetchApi(apiParams: apiParamsType) {
     return result;
   } catch (error) {
     console.log(error);
+    throw error; // 重新拋出錯誤，在呼叫端處理
   }
 }

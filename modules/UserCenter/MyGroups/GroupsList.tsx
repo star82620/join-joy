@@ -18,14 +18,24 @@ function GroupsList({ pageCategory }: GroupListProps) {
   ) => {};
 
   // 退出揪團
-  const handleQuitGroup = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleQuitGroup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const groupId = Number(e.currentTarget.value);
     const apiParams: apiParamsType = {
       apiPath: `${apiPaths["leave-group"]}/${groupId}`,
       method: "POST",
     };
 
-    const res = fetchApi(apiParams);
+    try {
+      const res = await fetchApi(apiParams);
+
+      if (res.success) {
+        alert("已退出揪團QQ");
+      } else {
+        alert("退出揪團失敗，請稍後再試");
+      }
+    } catch (error) {
+      console.error("好像發生了一點錯誤，請稍後再試", error);
+    }
   };
 
   // 前往評價頁
@@ -110,13 +120,11 @@ function GroupsList({ pageCategory }: GroupListProps) {
       </>
     );
 
-    if (isLeaderPage) {
-      if (isUpcoming) return leaderBtnTitle;
-      return "評價";
-    } else if (isMemberPage) {
-      if (isUpcoming) return memberBtnTitle;
-      return "評價";
-    }
+    const title = isLeaderPage ? leaderBtnTitle : memberBtnTitle;
+
+    const result = isExpired ? "評價" : title;
+
+    return result;
   };
 
   const btnTitle = setBtnTitle();
@@ -131,13 +139,11 @@ function GroupsList({ pageCategory }: GroupListProps) {
     const isExpiredGroup = endTime < today;
 
     if (isUpcoming) {
-      if (isExpiredGroup) return false;
-      if (isClosed) return false;
+      if (isExpiredGroup || isClosed) return false;
       return true;
     }
 
-    if (isExpiredGroup) return true;
-    if (isClosed) return true;
+    if (isExpiredGroup || isClosed) return true;
 
     return false;
   });
