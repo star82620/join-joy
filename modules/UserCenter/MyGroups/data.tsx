@@ -1,4 +1,6 @@
+import { SelectedGamesType } from "@/common/components/GameList/data";
 import { tabType } from "../date";
+import { GameType } from "@/constants/globalTypes";
 
 export type StatusType = "pending" | "member" | "leader";
 

@@ -5,6 +5,16 @@ export type ImgType = {
   alt: string;
 };
 
+// game
+export type GameType = {
+  gameId: number;
+  gameType: string;
+  gameName: string;
+  version: string;
+  peopleNum: string;
+  qtu: number;
+};
+
 // AuthProvider
 export type AuthProviderProps = {
   children: ReactNode;
