@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SelectedGamesType, GameListProps } from "./data";
 import GameItem from "./GameItem";
 
@@ -10,9 +10,11 @@ export default function GameList({
 }: GameListProps) {
   const isReadOnly = category === "view";
 
-  gamesData = gamesData ? gamesData : [];
+  const data = useMemo(() => {
+    return gamesData ? gamesData : [];
+  }, [gamesData]);
 
-  const [renderData, setRenderData] = useState(gamesData);
+  const [renderData, setRenderData] = useState(data);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
   const [isFull, setIsFull] = useState(false);
@@ -20,12 +22,12 @@ export default function GameList({
   const isEmptyResult = renderData.length === 0;
 
   useEffect(() => {
-    setRenderData(gamesData);
-  }, [gamesData]);
+    setRenderData(data);
+  }, [data]);
 
   // 得到 selectItems 類別篩選內容
   let selectItems: Array<string> = [];
-  gamesData.forEach((game) => {
+  data.forEach((game) => {
     const isInclude = selectItems.includes(game.gameType);
     if (isInclude) return;
     selectItems.push(game.gameType);
@@ -72,7 +74,7 @@ export default function GameList({
   };
 
   useEffect(() => {
-    const selectedData = gamesData.filter((game) => {
+    const selectedData = data.filter((game) => {
       // 類型篩選
       const typeFilter = selectType === "all" || game.gameType === selectType;
       // 關鍵字篩選
@@ -83,7 +85,7 @@ export default function GameList({
     setRenderData(selectedData);
   }, [selectType, searchValue]);
 
-  const isGamesEmpty = selectedGames?.length === 0;
+  const isEmptyGames = selectedGames?.length === 0;
 
   const headStyle = isReadOnly
     ? "px-14 pb-8 md:pb-6"
@@ -107,7 +109,7 @@ export default function GameList({
             );
           })}
           {isFull && <span className="text-danger">最多選擇五款 (=´ω`=)</span>}
-          {isGamesEmpty && <p>請在下列表單選擇預計要玩的遊戲</p>}
+          {isEmptyGames && <p>請在下列表單選擇預計要玩的遊戲</p>}
         </div>
       )}
 

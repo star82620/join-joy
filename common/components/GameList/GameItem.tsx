@@ -9,10 +9,11 @@ export default function GameItem({
 }: GameItemProps) {
   const { gameId, gameType, gameName, peopleNum, version, qtu } = game;
 
-  const a = selectedGames?.find((item) => {
+  // 尋找符合的項目
+  const selectedItem = selectedGames?.find((item) => {
     return item.gameId === gameId;
   });
-  const isDefaultChecked = a !== undefined;
+  const isDefaultChecked = selectedItem !== undefined;
 
   return (
     <li>
