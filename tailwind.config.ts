@@ -53,6 +53,7 @@ const config: Config = {
       transparent: "transparent",
     },
     fontSize: {
+      "4xl": "32px",
       "3xl": "28px",
       "2xl": "24px",
       xl: "20px",
