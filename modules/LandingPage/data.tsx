@@ -1,10 +1,13 @@
+import { StoreDataType } from "@/constants/types/StoreDataType";
+import { GroupDataType } from "@/constants/types/groupDataType";
+
 // CardsSectionProps
 export type CardsSectionProps = {
   layout: "swipe" | "block";
   cardCategory: "group" | "store";
   title: string;
   moreHref: string;
-  cardsData: [];
+  cardsData: GroupDataType[] | StoreDataType[];
 };
 
 // ----data----

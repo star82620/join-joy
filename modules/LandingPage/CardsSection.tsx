@@ -6,6 +6,8 @@ import GroupCard from "@/common/components/searchResultCard/GroupCard";
 import StoreCard from "@/common/components/searchResultCard/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { CardsSectionProps } from "./data";
+import { GroupDataType } from "@/constants/types/groupDataType";
+import { StoreDataType } from "@/constants/types/StoreDataType";
 
 const arrowBtnStyle =
   "border-2 p-2 md:p-1 shadow-btn active:shadow-none active:translate-x-0.5 active:translate-y-0.5 disabled:shadow-none disabled:translate-x-0.5 disabled:translate-y-0.5 bg-gray-100 hover:bg-gray-100 active:bg-gray-100 disabled:bg-gray-300 text-gray-950";
@@ -18,6 +20,7 @@ export default function CardsSection({
   cardsData,
 }: CardsSectionProps) {
   const isStore = cardCategory === "store";
+
   const isSwipe = layout === "swipe";
 
   // 卡片列表
@@ -73,9 +76,7 @@ export default function CardsSection({
       {/* 卡片列表 */}
       <div className={`container flex gap-4 md:gap-3  ${listStyle}`}>
         {cardsData.map((item) => {
-          // 卡片本人
-          // 店家卡片
-          if (isStore) {
+          if ("storeId" in item) {
             return (
               <div
                 key={item.storeId}
@@ -84,17 +85,16 @@ export default function CardsSection({
                 <StoreCard data={item} />
               </div>
             );
+          } else {
+            return (
+              <div
+                key={item.groupId}
+                className={`w-full max-w-[280px] min-w-[280px] ${cardStyle}`}
+              >
+                <GroupCard data={item} />
+              </div>
+            );
           }
-
-          // 揪團卡片
-          return (
-            <div
-              key={item.groupId}
-              className={`w-full max-w-[280px] min-w-[280px] ${cardStyle}`}
-            >
-              <GroupCard data={item} />
-            </div>
-          );
         })}
       </div>
 
