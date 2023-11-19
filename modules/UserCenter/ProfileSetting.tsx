@@ -1,13 +1,10 @@
 import React, { Children } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
-import { userDataKey } from "./date";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 
 export default function ProfileSetting() {
-  // const data = fetchApi(userDataKey);
-
   const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
   const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
