@@ -6,6 +6,7 @@ import Layout from "@/common/components/Layout";
 import useLogout from "@/common/hooks/useLogout";
 import LandingPage from "@/modules/LandingPage";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import { CommentDataType } from "@/constants/types/commentDataType";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,9 +38,12 @@ export async function getServerSideProps() {
 // 你附近的店家 => IP位置
 // 評價
 
+type HomeProps = {
+  commentsData: CommentDataType[];
+};
 const DataContext = createContext({});
 
-export default function Home({ commentsData }) {
+export default function Home({ commentsData }: HomeProps) {
   const authContext = useContext(AuthContext);
   const { authData } = authContext;
   const logout = useLogout();
