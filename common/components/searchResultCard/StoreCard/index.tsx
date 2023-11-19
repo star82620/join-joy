@@ -1,14 +1,14 @@
 import React from "react";
-import NextImage from "next/image";
-import ProfileImg from "../../ProfileImg";
-
 import Image from "../../FillImage";
+import ProfileImg from "../../ProfileImg";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { storeTagsIndex } from "@/constants/storeTagsIndex";
 import { storeIcons } from "@/constants/iconsPackage/storeIcons";
 import Link from "../../GeneralLink";
+import { defaultImages } from "@/constants/defaultImages";
+import { StoreCardProps } from "./data";
 
-export default function StoreCard({ data }) {
+export default function StoreCard({ data }: StoreCardProps) {
   const {
     storeId,
     storeName,
@@ -18,31 +18,35 @@ export default function StoreCard({ data }) {
     cover,
     score,
     tags,
+    hqTag,
+    popTag,
   } = data;
 
+  const profileImgSrc = profileImg || defaultImages.storeProfileImg;
+  const coverPhotoSrc = cover || defaultImages.storeCoverPhoto;
+  const scoreNum = Math.floor(score * 10) / 10;
+
   return (
-    <div className="h-full rounded-md border-2">
+    <div className="h-full rounded-md border-2 flex-shrink-0">
       <Link href={`/store/${storeId}`} className="no-underline">
         <div
           className="rounded-t-md w-full h-[200px] 
-          bg-no-repeat bg-center bg-cover
-        bg-[url('/images/photo-store-demo.png')]"
+          bg-no-repeat bg-center bg-cover"
+          style={{ backgroundImage: `url(${coverPhotoSrc})` }}
         ></div>
         <div className="px-5 pt-2 pb-4 md:px-4 md:pb-3">
           <div>
             <div className="w-full flex justify-start gap-4">
               <ProfileImg
-                src="/images/photo-user-demo.png"
-                alt=""
+                src={profileImgSrc}
+                alt={storeName}
                 sizeStyle="w-12 h-12 md:w-11 md:h-11"
               />
               <div className="w-full grow">
                 <div className="flex justify-between items-center gap-3">
-                  <h3 className="text-lg md:text-md whitespace-nowrap text-ellipsis overflow-hidden">
-                    {storeName}
-                  </h3>
+                  <h3 className="text-lg md:text-md">{storeName}</h3>
                   <span className="flex gap-1 font-bold md:text-sm">
-                    {score}
+                    {scoreNum}
                     <Image
                       src={globalIcons["rating-star-dark"]}
                       alt="rating-star-dark"
@@ -52,9 +56,7 @@ export default function StoreCard({ data }) {
                   </span>
                 </div>
                 <div className="text-sm text-gray-500 mt-1.5 md:mt-1">
-                  <p className=" whitespace-nowrap overflow-hidden">
-                    {address}
-                  </p>
+                  <p className="whitespace-nowrap overflow-hidden">{address}</p>
                   <p>{openHours}</p>
                 </div>
               </div>
@@ -62,9 +64,6 @@ export default function StoreCard({ data }) {
           </div>
           <div className="flex flex-wrap gap-2 gap-y-1 border-t border-gray-500 mt-2 pt-2 md:mt-1 md:pt-1">
             {tags.map((tag, index, tags) => {
-              const;
-              if (tag === "hqTag" || tag === "popTag") return;
-
               const iconSrc = storeIcons[tag].src;
               const iconAlt = storeIcons[tag].alt;
 

@@ -79,7 +79,7 @@ export default function CardsSection({
             return (
               <div
                 key={item.storeId}
-                className={`w-[376px] max-w-[376px] ${cardStyle}`}
+                className={`w-full min-w-[376px] max-w-[376px] ${cardStyle}`}
               >
                 <StoreCard data={item} />
               </div>

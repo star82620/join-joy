@@ -217,7 +217,7 @@ export const storeSet = [
     storeName: "六角學院桌遊店店店店店店店",
     address:
       "高雄市民生一路56號2樓雄市民生一路56號2雄市民生一路56號2雄市民生一路56號2",
-    profileImg: "/upload/store/Store_7_20231111205949.png",
+    profileImg: "http://4.224.16.99/upload/store/Store_7_20231111205949.png",
     cover: null,
     openHours: "12:00 - 20:00",
     score: 4.9375,
@@ -228,8 +228,8 @@ export const storeSet = [
     storeName: "六角學院桌遊店店店店店店店",
     address:
       "高雄市民生一路56號2樓雄市民生一路56號2雄市民生一路56號2雄市民生一路56號2",
-    profileImg: "/upload/store/Store_7_20231111205949.png",
-    cover: null,
+    profileImg: "/images/logo.jpg",
+    cover: "/images/logo-joinjoy.png",
     openHours: "12:00 - 20:00",
     score: 4.9375,
     tags: ["wifiTag"],
