@@ -1,4 +1,4 @@
-import getToken from "@/common/helpers/getToken";
+import getClientToken from "@/common/helpers/getClientToken";
 
 export type apiParamsType = {
   apiPath: string;
@@ -10,7 +10,9 @@ export type apiParamsType = {
 export default async function fetchApi(apiParams: apiParamsType) {
   const { apiPath, method, data, authToken } = apiParams;
 
-  const token: string | null = authToken ? `Bearer ${authToken}` : getToken();
+  const token: string | null = authToken
+    ? `Bearer ${authToken}`
+    : getClientToken();
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}${apiPath}`;
 
