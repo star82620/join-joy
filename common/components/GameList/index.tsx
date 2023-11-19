@@ -10,9 +10,7 @@ export default function GameList({
 }: GameListProps) {
   const isReadOnly = category === "view";
 
-  const data = useMemo(() => {
-    return gamesData ? gamesData : [];
-  }, [gamesData]);
+  const data = gamesData || [];
 
   const [renderData, setRenderData] = useState(data);
   const [selectType, setSelectType] = useState("all");
