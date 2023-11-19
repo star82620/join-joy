@@ -20,7 +20,7 @@ export type UserType = {
   userName: string;
   status: MemberStatusType;
   initNum: number;
-  profileImg: null;
+  profileImg: string | null;
 };
 
 export type GroupTagType =

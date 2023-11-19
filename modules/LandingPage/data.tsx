@@ -1,4 +1,4 @@
-import { StoreDataType } from "@/constants/types/StoreDataType";
+import { StoreDataType } from "@/constants/types/storeDataType";
 import { CommentDataType } from "@/constants/types/commentDataType";
 import { GroupDataType } from "@/constants/types/groupDataType";
 
@@ -9,6 +9,11 @@ export type CardsSectionProps = {
   title: string;
   moreHref: string;
   cardsData: GroupDataType[] | StoreDataType[];
+};
+
+// CommentCard
+export type CommentCardProps = {
+  data: CommentDataType;
 };
 
 // ----test data----
