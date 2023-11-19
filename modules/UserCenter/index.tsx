@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileSetting from "./ProfileSetting";
 import MyGroupsLeader from "./MyGroups/MyGroupsLeader";
@@ -6,6 +6,7 @@ import MyGroupsMember from "./MyGroups/MyGroupsMember";
 import icons from "@/constants/iconsPackage/userNavIcons";
 import MyFollowing from "./MyFollowing";
 import MyNotification from "./MyNotification";
+import UserNavBar from "./UserNavBar";
 import {
   NavSetType,
   NavIdType,
@@ -13,8 +14,6 @@ import {
   ActiveNavIdType,
   SetIconAttrType,
 } from "./date";
-import UserNavBar from "./UserNavBar";
-import fetchApi from "@/common/helpers/fetchApi";
 
 const navSet: NavSetType[] = [
   { id: "profile-setting", text: "個人檔案", component: <ProfileSetting /> },

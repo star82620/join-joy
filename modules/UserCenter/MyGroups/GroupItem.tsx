@@ -1,46 +1,69 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import formatGroupDate from "@/common/helpers/formateDate";
 import statusSet from "@/constants/groupStatusSet";
-import { setGroupStatus } from "./GroupsList";
-import { GroupItemProps } from "./data";
+import setGroupStatus from "./setGroupStatus";
+import { DataContext } from "@/pages/user-center";
+import { BtnTextType, GroupItemProps, GroupStatusKeyType } from "./data";
+import { defaultGroupRatingsSet } from "../date";
+import { MemberStatusType } from "@/constants/globalTypes";
 
-export default function GroupItem({
-  group,
-  isExpired,
-  actionBtns,
-}: GroupItemProps) {
+function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
+  const groupRatingsSet =
+    useContext(DataContext)?.groupRatingsSet || defaultGroupRatingsSet;
+
   const {
     groupId,
     groupName,
     store,
     place,
     totalMemberNum,
-    currentNum,
+    currentPeople,
     startTime,
     endTime,
-    status,
-    commented,
+    groupStatus,
+    memberStatus,
   } = group;
 
-  const groupStatus = setGroupStatus(endTime, status);
-  // 狀態表示
-  const statusStyle = statusSet[groupStatus].style;
-  const statusText = statusSet[groupStatus].text;
+  // 從整包的 groupRatingsSet 裡面找到符合的 groupRating
+  const [groupRating] = groupRatingsSet.filter((item) => item.id === groupId);
 
-  const isCommented = commented;
+  // 如果有撈到 isAllRates
+  const isCommented = groupRating.data?.isAllRated ?? false;
+
+  const status = setGroupStatus(endTime, groupStatus, memberStatus);
+  const statusStyle = statusSet[status].style;
+  const statusText = statusSet[status].text;
+
+  const isCancel = status === "cancel" || status === "reserved";
 
   // 抓取對應的按鈕
   const setBtn = () => {
-    if (!isExpired) return groupStatus;
-    if (isCommented) return "commented";
-    return "closed";
+    const isLeader = memberStatus === "leader";
+
+    if (status === "cancel") return "cancel";
+
+    if (status === "closed") {
+      if (isCommented) return "commented";
+      return "closed";
+    }
+
+    if (status === "reserved") {
+      if (isLeader) return "leader";
+      return "cancel";
+    }
+
+    if (status === "opening") return "leader";
+
+    return status;
   };
+
   const btnId = setBtn();
-  const btnDisabled = actionBtns[btnId].disabled;
-  const btnOnClick = actionBtns[btnId].func;
-  const btnText = actionBtns[btnId].text;
+
+  const btnDisabled = btnSet[btnId].disabled;
+  const btnOnClick = btnSet[btnId].func;
+  const btnText = btnSet[btnId].text;
 
   const isStore = store !== null;
   const location = isStore ? store.storeName : place;
@@ -50,13 +73,14 @@ export default function GroupItem({
     endTime
   );
   const groupTime = `${formattedStartTime} - ${formattedEndTime}`;
+  const groupIdString = groupId.toString();
 
   return (
     <li
       key={groupId}
       className="w-full flex justify-between items-center p-2 mb-3 bg-yellow-tint text-center text-sm"
     >
-      <p className="w-[10%] text-xs">
+      <p className="w-[8%] text-xs">
         <span className={`groupStatusDot ${statusStyle}`}>{statusText}</span>
       </p>
       <p className="w-[20%] truncate text-sm">
@@ -68,20 +92,25 @@ export default function GroupItem({
         <span className=" whitespace-nowrap">{groupTime}</span>
       </p>
       <p className="w-[10%]">
-        {currentNum}/{totalMemberNum}
+        {currentPeople}/{totalMemberNum}
       </p>
-      <div className="w-[10%]">
-        <Button
-          type="button"
-          appearance="black"
-          rounded
-          className="w-full"
-          isDisabled={btnDisabled}
-          onClick={btnOnClick}
-        >
-          <span className="text-sm">{btnText}</span>
-        </Button>
+      <div className="flex items-center w-[10%] min-h-[42px]">
+        {!isCancel && (
+          <Button
+            type="button"
+            appearance="black"
+            rounded
+            className="w-full"
+            value={groupIdString}
+            isDisabled={btnDisabled}
+            onClick={btnOnClick}
+          >
+            <span className="text-sm">{btnText}</span>
+          </Button>
+        )}
       </div>
     </li>
   );
 }
+
+export default GroupItem;
