@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import formatGroupDate from "@/common/helpers/formateDate";
-import statusSet from "@/constants/groupStatusSet";
+import { myGroupStatusSet } from "@/constants/groupStatusSet";
 import setGroupStatus from "./setGroupStatus";
 import { DataContext } from "@/pages/user-center";
 import { BtnTextType, GroupItemProps, GroupStatusKeyType } from "./data";
@@ -33,8 +33,8 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
   const isCommented = groupRating.data?.isAllRated ?? false;
 
   const status = setGroupStatus(endTime, groupStatus, memberStatus);
-  const statusStyle = statusSet[status].style;
-  const statusText = statusSet[status].text;
+  const statusStyle = myGroupStatusSet[status].style;
+  const statusText = myGroupStatusSet[status].text;
 
   const isCancel = status === "cancel" || status === "reserved";
 
