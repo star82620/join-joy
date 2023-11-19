@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
+import TabBlock from "@/common/components/FileWrapper/TabBlock";
+import { TabType } from "@/common/components/FileWrapper/data";
 
 export default function SearchBar() {
   const titleStyle = "text-lg md:text-md";
+  const [activeTab, setActiveTab] = useState("store");
+  const tabs: TabType[] = [
+    {
+      tabName: "group",
+      tabText: "找揪團",
+      img: { src: globalIcons["search-group"], alt: "search-group" },
+    },
+    {
+      tabName: "store",
+      tabText: "找店家",
+      img: { src: globalIcons["search-store"], alt: "search-store" },
+    },
+  ];
   return (
     <>
       {/* <div className="flex items-start absolute">
@@ -23,17 +38,24 @@ export default function SearchBar() {
           // onClick={() => setActiveTab(tabName)}
         >
           <span className="inline-block align-middle w-6 h-6 md:w-5 md:h-5 relative">
-            <Image
-              src={imgSrc}
-              alt={img.alt}
-              fill
-              sizes="100%"
-              className="object-contain"
-            />
+            <Image src="" alt="" fill sizes="100%" className="object-contain" />
           </span>
-          <span className="ml-2 align-middle">{tabText}</span>
+          <span className="ml-2 align-middle">edded</span>
         </p>
       </div> */}
+      {tabs.map((tab, index, tabs) => {
+        const zIndex = tabs.length - index;
+        const isActive = tab.tabName === activeTab;
+        return (
+          <TabBlock
+            key={tab.tabName}
+            tab={tab}
+            zIndex={zIndex}
+            isActive={isActive}
+            setActiveTab={setActiveTab}
+          />
+        );
+      })}
       {/* 下面是搜尋欄位 */}
       <section className="border-[3px] bg-yellow-tint px-12 pt-12 pb-14 md:px-4 md:py-7">
         <form className="flex md:flex-col items-end gap-7 md:gap-4">
