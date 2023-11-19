@@ -2,6 +2,7 @@ import React, {
   ChangeEventHandler,
   FormEventHandler,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import Button from "@/common/components/GeneralButton";
@@ -9,13 +10,15 @@ import Image from "@/common/components/FillImage";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import TabBlock from "@/common/components/FileWrapper/TabBlock";
 import { TabType } from "@/common/components/FileWrapper/data";
-import { SearchContext } from "@/common/contexts/SearchProvider";
+import {
+  SearchContext,
+  defaultSearchValues,
+} from "@/common/contexts/SearchProvider";
 
 export default function SearchBar() {
   const searchContext = useContext(SearchContext);
 
   const { searchValues, setSearchValues } = searchContext;
-  console.log("searchValues", searchValues);
 
   const titleStyle = "text-lg md:text-md";
 
@@ -57,7 +60,13 @@ export default function SearchBar() {
 
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
+    console.log("searchValues", searchValues);
   };
+
+  useEffect(() => {
+    setSearchValues(defaultSearchValues);
+  }, [activeTab]);
 
   const groupKeyWordInput = (
     <input
@@ -110,7 +119,7 @@ export default function SearchBar() {
             <h3 className={titleStyle}>地點</h3>
             <div className="relative">
               <select
-                className="inputStyle !pl-10"
+                className="inputStyle !pl-9"
                 name="cityId"
                 value={searchValues.cityId}
                 onChange={setSelectValue}

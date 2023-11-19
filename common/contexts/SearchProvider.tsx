@@ -23,7 +23,7 @@ export type SearchValuesType = {
   storeTag: number;
 };
 
-export const defaulteSearchValues: SearchValuesType = {
+export const defaultSearchValues: SearchValuesType = {
   cityId: 0,
   page: 0,
   pageSize: 0,
@@ -43,7 +43,7 @@ export const defaulteSearchValues: SearchValuesType = {
 };
 
 export const defaultSearchContext = {
-  searchValues: defaulteSearchValues,
+  searchValues: defaultSearchValues,
   setSearchValues: (value: SearchValuesType) => {},
 };
 
@@ -51,7 +51,7 @@ export const SearchContext = createContext(defaultSearchContext);
 
 export default function SearchProvider({ children }: SearchProviderProps) {
   const [searchValues, setSearchValues] =
-    useState<SearchValuesType>(defaulteSearchValues);
+    useState<SearchValuesType>(defaultSearchValues);
 
   return (
     <SearchContext.Provider value={{ searchValues, setSearchValues }}>

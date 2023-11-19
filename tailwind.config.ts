@@ -78,6 +78,9 @@ const config: Config = {
           "0px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
       },
       backgroundImage: {
+        "header-user": "/images/icon-header-user.svg",
+        "header-menu": "/images/icon-header-menu.svg",
+        // landingPage
         "landing-banner-bg": 'url("/images/landing-page/bg-banner-notext.svg")',
         "landing-banner-bg-md":
           'url("/images/landing-page/bg-banner-notext-md.svg")',
