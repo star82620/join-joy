@@ -5,11 +5,10 @@ import formatGroupDate from "@/common/helpers/formateDate";
 import { myGroupStatusSet } from "@/constants/groupStatusSet";
 import setGroupStatus from "./setGroupStatus";
 import { DataContext } from "@/pages/user-center";
-import { BtnTextType, GroupItemProps, GroupStatusKeyType } from "./data";
+import { GroupItemProps } from "./data";
 import { defaultGroupRatingsSet } from "../date";
-import { MemberStatusType } from "@/constants/globalTypes";
 
-function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
+function GroupItem({ group, btnSet }: GroupItemProps) {
   const groupRatingsSet =
     useContext(DataContext)?.groupRatingsSet || defaultGroupRatingsSet;
 
@@ -32,11 +31,11 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
   // 如果有撈到 isAllRates
   const isCommented = groupRating.data?.isAllRated ?? false;
 
-  const status = setGroupStatus(endTime, groupStatus, memberStatus);
+  const status = setGroupStatus(groupStatus, memberStatus);
   const statusStyle = myGroupStatusSet[status].style;
   const statusText = myGroupStatusSet[status].text;
 
-  const isCancel = status === "cancel" || status === "reserved";
+  const isWithoutBtn = status === "cancel" || status === "reserved";
 
   // 抓取對應的按鈕
   const setBtn = () => {
@@ -95,7 +94,7 @@ function GroupItem({ group, isExpired, btnSet }: GroupItemProps) {
         {currentPeople}/{totalMemberNum}
       </p>
       <div className="flex items-center w-[10%] min-h-[42px]">
-        {!isCancel && (
+        {!isWithoutBtn && (
           <Button
             type="button"
             appearance="black"

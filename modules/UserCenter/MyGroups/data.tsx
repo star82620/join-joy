@@ -26,13 +26,12 @@ export type BtnTextType =
 export type BtnSetType = Record<BtnTextType, BtnItemType>;
 
 export type GroupListProps = {
-  category: "leader" | "member";
+  pageCategory: "leader" | "member";
 };
 
 // GroupItem
 export type GroupItemProps = {
   group: MyGroupsItemType;
-  isExpired: boolean;
   btnSet: BtnSetType;
 };
 
