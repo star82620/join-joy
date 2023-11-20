@@ -1,4 +1,6 @@
-export const storeIcons = {
+import { ImgType } from "../globalTypes";
+
+export const storeIcons: Record<string, ImgType> = {
   wifiTag: {
     src: "/images/store/icon-wifitag.svg",
     alt: "wifiTag",
