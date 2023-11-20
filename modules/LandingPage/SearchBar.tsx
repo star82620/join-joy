@@ -14,43 +14,45 @@ import {
   SearchContext,
   defaultSearchValues,
 } from "@/common/contexts/SearchProvider";
+import { GetDataContext } from "@/pages";
+
+const tabs: TabType[] = [
+  {
+    tabName: "group",
+    tabText: "找揪團",
+    img: { src: globalIcons["search-group-light"], alt: "search-group" },
+  },
+  {
+    tabName: "store",
+    tabText: "找店家",
+    img: { src: globalIcons["search-store-light"], alt: "search-store" },
+  },
+];
 
 export default function SearchBar() {
   const searchContext = useContext(SearchContext);
+  const getDataContext = useContext(GetDataContext);
 
   const { searchValues, setSearchValues } = searchContext;
-
-  const titleStyle = "text-lg md:text-md";
+  const { citiesData } = getDataContext;
 
   const [activeTab, setActiveTab] = useState("group");
 
   const isGroup = activeTab === "group";
 
-  const tabs: TabType[] = [
-    {
-      tabName: "group",
-      tabText: "找揪團",
-      img: { src: globalIcons["search-group-light"], alt: "search-group" },
-    },
-    {
-      tabName: "store",
-      tabText: "找店家",
-      img: { src: globalIcons["search-store-light"], alt: "search-store" },
-    },
-  ];
-
   const btnText = isGroup ? "搜出揪團" : "搜出店家";
+  const titleStyle = "text-lg md:text-md";
 
+  // 儲存 input value
   const setSelectValue: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const inputName = e.target.name;
-
     const isCityId = inputName === "cityId";
-
     const value = isCityId ? Number(e.target.value) : e.target.value;
 
     setSearchValues({ ...searchValues, [inputName]: value });
   };
 
+  // 儲存 input value
   const setInputValue: ChangeEventHandler<HTMLInputElement> = (e) => {
     const inputName = e.target.name;
     const value = e.target.value;
@@ -58,10 +60,12 @@ export default function SearchBar() {
     setSearchValues({ ...searchValues, [inputName]: value });
   };
 
+  // 送出搜尋
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     console.log("searchValues", searchValues);
+    // 要跳到搜尋頁
   };
 
   useEffect(() => {
@@ -125,7 +129,11 @@ export default function SearchBar() {
                 onChange={setSelectValue}
               >
                 <option value="">選擇城市</option>
-                <option value="3">城市</option>
+                {citiesData.map((city) => (
+                  <option key={city.Id} value={city.Id}>
+                    {city.CityName}
+                  </option>
+                ))}
               </select>
               <span className="absolute left-3 bottom-0.5 -translate-y-1/4 aheadIcon before:bg-group-location before:bg-cover before:w-5 before:h-5"></span>
             </div>

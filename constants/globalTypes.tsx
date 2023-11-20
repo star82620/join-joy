@@ -71,3 +71,11 @@ export type AuthContextType = {
   authData: AuthDataType | null;
   setAuthData: React.Dispatch<React.SetStateAction<AuthDataType | null>>;
 };
+
+// 所有的城市列表
+export type CitiesDataItemType = {
+  Id: number;
+  CityName: string;
+};
+
+export type CitiesDataType = CitiesDataItemType[];

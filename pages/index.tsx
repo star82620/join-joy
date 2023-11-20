@@ -7,24 +7,72 @@ import useLogout from "@/common/hooks/useLogout";
 import LandingPage from "@/modules/LandingPage";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import { CommentDataType } from "@/constants/types/commentDataType";
+import apiPaths from "@/constants/apiPaths";
+import { GetServerSidePropsContext } from "next";
+import { CitiesDataType } from "@/constants/globalTypes";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export async function getServerSideProps() {
-  const apiParams: apiParamsType = {
-    apiPath: "/storeinfo/getnewestrating",
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context;
+  const { authToken } = req.cookies;
+
+  // 取得所有城市
+  const citiesApiParams: apiParamsType = {
+    apiPath: apiPaths.getCities,
     method: "GET",
   };
-  let data;
+
+  // 取得最新評價
+  const commentsApiParams: apiParamsType = {
+    apiPath: apiPaths["get-newest-rating"],
+    method: "GET",
+  };
+
+  // 有登入用戶的喜好設定
+  const userApiParams: apiParamsType = {
+    apiPath: apiPaths["get-my-profile"],
+    method: "GET",
+    authToken: authToken,
+  };
+
+  const searchKey = {
+    cityId: 0,
+    storeName: "",
+    storeFilter: 0,
+    storeTag: 0,
+    page: 0,
+    pageSize: 0,
+  };
+
+  // IP位置（先固定成高雄）
+  const searchGroupApiParams: apiParamsType = {
+    apiPath: apiPaths["get-my-profile"],
+    method: "GET",
+    data: searchKey,
+  };
+
+  //---
+
+  let commentsData;
+  let citiesData;
+
   try {
-    const res = await fetchApi(apiParams);
-    data = res.data;
+    const citiesRes = await fetchApi(citiesApiParams);
+    citiesData = citiesRes?.data ?? [];
+
+    const ratingRes = await fetchApi(commentsApiParams);
+    commentsData = ratingRes?.data ?? [];
+
+    const userRes = await fetchApi(userApiParams);
   } catch (error) {
     console.error(error);
   }
+
   return {
     props: {
-      commentsData: data,
+      commentsData: commentsData,
+      citiesData: citiesData,
     },
   };
 }
@@ -38,18 +86,26 @@ export async function getServerSideProps() {
 // 你附近的店家 => IP位置
 // 評價
 
-type HomeProps = {
+export type HomeProps = {
   commentsData: CommentDataType[];
+  citiesData: CitiesDataType;
 };
-const DataContext = createContext({});
 
-export default function Home({ commentsData }: HomeProps) {
-  const authContext = useContext(AuthContext);
-  const { authData } = authContext;
-  const logout = useLogout();
+export const defaultDataContext = {
+  commentsData: [] as CommentDataType[],
+  citiesData: [] as CitiesDataType,
+};
+
+export const GetDataContext = createContext<HomeProps>(defaultDataContext);
+
+export default function Home({ commentsData, citiesData }: HomeProps) {
+  // const authContext = useContext(AuthContext);
+  // const { authData } = authContext;
+  // const logout = useLogout();
 
   const dataSet = {
     commentsData: commentsData,
+    citiesData: citiesData,
   };
 
   console.log("data", commentsData);
@@ -57,9 +113,9 @@ export default function Home({ commentsData }: HomeProps) {
   return (
     <>
       <Layout pageCategory="landingpage">
-        <DataContext.Provider value={dataSet}>
+        <GetDataContext.Provider value={dataSet}>
           <LandingPage />
-        </DataContext.Provider>
+        </GetDataContext.Provider>
       </Layout>
     </>
   );

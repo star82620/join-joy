@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { commentSet, groupSet, storeSet } from "./data";
 import Image from "@/common/components/FillImage";
 import CardsSection from "./CardsSection";
 import CommentCard from "./CommentCard";
 import SearchBar from "./SearchBar";
 import SearchProvider from "@/common/contexts/SearchProvider";
+import { GetDataContext } from "@/pages";
 
 export default function LandingPage() {
+  const getDataContext = useContext(GetDataContext);
+  const { commentsData } = getDataContext;
+  // console.log("eeee", GetdataContext);
   return (
     <section className="bg-contain bg-no-repeat bg-landing-banner-bg md:bg-landing-banner-bg-md md:bg-[center_top_-54px]">
       <div className="container flex flex-col items-center pt-11 md:pt-12 pb-[164px] md:pb-[120px]">
@@ -78,7 +82,7 @@ export default function LandingPage() {
         </div>
         {/* comment */}
         <div className="flex items-center gap-6 md:gap-4 px-6 mt-20 md:mt-18 pb-[100px] md:pb-12 overflow-auto snap-x scrollbar-none landingBottomBg">
-          {commentSet.map((comment) => {
+          {commentsData.map((comment) => {
             return <CommentCard key={comment.commentId} data={comment} />;
           })}
         </div>
