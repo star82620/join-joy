@@ -8,14 +8,16 @@ export default function TabBlock({
   zIndex,
   isActive,
   setActiveTab,
+  activeColor,
 }: TabBlockProps) {
   const { tabName, tabText, img } = tab;
+
+  const activeBgColor = activeColor ?? "bg-yellow-dark";
 
   const defaultStyle =
     "pb-[7px] bg-gray-200 text-gray-600 border-gray-400 border-l-gray-400";
 
-  const activeStyle =
-    "pb-[10px] bg-yellow-dark text-gray-950 border-gray-950 rounded-tl-md";
+  const activeStyle = `pb-[10px] ${activeBgColor} text-gray-950 border-gray-950 rounded-tl-md`;
 
   const setImgSrc = () => {
     const activeImg = img.src.replace("light", "dark");
