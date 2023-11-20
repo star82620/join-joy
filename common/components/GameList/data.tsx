@@ -1,11 +1,11 @@
 import { GameType } from "@/constants/globalTypes";
 
-export type SelectedGameType = {
+export type SelectedGameItemType = {
   gameId: GameType["gameId"];
   gameName: GameType["gameName"];
 };
 
-export type SelectedGamesType = SelectedGameType[];
+export type SelectedGamesType = SelectedGameItemType[];
 
 export type GameListProps = {
   category: "view" | "form";
@@ -17,5 +17,6 @@ export type GameListProps = {
 export type GameItemProps = {
   game: GameType;
   isReadOnly: boolean;
-  handleSelected: React.ChangeEventHandler;
+  selectedGames?: SelectedGamesType;
+  handleSelected?: React.ChangeEventHandler;
 };

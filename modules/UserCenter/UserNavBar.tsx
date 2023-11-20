@@ -56,8 +56,7 @@ export default function UserNavBar({
         <ProfileImg
           src="/images/photo-user-000.png"
           alt="userName"
-          widthProp="w-16 md:w-10"
-          heightProp="h-16 md:h-16"
+          sizeStyle="w-16 md:w-10 h-16 md:h-16"
         />
         <p className="mt-3 text-center text-lg font-semibold">多多</p>
       </div>

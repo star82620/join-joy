@@ -53,6 +53,7 @@ const config: Config = {
       transparent: "transparent",
     },
     fontSize: {
+      "4xl": "32px",
       "3xl": "28px",
       "2xl": "24px",
       xl: "20px",
@@ -76,9 +77,13 @@ const config: Config = {
         "radio-false": 'url("/images/icon-radio-false.svg")',
         "checkbox-true": 'url("/images/icon-checkbox-true.svg")',
         "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
+        "mascot-vector": 'url("/images/mascot-vector.svg")',
       },
       backgroundSize: {
         "20px": "20px",
+      },
+      backgroundPosition: {
+        "right-5-bottom-5": "right 5rem bottom 5rem",
       },
       lineHeight: {
         heading: "1.4rem",

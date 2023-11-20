@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SelectedGamesType, GameListProps } from "./data";
+import { GameListProps } from "./data";
 import GameItem from "./GameItem";
 
 export default function GameList({
@@ -9,52 +9,71 @@ export default function GameList({
   setSelectedGames,
 }: GameListProps) {
   const isReadOnly = category === "view";
-  const [renderData, setRenderData] = useState(gamesData);
+
+  const data = gamesData || [];
+
+  const [renderData, setRenderData] = useState(data);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
+
+  const [isFull, setIsFull] = useState(false);
 
   const isEmptyResult = renderData.length === 0;
 
   useEffect(() => {
-    setRenderData(gamesData);
-  }, [gamesData]);
+    setRenderData(data);
+  }, [data]);
 
   // 得到 selectItems 類別篩選內容
   let selectItems: Array<string> = [];
-  gamesData.forEach((game) => {
+  data.forEach((game) => {
     const isInclude = selectItems.includes(game.gameType);
     if (isInclude) return;
     selectItems.push(game.gameType);
   });
 
+  // 類別篩選
   const handleSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectType(e.target.value);
   };
 
+  // 關鍵字搜尋
   const handleSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
 
+  // 選擇
   const handleSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const gameId = Number(e.target.value);
+    const selectedGameId = parseInt(e.target.value);
     const gameName = e.target.dataset.gamename;
+    const isSelected = e.target.checked;
 
     if (!setSelectedGames || !selectedGames) return;
-    if (e.target.checked && gameName) {
+
+    if (isSelected && selectedGames.length === 5) {
+      e.preventDefault();
+      setIsFull(true);
+      return;
+    } else {
+      setIsFull(false);
+    }
+
+    if (isSelected) {
+      if (!gameName) return;
       setSelectedGames([
         ...selectedGames,
-        { gameId: gameId, gameName: gameName },
+        { gameId: selectedGameId, gameName: gameName },
       ]);
     } else {
-      const index = selectedGames.findIndex((game) => game.gameId === gameId);
-      const newData = [...selectedGames];
-      newData.splice(index, 1);
-      setSelectedGames(newData);
+      const updatedSelectedGames = selectedGames.filter(
+        (item) => item.gameId !== selectedGameId
+      );
+      setSelectedGames(updatedSelectedGames);
     }
   };
 
   useEffect(() => {
-    const selectedData = gamesData.filter((game) => {
+    const selectedData = data.filter((game) => {
       // 類型篩選
       const typeFilter = selectType === "all" || game.gameType === selectType;
       // 關鍵字篩選
@@ -65,15 +84,35 @@ export default function GameList({
     setRenderData(selectedData);
   }, [selectType, searchValue]);
 
+  const isEmptyGames = selectedGames?.length === 0;
+
+  const headStyle = isReadOnly
+    ? "px-14 pb-8 md:pb-6"
+    : "bg-yellow-tint md:bg-transparent px-6 pt-4 md:pt-0 md:mb-3";
+
   // ---------
 
   return (
     <section className="flex flex-col justify-center items-center">
-      <div
-        className={`flex justify-between w-full pb-6 md:px-0  ${
-          isReadOnly ? "px-14 pb-8 md:pb-6" : " bg-yellow-tint px-6 pb-2"
-        }`}
-      >
+      {!isReadOnly && (
+        <div className="inputStyle h-12 flex gap-2 items-center text-gray-400 mb-3">
+          {selectedGames?.map((game) => {
+            const { gameId, gameName } = game;
+            return (
+              <div
+                key={gameId}
+                className="px-2 py-1 rounded-sm border border-gray-800 text-gray-950 font-medium"
+              >
+                {gameName}
+              </div>
+            );
+          })}
+          {isFull && <span className="text-danger">最多選擇五款 (=´ω`=)</span>}
+          {isEmptyGames && <p>請在下列表單選擇預計要玩的遊戲</p>}
+        </div>
+      )}
+
+      <div className={`flex justify-between w-full md:px-0 ${headStyle}`}>
         <label className="flex items-center gap-2">
           <span className="md:hidden text-lg font-semibold">類別：</span>
           <select className="px-3 py-2" onChange={handleSelectType}>
@@ -117,6 +156,7 @@ export default function GameList({
                 key={game.gameId}
                 game={game}
                 isReadOnly={isReadOnly}
+                selectedGames={selectedGames}
                 handleSelected={handleSelected}
               />
             ))}
