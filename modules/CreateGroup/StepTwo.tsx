@@ -91,7 +91,6 @@ export default function StepTwo({
               <p className="text-gray-500 text-sm font-semibold mt-1 md:text-xs">
                 最多5款，僅通知店家，實際以現場狀況為主
               </p>
-
               <GameList
                 category="form"
                 gamesData={gamesData}
@@ -101,6 +100,7 @@ export default function StepTwo({
             </TitleBlock>
           </label>
         )}
+
         <GroupTagSelector
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}

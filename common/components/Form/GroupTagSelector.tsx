@@ -15,6 +15,7 @@ export default function GroupTagSelector({
   setSelectedTags,
 }: GroupTagSelectorProps) {
   const [isTagsHidden, setIsTagsHidden] = useState<boolean>(true);
+
   const isEmptySelectedTags = selectedTags.length === 0;
 
   const toggleIcon = isTagsHidden ? "arrow-down" : "arrow-up";
@@ -27,19 +28,21 @@ export default function GroupTagSelector({
     const { id, text } = e.currentTarget.dataset as GroupTagItemType;
 
     if (!id || !text) return;
-    const selectedTag = { id, text };
+    const tagValue = { id, text };
 
     const index = selectedTags.findIndex((item) => {
       return item.id === id;
     });
 
     if (index < 0) {
-      setSelectedTags((prevState) => [...prevState, selectedTag]);
+      setSelectedTags((prevState) => [...prevState, tagValue]);
     }
 
-    const newValue = [...selectedTags];
-    newValue.splice(index, 1);
-    setSelectedTags(newValue);
+    if (index >= 0) {
+      const newValue = [...selectedTags];
+      newValue.splice(index, 1);
+      setSelectedTags(newValue);
+    }
   };
 
   return (

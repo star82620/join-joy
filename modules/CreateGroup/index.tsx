@@ -43,6 +43,8 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
   // 被選到的 Tag
   const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
 
+  console.log("tags", selectedTags);
+
   // 整理表單內容變成 POST 用資料
   const formatPostValues = () => {
     const {
