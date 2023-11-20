@@ -1,46 +1,30 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Inter } from "next/font/google";
-import Link from "next/link";
-import { AuthContext } from "@/common/contexts/AuthProvider";
-import Layout from "@/common/components/Layout";
-import useLogout from "@/common/hooks/useLogout";
-import LandingPage from "@/modules/LandingPage";
-import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import { CommentDataType } from "@/constants/types/commentDataType";
-import apiPaths from "@/constants/apiPaths";
 import { GetServerSidePropsContext } from "next";
+import { Inter } from "next/font/google";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
+import Layout from "@/common/components/Layout";
+import LandingPage from "@/modules/LandingPage";
+import { CommentDataType } from "@/constants/types/commentDataType";
 import { CitiesDataType } from "@/constants/globalTypes";
+import { GroupDataType } from "@/constants/types/groupDataType";
+import { StoreDataType } from "@/constants/types/storeDataType";
+import {
+  defaultGroupsSearchKey,
+  getSearchGroups,
+} from "@/common/helpers/getSearchApi/getSearchGroups";
+import {
+  defaultStoresSearchKey,
+  getSearchStores,
+} from "@/common/helpers/getSearchApi/getSearchStores";
 import {
   defaultCitiesData,
   defaultCommentsData,
   defaultGroupsData,
   defaultStoresData,
 } from "@/modules/LandingPage/data";
-import { GroupDataType } from "@/constants/types/groupDataType";
-import { StoreDataType } from "@/constants/types/storeDataType";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const defaultStoreSearchKey = {
-  cityId: 0, //城市
-  storeName: "", //店名
-  storeFilter: 0, //最相關...
-  storeTag: 0, //服務設施
-  page: 0, //分頁第幾頁
-  pageSize: 0, //一頁多少筆
-};
-
-const defaultGroupSearchKey = {
-  cityId: 0, //城市
-  startDate: "", //日期
-  gameName: "", //遊戲名稱、團名、遊戲類型（關鍵字搜尋）
-  groupFilter: 0, //最相關...
-  groupTag: 0, //遊戲面向
-  groupppl: 0, //揪團總人數
-  joinppl: 0, //剩餘人數
-  page: 0, //分頁第幾頁
-  pageSize: 0, //一頁多少筆
-};
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
@@ -94,7 +78,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const userPreferGameTypes = userData.games;
 
     const searchPreferenceKey = {
-      ...defaultGroupSearchKey,
+      ...defaultGroupsSearchKey,
       cityId: nearbyCityId,
     }; //這裡要改條件
     const searchPreferenceApiParams: apiParamsType = {
@@ -106,47 +90,33 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     // group IP位置（先固定高雄）
     const searchNearbyGroups = {
-      ...defaultGroupSearchKey,
+      ...defaultGroupsSearchKey,
       cityId: nearbyCityId,
       page: 1,
       pageSize: 8,
     };
 
-    const searchNearbyGroupsApiParams: apiParamsType = {
-      ...searchGroupApiParams,
-      data: searchNearbyGroups,
-    };
-
-    const nearbyGroupsRes = await fetchApi(searchNearbyGroupsApiParams);
-    nearbyGroupsData = nearbyGroupsRes?.data.finalGroups ?? [];
+    nearbyGroupsData = await getSearchGroups(searchNearbyGroups);
 
     // group 差你一個
     const searchRemaining = {
-      ...defaultGroupSearchKey,
+      ...defaultGroupsSearchKey,
       joinppl: 1,
       page: 1,
       pageSize: 8,
     };
-    const searchRemainingGroupApiParams: apiParamsType = {
-      ...searchGroupApiParams,
-      data: searchRemaining,
-    };
-    const remainingGroupsRes = await fetchApi(searchRemainingGroupApiParams);
-    remainingGroupsData = remainingGroupsRes?.data.finalGroups ?? [];
+
+    remainingGroupsData = await getSearchGroups(searchRemaining);
 
     // 你附近的店家（IP 先定高雄）
     const searchLocationStores = {
-      ...defaultStoreSearchKey,
+      ...defaultStoresSearchKey,
       cityId: nearbyCityId,
       page: 1,
       pageSize: 6,
     };
-    const searchnearbyStoresApiParams: apiParamsType = {
-      ...searchStoreApiParams,
-      data: searchLocationStores,
-    };
-    const nearbyStoresRes = await fetchApi(searchnearbyStoresApiParams);
-    nearbyStoresData = nearbyStoresRes?.data.matchedStores ?? [];
+
+    nearbyStoresData = await getSearchStores(searchLocationStores);
 
     //---
   } catch (error) {

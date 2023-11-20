@@ -41,6 +41,7 @@ export default function SearchBar() {
   const isGroup = activeTab === "group";
 
   const btnText = isGroup ? "搜出揪團" : "搜出店家";
+
   const titleStyle = "text-lg md:text-md";
 
   // 儲存 input value
@@ -65,6 +66,9 @@ export default function SearchBar() {
     e.preventDefault();
 
     console.log("searchValues", searchValues);
+
+    if (isGroup) {
+    }
     // 要跳到搜尋頁
   };
 
