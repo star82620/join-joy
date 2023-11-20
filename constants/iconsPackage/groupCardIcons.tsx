@@ -1,4 +1,6 @@
-const groupCardIcons = {
+import { ImgType } from "../globalTypes";
+
+const groupCardIcons: Record<string, ImgType> = {
   location: {
     src: "/images/group-card/icon-location.svg",
     alt: "icon-location",

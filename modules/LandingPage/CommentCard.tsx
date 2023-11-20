@@ -16,8 +16,10 @@ export default function CommentCard({ data }: CommentCardProps) {
   const userProfileImgSrc = profileImg || defaultImages["userProfileImg"];
   const ratingScore = Math.floor(score);
 
+  const storeHref = `/store/${storeId}`;
+
   return (
-    <Link href={`/store/${storeId}`} className="no-underline">
+    <Link href={storeHref} className="no-underline">
       <div
         className={`snap-start snap-normal scroll-ml-12 md:scroll-ml-6 sm:scroll-ml-3 ${cardStyle}`}
       >
@@ -37,8 +39,8 @@ export default function CommentCard({ data }: CommentCardProps) {
               {[...Array(ratingScore)].map((_, index) => (
                 <Image
                   key={index}
-                  src={globalIcons["rating-star-dark"]}
-                  alt="rating-star-dark"
+                  src={globalIcons["rating-star-dark"].src}
+                  alt={globalIcons["rating-star-dark"].alt}
                   widthProp="w-5 md:w-4"
                   heightProp="h-5 md:h-4"
                 />

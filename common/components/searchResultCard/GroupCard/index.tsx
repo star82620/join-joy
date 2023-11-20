@@ -22,7 +22,7 @@ export default function GroupCard({ data }: GroupCardProps) {
   } = data;
 
   const isStore = store !== null;
-  const location = isStore ? store.storeName : place;
+  const groupLocation = isStore ? store.storeName : place;
 
   const currentMembersNum =
     members.reduce((counts: number, member) => {
@@ -32,7 +32,7 @@ export default function GroupCard({ data }: GroupCardProps) {
 
   const plusNum = currentMembersNum - (members.length + 1);
 
-  const isPlus = plusNum > 0;
+  const hasExtraNumbers = plusNum > 0;
 
   const filteredMembers = members.filter((_, index) => {
     return index <= 2;
@@ -59,7 +59,7 @@ export default function GroupCard({ data }: GroupCardProps) {
             <span className="whitespace-nowrap">{`${startTime} - ${endTime}`}</span>
           </p>
           <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-location mt-2">
-            {location}
+            {groupLocation}
           </p>
           <div className="flex justify-start items-center gap-1 mt-3 md:mt-2 text-sm text-gray-500 font-semibold whitespace-nowrap overflow-scroll scrollbar-none">
             {tags.map((tag, index, tags) => {
@@ -115,7 +115,7 @@ export default function GroupCard({ data }: GroupCardProps) {
               );
             })}
 
-            {isPlus && (
+            {hasExtraNumbers && (
               <div className="flex justify-center items-center -ml-3 w-9 h-9 bg-yellow-dark rounded-full text-sm text-gray-400 pl-1">
                 +{plusNum}
               </div>

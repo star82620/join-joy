@@ -9,11 +9,11 @@ import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import TabBlock from "@/common/components/FileWrapper/TabBlock";
-import { TabType } from "@/common/components/FileWrapper/data";
 import {
   SearchContext,
   defaultSearchValues,
 } from "@/common/contexts/SearchProvider";
+import { tabs } from "./data";
 
 export default function SearchBar() {
   const searchContext = useContext(SearchContext);
@@ -25,19 +25,6 @@ export default function SearchBar() {
   const [activeTab, setActiveTab] = useState("group");
 
   const isGroup = activeTab === "group";
-
-  const tabs: TabType[] = [
-    {
-      tabName: "group",
-      tabText: "找揪團",
-      img: { src: globalIcons["search-group-light"], alt: "search-group" },
-    },
-    {
-      tabName: "store",
-      tabText: "找店家",
-      img: { src: globalIcons["search-store-light"], alt: "search-store" },
-    },
-  ];
 
   const btnText = isGroup ? "搜出揪團" : "搜出店家";
 
@@ -160,8 +147,8 @@ export default function SearchBar() {
           >
             <div className="flex justify-center items-center gap-2.5 whitespace-nowrap">
               <Image
-                src={globalIcons["search-white"]}
-                alt="search"
+                src={globalIcons["search-white"].src}
+                alt={globalIcons["search-white"].alt}
                 widthProp="w-6 md:w-5"
                 heightProp="h-6 md:h-5"
               />

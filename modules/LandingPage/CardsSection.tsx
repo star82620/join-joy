@@ -53,16 +53,16 @@ export default function CardsSection({
             <div className="flex gap-4">
               <button type="button" className={arrowBtnStyle}>
                 <Image
-                  src={globalIcons["arrow-left"]}
-                  alt="arrow-left"
+                  src={globalIcons["arrow-left"].src}
+                  alt={globalIcons["arrow-left"].alt}
                   widthProp="w-6 md:w-5"
                   heightProp="h-6 md:h-5"
                 />
               </button>
               <button type="button" className={arrowBtnStyle}>
                 <Image
-                  src={globalIcons["arrow-right"]}
-                  alt="arrow-right"
+                  src={globalIcons["arrow-right"].src}
+                  alt={globalIcons["arrow-right"].alt}
                   widthProp="w-6 md:w-5"
                   heightProp="h-6 md:h-5"
                 />

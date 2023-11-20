@@ -37,12 +37,14 @@ export default function GroupStatusSign({
     const text = myGroupStatusSet[status].text;
 
     return renderStatusSign(color, text);
-  } else if (category === "group" && isGroupStatusKey(status)) {
+  }
+
+  if (category === "group" && isGroupStatusKey(status)) {
     const color = groupStatusSet[status].style;
     const text = groupStatusSet[status].text;
 
     return renderStatusSign(color, text);
-  } else {
-    return null;
   }
+
+  return null;
 }

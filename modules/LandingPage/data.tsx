@@ -1,6 +1,8 @@
 import { StoreDataType } from "@/constants/types/storeDataType";
 import { CommentDataType } from "@/constants/types/commentDataType";
 import { GroupDataType } from "@/constants/types/groupDataType";
+import { globalIcons } from "@/constants/iconsPackage/globalIcons";
+import { TabType } from "@/common/components/FileWrapper/data";
 
 // CardsSectionProps
 export type CardsSectionProps = {
@@ -16,8 +18,29 @@ export type CommentCardProps = {
   data: CommentDataType;
 };
 
-// ----test data----
+// ----data----
 
+// SearchBar
+export const tabs: TabType[] = [
+  {
+    tabName: "group",
+    tabText: "找揪團",
+    img: {
+      src: globalIcons["search-group-light"].src,
+      alt: globalIcons["search-group-light"].alt,
+    },
+  },
+  {
+    tabName: "store",
+    tabText: "找店家",
+    img: {
+      src: globalIcons["search-store-light"].src,
+      alt: globalIcons["search-store-light"].alt,
+    },
+  },
+];
+
+// test data
 export const groupSet: GroupDataType[] = [
   {
     groupId: 18,

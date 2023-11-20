@@ -29,6 +29,7 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+
       {/* 卡片列表 */}
       <div
         className="bg-brown-dark pt-[72px] pb-[120px] md:pt-6 md:mb-8"
@@ -76,6 +77,7 @@ export default function LandingPage() {
             heightProp="h-[150px]"
           />
         </div>
+
         {/* comment */}
         <div className="flex items-center gap-6 md:gap-4 px-6 mt-20 md:mt-18 pb-[100px] md:pb-12 overflow-auto snap-x scrollbar-none landingBottomBg">
           {commentSet.map((comment) => {
