@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { commentSet, groupSet, storeSet } from "./data";
 import Image from "@/common/components/FillImage";
 import CardsSection from "./CardsSection";
 import CommentCard from "./CommentCard";
@@ -9,8 +8,20 @@ import { GetDataContext } from "@/pages";
 
 export default function LandingPage() {
   const getDataContext = useContext(GetDataContext);
-  const { commentsData } = getDataContext;
-  // console.log("eeee", GetdataContext);
+  const {
+    commentsData,
+    remainingGroupsData,
+    nearbyGroupsData,
+    preferenceData,
+    nearbyStoresData,
+  } = getDataContext;
+
+  const a = nearbyGroupsData.filter((item) => {
+    if (item.groupStatus !== "開團中") return;
+    return item;
+  });
+  console.log("aaaa", a);
+
   return (
     <section className="bg-contain bg-no-repeat bg-landing-banner-bg md:bg-landing-banner-bg-md md:bg-[center_top_-54px]">
       <div className="container flex flex-col items-center pt-11 md:pt-12 pb-[164px] md:pb-[120px]">
@@ -42,21 +53,21 @@ export default function LandingPage() {
           <CardsSection
             title="就差你一個成團"
             cardCategory="group"
-            cardsData={groupSet}
+            cardsData={remainingGroupsData}
             moreHref="/search"
             layout="swipe"
           />
           <CardsSection
             title="你 附近 的揪團"
             cardCategory="group"
-            cardsData={groupSet}
+            cardsData={nearbyGroupsData}
             moreHref="/search"
             layout="swipe"
           />
           <CardsSection
             title="你可能會有興趣的揪團"
             cardCategory="group"
-            cardsData={groupSet}
+            cardsData={preferenceData}
             moreHref="/search"
             layout="block"
           />
@@ -67,7 +78,7 @@ export default function LandingPage() {
           <CardsSection
             title="你 附近 的店家"
             cardCategory="store"
-            cardsData={storeSet}
+            cardsData={nearbyStoresData}
             moreHref="/search"
             layout="swipe"
           />

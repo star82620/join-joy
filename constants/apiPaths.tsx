@@ -10,6 +10,8 @@ const apiPaths = {
   "leave-group": "/group/leavegroup",
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",
+  "search-store": "/search/search/storesearch",
+  "search-group": "/search/search/groups",
 };
 
 export default apiPaths;
