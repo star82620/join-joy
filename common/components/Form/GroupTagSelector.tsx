@@ -27,21 +27,19 @@ export default function GroupTagSelector({
     const { id, text } = e.currentTarget.dataset as GroupTagItemType;
 
     if (!id || !text) return;
-    const tagValue = { id, text };
+    const selectedTag = { id, text };
 
     const index = selectedTags.findIndex((item) => {
       return item.id === id;
     });
 
     if (index < 0) {
-      setSelectedTags((prevState) => [...prevState, tagValue]);
+      setSelectedTags((prevState) => [...prevState, selectedTag]);
     }
 
-    if (index >= 0) {
-      const newValue = [...selectedTags];
-      newValue.splice(index, 1);
-      setSelectedTags(newValue);
-    }
+    const newValue = [...selectedTags];
+    newValue.splice(index, 1);
+    setSelectedTags(newValue);
   };
 
   return (

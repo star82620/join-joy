@@ -15,9 +15,13 @@ export default function TitleBlock({
     if (description && isCol) return "col";
     return "row";
   };
+
   const isCol = checkDirection() === "col";
+
   const colTitleStyle = isCol ? "block" : "inline";
+
   const colDescriptionStyle = isCol ? "mt-1" : "";
+
   const requiredStyle = require
     ? "after:content-['*'] after:text-danger after:text-xl"
     : "";

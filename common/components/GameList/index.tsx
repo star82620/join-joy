@@ -22,9 +22,9 @@ export default function GameList({
   // 得到 selectItems 類別篩選內容
   let selectItems: Array<string> = [];
   gamesData.forEach((game) => {
-    const isInclude = selectItems.includes(game.gametype);
+    const isInclude = selectItems.includes(game.gameType);
     if (isInclude) return;
-    selectItems.push(game.gametype);
+    selectItems.push(game.gameType);
   });
 
   const handleSelectType = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,7 +38,7 @@ export default function GameList({
   const handleSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const gameId = Number(e.target.value);
     const gameName = e.target.dataset.gamename;
-    console.log("gameNNName", gameName);
+
     if (!setSelectedGames || !selectedGames) return;
     if (e.target.checked && gameName) {
       setSelectedGames([
@@ -56,7 +56,7 @@ export default function GameList({
   useEffect(() => {
     const selectedData = gamesData.filter((game) => {
       // 類型篩選
-      const typeFilter = selectType === "all" || game.gametype === selectType;
+      const typeFilter = selectType === "all" || game.gameType === selectType;
       // 關鍵字篩選
       const searchFilter = game.gameName.includes(searchValue);
 

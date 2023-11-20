@@ -43,10 +43,9 @@ export type StoreType = {
 };
 
 // game
-// 這裡的 gameType 是小寫 t（from API）
 export type GameType = {
   gameId: number;
-  gametype: string;
+  gameType: string;
   gameName: string;
   version: string;
   peopleNum: string;

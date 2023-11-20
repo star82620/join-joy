@@ -156,7 +156,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           options={formattedData}
           onChange={handleSelectedCity}
           defaultText="請選擇城市"
-          value={city.cityName}
+          value={values.city.cityName}
           required={true}
         />
       </div>

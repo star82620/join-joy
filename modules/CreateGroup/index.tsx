@@ -1,6 +1,6 @@
 import React, { useState, createContext, FormEventHandler } from "react";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import convertToISO from "@/common/helpers/convertToISO";
+import { convertToISO } from "@/common/helpers/convertToISO";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProgressBar from "./ProgressBar";
 import StepOne from "./StepOne";
