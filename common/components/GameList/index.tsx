@@ -124,7 +124,7 @@ export default function GameList({
             ))}
           </select>
         </label>
-        <form className="flex items-center gap-4 ml-6 grow md:ml-3">
+        <div className="flex items-center gap-4 ml-6 grow md:ml-3">
           <label className="grow flex items-center gap-2">
             <span className="md:hidden text-lg font-semibold">關鍵字：</span>
             <input
@@ -134,7 +134,7 @@ export default function GameList({
               onChange={handleSearchValue}
             />
           </label>
-        </form>
+        </div>
       </div>
       <div className="w-full overflow-scroll">
         <div className="w-full bg-yellow-tint md:bg-transparent px-6 py-4 md:pt-0 md:px-1  md:min-w-[420px]">

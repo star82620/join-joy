@@ -149,6 +149,11 @@ export default function StepOne({ citiesData }: StepOneProps) {
       value: city.Id.toString(),
       text: city.CityName,
     }));
+
+    const selectedCityValue =
+      formattedData.find((city) => city.text === values.city.cityName)?.value ||
+      "";
+
     return (
       <div className="w-full">
         <SelectInput
@@ -156,7 +161,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           options={formattedData}
           onChange={handleSelectedCity}
           defaultText="請選擇城市"
-          value={values.city.cityName}
+          value={selectedCityValue}
           required={true}
         />
       </div>
