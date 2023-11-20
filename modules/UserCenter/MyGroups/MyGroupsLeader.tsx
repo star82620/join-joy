@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import GroupsList from "./GroupsList";
 
 export default function MyGroupsLeader() {
-  const pageStatus = "leader";
+  const pageCategory = "leader";
 
-  return <GroupsList category={pageStatus} />;
+  return <GroupsList pageCategory={pageCategory} />;
 }

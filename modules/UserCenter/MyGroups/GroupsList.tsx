@@ -9,25 +9,45 @@ import { defaultGroupsData } from "../date";
 import { tabs, BtnSetType, GroupListProps } from "./data";
 import apiPaths from "@/constants/apiPaths";
 
-function GroupsList({ category }: GroupListProps) {
+function GroupsList({ pageCategory }: GroupListProps) {
   const router = useRouter();
-  const handleCancelApply = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("取消加入揪團申請");
-  };
-  const handleQuitGroup = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+  // 取消加入揪團申請
+  const handleCancelApply = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {};
+
+  // 退出揪團
+  const handleQuitGroup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const groupId = Number(e.currentTarget.value);
     const apiParams: apiParamsType = {
       apiPath: `${apiPaths["leave-group"]}/${groupId}`,
       method: "POST",
     };
 
-    const res = fetchApi(apiParams);
+    try {
+      const res = await fetchApi(apiParams);
+
+      if (res.success) {
+        alert("已退出揪團QQ");
+      } else {
+        alert("退出揪團失敗，請稍後再試");
+      }
+    } catch (error) {
+      console.error("好像發生了一點錯誤，請稍後再試", error);
+    }
   };
-  const pushToComment = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+  // 前往評價頁
+  const pushToCommentPage = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.value;
     router.push(`/user-center/group/${id}`);
   };
-  const pushToManagement = (e: React.MouseEvent<HTMLButtonElement>) => {
+
+  // 前往揪團管理頁
+  const pushToManagementGroupPage = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     const id = e.currentTarget.value;
     router.push(`/user-center/group/${id}`);
   };
@@ -36,9 +56,9 @@ function GroupsList({ category }: GroupListProps) {
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
   // 我開的揪團（團主）
-  const isLeaderPage = category === "leader";
+  const isLeaderPage = pageCategory === "leader";
   // 我加入的揪團（團員）
-  const isMemberPage = category === "member";
+  const isMemberPage = pageCategory === "member";
   // 尚未開始 tab
   const isUpcoming = activeTab === "upcoming";
   // 已結束 tab
@@ -64,12 +84,12 @@ function GroupsList({ category }: GroupListProps) {
     },
     leader: {
       text: "管理",
-      func: pushToManagement,
+      func: pushToManagementGroupPage,
       disabled: false,
     },
     closed: {
       text: "評價",
-      func: pushToComment,
+      func: pushToCommentPage,
       disabled: false,
     },
     commented: {
@@ -100,13 +120,11 @@ function GroupsList({ category }: GroupListProps) {
       </>
     );
 
-    if (isLeaderPage) {
-      if (isUpcoming) return leaderBtnTitle;
-      return "評價";
-    } else if (isMemberPage) {
-      if (isUpcoming) return memberBtnTitle;
-      return "評價";
-    }
+    const title = isLeaderPage ? leaderBtnTitle : memberBtnTitle;
+
+    const result = isExpired ? "評價" : title;
+
+    return result;
   };
 
   const btnTitle = setBtnTitle();
@@ -114,20 +132,18 @@ function GroupsList({ category }: GroupListProps) {
   // 篩選要跑出來的列表內容
   const filteredData = groupsData.filter((group) => {
     const { endTime, groupStatus, memberStatus } = group;
-    const status = setGroupStatus(endTime, groupStatus, memberStatus);
+    const status = setGroupStatus(groupStatus, memberStatus);
     const isClosed = status === "closed";
     const now = new Date();
     const today = now.toISOString();
     const isExpiredGroup = endTime < today;
 
     if (isUpcoming) {
-      if (isExpiredGroup) return false;
-      if (isClosed) return false;
+      if (isExpiredGroup || isClosed) return false;
       return true;
     }
 
-    if (isExpiredGroup) return true;
-    if (isClosed) return true;
+    if (isExpiredGroup || isClosed) return true;
 
     return false;
   });
@@ -152,12 +168,7 @@ function GroupsList({ category }: GroupListProps) {
         </div>
         <ul>
           {filteredData.map((group) => (
-            <GroupItem
-              key={group.groupId}
-              group={group}
-              isExpired={isExpired}
-              btnSet={btnSet}
-            />
+            <GroupItem key={group.groupId} group={group} btnSet={btnSet} />
           ))}
           {isEmptyList && (
             <p className="text-center text-gray-600">目前沒有任何紀錄唷！</p>
