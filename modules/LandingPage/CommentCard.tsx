@@ -14,7 +14,7 @@ export default function CommentCard({ data }: CommentCardProps) {
   const { storeName, storeId } = group;
 
   const userProfileImgSrc = convertImgSrc(profileImg);
-  console.log("099", userProfileImgSrc);
+
   const ratingScore = Math.floor(score);
 
   return (
