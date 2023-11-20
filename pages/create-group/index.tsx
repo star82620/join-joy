@@ -19,7 +19,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   const citiesApiParams: apiParamsType = {
-    apiPath: apiPaths.getCities,
+    apiPath: apiPaths["get-cities"],
     method: "GET",
   };
 

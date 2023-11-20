@@ -63,7 +63,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
       const isStore = locationKind === "store";
 
       const storesKey: apiParamsType = {
-        apiPath: `${apiPaths.getCityStores}?city=${cityId}`,
+        apiPath: `${apiPaths["get-city-stores"]}?city=${cityId}`,
         method: "GET",
       };
 
@@ -88,7 +88,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
       const isStore = locationKind === "store";
 
       const remainingSeatsKey: apiParamsType = {
-        apiPath: `${apiPaths.getRemainingSeats}/${storeId}/${date}`,
+        apiPath: `${apiPaths["get-remaining-seats"]}/${storeId}/${date}`,
         method: "GET",
       };
 

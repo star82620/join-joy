@@ -41,7 +41,7 @@ export default function StepTwo({
   useEffect(() => {
     const getGamesData = async () => {
       const gamesKey: apiParamsType = {
-        apiPath: `${apiPaths.getGames}/${storeId}`,
+        apiPath: `${apiPaths["get-games"]}/${storeId}`,
         method: "GET",
       };
       const res = await fetchApi(gamesKey);

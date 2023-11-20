@@ -9,7 +9,7 @@ import StepThree from "./StepThree";
 import apiPaths from "@/constants/apiPaths";
 import {
   SelectedGamesType,
-  SelectedGameType,
+  SelectedGameItemType,
 } from "@/common/components/GameList/data";
 import {
   defaultValues,
@@ -70,7 +70,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
     const isPrivate = groupPrivacy === "private";
 
     const formattedGames = selectedGames.reduce(
-      (games, game: SelectedGameType) => {
+      (games, game: SelectedGameItemType) => {
         const { gameId } = game;
         games.push(gameId);
         return games;
@@ -117,7 +117,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
     const postValues = formatPostValues();
 
     const apiParams: apiParamsType = {
-      apiPath: apiPaths["submitCreateGroup"],
+      apiPath: apiPaths["submit-create-group"],
       method: "POST",
       data: postValues,
     };
