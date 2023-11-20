@@ -7,8 +7,6 @@ export default function convertImgSrc(img: string | null) {
 
   const convertImgSrc = `/upload${img}`;
 
-  console.log("heeee", img, convertImgSrc);
-
   const defaultImgSrc = defaultImages.userProfileImg;
 
   const result = img ? convertImgSrc : defaultImgSrc;

@@ -15,6 +15,7 @@ import {
   defaultSearchValues,
 } from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
+import { useRouter } from "next/router";
 
 const tabs: TabType[] = [
   {
@@ -30,13 +31,15 @@ const tabs: TabType[] = [
 ];
 
 export default function SearchBar() {
+  const router = useRouter();
+
   const searchContext = useContext(SearchContext);
   const getDataContext = useContext(GetDataContext);
 
-  const { searchValues, setSearchValues } = searchContext;
-  const { citiesData } = getDataContext;
+  const { searchValues, setSearchValues, activeTab, setActiveTab } =
+    searchContext;
 
-  const [activeTab, setActiveTab] = useState("group");
+  const { citiesData } = getDataContext;
 
   const isGroup = activeTab === "group";
 
@@ -65,11 +68,7 @@ export default function SearchBar() {
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    console.log("searchValues", searchValues);
-
-    if (isGroup) {
-    }
-    // 要跳到搜尋頁
+    router.push("/search");
   };
 
   useEffect(() => {
