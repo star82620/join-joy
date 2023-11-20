@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "@/common/components/FillImage";
-import { globalIcons } from "@/constants/iconsPackage/globalIcons";
-import { defaultImages } from "@/constants/defaultImages";
 import Link from "@/common/components/GeneralLink";
+import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { CommentCardProps } from "./data";
+import convertImgSrc from "@/common/helpers/convertImgSrc";
 
 const cardStyle =
   "flex flex-col w-[336px] md:w-[276px] h-[268px] md:h-[220px] p-4 md:p-3 rounded-md shadow-comment-card bg-white relative before:w-4 before:h-4 before:bg-brackets-start before:self-start before:bg-no-repeat after:w-4 after:h-4 after:bg-brackets-end after:self-end after:bg-no-repeat";
@@ -13,7 +13,7 @@ export default function CommentCard({ data }: CommentCardProps) {
   const { userName, profileImg } = commentBy;
   const { storeName, storeId } = group;
 
-  const userProfileImgSrc = profileImg || defaultImages["userProfileImg"];
+  const userProfileImgSrc = convertImgSrc(profileImg);
   const ratingScore = Math.floor(score);
 
   return (

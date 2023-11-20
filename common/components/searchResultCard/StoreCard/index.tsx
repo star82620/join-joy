@@ -7,6 +7,7 @@ import { storeIcons } from "@/constants/iconsPackage/storeIcons";
 import Link from "../../GeneralLink";
 import { defaultImages } from "@/constants/defaultImages";
 import { StoreCardProps } from "./data";
+import convertImgSrc from "@/common/helpers/convertImgSrc";
 
 export default function StoreCard({ data }: StoreCardProps) {
   const {
@@ -22,7 +23,7 @@ export default function StoreCard({ data }: StoreCardProps) {
     popTag,
   } = data;
 
-  const profileImgSrc = profileImg || defaultImages.storeProfileImg;
+  const profileImgSrc = convertImgSrc(profileImg);
   const coverPhotoSrc = cover || defaultImages.storeCoverPhoto;
   const scoreNum = Math.floor(score * 10) / 10;
 

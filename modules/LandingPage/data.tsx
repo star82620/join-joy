@@ -41,6 +41,7 @@ export const defaultCommentsData: CommentDataType[] = [
     score: 0,
   },
 ];
+
 export const defaultGroupsData: GroupDataType[] = [
   {
     groupId: 0,
