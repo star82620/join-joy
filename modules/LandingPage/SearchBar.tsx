@@ -39,6 +39,17 @@ export default function SearchBar() {
   const { searchValues, setSearchValues, activeTab, setActiveTab } =
     searchContext;
 
+  const isEmptyCityId = searchValues.cityId === 0;
+  const isEmptyStartDate = searchValues.startDate === "";
+  const isEmptyGameName = searchValues.gameName === "";
+  const isEmptyStoreName = searchValues.storeName === "";
+
+  const [error, setError] = useState(false);
+
+  const isError = error === true;
+
+  useEffect(() => {}, [searchValues]);
+
   const { citiesData } = getDataContext;
 
   const isGroup = activeTab === "group";
@@ -67,6 +78,16 @@ export default function SearchBar() {
   // 送出搜尋
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
+    if (
+      isEmptyCityId &&
+      isEmptyStartDate &&
+      isEmptyGameName &&
+      isEmptyStoreName
+    ) {
+      setError(true);
+      return;
+    }
 
     router.push("/search");
   };
@@ -163,22 +184,29 @@ export default function SearchBar() {
             <h3 className={titleStyle}>關鍵字</h3>
             {isGroup ? groupKeyWordInput : storeKeyWordInput}
           </div>
-          <Button
-            type="submit"
-            appearance="black"
-            rounded
-            className="md:w-full"
-          >
-            <div className="flex justify-center items-center gap-2.5 whitespace-nowrap">
-              <Image
-                src={globalIcons["search-white"]}
-                alt="search"
-                widthProp="w-6 md:w-5"
-                heightProp="h-6 md:h-5"
-              />
-              {btnText}
-            </div>
-          </Button>
+          <div>
+            {isError && (
+              <p className="mb-1 text-center text-sm text-danger font-semibold">
+                請填入搜尋條件
+              </p>
+            )}
+            <Button
+              type="submit"
+              appearance="black"
+              rounded
+              className="md:w-full"
+            >
+              <div className="flex justify-center items-center gap-2.5 whitespace-nowrap">
+                <Image
+                  src={globalIcons["search-white"]}
+                  alt="search"
+                  widthProp="w-6 md:w-5"
+                  heightProp="h-6 md:h-5"
+                />
+                {btnText}
+              </div>
+            </Button>
+          </div>
         </form>
       </div>
     </section>

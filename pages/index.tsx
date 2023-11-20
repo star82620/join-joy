@@ -68,25 +68,21 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
 
     // 有登入用戶的喜好設定 => 要問洛陽 gameType 的篩選?
-    const userApiParams: apiParamsType = {
-      apiPath: apiPaths["get-my-profile"],
-      method: "GET",
+    const preferenceApiParams: apiParamsType = {
+      apiPath: apiPaths["get-preference-group"],
+      method: "POST",
       authToken: authToken,
+      data: {
+        page: 1,
+        pageSize: 8,
+      },
     };
-    const userRes = await fetchApi(userApiParams);
-    const userData = userRes?.data ?? [];
-    const userPreferGameTypes = userData.games;
 
-    const searchPreferenceKey = {
-      ...defaultGroupsSearchKey,
-      cityId: nearbyCityId,
-    }; //這裡要改條件
-    const searchPreferenceApiParams: apiParamsType = {
-      ...searchGroupApiParams,
-      data: searchPreferenceKey,
-    };
-    const preferenceRes = await fetchApi(searchPreferenceApiParams);
-    preferenceData = preferenceRes?.data.finalGroups ?? [];
+    const preferenceRes = await fetchApi(preferenceApiParams);
+
+    if (preferenceRes.status) {
+      preferenceData = preferenceRes.data;
+    }
 
     // group IP位置（先固定高雄）
     const searchNearbyGroups = {

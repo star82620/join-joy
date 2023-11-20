@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { ProfileImgProps } from "./data";
+import convertImgSrc from "@/common/helpers/convertImgSrc";
 
 export default function ProfileImg({ src, alt, sizeStyle }: ProfileImgProps) {
-  const imgSrc = `${process.env.NEXT_PUBLIC_API_URL}${src}`;
-
+  const imgSrc = convertImgSrc(src);
   return (
     <div
       className={`relative rounded-full border-2 border-white outline outline-2

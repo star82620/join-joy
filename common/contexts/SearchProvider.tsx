@@ -40,11 +40,6 @@ export const defaultSearchValues: SearchValuesType = {
   storeTag: 0,
 };
 
-type SearchTabContextType = {
-  activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-};
-
 export const defaultSearchContext = {
   searchValues: defaultSearchValues,
   setSearchValues: (value: SearchValuesType) => {},

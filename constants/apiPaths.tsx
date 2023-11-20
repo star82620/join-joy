@@ -12,6 +12,7 @@ const apiPaths = {
   "get-newest-rating": "/storeinfo/getnewestrating",
   "search-store": "/search/search/storesearch",
   "search-group": "/search/search/groups",
+  "get-preference-group": "/search/search/groupsinterest",
 };
 
 export default apiPaths;

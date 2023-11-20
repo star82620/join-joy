@@ -1,15 +1,19 @@
 import { defaultImages } from "@/constants/defaultImages";
 
 export default function convertImgSrc(img: string | null) {
-  const checkedSrc = img?.includes("http");
-
-  if (checkedSrc) return img;
-
-  const convertImgSrc = `/upload${img}`;
-
   const defaultImgSrc = defaultImages.userProfileImg;
 
-  const result = img ? convertImgSrc : defaultImgSrc;
+  if (!img) return defaultImgSrc;
+
+  if (!img?.includes("http")) {
+    const formattedImg = `${process.env.NEXT_PUBLIC_API_URL}/upload/${img}`;
+
+    const result = formattedImg || defaultImgSrc;
+
+    return result;
+  }
+
+  const result = img || defaultImgSrc;
 
   return result;
 }
