@@ -15,8 +15,6 @@ import {
   GamesDataType,
   HandlePrivateGroupType,
   HandlePDescriptionValueType,
-  HandleSelectedTag,
-  ToggleTagsBlockType,
   StepTwoProps,
 } from "./data";
 
@@ -129,7 +127,7 @@ export default function StepTwo({
           const { title, description } = question;
           return (
             <section
-              key={index}
+              key={question.title}
               className="flex justify-between gap-3 md:flex-col"
             >
               <div>

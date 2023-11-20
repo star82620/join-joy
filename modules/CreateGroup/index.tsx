@@ -117,7 +117,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
     const postValues = formatPostValues();
 
     const apiParams: apiParamsType = {
-      apiPath: apiPaths["submit-create-group"],
+      apiPath: apiPaths["submitCreateGroup"],
       method: "POST",
       data: postValues,
     };
@@ -130,6 +130,10 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
       setActiveStep(3);
     }
   };
+
+  const isStepOne = activeStep === 1;
+  const isStepTwo = activeStep === 2;
+  const isStepThree = activeStep === 3;
 
   return (
     <div className="container py-[88px] lg:py-18 md:py-16 sm:py-14">
@@ -144,8 +148,8 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
                   id="create-group"
                   onSubmit={submitCreateGroupHandler}
                 >
-                  {activeStep === 1 && <StepOne citiesData={citiesData} />}
-                  {activeStep === 2 && (
+                  {isStepOne && <StepOne citiesData={citiesData} />}
+                  {isStepTwo && (
                     <StepTwo
                       selectedGames={selectedGames}
                       setSelectedGames={setSelectedGames}
@@ -153,9 +157,7 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
                       setSelectedTags={setSelectedTags}
                     />
                   )}
-                  {activeStep === 3 && (
-                    <StepThree createdGroupId={createdGroupId} />
-                  )}
+                  {isStepThree && <StepThree createdGroupId={createdGroupId} />}
                 </form>
               </ValuesContext.Provider>
             </StepContext.Provider>

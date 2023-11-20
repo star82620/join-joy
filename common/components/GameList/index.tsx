@@ -79,7 +79,7 @@ export default function GameList({
           <select className="px-3 py-2" onChange={handleSelectType}>
             <option value="all">全部</option>
             {selectItems.map((type, index) => (
-              <option key={index} value={type}>
+              <option key={type} value={type}>
                 {type}
               </option>
             ))}
