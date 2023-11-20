@@ -2,9 +2,10 @@ import { StoreDataType } from "@/constants/types/storeDataType";
 import { CommentDataType } from "@/constants/types/commentDataType";
 import { GroupDataType } from "@/constants/types/groupDataType";
 import { CitiesDataType } from "@/constants/globalTypes";
+import { TabType } from "@/common/components/FileWrapper/data";
+import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 
 // page
-
 export type HomeProps = {
   citiesData: CitiesDataType;
   commentsData: CommentDataType[];
@@ -28,8 +29,9 @@ export type CommentCardProps = {
   data: CommentDataType;
 };
 
-// ----test data----
+// ----data----
 
+// page
 export const defaultCitiesData: CitiesDataType = [{ CityName: "", Id: 0 }];
 
 export const defaultCommentsData: CommentDataType[] = [
@@ -99,5 +101,26 @@ export const defaultStoresData: StoreDataType[] = [
     tags: [],
     hqTag: true,
     popTag: true,
+  },
+];
+
+// SearchBar
+
+export const tabs: TabType[] = [
+  {
+    tabName: "group",
+    tabText: "找揪團",
+    img: {
+      src: globalIcons["search-group-light"].src,
+      alt: globalIcons["search-group-light"].alt,
+    },
+  },
+  {
+    tabName: "store",
+    tabText: "找店家",
+    img: {
+      src: globalIcons["search-store-light"].src,
+      alt: globalIcons["search-store-light"].alt,
+    },
   },
 ];

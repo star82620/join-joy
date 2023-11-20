@@ -34,7 +34,7 @@ export default function StoreCard({ data }: StoreCardProps) {
           className="rounded-t-md w-full h-[200px] 
           bg-no-repeat bg-center bg-cover"
           style={{ backgroundImage: `url(${coverPhotoSrc})` }}
-        ></div>
+        />
         <div className="px-5 pt-2 pb-4 md:px-4 md:pb-3">
           <div>
             <div className="w-full flex justify-start gap-4">
@@ -49,8 +49,8 @@ export default function StoreCard({ data }: StoreCardProps) {
                   <span className="flex gap-1 font-bold md:text-sm">
                     {scoreNum}
                     <Image
-                      src={globalIcons["rating-star-dark"]}
-                      alt="rating-star-dark"
+                      src={globalIcons["rating-star-dark"].src}
+                      alt={globalIcons["rating-star-dark"].alt}
                       widthProp="w-6 md:w-5"
                       heightProp="h-6 md:h-5"
                     />
