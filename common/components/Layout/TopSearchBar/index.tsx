@@ -2,6 +2,7 @@ import React, { MouseEventHandler, useContext, useState } from "react";
 import Button from "../../GeneralButton";
 import { TabType } from "../../FileWrapper/data";
 import Image from "../../FillImage";
+import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 
 export const tabs: TabType[] = [
   {
@@ -42,21 +43,21 @@ export default function TopSearchBar() {
 
           const imgSrc = setImgSrc();
           return (
-            <p
+            <div
               key={tabName}
               className={`px-2 py-1 md:p-1 ${tabStyle}`}
               onClick={() => {
                 setActiveTab(tabName);
               }}
             >
-              <Image
+              {/* <Image
                 src={imgSrc}
                 alt={img.alt}
                 widthProp="w-5 md:w-4"
                 heightProp="h-5 md:h-4"
-              />
+              /> */}
               {tabText}
-            </p>
+            </div>
           );
         })}
       </div>
@@ -64,7 +65,7 @@ export default function TopSearchBar() {
   };
 
   // const searchContext = useContext(SearchContext);
-  // const {activeTab, setActiveTab} = searchContext;
+  // const {activeTab, setActiveTab,searchValues} = searchContext;
 
   const [activeTab, setActiveTab] = useState("group");
   const isGroup = activeTab === "group";
@@ -84,7 +85,7 @@ export default function TopSearchBar() {
           <div className="flex items-center gap-2">
             <SearchTab />
             <div className="inputStyle !mt-0" onClick={setToggleDetailInputs}>
-              台北市 信義區、2023/10/5
+              台北市 信義區、2023/10/5"searchValues"
             </div>
           </div>
         )}
