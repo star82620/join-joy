@@ -38,7 +38,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   };
 
   const groupRes = await fetchApi(groupApiParams);
-  console.log(groupRes);
 
   if (!groupRes.status) {
     return {
@@ -49,7 +48,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const groupData: GroupDataType = groupRes;
+  const groupData: GroupDataType = groupRes.data?.groupWithGames;
 
   // 獲取該揪團審核 & 未審核成員
   const memberApiParams: apiParamsType = {

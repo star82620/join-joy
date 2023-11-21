@@ -26,8 +26,8 @@ export default function GroupDetailForm() {
   const defaultValues = {
     groupName: groupName,
     totalMemberNum: totalMemberNum,
-    games: games,
-    tags: tags,
+    games: games || [],
+    tags: tags || [],
     description: description,
     isPrivate: isPrivate,
   };
