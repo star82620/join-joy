@@ -38,13 +38,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     const nearbyCityId = 15;
 
     // 取得所有城市
-    const citiesApiParams: apiParamsType = {
-      apiPath: apiPaths.getCities,
-      method: "GET",
-    };
-    const citiesRes = await fetchApi(citiesApiParams);
+    // const citiesApiParams: apiParamsType = {
+    //   apiPath: apiPaths.getCities,
+    //   method: "GET",
+    // };
+    // const citiesRes = await fetchApi(citiesApiParams);
 
-    const citiesData = citiesRes.data;
+    // const citiesData = citiesRes.data;
 
     // 取得最新評價
     // const commentsApiParams: apiParamsType = {
