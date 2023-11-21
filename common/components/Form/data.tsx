@@ -46,6 +46,7 @@ export type TitleBlockProps = {
   direction?: "row" | "col";
   require?: boolean;
   children: ReactNode;
+  aheadIconStyle?: string;
 };
 
 export type IsInputErrorsType = Record<string, boolean>;

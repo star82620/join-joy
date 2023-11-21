@@ -51,7 +51,7 @@ export default function CommentCard({ data }: CommentCardProps) {
               {msg}
             </p>
           </div>
-          <div className="font-medium text-sm md:text-xs aheadIcon before:w-5 before:h-5 before:md:w-4 before:md:h-4 before:bg-group-location">
+          <div className="font-medium text-sm md:text-xs aheadIcon before:w-5 before:h-5 before:md:w-4 before:md:h-4 before:bg-group-card-location">
             {storeName}
           </div>
         </div>

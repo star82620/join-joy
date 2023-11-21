@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import { GroupDataContext } from "@/pages/user-center/group/[id]";
-// import TitleBlock from "./TitleBlock";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import TitleBlock from "@/common/components/Form/TitleBlock";
 import { groupTitleSet } from "./data";
+import Image from "@/common/components/FillImage";
 
 export default function ReserveInfo() {
   const dataContext = useContext(GroupDataContext);
@@ -31,7 +31,7 @@ export default function ReserveInfo() {
   const StoreLocation = () => (
     <>
       <Link href={`/store/${store?.storeId}`}>
-        <p>{store?.storeName}</p>
+        <span>{store?.storeName}</span>
       </Link>
       <p className="text-sm before:content-['（'] after:content-['）']">
         {store?.address}
@@ -51,8 +51,13 @@ export default function ReserveInfo() {
         <TitleBlock title="date">{date}</TitleBlock>
         <TitleBlock title="time">{timeContent}</TitleBlock>
         <TitleBlock title="cost">{cost}</TitleBlock> */}
-        <TitleBlock title={groupTitleSet.location.title}>
-          <span>{location}</span>
+        <TitleBlock
+          title={groupTitleSet.location.title}
+          aheadIconStyle="aheadIcons before:w-5 before:h-5 before:bg-group-location"
+        >
+          <div className="aheadIcons before:w-5 before:h-5 before:bg-group-location">
+            {location}
+          </div>
         </TitleBlock>
       </ul>
 
