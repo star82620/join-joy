@@ -7,15 +7,19 @@ export default function FillImage({
   alt,
   widthProp,
   heightProp,
+  rounded,
 }: FillImageProps) {
+  const roundedStyle = !!rounded ? "rounded-full" : "";
   return (
-    <div className={`relative ${widthProp} ${heightProp}`}>
+    <div
+      className={`relative flex-shrink-0 ${widthProp} ${heightProp} ${roundedStyle}`}
+    >
       <NextImage
         src={src}
         alt={alt}
         fill
         sizes="100%"
-        className="object-contain align-middle"
+        className={`object-contain align-middle ${roundedStyle}`}
       />
     </div>
   );
