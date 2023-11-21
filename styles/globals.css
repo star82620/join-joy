@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Lato, Inter, Roboto, San Francisco, Segoe UI, "Ping fang",
     Microsoft JhengHei, "微軟正黑體", sans-serif;
@@ -31,6 +35,46 @@ h6 {
   white-space: pre-wrap;
 }
 
+.z-1 {
+  z-index: 1;
+}
+.z-2 {
+  z-index: 2;
+}
+.z-3 {
+  z-index: 3;
+}
+.z-4 {
+  z-index: 4;
+}
+.z-5 {
+  z-index: 5;
+}
+.z-6 {
+  z-index: 6;
+}
+.z-7 {
+  z-index: 7;
+}
+.z-8 {
+  z-index: 8;
+}
+.z-9 {
+  z-index: 9;
+}
+
+/* 隱藏滾動軸 */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.landingBottomBg {
+  background-image: linear-gradient(transparent 30%, #f2e1be 30%);
+}
+
 .container {
   @apply max-w-[1272px] mx-auto 
   px-12 md:px-6 sm:px-3;
@@ -38,6 +82,10 @@ h6 {
 
 .inputStyle {
   @apply w-full min-h-[44px] border-b-2 border-gray-950 bg-yellow-tint mt-2 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm;
+}
+
+.inputStyle:focus {
+  @apply border-gray-400;
 }
 
 .inputErrorMsgStyle {
@@ -66,7 +114,7 @@ h6 {
 .groupStatusDot {
   @apply align-middle
   before:content-[''] before:inline-block 
-  before:w-2.5 before:h-2.5 before:mr-1
+  before:w-2.5 before:h-2.5 before:mr-1 before:-mt-10
   before:align-baseline
   before:rounded-full;
 }
@@ -74,6 +122,14 @@ h6 {
 .groupStatusPending,
 .groupStatusOpening {
   @apply before:bg-green-light;
+}
+
+.groupStatusClosed {
+  @apply before:bg-gray-900;
+}
+
+.groupStatusCancel {
+  @apply before:bg-gray-200;
 }
 
 .groupStatusMember {
@@ -84,10 +140,42 @@ h6 {
   @apply before:bg-yellow-primary;
 }
 
-.groupStatusClosed {
-  @apply before:bg-gray-900;
+.aheadIcon {
+  @apply before:content-[''] before:bg-no-repeat before:align-middle before:mb-[0.2rem]
+  before:bg-center before:inline-block before:mr-1;
 }
 
-.groupStatusCancel {
-  @apply before:bg-gray-200;
+/*  */
+a#scroll-btn {
+  position: relative;
+  display: block;
+  height: 44px;
+  width: 28px;
+  border: 3px solid #272725;
+  margin: auto;
+  border-radius: 2em;
+}
+
+a#scroll-btn:before {
+  position: absolute;
+  content: "";
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 8px;
+  height: 8px;
+  width: 8px;
+  background-color: #272725;
+  border-radius: 50%;
+  animation: move-down 2s infinite;
+}
+
+@keyframes move-down {
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(16px);
+    opacity: 0;
+  }
 }

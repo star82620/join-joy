@@ -25,6 +25,7 @@ export type TabBlockProps = {
   zIndex: number;
   isActive: boolean;
   setActiveTab: SetActiveTabType;
+  activeColor?: string;
 };
 
 export type TabsSectionProps = {
