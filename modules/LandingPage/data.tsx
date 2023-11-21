@@ -52,7 +52,9 @@ export const tabs: TabType[] = [
 ];
 
 // page default data
-export const defaultCommentData: CommentDataType[] = [
+export const defaultCitiesData: CitiesDataType = [{ Id: 0, CityName: "" }];
+
+export const defaultCommentsData: CommentDataType[] = [
   {
     commentBy: {
       userId: 0,
