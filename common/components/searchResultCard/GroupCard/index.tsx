@@ -4,8 +4,10 @@ import Link from "../../GeneralLink";
 import { defaultImages } from "@/constants/defaultImages";
 import GroupStatusSign from "../../GroupStatusSign";
 import { GroupCardProps } from "./data";
+import convertImgSrc from "@/common/helpers/convertImgSrc";
 
 export default function GroupCard({ data }: GroupCardProps) {
+  if (!data) return null;
   const {
     groupId,
     groupName,
@@ -37,10 +39,8 @@ export default function GroupCard({ data }: GroupCardProps) {
   const filteredMembers = members.filter((_, index) => {
     return index <= 2;
   });
-  const defaultProfileImg = defaultImages.userProfileImg;
-  const leaderProfileImgSrc = leader.profileImg
-    ? leader.profileImg
-    : defaultProfileImg;
+
+  const leaderProfileImgSrc = convertImgSrc(leader.profileImg);
 
   return (
     <Link href={`/group/${groupId}`} className="no-underline">
@@ -98,7 +98,7 @@ export default function GroupCard({ data }: GroupCardProps) {
               if (index > 3) return;
               const zIndex = `z-${ary.length - index}`;
               const { profileImg, userId, userName } = member;
-              const profileImgSrc = profileImg ? profileImg : defaultProfileImg;
+              const profileImgSrc = convertImgSrc(profileImg);
               return (
                 <div
                   key={userId}

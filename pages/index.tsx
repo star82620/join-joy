@@ -1,66 +1,154 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext } from "react";
+import { GetServerSidePropsContext } from "next";
 import { Inter } from "next/font/google";
-import Link from "next/link";
-import { AuthContext } from "@/common/contexts/AuthProvider";
-import Layout from "@/common/components/Layout";
-
-import useLogout from "@/common/hooks/useLogout";
-import LandingPage from "@/modules/LandingPage";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import { CommentDataType } from "@/constants/types/commentDataType";
+import apiPaths from "@/constants/apiPaths";
+import LandingPage from "@/modules/LandingPage";
+import Layout from "@/common/components/Layout";
+import {
+  defaultGroupsSearchKey,
+  getSearchGroups,
+} from "@/common/helpers/getApi/getSearchGroups";
+import {
+  defaultStoresSearchKey,
+  getSearchStores,
+} from "@/common/helpers/getApi/getSearchStores";
+import {
+  HomeProps,
+  defaultCitiesData,
+  defaultCommentsData,
+  defaultGroupsData,
+  defaultStoresData,
+} from "@/modules/LandingPage/data";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export async function getServerSideProps() {
-  const apiParams: apiParamsType = {
-    apiPath: "/storeinfo/getnewestrating",
-    method: "GET",
-  };
-  let data;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { req } = context;
+  const { authToken } = req.cookies;
+
+  let citiesData = [];
+  let commentsData = [];
+  let nearbyGroupsData = [];
+  let remainingGroupsData = [];
+  let preferenceData = [];
+  let nearbyStoresData = [];
+
   try {
-    const res = await fetchApi(apiParams);
-    data = res.data;
+    const nearbyCityId = 15;
+
+    // 取得所有城市
+    const citiesApiParams: apiParamsType = {
+      apiPath: apiPaths.getCities,
+      method: "GET",
+    };
+    const citiesRes = await fetchApi(citiesApiParams);
+    citiesData = citiesRes?.data ?? [];
+
+    // 取得最新評價
+    const commentsApiParams: apiParamsType = {
+      apiPath: apiPaths["get-newest-rating"],
+      method: "GET",
+    };
+    const commentsRes = await fetchApi(commentsApiParams);
+    commentsData = commentsRes?.data ?? [];
+
+    // 有登入用戶的喜好設定
+    const preferenceApiParams: apiParamsType = {
+      apiPath: apiPaths["get-preference-group"],
+      method: "POST",
+      authToken: authToken,
+      data: {
+        page: 1,
+        pageSize: 8,
+      },
+    };
+
+    const preferenceRes = await fetchApi(preferenceApiParams);
+
+    if (preferenceRes.status) {
+      preferenceData = preferenceRes.data;
+    }
+
+    // group IP位置（先固定高雄）
+    const searchNearbyGroups = {
+      ...defaultGroupsSearchKey,
+      cityId: nearbyCityId,
+      page: 1,
+      pageSize: 8,
+    };
+
+    nearbyGroupsData = await getSearchGroups(searchNearbyGroups);
+
+    // group 差你一個
+    const searchRemaining = {
+      ...defaultGroupsSearchKey,
+      joinppl: 1,
+      page: 1,
+      pageSize: 8,
+    };
+
+    remainingGroupsData = await getSearchGroups(searchRemaining);
+
+    // 你附近的店家（IP 先定高雄）
+    const searchLocationStores = {
+      ...defaultStoresSearchKey,
+      cityId: nearbyCityId,
+      page: 1,
+      pageSize: 6,
+    };
+
+    nearbyStoresData = await getSearchStores(searchLocationStores);
   } catch (error) {
     console.error(error);
   }
+
   return {
     props: {
-      commentsData: data,
+      citiesData: citiesData,
+      commentsData: commentsData,
+      nearbyGroupsData: nearbyGroupsData,
+      remainingGroupsData: remainingGroupsData,
+      preferenceData: preferenceData,
+      nearbyStoresData: nearbyStoresData,
     },
   };
 }
 
-// 搜尋的地點內容：城市
-// 搜尋的日期內容
-// 用戶資料（如果有登入）
-// 就差你一個成團 => 可以直接打
-// 你附近的揪團 => IP位置
-// 你可能有興趣的揪團 => 先取得用戶資料、以遊戲喜好搜尋（有搜喜好地區嗎？）
-// 你附近的店家 => IP位置
-// 評價
-
-type HomeProps = {
-  commentsData: CommentDataType[];
+export const defaultDataContext = {
+  citiesData: defaultCitiesData,
+  commentsData: defaultCommentsData,
+  nearbyGroupsData: defaultGroupsData,
+  remainingGroupsData: defaultGroupsData,
+  preferenceData: defaultGroupsData,
+  nearbyStoresData: defaultStoresData,
 };
-const DataContext = createContext({});
 
-export default function Home({ commentsData }: HomeProps) {
-  const authContext = useContext(AuthContext);
-  const { authData } = authContext;
-  const logout = useLogout();
+export const GetDataContext = createContext<HomeProps>(defaultDataContext);
 
+export default function Home({
+  citiesData,
+  commentsData,
+  nearbyGroupsData,
+  remainingGroupsData,
+  preferenceData,
+  nearbyStoresData,
+}: HomeProps) {
   const dataSet = {
+    citiesData: citiesData,
     commentsData: commentsData,
+    nearbyGroupsData: nearbyGroupsData,
+    remainingGroupsData: remainingGroupsData,
+    preferenceData: preferenceData,
+    nearbyStoresData: nearbyStoresData,
   };
-
-  console.log("data", commentsData);
 
   return (
     <>
       <Layout pageCategory="landingpage">
-        <DataContext.Provider value={dataSet}>
+        <GetDataContext.Provider value={dataSet}>
           <LandingPage />
-        </DataContext.Provider>
+        </GetDataContext.Provider>
       </Layout>
     </>
   );

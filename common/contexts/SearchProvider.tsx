@@ -1,6 +1,4 @@
-import { useState, useEffect, createContext, Children, ReactNode } from "react";
-import fetchApi from "@/common/helpers/fetchApi";
-import apiPaths from "@/constants/apiPaths";
+import { useState, createContext, Children, ReactNode } from "react";
 
 export type SearchProviderProps = { children: ReactNode };
 
@@ -45,6 +43,8 @@ export const defaultSearchValues: SearchValuesType = {
 export const defaultSearchContext = {
   searchValues: defaultSearchValues,
   setSearchValues: (value: SearchValuesType) => {},
+  activeTab: "group",
+  setActiveTab: (activeTab: string) => {},
 };
 
 export const SearchContext = createContext(defaultSearchContext);
@@ -52,30 +52,11 @@ export const SearchContext = createContext(defaultSearchContext);
 export default function SearchProvider({ children }: SearchProviderProps) {
   const [searchValues, setSearchValues] =
     useState<SearchValuesType>(defaultSearchValues);
+  const [activeTab, setActiveTab] = useState<string>("group");
+
+  const dataSet = { searchValues, setSearchValues, activeTab, setActiveTab };
 
   return (
-    <SearchContext.Provider value={{ searchValues, setSearchValues }}>
-      {children}
-    </SearchContext.Provider>
+    <SearchContext.Provider value={dataSet}>{children}</SearchContext.Provider>
   );
 }
-
-// {
-//   "cityId": 0,
-//   "startDate": "2023-11-19T13:55:07.403Z",
-//   "gameName": "string",
-//   "groupFilter": 0,
-//   "groupTag": 0,
-//   "groupppl": 0,
-//   "joinppl": 0,
-//   "page": 0,
-//   "pageSize": 0
-// },
-// {
-//   "cityId": 0,
-//   "storeName": "string",
-//   "storeFilter": 0,
-//   "storeTag": 0,
-//   "page": 0,
-//   "pageSize": 0
-// }
