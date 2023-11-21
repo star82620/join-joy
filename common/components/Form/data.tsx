@@ -47,6 +47,7 @@ export type TitleBlockProps = {
   require?: boolean;
   children: ReactNode;
   aheadIconStyle?: string;
+  full?: boolean;
 };
 
 export type IsInputErrorsType = Record<string, boolean>;

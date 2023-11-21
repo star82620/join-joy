@@ -30,6 +30,8 @@ export default function ReserveInfo() {
   const { place, store, date, startTime, endTime, cost, groupStatus } =
     groupData;
 
+  const isOpening = groupStatus === "開團中";
+
   const postReserve = async () => {
     try {
       const apiParams: apiParamsType = {
@@ -61,7 +63,7 @@ export default function ReserveInfo() {
         <h3 className="text-sm">目前揪團狀態：</h3>
         <GroupStatusSign category="group" status={groupStatus} />
       </div>
-      <ul className="flex md:flex-col gap-12 md:gap-6">
+      <div className="flex justify-between md:flex-col gap-12 md:gap-6">
         <TitleBlock
           title={groupTitleSet.location}
           aheadIconStyle="before:w-5 before:h-5 before:bg-group-location"
@@ -86,21 +88,23 @@ export default function ReserveInfo() {
         >
           <div className="mt-2">{cost}</div>
         </TitleBlock>
-      </ul>
-
-      <div className="flex flex-col items-center">
-        <Button
-          type="button"
-          appearance="orange"
-          onClick={handleSubmitReserve}
-          className="w-1/2 md:w-full text-xl"
-        >
-          送出預約
-        </Button>
-        <p className="mt-3 text-gray-600 font-semibold">
-          預約後不可再接受團員進出
-        </p>
       </div>
+      {isOpening && (
+        <div className="flex flex-col items-center">
+          <Button
+            type="button"
+            appearance="orange"
+            onClick={handleSubmitReserve}
+            className="w-1/2 md:w-full text-xl"
+          >
+            送出預約
+          </Button>
+
+          <p className="mt-3 text-gray-600 font-semibold">
+            預約後不可再接受團員進出
+          </p>
+        </div>
+      )}
     </div>
   );
 }

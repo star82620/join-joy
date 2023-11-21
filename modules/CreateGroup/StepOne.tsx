@@ -262,7 +262,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
     <>
       <section className="flex flex-col w-full gap-10">
         <label>
-          <TitleBlock title="揪團主旨" require={true}>
+          <TitleBlock title="揪團主旨" require={true} full>
             <TextInput textInputParams={groupNameInputParams} />
           </TitleBlock>
         </label>
@@ -273,6 +273,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           description="（揪團成立後不可更改）"
           direction="row"
           require={true}
+          full
         >
           <div className="mt-3">
             <RadioInput options={locationOptions} onChange={handleInputValue} />
@@ -296,6 +297,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
             description="（揪團成立後不可更改）"
             direction="row"
             require={true}
+            full
           >
             <input
               list="data"
@@ -350,6 +352,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           description="（揪團成立後不可更改）"
           direction="row"
           require={true}
+          full
         >
           <div className="flex gap-4 mt-2">
             <label className="w-full">
@@ -403,7 +406,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
         </TitleBlock>
 
         <label>
-          <TitleBlock title="預計揪團人數" require={true}>
+          <TitleBlock title="預計揪團人數" require={true} full>
             <select
               className="inputStyle"
               name="totalMemberNum"
@@ -434,9 +437,10 @@ export default function StepOne({ citiesData }: StepOneProps) {
         <label>
           <TitleBlock
             title="內建人數"
-            description="（包含自己）"
+            description="（包含自己的同行者人數）"
             direction="row"
             require={true}
+            full
           >
             <select
               className="inputStyle"

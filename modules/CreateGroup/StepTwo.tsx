@@ -91,7 +91,7 @@ export default function StepTwo({
       <section className="flex flex-col w-full gap-10">
         {isStore && (
           <label>
-            <TitleBlock title="預計要玩的遊戲" titleStyle="block">
+            <TitleBlock title="預計要玩的遊戲" titleStyle="block" full>
               <p className="text-gray-500 text-sm font-semibold mt-1 md:text-xs">
                 最多5款，僅通知店家，實際以現場狀況為主
               </p>
