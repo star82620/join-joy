@@ -1,6 +1,6 @@
-import { UserNavIconsType } from "../globalTypes";
+import { IconsType } from "../globalTypes";
 
-const userNavIcons: UserNavIconsType = {
+const userNavIcons: IconsType = {
   "my-following": {
     src: "/images/user-center/icon-my-following.svg",
     alt: "icon-my-following",

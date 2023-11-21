@@ -10,6 +10,8 @@ export default function GeneralButton({
   rounded,
   className,
   form,
+  name,
+  value,
 }: ButtonType) {
   const defaultColor = dataSet[appearance].default || null;
   const hoverColor = dataSet[appearance].hover || null;
@@ -30,6 +32,8 @@ export default function GeneralButton({
       onClick={onClick}
       disabled={isDisabled}
       form={form}
+      name={name}
+      value={value}
     >
       {children}
     </button>

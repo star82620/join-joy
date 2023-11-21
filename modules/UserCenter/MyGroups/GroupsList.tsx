@@ -1,81 +1,148 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import TabSection from "../TabSection";
 import GroupItem from "./GroupItem";
-import { groupsData, tabs, ActionBtnsType, GroupListProps } from "./data";
+import { DataContext } from "@/pages/user-center";
+import setGroupStatus from "./setGroupStatus";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import { defaultGroupsData } from "../date";
+import { tabs, BtnSetType, GroupListProps } from "./data";
+import apiPaths from "@/constants/apiPaths";
 
-// 是哪一種狀態
-export const setGroupStatus = (endTime: string, status: string) => {
-  const now = new Date();
-  const today = now.toISOString();
-  if (status === "pending") return "pending";
-  if (endTime < today) return "closed";
-  return "member";
-};
-
-export default function GroupsList({ pageStatus }: GroupListProps) {
+function GroupsList({ pageCategory }: GroupListProps) {
   const router = useRouter();
+
+  // 取消加入揪團申請
+  const handleCancelApply = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {};
+
+  // 退出揪團
+  const handleQuitGroup = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const groupId = Number(e.currentTarget.value);
+    const apiParams: apiParamsType = {
+      apiPath: `${apiPaths["leave-group"]}/${groupId}`,
+      method: "POST",
+    };
+
+    try {
+      const res = await fetchApi(apiParams);
+      if (res.success) return alert("已退出揪團QQ");
+
+      return alert("退出揪團失敗，請稍後再試");
+    } catch (error) {
+      console.error("好像發生了一點錯誤，請稍後再試", error);
+    }
+  };
+
+  // 前往評價頁
+  const pushToCommentPage = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = e.currentTarget.value;
+    router.push(`/user-center/group/${id}`);
+  };
+
+  // 前往揪團管理頁
+  const pushToManagementGroupPage = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    const id = e.currentTarget.value;
+    router.push(`/user-center/group/${id}`);
+  };
+
+  // Tab 控制 state，預設 upcoming
   const [activeTab, setActiveTab] = useState<string>("upcoming");
 
-  const handleCancelApply = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("取消加入揪團申請");
-  };
-  const handleQuitGroup = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("退出揪團");
-  };
-  const handleToComment = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("跳到評價頁面");
-    router.push("/about");
-  };
+  // 我開的揪團（團主）
+  const isLeaderPage = pageCategory === "leader";
+  // 我加入的揪團（團員）
+  const isMemberPage = pageCategory === "member";
+  // 尚未開始 tab
+  const isUpcoming = activeTab === "upcoming";
+  // 已結束 tab
+  const isExpired = activeTab === "Expired";
 
-  const actionBtns: ActionBtnsType = {
+  // 取得 groupSet，根據角色分別抓對應的資料群
+  const groupsSetData =
+    useContext(DataContext)?.groupsData || defaultGroupsData;
+  const groupsData = isLeaderPage
+    ? groupsSetData["leader"]
+    : groupsSetData["member"];
+
+  const btnSet: BtnSetType = {
     pending: {
       text: "取消申請",
-      func: handleQuitGroup,
+      func: handleCancelApply,
       disabled: false,
     },
     member: {
       text: "退出揪團",
-      func: handleCancelApply,
+      func: handleQuitGroup,
+      disabled: false,
+    },
+    leader: {
+      text: "管理",
+      func: pushToManagementGroupPage,
       disabled: false,
     },
     closed: {
       text: "評價",
-      func: handleToComment,
+      func: pushToCommentPage,
       disabled: false,
     },
     commented: {
       text: "已評價",
       disabled: true,
     },
+    cancel: {
+      text: "",
+      disabled: true,
+    },
   };
 
-  const isExpired = activeTab === "Expired";
-  const upcomingBtnTitle = (
-    <>
-      <span className="whitespace-nowrap after:content-['/'] after:font-normal">
-        取消
-      </span>
-      <span className="whitespace-nowrap">退出</span>
-    </>
-  );
-  const expiredBtnTitle = "評價";
+  const setBtnTitle = () => {
+    const leaderBtnTitle = (
+      <>
+        <span className="whitespace-nowrap after:content-['/'] after:font-normal">
+          預約
+        </span>
+        <span className="whitespace-nowrap">審核</span>
+      </>
+    );
+    const memberBtnTitle = (
+      <>
+        <span className="whitespace-nowrap after:content-['/'] after:font-normal">
+          取消
+        </span>
+        <span className="whitespace-nowrap">退出</span>
+      </>
+    );
 
-  const isLeaderPage = pageStatus === "leader";
-  const isMemberPage = pageStatus === "member";
-  const isUpcoming = activeTab === "upcoming";
+    const title = isLeaderPage ? leaderBtnTitle : memberBtnTitle;
 
+    const result = isExpired ? "評價" : title;
+
+    return result;
+  };
+
+  const btnTitle = setBtnTitle();
+
+  // 篩選要跑出來的列表內容
   const filteredData = groupsData.filter((group) => {
-    const isLeaderGroup = group.status === "leader";
-    if (isLeaderPage && !isLeaderGroup) return false;
-    if (isMemberPage && isLeaderGroup) return false;
+    const { endTime, groupStatus, memberStatus } = group;
+    const status = setGroupStatus(groupStatus, memberStatus);
+    const isClosed = status === "closed";
+    const now = new Date();
+    const today = now.toISOString();
+    const isExpiredGroup = endTime < today;
 
-    const groupStatus = setGroupStatus(group.endTime, group.status);
-    const isClosed = groupStatus === "closed";
-    if (isUpcoming && isClosed) return false;
-    if (isExpired && !isClosed) return false;
+    if (isUpcoming) {
+      if (isExpiredGroup || isClosed) return false;
+      return true;
+    }
 
-    return true;
+    if (isExpiredGroup || isClosed) return true;
+
+    return false;
   });
 
   const isEmptyList = filteredData.length === 0;
@@ -89,23 +156,16 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
       />
       <div className="mt-10 md:mt-4">
         <div className="w-full flex justify-between items-center gap-3 md:gap-2 p-2 mb-3 border-b-2 text-center font-semibold leading-[1.2] mdg:text-sm md:hidden">
-          <p className="w-[10%]">狀態</p>
+          <p className="w-[8%]">狀態</p>
           <p className="w-[20%]">名稱</p>
           <p className="w-[20%]">地點</p>
           <p className="w-[20%]">時間</p>
           <p className="w-[10%]">人數</p>
-          <p className="w-[10%]">
-            {isExpired ? expiredBtnTitle : upcomingBtnTitle}
-          </p>
+          <p className="w-[10%]">{btnTitle}</p>
         </div>
         <ul>
           {filteredData.map((group) => (
-            <GroupItem
-              key={group.groupId}
-              group={group}
-              isExpired={isExpired}
-              actionBtns={actionBtns}
-            />
+            <GroupItem key={group.groupId} group={group} btnSet={btnSet} />
           ))}
           {isEmptyList && (
             <p className="text-center text-gray-600">目前沒有任何紀錄唷！</p>
@@ -115,3 +175,5 @@ export default function GroupsList({ pageStatus }: GroupListProps) {
     </section>
   );
 }
+
+export default GroupsList;

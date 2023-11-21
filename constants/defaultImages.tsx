@@ -1,11 +1,5 @@
-import { DefaultImagesType } from "./globalTypes";
-
-const defaultImages: DefaultImagesType = {
-  // 團員的朋友預設頭像
-  subMemberPhoto: {
-    src: "/images/logo.jpg",
-    alt: "subMemberPhoto",
-  },
+export const defaultImages: Record<string, string> = {
+  userProfileImg: "/images/photo-user-000.png",
+  storeProfileImg: "/images/photo-user-demo.png",
+  storeCoverPhoto: "/images/photo-store-demo.png",
 };
-
-export default defaultImages;

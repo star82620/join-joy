@@ -18,13 +18,14 @@ export type TabSetType = Array<TabType>;
 
 export type ReturnComponentType = Record<string, ReactNode>;
 
-type SetActiveTabType = (activeTab: TabNameType) => void;
+export type SetActiveTabType = (activeTab: TabNameType) => void;
 
 export type TabBlockProps = {
   tab: TabType;
   zIndex: number;
   isActive: boolean;
   setActiveTab: SetActiveTabType;
+  activeColor?: string;
 };
 
 export type TabsSectionProps = {

@@ -22,6 +22,9 @@ const config: Config = {
       "yellow-tone": "#FFF4C6",
       "yellow-tint": "#FEFAF2",
       "yellow-dark": "#FAF2E2",
+      "yellow-light": "#FFFAF2",
+      "yellow-landing-bg": "#F2E1BE",
+
       // secondary-orange
       "orange-primary": "#FF8356",
       "orange-second": "#FFA584",
@@ -48,11 +51,15 @@ const config: Config = {
       "green-dark": "#3B956B",
       "purple-light": "#DD84FC",
       "purple-dark": "#9354A9",
+      "brown-light": "#C9B896",
+      "brown-dark": "#5F584A",
+
       danger: "#DD240B",
       white: "#FFFFFF",
       transparent: "transparent",
     },
     fontSize: {
+      "4xl": "32px",
       "3xl": "28px",
       "2xl": "24px",
       xl: "20px",
@@ -66,8 +73,24 @@ const config: Config = {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
         window: "3px 2px 0 0 #504F4E",
+        "profile-img":
+          "2px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
+        "comment-card":
+          "0px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
       },
       backgroundImage: {
+        "header-user": "/images/icon-header-user.svg",
+        "header-menu": "/images/icon-header-menu.svg",
+        // landingPage
+        "landing-banner-bg": 'url("/images/landing-page/bg-banner-notext.svg")',
+        "landing-banner-bg-md":
+          'url("/images/landing-page/bg-banner-notext-md.svg")',
+        "brackets-start": 'url("/images/landing-page/icon-brackets-start.svg")',
+        "brackets-end": 'url("/images/landing-page/icon-brackets-end.svg")',
+        // search
+        "search-location": 'url("/images/icon-search-location.svg")',
+        "search-date": 'url("/images/icon-search-date.svg")',
+        // input
         "eye-hide": 'url("/images/input-password-hide.svg")',
         "eye-show": 'url("/images/input-password-show.svg")',
         "follow-true": 'url("/images/icon-check.svg")',
@@ -76,9 +99,21 @@ const config: Config = {
         "radio-false": 'url("/images/icon-radio-false.svg")',
         "checkbox-true": 'url("/images/icon-checkbox-true.svg")',
         "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
+
+        // group
+        "group-time": 'url("/images/group-card/icon-time.svg")',
+        "group-member": 'url("/images/group-card/icon-members.svg")',
+        "group-location": 'url("/images/group-card/icon-location.svg")',
+        "group-tag": 'url("/images/group-card/icon-tag.svg")',
+
+        //
+        "mascot-vector": 'url("/images/mascot-vector.svg")',
       },
       backgroundSize: {
         "20px": "20px",
+      },
+      backgroundPosition: {
+        "right-5-bottom-5": "right 5rem bottom 5rem",
       },
       lineHeight: {
         heading: "1.4rem",

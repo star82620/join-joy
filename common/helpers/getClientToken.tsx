@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-export default function getToken() {
+export default function getClientToken() {
   const authCookie = Cookies.get("authToken");
 
   if (!authCookie) return null;

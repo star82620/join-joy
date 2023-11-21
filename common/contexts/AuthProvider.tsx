@@ -19,7 +19,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     async function fetchAuthData() {
       const res = await fetchApi({
-        apiPath: apiPaths.checkLoginStatus,
+        apiPath: apiPaths["check-login-status"],
         method: "GET",
       });
       if (res?.data) {
