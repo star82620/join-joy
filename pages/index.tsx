@@ -106,12 +106,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      citiesData: citiesData,
-      commentsData: commentsData,
-      nearbyGroupsData: nearbyGroupsData,
-      remainingGroupsData: remainingGroupsData,
-      preferenceData: preferenceData,
-      nearbyStoresData: nearbyStoresData,
+      citiesData: citiesData || defaultCitiesData,
+      commentsData: commentsData || defaultCommentsData,
+      nearbyGroupsData: nearbyGroupsData || defaultGroupsData,
+      remainingGroupsData: remainingGroupsData || defaultGroupsData,
+      preferenceData: preferenceData || defaultGroupsData,
+      nearbyStoresData: nearbyStoresData || defaultStoresData,
     },
   };
 }
