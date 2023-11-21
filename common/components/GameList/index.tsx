@@ -16,7 +16,7 @@ export default function GameList({
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
 
-  const [isFull, setIsFull] = useState(false);
+  const [isReachedSelectedLimit, setIsReachedSelectedLimit] = useState(false);
 
   const isEmptyResult = renderData.length === 0;
 
@@ -48,14 +48,14 @@ export default function GameList({
     const gameName = e.target.dataset.gamename;
     const isSelected = e.target.checked;
 
-    if (!setSelectedGames || !selectedGames) return;
+    if (!setSelectedGames || !selectedGames) return null;
 
     if (isSelected && selectedGames.length === 5) {
       e.preventDefault();
-      setIsFull(true);
+      setIsReachedSelectedLimit(true);
       return;
     } else {
-      setIsFull(false);
+      setIsReachedSelectedLimit(false);
     }
 
     if (isSelected) {
@@ -107,7 +107,9 @@ export default function GameList({
               </div>
             );
           })}
-          {isFull && <span className="text-danger">最多選擇五款 (=´ω`=)</span>}
+          {isReachedSelectedLimit && (
+            <span className="text-danger">最多選擇五款 (=´ω`=)</span>
+          )}
           {isEmptyGames && <p>請在下列表單選擇預計要玩的遊戲</p>}
         </div>
       )}

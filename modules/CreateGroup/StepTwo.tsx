@@ -38,8 +38,8 @@ export default function StepTwo({
 
   const isGamesEmpty = gamesData.length === 0;
 
-  useEffect(() => {
-    const getGamesData = async () => {
+  const getGamesData = async () => {
+    try {
       const gamesKey: apiParamsType = {
         apiPath: `${apiPaths["get-games"]}/${storeId}`,
         method: "GET",
@@ -47,8 +47,12 @@ export default function StepTwo({
       const res = await fetchApi(gamesKey);
       const data = res.data ? res.data.gamelist : [];
       setGamesData(data);
-    };
+    } catch (error) {
+      return error;
+    }
+  };
 
+  useEffect(() => {
     if (isStore && storeId) {
       getGamesData();
     }
