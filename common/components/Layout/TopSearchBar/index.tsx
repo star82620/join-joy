@@ -71,25 +71,26 @@ export default function TopSearchBar() {
   const isGroup = activeTab === "group";
 
   const [toggleDetail, setToggleDetail] = useState(true);
-  const isOpen = toggleDetail === true;
+
+  const isToggleDetail = toggleDetail === true;
 
   const setToggleDetailInputs = () => {
     setToggleDetail(!toggleDetail);
   };
 
-  // 有縮小版，點擊滑出詳細版
   return (
     <>
       <div className="py-4 md:px-4 md:py-3 bg-brown-dark">
-        {isOpen && (
-          <div className="flex items-center gap-2">
+        {/* 手機版 */}
+        {!isToggleDetail && (
+          <div className="container flex items-center gap-2">
             <SearchTab />
             <div className="inputStyle !mt-0" onClick={setToggleDetailInputs}>
-              台北市 信義區、2023/10/5"searchValues"
+              台北市 信義區、2023/10/5 searchValues
             </div>
           </div>
         )}
-        {!isOpen && (
+        {isToggleDetail && (
           <div className="container flex items-center md:flex-col gap-7 md:gap-4">
             <SearchTab />
             <div className="w-full flex md:flex-col gap-7 md:gap-4 md:mt-1">
