@@ -16,6 +16,13 @@ const apiPaths = {
 
   getCities: "/member/city",
   "leave-group": "/group/leavegroup",
+
+  // group management
+  getGroupInfo: "/group/easydetail/",
+  getGroupAllMember: "/group/joinList",
+  getStoreGames: "/storeinfo/gamelist",
+  submitReserve: "/group/reservegroup",
+
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",
   "search-store": "/search/search/storesearch",
