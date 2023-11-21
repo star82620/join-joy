@@ -9,7 +9,6 @@ import TitleBlock from "@/common/components/Form/TitleBlock";
 import RadioInput from "@/common/components/Form/RadioInput";
 import GroupTagSelector from "@/common/components/Form/GroupTagSelector";
 import TextArea from "@/common/components/Form/TextArea";
-import { TextAreaParamsType } from "@/common/components/Form/data";
 import {
   questionsWithRadio,
   GamesDataType,
@@ -77,15 +76,6 @@ export default function StepTwo({
     }));
   };
 
-  const descriptionInputParams: TextAreaParamsType = {
-    inputName: "description",
-    value: values.description,
-    onChange: handleDescriptionValue,
-    maxLength: 100,
-    rows: 4,
-    placeholder: "如果需要特別標註的部分，請再寫下並讓團員知道！",
-  };
-
   return (
     <>
       <section className="flex flex-col w-full gap-10">
@@ -110,7 +100,15 @@ export default function StepTwo({
           setSelectedTags={setSelectedTags}
         />
 
-        <TextArea title="備註" textAreaParams={descriptionInputParams} />
+        <TextArea
+          title="備註"
+          inputName="description"
+          value={values.description}
+          onChange={handleDescriptionValue}
+          maxLength={100}
+          rows={4}
+          placeholder="如果需要特別標註的部分，請再寫下並讓團員知道！"
+        />
 
         {questionsWithRadio.map((question, index) => {
           const { title, description } = question;

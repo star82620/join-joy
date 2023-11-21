@@ -1,7 +1,7 @@
 import { ChangeEventHandler, MouseEventHandler, ReactNode } from "react";
 import { ButtonType } from "../GeneralButton/data";
 import { apiParamsType } from "@/common/helpers/fetchApi";
-import { GroupTagIdType } from "@/constants/globalTypes";
+import { GroupTagIdType, GroupTagItemType } from "@/constants/globalTypes";
 
 export type InputType = {
   label: string;
@@ -48,12 +48,12 @@ export type TitleBlockProps = {
   children: ReactNode;
   aheadIconStyle?: string;
   full?: boolean;
+  strongDesc?: boolean;
 };
 
 export type IsInputErrorsType = Record<string, boolean>;
 
-// TextInput
-export type TextInputParamsType = {
+export type TextInputProps = {
   type: "text" | "email" | "number";
   inputName: string;
   value: string;
@@ -64,10 +64,6 @@ export type TextInputParamsType = {
   disabled?: boolean;
   pattern?: RegExp;
   errorMsg?: string;
-};
-
-export type TextInputProps = {
-  textInputParams: TextInputParamsType;
   isError?: boolean;
 };
 
@@ -89,9 +85,12 @@ export type RadioInputProps = {
 };
 
 // TextArea
-export type TextAreaParamsType = {
+
+export type TextAreaProps = {
+  title: string;
   inputName: string;
   value: string;
+  onChange: ChangeEventHandler<HTMLTextAreaElement>;
   rows?: number;
   cols?: number;
   maxLength?: number;
@@ -100,12 +99,6 @@ export type TextAreaParamsType = {
   disabled?: boolean;
   readonly?: boolean;
   errorMsg?: string;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
-};
-
-export type TextAreaProps = {
-  title: string;
-  textAreaParams: TextAreaParamsType;
   isError?: boolean;
 };
 
@@ -130,11 +123,9 @@ export type SelectInputProps = {
 
 // GroupTagSelector
 
-export type SelectedTagsItemType = { id: GroupTagIdType; text: string };
-
 export type GroupTagSelectorProps = {
-  selectedTags: SelectedTagsItemType[];
-  setSelectedTags: React.Dispatch<React.SetStateAction<SelectedTagsItemType[]>>;
+  selectedTags: GroupTagItemType[];
+  setSelectedTags: React.Dispatch<React.SetStateAction<GroupTagItemType[]>>;
 };
 
 export type ToggleTagsBlockType = MouseEventHandler<HTMLElement>;

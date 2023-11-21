@@ -1,4 +1,4 @@
-import { ImgType } from "@/constants/globalTypes";
+import { GroupTagIdType, ImgType } from "@/constants/globalTypes";
 import { GroupStatusKeyType } from "@/constants/groupStatusSet";
 import { groupProfileTitles } from "@/constants/iconsPackage/groupCardIcons";
 import { MouseEventHandler, ReactNode } from "react";
@@ -42,7 +42,7 @@ export type GroupDataType = {
   isPrivate: boolean;
   games: GameItemType[] | [];
   members: MemberType[] | [];
-  tags: Array<string> | [];
+  tags: string[] | [];
 };
 
 export type GamesDataItemType = {
