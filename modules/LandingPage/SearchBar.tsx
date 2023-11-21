@@ -171,6 +171,7 @@ export default function SearchBar() {
             <h3 className={titleStyle}>關鍵字</h3>
             {isGroup ? groupKeyWordInput : storeKeyWordInput}
           </div>
+
           <div>
             {isError && (
               <p className="mb-1 text-center text-sm text-danger font-semibold">

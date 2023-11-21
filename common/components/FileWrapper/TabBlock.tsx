@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import clsx from "clsx";
 import { TabBlockProps } from "./data";
 
 export default function TabBlock({
@@ -27,18 +26,14 @@ export default function TabBlock({
 
   const imgSrc = setImgSrc();
 
+  const tabClass = isActive ? `z-10` : `z-${zIndex}`;
+  const tabStyle = isActive ? activeStyle : defaultStyle;
+
   return (
     <p
-      className={clsx(
-        "pt-2 px-6 md:px-3",
-        "-ml-3 md:-ml-2",
-        "text-lg font-semibold leading-[1.5] md:text-sm",
-        "border-[3px] border-b-0",
-        "rounded-tr-md",
-        "first:rounded-tl-md first:border-l-[3px] first:ml-0",
-        isActive ? `z-10` : `z-${zIndex}`,
-        isActive ? activeStyle : defaultStyle
-      )}
+      className={`
+        pt-2 px-6 md:px-3 -ml-3 md:-ml-2 text-lg font-semibold leading-[1.5] md:text-sm border-[3px] border-b-0 rounded-tr-md first:rounded-tl-md first:border-l-[3px] first:ml-0 cursor-pointer ${tabClass} ${tabStyle}
+      `}
       data-tab={tabName}
       onClick={() => setActiveTab(tabName)}
     >

@@ -31,10 +31,28 @@ export type CommentCardProps = {
 
 // ----data----
 
-// page
-export const defaultCitiesData: CitiesDataType = [{ CityName: "", Id: 0 }];
+// SearchBar
+export const tabs: TabType[] = [
+  {
+    tabName: "group",
+    tabText: "找揪團",
+    img: {
+      src: globalIcons["search-group-light"].src,
+      alt: globalIcons["search-group-light"].alt,
+    },
+  },
+  {
+    tabName: "store",
+    tabText: "找店家",
+    img: {
+      src: globalIcons["search-store-light"].src,
+      alt: globalIcons["search-store-light"].alt,
+    },
+  },
+];
 
-export const defaultCommentsData: CommentDataType[] = [
+// page default data
+export const defaultCommentData: CommentDataType[] = [
   {
     commentBy: {
       userId: 0,
@@ -101,26 +119,5 @@ export const defaultStoresData: StoreDataType[] = [
     tags: [],
     hqTag: true,
     popTag: true,
-  },
-];
-
-// SearchBar
-
-export const tabs: TabType[] = [
-  {
-    tabName: "group",
-    tabText: "找揪團",
-    img: {
-      src: globalIcons["search-group-light"].src,
-      alt: globalIcons["search-group-light"].alt,
-    },
-  },
-  {
-    tabName: "store",
-    tabText: "找店家",
-    img: {
-      src: globalIcons["search-store-light"].src,
-      alt: globalIcons["search-store-light"].alt,
-    },
   },
 ];

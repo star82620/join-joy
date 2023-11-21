@@ -26,11 +26,15 @@ export default function CardsSection({
     ? "md:flex-col flex-wrap"
     : "overflow-auto snap-x scrollbar-none";
 
+  const widthClass = isStore
+    ? "min-w-[376px] max-w-[376px]"
+    : "max-w-[280px] min-w-[280px]";
+
   const storeCardStyle = "h-[360px]";
 
   const groupCardStyle = !isSwipe
-    ? "md:max-w-full"
-    : "snap-start snap-normal scroll-ml-12 md:scroll-ml-6 sm:scroll-ml-3";
+    ? "md:max-w-full "
+    : "snap-start snap-normal scroll-ml-12 md:scroll-ml-6 sm:scroll-ml-3 ";
 
   const cardStyle = isStore ? storeCardStyle : groupCardStyle;
 
@@ -75,25 +79,15 @@ export default function CardsSection({
       {/* 卡片列表 */}
       <div className={`container flex gap-4 md:gap-3  ${listStyle}`}>
         {cardsData.map((item) => {
-          if ("storeId" in item) {
-            return (
-              <div
-                key={item.storeId}
-                className={`w-full min-w-[376px] max-w-[376px] ${cardStyle}`}
-              >
-                <StoreCard data={item} />
-              </div>
-            );
-          } else {
-            return (
-              <div
-                key={item.groupId}
-                className={`w-full max-w-[280px] min-w-[280px] ${cardStyle}`}
-              >
-                <GroupCard data={item} />
-              </div>
-            );
-          }
+          const isStore = "storeId" in item;
+          return (
+            <div
+              key={isStore ? item.storeId : item.groupId}
+              className={`w-full ${widthClass} ${cardStyle}`}
+            >
+              {isStore ? <StoreCard data={item} /> : <GroupCard data={item} />}
+            </div>
+          );
         })}
       </div>
 
