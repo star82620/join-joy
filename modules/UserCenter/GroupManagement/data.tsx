@@ -91,42 +91,15 @@ export type MemberCardBtnsItemType = {
 // ---data---
 
 // ReserveInfo
-type groupTitleItemType = {
-  title: string;
-  img: ImgType;
-};
 
-type groupTitleSetType = Record<string, groupTitleItemType>;
-
-export const groupTitleSet: groupTitleSetType = {
-  location: {
-    title: "地點",
-    img: groupProfileTitles.location,
-  },
-  date: {
-    title: "日期",
-    img: groupProfileTitles.date,
-  },
-  time: {
-    title: "時間",
-    img: groupProfileTitles.time,
-  },
-  cost: {
-    title: "收費",
-    img: groupProfileTitles.time,
-  },
-  totalMembers: {
-    title: "預計揪團人數",
-    img: groupProfileTitles.time,
-  },
-  games: {
-    title: "預計要玩的遊戲",
-    img: groupProfileTitles.time,
-  },
-  description: {
-    title: "備註",
-    img: groupProfileTitles.time,
-  },
+export const groupTitleSet: Record<string, string> = {
+  location: "地點",
+  date: "日期",
+  time: "時間",
+  cost: "收費",
+  totalMembers: "預計揪團人數",
+  games: "預計要玩的遊戲",
+  description: "備註",
 };
 
 // page

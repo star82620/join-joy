@@ -67,10 +67,6 @@ export default function GroupManagePage({
   membersData,
   gamesData,
 }: GroupManagePageProps) {
-  console.log("groupId", groupId);
-  console.log("groupData", groupData);
-  console.log("membersData", membersData);
-  console.log("gamesData", gamesData);
   return (
     <Layout pageCategory="user-center">
       <GroupDataContext.Provider

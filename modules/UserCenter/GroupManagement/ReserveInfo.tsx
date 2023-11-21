@@ -7,18 +7,26 @@ import apiPaths from "@/constants/apiPaths";
 import TitleBlock from "@/common/components/Form/TitleBlock";
 import { groupTitleSet } from "./data";
 import Image from "@/common/components/FillImage";
+import GroupStatusSign from "@/common/components/GroupStatusSign";
 
 export default function ReserveInfo() {
   const dataContext = useContext(GroupDataContext);
   const { groupId, groupData } = dataContext;
-  const { place, store, date, startTime, endTime, cost } = groupData;
+  const { place, store, date, startTime, endTime, cost, groupStatus } =
+    groupData;
 
   const postReserve = async () => {
-    const apiParams: apiParamsType = {
-      apiPath: `${apiPaths["submitReserve"]}/${groupId}`,
-      method: "POST",
-    };
-    const res = await fetchApi(apiParams);
+    try {
+      const apiParams: apiParamsType = {
+        apiPath: `${apiPaths["submitReserve"]}/${groupId}`,
+        method: "POST",
+      };
+      const res = await fetchApi(apiParams);
+
+      if (!res) return null;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // 送出預約
@@ -45,19 +53,34 @@ export default function ReserveInfo() {
 
   return (
     <div className="flex flex-col justify-start gap-8 md:gap-6 px-10 py-6 md:p-4">
-      <h3 className="text-sm">目前揪團狀態：開團中</h3>
+      <div className="flex items-center gap-2">
+        <h3 className="text-sm">目前揪團狀態：</h3>
+        <GroupStatusSign category="group" status={groupStatus} />
+      </div>
       <ul className="flex md:flex-col gap-12 md:gap-6">
-        {/* <TitleBlock title="location">{location}</TitleBlock>
-        <TitleBlock title="date">{date}</TitleBlock>
-        <TitleBlock title="time">{timeContent}</TitleBlock>
-        <TitleBlock title="cost">{cost}</TitleBlock> */}
         <TitleBlock
-          title={groupTitleSet.location.title}
-          aheadIconStyle="aheadIcons before:w-5 before:h-5 before:bg-group-location"
+          title={groupTitleSet.location}
+          aheadIconStyle="before:w-5 before:h-5 before:bg-group-location"
         >
-          <div className="aheadIcons before:w-5 before:h-5 before:bg-group-location">
-            {location}
-          </div>
+          <div className="mt-2">{location}</div>
+        </TitleBlock>
+        <TitleBlock
+          title={groupTitleSet.date}
+          aheadIconStyle="before:w-5 before:h-5 before:bg-group-date"
+        >
+          <div className="mt-2">{date}</div>
+        </TitleBlock>
+        <TitleBlock
+          title={groupTitleSet.time}
+          aheadIconStyle="before:w-5 before:h-5 before:bg-group-time"
+        >
+          <div className="mt-2">{timeContent}</div>
+        </TitleBlock>
+        <TitleBlock
+          title={groupTitleSet.cost}
+          aheadIconStyle="before:w-5 before:h-5 before:bg-group-cost"
+        >
+          <div className="mt-2">{cost}</div>
         </TitleBlock>
       </ul>
 

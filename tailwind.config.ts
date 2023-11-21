@@ -148,6 +148,9 @@ const config: Config = {
         "15": "60px",
         "22": "88px",
       },
+      padding: {
+        "15": "72px",
+      },
     },
   },
   plugins: [],
