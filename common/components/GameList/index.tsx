@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { SelectedGamesType, GameListProps } from "./data";
+import React, { useEffect, useState } from "react";
+import { GameListProps } from "./data";
 import GameItem from "./GameItem";
 
 export default function GameList({
@@ -15,7 +15,8 @@ export default function GameList({
   const [renderData, setRenderData] = useState(data);
   const [selectType, setSelectType] = useState("all");
   const [searchValue, setSearchValue] = useState("");
-  const [isFull, setIsFull] = useState(false);
+
+  const [isReachedSelectedLimit, setIsReachedSelectedLimit] = useState(false);
 
   const isEmptyResult = renderData.length === 0;
 
@@ -47,14 +48,14 @@ export default function GameList({
     const gameName = e.target.dataset.gamename;
     const isSelected = e.target.checked;
 
-    if (!setSelectedGames || !selectedGames) return;
+    if (!setSelectedGames || !selectedGames) return null;
 
     if (isSelected && selectedGames.length === 5) {
       e.preventDefault();
-      setIsFull(true);
+      setIsReachedSelectedLimit(true);
       return;
     } else {
-      setIsFull(false);
+      setIsReachedSelectedLimit(false);
     }
 
     if (isSelected) {
@@ -106,7 +107,9 @@ export default function GameList({
               </div>
             );
           })}
-          {isFull && <span className="text-danger">最多選擇五款 (=´ω`=)</span>}
+          {isReachedSelectedLimit && (
+            <span className="text-danger">最多選擇五款 (=´ω`=)</span>
+          )}
           {isEmptyGames && <p>請在下列表單選擇預計要玩的遊戲</p>}
         </div>
       )}
@@ -117,13 +120,13 @@ export default function GameList({
           <select className="px-3 py-2" onChange={handleSelectType}>
             <option value="all">全部</option>
             {selectItems.map((type, index) => (
-              <option key={index} value={type}>
+              <option key={type} value={type}>
                 {type}
               </option>
             ))}
           </select>
         </label>
-        <form className="flex items-center gap-4 ml-6 grow md:ml-3">
+        <div className="flex items-center gap-4 ml-6 grow md:ml-3">
           <label className="grow flex items-center gap-2">
             <span className="md:hidden text-lg font-semibold">關鍵字：</span>
             <input
@@ -133,7 +136,7 @@ export default function GameList({
               onChange={handleSearchValue}
             />
           </label>
-        </form>
+        </div>
       </div>
       <div className="w-full overflow-scroll">
         <div className="w-full bg-yellow-tint md:bg-transparent px-6 py-4 md:pt-0 md:px-1  md:min-w-[420px]">

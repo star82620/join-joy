@@ -27,12 +27,9 @@ function GroupsList({ pageCategory }: GroupListProps) {
 
     try {
       const res = await fetchApi(apiParams);
+      if (res.success) return alert("已退出揪團QQ");
 
-      if (res.success) {
-        alert("已退出揪團QQ");
-      } else {
-        alert("退出揪團失敗，請稍後再試");
-      }
+      return alert("退出揪團失敗，請稍後再試");
     } catch (error) {
       console.error("好像發生了一點錯誤，請稍後再試", error);
     }
