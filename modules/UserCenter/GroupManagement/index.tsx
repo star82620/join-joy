@@ -7,11 +7,6 @@ import ReserveInfo from "./ReserveInfo";
 import GroupDetailForm from "./GroupDetailForm";
 import MemberList from "./MemberList";
 
-// 審核團員列表會在團的狀態為已成團、已預約後消失
-// 參加者列表的按鈕會在活動時間開始前一小時開放
-// 活動時間前一小時的時間，有沒有
-// 活動是 11-14 11:30 ，前一個小時是 11-14 10:30
-// 現在時間 11-14 11:00
 const isWithinOneHour = (time: Date) => {
   // 現在時間
   const now = new Date();
