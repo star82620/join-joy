@@ -43,7 +43,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       method: "GET",
     };
     const citiesRes = await fetchApi(citiesApiParams);
-    citiesData = citiesRes?.data ?? [];
+
+    const citiesData = citiesRes.data;
 
     // 取得最新評價
     // const commentsApiParams: apiParamsType = {
@@ -135,12 +136,12 @@ export default function Home({
   nearbyStoresData,
 }: HomeProps) {
   const dataSet = {
-    citiesData: citiesData,
-    commentsData: commentsData,
-    nearbyGroupsData: nearbyGroupsData,
-    remainingGroupsData: remainingGroupsData,
-    preferenceData: preferenceData,
-    nearbyStoresData: nearbyStoresData,
+    citiesData: citiesData || defaultCitiesData,
+    commentsData: commentsData || [],
+    nearbyGroupsData: nearbyGroupsData || [],
+    remainingGroupsData: remainingGroupsData || [],
+    preferenceData: preferenceData || [],
+    nearbyStoresData: nearbyStoresData || [],
   };
 
   return (
