@@ -34,23 +34,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let preferenceData = defaultGroupsData;
   let nearbyStoresData = defaultStoresData;
 
-  // citiesData: defaultCitiesData,
-  // commentsData: defaultCommentsData,
-  // nearbyGroupsData: defaultGroupsData,
-  // remainingGroupsData: defaultGroupsData,
-  // preferenceData: defaultGroupsData,
-  // nearbyStoresData: defaultStoresData,
-
   try {
     const nearbyCityId = 15;
 
     // 取得所有城市
-    // const citiesApiParams: apiParamsType = {
-    //   apiPath: apiPaths.getCities,
-    //   method: "GET",
-    // };
-    // const citiesRes = await fetchApi(citiesApiParams);
-    // citiesData = citiesRes?.data ?? [];
+    const citiesApiParams: apiParamsType = {
+      apiPath: apiPaths.getCities,
+      method: "GET",
+    };
+    const citiesRes = await fetchApi(citiesApiParams);
+    citiesData = citiesRes?.data ?? [];
 
     // 取得最新評價
     // const commentsApiParams: apiParamsType = {
