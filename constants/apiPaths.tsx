@@ -14,14 +14,13 @@ const apiPaths = {
   "my-groups-list": "/member/usergrouplist",
   "check-group-rating": "/member/checkgroupratings",
 
-  getCities: "/member/city",
   "leave-group": "/group/leavegroup",
 
   // group management
-  getGroupInfo: "/group/easydetail/",
-  getGroupAllMember: "/group/joinList",
-  getStoreGames: "/storeinfo/gamelist",
-  submitReserve: "/group/reservegroup",
+  "get-group-info": "/group/easydetail/",
+  "get-group-all-member": "/group/joinList",
+  "get-store-games": "/storeinfo/gamelist",
+  "submit-reserve": "/group/reservegroup",
 
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",

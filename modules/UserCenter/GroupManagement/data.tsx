@@ -1,10 +1,10 @@
 import { ImgType } from "@/constants/globalTypes";
+import { GroupStatusKeyType } from "@/constants/groupStatusSet";
 import { groupProfileTitles } from "@/constants/iconsPackage/groupCardIcons";
 import { MouseEventHandler, ReactNode } from "react";
 
 // page
-export type GroupStatusType = string;
-// "開團中"|"已結束";
+export type GroupStatusType = GroupStatusKeyType;
 
 export type StoreType = {
   storeId: number;
@@ -47,7 +47,7 @@ export type GroupDataType = {
 
 export type GamesDataItemType = {
   gameId: number;
-  gametype: string;
+  gameType: string;
   gameName: string;
   version: string;
   peopleNum: string;
@@ -88,6 +88,11 @@ export type MemberCardBtnsItemType = {
   handler: MouseEventHandler;
 };
 
+// ReserveInfo
+export type StoreLocationProps = {
+  storeData: GroupDataType["store"];
+};
+
 // ---data---
 
 // ReserveInfo
@@ -104,7 +109,7 @@ export const groupTitleSet: Record<string, string> = {
 
 // page
 export const defaultGroupsData: GroupDataType = {
-  groupStatus: "pending",
+  groupStatus: "已結束",
   groupName: "",
   date: "",
   startTime: "",
@@ -137,7 +142,7 @@ export const defaultMembersData: MembersDataType = [
 export const defaultGamesData: GamesDataType = [
   {
     gameId: 0,
-    gametype: "",
+    gameType: "",
     gameName: "",
     version: "",
     peopleNum: "",

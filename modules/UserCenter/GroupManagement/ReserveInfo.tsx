@@ -5,9 +5,24 @@ import { GroupDataContext } from "@/pages/user-center/group/[id]";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import TitleBlock from "@/common/components/Form/TitleBlock";
-import { groupTitleSet } from "./data";
+import { StoreLocationProps, groupTitleSet } from "./data";
 import Image from "@/common/components/FillImage";
 import GroupStatusSign from "@/common/components/GroupStatusSign";
+
+const StoreLocation = ({ storeData }: StoreLocationProps) => {
+  if (!storeData) return null;
+  const { storeId, storeName, address } = storeData;
+  return (
+    <>
+      <Link href={`/store/${storeId}`}>
+        <span>{storeName}</span>
+      </Link>
+      <p className="text-sm before:content-['（'] after:content-['）']">
+        {address}
+      </p>
+    </>
+  );
+};
 
 export default function ReserveInfo() {
   const dataContext = useContext(GroupDataContext);
@@ -18,7 +33,7 @@ export default function ReserveInfo() {
   const postReserve = async () => {
     try {
       const apiParams: apiParamsType = {
-        apiPath: `${apiPaths["submitReserve"]}/${groupId}`,
+        apiPath: `${apiPaths["submit-reserve"]}/${groupId}`,
         method: "POST",
       };
       const res = await fetchApi(apiParams);
@@ -36,20 +51,9 @@ export default function ReserveInfo() {
     postReserve();
   };
 
-  const StoreLocation = () => (
-    <>
-      <Link href={`/store/${store?.storeId}`}>
-        <span>{store?.storeName}</span>
-      </Link>
-      <p className="text-sm before:content-['（'] after:content-['）']">
-        {store?.address}
-      </p>
-    </>
-  );
-
   const isStore = store !== null;
-  const location = isStore ? <StoreLocation /> : place;
-  const timeContent = `${startTime}-${endTime}`;
+  const location = isStore ? <StoreLocation storeData={store} /> : place;
+  const timeContent = startTime && endTime ? `${startTime}-${endTime}` : null;
 
   return (
     <div className="flex flex-col justify-start gap-8 md:gap-6 px-10 py-6 md:p-4">

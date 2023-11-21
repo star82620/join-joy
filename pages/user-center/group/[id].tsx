@@ -14,24 +14,44 @@ import {
 } from "@/modules/UserCenter/GroupManagement/data";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
+  // 如果不是團主 => 404
+
+  const { authToken } = context.req.cookies;
+
+  if (!authToken) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+
   // 獲取 id
   const { id } = context.params as { id: string };
 
-  // 如果沒有 token => login
-  // 如果不是團主 => landingPage
-
   // 獲取該揪團資訊
   const groupApiParams: apiParamsType = {
-    apiPath: `${apiPaths["getGroupInfo"]}/${id}`,
+    apiPath: `${apiPaths["get-group-info"]}/${id}`,
     method: "GET",
   };
 
   const groupRes = await fetchApi(groupApiParams);
-  const groupData: GroupDataType = groupRes?.data?.groupWithGames ?? [];
+
+  if (!groupRes.status) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: true,
+      },
+    };
+  }
+
+  const groupData: GroupDataType = groupRes?.data?.groupWithGames;
 
   // 獲取該揪團審核 & 未審核成員
   const memberApiParams: apiParamsType = {
-    apiPath: `${apiPaths["getGroupAllMember"]}?groupId=${id}`,
+    apiPath: `${apiPaths["get-group-all-member"]}?groupId=${id}`,
     method: "GET",
   };
   const memberRes = await fetchApi(memberApiParams);
@@ -42,7 +62,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let gamesData = [];
   if (storeId) {
     const gamesApiParams: apiParamsType = {
-      apiPath: `${apiPaths["getStoreGames"]}/${storeId}`,
+      apiPath: `${apiPaths["get-store-games"]}/${storeId}`,
       method: "GET",
     };
     const gamesRes = await fetchApi(gamesApiParams);
