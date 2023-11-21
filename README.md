@@ -1,17 +1,14 @@
-揪遊
-揪遊 JoinJoy ｜公開的桌遊揪團平台
+# 揪遊 JoinJoy ｜公開的桌遊揪團平台
 
----
-
-[專案網址 (https://join-joy.vercel.app/)] ｜
-[前端 Github Repo (https://github.com/star82620/join-joy)] ｜
-[Swagger (http://4.224.16.99/swagger/index.html?url=/swagger/v1/swagger.json#/)] ｜
+[專案網址](https://join-joy.vercel.app/) ｜
+[前端 Github Repo](https://github.com/star82620/join-joy) ｜
+[Swagger](http://4.224.16.99/swagger/index.html?url=/swagger/v1/swagger.json#/) ｜
 
 ---
 
 ## 功能介紹
 
-| 成為會員之後能夠進一步根據使用的服務分為「團主」及「團員」角色
+> 成為會員之後能夠進一步根據使用的服務分為「團主」及「團員」角色
 
 ### 會員端
 
@@ -24,7 +21,7 @@
 - 會員追蹤會員及店家
 - 會員透過揪團頁面的「留言版」交流
 
-### <-- 團主角色 -->
+### ► 團主角色
 
 - 團主建立揪團
 - 團主審核會員的入團申請
@@ -34,7 +31,7 @@
 - 團主評價團員及店家
 - 團主查看揪團狀態
 
-### <-- 團員角色 -->
+### ► 團員角色
 
 - 團員加入揪團
 - 團員取消申請入團
