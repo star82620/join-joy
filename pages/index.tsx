@@ -136,12 +136,12 @@ export default function Home({
   nearbyStoresData,
 }: HomeProps) {
   const dataSet = {
-    citiesData: citiesData || defaultCitiesData,
-    commentsData: commentsData || [],
-    nearbyGroupsData: nearbyGroupsData || [],
-    remainingGroupsData: remainingGroupsData || [],
-    preferenceData: preferenceData || [],
-    nearbyStoresData: nearbyStoresData || [],
+    citiesData,
+    commentsData,
+    nearbyGroupsData,
+    remainingGroupsData,
+    preferenceData,
+    nearbyStoresData,
   };
 
   return (
