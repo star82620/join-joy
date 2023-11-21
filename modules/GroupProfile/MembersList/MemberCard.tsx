@@ -2,7 +2,7 @@ import React from "react";
 import Link from "@/common/components/GeneralLink";
 import ProfileImg from "@/common/components/ProfileImg";
 import { memberStatusIndex } from "@/constants/wordIndexes";
-import defaultImages from "@/constants/defaultImages";
+import { defaultImages } from "@/constants/defaultImages";
 import { MemberCardProps } from "../data";
 
 export default function MemberCard({ member, subNum }: MemberCardProps) {
@@ -12,10 +12,11 @@ export default function MemberCard({ member, subNum }: MemberCardProps) {
   const statusText = memberStatusIndex[status];
   const cardShadow = !isSubmember ? "shadow-btn" : "";
   const subMemberPhoto = defaultImages["subMemberPhoto"];
-  const profileImgSrc = !isSubmember
-    ? "/images/photo-user-000.png"
-    : subMemberPhoto.src;
-  const profileImgAlt = !isSubmember ? userName : subMemberPhoto.alt;
+  const profileImgSrc = "/images/photo-user-000.png";
+  // const profileImgSrc = !isSubmember
+  //   ? "/images/photo-user-000.png"
+  //   : subMemberPhoto.src;
+  const profileImgAlt = !isSubmember ? userName : "subMemberPhoto.alt";
   const CardContent = () => (
     <section
       className={`flex justify-between items-center gap-4 md:gap-2 p-2 border-2 rounded  bg-yellow-tint ${cardShadow}`}
@@ -23,8 +24,7 @@ export default function MemberCard({ member, subNum }: MemberCardProps) {
       <ProfileImg
         src={profileImgSrc}
         alt={profileImgAlt}
-        widthProp="w-16"
-        heightProp="h-16"
+        sizeStyle="w-16 h-16"
       />
       <div className="grow">
         <p className="text-gray-600 md:text-xs">{statusText}</p>

@@ -9,31 +9,13 @@ import {
   GroupProfilePageProps,
   getStaticPropsProps,
 } from "@/modules/GroupProfile/data";
+import { GetServerSidePropsContext } from "next";
 
-export async function getStaticPaths() {
-  const apiParams: apiParamsType = {
-    apiPath: "/group/getallgroupid",
-    method: "GET",
-  };
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { id } = context.params;
+  const { authToken } = context.req.cookies;
 
-  const res = await fetchApi(apiParams);
-  const data = res.data;
-
-  const paths = data.map((group: GroupType) => {
-    return {
-      params: {
-        id: group.groupId.toString(),
-      },
-    };
-  });
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }: getStaticPropsProps) {
-  const { id } = params;
+  console.log(id);
 
   const groupApiParams: apiParamsType = {
     apiPath: `/group/easydetail/${id}`,

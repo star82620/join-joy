@@ -10,8 +10,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
       <ProfileImg
         src="/images/photo-user-000.png"
         alt="user"
-        widthProp="w-16 md:w-9"
-        heightProp="h-16 md:h-9"
+        sizeStyle="w-16 md:w-9 h-16 md:h-9"
       />
       <div className="grow">
         <div>

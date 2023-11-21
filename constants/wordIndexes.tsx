@@ -1,3 +1,5 @@
+import { GroupTagItemType } from "./globalTypes";
+
 // 遊戲類型
 export const gameTypeIndex: Record<number, string> = {
   1: "不限定",
@@ -49,8 +51,13 @@ export const citiesIndex: Record<number, string> = {
   22: "連江縣",
 };
 
-// 揪團狀態
-export const status = {
-  pending: {},
-  over: {},
-};
+// 揪團 tags
+export const groupTags: GroupTagItemType[] = [
+  { id: "beginnerTag", text: "新手團" },
+  { id: "expertTag", text: "老手團" },
+  { id: "practiceTag", text: "經驗切磋" },
+  { id: "openTag", text: "不限定" },
+  { id: "tutorialTag", text: "教學團" },
+  { id: "casualTag", text: "輕鬆" },
+  { id: "competitiveTag", text: "競技" },
+];
