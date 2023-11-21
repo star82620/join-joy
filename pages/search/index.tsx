@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import { defaultGroupsSearchKey } from "@/common/helpers/getSearchApi/getSearchGroups";
+import { defaultGroupsSearchKey } from "@/common/helpers/getApi/getSearchGroups";
 import Image from "next/image";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";

@@ -5,7 +5,7 @@ import convertImgSrc from "@/common/helpers/convertImgSrc";
 
 export default function ProfileImg({ src, alt, sizeStyle }: ProfileImgProps) {
   const imgSrc = convertImgSrc(src);
-  console.log("a", imgSrc);
+
   return (
     <div
       className={`relative rounded-full border-2 border-white outline outline-2

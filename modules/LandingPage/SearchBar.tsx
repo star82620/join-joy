@@ -31,6 +31,9 @@ export default function SearchBar() {
   const isEmptyGameName = searchValues.gameName === "";
   const isEmptyStoreName = searchValues.storeName === "";
 
+  const isAllEmpty =
+    isEmptyCityId && isEmptyStartDate && isEmptyGameName && isEmptyStoreName;
+
   const [error, setError] = useState(false);
 
   const isError = error === true;
@@ -66,12 +69,7 @@ export default function SearchBar() {
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (
-      isEmptyCityId &&
-      isEmptyStartDate &&
-      isEmptyGameName &&
-      isEmptyStoreName
-    ) {
+    if (isAllEmpty) {
       setError(true);
       return;
     }
