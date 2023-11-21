@@ -48,6 +48,8 @@ const config: Config = {
       "green-dark": "#3B956B",
       "purple-light": "#DD84FC",
       "purple-dark": "#9354A9",
+      "brown-light": "#C9B896",
+      "brown-dark": "#5F584A",
       danger: "#DD240B",
       white: "#FFFFFF",
       transparent: "transparent",
