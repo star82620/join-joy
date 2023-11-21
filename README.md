@@ -1,40 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 揪遊 JoinJoy ｜公開的桌遊揪團平台
 
-## Getting Started
+[專案網址](https://join-joy.vercel.app/) ｜
+[前端 Github Repo](https://github.com/star82620/join-joy) ｜
+[Swagger](http://4.224.16.99/swagger/index.html?url=/swagger/v1/swagger.json#/) ｜
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 功能介紹
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> 成為會員之後能夠進一步根據使用的服務分為「團主」及「團員」角色
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### 會員端
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- 會員註冊/登入
+- 會員資料修改
+- 搜尋及篩選揪團與店家
+- 查看揪團詳細資訊（參加者列表、留言板）
+- 查看店家詳細資訊（預約時間、遊戲清單、評價與評分）
+- 查看會員詳細資訊（歷史揪團紀錄、評價與評分）
+- 會員追蹤會員及店家
+- 會員透過揪團頁面的「留言版」交流
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### ► 團主角色
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- 團主建立揪團
+- 團主審核會員的入團申請
+- 團主預約店家時間
+- 團主編輯揪團詳細資料
+- 團主確認團員的出席
+- 團主評價團員及店家
+- 團主查看揪團狀態
 
-## Learn More
+### ► 團員角色
 
-To learn more about Next.js, take a look at the following resources:
+- 團員加入揪團
+- 團員取消申請入團
+- 團員退出已加入的揪團
+- 團員評價團主、團員及店家
+- 團員查看入團狀態
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 建議體驗流程
 
-## Deploy on Vercel
+- 團員
+  1. 註冊會員帳號
+  2. 搜尋有興趣的揪團或店家
+  3. 從 `揪團詳細頁` 申請加入揪團
+  4. 從 `會員中心-管理我加入的揪團` 查看審核中、已加入的揪團
+  5. 活動結束後，從 `會員中心-管理我加入的揪團` 進行店家、團員評價
+- 團主
+  1. 註冊會員帳號
+  2. `我要開團` 按鈕進入 `開團表單` 進行開團
+  3. 等待團員加入，從 `會員中心-管理我開的揪團-揪團管理頁` 審核待加入的團員
+  4. 確定人數後 `送出預約`
+  5. 活動進行前一小時可於 `揪團管理頁` 對團員進行出缺席點名
+  6. 活動結束後，從 `會員中心-管理我加入的揪團` 進行店家、團員評價
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
