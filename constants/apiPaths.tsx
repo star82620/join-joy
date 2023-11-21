@@ -13,6 +13,7 @@ const apiPaths = {
   "get-my-profile": "/member/memberDetails",
   "my-groups-list": "/member/usergrouplist",
   "check-group-rating": "/member/checkgroupratings",
+  "get-manage-group": "/group/detail",
 
   "leave-group": "/group/leavegroup",
 

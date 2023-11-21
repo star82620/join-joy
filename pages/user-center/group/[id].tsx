@@ -32,11 +32,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // 獲取該揪團資訊
   const groupApiParams: apiParamsType = {
-    apiPath: `${apiPaths["get-group-info"]}/${id}`,
+    apiPath: `${apiPaths["get-manage-group"]}/${id}`,
     method: "GET",
+    authToken: authToken,
   };
 
   const groupRes = await fetchApi(groupApiParams);
+  console.log(groupRes);
 
   if (!groupRes.status) {
     return {
@@ -47,7 +49,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const groupData: GroupDataType = groupRes?.data?.groupWithGames;
+  const groupData: GroupDataType = groupRes;
 
   // 獲取該揪團審核 & 未審核成員
   const memberApiParams: apiParamsType = {
