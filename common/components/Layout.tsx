@@ -17,7 +17,7 @@ interface Props {
     | "store"
     | "landingpage"
     | "error"
-    | "searchresult";
+    | "search";
   children: ReactNode;
   mainClassName?: string;
 }
