@@ -1,13 +1,8 @@
 import React, { MouseEventHandler } from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
-import {
-  GroupDataType,
-  MemberType,
-  MemberCardBtnsType,
-  MemberCardProps,
-} from "./data";
-import { memberStatusFormat } from "@/constants/memberStatusFormat";
+import { MemberCardBtnsType, MemberCardProps } from "./data";
+import { memberStatusIndex } from "@/constants/wordIndexes";
 import Link from "@/common/components/GeneralLink";
 
 export default function MemberCard({ category, member }: MemberCardProps) {
@@ -50,7 +45,7 @@ export default function MemberCard({ category, member }: MemberCardProps) {
 
   const profileImgSrc = profileImg ?? "/images/photo-user-000.png";
   const memberStatus =
-    status === "pending" ? "申請者" : memberStatusFormat[status];
+    status === "pending" ? "申請者" : memberStatusIndex[status];
 
   return (
     <li className="w-full flex flex-col md:flex-row md:justify-between gap-2 p-2 rounded border-2 bg-yellow-tint shadow-btn">

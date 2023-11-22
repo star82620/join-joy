@@ -10,7 +10,7 @@ import TitleBlock from "@/common/components/Form/TitleBlock";
 import TextInput from "@/common/components/Form/TextInput";
 import { SelectedGamesType } from "@/common/components/GameList/data";
 import GroupTagSelector from "@/common/components/Form/GroupTagSelector";
-import { groupTags } from "@/constants/wordsIndex";
+import { groupTags } from "@/constants/wordIndexes";
 import { GroupTagItemType } from "@/constants/globalTypes";
 import TextArea from "@/common/components/Form/TextArea";
 import RadioInput from "@/common/components/Form/RadioInput";
