@@ -100,7 +100,7 @@ export type GameItemProps = {
 };
 
 export type StoreLocationProps = {
-  store: StoreType;
+  store: StoreType | null;
 };
 
 // MemberList

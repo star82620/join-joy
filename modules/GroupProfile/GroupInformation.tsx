@@ -22,6 +22,7 @@ import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 
 export function StoreLocation({ store }: StoreLocationProps) {
+  if (!store) return null;
   return (
     <p className="leading-6">
       <span className="font-medium whitespace-nowrap">
@@ -102,7 +103,7 @@ export default function GroupInformation() {
   useEffect(() => {
     const fetchIsLeaderAuth = async () => {
       const memberStatus = await checkMemberStatus(authData, groupId);
-      console.log("b", memberStatus);
+
       setMyMemberStatus(memberStatus);
     };
 
