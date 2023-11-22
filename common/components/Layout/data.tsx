@@ -1,3 +1,43 @@
+import { ReactNode } from "react";
+
+// Layout
+export type PageCategoryType =
+  | "signup"
+  | "login"
+  | "forget-password"
+  | "create-group"
+  | "user-center"
+  | "group"
+  | "user"
+  | "store"
+  | "landingpage"
+  | "error"
+  | "searchresult";
+
+export type LayoutProps = {
+  pageCategory: PageCategoryType;
+  children: ReactNode;
+  mainClassName?: string;
+};
+
+// Header
+
+// 隱藏「我要開團」的頁面
+export const hiddenGroupBtnPages: Array<string> = [
+  "login",
+  "signup",
+  "forget-password",
+  "create-group",
+];
+
+// 隱藏「在揪遊上成立店家」的頁面
+export const hiddenStoreBtnPages: Array<string> = ["login"];
+
+export type HeaderProps = {
+  pageCategory: PageCategoryType;
+};
+
+// Footer
 type ContentType = {
   text: string;
   href: string;

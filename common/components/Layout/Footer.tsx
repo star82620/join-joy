@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "../GeneralLink";
+import Link from "@/common/components/GeneralLink";
 import { simpleFooterPages, copyright, footerInfo, footerMenu } from "./data";
 
 // 簡易款
