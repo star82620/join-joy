@@ -13,7 +13,7 @@ export default function Navbar() {
   const nickName = authData?.nickName;
 
   return (
-    <ul className="flex flex-col items-center absolute top-[72px] right-0 border-2 bg-yellow-tint w-[180px]">
+    <ul className="flex flex-col items-center absolute top-[56px] -right-0.5 border-2 bg-yellow-tint w-[180px]">
       {isLogin && (
         <>
           <li className="w-full p-3 flex border-b-2">

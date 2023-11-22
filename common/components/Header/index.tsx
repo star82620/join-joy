@@ -20,18 +20,20 @@ export default function Header({ pageCategory }: HeaderProps) {
   };
 
   const defaultHeaderStyle = "bg-yellow-dark border-b-2 border-stone-950";
-  const headerStyle = isLandingPage ? "" : defaultHeaderStyle;
+  const headerStyle = isLandingPage ? "bg-orange-landing" : defaultHeaderStyle;
 
   return (
-    <header className="bg-yellow-neutral">
-      <div className="flex justify-between items-center container py-5 md:py-3">
+    <header className={headerStyle}>
+      <div className="container flex justify-between items-center py-2">
         <Link href="/">
           <Logo width="38" height="38" />
         </Link>
         <section className="flex items-center gap-6 relative">
           {!isStoreButtonHidden && (
-            <div className="md:hidden">
-              <Link href="/">在 揪遊 上成立店家</Link>
+            <div className="md:hidden font-semibold">
+              <Link href="/" className="no-underline">
+                在 揪遊 上成立店家
+              </Link>
             </div>
           )}
           {!isGroupButtonHidden && (
@@ -41,7 +43,7 @@ export default function Header({ pageCategory }: HeaderProps) {
               onClick={pushToCreateGroup}
               className="md:hidden"
             >
-              <span className="text-xl md:text-xs">我要開團</span>
+              <span className="text-lg md:text-xs leading-6">我要開團</span>
             </Button>
           )}
           <section className="flex flex-col">
