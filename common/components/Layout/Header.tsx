@@ -2,15 +2,11 @@ import React, { MouseEventHandler, useState } from "react";
 import { useRouter } from "next/router";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
-import Navbar from "./Navbar";
-import {
-  HeaderProps,
-  hiddenGroupBtnPages,
-  hiddenStoreBtnPages,
-  logoSet,
-} from "./data";
 import Image from "../FillImage";
+import Navbar from "./Navbar";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
+import { logoSet } from "@/constants/logoSet";
+import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 
 export default function Header({ pageCategory }: HeaderProps) {
   const router = useRouter();

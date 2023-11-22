@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { ImgType } from "@/constants/globalTypes";
 
 // Layout
 export type PageCategoryType =
@@ -38,19 +37,9 @@ export type HeaderProps = {
   pageCategory: PageCategoryType;
 };
 
-// Logo
-export const logoSet: Record<string, ImgType> = {
-  header: {
-    src: "/images/logo/logo-joinjoy-main.svg",
-    alt: "logo-joinjoy-main",
-  },
-  footer: {
-    src: "/images/logo/logo-joinjoy-chinese.svg",
-    alt: "logo-joinjoy-chinese",
-  },
-};
-
 // Footer
+export type FooterProps = { pageCategory: string };
+
 type ContentType = {
   text: string;
   href: string;
@@ -73,10 +62,7 @@ export const simpleFooterPages: Array<string> = [
 
 export const copyright = "Copyright © 2023 遊人揪揪工作室 All rights reserved.";
 
-export const footerInfo: Record<string, string> = {
-  logo: "Join Joy",
-  slogan: "Joining Together, Joy Forever!",
-};
+export const slogan = "Joining Together, Joy Forever!";
 
 export const footerMenu: DataType = [
   {
