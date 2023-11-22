@@ -39,7 +39,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     // 取得所有城市
     const citiesApiParams: apiParamsType = {
-      apiPath: apiPaths.getCities,
+      apiPath: apiPaths["get-cities"],
       method: "GET",
     };
     const citiesRes = await fetchApi(citiesApiParams);

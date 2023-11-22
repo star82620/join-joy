@@ -101,10 +101,18 @@ const config: Config = {
         "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
 
         // group
-        "group-time": 'url("/images/group-card/icon-time.svg")',
-        "group-member": 'url("/images/group-card/icon-members.svg")',
-        "group-location": 'url("/images/group-card/icon-location.svg")',
-        "group-tag": 'url("/images/group-card/icon-tag.svg")',
+        "group-card-time": 'url("/images/group-card/icon-time.svg")',
+        "group-card-member": 'url("/images/group-card/icon-members.svg")',
+        "group-card-location": 'url("/images/group-card/icon-location.svg")',
+        "group-card-tag": 'url("/images/group-card/icon-tag.svg")',
+        "group-location": 'url("/images/group-profile/icon-location.svg")',
+        "group-cost": 'url("/images/group-profile/icon-cost.svg")',
+        "group-date": 'url("/images/group-profile/icon-date.svg")',
+        "group-games": 'url("/images/group-profile/icon-games.svg")',
+        "group-tag": 'url("/images/group-profile/icon-tag.svg")',
+        "group-time": 'url("/images/group-profile/icon-time.svg")',
+        "group-description":
+          'url("/images/group-profile/icon-description.svg")',
 
         //
         "mascot-vector": 'url("/images/mascot-vector.svg")',
@@ -139,6 +147,9 @@ const config: Config = {
         "14": "56px",
         "15": "60px",
         "22": "88px",
+      },
+      padding: {
+        "15": "72px",
       },
     },
   },
