@@ -1,8 +1,9 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { MouseEventHandler, useContext, useState } from "react";
 import Image from "next/image";
 import Logo from "../WebsiteLogo";
 import Button from "../GeneralButton";
 import Link from "../GeneralLink";
+import { AuthContext } from "@/common/contexts/AuthProvider";
 
 import { hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 import { useRouter } from "next/router";
@@ -13,12 +14,15 @@ type HeaderProps = {
 };
 
 export default function Header({ pageCategory }: HeaderProps) {
+  const router = useRouter();
+
   let isGroupButtonHidden = hiddenGroupBtnPages.includes(pageCategory);
   let isStoreButtonHidden = hiddenStoreBtnPages.includes(pageCategory);
 
+  const authContext = useContext(AuthContext);
+
   const [toggleNavBar, setToggleNavBar] = useState(false);
 
-  const router = useRouter();
   const pushToCreateGroup: MouseEventHandler<HTMLButtonElement> = () => {
     router.push("/create-group");
   };

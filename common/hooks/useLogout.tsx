@@ -1,12 +1,18 @@
-import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthProvider";
 import deleteCookie from "../helpers/deleteCookie";
 
 export function useLogout() {
-  const router = useRouter();
+  const { setIsLogin, setAuthData, isLogin } = useContext(AuthContext);
 
   return function logout() {
+    if (!isLogin) return;
     deleteCookie("authToken");
-    alert("登出了！");
-    router.push("/");
+
+    setAuthData(null);
+
+    setIsLogin(false);
+
+    window.location.href = "/";
   };
 }

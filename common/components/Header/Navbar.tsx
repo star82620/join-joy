@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "../GeneralLink";
 import { AuthContext } from "@/common/contexts/AuthProvider";
-import useLogout from "@/common/hooks/useLogout";
+import { useLogout } from "@/common/hooks/useLogout";
 import { useRouter } from "next/router";
 import { AuthContextType } from "@/constants/globalTypes";
 import deleteCookie from "@/common/helpers/deleteCookie";
@@ -43,41 +43,37 @@ const dataSet: dataSetType = [
 
 export default function Navbar() {
   const router = useRouter();
+  const logout = useLogout();
+
   const authContext = useContext(AuthContext);
-  const { authData, setAuthData } = authContext;
-  console.log("aa", authContext);
-
-  const [isLogin, setIsLogin] = useState(false);
-
-  useEffect(() => {
-    if (authData?.userId) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [authData]);
+  const { authData, isLogin } = authContext;
 
   const PushToMyUserProfile = () => {
     router.push("/user-center");
   };
 
+  const nickName = authData?.nickName;
+
   return (
     <ul className="flex flex-col items-center absolute top-[72px] right-0 border bg-yellow-tint w-[180px]">
-      <li className="w-full p-3">嗨！{authData?.nickName}</li>
+      {isLogin && (
+        <>
+          <li className="w-full p-3">嗨！{nickName}</li>
+          <li
+            className="w-full p-3 border-t border-b cursor-pointer"
+            onClick={PushToMyUserProfile}
+          >
+            個人檔案
+          </li>
 
-      <li
-        className="w-full p-3 border-t border-b cursor-pointer"
-        onClick={PushToMyUserProfile}
-      >
-        個人檔案
-      </li>
-
-      <li
-        className="w-full p-3 border-t border-b cursor-pointer"
-        onClick={() => deleteCookie("authToken")}
-      >
-        登出
-      </li>
+          <li
+            className="w-full p-3 border-t border-b cursor-pointer"
+            onClick={logout}
+          >
+            登出
+          </li>
+        </>
+      )}
       {!isLogin && (
         <li
           className="w-full p-3 border-t border-b cursor-pointer"
