@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import Image from "@/common/components/FillImage";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import FileWrapper from "@/common/components/FileWrapper";
+import ProfileImg from "@/common/components/ProfileImg";
+import { ReturnComponentType } from "@/common/components/FileWrapper/data";
 import checkIsFollowed from "@/common/helpers/checkIsFollowed";
 import TagBlock from "./TagBlock";
 import GroupsList from "./GroupsList";
 import Comments from "./Comments";
 import { selectActiveComponent } from "@/common/helpers/selectActiveComponent";
-import { ReturnComponentType } from "@/common/components/FileWrapper/data";
-import { userData, tabSet, ActiveTabType } from "./data";
 import FollowingButton from "@/common/components/FollowingButton";
+import { userData, tabSet, ActiveTabType } from "./data";
 
 export default function UserProfile() {
   const isFollowed = checkIsFollowed();
@@ -27,14 +27,11 @@ export default function UserProfile() {
           <ModalWrapper title="關於我" layout="primary">
             <div className="px-9 py-12 lg:px-16 md:px-8 md:py-4 flex flex-col justify-center items-center gap-6 lg:flex-row lg:justify-between lg:items-start md:flex-col md:justify-center md:items-center">
               <div className="flex flex-col justify-center items-center gap-6 lg:gap-3">
-                <div className="relative w-28 h-28 rounded-full border-2 border-white outline outline-2 outline-gray-950">
-                  <Image
-                    src={profileImg}
-                    alt={userName}
-                    fill
-                    className="object-contain rounded-full"
-                  />
-                </div>
+                <ProfileImg
+                  src={profileImg}
+                  alt={userName}
+                  sizeStyle="w-28 h-28"
+                />
                 <h1 className="text-lg lg:text-md font-semibold leading-[1.2] text-center">
                   {userName}
                 </h1>
