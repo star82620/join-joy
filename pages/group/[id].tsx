@@ -5,9 +5,16 @@ import Layout from "@/common/components/Layout";
 import {
   GroupDataType,
   GroupProfilePageProps,
+  defaultCommentData,
+  defaultGroupData,
 } from "@/modules/GroupProfile/data";
 import { GetServerSidePropsContext } from "next";
 import { CommentDataType } from "@/constants/types/commentDataType";
+import apiPaths from "@/constants/apiPaths";
+
+let groupId = 0;
+let groupData = defaultGroupData;
+let commentsData = defaultCommentData;
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   // 獲取 id
@@ -16,17 +23,20 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // 取得揪團資料
   const groupApiParams: apiParamsType = {
-    apiPath: `/group/easydetail/${id}`,
+    apiPath: `${apiPaths["get-group-info"]}/${id}`,
     method: "GET",
   };
 
   const groupRes = await fetchApi(groupApiParams);
 
-  // if (!groupRes) {
-  //   return console.log("groupRes,NO");
-  // }
+  if (!groupRes) {
+    console.log("groupRes,NO");
+    return {
+      props: { groupId: id, groupData: groupData, commentsData: commentsData },
+    };
+  }
 
-  const groupData: GroupDataType = groupRes.data.groupWithGames || [];
+  groupData = groupRes.data?.groupWithGames || defaultGroupData;
 
   // 取得留言板內容
   const commentsApiParams: apiParamsType = {
@@ -36,13 +46,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const commentsRes = await fetchApi(commentsApiParams);
 
-  // if (commentsRes) {
-  //   return console.log("comment,No");
-  // }
+  if (commentsRes) {
+    console.log("comment,No");
+  }
 
-  const commentsData: CommentDataType[] = Array.isArray(commentsRes.data)
-    ? commentsRes.data
-    : [];
+  commentsData = Array.isArray(commentsRes.data) ? commentsRes.data : [];
 
   return {
     props: { groupId: id, groupData: groupData, commentsData: commentsData },

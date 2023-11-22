@@ -1,3 +1,7 @@
+import { MemberStatusType, StoreType } from "@/constants/globalTypes";
+import { GroupStatusKeyType } from "@/constants/groupStatusSet";
+import { GroupTagType } from "@/constants/types/groupDataType";
+
 // page
 export type getStaticPropsProps = { params: Record<string, string> };
 
@@ -57,8 +61,6 @@ export type TitlesType = Record<IconKeyType, TitleItemType>;
 
 export type TitleProps = { content: IconKeyType };
 
-export type StoreType = { storeName: string; storeId: string; address: string };
-
 export type GameItemType = {
   gameName: string;
   gameId: string;
@@ -66,18 +68,18 @@ export type GameItemType = {
 };
 
 export type MemberType = {
-  userId: string;
+  userId: number;
   userName: string;
-  status: "leader" | "member";
+  status: MemberStatusType;
   initNum: number;
   profileImg: string;
 };
 
 export type GroupDataType = {
   groupName: string;
-  groupStatus: "opening" | "closed";
-  place: string;
-  store: StoreType;
+  groupStatus: GroupStatusKeyType;
+  place: string | null;
+  store: StoreType | null;
   date: string;
   startTime: string;
   endTime: string;
@@ -86,7 +88,7 @@ export type GroupDataType = {
   games: GameItemType[];
   description: string;
   members: MemberType[];
-  tags: Array<string>;
+  tags: GroupTagType[];
 };
 
 export type TagItemProps = {
@@ -162,4 +164,40 @@ export const titles: TitlesType = {
       alt: "icon-description",
     },
   },
+};
+
+export const defaultGroupData: GroupDataType = {
+  groupName: "",
+  groupStatus: "開團中",
+  place: null,
+  store: {
+    storeId: 0,
+    storeName: "",
+    address: "",
+  },
+  date: "",
+  startTime: "",
+  endTime: "",
+  cost: "",
+  totalMemberNum: 0,
+  games: [],
+  description: "",
+  members: [
+    {
+      userId: 0,
+      userName: "",
+      status: "leader",
+      initNum: 0,
+      profileImg: "",
+    },
+  ],
+  tags: [],
+};
+
+export const defaultCommentData: CommentsDataItemType = {
+  userId: 0,
+  userName: "",
+  userPhoto: "",
+  commentContent: "",
+  commentDate: "",
 };
