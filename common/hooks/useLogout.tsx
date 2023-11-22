@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import deleteCookie from "../helpers/deleteCookie";
 
-export default function useLogout() {
+export function useLogout() {
   const router = useRouter();
 
   return function logout() {

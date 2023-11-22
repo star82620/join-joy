@@ -1,11 +1,12 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import Image from "next/image";
 import Logo from "../WebsiteLogo";
 import Button from "../GeneralButton";
 import Link from "../GeneralLink";
-import Navbar from "../Navbar";
+
 import { hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 import { useRouter } from "next/router";
+import Navbar from "./Navbar";
 
 type HeaderProps = {
   pageCategory: string;
@@ -14,6 +15,8 @@ type HeaderProps = {
 export default function Header({ pageCategory }: HeaderProps) {
   let isGroupButtonHidden = hiddenGroupBtnPages.includes(pageCategory);
   let isStoreButtonHidden = hiddenStoreBtnPages.includes(pageCategory);
+
+  const [toggleNavBar, setToggleNavBar] = useState(false);
 
   const router = useRouter();
   const pushToCreateGroup: MouseEventHandler<HTMLButtonElement> = () => {
@@ -26,7 +29,7 @@ export default function Header({ pageCategory }: HeaderProps) {
         <Link href="/">
           <Logo width="38" height="38" />
         </Link>
-        <section className="flex items-center gap-6">
+        <section className="flex items-center gap-6 relative">
           {isStoreButtonHidden || (
             <Link href="/" className="md:hidden">
               在 揪遊 上成立店家
@@ -46,7 +49,7 @@ export default function Header({ pageCategory }: HeaderProps) {
             <Button
               type="button"
               appearance="white"
-              onClick={() => console.log("I see")}
+              onClick={() => setToggleNavBar(!toggleNavBar)}
               className="w-fit"
             >
               <Image
@@ -65,7 +68,7 @@ export default function Header({ pageCategory }: HeaderProps) {
               />
             </Button>
             {/* 點擊按鈕下拉選單，登入狀態會影響內容 */}
-            {/* <Navbar /> */}
+            {toggleNavBar && <Navbar />}
           </section>
         </section>
       </div>

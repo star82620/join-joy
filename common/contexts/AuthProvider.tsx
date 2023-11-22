@@ -22,7 +22,8 @@ export default function AuthProvider({ children }: AuthProviderProps) {
         apiPath: apiPaths["check-login-status"],
         method: "GET",
       });
-      if (res?.data) {
+      if (res.data) {
+        console.log("AA", res.data);
         setAuthData(res.data);
       }
     }
