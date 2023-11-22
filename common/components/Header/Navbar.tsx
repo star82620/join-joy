@@ -34,14 +34,24 @@ export default function Navbar() {
         </>
       )}
       {!isLogin && (
-        <li
-          className="w-full p-3 border-t border-b cursor-pointer"
-          onClick={() => {
-            router.push("/login");
-          }}
-        >
-          登入
-        </li>
+        <>
+          <li
+            className="w-full p-3 border-b cursor-pointer"
+            onClick={() => {
+              router.push("/signup");
+            }}
+          >
+            註冊
+          </li>
+          <li
+            className="w-full p-3 cursor-pointer"
+            onClick={() => {
+              router.push("/login");
+            }}
+          >
+            登入
+          </li>
+        </>
       )}
     </ul>
   );
