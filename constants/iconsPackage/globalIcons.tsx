@@ -38,4 +38,14 @@ export const globalIcons: Record<string, ImgType> = {
     src: "/images/icon-search-store-dark.svg",
     alt: "icon-search-store-dark",
   },
+
+  // header
+  "header-user": {
+    src: "/images/icon-header-user.svg",
+    alt: "icon-header-user",
+  },
+  "header-menu": {
+    src: "/images/icon-header-menu.svg",
+    alt: "icon-header-menu",
+  },
 };

@@ -1,11 +1,16 @@
 import React, { MouseEventHandler, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
-import Logo from "./WebsiteLogo";
 import Navbar from "./Navbar";
-import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
+import {
+  HeaderProps,
+  hiddenGroupBtnPages,
+  hiddenStoreBtnPages,
+  logoSet,
+} from "./data";
+import Image from "../FillImage";
+import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 
 export default function Header({ pageCategory }: HeaderProps) {
   const router = useRouter();
@@ -13,6 +18,7 @@ export default function Header({ pageCategory }: HeaderProps) {
 
   let isGroupButtonHidden = hiddenGroupBtnPages.includes(pageCategory);
   let isStoreButtonHidden = hiddenStoreBtnPages.includes(pageCategory);
+
   let isLandingPage = pageCategory === "landingpage";
 
   const pushToCreateGroup: MouseEventHandler<HTMLButtonElement> = () => {
@@ -22,11 +28,19 @@ export default function Header({ pageCategory }: HeaderProps) {
   const defaultHeaderStyle = "bg-yellow-dark border-b-2 border-stone-950";
   const headerStyle = isLandingPage ? "bg-orange-landing" : defaultHeaderStyle;
 
+  const logoSrc = logoSet.header.src;
+  const logoAlt = logoSet.header.alt;
+
   return (
     <header className={headerStyle}>
       <div className="container flex justify-between items-center py-2">
         <Link href="/">
-          <Logo width="38" height="38" />
+          <Image
+            src={logoSrc}
+            alt={logoAlt}
+            widthProp="w-[72px] md:w-[64px]"
+            heightProp="h-[44px]"
+          />
         </Link>
         <section className="flex items-center gap-6 relative">
           {!isStoreButtonHidden && (
@@ -46,31 +60,31 @@ export default function Header({ pageCategory }: HeaderProps) {
               <span className="text-lg md:text-xs leading-6">我要開團</span>
             </Button>
           )}
-          <section className="flex flex-col">
+          <div className="flex flex-col">
             <Button
               type="button"
               appearance="white"
               onClick={() => setToggleNavBar(!toggleNavBar)}
               className="w-fit"
             >
-              <Image
-                src="/images/icon-header-user.svg"
-                alt="user"
-                width="36"
-                height="24"
-                className="inline md:hidden border-r-2 border-gray-950 pr-3 mr-3"
-              />
-              <Image
-                src="/images/icon-header-menu.svg"
-                alt="menu"
-                width="24"
-                height="24"
-                className="inline"
-              />
+              <div className="flex items-center gap-3">
+                <Image
+                  src={globalIcons["header-user"].src}
+                  alt={globalIcons["header-user"].alt}
+                  widthProp="w-6"
+                  heightProp="h-6"
+                />
+                <div className="w-0.5 h-6 bg-gray-950"></div>
+                <Image
+                  src={globalIcons["header-menu"].src}
+                  alt={globalIcons["header-menu"].alt}
+                  widthProp="w-6"
+                  heightProp="h-6"
+                />
+              </div>
             </Button>
-            {/* 點擊按鈕下拉選單，登入狀態會影響內容 */}
             {toggleNavBar && <Navbar />}
-          </section>
+          </div>
         </section>
       </div>
     </header>
