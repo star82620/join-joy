@@ -10,11 +10,17 @@ export default function MemberList() {
   const pendingListData = membersData.filter(
     (member) => member.status === "pending"
   );
+  const pendingNum = pendingListData.reduce((count, member) => {
+    count += member.initNum;
+    return count;
+  }, 0);
   const membersListData = membersData.filter(
     (member) => member.status !== "pending"
   );
-  const pendingNum = pendingListData.length;
-  const memberNum = membersListData.length;
+  const memberNum = membersListData.reduce((count, member) => {
+    count += member.initNum;
+    return count;
+  }, 0);
 
   return (
     <>
@@ -36,7 +42,7 @@ export default function MemberList() {
       </ModalWrapper>
       <ModalWrapper title="參加者列表" layout="secondary">
         <div className="flex flex-col items-center gap-2 p-4">
-          <p className="font-semibold ">目前人數： {memberNum} 人</p>
+          <p className="font-semibold ">目前總人數： {memberNum} 人</p>
           <p className="text-sm font-semibold text-gray-800">
             活動當天前1小時開放點名
           </p>
