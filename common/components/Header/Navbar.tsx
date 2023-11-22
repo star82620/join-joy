@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Link from "./GeneralLink";
+import Link from "../GeneralLink";
 
 type dataType = {
   href: string;
@@ -11,19 +11,6 @@ type dataSetType = dataType[];
 type NavbarItemProps = {
   data: dataType;
 };
-
-// 這些資料移出去 Header
-const dataSet: dataSetType = [
-  {
-    href: "/user-center",
-    img: {
-      src: "/images/icon-header-user",
-      alt: "usercenter",
-    },
-    content: "我的個人資訊",
-  },
-  // { href: "", img:{src: "", alt: ""}, content: "" },
-];
 
 function NavbarItem({ data }: NavbarItemProps) {
   const { href, img, content } = data;

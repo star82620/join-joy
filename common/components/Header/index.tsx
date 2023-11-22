@@ -1,10 +1,11 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import Image from "next/image";
 import Logo from "../WebsiteLogo";
 import Button from "../GeneralButton";
 import Link from "../GeneralLink";
 import Navbar from "../Navbar";
 import { hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
+import { useRouter } from "next/router";
 
 type HeaderProps = {
   pageCategory: string;
@@ -14,6 +15,11 @@ export default function Header({ pageCategory }: HeaderProps) {
   let isGroupButtonHidden = hiddenGroupBtnPages.includes(pageCategory);
   let isStoreButtonHidden = hiddenStoreBtnPages.includes(pageCategory);
 
+  const router = useRouter();
+  const pushToCreateGroup: MouseEventHandler<HTMLButtonElement> = () => {
+    router.push("/create-group");
+  };
+
   return (
     <header className="bg-yellow-dark border-b-2 border-stone-950">
       <div className="flex justify-between items-center container py-5 md:py-3">
@@ -22,7 +28,7 @@ export default function Header({ pageCategory }: HeaderProps) {
         </Link>
         <section className="flex items-center gap-6">
           {isStoreButtonHidden || (
-            <Link href="/create-group" className="md:hidden">
+            <Link href="/" className="md:hidden">
               在 揪遊 上成立店家
             </Link>
           )}
@@ -30,7 +36,7 @@ export default function Header({ pageCategory }: HeaderProps) {
             <Button
               type="button"
               appearance="yellow"
-              onClick={() => console.log("開團！")}
+              onClick={pushToCreateGroup}
               className="md:hidden"
             >
               <span className="text-xl md:text-xs">我要開團</span>
