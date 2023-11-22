@@ -55,21 +55,22 @@ export default function Navbar() {
   const nickName = authData?.nickName;
 
   return (
-    <ul className="flex flex-col items-center absolute top-[72px] right-0 border bg-yellow-tint w-[180px]">
+    <ul className="flex flex-col items-center absolute top-[72px] right-0 border-2 bg-yellow-tint w-[180px]">
       {isLogin && (
         <>
-          <li className="w-full p-3">嗨！{nickName}</li>
+          <li className="w-full p-3 flex border-b-2">
+            Hi!<p className="mx-1 truncate font-semibold">{nickName}</p> 👋🏻
+          </li>
           <li
-            className="w-full p-3 border-t border-b cursor-pointer"
-            onClick={PushToMyUserProfile}
+            className="w-full p-3 cursor-pointer"
+            onClick={() => {
+              router.push("/user-center");
+            }}
           >
             個人檔案
           </li>
 
-          <li
-            className="w-full p-3 border-t border-b cursor-pointer"
-            onClick={logout}
-          >
+          <li className="w-full p-3 cursor-pointer border-t-2" onClick={logout}>
             登出
           </li>
         </>
