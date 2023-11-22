@@ -6,6 +6,8 @@ import { defaultImages } from "@/constants/defaultImages";
 import { MemberCardProps } from "../data";
 
 export default function MemberCard({ member, subNum }: MemberCardProps) {
+  if (!member) return null;
+
   const { userId, userName, status, initNum, profileImg } = member;
 
   if (status === "pending") return null;

@@ -12,7 +12,11 @@ export const GroupDataContext = createContext<GroupDataContextType>(
 export default function GroupProfile({ data }: GroupProfileProps) {
   const { groupId, groupData, commentsData } = data;
 
-  const currentMemberNum = groupData.members.reduce((counter, member) => {
+  const filteredMembers = groupData.members.filter((member) => {
+    return member.status !== "pending";
+  });
+
+  const currentMemberNum = filteredMembers.reduce((counter, member) => {
     counter += member.initNum;
     return counter;
   }, 0);
@@ -24,11 +28,10 @@ export default function GroupProfile({ data }: GroupProfileProps) {
           value={{ groupId, groupData, currentMemberNum, commentsData }}
         >
           <div className="flex flex-col gap-9 md:gap-8 grow">
-            <div className="grow">
-              <ModalWrapper title="揪團資訊" layout="primary">
-                <GroupInformation />
-              </ModalWrapper>
-            </div>
+            <ModalWrapper title="揪團資訊" layout="primary">
+              <GroupInformation />
+            </ModalWrapper>
+
             <div>
               <ModalWrapper title="留言板" layout="secondary">
                 <CommentsBoard />
