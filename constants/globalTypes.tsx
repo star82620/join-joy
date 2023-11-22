@@ -123,3 +123,17 @@ export type GroupTagIdType =
   | "competitiveTag";
 
 export type GroupTagItemType = { id: GroupTagIdType; text: string };
+
+// Layout
+export type PageCategoryType =
+  | "signup"
+  | "login"
+  | "forget-password"
+  | "create-group"
+  | "user-center"
+  | "group"
+  | "user"
+  | "store"
+  | "landingpage"
+  | "error"
+  | "searchresult";

@@ -1,45 +1,40 @@
 import React, { MouseEventHandler, useContext, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
-import Logo from "../WebsiteLogo";
 import Button from "../GeneralButton";
 import Link from "../GeneralLink";
-import { AuthContext } from "@/common/contexts/AuthProvider";
-
-import { hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
-import { useRouter } from "next/router";
+import Logo from "../WebsiteLogo";
+import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 import Navbar from "./Navbar";
-
-type HeaderProps = {
-  pageCategory: string;
-};
 
 export default function Header({ pageCategory }: HeaderProps) {
   const router = useRouter();
+  const [toggleNavBar, setToggleNavBar] = useState(false);
 
   let isGroupButtonHidden = hiddenGroupBtnPages.includes(pageCategory);
   let isStoreButtonHidden = hiddenStoreBtnPages.includes(pageCategory);
-
-  const authContext = useContext(AuthContext);
-
-  const [toggleNavBar, setToggleNavBar] = useState(false);
+  let isLandingPage = pageCategory === "landingpage";
 
   const pushToCreateGroup: MouseEventHandler<HTMLButtonElement> = () => {
     router.push("/create-group");
   };
 
+  const defaultHeaderStyle = "bg-yellow-dark border-b-2 border-stone-950";
+  const headerStyle = isLandingPage ? "" : defaultHeaderStyle;
+
   return (
-    <header className="bg-yellow-dark border-b-2 border-stone-950">
+    <header className="bg-yellow-neutral">
       <div className="flex justify-between items-center container py-5 md:py-3">
         <Link href="/">
           <Logo width="38" height="38" />
         </Link>
         <section className="flex items-center gap-6 relative">
-          {isStoreButtonHidden || (
-            <Link href="/" className="md:hidden">
-              在 揪遊 上成立店家
-            </Link>
+          {!isStoreButtonHidden && (
+            <div className="md:hidden">
+              <Link href="/">在 揪遊 上成立店家</Link>
+            </div>
           )}
-          {isGroupButtonHidden || (
+          {!isGroupButtonHidden && (
             <Button
               type="button"
               appearance="yellow"

@@ -1,45 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "../GeneralLink";
+import React, { useContext } from "react";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import { useLogout } from "@/common/hooks/useLogout";
 import { useRouter } from "next/router";
-import { AuthContextType } from "@/constants/globalTypes";
-import deleteCookie from "@/common/helpers/deleteCookie";
-
-type dataType = {
-  href: string;
-  img: Record<string, string>;
-  content: string;
-};
-type dataSetType = dataType[];
-type NavbarItemProps = {
-  data: dataType;
-  toggleNavBar: boolean;
-  setToggleNavBar: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const dataSet: dataSetType = [
-  {
-    href: "/user-center",
-    img: {
-      src: "/images/icon-header-user",
-      alt: "usercenter",
-    },
-    content: "我的個人資訊",
-  },
-  // { href: "", img:{src: "", alt: ""}, content: "" },
-];
-
-// function NavbarItem({ data }: NavbarItemProps) {
-//   const { href, img, content } = data;
-
-//   return (
-//     <Link href={href} className="flex justify-center items-center p-3">
-//       <span>{content}</span>
-//     </Link>
-//   );
-// }
 
 export default function Navbar() {
   const router = useRouter();
@@ -47,10 +9,6 @@ export default function Navbar() {
 
   const authContext = useContext(AuthContext);
   const { authData, isLogin } = authContext;
-
-  const PushToMyUserProfile = () => {
-    router.push("/user-center");
-  };
 
   const nickName = authData?.nickName;
 

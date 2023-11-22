@@ -1,3 +1,5 @@
+import { PageCategoryType } from "@/constants/globalTypes";
+
 // 隱藏「我要開團」的頁面
 export const hiddenGroupBtnPages: Array<string> = [
   "login",
@@ -8,3 +10,7 @@ export const hiddenGroupBtnPages: Array<string> = [
 
 // 隱藏「在揪遊上成立店家」的頁面
 export const hiddenStoreBtnPages: Array<string> = ["login"];
+
+export type HeaderProps = {
+  pageCategory: PageCategoryType;
+};
