@@ -75,6 +75,7 @@ export type TitleBlockProps = {
 export type MemberCardProps = {
   category: "pending" | "member";
   member: MemberType;
+  groupId: number;
 };
 
 export type MemberCardBtnsType = {

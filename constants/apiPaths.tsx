@@ -22,6 +22,8 @@ const apiPaths = {
   "get-group-all-member": "/group/joinList",
   "get-store-games": "/storeinfo/gamelist",
   "submit-reserve": "/group/reservegroup",
+  "review-group-member": "/group/reviewGroup",
+  "check-member-attended": "/group/rollcall",
 
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",

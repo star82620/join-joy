@@ -1,35 +1,56 @@
 import React, { MouseEventHandler } from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
-import {
-  GroupDataType,
-  MemberType,
-  MemberCardBtnsType,
-  MemberCardProps,
-} from "./data";
+import { MemberCardBtnsType, MemberCardProps } from "./data";
 import { memberStatusFormat } from "@/constants/memberStatusFormat";
 import Link from "@/common/components/GeneralLink";
+import { checkMemberAttended } from "@/common/helpers/getApi/checkMemberAttended";
+import { reviewGroupMember } from "@/common/helpers/getApi/reviewGroupMember";
 
-export default function MemberCard({ category, member }: MemberCardProps) {
-  // 如果是 "pending"：拒絕、接受
-  // 如果是 "member"：缺席、出席
+export default function MemberCard({
+  category,
+  member,
+  groupId,
+}: MemberCardProps) {
+  const { userId, profileImg, userName, status, initNum } = member;
+
+  // 出席、缺席
+  const handleAttended: MouseEventHandler<HTMLButtonElement> = (e) => {
+    // 根據點擊按鈕的 種類 資料 打 API
+
+    const userId = Number(e.currentTarget.value);
+    const btnCategory = e.currentTarget.innerText;
+    const isAttended = btnCategory === "出席";
+
+    const res = checkMemberAttended(groupId, userId, isAttended);
+  };
+
+  // 接受、拒絕
+  const handleReviewMember: MouseEventHandler<HTMLButtonElement> = (e) => {
+    const userId = Number(e.currentTarget.value);
+    const btnCategory = e.currentTarget.innerText;
+    const isAccepted = btnCategory === "接受";
+    const acceptedStatus = isAccepted ? "member" : "rejected";
+
+    reviewGroupMember(groupId, userId, acceptedStatus);
+  };
 
   const btns: MemberCardBtnsType = {
     pending: [
       {
         text: "拒絕",
         appearance: "white",
-        handler: () => {},
+        handler: handleReviewMember,
       },
       {
         text: "接受",
         appearance: "black",
-        handler: () => {},
+        handler: handleReviewMember,
       },
     ],
     member: [
-      { text: "缺席", appearance: "white", handler: () => {} },
-      { text: "出席", appearance: "black", handler: () => {} },
+      { text: "缺席", appearance: "white", handler: handleAttended },
+      { text: "出席", appearance: "black", handler: handleAttended },
     ],
   };
 
@@ -42,13 +63,9 @@ export default function MemberCard({ category, member }: MemberCardProps) {
   const declineBtnColor = declineBtn.appearance;
   const declineBtnText = declineBtn.text;
   const declineBtnHandler = declineBtn.handler;
+
   const isBtnDisabled = true;
 
-  const { userId, profileImg, userName, status, initNum } = member;
-
-  console.log("eee", profileImg);
-
-  const profileImgSrc = profileImg ?? "/images/photo-user-000.png";
   const memberStatus =
     status === "pending" ? "申請者" : memberStatusFormat[status];
 
@@ -57,7 +74,7 @@ export default function MemberCard({ category, member }: MemberCardProps) {
       <Link href={`/user/${userId}`} className="no-underline">
         <div className="flex items-center gap-4 md:gap-2">
           <ProfileImg
-            src={profileImgSrc}
+            src={profileImg}
             alt="user"
             sizeStyle="w-10 md:w-9 h-10 md:h-9"
           />
@@ -82,8 +99,9 @@ export default function MemberCard({ category, member }: MemberCardProps) {
               appearance={appearance}
               onClick={handler}
               rounded
-              isDisabled={isBtnDisabled}
+              // isDisabled={isBtnDisabled}
               className="w-full"
+              value={userId.toString()}
             >
               {text}
             </Button>

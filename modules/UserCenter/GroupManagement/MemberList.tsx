@@ -5,7 +5,7 @@ import MemberCard from "./MemberCard";
 
 export default function MemberList() {
   const dataContext = useContext(GroupDataContext);
-  const { membersData } = dataContext;
+  const { membersData, groupId } = dataContext;
 
   const pendingListData = membersData.filter(
     (member) => member.status === "pending"
@@ -35,6 +35,7 @@ export default function MemberList() {
                 key={member.userId}
                 category="pending"
                 member={member}
+                groupId={groupId}
               />
             ))}
           </ul>
@@ -53,6 +54,7 @@ export default function MemberList() {
                 key={member.userId}
                 category="member"
                 member={member}
+                groupId={groupId}
               />
             ))}
           </ul>
