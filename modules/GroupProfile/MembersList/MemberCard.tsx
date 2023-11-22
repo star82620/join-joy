@@ -6,26 +6,18 @@ import { defaultImages } from "@/constants/defaultImages";
 import { MemberCardProps } from "../data";
 
 export default function MemberCard({ member, subNum }: MemberCardProps) {
-  const { userId, userName, status, initNum } = member;
+  const { userId, userName, status, initNum, profileImg } = member;
   const isSubmember = subNum > 0;
   const isSingle = initNum === 1;
   const statusText = memberStatusIndex[status];
   const cardShadow = !isSubmember ? "shadow-btn" : "";
-  const subMemberPhoto = defaultImages["subMemberPhoto"];
-  const profileImgSrc = "/images/photo-user-000.png";
-  // const profileImgSrc = !isSubmember
-  //   ? "/images/photo-user-000.png"
-  //   : subMemberPhoto.src;
+
   const profileImgAlt = !isSubmember ? userName : "subMemberPhoto.alt";
   const CardContent = () => (
     <section
       className={`flex justify-between items-center gap-4 md:gap-2 p-2 border-2 rounded  bg-yellow-tint ${cardShadow}`}
     >
-      <ProfileImg
-        src={profileImgSrc}
-        alt={profileImgAlt}
-        sizeStyle="w-16 h-16"
-      />
+      <ProfileImg src={profileImg} alt={profileImgAlt} sizeStyle="w-16 h-16" />
       <div className="grow">
         <p className="text-gray-600 md:text-xs">{statusText}</p>
         <p className="md:text-sm mt-1 md:mt-0">

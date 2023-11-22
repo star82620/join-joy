@@ -70,6 +70,7 @@ export type MemberType = {
   userName: string;
   status: "leader" | "member";
   initNum: number;
+  profileImg: string;
 };
 
 export type GroupDataType = {

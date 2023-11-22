@@ -15,6 +15,9 @@ import {
   TagItemProps,
   GameItemProps,
 } from "./data";
+import { useRouter } from "next/router";
+import { AuthContext } from "@/common/contexts/AuthProvider";
+import { checkIsLeader } from "@/common/helpers/checkIsLeader";
 
 export function StoreLocation({ store }: StoreLocationProps) {
   return (
@@ -73,7 +76,11 @@ export default function GroupInformation({
   setApplyNum,
   handleJoinSubmit,
 }: GroupInformationProps) {
-  const { groupData, currentMemberNum } = useContext(GroupDataContext);
+  const router = useRouter();
+  const authContext = useContext(AuthContext);
+  const { authData, setAuthData } = authContext;
+
+  const { groupId, groupData, currentMemberNum } = useContext(GroupDataContext);
   const {
     groupName,
     groupStatus,
@@ -125,6 +132,12 @@ export default function GroupInformation({
       </Button>
     </form>
   );
+  const pushToGroupManagementPage = () => {
+    router.push(`/user-center/group/${groupId}`);
+  };
+
+  const isLeaderAuth = checkIsLeader(authData, groupId);
+  console.log(isLeaderAuth);
 
   return (
     <section className="px-12 py-8 md:px-3 md:py-4">
@@ -133,14 +146,14 @@ export default function GroupInformation({
         <span className="grow before:content-[''] before:w-2.5 before:h-2.5 before:rounded-full before:bg-green-light before:inline-block before:mr-1">
           {groupStatusText}
         </span>
-        <div className=" cursor-pointer">
-          <Image
-            src="/images/group-profile/icon-share.svg"
-            alt="icon-share"
-            widthProp="w-6 md:w-5"
-            heightProp="h-6 md:h-5"
-          />
-        </div>
+        <Button
+          type="button"
+          appearance="yellow-dark"
+          rounded
+          onClick={pushToGroupManagementPage}
+        >
+          管理揪團
+        </Button>
       </div>
       <ul className="flex flex-col gap-6 mt-6">
         <li>

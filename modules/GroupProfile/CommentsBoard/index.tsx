@@ -1,4 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, {
+  useState,
+  useContext,
+  ChangeEventHandler,
+  MouseEventHandler,
+} from "react";
 import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
@@ -6,13 +11,14 @@ import CommentCard from "./CommentCard";
 import { GroupDataContext } from "../index";
 import { CommentsDataItemType } from "../data";
 import { AuthContext } from "@/common/contexts/AuthProvider";
+import { CommentTextAreaProps } from "./data";
 
 const CommentTextArea = ({
   textLength,
   commentValue,
   handleInputValue,
   handleSubmitComment,
-}) => {
+}: CommentTextAreaProps) => {
   return (
     <div className="flex items-center gap-2">
       <div className="grow">
@@ -51,14 +57,12 @@ export default function CommentsBoard() {
   const [commentValue, setCommentValue] = useState("");
   const isEmpty = commentsData.length === 0;
 
-  const handleInputValue = (e) => {
+  const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setCommentValue(e.target.value);
     setTextLength(e.target.value.length);
   };
 
-  async function handleSubmitComment(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
+  const handleSubmitComment: MouseEventHandler<HTMLFormElement> = async (e) => {
     const msg = {
       groupId: groupId,
       commentTxt: commentValue,
@@ -71,8 +75,8 @@ export default function CommentsBoard() {
     };
 
     const res = await fetchApi(submitMsgKey);
-    console.log(res);
-  }
+    if (!res) return;
+  };
 
   return (
     <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
