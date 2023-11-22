@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import Link from "@/common/components/GeneralLink";
@@ -95,9 +95,25 @@ export default function GroupInformation({
     description,
     tags,
   } = groupData;
+
+  const [isLeaderAuth, setIsLeaderAuth] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchIsLeaderAuth = async () => {
+      const isLeader = await checkIsLeader(authData, groupId);
+      console.log("b", isLeader);
+      setIsLeaderAuth(isLeader);
+    };
+
+    fetchIsLeaderAuth();
+  }, [authData, groupId]);
+
   const isPlace = place !== null;
+
   const groupStatusText = groupStatusIndex[groupStatus];
+
   const remainingNum = totalMemberNum - currentMemberNum;
+
   const isFull = remainingNum <= 0;
 
   const NumOptions = () => {
@@ -136,9 +152,6 @@ export default function GroupInformation({
     router.push(`/user-center/group/${groupId}`);
   };
 
-  const isLeaderAuth = checkIsLeader(authData, groupId);
-  console.log(isLeaderAuth);
-
   return (
     <section className="px-12 py-8 md:px-3 md:py-4">
       <div className="flex items-center gap-2">
@@ -146,14 +159,16 @@ export default function GroupInformation({
         <span className="grow before:content-[''] before:w-2.5 before:h-2.5 before:rounded-full before:bg-green-light before:inline-block before:mr-1">
           {groupStatusText}
         </span>
-        <Button
-          type="button"
-          appearance="yellow-dark"
-          rounded
-          onClick={pushToGroupManagementPage}
-        >
-          管理揪團
-        </Button>
+        {isLeaderAuth && (
+          <Button
+            type="button"
+            appearance="yellow-dark"
+            rounded
+            onClick={pushToGroupManagementPage}
+          >
+            管理揪團
+          </Button>
+        )}
       </div>
       <ul className="flex flex-col gap-6 mt-6">
         <li>
