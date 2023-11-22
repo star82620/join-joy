@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import Link from "@/common/components/GeneralLink";
-import Share from "@/common/components/Share";
 import { groupStatusIndex } from "@/constants/wordIndexes";
 import { GroupDataContext } from "./index";
 import { gameTypeIndex } from "@/constants/wordIndexes";
@@ -17,7 +16,8 @@ import {
 } from "./data";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/common/contexts/AuthProvider";
-import { checkIsLeader } from "@/common/helpers/checkIsLeader";
+import { checkMemberStatus } from "@/common/helpers/checkMemberStatus";
+import { MemberStatusType } from "@/constants/globalTypes";
 
 export function StoreLocation({ store }: StoreLocationProps) {
   return (
@@ -96,17 +96,22 @@ export default function GroupInformation({
     tags,
   } = groupData;
 
-  const [isLeaderAuth, setIsLeaderAuth] = useState<boolean>(false);
+  const [myMemberStatus, setMyMemberStatus] = useState<MemberStatusType | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchIsLeaderAuth = async () => {
-      const isLeader = await checkIsLeader(authData, groupId);
-      console.log("b", isLeader);
-      setIsLeaderAuth(isLeader);
+      const memberStatus = await checkMemberStatus(authData, groupId);
+      console.log("b", memberStatus);
+      setMyMemberStatus(memberStatus);
     };
 
     fetchIsLeaderAuth();
   }, [authData, groupId]);
+
+  const isLeader = myMemberStatus === "leader";
+  const isMember = myMemberStatus !== null;
 
   const isPlace = place !== null;
 
@@ -148,6 +153,7 @@ export default function GroupInformation({
       </Button>
     </form>
   );
+
   const pushToGroupManagementPage = () => {
     router.push(`/user-center/group/${groupId}`);
   };
@@ -159,7 +165,7 @@ export default function GroupInformation({
         <span className="grow before:content-[''] before:w-2.5 before:h-2.5 before:rounded-full before:bg-green-light before:inline-block before:mr-1">
           {groupStatusText}
         </span>
-        {isLeaderAuth && (
+        {isLeader && (
           <Button
             type="button"
             appearance="yellow-dark"
@@ -214,7 +220,7 @@ export default function GroupInformation({
           <TagItem key={tag} tag={tag} />
         ))}
       </div>
-      {!isFull && <JoinForm />}
+      {!isFull && !isMember && <JoinForm />}
     </section>
   );
 }

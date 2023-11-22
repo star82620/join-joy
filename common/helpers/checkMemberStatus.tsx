@@ -5,11 +5,13 @@ import { AuthDataType } from "@/constants/globalTypes";
 import { GroupIdType } from "@/modules/GroupProfile/data";
 import { UserType } from "@/constants/types/groupDataType";
 
-export async function checkIsLeader(
+export async function checkMemberStatus(
   authData: AuthDataType | null,
   groupId: GroupIdType
 ) {
-  if (!authData?.userId || !groupId) return false;
+  if (!authData?.userId || !groupId) return null;
+
+  const authUserID = authData.userId;
 
   const apiParams: apiParamsType = {
     apiPath: `${apiPaths["get-all-members"]}?groupId=${groupId}`,
@@ -18,23 +20,19 @@ export async function checkIsLeader(
 
   try {
     const res = await fetchApi(apiParams);
-    if (!res.status || !res.data) return false;
+    if (!res.status || !res.data) return null;
 
     const data: UserType[] = res?.data;
 
-    // 從一包成員中找到團主，確認他是不是我
-    const groupLeader = data.filter((user) => {
-      return user.status === "leader";
+    const groupMember = data.filter((user) => {
+      return user.userId === authUserID;
     });
 
-    const leaderId = groupLeader[0].userId;
-    const authUserID = authData.userId;
+    const memberStatus = groupMember[0].status;
 
-    const isLeader = leaderId === authUserID;
-
-    return isLeader;
+    return memberStatus;
   } catch (error) {
     console.error(error);
-    return false;
+    return null;
   }
 }
