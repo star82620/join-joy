@@ -8,8 +8,7 @@ export default function ProfileImg({ src, alt, sizeStyle }: ProfileImgProps) {
 
   return (
     <div
-      className={`relative rounded-full border-2 border-white outline outline-2
-  outline-gray-950 flex-shrink-0 ${sizeStyle}`}
+      className={`relative rounded-full border-2 border-white outline outline-2 outline-gray-950 flex-shrink-0 ${sizeStyle}`}
     >
       <Image
         src={imgSrc}

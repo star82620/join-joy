@@ -34,10 +34,11 @@ export default async function fetchApi(apiParams: apiParamsType) {
 
   const requestOptions = {
     method: method,
+
     headers: headers,
+
     body: body,
   };
-
   try {
     const res = await fetch(url, requestOptions);
     const result = await res.json();

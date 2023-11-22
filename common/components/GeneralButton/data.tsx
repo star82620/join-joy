@@ -2,7 +2,15 @@ import { MouseEventHandler, ReactNode } from "react";
 
 export type ButtonType = {
   type: "button" | "submit" | "reset";
-  appearance: "orange" | "yellow" | "white" | "black" | "gray" | "brown";
+  appearance:
+    | "orange"
+    | "yellow"
+    | "yellow-dark"
+    | "white"
+    | "white-gray"
+    | "black"
+    | "gray"
+    | "brown";
   children: ReactNode;
   onClick?: MouseEventHandler | undefined;
   isDisabled?: boolean;
@@ -30,6 +38,14 @@ export const dataSet = {
     disabled:
       "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
     textColor: "text-gray-950",
+  },
+  "yellow-dark": {
+    default: "bg-yellow-dark border-gray-500",
+    hover: "hover:bg-white hover:text-gray-950 hover:border-gray-950",
+    active: "active:bg-yellow-neutral",
+    disabled:
+      "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
+    textColor: "text-gray-500",
   },
   white: {
     default: "bg-white border-gray-950",

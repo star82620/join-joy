@@ -6,7 +6,7 @@ export default function convertImgSrc(img: string | null) {
   if (!img) return defaultImgSrc;
 
   if (img && !img.includes("http")) {
-    const formattedImg = `${process.env.NEXT_PUBLIC_API_URL}/upload/${img}`;
+    const formattedImg = `${process.env.NEXT_PUBLIC_API_URL}/upload${img}`;
 
     const result = formattedImg || defaultImgSrc;
 
