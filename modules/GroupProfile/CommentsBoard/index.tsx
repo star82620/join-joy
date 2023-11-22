@@ -78,6 +78,10 @@ export default function CommentsBoard() {
     if (!res) return;
   };
 
+  const emptyBg = isEmpty
+    ? "bg-mascot-02 bg-no-repeat bg-contain bg-right-bottom bg-contain bg-[length:100px]"
+    : "";
+
   return (
     <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
       <div className="pb-6 md:pb-4">
@@ -93,9 +97,11 @@ export default function CommentsBoard() {
         )}
       </div>
 
-      <div className="flex flex-col gap-6 pt-6 md:pt-4 border-t border-gray-300">
+      <div
+        className={`flex flex-col gap-6 pt-6 md:pt-4 border-t border-gray-300 ${emptyBg}`}
+      >
         {isEmpty && (
-          <p className="text-center text-gray-600">目前還沒有留言唷！</p>
+          <p className="text-center text-gray-600 h-20">目前還沒有留言唷！</p>
         )}
         {commentsData.map((comment: CommentsDataItemType) => (
           <CommentCard key={comment.commentDate} comment={comment} />
