@@ -32,21 +32,21 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // 獲取該揪團資訊
   const groupApiParams: apiParamsType = {
-    apiPath: `${apiPaths["get-manage-group"]}/${id}`,
+    apiPath: `${apiPaths["get-group-info"]}/${id}`,
     method: "GET",
     authToken: authToken,
   };
 
   const groupRes = await fetchApi(groupApiParams);
 
-  if (!groupRes.status) {
-    return {
-      redirect: {
-        destination: "/404",
-        permanent: true,
-      },
-    };
-  }
+  // if (!groupRes.status) {
+  //   return {
+  //     redirect: {
+  //       destination: "/404",
+  //       permanent: true,
+  //     },
+  //   };
+  // }
 
   const groupData: GroupDataType = groupRes.data?.groupWithGames;
 
