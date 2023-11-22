@@ -18,6 +18,8 @@ import { useRouter } from "next/router";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import { checkMemberStatus } from "@/common/helpers/checkMemberStatus";
 import { MemberStatusType } from "@/constants/globalTypes";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 
 export function StoreLocation({ store }: StoreLocationProps) {
   return (
@@ -72,10 +74,7 @@ export function TagItem({ tag }: TagItemProps) {
   );
 }
 
-export default function GroupInformation({
-  setApplyNum,
-  handleJoinSubmit,
-}: GroupInformationProps) {
+export default function GroupInformation() {
   const router = useRouter();
   const authContext = useContext(AuthContext);
   const { authData, setAuthData } = authContext;
@@ -153,6 +152,32 @@ export default function GroupInformation({
       </Button>
     </form>
   );
+
+  const [applyNum, setApplyNum] = useState<number>(1);
+
+  const handleJoinSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!authData?.userId) {
+      router.push("/login");
+    }
+
+    const data = {
+      groupId: groupId,
+      initNum: applyNum,
+    };
+
+    const apiParams: apiParamsType = {
+      apiPath: apiPaths["apply-join-group"],
+      method: "POST",
+      data: data,
+    };
+
+    const res = await fetchApi(apiParams);
+    if (!res.status) return;
+
+    alert("成功送出入團申請");
+  };
 
   const pushToGroupManagementPage = () => {
     router.push(`/user-center/group/${groupId}`);
