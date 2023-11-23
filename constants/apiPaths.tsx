@@ -24,6 +24,7 @@ const apiPaths = {
   "submit-reserve": "/group/reservegroup",
   "review-group-member": "/group/reviewGroup",
   "check-member-attended": "/group/rollcall",
+  "edit-group-Info": "/group/edit",
 
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",
