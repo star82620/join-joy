@@ -12,6 +12,8 @@ import { GroupDataContext } from "../index";
 import { CommentsDataItemType } from "../data";
 import { AuthContext } from "@/common/contexts/AuthProvider";
 import { CommentTextAreaProps } from "./data";
+import Image from "@/common/components/FillImage";
+import { mascotImages } from "@/constants/defaultImages";
 
 const CommentTextArea = ({
   textLength,
@@ -78,10 +80,6 @@ export default function CommentsBoard() {
     if (!res) return;
   };
 
-  const emptyBg = isEmpty
-    ? "bg-mascot-02 bg-no-repeat bg-contain bg-right-bottom bg-contain bg-[length:100px]"
-    : "";
-
   return (
     <section className="px-12 pt-8 pb-10 md:px-3 md:py-4">
       <div className="pb-6 md:pb-4">
@@ -97,11 +95,17 @@ export default function CommentsBoard() {
         )}
       </div>
 
-      <div
-        className={`flex flex-col gap-6 pt-6 md:pt-4 border-t border-gray-300 ${emptyBg}`}
-      >
+      <div className="flex flex-col gap-6 pt-6 md:pt-4 border-t border-gray-300">
         {isEmpty && (
-          <p className="text-center text-gray-600 h-20">目前還沒有留言唷！</p>
+          <div className="flex justify-between items-center">
+            <p className="text-center text-gray-600">目前還沒有留言唷！</p>
+            <Image
+              src={mascotImages["blue-1"].src}
+              alt={mascotImages["blue-1"].alt}
+              widthProp="w-[120px]"
+              heightProp="h-[100px]"
+            />
+          </div>
         )}
         {commentsData.map((comment: CommentsDataItemType) => (
           <CommentCard key={comment.commentDate} comment={comment} />

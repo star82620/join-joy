@@ -106,8 +106,8 @@ export type StoreLocationProps = {
 // MemberList
 export type MemberCardProps = { member: MemberType; subNum: number };
 
-// GroupInformation
-export type GroupInformationProps = {
+// GroupInfo
+export type GroupInfoProps = {
   setApplyNum: (applyNum: number) => void;
   handleJoinSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };

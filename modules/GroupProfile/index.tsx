@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import GroupInformation from "./GroupInformation";
+import GroupInfo from "./GroupInfo";
 import MembersList from "./MembersList";
 import CommentsBoard from "./CommentsBoard";
 import { GroupDataContextType, GroupProfileProps } from "./data";
@@ -29,7 +29,7 @@ export default function GroupProfile({ data }: GroupProfileProps) {
         >
           <div className="flex flex-col gap-9 md:gap-8 grow">
             <ModalWrapper title="揪團資訊" layout="primary">
-              <GroupInformation />
+              <GroupInfo />
             </ModalWrapper>
 
             <div>
@@ -38,6 +38,7 @@ export default function GroupProfile({ data }: GroupProfileProps) {
               </ModalWrapper>
             </div>
           </div>
+
           <div className="w-[304px] md:w-full">
             <ModalWrapper title="參加者列表" layout="secondary">
               <MembersList />
