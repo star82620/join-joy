@@ -1,0 +1,63 @@
+import { MouseEventHandler, SetStateAction } from "react";
+
+export type RatingNameType =
+  | "groupId"
+  | "clean"
+  | "service"
+  | "variety"
+  | "value"
+  | "comment";
+
+export type StoreValuesType = {
+  groupId: number;
+  clean: number;
+  service: number;
+  variety: number;
+  value: number;
+  comment: string;
+};
+
+export type RatingItemSetType = {
+  title: string;
+  ratingName: RatingNameType;
+};
+
+export type RatingSelectorProps = RatingItemSetType & {
+  values: StoreValuesType;
+  handleScoreValue: MouseEventHandler<HTMLElement>;
+};
+
+export type MemberValuesType = {
+  groupId: number;
+  memberId: number;
+  score: number;
+  comment: string;
+};
+
+export type StepType = "store" | "member";
+
+// ---data---
+
+export const defaultStoreValues: StoreValuesType = {
+  groupId: 0,
+  clean: 0,
+  service: 0,
+  variety: 0,
+  value: 0,
+  comment: "",
+};
+
+export const RatingItemSet: RatingItemSetType[] = [
+  { ratingName: "clean", title: "環境舒適" },
+  { ratingName: "service", title: "服務態度" },
+  { ratingName: "variety", title: "遊戲多樣性" },
+  { ratingName: "value", title: "性價比" },
+  // { ratingName: "all", title: "整體" },
+];
+
+export const defaultMemberValues: MemberValuesType = {
+  groupId: 0,
+  memberId: 0,
+  score: 0,
+  comment: "",
+};
