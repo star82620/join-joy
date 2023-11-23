@@ -108,6 +108,11 @@ const config: Config = {
 
         //
         "mascot-vector": 'url("/images/mascot-vector.svg")',
+
+        // comment
+        "rating-star-light": 'url("/images/icon-rating-star-light.svg")',
+        "rating-star-dark": 'url("/images/icon-rating-star-dark.svg")',
+        "rating-star-gray": 'url("/images/icon-rating-star-gray.svg")',
       },
       backgroundSize: {
         "20px": "20px",
@@ -133,11 +138,17 @@ const config: Config = {
       width: {
         "14": "56px",
         "15": "60px",
+        "16": "64px",
+        "18": "72px",
+        "20": "80px",
         "22": "88px",
       },
       height: {
         "14": "56px",
         "15": "60px",
+        "16": "64px",
+        "18": "72px",
+        "20": "80px",
         "22": "88px",
       },
     },
