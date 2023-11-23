@@ -3,9 +3,7 @@ import React, {
   MouseEventHandler,
   useContext,
 } from "react";
-import FileWrapper from "@/common/components/FileWrapper";
 import Button from "@/common/components/GeneralButton";
-import Image from "@/common/components/FillImage";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileImg from "@/common/components/ProfileImg";
 import TextArea from "@/common/components/Form/TextArea";
@@ -17,6 +15,10 @@ export default function RatingStore() {
   const { storeValues, setStoreValues, step, setStep } =
     useContext(RatingValueContext);
 
+  const setStepMember: MouseEventHandler<HTMLButtonElement> = () => {
+    setStep("member");
+  };
+
   // 儲存店家評價
   const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = () => {
     setStoreValues((prevState) => ({ ...prevState, comment: "" }));
@@ -26,7 +28,7 @@ export default function RatingStore() {
   const handleScoreValue: MouseEventHandler<HTMLElement> = (e) => {
     const ratingName = e.currentTarget.dataset.ratingname as RatingNameType;
     const target = e.target as HTMLElement;
-    const scoreNum = target.dataset.score;
+    const scoreNum = Number(target.dataset.score);
 
     setStoreValues((prevState) => ({ ...prevState, [ratingName]: scoreNum }));
   };
@@ -36,37 +38,48 @@ export default function RatingStore() {
       <ModalWrapper title="評論你所體驗的店家" layout="primary">
         <div className="pt-10 pb-14 px-14">
           <div className="flex justify-between gap-[10%]">
-            <div className="w-[70%] flex flex-col justify-center flex-wrap gap-x-4 h-16">
+            <div className="w-[70%] mdg:w-full flex justify-center mdg:justify-start items-center gap-x-4 h-16 mdg:h-auto">
               <ProfileImg src="" alt="storeName" sizeStyle="w-16 h-16" />
-              <h3 className="w-full text-lg truncate">六角桌遊店</h3>
-              <p className="text-gray-700">高雄市新興區民生一路56號</p>
+              <div>
+                <h3 className="text-lg truncate">六角桌遊店</h3>
+                <p className="text-gray-700 mt-1">高雄市新興區民生一路56號</p>
+              </div>
             </div>
             <div className="w-full flex flex-col justify-center items-start">
               <h3 className="text-lg">本次遊戲時間</h3>
-              <p>2023/10/2 14:00 - 20:00</p>
+              <p className="mt-1">2023/10/2 14:00 - 20:00</p>
             </div>
           </div>
-          <div className="flex justify-between gap-[10%] mt-8">
-            <div className="w-[70%]">
+          <div className="flex mdg:flex-col justify-between gap-[10%] mt-8">
+            <div className="w-[70%] mdg:w-full">
               <h3 className="text-lg">各項目評分：</h3>
               <ul className="flex flex-col gap-6 mt-4">
-                {RatingItemSet.map((item) => (
-                  <RatingSelector
-                    title={item.title}
-                    ratingName={item.ratingName}
-                    values={storeValues}
-                    handleScoreValue={handleScoreValue}
-                  />
-                ))}
+                {RatingItemSet.map((item) => {
+                  const { title, ratingName } = item;
+                  return (
+                    <li className="w-full flex justify-between">
+                      <h4>{title}</h4>
+                      <RatingSelector
+                        key={ratingName}
+                        ratingName={ratingName}
+                        scoreValue={storeValues[ratingName]}
+                        handleScoreValue={handleScoreValue}
+                      />
+                    </li>
+                  );
+                })}
               </ul>
             </div>
-            <div className="w-full">
-              {/* <TextArea title="評語" textAreaParams={} /> */}
-              <h3 className="text-lg mb-2">評語</h3>
-              <textarea
-                className="w-full"
-                value={storeValues.comment}
-                onChange={handleInputValue}
+            <div className="w-full mdg:mt-8">
+              <TextArea
+                title="評語"
+                textAreaParams={{
+                  maxLength: 100,
+                  inputName: "comment",
+                  value: storeValues.comment,
+                  onChange: handleInputValue,
+                  placeholder: "留下評論並讓大家知道",
+                }}
               />
             </div>
           </div>
@@ -80,10 +93,11 @@ export default function RatingStore() {
             appearance="black"
             rounded
             className="w-[80%] mt-4"
+            onClick={setStepMember}
           >
             <p className="text-xl">下一步</p>
           </Button>
-          <p className="mt-5">略過</p>
+          <p className="mt-5 cursor-pointer underline">略過</p>
         </div>
       </ModalWrapper>
     </div>

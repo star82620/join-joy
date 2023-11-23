@@ -102,7 +102,7 @@ export type TextAreaParamsType = {
 };
 
 export type TextAreaProps = {
-  title: string;
+  title: string | ReactNode;
   textAreaParams: TextAreaParamsType;
   isError?: boolean;
 };

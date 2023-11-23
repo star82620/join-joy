@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { FormEventHandler, createContext, useState } from "react";
 import {
   MemberValuesType,
   StepType,
@@ -37,11 +37,19 @@ export default function Feedback() {
     setStep,
   };
 
+  const handleSubmitRatings: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    console.log("444");
+  };
+
   return (
     <>
       <RatingValueContext.Provider value={contextValues}>
-        {isStoreRating && <RatingStore />}
-        {isMemberRating && <RatingMember />}
+        <form onSubmit={handleSubmitRatings}>
+          {isStoreRating && <RatingStore />}
+
+          {isMemberRating && <RatingMember />}
+        </form>
       </RatingValueContext.Provider>
     </>
   );

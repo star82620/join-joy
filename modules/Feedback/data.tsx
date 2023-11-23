@@ -5,8 +5,7 @@ export type RatingNameType =
   | "clean"
   | "service"
   | "variety"
-  | "value"
-  | "comment";
+  | "value";
 
 export type StoreValuesType = {
   groupId: number;
@@ -22,19 +21,30 @@ export type RatingItemSetType = {
   ratingName: RatingNameType;
 };
 
-export type RatingSelectorProps = RatingItemSetType & {
-  values: StoreValuesType;
+export type RatingSelectorProps = {
+  ratingName: RatingNameType | string | number;
+  scoreValue: number;
   handleScoreValue: MouseEventHandler<HTMLElement>;
 };
 
-export type MemberValuesType = {
+export type MemberValuesItemType = {
   groupId: number;
   memberId: number;
   score: number;
   comment: string;
 };
 
+export type MemberValuesType = Record<number, MemberValuesItemType>;
+
 export type StepType = "store" | "member";
+
+// RatingMember
+export type MemberBlockProps = {
+  status: "member" | "leader";
+  userName: string;
+  userId: number;
+  profileImg: string;
+};
 
 // ---data---
 
@@ -56,8 +66,10 @@ export const RatingItemSet: RatingItemSetType[] = [
 ];
 
 export const defaultMemberValues: MemberValuesType = {
-  groupId: 0,
-  memberId: 0,
-  score: 0,
-  comment: "",
+  0: {
+    groupId: 0,
+    memberId: 0,
+    score: 0,
+    comment: "",
+  },
 };
