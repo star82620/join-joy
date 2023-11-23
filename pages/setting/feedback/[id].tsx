@@ -4,7 +4,7 @@ import Feedback from "@/modules/Feedback";
 import Layout from "@/common/components/Layout";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { id } = context.params;
+  const { id } = context.params as { id: string };
   const { authToken } = context.req.cookies;
   // if (!authToken) {
   //   return {
