@@ -26,11 +26,31 @@ const StoreLocation = ({ storeData }: StoreLocationProps) => {
 
 export default function ReserveInfo() {
   const dataContext = useContext(GroupDataContext);
-  const { groupId, groupData } = dataContext;
-  const { place, store, date, startTime, endTime, cost, groupStatus } =
-    groupData;
+  const { groupId, groupData, membersData } = dataContext;
+  const {
+    place,
+    store,
+    date,
+    startTime,
+    endTime,
+    cost,
+    groupStatus,
+    totalMemberNum,
+  } = groupData;
 
   const isOpening = groupStatus === "開團中";
+
+  const filteredPendingData = membersData.filter(
+    (member) => member.status === "pending"
+  );
+  const filteredMemberData = membersData.filter(
+    (member) => member.status !== "pending"
+  );
+
+  const pendingNum = filteredPendingData.length;
+  const memberNum = filteredMemberData.length;
+
+  const isMemberFull = memberNum === totalMemberNum;
 
   const postReserve = async () => {
     try {
@@ -48,9 +68,16 @@ export default function ReserveInfo() {
 
   // 送出預約
   const handleSubmitReserve = () => {
-    // 如果團員人數和總人數不符，要先改總人數
-    // 如果還有審核中人員， return
-    postReserve();
+    if (pendingNum !== 0) {
+      return alert("請先清空審核列表");
+    }
+    if (!isMemberFull) {
+      return alert("揪團總人數和團員人數不符");
+    }
+
+    postReserve().then((res) => {
+      console.log(res);
+    });
   };
 
   const isStore = store !== null;

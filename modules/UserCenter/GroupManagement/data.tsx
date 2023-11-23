@@ -1,7 +1,7 @@
 import { GroupTagIdType, ImgType } from "@/constants/globalTypes";
 import { GroupStatusKeyType } from "@/constants/groupStatusSet";
 import { groupProfileTitles } from "@/constants/iconsPackage/groupCardIcons";
-import { MouseEventHandler, ReactNode } from "react";
+import { MouseEventHandler, ReactNode, SetStateAction } from "react";
 
 // page
 export type GroupStatusType = GroupStatusKeyType;
@@ -71,11 +71,22 @@ export type TitleBlockProps = {
   children: ReactNode;
 };
 
+// MemberList
+
+export type MemberCardContextType = {
+  btns: MemberCardBtnsType;
+  setMemberListData: React.Dispatch<
+    SetStateAction<Record<string, MemberType[]>>
+  >;
+  date: string;
+  startTime: string;
+  endTime: string;
+};
+
 // MemberCard
 export type MemberCardProps = {
   category: "pending" | "member";
   member: MemberType;
-  groupId: number;
 };
 
 export type MemberCardBtnsType = {
