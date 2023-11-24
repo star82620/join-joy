@@ -46,7 +46,7 @@ export type MemberBlockProps = {
   profileImg: string;
 };
 
-export type Data = {
+export type MemberDataItemType = {
   memberId: number;
   memberName: string;
   memberPhoto: string;
