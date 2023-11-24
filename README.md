@@ -1,10 +1,14 @@
-<p align="center"><img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/logo.svg" alt="logo" width="300" height="auto" /></p>
+<p align="center">
 
-# 揪遊 JoinJoy ｜公開的桌遊揪團平台
+  <img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/logo.svg" alt="logo" width="300" height="auto" />
 
-[專案網址](https://join-joy-demo.vercel.app/) ｜
-[前端 Github Repo](https://github.com/star82620/join-joy) ｜
-[Swagger](https://2be5-4-224-16-99.ngrok-free.app/swagger)
+  <h1>揪遊 JoinJoy ｜公開的桌遊揪團平台</h1>
+
+<a href="https://join-joy-demo.vercel.app/">專案網址</a> ｜
+<a href="https://github.com/star82620/join-joy">前端 Github Repo</a> ｜
+<a href="https://2be5-4-224-16-99.ngrok-free.app/swagger">Swagger</a>
+
+</p>
 
 <img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/cover.png" alt="cover" />
 
