@@ -1,8 +1,8 @@
-# 揪遊 JoinJoy ｜公開的桌遊揪團平台
-
 <img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/logo.svg" alt="logo" width="300" height="auto" />
 
-<p style="text-align:center">
+# 揪遊 JoinJoy ｜公開的桌遊揪團平台
+
+<p align="center">
 
 [專案網址](https://join-joy-demo.vercel.app/) ｜
 [前端 Github Repo](https://github.com/star82620/join-joy) ｜
