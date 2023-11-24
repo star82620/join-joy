@@ -48,7 +48,7 @@ export default function SearchBar() {
 
   const titleStyle = "text-lg md:text-md";
 
-  // 儲存 input value
+  // 儲存 select value
   const setSelectValue: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const inputName = e.target.name;
     const isCityId = inputName === "cityId";
@@ -74,7 +74,28 @@ export default function SearchBar() {
       return;
     }
 
-    router.push("/search");
+    const { cityId, startDate, gameName, storeName } = searchValues;
+
+    // 把搜尋的資料存在網址中
+    // cityId startDate gameName storeName
+    let queryValues = `?tab=${activeTab}`;
+
+    if (!!cityId) {
+      queryValues = `${queryValues}&city=${cityId}`;
+    }
+    if (!!startDate) {
+      queryValues = `${queryValues}&date=${startDate}`;
+    }
+    if (!!gameName) {
+      queryValues = `${queryValues}&keyword=${gameName}`;
+    }
+    if (!!storeName) {
+      queryValues = `${queryValues}&keyword=${storeName}`;
+    }
+
+    console.log(queryValues);
+
+    router.push(`/search${queryValues}`);
   };
 
   useEffect(() => {

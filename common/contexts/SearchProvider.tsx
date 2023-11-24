@@ -10,7 +10,7 @@ export const defaultSearchValues: SearchValuesType = {
 
   // group
   startDate: "",
-  gameName: "fff",
+  gameName: "",
   groupFilter: 0,
   groupTag: 0,
   groupppl: 0,
