@@ -46,6 +46,16 @@ export type MemberBlockProps = {
   profileImg: string;
 };
 
+export type Data = {
+  memberId: number;
+  memberName: string;
+  memberPhoto: string;
+  isRated: boolean;
+  score: number;
+  comment: string | null;
+  status: "member" | "leader";
+};
+
 // ---data---
 
 export const defaultStoreValues: StoreValuesType = {
@@ -73,3 +83,5 @@ export const defaultMemberValues: MemberValuesType = {
     comment: "",
   },
 };
+
+// RatingMember

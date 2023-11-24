@@ -2,6 +2,7 @@ import React, {
   ChangeEventHandler,
   MouseEventHandler,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import Button from "@/common/components/GeneralButton";
@@ -11,39 +12,74 @@ import ProfileImg from "@/common/components/ProfileImg";
 import RatingSelector from "./RatingSelector";
 import TextArea from "@/common/components/Form/TextArea";
 import { memberStatusFormat } from "@/constants/memberStatusFormat";
-import { MemberBlockProps } from "./data";
+import { MemberBlockProps, MemberDataItemType, MemberValuesType } from "./data";
+
+const testData: MemberDataItemType[] = [
+  {
+    memberId: 0,
+    memberName: "乃胖胖胖",
+    memberPhoto:
+      "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
+
+    isRated: false,
+    score: 0,
+    comment: null,
+    status: "member",
+  },
+];
 
 export default function RatingMember() {
   const { memberValues, setMemberValues, step, setStep } =
     useContext(RatingValueContext);
 
-  const [memberScores, setMemberScores] = useState<Record<number, number>>({});
+  console.log(memberValues);
 
-  const ratingData = {};
+  const filteredData = testData.filter((item) => {
+    return item.isRated === false;
+  });
+
+  let defaultMemberRating = {} as MemberValuesType;
+  filteredData.forEach((item) => {
+    const { memberId } = item;
+    const defaultValue = {
+      groupId: 2,
+      memberId: memberId,
+      score: 0,
+      comment: "",
+    };
+    defaultMemberRating[memberId] = defaultValue;
+  });
+
+  useEffect(() => {
+    if (Object.keys(memberValues).length === 0) {
+      setMemberValues(defaultMemberRating);
+    }
+    console.log("eee");
+  }, []);
 
   const setStepStore: MouseEventHandler<HTMLParagraphElement> = () => {
     setStep("store");
   };
 
   // 儲存店家評價
-  const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = () => {
-    setMemberValues((prevState) => ({ ...prevState, comment: "" }));
+  const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    const content = e.target.value;
+    const userId = Number(e.target.name);
+    const newValue = { ...memberValues[userId], comment: content };
+
+    setMemberValues((prevState) => ({ ...prevState, ...newValue }));
   };
 
-  const handleScoreValue = () => {};
+  // 儲存分數
+  const handleScoreValue: MouseEventHandler<HTMLDivElement> = (e) => {
+    const userId = Number(e.currentTarget.dataset.ratingname);
+    const target = e.target as HTMLElement;
+    const scoreNum = Number(target.dataset.score);
 
-  const testData = [
-    {
-      memberId: 0,
-      memberName: "乃胖胖胖",
-      memberPhoto:
-        "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
+    const newValue = { ...memberValues[userId], score: scoreNum };
 
-      isRated: false,
-      score: 0,
-      comment: null,
-    },
-  ];
+    setMemberValues((prevState) => ({ ...prevState, ...newValue }));
+  };
 
   const MemberBlock = ({
     status,
@@ -66,7 +102,7 @@ export default function RatingMember() {
             <h4 className="text-lg">評分：</h4>
             <RatingSelector
               ratingName={userId}
-              scoreValue={memberScores[userId]}
+              scoreValue={memberValues[userId].score}
               handleScoreValue={handleScoreValue}
             />
           </div>
@@ -74,7 +110,7 @@ export default function RatingMember() {
             title="評語"
             textAreaParams={{
               maxLength: 50,
-              inputName: "comment",
+              inputName: userId.toString(),
               value: memberValues[userId].comment,
               onChange: handleInputValue,
             }}
@@ -89,10 +125,10 @@ export default function RatingMember() {
       <ModalWrapper title="評論同行的夥伴" layout="primary">
         <div className="w-full flex flex-col gap-6 px-14 pt-10 pb-6">
           {testData.map((item) => {
-            const { memberName, memberId, memberPhoto } = item;
+            const { status, memberName, memberId, memberPhoto } = item;
             return (
               <MemberBlock
-                status="member"
+                status={status}
                 userName={memberName}
                 userId={memberId}
                 profileImg={memberPhoto}
