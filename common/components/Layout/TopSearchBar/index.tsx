@@ -33,7 +33,6 @@ export default function TopSearchBar() {
       <div className="flex items-center gap-0.5 p-1 bg-yellow-tint font-semibold leading-6 whitespace-nowrap flex-shrink-0">
         {tabs.map((tab) => {
           const { tabName, tabText, img } = tab;
-          const { src, alt } = img;
           const isActive = activeTab === tabName;
           const tabStyle = isActive ? activeStyle : defaultStyle;
           const setImgSrc = () => {
@@ -66,7 +65,7 @@ export default function TopSearchBar() {
   };
 
   const searchContext = useContext(SearchContext);
-  const { activeTab, setActiveTab, searchValues } = searchContext;
+  const { activeTab, setActiveTab, searchKeys } = searchContext;
 
   const isGroup = activeTab === "group";
 
@@ -86,7 +85,7 @@ export default function TopSearchBar() {
           <div className="container flex items-center gap-2">
             <SearchTab />
             <div className="inputStyle !mt-0" onClick={setToggleDetailInputs}>
-              台北市 信義區、2023/10/5 searchValues
+              台北市 信義區、2023/10/5 searchKeys
             </div>
           </div>
         )}
