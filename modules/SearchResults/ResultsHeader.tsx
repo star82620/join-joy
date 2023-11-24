@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import FilterBlock from "./FilterBlock";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import { groupFilterSet, storeFilterSet } from "./data";
+import { useRouter } from "next/router";
 
 export default function ResultsHeader() {
   const searchContext = useContext(SearchContext);
@@ -16,7 +17,11 @@ export default function ResultsHeader() {
     setTotalCount,
   } = searchContext;
 
-  const isGroup = activeTab === "group";
+  const router = useRouter();
+  const queryKey = router.query;
+  const { tab, keyword } = queryKey;
+
+  const isGroup = tab === "group";
 
   // 搜尋對象切換
   const filterSet = isGroup ? groupFilterSet : storeFilterSet;

@@ -69,6 +69,12 @@ export default function TopSearchBar() {
 
   const isGroup = activeTab === "group";
 
+  const keywordPlaceholderText = isGroup
+    ? "輸入你想找的遊戲"
+    : "輸入你想找的店家名稱";
+
+  const btnText = isGroup ? "搜出揪團" : "搜出店家";
+
   const [toggleDetail, setToggleDetail] = useState(true);
 
   const isToggleDetail = toggleDetail === true;
@@ -105,11 +111,11 @@ export default function TopSearchBar() {
               <input
                 type="text"
                 className="inputStyle !mt-0"
-                placeholder="輸入你想找的遊戲"
+                placeholder={keywordPlaceholderText}
               />
             </div>
             <Button type="submit" appearance="black" rounded>
-              <span className="whitespace-nowrap">搜出店家</span>
+              <span className="whitespace-nowrap">{btnText}</span>
             </Button>
           </div>
         )}
