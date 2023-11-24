@@ -14,6 +14,7 @@ import {
   getSearchStores,
 } from "@/common/helpers/getApi/getSearchStores";
 import {
+  GetDataContextType,
   HomeProps,
   defaultCitiesData,
   defaultCommentsData,
@@ -41,7 +42,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     // 取得所有城市
     const citiesApiParams: apiParamsType = {
-      apiPath: apiPaths.getCities,
+      apiPath: apiPaths["get-cities"],
       method: "GET",
     };
     const citiesRes = await fetchApi(citiesApiParams);
@@ -126,7 +127,10 @@ export const defaultDataContext = {
   nearbyStoresData: defaultStoresData,
 };
 
-export const GetDataContext = createContext<HomeProps>(defaultDataContext);
+export const GetDataContext =
+  createContext<GetDataContextType>(defaultDataContext);
+// export const GetCitiesDataContext =
+//   createContext<GetCitiesDataContextType>(defaultCitiesData);
 
 export default function Home({
   citiesData,

@@ -15,6 +15,8 @@ export type HomeProps = {
   nearbyStoresData: StoreDataType[];
 };
 
+export type GetDataContextType = HomeProps;
+
 // CardsSectionProps
 export type CardsSectionProps = {
   layout: "swipe" | "block";
@@ -30,26 +32,6 @@ export type CommentCardProps = {
 };
 
 // ----data----
-
-// SearchBar
-export const tabs: TabType[] = [
-  {
-    tabName: "group",
-    tabText: "找揪團",
-    img: {
-      src: globalIcons["search-group-light"].src,
-      alt: globalIcons["search-group-light"].alt,
-    },
-  },
-  {
-    tabName: "store",
-    tabText: "找店家",
-    img: {
-      src: globalIcons["search-store-light"].src,
-      alt: globalIcons["search-store-light"].alt,
-    },
-  },
-];
 
 // page default data
 export const defaultCitiesData: CitiesDataType = [{ Id: 0, CityName: "" }];

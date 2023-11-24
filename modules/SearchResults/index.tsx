@@ -10,6 +10,7 @@ import EmptyResults from "./EmptyResults";
 export default function SearchResults({
   defaultData,
   defaultCount,
+  citiesData,
 }: SearchResultsProps) {
   const searchContext = useContext(SearchContext);
   const {

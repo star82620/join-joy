@@ -17,10 +17,12 @@ import {
   getSearchStores,
 } from "@/common/helpers/getApi/getSearchStores";
 import { SearchResultsPageProps } from "@/modules/SearchResults/data";
+import { getCitiesApi } from "@/common/helpers/getApi/getCitiesApi";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let defaultData = [];
   let defaultCount = 0;
+  let citiesData = [];
 
   const searchKeys = context.query;
 
@@ -30,6 +32,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const isGroup = tab === "group";
   const isStore = tab === "store";
+
+  citiesData = await getCitiesApi();
+
+  console.log(citiesData);
 
   if (isGroup) {
     const cityIdKey = city ? Number(city) : 0;
@@ -85,6 +91,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function SearchResultsPage({
   defaultData,
   defaultCount,
+  citiesData,
 }: SearchResultsPageProps) {
   console.log("OMD", defaultCount, defaultData);
 
@@ -96,6 +103,7 @@ export default function SearchResultsPage({
           <SearchResults
             defaultData={defaultData}
             defaultCount={defaultCount}
+            citiesData={citiesData}
           />
         </div>
       </Layout>

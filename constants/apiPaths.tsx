@@ -14,7 +14,6 @@ const apiPaths = {
   "my-groups-list": "/member/usergrouplist",
   "check-group-rating": "/member/checkgroupratings",
 
-  getCities: "/member/city",
   "leave-group": "/group/leavegroup",
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",

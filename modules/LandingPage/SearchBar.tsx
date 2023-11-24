@@ -15,83 +15,27 @@ import {
 } from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
 import { useRouter } from "next/router";
-import { tabs } from "./data";
+
+import useSearch from "./useSearch";
+import { searchTabs } from "@/constants/searchTabs";
 
 export default function SearchBar() {
-  const router = useRouter();
+  const {
+    setSelectValue,
+    setInputValue,
+    submitSearch,
+    isError,
+    isGroup,
+    submitBtnText,
+  } = useSearch();
 
   const searchContext = useContext(SearchContext);
-  const getDataContext = useContext(GetDataContext);
-
   const { searchKeys, setSearchKeys, activeTab, setActiveTab } = searchContext;
 
-  const isEmptyCityId = searchKeys.cityId === 0;
-  const isEmptyStartDate = searchKeys.startDate === "";
-  const isEmptyGameName = searchKeys.gameName === "";
-  const isEmptyStoreName = searchKeys.storeName === "";
-
-  const isAllEmpty =
-    isEmptyCityId && isEmptyStartDate && isEmptyGameName && isEmptyStoreName;
-
-  const [error, setError] = useState(false);
-
-  const isError = error === true;
-
-  useEffect(() => {}, [searchKeys]);
-
+  const getDataContext = useContext(GetDataContext);
   const { citiesData } = getDataContext;
 
-  const isGroup = activeTab === "group";
-
-  const btnText = isGroup ? "搜出揪團" : "搜出店家";
-
   const titleStyle = "text-lg md:text-md";
-
-  // 儲存 select value
-  const setSelectValue: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    const inputName = e.target.name;
-    const isCityId = inputName === "cityId";
-    const value = isCityId ? Number(e.target.value) : e.target.value;
-
-    setSearchKeys({ ...searchKeys, [inputName]: value });
-  };
-
-  // 儲存 input value
-  const setInputValue: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const inputName = e.target.name;
-    const value = e.target.value;
-
-    setSearchKeys({ ...searchKeys, [inputName]: value });
-  };
-
-  // 送出搜尋
-  const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-
-    if (isAllEmpty) {
-      setError(true);
-      return;
-    }
-
-    const { cityId, startDate, gameName, storeName } = searchKeys;
-
-    let queryValues = `?tab=${activeTab}`;
-
-    if (cityId) {
-      queryValues = `${queryValues}&city=${cityId}`;
-    }
-    if (startDate) {
-      queryValues = `${queryValues}&date=${startDate}`;
-    }
-    if (gameName) {
-      queryValues = `${queryValues}&keyword=${gameName}`;
-    }
-    if (storeName) {
-      queryValues = `${queryValues}&keyword=${storeName}`;
-    }
-
-    router.push(`/search${queryValues}`);
-  };
 
   useEffect(() => {
     setSearchKeys(defaultSearchKeys);
@@ -122,7 +66,7 @@ export default function SearchBar() {
   return (
     <section className="w-full flex flex-col items-center relative lg:w-full">
       <div className="flex items-start absolute">
-        {tabs.map((tab, index, tabs) => {
+        {searchTabs.map((tab, index, tabs) => {
           const zIndex = tabs.length - index;
           const isActive = activeTab === tab.tabName;
           return (
@@ -205,7 +149,7 @@ export default function SearchBar() {
                   widthProp="w-6 md:w-5"
                   heightProp="h-6 md:h-5"
                 />
-                {btnText}
+                {submitBtnText}
               </div>
             </Button>
           </div>
