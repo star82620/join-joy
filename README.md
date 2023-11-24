@@ -1,10 +1,22 @@
-# 揪遊 JoinJoy ｜公開的桌遊揪團平台
+<p align="center">
+  <img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/logo.svg" alt="logo" width="300" height="auto" />
+</p>
 
-[專案網址](https://join-joy.vercel.app/) ｜
-[前端 Github Repo](https://github.com/star82620/join-joy) ｜
-[Swagger](http://4.224.16.99/swagger/index.html?url=/swagger/v1/swagger.json#/) ｜
+<h1 align="center">揪遊 JoinJoy ｜桌遊揪團平台</h1>
 
----
+<div align="center" style="margin-bottom:24px">
+  <a href="https://join-joy-demo.vercel.app/">專案網址</a> ｜
+  <a href="https://github.com/star82620/join-joy">前端 Github Repo</a> ｜
+  <a href="https://2be5-4-224-16-99.ngrok-free.app/swagger">Swagger</a>
+</div>
+
+<p>
+</p>
+
+<br>
+<br>
+
+<img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/cover.png" alt="cover" />
 
 ## 功能介紹
 
@@ -13,12 +25,9 @@
 ### 會員端
 
 - 會員註冊/登入
-- 會員資料修改
 - 搜尋及篩選揪團與店家
 - 查看揪團詳細資訊（參加者列表、留言板）
-- 查看店家詳細資訊（預約時間、遊戲清單、評價與評分）
 - 查看會員詳細資訊（歷史揪團紀錄、評價與評分）
-- 會員追蹤會員及店家
 - 會員透過揪團頁面的「留言版」交流
 
 ### ► 團主角色
@@ -34,8 +43,6 @@
 ### ► 團員角色
 
 - 團員加入揪團
-- 團員取消申請入團
-- 團員退出已加入的揪團
 - 團員評價團主、團員及店家
 - 團員查看入團狀態
 
