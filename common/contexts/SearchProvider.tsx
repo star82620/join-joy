@@ -1,25 +1,7 @@
-import { useState, createContext, Children, ReactNode } from "react";
-
-export type SearchProviderProps = { children: ReactNode };
-
-export type SearchValuesType = {
-  cityId: number;
-  page: number;
-  pageSize: number;
-
-  // group
-  startDate: string;
-  gameName: string;
-  groupFilter: number;
-  groupTag: number;
-  groupppl: number;
-  joinppl: number;
-
-  // store
-  storeName: string;
-  storeFilter: number;
-  storeTag: number;
-};
+import { SearchProviderProps, SearchValuesType } from "@/constants/globalTypes";
+import { GroupDataType } from "@/constants/types/groupDataType";
+import { StoreDataType } from "@/constants/types/storeDataType";
+import { useState, createContext, Children } from "react";
 
 export const defaultSearchValues: SearchValuesType = {
   cityId: 0,
@@ -28,7 +10,7 @@ export const defaultSearchValues: SearchValuesType = {
 
   // group
   startDate: "",
-  gameName: "",
+  gameName: "fff",
   groupFilter: 0,
   groupTag: 0,
   groupppl: 0,
@@ -41,10 +23,12 @@ export const defaultSearchValues: SearchValuesType = {
 };
 
 export const defaultSearchContext = {
-  searchValues: defaultSearchValues,
-  setSearchValues: (value: SearchValuesType) => {},
   activeTab: "group",
   setActiveTab: (activeTab: string) => {},
+  searchValues: defaultSearchValues,
+  setSearchValues: (value: SearchValuesType) => {},
+  searchResultsData: [] as StoreDataType[] | GroupDataType[],
+  setSearchResultsData: (value: StoreDataType[] | GroupDataType[]) => {},
 };
 
 export const SearchContext = createContext(defaultSearchContext);
@@ -53,8 +37,18 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   const [searchValues, setSearchValues] =
     useState<SearchValuesType>(defaultSearchValues);
   const [activeTab, setActiveTab] = useState<string>("group");
+  const [searchResultsData, setSearchResultsData] = useState<
+    StoreDataType[] | GroupDataType[]
+  >([]);
 
-  const dataSet = { searchValues, setSearchValues, activeTab, setActiveTab };
+  const dataSet = {
+    activeTab,
+    setActiveTab,
+    searchValues,
+    setSearchValues,
+    searchResultsData,
+    setSearchResultsData,
+  };
 
   return (
     <SearchContext.Provider value={dataSet}>{children}</SearchContext.Provider>
