@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import GroupCard from "@/common/components/searchResultCard/GroupCard";
 import { groupSet } from "@/constants/testData";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { SelectOptionType } from "@/common/components/Form/data";
+import { SearchContext } from "@/common/contexts/SearchProvider";
 
 export type FilterSetItemType = { title: string; options: SelectOptionType[] };
 export type FilterSetType = FilterSetItemType[];
@@ -180,13 +181,20 @@ const FilterBlock = ({ title, options }: FilterSetItemType) => {
 };
 
 export default function SearchResults() {
+  const searchContext = useContext(SearchContext);
+  const { searchValues, setSearchValues, activeTab, setActiveTab } =
+    searchContext;
   const [activePage, setActivePage] = useState(1);
   const btnAppearance = true ? "white" : "white-gray";
   const pageBtnStyle = "text-gray-950 font-semibold";
 
-  // const isGroup = activeTab === "group";
+  const isGroup = activeTab === "group";
 
-  // const filterSet = isGroup ? groupFilterSet : storeFilterSet;
+  useEffect(() => {
+    console.log("aaaa");
+  }, [activeTab]);
+  const filterSet = isGroup ? groupFilterSet : storeFilterSet;
+
   return (
     <div className="container">
       <div>
@@ -195,10 +203,10 @@ export default function SearchResults() {
           找到 50 個符合 2023/10/5 在 台北市 信義區 的 揪團（關鍵字：無）{" "}
         </p>
         <div className="flex flex-wrap gap-3 md:gap-1 mt-6 md:mt-2">
-          {/* {filterSet.map((item) => {
+          {filterSet.map((item) => {
             const { title, options } = item;
             return <FilterBlock key={title} title={title} options={options} />;
-          })} */}
+          })}
         </div>
       </div>
       <div className="mt-9 md:mt-4">

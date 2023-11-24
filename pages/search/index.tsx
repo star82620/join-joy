@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
-import { SearchContext } from "@/common/contexts/SearchProvider";
+import SearchProvider, {
+  SearchContext,
+} from "@/common/contexts/SearchProvider";
 import { defaultGroupsSearchKey } from "@/common/helpers/getApi/getSearchGroups";
 import Image from "next/image";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import SearchResults from "@/modules/SearchResults";
+import Layout from "@/common/components/Layout";
+import TopSearchBar from "@/common/components/Layout/TopSearchBar";
 
 export default function SearchPage() {
   const searchContext = useContext(SearchContext);
@@ -17,8 +21,13 @@ export default function SearchPage() {
   console.log(searchValues);
 
   return (
-    <div>
-      <SearchResults />
-    </div>
+    <SearchProvider>
+      <Layout pageCategory="search">
+        <TopSearchBar />
+        <div className="pt-12 pb-[108px]">
+          <SearchResults />
+        </div>
+      </Layout>
+    </SearchProvider>
   );
 }

@@ -3,6 +3,7 @@ import Button from "../../GeneralButton";
 import { TabType } from "../../FileWrapper/data";
 import Image from "../../FillImage";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
+import { SearchContext } from "@/common/contexts/SearchProvider";
 
 export const tabs: TabType[] = [
   {
@@ -64,10 +65,9 @@ export default function TopSearchBar() {
     );
   };
 
-  // const searchContext = useContext(SearchContext);
-  // const {activeTab, setActiveTab,searchValues} = searchContext;
+  const searchContext = useContext(SearchContext);
+  const { activeTab, setActiveTab, searchValues } = searchContext;
 
-  const [activeTab, setActiveTab] = useState("group");
   const isGroup = activeTab === "group";
 
   const [toggleDetail, setToggleDetail] = useState(true);
