@@ -4,9 +4,9 @@
 [前端 Github Repo](https://github.com/star82620/join-joy) ｜
 [Swagger](http://4.224.16.99/swagger/index.html?url=/swagger/v1/swagger.json#/) ｜
 
-<img src="https://raw.githubusercontent.com/star82620/join-joy/ce35fb4a76fe2ae24be0fc9897487d257f523a66/public/images/readme/logo.svg">
+<img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/logo.svg" alt="logo">
 
-## <!-- https://raw.githubusercontent.com/star82620/join-joy/ce35fb4a76fe2ae24be0fc9897487d257f523a66/public/images/readme/logo.svg -->
+## [!cover](https://raw.githubusercontent.com/star82620/join-joy/ce35fb4a76fe2ae24be0fc9897487d257f523a66/public/images/readme/cover.png)
 
 ## 功能介紹
 
