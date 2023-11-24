@@ -99,13 +99,15 @@ export default function SearchResults({
       <div className="mt-9 md:mt-4">
         {isGroup && (
           <div className="flex flex-wrap gap-x-4 gap-y-8 md:gap-3">
-            {searchResultsData.map((group) => {
+            {searchResultsData.map((item) => {
+              const isGroupData = "groupId" in item;
               return (
                 <div
-                  key={group.groupId}
+                  key={isGroupData ? item.groupId : item.storeId}
                   className="w-full max-w-[280px] md:max-w-full"
                 >
-                  <GroupCard data={group} />
+                  {isGroupData && <GroupCard data={item} />}
+                  {!isGroupData && <StoreCard data={item} />}
                 </div>
               );
             })}
