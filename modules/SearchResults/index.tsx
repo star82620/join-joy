@@ -36,7 +36,7 @@ export default function SearchResults({
   const isEmptyResult = searchResultsData.length === 0;
 
   return (
-    <div className="container">
+    <div className="container pt-12 pb-[108px]">
       <ResultsHeader />
       {!isEmptyResult ? <ResultsSection /> : <EmptyResults />}
     </div>

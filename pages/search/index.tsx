@@ -56,10 +56,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     const isEmptyResult = typeof GroupsData === "string";
 
-    if (!isEmptyResult) {
-      defaultData = GroupsData.finalGroups;
-      defaultCount = GroupsData.groupCount;
-    }
+    // if (!isEmptyResult) {
+    //   defaultData = GroupsData.finalGroups;
+    //   defaultCount = GroupsData.groupCount;
+    // }
   }
 
   if (isStore) {
@@ -79,10 +79,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     const isEmptyResult = typeof StoreData === "string";
 
-    if (!isEmptyResult) {
-      defaultData = StoreData.matchedStores;
-      defaultCount = StoreData?.storeCount;
-    }
+    // if (!isEmptyResult) {
+    //   defaultData = StoreData.matchedStores;
+    //   defaultCount = StoreData?.storeCount;
+    // }
   }
 
   return { props: { defaultData, defaultCount } };
@@ -91,21 +91,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function SearchResultsPage({
   defaultData,
   defaultCount,
-  citiesData,
-}: SearchResultsPageProps) {
+}: // citiesData,
+SearchResultsPageProps) {
   console.log("OMD", defaultCount, defaultData);
 
   return (
     <SearchProvider>
       <Layout pageCategory="search">
-        <TopSearchBar />
-        <div className="pt-12 pb-[108px]">
-          <SearchResults
-            defaultData={defaultData}
-            defaultCount={defaultCount}
-            citiesData={citiesData}
-          />
-        </div>
+        <SearchResults defaultData={defaultData} defaultCount={defaultCount} />
       </Layout>
     </SearchProvider>
   );
