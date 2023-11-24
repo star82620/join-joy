@@ -26,9 +26,13 @@ export const defaultSearchContext = {
   activeTab: "group",
   setActiveTab: (activeTab: string) => {},
   searchKeys: defaultSearchKeys,
-  setSearchKeys: (value: SearchKeysType) => {},
+  setSearchKeys: (searchKeys: SearchKeysType) => {},
   searchResultsData: [] as StoreDataType[] | GroupDataType[],
-  setSearchResultsData: (value: StoreDataType[] | GroupDataType[]) => {},
+  setSearchResultsData: (
+    searchResultsData: StoreDataType[] | GroupDataType[]
+  ) => {},
+  totalCount: 0,
+  setTotalCount: (totalCount: number) => {},
 };
 
 export const SearchContext = createContext(defaultSearchContext);
@@ -40,6 +44,7 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   const [searchResultsData, setSearchResultsData] = useState<
     StoreDataType[] | GroupDataType[]
   >([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   const dataSet = {
     activeTab,
@@ -48,6 +53,8 @@ export default function SearchProvider({ children }: SearchProviderProps) {
     setSearchKeys,
     searchResultsData,
     setSearchResultsData,
+    totalCount,
+    setTotalCount,
   };
 
   console.log("searchResultsData", searchResultsData);
