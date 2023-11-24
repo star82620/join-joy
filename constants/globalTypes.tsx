@@ -126,7 +126,7 @@ export type GroupTagItemType = { id: GroupTagIdType; text: string };
 // SearchProvider
 export type SearchProviderProps = { children: ReactNode };
 
-export type SearchValuesType = {
+export type SearchKeysType = {
   cityId: number;
   page: number;
   pageSize: number;

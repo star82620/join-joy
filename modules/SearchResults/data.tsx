@@ -1,4 +1,15 @@
 import { SelectOptionType } from "@/common/components/Form/data";
+import { GroupDataType } from "@/constants/types/groupDataType";
+import { StoreDataType } from "@/constants/types/storeDataType";
+
+// page
+export type SearchResultsPageProps = {
+  defaultData: GroupDataType[] | StoreDataType[] | [];
+  defaultCount: number;
+};
+
+//
+export type SearchResultsProps = SearchResultsPageProps;
 
 export type FilterSetItemType = { title: string; options: SelectOptionType[] };
 export type FilterSetType = FilterSetItemType[];
@@ -54,6 +65,7 @@ export const storeFilterSet: FilterSetType = [
     ],
   },
 ];
+
 export const groupFilterSet: FilterSetType = [
   {
     title: "排序",

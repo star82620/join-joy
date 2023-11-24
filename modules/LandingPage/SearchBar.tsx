@@ -11,7 +11,7 @@ import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import TabBlock from "@/common/components/FileWrapper/TabBlock";
 import {
   SearchContext,
-  defaultSearchValues,
+  defaultSearchKeys,
 } from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
 import { useRouter } from "next/router";
@@ -23,13 +23,12 @@ export default function SearchBar() {
   const searchContext = useContext(SearchContext);
   const getDataContext = useContext(GetDataContext);
 
-  const { searchValues, setSearchValues, activeTab, setActiveTab } =
-    searchContext;
+  const { searchKeys, setSearchKeys, activeTab, setActiveTab } = searchContext;
 
-  const isEmptyCityId = searchValues.cityId === 0;
-  const isEmptyStartDate = searchValues.startDate === "";
-  const isEmptyGameName = searchValues.gameName === "";
-  const isEmptyStoreName = searchValues.storeName === "";
+  const isEmptyCityId = searchKeys.cityId === 0;
+  const isEmptyStartDate = searchKeys.startDate === "";
+  const isEmptyGameName = searchKeys.gameName === "";
+  const isEmptyStoreName = searchKeys.storeName === "";
 
   const isAllEmpty =
     isEmptyCityId && isEmptyStartDate && isEmptyGameName && isEmptyStoreName;
@@ -38,7 +37,7 @@ export default function SearchBar() {
 
   const isError = error === true;
 
-  useEffect(() => {}, [searchValues]);
+  useEffect(() => {}, [searchKeys]);
 
   const { citiesData } = getDataContext;
 
@@ -54,7 +53,7 @@ export default function SearchBar() {
     const isCityId = inputName === "cityId";
     const value = isCityId ? Number(e.target.value) : e.target.value;
 
-    setSearchValues({ ...searchValues, [inputName]: value });
+    setSearchKeys({ ...searchKeys, [inputName]: value });
   };
 
   // 儲存 input value
@@ -62,7 +61,7 @@ export default function SearchBar() {
     const inputName = e.target.name;
     const value = e.target.value;
 
-    setSearchValues({ ...searchValues, [inputName]: value });
+    setSearchKeys({ ...searchKeys, [inputName]: value });
   };
 
   // 送出搜尋
@@ -74,32 +73,28 @@ export default function SearchBar() {
       return;
     }
 
-    const { cityId, startDate, gameName, storeName } = searchValues;
+    const { cityId, startDate, gameName, storeName } = searchKeys;
 
-    // 把搜尋的資料存在網址中
-    // cityId startDate gameName storeName
     let queryValues = `?tab=${activeTab}`;
 
-    if (!!cityId) {
+    if (cityId) {
       queryValues = `${queryValues}&city=${cityId}`;
     }
-    if (!!startDate) {
+    if (startDate) {
       queryValues = `${queryValues}&date=${startDate}`;
     }
-    if (!!gameName) {
+    if (gameName) {
       queryValues = `${queryValues}&keyword=${gameName}`;
     }
-    if (!!storeName) {
+    if (storeName) {
       queryValues = `${queryValues}&keyword=${storeName}`;
     }
-
-    console.log(queryValues);
 
     router.push(`/search${queryValues}`);
   };
 
   useEffect(() => {
-    setSearchValues(defaultSearchValues);
+    setSearchKeys(defaultSearchKeys);
   }, [activeTab]);
 
   const groupKeyWordInput = (
@@ -108,7 +103,7 @@ export default function SearchBar() {
       className="inputStyle"
       placeholder="輸入你想找的遊戲"
       name="gameName"
-      value={searchValues.gameName}
+      value={searchKeys.gameName}
       onChange={setInputValue}
     />
   );
@@ -119,7 +114,7 @@ export default function SearchBar() {
       className="inputStyle"
       placeholder="輸入你想找的店家"
       name="storeName"
-      value={searchValues.storeName}
+      value={searchKeys.storeName}
       onChange={setInputValue}
     />
   );
@@ -155,7 +150,7 @@ export default function SearchBar() {
               <select
                 className="inputStyle !pl-9"
                 name="cityId"
-                value={searchValues.cityId}
+                value={searchKeys.cityId}
                 onChange={setSelectValue}
               >
                 <option value="">選擇城市</option>
@@ -176,7 +171,7 @@ export default function SearchBar() {
                 <select
                   className="inputStyle !pl-10"
                   name="startDate"
-                  value={searchValues.startDate}
+                  value={searchKeys.startDate}
                   onChange={setSelectValue}
                 >
                   <option value="">選擇遊玩的日期</option>

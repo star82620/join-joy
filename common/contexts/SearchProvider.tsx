@@ -1,11 +1,11 @@
-import { SearchProviderProps, SearchValuesType } from "@/constants/globalTypes";
+import { SearchProviderProps, SearchKeysType } from "@/constants/globalTypes";
 import { GroupDataType } from "@/constants/types/groupDataType";
 import { StoreDataType } from "@/constants/types/storeDataType";
 import { useState, createContext, Children } from "react";
 
-export const defaultSearchValues: SearchValuesType = {
+export const defaultSearchKeys: SearchKeysType = {
   cityId: 0,
-  page: 0,
+  page: 1,
   pageSize: 0,
 
   // group
@@ -25,8 +25,8 @@ export const defaultSearchValues: SearchValuesType = {
 export const defaultSearchContext = {
   activeTab: "group",
   setActiveTab: (activeTab: string) => {},
-  searchValues: defaultSearchValues,
-  setSearchValues: (value: SearchValuesType) => {},
+  searchKeys: defaultSearchKeys,
+  setSearchKeys: (value: SearchKeysType) => {},
   searchResultsData: [] as StoreDataType[] | GroupDataType[],
   setSearchResultsData: (value: StoreDataType[] | GroupDataType[]) => {},
 };
@@ -34,8 +34,8 @@ export const defaultSearchContext = {
 export const SearchContext = createContext(defaultSearchContext);
 
 export default function SearchProvider({ children }: SearchProviderProps) {
-  const [searchValues, setSearchValues] =
-    useState<SearchValuesType>(defaultSearchValues);
+  const [searchKeys, setSearchKeys] =
+    useState<SearchKeysType>(defaultSearchKeys);
   const [activeTab, setActiveTab] = useState<string>("group");
   const [searchResultsData, setSearchResultsData] = useState<
     StoreDataType[] | GroupDataType[]
@@ -44,11 +44,13 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   const dataSet = {
     activeTab,
     setActiveTab,
-    searchValues,
-    setSearchValues,
+    searchKeys,
+    setSearchKeys,
     searchResultsData,
     setSearchResultsData,
   };
+
+  console.log("searchResultsData", searchResultsData);
 
   return (
     <SearchContext.Provider value={dataSet}>{children}</SearchContext.Provider>

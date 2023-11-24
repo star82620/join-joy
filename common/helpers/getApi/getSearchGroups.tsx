@@ -30,13 +30,30 @@ const searchGroupsApiParams: apiParamsType = {
   method: "POST",
 };
 
-export async function getSearchGroups(searchKey: GroupsSearchKeyType) {
+export async function getSearchGroups(
+  searchKey: GroupsSearchKeyType,
+  haveCount?: "haveCount"
+) {
   if (searchKey) {
     searchGroupsApiParams.data = searchKey;
   }
 
+  console.log("KEY", searchGroupsApiParams);
+
   try {
     const res = await fetchApi(searchGroupsApiParams);
+
+    console.log("我ji3", res);
+
+    if (!res.status) {
+      return res.message;
+    }
+
+    if (haveCount) {
+      const data = res?.data;
+      return data;
+    }
+
     const data = res?.data.finalGroups ?? [];
 
     return data;
