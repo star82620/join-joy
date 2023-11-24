@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import GroupCard from "@/common/components/searchResultCard/GroupCard";
-import { groupSet } from "@/constants/testData";
+import { groupSet, storeSet } from "@/constants/testData";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { SelectOptionType } from "@/common/components/Form/data";
 import { SearchContext } from "@/common/contexts/SearchProvider";
+import StoreCard from "@/common/components/searchResultCard/StoreCard";
 
 export type FilterSetItemType = { title: string; options: SelectOptionType[] };
 export type FilterSetType = FilterSetItemType[];
@@ -184,21 +185,27 @@ export default function SearchResults() {
   const searchContext = useContext(SearchContext);
   const { searchValues, setSearchValues, activeTab, setActiveTab } =
     searchContext;
-  const [activePage, setActivePage] = useState(1);
-  const btnAppearance = true ? "white" : "white-gray";
-  const pageBtnStyle = "text-gray-950 font-semibold";
 
   const isGroup = activeTab === "group";
 
-  useEffect(() => {
-    console.log("aaaa");
-  }, [activeTab]);
+  console.log(searchValues);
+
+  // 分頁設定
+  const [activePage, setActivePage] = useState(1);
+
+  const btnAppearance = true ? "white" : "white-gray";
+  const pageBtnStyle = "text-gray-950 font-semibold";
+
+  // 搜尋對象切換
   const filterSet = isGroup ? groupFilterSet : storeFilterSet;
+  const titleText = isGroup
+    ? "請選擇你有興趣的揪團加入！"
+    : "請選擇你有興趣的店家查看！";
 
   return (
     <div className="container">
       <div>
-        <h2>請選擇你有興趣的揪團加入！</h2>
+        <h2>{titleText}</h2>
         <p className="mt-3 md:mt-1">
           找到 50 個符合 2023/10/5 在 台北市 信義區 的 揪團（關鍵字：無）{" "}
         </p>
@@ -222,6 +229,7 @@ export default function SearchResults() {
             );
           })}
         </div>
+
         <div className="flex gap-1 items-center w-fit m-auto mt-16 md:mt-8">
           {/* prev arrow */}
           <Button

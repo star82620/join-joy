@@ -46,17 +46,17 @@ export default function TopSearchBar() {
           return (
             <div
               key={tabName}
-              className={`px-2 py-1 md:p-1 ${tabStyle}`}
+              className={`flex items-center gap-1 px-2 py-1 md:p-1 ${tabStyle}`}
               onClick={() => {
                 setActiveTab(tabName);
               }}
             >
-              {/* <Image
+              <Image
                 src={imgSrc}
                 alt={img.alt}
                 widthProp="w-5 md:w-4"
                 heightProp="h-5 md:h-4"
-              /> */}
+              />
               {tabText}
             </div>
           );
