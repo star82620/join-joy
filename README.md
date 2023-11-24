@@ -2,7 +2,7 @@
 
 [專案網址](https://join-joy.vercel.app/) ｜
 [前端 Github Repo](https://github.com/star82620/join-joy) ｜
-[Swagger](http://4.224.16.99/swagger/index.html?url=/swagger/v1/swagger.json#/) ｜
+[Swagger](https://2be5-4-224-16-99.ngrok-free.app/swagger/index.html?url=/swagger/v1/swagger.json#/) ｜
 
 ---
 

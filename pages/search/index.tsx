@@ -4,6 +4,7 @@ import { defaultGroupsSearchKey } from "@/common/helpers/getApi/getSearchGroups"
 import Image from "next/image";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
+import SearchResults from "@/modules/SearchResults";
 
 export default function SearchPage() {
   const searchContext = useContext(SearchContext);
@@ -17,12 +18,7 @@ export default function SearchPage() {
 
   return (
     <div>
-      <Image
-        src="http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg"
-        alt=""
-        width={100}
-        height={100}
-      />
+      <SearchResults />
     </div>
   );
 }

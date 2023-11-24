@@ -41,7 +41,7 @@ export const groupSet: GroupDataType[] = [
       status: "leader",
       initNum: 2,
       profileImg:
-        "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+        "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
     },
     members: [
       {
@@ -135,7 +135,7 @@ export const groupSet: GroupDataType[] = [
       status: "leader",
       initNum: 2,
       profileImg:
-        "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+        "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
     },
     members: [
       {
@@ -185,7 +185,7 @@ export const groupSet: GroupDataType[] = [
       status: "leader",
       initNum: 2,
       profileImg:
-        "http://4.224.16.99/upload/profile/Member_6_20231111213427.jpg",
+        "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
     },
     members: [
       {
@@ -219,7 +219,8 @@ export const storeSet: StoreDataType[] = [
     storeName: "六角學院桌遊店店店店店店店",
     address:
       "高雄市民生一路56號2樓雄市民生一路56號2雄市民生一路56號2雄市民生一路56號2",
-    profileImg: "http://4.224.16.99/upload/store/Store_7_20231111205949.png",
+    profileImg:
+      "https://2be5-4-224-16-99.ngrok-free.app/upload/store/Store_7_20231111205949.png",
     cover: null,
     openHours: "12:00 - 20:00",
     score: 4.9375,
