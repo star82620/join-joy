@@ -19,22 +19,20 @@ import {
   // inputParamsSet,
 } from "./data";
 import TextInput from "@/common/components/Form/TextInput";
-import { TextInputParamsType } from "@/common/components/Form/data";
 import SelectInput from "@/common/components/Form/SelectInput";
 import RadioInput from "@/common/components/Form/RadioInput";
 
 // 輸入自行輸入地點 input
 const PlaceInput = ({ place, handleInputValue }: PlaceInputProps) => {
-  const textInputParams: Record<string, TextInputParamsType> = {
-    place: {
-      type: "text",
-      inputName: "place",
-      value: place,
-      onChange: handleInputValue,
-      placeholder: "請選擇輸入詳細地址",
-    },
-  };
-  return <TextInput textInputParams={textInputParams.place} />;
+  return (
+    <TextInput
+      type="text"
+      inputName="place"
+      value={place}
+      onChange={handleInputValue}
+      placeholder="請選擇輸入詳細地址"
+    />
+  );
 };
 
 export default function StepOne({ citiesData }: StepOneProps) {
@@ -249,21 +247,19 @@ export default function StepOne({ citiesData }: StepOneProps) {
     setRemainingBlockHidden(!remainingBlockHidden);
   };
 
-  const groupNameInputParams: TextInputParamsType = {
-    type: "text",
-    inputName: "groupName",
-    value: values.groupName,
-    onChange: handleInputValue,
-    placeholder: "幫你的揪團取一個酷酷的名字吧！(๑•̀ㅂ•́)و✧",
-    required: true,
-  };
-
   return (
     <>
       <section className="flex flex-col w-full gap-10">
         <label>
-          <TitleBlock title="揪團主旨" require={true}>
-            <TextInput textInputParams={groupNameInputParams} />
+          <TitleBlock title="揪團主旨" require={true} full>
+            <TextInput
+              type="text"
+              inputName="groupName"
+              value={values.groupName}
+              onChange={handleInputValue}
+              placeholder="幫你的揪團取一個酷酷的名字吧！(๑•̀ㅂ•́)و✧"
+              required={true}
+            />
           </TitleBlock>
         </label>
 
@@ -273,6 +269,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           description="（揪團成立後不可更改）"
           direction="row"
           require={true}
+          full
         >
           <div className="mt-3">
             <RadioInput options={locationOptions} onChange={handleInputValue} />
@@ -296,6 +293,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
             description="（揪團成立後不可更改）"
             direction="row"
             require={true}
+            full
           >
             <input
               list="data"
@@ -350,6 +348,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
           description="（揪團成立後不可更改）"
           direction="row"
           require={true}
+          full
         >
           <div className="flex gap-4 mt-2">
             <label className="w-full">
@@ -403,7 +402,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
         </TitleBlock>
 
         <label>
-          <TitleBlock title="預計揪團人數" require={true}>
+          <TitleBlock title="預計揪團人數" require={true} full>
             <select
               className="inputStyle"
               name="totalMemberNum"
@@ -434,9 +433,10 @@ export default function StepOne({ citiesData }: StepOneProps) {
         <label>
           <TitleBlock
             title="內建人數"
-            description="（包含自己）"
+            description="（包含自己的同行者人數）"
             direction="row"
             require={true}
+            full
           >
             <select
               className="inputStyle"

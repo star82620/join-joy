@@ -1,21 +1,22 @@
 import React from "react";
 import { TextAreaProps, defaultErrorText } from "./data";
 
-export default function TextArea({ title, textAreaParams }: TextAreaProps) {
-  const {
-    maxLength,
-    inputName,
-    value,
-    onChange,
-    rows,
-    cols,
-    placeholder,
-    required,
-    disabled,
-    readonly,
-    errorMsg,
-  } = textAreaParams;
+export default function TextArea({
+  title,
+  maxLength,
+  inputName,
+  value,
+  onChange,
+  rows,
+  cols,
+  placeholder,
+  required,
+  disabled,
+  readonly,
+  errorMsg,
+}: TextAreaProps) {
   const currentLength = value.length;
+
   const isError = required && currentLength === 0;
 
   const errorText = errorMsg ?? defaultErrorText;
@@ -24,12 +25,14 @@ export default function TextArea({ title, textAreaParams }: TextAreaProps) {
       <section className="w-full">
         <div className="flex justify-between items-end ">
           <h3 className="text-lg font-semibold md:text-md">{title}</h3>
-          <span className="text-sm md:text-xs">
-            {currentLength}/{maxLength}
-          </span>
+          {!!maxLength && (
+            <span className="text-sm md:text-xs">
+              {currentLength}/{maxLength}
+            </span>
+          )}
         </div>
         <textarea
-          className="w-full h-20 border-b-2 bg-yellow-tint mt-2 md:mt-1 py-2 px-3 placeholder:text-gray-400 md:placeholder:text-sm"
+          className="inputStyle placeholder:text-gray-400 md:placeholder:text-sm"
           name={inputName}
           value={value}
           onChange={onChange}

@@ -14,8 +14,19 @@ const apiPaths = {
   "get-my-profile": "/member/memberDetails",
   "my-groups-list": "/member/usergrouplist",
   "check-group-rating": "/member/checkgroupratings",
+  "get-manage-group": "/group/detail",
 
   "leave-group": "/group/leavegroup",
+
+  // group management
+  "get-group-info": "/group/easydetail/",
+  "get-group-all-member": "/group/joinList",
+  "get-store-games": "/storeinfo/gamelist",
+  "submit-reserve": "/group/reservegroup",
+  "review-group-member": "/group/reviewGroup",
+  "check-member-attended": "/group/rollcall",
+  "edit-group-Info": "/group/edit",
+
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",
   "search-store": "/search/search/storesearch",

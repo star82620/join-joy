@@ -8,6 +8,9 @@ export default function TitleBlock({
   direction,
   require,
   children,
+  aheadIconStyle,
+  full,
+  strongDesc,
 }: TitleBlockProps) {
   const checkDirection = () => {
     const isCol = direction === "col";
@@ -26,22 +29,30 @@ export default function TitleBlock({
     ? "after:content-['*'] after:text-danger after:text-xl"
     : "";
 
+  const fullStyle = !!full ? "w-full" : "";
+
+  const aheadIconClass = !!aheadIconStyle ? `aheadIcon ${aheadIconStyle}` : "";
+
+  const strongDescStyle = !!strongDesc ? "font-semibold !text-gray-500" : "";
+
   return (
-    <section className="w-full">
+    <div className={fullStyle}>
       <div>
         <h3
-          className={`text-lg font-semibold md:text-md ${titleStyle} ${requiredStyle} ${colTitleStyle}`}
+          className={`text-lg font-semibold md:text-md ${titleStyle} ${requiredStyle} ${colTitleStyle} ${aheadIconClass}`}
         >
           {title}
         </h3>
         {description && (
-          <span className={`text-sm text-gray-800 ${colDescriptionStyle}`}>
+          <span
+            className={`text-sm text-gray-800 ${colDescriptionStyle} ${strongDescStyle}`}
+          >
             {description}
           </span>
         )}
       </div>
 
       {children}
-    </section>
+    </div>
   );
 }

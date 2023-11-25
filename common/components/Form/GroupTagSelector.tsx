@@ -47,7 +47,7 @@ export default function GroupTagSelector({
 
   return (
     <label>
-      <TitleBlock title="揪團整體面向">
+      <TitleBlock title="揪團整體面向" full>
         <div className="relative" onClick={toggleTagsBlock}>
           <div className="w-full h-10 inputStyle last:after:content-['']">
             {isEmptySelectedTags && (
