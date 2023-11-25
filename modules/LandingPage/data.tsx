@@ -1,18 +1,22 @@
 import { StoreDataType } from "@/constants/types/storeDataType";
 import { CommentDataType } from "@/constants/types/commentDataType";
 import { GroupDataType } from "@/constants/types/groupDataType";
-import { CitiesDataType } from "@/constants/globalTypes";
+import { AuthDataType, CitiesDataType } from "@/constants/globalTypes";
 import { TabType } from "@/common/components/FileWrapper/data";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 
 // page
-export type HomeProps = {
+export type DefaultDataContextType = {
   citiesData: CitiesDataType;
   commentsData: CommentDataType[];
   nearbyGroupsData: GroupDataType[];
   remainingGroupsData: GroupDataType[];
   preferenceData: GroupDataType[];
   nearbyStoresData: StoreDataType[];
+};
+
+export type HomeProps = DefaultDataContextType & {
+  userInfo: AuthDataType;
 };
 
 // CardsSectionProps

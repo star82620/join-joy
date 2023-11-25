@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { GetServerSidePropsContext } from "next";
 import { Inter } from "next/font/google";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
@@ -14,18 +14,34 @@ import {
   getSearchStores,
 } from "@/common/helpers/getApi/getSearchStores";
 import {
+  DefaultDataContextType,
   HomeProps,
   defaultCitiesData,
   defaultCommentsData,
   defaultGroupsData,
   defaultStoresData,
 } from "@/modules/LandingPage/data";
+import { AuthContext } from "@/common/contexts/AuthProvider";
+import { AuthDataType } from "@/constants/globalTypes";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
   const { authToken } = req.cookies;
+
+  let userInfo: AuthDataType | null = null;
+
+  const apiParams: apiParamsType = {
+    apiPath: `${apiPaths["check-login-status"]}`,
+    method: "GET",
+    authToken: authToken,
+  };
+
+  const res = await fetchApi(apiParams);
+  if (res.data) {
+    userInfo = res.data;
+  }
 
   let citiesData = [];
   let commentsData = [];
@@ -111,6 +127,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       remainingGroupsData: remainingGroupsData,
       preferenceData: preferenceData,
       nearbyStoresData: nearbyStoresData,
+      userInfo: userInfo,
     },
   };
 }
@@ -124,7 +141,8 @@ export const defaultDataContext = {
   nearbyStoresData: defaultStoresData,
 };
 
-export const GetDataContext = createContext<HomeProps>(defaultDataContext);
+export const GetDataContext =
+  createContext<DefaultDataContextType>(defaultDataContext);
 
 export default function Home({
   citiesData,
@@ -133,6 +151,7 @@ export default function Home({
   remainingGroupsData,
   preferenceData,
   nearbyStoresData,
+  userInfo,
 }: HomeProps) {
   const dataSet = {
     citiesData: citiesData,
@@ -142,6 +161,12 @@ export default function Home({
     preferenceData: preferenceData,
     nearbyStoresData: nearbyStoresData,
   };
+
+  const { setAuthData, setIsLogin } = useContext(AuthContext);
+  if (!!userInfo) {
+    setAuthData(userInfo);
+    setIsLogin(true);
+  }
 
   return (
     <>

@@ -70,6 +70,8 @@ export type AuthDataType = UserInfoType & {
 };
 
 export type AuthContextType = {
+  isLogin: boolean;
+  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
   authData: AuthDataType | null;
   setAuthData: React.Dispatch<React.SetStateAction<AuthDataType | null>>;
 };

@@ -32,6 +32,8 @@ const config: Config = {
       "orange-tone": "#FFDFD3",
       "orange-tint": "#FFF4F0",
       "orange-dark": "#F8E9E4",
+      "orange-landing": "#FFE6BD",
+
       // Natural Gray
       "gray-950": "#272725",
       "gray-900": "#3D3D3C",

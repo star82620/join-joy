@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, Children, ReactNode } from "react";
-import fetchApi from "@/common/helpers/fetchApi";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import {
   AuthDataType,
@@ -8,30 +8,39 @@ import {
 } from "@/constants/globalTypes";
 
 export const AuthContext = createContext<AuthContextType>({
+  isLogin: false,
+  setIsLogin: () => {},
   authData: null,
   setAuthData: () => {},
 });
 
 export default function AuthProvider({ children }: AuthProviderProps) {
+  const [isLogin, setIsLogin] = useState(false);
   const [authData, setAuthData] = useState<AuthDataType | null>(null);
 
-  // 每次進入頁面時就跑一次
   useEffect(() => {
-    async function fetchAuthData() {
-      const res = await fetchApi({
+    async function getAuthData() {
+      const apiParams: apiParamsType = {
         apiPath: apiPaths["check-login-status"],
         method: "GET",
-      });
-      if (res?.data) {
-        setAuthData(res.data);
-      }
+      };
+
+      const res = await fetchApi(apiParams);
+      return res;
     }
 
-    fetchAuthData();
+    getAuthData().then((info) => {
+      if (info.data) {
+        setAuthData(info.data);
+        setIsLogin(true);
+      }
+    });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ authData, setAuthData }}>
+    <AuthContext.Provider
+      value={{ isLogin, setIsLogin, authData, setAuthData }}
+    >
       {children}
     </AuthContext.Provider>
   );
