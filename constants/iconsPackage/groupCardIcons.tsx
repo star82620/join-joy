@@ -1,6 +1,6 @@
-import { ImgType } from "../globalTypes";
+import { IconsType } from "../globalTypes";
 
-const groupCardIcons: Record<string, ImgType> = {
+const groupCardIcons: IconsType = {
   location: {
     src: "/images/group-card/icon-location.svg",
     alt: "icon-location",
@@ -21,7 +21,7 @@ const groupCardIcons: Record<string, ImgType> = {
 
 export default groupCardIcons;
 
-export const groupProfileTitles: Record<string, ImgType> = {
+export const groupProfileTitles: IconsType = {
   location: {
     src: "/images/group-profile/icon-location.svg",
     alt: "icon-location",

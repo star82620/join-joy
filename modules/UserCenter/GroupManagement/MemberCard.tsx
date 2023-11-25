@@ -1,15 +1,9 @@
-import React, { MouseEventHandler, useContext } from "react";
+import React, { useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
-import {
-  MemberCardBtnsType,
-  MemberCardContextType,
-  MemberCardProps,
-} from "./data";
+import { MemberCardContextType, MemberCardProps } from "./data";
 import { memberStatusFormat } from "@/constants/memberStatusFormat";
 import Link from "@/common/components/GeneralLink";
-import { checkMemberAttended } from "@/common/helpers/getApi/checkMemberAttended";
-import { reviewGroupMember } from "@/common/helpers/getApi/reviewGroupMember";
 import { MemberCardContext } from "./MemberList";
 
 function isOpen(date: string, startTime: string, endTime: string) {
@@ -25,10 +19,13 @@ function isOpen(date: string, startTime: string, endTime: string) {
   openTimeEnd.setHours(openTimeEnd.getHours() + 12);
 
   // 獲取當前時間
-  const now = new Date();
+  const currentTime = new Date();
 
   // 判斷當前時間是否在開放時間範圍內
-  return now >= openTimeStart && now <= openTimeEnd;
+  const isWinthinOpenTime =
+    currentTime >= openTimeStart && currentTime <= openTimeEnd;
+
+  return isWinthinOpenTime;
 }
 
 export default function MemberCard({ category, member }: MemberCardProps) {

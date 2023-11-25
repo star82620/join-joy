@@ -14,9 +14,9 @@ const isWithinOneHour = (time: Date) => {
   const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
 
   // 確認指定時間有沒有在一小時內
-  const result = time >= oneHourAgo && time <= now;
+  const isWithinOneHour = time >= oneHourAgo && time <= now;
 
-  return result;
+  return isWithinOneHour;
 };
 
 export default function GroupManagement() {

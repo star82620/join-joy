@@ -115,49 +115,47 @@ export default function MemberList() {
   };
 
   return (
-    <>
-      <MemberCardContext.Provider
-        value={{ btns, setMemberListData, date, startTime, endTime }}
-      >
-        <ModalWrapper title="審核團員列表" layout="secondary">
-          <div className="flex flex-col items-center gap-2 p-4">
-            <div className="flex flex-wrap justify-center items-center font-semibold">
-              <p>申請者總人數</p>
-              <p>共 {pendingNum} 位</p>
-            </div>
-            <p className="text-sm -mt-1">（還可邀請 {remainingNum} 位加入）</p>
-            {/* <p className="text-sm text-blue-dark font-semibold">全部接受</p> */}
-
-            <ul className="w-full flex flex-col gap-4 md:gap-3">
-              {memberListData.pending.map((member) => (
-                <MemberCard
-                  key={member.userId}
-                  category="pending"
-                  member={member}
-                />
-              ))}
-            </ul>
+    <MemberCardContext.Provider
+      value={{ btns, setMemberListData, date, startTime, endTime }}
+    >
+      <ModalWrapper title="審核團員列表" layout="secondary">
+        <div className="flex flex-col items-center gap-2 p-4">
+          <div className="flex flex-wrap justify-center items-center font-semibold">
+            <p>申請者總人數</p>
+            <p>共 {pendingNum} 位</p>
           </div>
-        </ModalWrapper>
-        <ModalWrapper title="參加者列表" layout="secondary">
-          <div className="flex flex-col items-center gap-2 p-4">
-            <p className="font-semibold ">目前總人數： {memberNum} 人</p>
-            <p className="text-sm font-semibold text-gray-800">
-              活動開始前 1 小時開放點名
-            </p>
+          <p className="text-sm -mt-1">（還可邀請 {remainingNum} 位加入）</p>
+          {/* <p className="text-sm text-blue-dark font-semibold">全部接受</p> */}
 
-            <ul className="w-full flex flex-col gap-4 md:gap-3">
-              {memberListData.member.map((member) => (
-                <MemberCard
-                  key={member.userId}
-                  category="member"
-                  member={member}
-                />
-              ))}
-            </ul>
-          </div>
-        </ModalWrapper>
-      </MemberCardContext.Provider>
-    </>
+          <ul className="w-full flex flex-col gap-4 md:gap-3">
+            {memberListData.pending.map((member) => (
+              <MemberCard
+                key={member.userId}
+                category="pending"
+                member={member}
+              />
+            ))}
+          </ul>
+        </div>
+      </ModalWrapper>
+      <ModalWrapper title="參加者列表" layout="secondary">
+        <div className="flex flex-col items-center gap-2 p-4">
+          <p className="font-semibold ">目前總人數： {memberNum} 人</p>
+          <p className="text-sm font-semibold text-gray-800">
+            活動開始前 1 小時開放點名
+          </p>
+
+          <ul className="w-full flex flex-col gap-4 md:gap-3">
+            {memberListData.member.map((member) => (
+              <MemberCard
+                key={member.userId}
+                category="member"
+                member={member}
+              />
+            ))}
+          </ul>
+        </div>
+      </ModalWrapper>
+    </MemberCardContext.Provider>
   );
 }
