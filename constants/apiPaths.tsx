@@ -5,6 +5,7 @@ const apiPaths = {
 
   // create-group
   "get-cities": "/member/city",
+  "get-all-game-types": "/member/gameType",
   "get-city-stores": "/search/search/stores",
   "get-games": "/storeinfo/gamelist",
   "get-remaining-seats": "/group/checkability",
@@ -14,7 +15,6 @@ const apiPaths = {
   "my-groups-list": "/member/usergrouplist",
   "check-group-rating": "/member/checkgroupratings",
 
-  getCities: "/member/city",
   "leave-group": "/group/leavegroup",
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",
