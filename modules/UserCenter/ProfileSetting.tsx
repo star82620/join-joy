@@ -1,12 +1,17 @@
-import React, { Children } from "react";
+import React, { Children, useState } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
+import TitleBlock from "@/common/components/Form/TitleBlock";
+import TextInput from "@/common/components/Form/TextInput";
+import { defaultProfileData } from "@/constants/defaultData";
+
+const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
+const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
 export default function ProfileSetting() {
-  const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
-  const inputDescStyle = "text-sm md:text-xs text-gray-500";
+  const [profileValues, setProfileValues] = useState(defaultProfileData);
 
   return (
     <section className="p-8 md:px-4">
@@ -14,6 +19,16 @@ export default function ProfileSetting() {
         <div className="flex md:flex-col justify-between gap-6">
           <div className="flex flex-col gap-10 md:gap-6 md:order-2">
             <div>
+              <TitleBlock title="你的名字">
+                <TextInput
+                  textInputParams={{
+                    type: "text",
+                    inputName: "nickName",
+                    value: profileValues.nickName,
+                    onChange: () => {},
+                  }}
+                />
+              </TitleBlock>
               <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>你的名字</h3>
               <input type="text" />
             </div>
