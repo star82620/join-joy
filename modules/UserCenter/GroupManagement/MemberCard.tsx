@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
 import { MemberCardContextType, MemberCardProps } from "./data";
-import { memberStatusFormat } from "@/constants/memberStatusFormat";
+
 import Link from "@/common/components/GeneralLink";
 import { MemberCardContext } from "./MemberList";
+import { memberStatusIndex } from "@/constants/wordIndexes";
 
 function isOpen(date: string, startTime: string, endTime: string) {
   // 將日期和時間轉換為 Date 對象
@@ -39,7 +40,7 @@ export default function MemberCard({ category, member }: MemberCardProps) {
   const btnItems = btns[category];
 
   const memberStatus =
-    status === "pending" ? "申請者" : memberStatusFormat[status];
+    status === "pending" ? "申請者" : memberStatusIndex[status];
 
   const isBtnDisabled = isMemberCategory
     ? !isOpen(date, startTime, endTime)
