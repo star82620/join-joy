@@ -1,8 +1,7 @@
-import React from "react";
 import apiPaths from "@/constants/apiPaths";
 import fetchApi, { apiParamsType } from "../fetchApi";
 
-export async function getGameTypes() {
+export async function getGameTypesApi() {
   // 取得所有遊戲類別
   const apiParams: apiParamsType = {
     apiPath: apiPaths["get-all-game-types"],
