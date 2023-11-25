@@ -5,6 +5,27 @@ export type ImgType = {
   alt: string;
 };
 
+// iconsPackage
+export type IconsPackageType = Record<string, ImgType>;
+
+type IconIdType =
+  | "my-following"
+  | "my-following-active"
+  | "my-groups"
+  | "my-groups-active"
+  | "profile-setting"
+  | "profile-setting-active"
+  | "my-notification"
+  | "my-notification-active"
+  | "logout"
+  | "sub-closing"
+  | "sub-opening";
+
+export type UserNavIconsType = Record<IconIdType, ImgType>;
+
+// defaultImages
+export type DefaultImagesType = Record<string, ImgType>;
+
 export type IconsType = Record<string, ImgType>;
 
 // game
@@ -70,6 +91,8 @@ export type AuthDataType = UserInfoType & {
 };
 
 export type AuthContextType = {
+  isLogin: boolean;
+  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
   authData: AuthDataType | null;
   setAuthData: React.Dispatch<React.SetStateAction<AuthDataType | null>>;
 };

@@ -3,7 +3,7 @@ import TitleBlock from "./TitleBlock";
 import Image from "../FillImage";
 import icons from "@/constants/iconsPackage/createGroupIcons";
 import { GroupTagItemType } from "@/constants/globalTypes";
-import { groupTags } from "@/constants/wordsIndex";
+import { groupTags } from "@/constants/wordIndexes";
 import {
   GroupTagSelectorProps,
   HandleSelectedTagType,
@@ -47,7 +47,7 @@ export default function GroupTagSelector({
 
   return (
     <label>
-      <TitleBlock title="揪團整體面向">
+      <TitleBlock title="揪團整體面向" full>
         <div className="relative" onClick={toggleTagsBlock}>
           <div className="w-full h-10 inputStyle last:after:content-['']">
             {isEmptySelectedTags && (

@@ -17,7 +17,7 @@ export default function ProfileSetting() {
     <section className="p-8 md:px-4">
       <form className="flex flex-col gap-10">
         <div className="flex md:flex-col justify-between gap-6">
-          <div className="flex flex-col gap-10 md:gap-6 md:order-2">
+          <div className="w-full flex flex-col gap-10 md:gap-6 md:order-2">
             <div>
               <TitleBlock title="你的名字">
                 <TextInput
@@ -30,7 +30,7 @@ export default function ProfileSetting() {
                 />
               </TitleBlock>
               <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>你的名字</h3>
-              <input type="text" />
+              <input type="text" className="inputStyle" />
             </div>
             <div>
               <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>帳號</h3>

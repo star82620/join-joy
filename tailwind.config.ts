@@ -32,6 +32,8 @@ const config: Config = {
       "orange-tone": "#FFDFD3",
       "orange-tint": "#FFF4F0",
       "orange-dark": "#F8E9E4",
+      "orange-landing": "#FFE6BD",
+
       // Natural Gray
       "gray-950": "#272725",
       "gray-900": "#3D3D3C",
@@ -101,13 +103,25 @@ const config: Config = {
         "checkbox-false": 'url("/images/icon-checkbox-false.svg")',
 
         // group
-        "group-time": 'url("/images/group-card/icon-time.svg")',
-        "group-member": 'url("/images/group-card/icon-members.svg")',
-        "group-location": 'url("/images/group-card/icon-location.svg")',
-        "group-tag": 'url("/images/group-card/icon-tag.svg")',
+        "group-card-time": 'url("/images/group-card/icon-time.svg")',
+        "group-card-member": 'url("/images/group-card/icon-members.svg")',
+        "group-card-location": 'url("/images/group-card/icon-location.svg")',
+        "group-card-tag": 'url("/images/group-card/icon-tag.svg")',
+        "group-location": 'url("/images/group-profile/icon-location.svg")',
+        "group-cost": 'url("/images/group-profile/icon-cost.svg")',
+        "group-date": 'url("/images/group-profile/icon-date.svg")',
+        "group-games": 'url("/images/group-profile/icon-games.svg")',
+        "group-tag": 'url("/images/group-profile/icon-tag.svg")',
+        "group-time": 'url("/images/group-profile/icon-time.svg")',
+        "group-description":
+          'url("/images/group-profile/icon-description.svg")',
 
         //
         "mascot-vector": 'url("/images/mascot-vector.svg")',
+        "mascot-02": 'url("/images/mascot/img-mascot-05.svg")',
+        "mascot-05": 'url("/images/mascot/img-mascot-05.svg")',
+        "mascot-13": 'url("/images/mascot/img-mascot-13.svg")',
+        "mascot-14": 'url("/images/mascot/img-mascot-14.svg")',
       },
       backgroundSize: {
         "20px": "20px",
@@ -139,6 +153,9 @@ const config: Config = {
         "14": "56px",
         "15": "60px",
         "22": "88px",
+      },
+      padding: {
+        "15": "72px",
       },
     },
   },
