@@ -67,5 +67,5 @@ function DefaultFooter() {
 export default function Footer({ pageCategory }: FooterProps) {
   let isDefaultFooter = !simpleFooterPages.includes(pageCategory);
 
-  return <>{isDefaultFooter ? <DefaultFooter /> : <SimpleFooter />}</>;
+  return isDefaultFooter ? <DefaultFooter /> : <SimpleFooter />;
 }
