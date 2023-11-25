@@ -48,4 +48,13 @@ export const globalIcons: Record<string, ImgType> = {
     src: "/images/icon-header-menu.svg",
     alt: "icon-header-menu",
   },
+
+  followed: {
+    src: "/images/icon-followed.svg",
+    alt: "icon-followed",
+  },
+  "not-followed": {
+    src: "/images/icon-not-followed.svg",
+    alt: "icon-not-followed",
+  },
 };

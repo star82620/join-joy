@@ -118,6 +118,10 @@ const config: Config = {
 
         //
         "mascot-vector": 'url("/images/mascot-vector.svg")',
+        "mascot-02": 'url("/images/mascot/img-mascot-05.svg")',
+        "mascot-05": 'url("/images/mascot/img-mascot-05.svg")',
+        "mascot-13": 'url("/images/mascot/img-mascot-13.svg")',
+        "mascot-14": 'url("/images/mascot/img-mascot-14.svg")',
       },
       backgroundSize: {
         "20px": "20px",
