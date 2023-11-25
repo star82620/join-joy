@@ -38,15 +38,7 @@ export default function GroupInfo() {
     null
   );
 
-  const fetchIsLeaderAuth = async () => {
-    const memberStatus = useCheckMemberStatus();
-
-    setMyMemberStatus(memberStatus);
-  };
-
-  useEffect(() => {
-    fetchIsLeaderAuth();
-  }, [authData, groupId]);
+  const memberStatus = useCheckMemberStatus();
 
   const isLeader = myMemberStatus === "leader";
   const isMember = myMemberStatus !== null;
