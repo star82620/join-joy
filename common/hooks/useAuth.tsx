@@ -14,7 +14,7 @@ export function useAuth() {
         const json = await res.json();
         const data = await json.data;
 
-        if (!res.status) return;
+        if (!res.status || !data) return null;
 
         setAuthData(data);
         setIsLogin(true);
@@ -26,5 +26,5 @@ export function useAuth() {
     fetchAuthData();
   }, []);
 
-  return { authData, isLogin };
+  return { authData, isLogin, setAuthData, setIsLogin };
 }
