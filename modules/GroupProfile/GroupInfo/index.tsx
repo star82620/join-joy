@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Button from "@/common/components/GeneralButton";
+import { useAuth } from "@/common/hooks/useAuth";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import apiPaths from "@/constants/apiPaths";
 import { checkMemberStatus } from "@/common/helpers/checkMemberStatus";
+import apiPaths from "@/constants/apiPaths";
 import { groupStatusIndex } from "@/constants/wordIndexes";
-import { AuthContext } from "@/common/contexts/AuthProvider";
 import { MemberStatusType } from "@/constants/globalTypes";
 import { GroupDataContext } from "../index";
 import StoreLocation from "./StoreLocation";
@@ -16,8 +16,7 @@ import { GameItemType } from "../data";
 
 export default function GroupInfo() {
   const router = useRouter();
-  const authContext = useContext(AuthContext);
-  const { authData, setAuthData } = authContext;
+  const { authData } = useAuth();
 
   const { groupId, groupData, currentMemberNum } = useContext(GroupDataContext);
   const {

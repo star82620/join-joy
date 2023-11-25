@@ -81,20 +81,9 @@ export type UserProfileType = UserInfoType & {
   cities: Array<number>;
 };
 
-// AuthProvider
-export type AuthProviderProps = {
-  children: ReactNode;
-};
-
+// useAuth
 export type AuthDataType = UserInfoType & {
   photo: string;
-};
-
-export type AuthContextType = {
-  isLogin: boolean;
-  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
-  authData: AuthDataType | null;
-  setAuthData: React.Dispatch<React.SetStateAction<AuthDataType | null>>;
 };
 
 // 所有的城市列表
@@ -104,6 +93,7 @@ export type CitiesDataItemType = {
 };
 
 export type CitiesDataType = CitiesDataItemType[];
+
 // store
 export type StoreDataType = {
   storeId: number;

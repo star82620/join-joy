@@ -5,8 +5,6 @@ export function useAuth() {
   const [authData, setAuthData] = useState<AuthDataType | null>(null);
   const [isLogin, setIsLogin] = useState(false);
 
-  console.log("看看有沒有登入", authData);
-
   useEffect(() => {
     const fetchAuthData = async () => {
       try {
