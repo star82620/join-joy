@@ -9,13 +9,23 @@ const apiPaths = {
   "get-games": "/storeinfo/gamelist",
   "get-remaining-seats": "/group/checkability",
   "submit-create-group": "/group/create",
-
+  //my group
+  "get-all-members": "/group/joinList",
+  "apply-join-group": "/group/join",
+  //
   "get-my-profile": "/member/memberDetails",
   "my-groups-list": "/member/usergrouplist",
   "check-group-rating": "/member/checkgroupratings",
+  "get-manage-group": "/group/detail",
 
-  getCities: "/member/city",
   "leave-group": "/group/leavegroup",
+
+  // group management
+  "get-group-info": "/group/easydetail/",
+  "get-group-all-member": "/group/joinList",
+  "get-store-games": "/storeinfo/gamelist",
+  "submit-reserve": "/group/reservegroup",
+
   // landing page
   "get-newest-rating": "/storeinfo/getnewestrating",
   "search-store": "/search/search/storesearch",

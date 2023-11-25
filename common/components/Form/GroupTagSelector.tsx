@@ -3,7 +3,7 @@ import TitleBlock from "./TitleBlock";
 import Image from "../FillImage";
 import icons from "@/constants/iconsPackage/createGroupIcons";
 import { GroupTagItemType } from "@/constants/globalTypes";
-import { groupTags } from "@/constants/wordsIndex";
+import { groupTags } from "@/constants/wordIndexes";
 import {
   GroupTagSelectorProps,
   HandleSelectedTagType,

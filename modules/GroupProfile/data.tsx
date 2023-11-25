@@ -1,3 +1,45 @@
+import { MemberStatusType, StoreType } from "@/constants/globalTypes";
+import { GroupStatusKeyType } from "@/constants/groupStatusSet";
+import { GroupTagType } from "@/constants/types/groupDataType";
+
+// page
+export type getStaticPropsProps = { params: Record<string, string> };
+
+export type GroupType = { groupId: number; groupName: string };
+
+export type GroupIdType = number;
+
+export type CommentsDataItemType = {
+  userId: number;
+  userName: string;
+  userPhoto: string;
+  commentContent: string;
+  commentDate: string;
+};
+
+export type GroupDataContextType = {
+  groupId: GroupIdType;
+  groupData: GroupDataType;
+  currentMemberNum: number;
+  commentsData: CommentsDataItemType[];
+};
+
+export type GroupProfilePageProps = {
+  groupId: GroupIdType;
+  groupData: GroupDataType;
+  commentsData: CommentsDataItemType[];
+};
+
+export type GroupProfileProps = {
+  data: GroupProfilePageProps;
+};
+
+export type CommentCardProps = {
+  comment: CommentsDataItemType;
+};
+
+//
+
 type IconKeyType =
   | "location"
   | "date"
@@ -19,26 +61,25 @@ export type TitlesType = Record<IconKeyType, TitleItemType>;
 
 export type TitleProps = { content: IconKeyType };
 
-export type StoreType = { storeName: string; storeId: string; address: string };
-
 export type GameItemType = {
   gameName: string;
   gameId: string;
-  gameType: string;
+  gameType: number;
 };
 
 export type MemberType = {
-  userId: string;
+  userId: number;
   userName: string;
-  status: "leader" | "member";
+  status: MemberStatusType;
   initNum: number;
+  profileImg: string;
 };
 
 export type GroupDataType = {
   groupName: string;
-  groupStatus: "opening" | "closed";
-  place: string;
-  store: StoreType;
+  groupStatus: GroupStatusKeyType;
+  place: string | null;
+  store: StoreType | null;
   date: string;
   startTime: string;
   endTime: string;
@@ -47,7 +88,7 @@ export type GroupDataType = {
   games: GameItemType[];
   description: string;
   members: MemberType[];
-  tags: Array<string>;
+  tags: GroupTagType[];
 };
 
 export type TagItemProps = {
@@ -59,47 +100,19 @@ export type GameItemProps = {
 };
 
 export type StoreLocationProps = {
-  store: StoreType;
+  store: StoreType | null;
 };
 
+// MemberList
 export type MemberCardProps = { member: MemberType; subNum: number };
 
-export type GroupInformationProps = {
+// GroupInfo
+export type GroupInfoProps = {
   setApplyNum: (applyNum: number) => void;
   handleJoinSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 // ---data---
-
-export const groupData: GroupDataType = {
-  groupName: "輕鬆派對揪遊團",
-  groupStatus: "opening",
-  place: "NULL",
-  store: {
-    storeId: "s123",
-    storeName: "六角學院桌遊店",
-    address: "高雄市....56號",
-  },
-  date: "2023/10/02",
-  startTime: "14:00",
-  endTime: "20:00",
-  cost: "NT$210 元 / 每人每小時",
-  totalMemberNum: 12,
-  games: [
-    { gameId: "g114", gameName: "寶石獵人", gameType: "派對遊戲" },
-    { gameId: "g129", gameName: "矮人礦坑", gameType: "陣營遊戲" },
-    { gameId: "g512", gameName: "大富翁", gameType: "派對遊戲" },
-  ],
-  description:
-    "不要遲到唷！！準時開桌，遊戲都會教學\n歡迎新手不要遲到唷！！準時開桌，遊戲都會教學\n歡迎新手不要遲到唷！！準時開桌，遊戲都會教學歡迎新手",
-  members: [
-    { userId: "a00012", userName: "多多", status: "leader", initNum: 2 },
-    { userId: "a00019", userName: "皮卡秋", status: "member", initNum: 3 },
-    { userId: "a00041", userName: "少少", status: "member", initNum: 4 },
-    { userId: "a00033", userName: "巧虎", status: "member", initNum: 1 },
-  ],
-  tags: ["新手團", "經驗切磋"],
-};
 
 export const titles: TitlesType = {
   location: {
@@ -151,4 +164,40 @@ export const titles: TitlesType = {
       alt: "icon-description",
     },
   },
+};
+
+export const defaultGroupData: GroupDataType = {
+  groupName: "",
+  groupStatus: "開團中",
+  place: null,
+  store: {
+    storeId: 0,
+    storeName: "",
+    address: "",
+  },
+  date: "",
+  startTime: "",
+  endTime: "",
+  cost: "",
+  totalMemberNum: 0,
+  games: [],
+  description: "",
+  members: [
+    {
+      userId: 0,
+      userName: "",
+      status: "leader",
+      initNum: 0,
+      profileImg: "",
+    },
+  ],
+  tags: [],
+};
+
+export const defaultCommentData: CommentsDataItemType = {
+  userId: 0,
+  userName: "",
+  userPhoto: "",
+  commentContent: "",
+  commentDate: "",
 };
