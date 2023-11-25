@@ -2,21 +2,18 @@ import React from "react";
 import { TextInputProps } from "./data";
 
 export default function TextInput({
-  textInputParams,
+  type,
+  inputName,
+  value,
+  onChange,
+  id,
+  placeholder,
+  required,
+  disabled,
+  pattern,
+  errorMsg,
   isError,
 }: TextInputProps) {
-  const {
-    id,
-    type,
-    inputName,
-    placeholder,
-    value,
-    onChange,
-    required,
-    disabled,
-    errorMsg,
-  } = textInputParams;
-
   const errorStyle = !!isError ? "border-danger" : "";
   return (
     <>

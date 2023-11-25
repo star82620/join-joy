@@ -9,5 +9,7 @@ export async function getCitiesApi() {
   };
   const citiesRes = await fetchApi(citiesApiParams);
 
-  return citiesRes;
+  if (!citiesRes.status) return null;
+
+  return citiesRes.data;
 }

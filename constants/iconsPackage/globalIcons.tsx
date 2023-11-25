@@ -39,6 +39,16 @@ export const globalIcons: Record<string, ImgType> = {
     alt: "icon-search-store-dark",
   },
 
+  // header
+  "header-user": {
+    src: "/images/icon-header-user.svg",
+    alt: "icon-header-user",
+  },
+  "header-menu": {
+    src: "/images/icon-header-menu.svg",
+    alt: "icon-header-menu",
+  },
+
   followed: {
     src: "/images/icon-followed.svg",
     alt: "icon-followed",
