@@ -39,13 +39,13 @@ export default function GroupInfo() {
     null
   );
 
+  const fetchIsLeaderAuth = async () => {
+    const memberStatus = await checkMemberStatus(authData, groupId);
+
+    setMyMemberStatus(memberStatus);
+  };
+
   useEffect(() => {
-    const fetchIsLeaderAuth = async () => {
-      const memberStatus = await checkMemberStatus(authData, groupId);
-
-      setMyMemberStatus(memberStatus);
-    };
-
     fetchIsLeaderAuth();
   }, [authData, groupId]);
 
