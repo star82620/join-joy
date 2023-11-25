@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Button from "@/common/components/GeneralButton";
 import { useAuth } from "@/common/hooks/useAuth";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import { checkMemberStatus } from "@/common/helpers/checkMemberStatus";
 import apiPaths from "@/constants/apiPaths";
 import { groupStatusIndex } from "@/constants/wordIndexes";
 import { MemberStatusType } from "@/constants/globalTypes";
@@ -13,6 +12,7 @@ import Title from "./Title";
 import TagItem from "./TagItem";
 import GameItem from "./GameItem";
 import { GameItemType } from "../data";
+import { useCheckMemberStatus } from "@/common/hooks/useCheckMemberStatus";
 
 export default function GroupInfo() {
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function GroupInfo() {
   );
 
   const fetchIsLeaderAuth = async () => {
-    const memberStatus = await checkMemberStatus(authData, groupId);
+    const memberStatus = useCheckMemberStatus();
 
     setMyMemberStatus(memberStatus);
   };

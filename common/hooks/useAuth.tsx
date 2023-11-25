@@ -8,7 +8,7 @@ export function useAuth() {
   useEffect(() => {
     const fetchAuthData = async () => {
       try {
-        const res = await fetch("/api/checkLoginStatus");
+        const res = await fetch("/api/global/checkLoginStatus");
         const json = await res.json();
         const data = await json.data;
 

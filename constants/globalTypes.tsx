@@ -28,7 +28,7 @@ export type DefaultImagesType = Record<string, ImgType>;
 
 export type IconsType = Record<string, ImgType>;
 
-// game
+// game 這個跟樓下有個 GameDataType 一樣哦
 export type GameType = {
   gameId: number;
   gameType: string;
