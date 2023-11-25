@@ -21,7 +21,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     async function getAuthData() {
       const apiParams: apiParamsType = {
-        apiPath: `${apiPaths["check-login-status"]}`,
+        apiPath: apiPaths["check-login-status"],
         method: "GET",
       };
 
