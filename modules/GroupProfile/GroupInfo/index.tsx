@@ -38,7 +38,8 @@ export default function GroupInfo() {
     null
   );
 
-  const memberStatus = useCheckMemberStatus();
+  const memberStatuss = useCheckMemberStatus();
+  console.log("memberStatuss", memberStatuss);
 
   const isLeader = myMemberStatus === "leader";
   const isMember = myMemberStatus !== null;

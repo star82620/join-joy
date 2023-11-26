@@ -12,9 +12,11 @@ export function useCheckMemberStatus() {
   useEffect(() => {
     const checkMemberStatus = async () => {
       try {
-        const res = await fetch("/api/group/getAllMembers");
+        const res = await fetch("/api/group/[id]");
         const json = await res.json();
         const data: UserType[] = await json?.data;
+
+        console.log("memberStatussss res", json);
 
         if (!res.status || !data) return null;
 
