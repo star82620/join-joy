@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { logoSet } from "@/constants/logoSet";
 import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
+import { useAuth } from "@/common/hooks/useAuth";
 
 export default function Header({ pageCategory }: HeaderProps) {
   const router = useRouter();
@@ -26,6 +27,8 @@ export default function Header({ pageCategory }: HeaderProps) {
 
   const logoSrc = logoSet.header.src;
   const logoAlt = logoSet.header.alt;
+
+  const { authData, isLogin } = useAuth();
 
   return (
     <header className={headerStyle}>
@@ -79,7 +82,7 @@ export default function Header({ pageCategory }: HeaderProps) {
                 />
               </div>
             </Button>
-            {toggleNavBar && <Navbar />}
+            {toggleNavBar && <Navbar authData={authData} isLogin={isLogin} />}
           </div>
         </section>
       </div>

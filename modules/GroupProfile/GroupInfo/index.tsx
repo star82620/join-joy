@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Button from "@/common/components/GeneralButton";
+import { useAuth } from "@/common/hooks/useAuth";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-import { checkMemberStatus } from "@/common/helpers/checkMemberStatus";
 import { groupStatusIndex } from "@/constants/wordIndexes";
-import { AuthContext } from "@/common/contexts/AuthProvider";
 import { MemberStatusType } from "@/constants/globalTypes";
 import { GroupDataContext } from "../index";
 import StoreLocation from "./StoreLocation";
@@ -13,11 +12,11 @@ import Title from "./Title";
 import TagItem from "./TagItem";
 import GameItem from "./GameItem";
 import { GameItemType } from "../data";
+import { useCheckMemberStatus } from "@/common/hooks/useCheckMemberStatus";
 
 export default function GroupInfo() {
   const router = useRouter();
-  const authContext = useContext(AuthContext);
-  const { authData, setAuthData } = authContext;
+  const { authData } = useAuth();
 
   const { groupId, groupData, currentMemberNum } = useContext(GroupDataContext);
   const {
@@ -35,19 +34,7 @@ export default function GroupInfo() {
     tags,
   } = groupData;
 
-  const [myMemberStatus, setMyMemberStatus] = useState<MemberStatusType | null>(
-    null
-  );
-
-  const fetchIsLeaderAuth = async () => {
-    const memberStatus = await checkMemberStatus(authData, groupId);
-
-    setMyMemberStatus(memberStatus);
-  };
-
-  useEffect(() => {
-    fetchIsLeaderAuth();
-  }, [authData, groupId]);
+  const myMemberStatus = useCheckMemberStatus(groupId);
 
   const isLeader = myMemberStatus === "leader";
   const isMember = myMemberStatus !== null;

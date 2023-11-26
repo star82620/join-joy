@@ -3,16 +3,13 @@ import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import GroupProfile from "@/modules/GroupProfile";
 import Layout from "@/common/components/Layout";
 import {
-  GroupDataType,
   GroupProfilePageProps,
   defaultCommentData,
   defaultGroupData,
 } from "@/modules/GroupProfile/data";
 import { GetServerSidePropsContext } from "next";
-import { CommentDataType } from "@/constants/types/commentDataType";
 import apiPaths from "@/constants/apiPaths";
 
-let groupId = 0;
 let groupData = defaultGroupData;
 let commentsData = defaultCommentData;
 
@@ -20,6 +17,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // 獲取 id
   const { id } = context.params as { id: string };
   const { authToken } = context.req.cookies;
+  const groupId = Number(id);
 
   // 取得揪團資料
   const groupApiParams: apiParamsType = {

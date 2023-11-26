@@ -6,14 +6,14 @@ import React, {
 } from "react";
 import Link from "@/common/components/GeneralLink";
 import Button from "@/common/components/GeneralButton";
+import Image from "@/common/components/FillImage";
+import { useAuth } from "@/common/hooks/useAuth";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import CommentCard from "./CommentCard";
+import { mascotImages } from "@/constants/defaultImages";
 import { GroupDataContext } from "../index";
 import { CommentsDataItemType } from "../data";
-import { AuthContext } from "@/common/contexts/AuthProvider";
 import { CommentTextAreaProps } from "./data";
-import Image from "@/common/components/FillImage";
-import { mascotImages } from "@/constants/defaultImages";
 
 const CommentTextArea = ({
   textLength,
@@ -51,8 +51,7 @@ const InputWithoutAuth = () => (
 );
 
 export default function CommentsBoard() {
-  const authContext = useContext(AuthContext);
-  const { authData, setAuthData } = authContext;
+  const { authData } = useAuth();
 
   const { commentsData, groupId } = useContext(GroupDataContext);
   const [textLength, setTextLength] = useState(0);
