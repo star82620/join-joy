@@ -14,11 +14,7 @@ export default async function handler(
       method: "GET",
     };
 
-    console.log("試試看哦 API 路徑 ", apiParams.apiPath);
-
     const result = await fetchApi(apiParams);
-
-    console.log("試試看哦結果是什麼", result);
 
     res.status(200).json(result);
   } catch (error) {

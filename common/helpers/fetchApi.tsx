@@ -40,7 +40,6 @@ export default async function fetchApi(apiParams: apiParamsType) {
     body: body,
   };
   try {
-    console.log("我要知道你是誰", url);
     const res = await fetch(url, requestOptions);
     const result = await res.json();
 

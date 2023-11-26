@@ -2,12 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useLogout } from "@/common/hooks/useLogout";
 import { useAuth } from "@/common/hooks/useAuth";
+import { NavBarProps } from "./data";
 
-export default function Navbar() {
+export default function Navbar({ authData, isLogin }: NavBarProps) {
   const router = useRouter();
   const logout = useLogout();
-
-  const { authData, isLogin } = useAuth();
 
   const nickName = authData?.nickName;
 

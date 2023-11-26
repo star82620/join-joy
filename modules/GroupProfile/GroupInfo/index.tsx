@@ -34,12 +34,7 @@ export default function GroupInfo() {
     tags,
   } = groupData;
 
-  const [myMemberStatus, setMyMemberStatus] = useState<MemberStatusType | null>(
-    null
-  );
-
-  const memberStatuss = useCheckMemberStatus();
-  console.log("memberStatuss", memberStatuss);
+  const myMemberStatus = useCheckMemberStatus(groupId);
 
   const isLeader = myMemberStatus === "leader";
   const isMember = myMemberStatus !== null;
