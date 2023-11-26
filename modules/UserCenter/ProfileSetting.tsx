@@ -5,12 +5,10 @@ import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import TitleBlock from "@/common/components/Form/TitleBlock";
 import TextInput from "@/common/components/Form/TextInput";
-import { defaultProfileData } from "@/constants/defaultData";
 import { DataContext } from "@/pages/user-center";
 import SelectInput from "@/common/components/Form/SelectInput";
 import TextArea from "@/common/components/Form/TextArea";
 import { useAuth } from "@/common/hooks/useAuth";
-import { defaultImages } from "@/constants/defaultImages";
 import PreferenceBlock from "@/common/components/PreferenceBlock";
 
 const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
@@ -25,8 +23,8 @@ export default function ProfileSetting() {
   return (
     <section className="p-8 md:px-4">
       <form className="flex flex-col gap-10">
-        <div className="flex md:flex-col justify-between items-start gap-6">
-          <div className="w-full flex flex-col gap-10 md:gap-6 md:order-2">
+        <div className="flex mdg:flex-col justify-between items-start gap-6">
+          <div className="w-full flex flex-col gap-10 mdg:gap-6 mdg:order-2">
             <div>
               <TitleBlock title="你的名字">
                 <TextInput
@@ -69,7 +67,7 @@ export default function ProfileSetting() {
               </TitleBlock>
             </div>
           </div>
-          <div className="w-full flex flex-col md:flex-row justify-center items-center gap-1 md:gap-6 bg-yellow-tint px-20 py-4 md:px-0 md:py-3 md:order-1">
+          <div className="w-full flex flex-col mdg:flex-row justify-center items-center gap-1 md:gap-6 bg-yellow-tint px-20 py-4 mdg:px-0 mdg:py-3 mdg:order-1">
             <div className="text-center">
               <h3 className="text-lg md:text-md">大頭貼</h3>
               <p className="text-sm md:text-xs text-gray-500 mt-1">
@@ -85,13 +83,13 @@ export default function ProfileSetting() {
                   heightProp="h-[145px] md:h-[108px]"
                 />
               ) : (
-                <div className="w-[145px] md:w-[108px] h-[145px] md:h-[108px] bg-gray-100"></div>
+                <div className="w-[145px] md:w-[108px] h-[145px] md:h-[108px]"></div>
               )}
 
               <Button type="button" appearance="white" rounded>
-                <span className="font-semibold text-sm md:text-xs px-15">
+                <p className="font-semibold text-sm md:text-xs w-[200px]">
                   變更大頭貼
-                </span>
+                </p>
               </Button>
             </div>
           </div>
