@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
-import { AuthContext } from "@/common/contexts/AuthProvider";
-import { useLogout } from "@/common/hooks/useLogout";
+import React from "react";
 import { useRouter } from "next/router";
+import { useLogout } from "@/common/hooks/useLogout";
+import { useAuth } from "@/common/hooks/useAuth";
+import { NavBarProps } from "./data";
 
-export default function Navbar() {
+export default function Navbar({ authData, isLogin }: NavBarProps) {
   const router = useRouter();
   const logout = useLogout();
-
-  const authContext = useContext(AuthContext);
-  const { authData, isLogin } = authContext;
 
   const nickName = authData?.nickName;
 

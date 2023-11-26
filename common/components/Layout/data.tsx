@@ -1,3 +1,4 @@
+import { AuthDataType } from "@/constants/globalTypes";
 import { ReactNode } from "react";
 
 // Layout
@@ -35,6 +36,13 @@ export const hiddenStoreBtnPages: Array<string> = ["login"];
 
 export type HeaderProps = {
   pageCategory: PageCategoryType;
+};
+
+// NavBar
+
+export type NavBarProps = {
+  authData: AuthDataType | null;
+  isLogin: boolean;
 };
 
 // Footer
