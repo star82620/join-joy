@@ -15,9 +15,7 @@ export type DefaultDataContextType = {
   nearbyStoresData: StoreDataType[];
 };
 
-export type HomeProps = DefaultDataContextType & {
-  userInfo: AuthDataType;
-};
+export type HomeProps = DefaultDataContextType;
 
 // CardsSectionProps
 export type CardsSectionProps = {
