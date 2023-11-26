@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React, { Children, useContext, useState } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
@@ -6,35 +6,46 @@ import Link from "@/common/components/GeneralLink";
 import TitleBlock from "@/common/components/Form/TitleBlock";
 import TextInput from "@/common/components/Form/TextInput";
 import { defaultProfileData } from "@/constants/defaultData";
+import { DataContext } from "@/pages/user-center";
+import SelectInput from "@/common/components/Form/SelectInput";
+import TextArea from "@/common/components/Form/TextArea";
+import { useAuth } from "@/common/hooks/useAuth";
+import { defaultImages } from "@/constants/defaultImages";
+import PreferenceBlock from "@/common/components/PreferenceBlock";
 
 const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
 const inputDescStyle = "text-sm md:text-xs text-gray-500";
 
 export default function ProfileSetting() {
-  const [profileValues, setProfileValues] = useState(defaultProfileData);
+  const { profileData } = useContext(DataContext);
+  const [profileValues, setProfileValues] = useState(profileData);
+  const { authData } = useAuth();
+  const profileImg = authData?.photo;
 
   return (
     <section className="p-8 md:px-4">
       <form className="flex flex-col gap-10">
-        <div className="flex md:flex-col justify-between gap-6">
+        <div className="flex md:flex-col justify-between items-start gap-6">
           <div className="w-full flex flex-col gap-10 md:gap-6 md:order-2">
             <div>
               <TitleBlock title="你的名字">
                 <TextInput
-                  textInputParams={{
-                    type: "text",
-                    inputName: "nickName",
-                    value: profileValues.nickName,
-                    onChange: () => {},
-                  }}
+                  type="text"
+                  inputName="nickName"
+                  value={profileValues.nickName}
+                  onChange={() => {}}
                 />
               </TitleBlock>
-              <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>你的名字</h3>
-              <input type="text" className="inputStyle" />
             </div>
             <div>
-              <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>帳號</h3>
-              <input type="email" readOnly />
+              <TitleBlock title="帳號">
+                <TextInput
+                  type="email"
+                  inputName="email"
+                  value={profileValues.email}
+                  readOnly
+                />
+              </TitleBlock>
             </div>
             <div>
               <h3 className={`${inputTitleStyle} mb-4`}>密碼</h3>
@@ -43,29 +54,42 @@ export default function ProfileSetting() {
               </Link>
             </div>
             <div>
-              <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>地區</h3>
-              <p className={`${inputDescStyle} mb-2`}>最多選擇 3 個</p>
-              <select>
-                <option>city</option>
-              </select>
+              <TitleBlock
+                title="地區"
+                description="最多選擇 3 個"
+                direction="col"
+              >
+                <SelectInput
+                  inputName="cities"
+                  value={profileValues.cities.toString()}
+                  defaultText="高雄市"
+                  options={[]}
+                  onChange={() => {}}
+                />
+              </TitleBlock>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-1 md:gap-6 bg-yellow-tint px-20 py-4 md:px-0 md:py-3 md:order-1">
-            <div>
+          <div className="w-full flex flex-col md:flex-row justify-center items-center gap-1 md:gap-6 bg-yellow-tint px-20 py-4 md:px-0 md:py-3 md:order-1">
+            <div className="text-center">
               <h3 className="text-lg md:text-md">大頭貼</h3>
               <p className="text-sm md:text-xs text-gray-500 mt-1">
                 圖片需小於 2MB
               </p>
             </div>
-            <div className="flex flex-col gap-3">
-              <Image
-                src=""
-                alt="userName"
-                widthProp="w-[145px] md:w-[108px]"
-                heightProp="h-[145px] md:h-[108px]"
-              />
-              <Button type="submit" appearance="white" rounded>
-                <span className="font-semibold text-sm md:text-xs ">
+            <div className="flex flex-col justify-center items-center gap-3">
+              {profileImg ? (
+                <Image
+                  src={profileImg}
+                  alt="userName"
+                  widthProp="w-[145px] md:w-[108px]"
+                  heightProp="h-[145px] md:h-[108px]"
+                />
+              ) : (
+                <div className="w-[145px] md:w-[108px] h-[145px] md:h-[108px] bg-gray-100"></div>
+              )}
+
+              <Button type="button" appearance="white" rounded>
+                <span className="font-semibold text-sm md:text-xs px-15">
                   變更大頭貼
                 </span>
               </Button>
@@ -76,15 +100,20 @@ export default function ProfileSetting() {
           <div>
             <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>喜好遊戲種類</h3>
             <p className={`${inputDescStyle} mb-4 md:mb-2`}>最多選擇3個</p>
-            <div>一顆一顆</div>
+            <div>
+              <PreferenceBlock isActive={true}>策略遊戲</PreferenceBlock>
+            </div>
           </div>
           <div>
-            <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>個人簡介</h3>
-            <p className={`flex justify-between mb-2`}>
-              <span className={inputDescStyle}>讓更多人認識你唷</span>
-              <span className="text-sm md:text-xs font-bold">0/100</span>
-            </p>
-            <textarea placeholder="輸入你的自我介紹"></textarea>
+            <TextArea
+              title="個人簡介"
+              inputName="description"
+              placeholder="輸入你的自我介紹"
+              maxLength={100}
+              rows={4}
+              value={profileValues.description}
+              onChange={() => {}}
+            />
           </div>
         </div>
       </form>

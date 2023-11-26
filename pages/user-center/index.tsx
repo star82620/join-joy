@@ -90,7 +90,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export const DataContext = createContext<DataContextType>({
-  profileData: [defaultProfileData],
+  profileData: defaultProfileData,
   groupsData: defaultGroupsData,
   groupRatingsSet: defaultGroupRatingsSet,
 });

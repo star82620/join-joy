@@ -15,7 +15,7 @@ export type GroupDataSetType = {
 };
 
 export type UserCenterPageProps = {
-  profileData: ProfileDataType[];
+  profileData: ProfileDataType;
   groupsData: GroupDataSetType;
   groupRatingsSet: GroupRatingsType[];
 };
