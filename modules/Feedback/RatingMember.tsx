@@ -18,19 +18,6 @@ import {
 import { memberStatusIndex } from "@/constants/wordIndexes";
 import RatingSelector from "./RatingSelector";
 
-const testData: MemberDataItemType[] = [
-  {
-    memberId: 111,
-    memberName: "乃胖胖胖",
-    memberPhoto:
-      "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
-    isRated: false,
-    score: 0,
-    comment: null,
-    status: "member",
-  },
-];
-
 export default function RatingMember({
   groupId,
   membersData,
@@ -43,6 +30,8 @@ export default function RatingMember({
   const filteredData = membersData.filter((item) => {
     return item.isRated === false;
   });
+
+  console.log("耶", filteredData);
 
   // 生成每個團員的預設資料
   const defaultMemberRating = filteredData.reduce((members, item) => {
@@ -143,7 +132,7 @@ export default function RatingMember({
     <div className="container pt-14 pb-12">
       <ModalWrapper title="評論同行的夥伴" layout="primary">
         <div className="w-full flex flex-col gap-10 px-14 pt-10 pb-6">
-          {membersData.map((item) => {
+          {filteredData.map((item) => {
             const { status, memberName, memberId, memberPhoto } = item;
             return (
               <MemberBlock

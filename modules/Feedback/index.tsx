@@ -8,6 +8,7 @@ import {
 import RatingStore from "./RatingStore";
 import RatingMember from "./RatingMember";
 import { useRouter } from "next/router";
+import { apiParamsType } from "@/common/helpers/fetchApi";
 
 export default function Feedback({
   groupId,
@@ -15,6 +16,9 @@ export default function Feedback({
   memberRatingData,
 }: FeedbackProps) {
   if (!memberRatingData) return <div>loading</div>;
+  const { isAllRated } = memberRatingData;
+  if (isAllRated) return <div>該團已完成評價</div>;
+
   const router = useRouter();
 
   const [storeValues, setStoreValues] = useState(defaultStoreValues);
@@ -24,33 +28,35 @@ export default function Feedback({
   console.log("11111", memberRatingData);
 
   const membersData = memberRatingData.ratingStatus;
-  // const { isAllRated } = memberRatingData;
 
   const isStoreRating = step === "store";
   const isMemberRating = step === "member";
 
-  // 送出評價
+  // 送出評價 something wrong here
   const handleSubmitRatings: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    try {
+      // const fetchPromises = Object.values(memberValues).map(async (member) => {
 
-    // Object.values(memberValues).forEach((member) => {
-    //   // ???
-    // });
+      const ress = await fetch("/api/setting/feedback/ratingMember", {
+        method: "POST",
+        body: JSON.stringify(Object.values(memberValues)[0]),
+      });
 
-    const res = await fetch("/api/setting/feedback/ratingStore", {
-      method: "POST",
-      body: JSON.stringify(storeValues),
-    });
+      // await Promise.all(fetchPromises);
 
-    console.log(res.json());
+      const res = await fetch("/api/setting/feedback/ratingStore", {
+        method: "POST",
+        body: JSON.stringify(storeValues),
+      });
 
-    if (res.status) {
+      // if (res.status) {
       alert("成功送出評論！");
-      router.push("/user-center");
+      router.push("/");
+      // }
+    } catch (error) {
+      console.error(error);
     }
-
-    console.log("memberValues", memberValues);
-    console.log("storeValues", storeValues);
   };
 
   return (

@@ -7,12 +7,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    const { authToken } = req.cookies;
     const data = req.body;
 
     const apiParams: apiParamsType = {
       apiPath: apiPaths["rating-member"],
       method: "POST",
       data: JSON.stringify(data),
+      authToken: authToken,
     };
 
     const result = await fetchApi(apiParams);
