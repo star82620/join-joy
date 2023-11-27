@@ -3,6 +3,7 @@ import FilterBlock from "./FilterBlock";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import { groupFilterSet, storeFilterSet } from "./data";
 import { useRouter } from "next/router";
+import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
 
 export default function ResultsHeader() {
   const searchContext = useContext(SearchContext);
@@ -17,9 +18,11 @@ export default function ResultsHeader() {
     setTotalCount,
   } = searchContext;
 
+  const allCitiesData = useGetAllCitiesData();
+
   const router = useRouter();
   const queryKey = router.query;
-  const { tab, keyword } = queryKey;
+  const { tab, city, keyword } = queryKey;
 
   const isGroup = tab === "group";
 
@@ -33,8 +36,9 @@ export default function ResultsHeader() {
     ? ` ${searchKeys.startDate}`
     : null;
 
-  const resultCountLocation = !!searchKeys.cityId
-    ? `在 ${searchKeys.cityId}`
+  // 如果有 city 就 回傳
+  const resultCountLocation = !!city
+    ? `在 ${allCitiesData[Number(city)].CityName}`
     : null;
 
   const resultCountTab = isGroup ? "揪團" : "店家";

@@ -5,6 +5,7 @@ import SearchTab from "./SearchTab";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import { CitiesDataType } from "@/constants/globalTypes";
 import { DisplayCategoryType } from "./data";
+import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
 
 export default function TopSearchBar() {
   const {
@@ -39,19 +40,7 @@ export default function TopSearchBar() {
   };
 
   // 所有城市資料
-  const [allCitiesData, setAllCitiesData] = useState<CitiesDataType>([]);
-
-  const getCitiesData = async () => {
-    const res = await fetch("/api/global/getAllCities");
-    const json = await res.json();
-    const data = await json.data;
-
-    setAllCitiesData(data);
-  };
-
-  useEffect(() => {
-    getCitiesData();
-  }, []);
+  const allCitiesData = useGetAllCitiesData();
 
   return (
     <div className="py-4 md:px-4 md:py-3 bg-brown-dark">

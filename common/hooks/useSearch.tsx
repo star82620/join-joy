@@ -55,7 +55,7 @@ export default function useSearch() {
     const { cityId, startDate, gameName, storeName } = searchKeys;
 
     if (isSearchPage) {
-      let queryData = { tab: activeTab };
+      let queryData: Record<string, string> = { tab: activeTab };
 
       if (cityId) {
         queryData = { ...queryData, city: encodeURIComponent(cityId) };

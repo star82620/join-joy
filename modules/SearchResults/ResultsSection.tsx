@@ -7,7 +7,7 @@ import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import { useRouter } from "next/router";
-import { useGetSearchResult } from "@/common/hooks/getSearchResult";
+import { useGetSearchResult } from "@/common/hooks/useGetSearchResult";
 
 export default function ResultsSection({}) {
   const router = useRouter();
@@ -37,7 +37,7 @@ export default function ResultsSection({}) {
   };
 
   // 搜尋
-  const a = useGetSearchResult();
+  useGetSearchResult();
 
   return (
     <div className="mt-9 md:mt-4">

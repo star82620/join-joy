@@ -14,10 +14,9 @@ import {
   defaultSearchKeys,
 } from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
-import { useRouter } from "next/router";
 
-import useSearch from "./useSearch";
 import { searchTabs } from "@/constants/searchTabs";
+import useSearch from "@/common/hooks/useSearch";
 
 export default function SearchBar() {
   const {

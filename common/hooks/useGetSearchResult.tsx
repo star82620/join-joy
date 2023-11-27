@@ -20,7 +20,7 @@ export function useGetSearchResult() {
 
   const querySearchKeys = router.query;
 
-  console.log("querySearchKeys", querySearchKeys);
+  console.log("網址querySearchKeys", querySearchKeys);
 
   const { tab, city, date, keyword } = querySearchKeys;
 
@@ -29,12 +29,9 @@ export function useGetSearchResult() {
 
   const getSearchResult = async () => {
     if (isGroup) {
-      console.log("揪團");
       const cityIdKey = city ? Number(city) : 0;
       const startDateKey = date ? date.toString() : "";
       const gameNameKey = keyword ? keyword.toString() : "";
-
-      console.log("defaultGroupsSearchKey", defaultGroupsSearchKey);
 
       const searchGroupKey: GroupsSearchKeyType = {
         ...defaultGroupsSearchKey,
@@ -46,7 +43,7 @@ export function useGetSearchResult() {
         pageSize: 16,
       };
 
-      console.log("searchGroupKey", searchGroupKey);
+      console.log("條件searchGroupKey", searchGroupKey);
 
       const GroupsData = await getSearchGroups(searchGroupKey, "haveCount");
 
@@ -82,8 +79,6 @@ export function useGetSearchResult() {
   };
 
   useEffect(() => {
-    console.log("有動");
     getSearchResult();
-    console.log("有動杷");
   }, [querySearchKeys]);
 }

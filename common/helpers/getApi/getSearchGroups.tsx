@@ -38,12 +38,8 @@ export async function getSearchGroups(
     searchGroupsApiParams.data = searchKey;
   }
 
-  console.log("KEY", searchGroupsApiParams);
-
   try {
     const res = await fetchApi(searchGroupsApiParams);
-
-    console.log("我ji3", res);
 
     if (!res.status) {
       return res.message;
