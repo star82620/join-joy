@@ -32,11 +32,11 @@ export default function TopSearchBar() {
     : "輸入你想找的店家名稱";
 
   // 切換不顯示、一般款和簡易款
-
   const [displayCategory, setDisplayCategory] =
     useState<DisplayCategoryType>("default");
 
   // 畫面滾動位置為依據
+
   const ishidden = displayCategory === "hidden";
   // 點擊切換、手機版
   const isDefault = displayCategory === "default";

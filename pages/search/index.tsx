@@ -97,7 +97,7 @@ SearchResultsPageProps) {
 
   return (
     <SearchProvider>
-      <Layout pageCategory="search">
+      <Layout pageCategory="searchresult">
         <SearchResults defaultData={defaultData} defaultCount={defaultCount} />
       </Layout>
     </SearchProvider>
