@@ -13,7 +13,8 @@ export type PageCategoryType =
   | "store"
   | "landingpage"
   | "error"
-  | "searchresult";
+  | "searchresult"
+  | "setting";
 
 export type LayoutProps = {
   pageCategory: PageCategoryType;

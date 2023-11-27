@@ -179,3 +179,7 @@ a#scroll-btn:before {
     opacity: 0;
   }
 }
+
+.progressBar {
+  background: linear-gradient(transparent 50%, #787878 50%);
+}

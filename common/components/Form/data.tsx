@@ -91,7 +91,6 @@ export type TextAreaProps = {
   title: string;
   inputName: string;
   value: string;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
   rows?: number;
   cols?: number;
   maxLength?: number;
@@ -100,7 +99,7 @@ export type TextAreaProps = {
   disabled?: boolean;
   readonly?: boolean;
   errorMsg?: string;
-  isError?: boolean;
+  onChange: ChangeEventHandler<HTMLTextAreaElement>;
 };
 
 // SelectInput
