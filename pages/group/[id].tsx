@@ -28,7 +28,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const groupRes = await fetchApi(groupApiParams);
 
   if (!groupRes) {
-    console.log("groupRes,NO");
     return {
       props: { groupId: id, groupData: groupData, commentsData: commentsData },
     };
@@ -45,7 +44,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const commentsRes = await fetchApi(commentsApiParams);
 
   if (commentsRes) {
-    console.log("comment,No");
+    // console.log("comment,No");
   }
 
   commentsData = Array.isArray(commentsRes.data) ? commentsRes.data : [];

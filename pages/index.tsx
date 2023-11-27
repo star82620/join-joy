@@ -18,9 +18,11 @@ import {
   HomeProps,
   defaultCitiesData,
   defaultCommentsData,
+} from "@/modules/LandingPage/data";
+import {
   defaultGroupsData,
   defaultStoresData,
-} from "@/modules/LandingPage/data";
+} from "@/constants/defaultSearchDate";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -76,7 +76,7 @@ export default function ReserveInfo() {
     }
 
     postReserve().then((res) => {
-      console.log(res);
+      // console.log(res);
     });
   };
 

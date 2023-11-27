@@ -8,10 +8,12 @@ export default function Layout({
   children,
   mainClassName,
 }: LayoutProps) {
+  const isSearchPage = pageCategory === "searchresult";
+  const bgColor = isSearchPage ? "bg-yellow-dark" : "bg-yellow-tint";
   return (
     <div className="min-h-screen flex flex-col">
       <Header pageCategory={pageCategory} />
-      <main className={`grow bg-yellow-tint ${mainClassName}`}>{children}</main>
+      <main className={`grow ${bgColor} ${mainClassName}`}>{children}</main>
       <Footer pageCategory={pageCategory} />
     </div>
   );

@@ -33,26 +33,6 @@ export type CommentCardProps = {
 
 // ----data----
 
-// SearchBar
-export const tabs: TabType[] = [
-  {
-    tabName: "group",
-    tabText: "找揪團",
-    img: {
-      src: globalIcons["search-group-light"].src,
-      alt: globalIcons["search-group-light"].alt,
-    },
-  },
-  {
-    tabName: "store",
-    tabText: "找店家",
-    img: {
-      src: globalIcons["search-store-light"].src,
-      alt: globalIcons["search-store-light"].alt,
-    },
-  },
-];
-
 // page default data
 export const defaultCitiesData: CitiesDataType = [{ Id: 0, CityName: "" }];
 
@@ -74,54 +54,5 @@ export const defaultCommentsData: CommentDataType[] = [
     msg: "",
     commentDate: "",
     score: 0,
-  },
-];
-
-export const defaultGroupsData: GroupDataType[] = [
-  {
-    groupId: 0,
-    groupName: "",
-    groupStatus: "開團中",
-    place: "",
-    isPrivate: false,
-    store: null,
-    date: "",
-    startTime: "",
-    endTime: "",
-    totalMemberNum: 0,
-    currentpeople: 0,
-    isHomeGroup: false,
-    games: [
-      {
-        gameName: "",
-        gameType: 0,
-      },
-    ],
-
-    leader: {
-      userId: 0,
-      userName: "",
-      status: "member",
-      initNum: 1,
-      profileImg: "",
-    },
-    members: [],
-    tags: [],
-  },
-];
-
-export const defaultStoresData: StoreDataType[] = [
-  {
-    storeId: 0,
-    storeName: "",
-    address: "",
-    profileImg: "",
-    cover: "",
-    openHours: "",
-    score: 0,
-    description: "",
-    tags: [],
-    hqTag: true,
-    popTag: true,
   },
 ];
