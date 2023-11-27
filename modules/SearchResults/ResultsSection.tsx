@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useContext } from "react";
+import React, { MouseEventHandler, useContext, useEffect } from "react";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import GroupCard from "@/common/components/searchResultCard/GroupCard";
 import StoreCard from "@/common/components/searchResultCard/StoreCard";
@@ -11,6 +11,7 @@ import { useGetSearchResult } from "@/common/hooks/useGetSearchResult";
 
 export default function ResultsSection({}) {
   const router = useRouter();
+  const getSearchResult = useGetSearchResult();
   const searchContext = useContext(SearchContext);
   const {
     searchKeys,
@@ -22,6 +23,8 @@ export default function ResultsSection({}) {
     totalCount,
     setTotalCount,
   } = searchContext;
+
+  const queryKeys = router.query;
 
   const isGroup = activeTab === "group";
   const isEmptyResult = searchResultsData.length === 0;
@@ -36,8 +39,10 @@ export default function ResultsSection({}) {
     setSearchKeys({ ...searchKeys, page: pageNum });
   };
 
-  // 搜尋
-  useGetSearchResult();
+  // // 搜尋
+  useEffect(() => {
+    getSearchResult();
+  }, [queryKeys]);
 
   return (
     <div className="mt-9 md:mt-4">

@@ -78,7 +78,8 @@ export function useGetSearchResult() {
     }
   };
 
-  useEffect(() => {
-    getSearchResult();
-  }, [querySearchKeys]);
+  return getSearchResult;
+  // useEffect(() => {
+  //   getSearchResult();
+  // }, [querySearchKeys]);
 }

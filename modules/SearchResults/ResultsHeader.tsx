@@ -36,9 +36,10 @@ export default function ResultsHeader() {
     ? ` ${searchKeys.startDate}`
     : null;
 
-  // 如果有 city 就 回傳
-  const resultCountLocation = !!city
-    ? `在 ${allCitiesData[Number(city)].CityName}`
+  // 抓 query 的 city 如果 city 不是 undefined 就 回傳 不然就 null
+
+  const resultCountLocation = city
+    ? `在 ${allCitiesData?.[Number(city) - 1]?.CityName}`
     : null;
 
   const resultCountTab = isGroup ? "揪團" : "店家";
@@ -59,7 +60,7 @@ export default function ResultsHeader() {
       <h2>{titleText}</h2>
       <p className="mt-3 md:mt-1">
         找到 {totalCount} 個符合 {resultCountDate}
-        {resultCountLocation} 的 {resultCountTab}
+        {city && resultCountLocation} 的 {resultCountTab}
         （關鍵字：{resultCountKeyword}）
       </p>
       <div className="flex flex-wrap gap-3 md:gap-1 mt-6 md:mt-2 flex-s">
