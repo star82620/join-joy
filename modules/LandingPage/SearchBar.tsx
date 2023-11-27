@@ -104,7 +104,7 @@ export default function SearchBar() {
                   </option>
                 ))}
               </select>
-              <span className="absolute left-3 bottom-0.5 -translate-y-1/4 aheadIcon before:bg-group-location before:bg-cover before:w-5 before:h-5"></span>
+              <span className="absolute left-3 bottom-0.5 -translate-y-1/4 aheadIcon before:bg-group-card-location before:bg-cover before:w-5 before:h-5"></span>
             </div>
           </div>
 

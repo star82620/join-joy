@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { GetServerSidePropsContext } from "next";
 import { Inter } from "next/font/google";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
@@ -14,7 +14,7 @@ import {
   getSearchStores,
 } from "@/common/helpers/getApi/getSearchStores";
 import {
-  GetDataContextType,
+  DefaultDataContextType,
   HomeProps,
   defaultCitiesData,
   defaultCommentsData,
@@ -128,9 +128,7 @@ export const defaultDataContext = {
 };
 
 export const GetDataContext =
-  createContext<GetDataContextType>(defaultDataContext);
-// export const GetCitiesDataContext =
-//   createContext<GetCitiesDataContextType>(defaultCitiesData);
+  createContext<DefaultDataContextType>(defaultDataContext);
 
 export default function Home({
   citiesData,

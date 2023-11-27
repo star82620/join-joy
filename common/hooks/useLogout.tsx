@@ -1,12 +1,17 @@
-import { useRouter } from "next/router";
+import { useAuth } from "./useAuth";
 import deleteCookie from "../helpers/deleteCookie";
 
-export default function useLogout() {
-  const router = useRouter();
+export function useLogout() {
+  const { setIsLogin, setAuthData, isLogin } = useAuth();
 
   return function logout() {
+    if (!isLogin) return;
+
     deleteCookie("authToken");
-    alert("登出了！");
-    router.push("/");
+
+    setAuthData(null);
+    setIsLogin(false);
+
+    window.location.href = "/";
   };
 }

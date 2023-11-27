@@ -5,6 +5,7 @@ export type ButtonType = {
   appearance:
     | "orange"
     | "yellow"
+    | "yellow-dark"
     | "white"
     | "white-gray"
     | "black"
@@ -38,6 +39,14 @@ export const dataSet = {
     disabled:
       "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
     textColor: "text-gray-950",
+  },
+  "yellow-dark": {
+    default: "bg-yellow-dark border-gray-500",
+    hover: "hover:bg-white hover:text-gray-950 hover:border-gray-950",
+    active: "active:bg-yellow-neutral",
+    disabled:
+      "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
+    textColor: "text-gray-500",
   },
   white: {
     default: "bg-white border-gray-950",
