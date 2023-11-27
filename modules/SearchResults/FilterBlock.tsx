@@ -28,8 +28,6 @@ export default function FilterBlock({
     ) {
       const value = Number(e.target.value);
 
-      console.log("喔喔喔", inputName, value);
-
       setSearchKeys((prevState: SearchKeysType) => ({
         ...prevState,
         [inputName]: value,

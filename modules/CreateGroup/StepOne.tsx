@@ -49,8 +49,6 @@ export default function StepOne({ citiesData }: StepOneProps) {
     values;
   const { stores, remainingSeats, acceptedNum } = storesData;
 
-  console.log("storesData", storesData);
-
   const isStore = locationKind === "store";
   const formattedDate = date.replaceAll("-", "/");
   const cityId = city.cityId;

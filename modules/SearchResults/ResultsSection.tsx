@@ -41,7 +41,6 @@ export default function ResultsSection({}) {
 
   // // 搜尋
   useEffect(() => {
-    console.log("動了");
     getSearchResult();
   }, [queryKeys]);
 

@@ -103,9 +103,6 @@ function UserCenterPage({
 }: UserCenterPageProps) {
   const dataSet = { profileData, groupsData, groupRatingsSet };
 
-  console.log("profileData", profileData);
-  console.log("groupsData", groupsData);
-  console.log("groupRatingsSet", groupRatingsSet);
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">
       <DataContext.Provider value={dataSet}>

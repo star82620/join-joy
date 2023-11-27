@@ -36,14 +36,10 @@ export default function CreateGroup({ citiesData }: CreateGroupPageProps) {
   const [values, setValues] = useState(defaultValues);
   const [createdGroupId, setCreatedGroupId] = useState(0);
 
-  console.log("values", values);
-
   // 被選到的遊戲
   const [selectedGames, setSelectedGames] = useState<SelectedGamesType>([]);
   // 被選到的 Tag
   const [selectedTags, setSelectedTags] = useState<SelectedTagsType[]>([]);
-
-  console.log("tags", selectedTags);
 
   // 整理表單內容變成 POST 用資料
   const formatPostValues = () => {

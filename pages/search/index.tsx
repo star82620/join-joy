@@ -25,8 +25,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const searchKeys = context.query;
 
-  console.log("page", searchKeys);
-
   const { tab, city, date, keyword } = searchKeys;
 
   const isGroup = tab === "group";
