@@ -1,7 +1,7 @@
 import { SearchProviderProps, SearchKeysType } from "@/constants/globalTypes";
 import { GroupDataType } from "@/constants/types/groupDataType";
 import { StoreDataType } from "@/constants/types/storeDataType";
-import { useState, createContext, Children } from "react";
+import { useState, createContext, Children, SetStateAction } from "react";
 
 export const defaultSearchKeys: SearchKeysType = {
   cityId: 0,
@@ -21,8 +21,6 @@ export const defaultSearchKeys: SearchKeysType = {
   storeFilter: 0,
   storeTag: 0,
 };
-
-// type activeTabType = "group" | "store";
 
 export const defaultSearchContext = {
   activeTab: "group",
