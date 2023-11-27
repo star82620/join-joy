@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/logo.svg" alt="logo" width="300" height="auto" />
-</p>
+
 
 <h1 align="center">揪遊 JoinJoy ｜桌遊揪團平台</h1>
 
@@ -16,7 +14,7 @@
 <br>
 <br>
 
-<img src="https://raw.githubusercontent.com/star82620/join-joy/update-readme-photo/public/images/readme/cover.png" alt="cover" />
+
 
 ## 功能介紹
 
