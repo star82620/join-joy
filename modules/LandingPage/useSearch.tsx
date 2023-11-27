@@ -50,12 +50,42 @@ export default function useSearch() {
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
+    const isSearchPage = router.asPath.split("?")[0] === "/search";
+
+    const { cityId, startDate, gameName, storeName } = searchKeys;
+
+    if (isSearchPage) {
+      let queryData = {};
+
+      if (cityId) {
+        queryData = { ...queryData, city: encodeURIComponent(cityId) };
+      }
+      if (startDate) {
+        queryData = { ...queryData, date: encodeURIComponent(startDate) };
+      }
+      if (gameName) {
+        queryData = { ...queryData, keyword: encodeURIComponent(gameName) };
+      }
+      if (storeName) {
+        queryData = { ...queryData, keyword: encodeURIComponent(storeName) };
+      }
+
+      router.push(
+        {
+          pathname: "/search",
+          query: queryData,
+        },
+        undefined,
+        { shallow: true }
+      );
+
+      return;
+    }
+
     if (isAllEmpty) {
       setError(true);
       return;
     }
-
-    const { cityId, startDate, gameName, storeName } = searchKeys;
 
     let queryValues = `?tab=${activeTab}`;
 

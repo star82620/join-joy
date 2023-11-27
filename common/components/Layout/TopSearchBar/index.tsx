@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../GeneralButton";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import useSearch from "@/modules/LandingPage/useSearch";
@@ -6,6 +6,8 @@ import { GetDataContext } from "@/pages";
 import SearchTab from "./SearchTab";
 import { DisplayCategoryType } from "./data";
 import { CitiesDataContext } from "@/common/contexts/CitiesProvider";
+import { CitiesDataType } from "@/constants/globalTypes";
+import SelectInput from "../../Form/SelectInput";
 
 export default function TopSearchBar() {
   const {
@@ -19,13 +21,6 @@ export default function TopSearchBar() {
 
   const searchContext = useContext(SearchContext);
   const { activeTab, setActiveTab, searchKeys } = searchContext;
-
-  // const getDataContext = useContext(GetDataContext);
-  // const { citiesData } = getDataContext;
-
-  const cityDataContext = useContext(CitiesDataContext);
-  // const citiesData = getDataContext;
-  console.log("dd", cityDataContext);
 
   const keywordPlaceholderText = isGroup
     ? "輸入你想找的遊戲"
@@ -46,6 +41,21 @@ export default function TopSearchBar() {
     // setDisplayCategory(!displayCategory);
   };
 
+  // 所有城市資料
+  const [allCitiesData, setAllCitiesData] = useState<CitiesDataType>([]);
+
+  const getCitiesData = async () => {
+    const res = await fetch("/api/global/getAllCities");
+    const json = await res.json();
+    const data = await json.data;
+
+    setAllCitiesData(data);
+  };
+
+  useEffect(() => {
+    getCitiesData();
+  }, []);
+
   return (
     <div className="py-4 md:px-4 md:py-3 bg-brown-dark">
       <form onSubmit={submitSearch}>
@@ -64,20 +74,27 @@ export default function TopSearchBar() {
             <div className="w-full flex md:flex-col gap-7 md:gap-4 md:mt-1">
               <select
                 className="inputStyle !mt-0"
+                name="cityId"
                 value={searchKeys.cityId}
                 onChange={setSelectValue}
               >
                 <option value="">選擇城市</option>
-                {/* {citiesData.map((city) => (
+                {allCitiesData.map((city) => (
                   <option key={city.Id} value={city.Id}>
                     {city.CityName}
                   </option>
-                ))} */}
+                ))}
               </select>
               {isGroup && (
-                <select className="inputStyle !mt-0" placeholder="2023/10/5">
-                  日期
-                  <option>2023/10/5</option>
+                <select
+                  className="inputStyle !mt-0"
+                  name="startDate"
+                  value={searchKeys.startDate}
+                  onChange={setSelectValue}
+                >
+                  <option>請選擇日期</option>
+                  <option value="2023-11-31">2023/11/31</option>
+                  <option value="2023-12-01">2023/12/01</option>
                 </select>
               )}
               <input

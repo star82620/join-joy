@@ -10,7 +10,6 @@ import EmptyResults from "./EmptyResults";
 export default function SearchResults({
   defaultData,
   defaultCount,
-  citiesData,
 }: SearchResultsProps) {
   const searchContext = useContext(SearchContext);
   const {
@@ -24,8 +23,6 @@ export default function SearchResults({
     setTotalCount,
   } = searchContext;
 
-  console.log("KKK", searchKeys);
-
   // 將預設資料填入
   useEffect(() => {
     setTotalCount(defaultCount);
@@ -38,7 +35,8 @@ export default function SearchResults({
   return (
     <div className="container pt-12 pb-[108px]">
       <ResultsHeader />
-      {!isEmptyResult ? <ResultsSection /> : <EmptyResults />}
+      <ResultsSection />
+      {/* {!isEmptyResult ? <ResultsSection /> : <EmptyResults />} */}
     </div>
   );
 }
