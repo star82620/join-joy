@@ -3,7 +3,6 @@ import Button from "../../GeneralButton";
 import useSearch from "@/common/hooks/useSearch";
 import SearchTab from "./SearchTab";
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import { CitiesDataType } from "@/constants/globalTypes";
 import { DisplayCategoryType } from "./data";
 import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
 

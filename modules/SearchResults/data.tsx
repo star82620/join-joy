@@ -14,7 +14,13 @@ export type SearchResultsProps = SearchResultsPageProps;
 
 export type FilterSetItemType = {
   title: string;
-  inputName: string;
+  inputName:
+    | "groupFilter"
+    | "groupTag"
+    | "groupppl"
+    | "joinppl"
+    | "storeFilter"
+    | "storeTag";
   options: SelectOptionType[];
 };
 export type FilterSetType = FilterSetItemType[];

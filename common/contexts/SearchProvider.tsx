@@ -24,7 +24,7 @@ export const defaultSearchKeys: SearchKeysType = {
 
 export const defaultSearchContext = {
   activeTab: "group",
-  setActiveTab: (activeTab: string) => {},
+  setActiveTab: (activeTab: "group" | "store") => {},
   searchKeys: defaultSearchKeys,
   setSearchKeys: (searchKeys: SearchKeysType) => {},
   searchResultsData: [] as StoreDataType[] | GroupDataType[],
@@ -43,7 +43,7 @@ export default function SearchProvider({ children }: SearchProviderProps) {
 
   console.log("searchKeys", searchKeys);
 
-  const [activeTab, setActiveTab] = useState<string>("group");
+  const [activeTab, setActiveTab] = useState<"group" | "store">("group");
 
   const [searchResultsData, setSearchResultsData] = useState<
     StoreDataType[] | GroupDataType[]
