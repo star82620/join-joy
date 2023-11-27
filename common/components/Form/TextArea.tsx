@@ -15,7 +15,7 @@ export default function TextArea({
   readonly,
   errorMsg,
 }: TextAreaProps) {
-  const currentLength = value.length;
+  const currentLength = value === null ? 0 : value.length;
 
   const isError = required && currentLength === 0;
 

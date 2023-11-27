@@ -38,7 +38,7 @@ function GroupsList({ pageCategory }: GroupListProps) {
   // 前往評價頁
   const pushToCommentPage = (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.value;
-    router.push(`/user-center/group/${id}`);
+    router.push(`/setting/feedback/${id}`);
   };
 
   // 前往揪團管理頁
