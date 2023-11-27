@@ -1,19 +1,22 @@
 import React, {
   ChangeEventHandler,
   MouseEventHandler,
-  useContext,
+  useCallback,
   useEffect,
   useState,
 } from "react";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import { RatingValueContext } from ".";
 import ProfileImg from "@/common/components/ProfileImg";
-import RatingSelector from "./RatingSelector";
 import TextArea from "@/common/components/Form/TextArea";
-
-import { MemberBlockProps, MemberDataItemType, MemberValuesType } from "./data";
+import {
+  MemberBlockProps,
+  MemberDataItemType,
+  MemberValuesType,
+  RatingMemberProps,
+} from "./data";
 import { memberStatusIndex } from "@/constants/wordIndexes";
+import RatingSelector from "./RatingSelector";
 
 const testData: MemberDataItemType[] = [
   {
@@ -21,7 +24,6 @@ const testData: MemberDataItemType[] = [
     memberName: "乃胖胖胖",
     memberPhoto:
       "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
-
     isRated: false,
     score: 0,
     comment: null,
@@ -29,46 +31,56 @@ const testData: MemberDataItemType[] = [
   },
 ];
 
-export default function RatingMember() {
-  const { groupId, memberValues, setMemberValues, step, setStep } =
-    useContext(RatingValueContext);
-
+export default function RatingMember({
+  groupId,
+  memberValues,
+  setMemberValues,
+  step,
+  setStep,
+}: RatingMemberProps) {
+  // 找出尚未評價的成員
   const filteredData = testData.filter((item) => {
     return item.isRated === false;
   });
 
-  let defaultMemberRating = {} as MemberValuesType;
-
-  useEffect(() => {
-    // 生成每個團員的預設資料
-    filteredData.forEach((item) => {
-      const { memberId } = item;
-      const defaultValue = {
-        groupId: groupId,
-        memberId: memberId,
-        score: 0,
-        comment: "",
-      };
-      defaultMemberRating[memberId] = defaultValue;
-    });
-
-    setMemberValues(defaultMemberRating);
-  }, []);
+  // 生成每個團員的預設資料
+  const defaultMemberRating = filteredData.reduce((allMember, item) => {
+    allMember[item.memberId] = {
+      groupId: groupId,
+      memberId: item.memberId,
+      score: 0,
+      comment: "",
+    };
+    return allMember;
+  }, {} as MemberValuesType);
 
   console.log("emberValues", memberValues);
 
+  useEffect(() => {
+    setMemberValues(defaultMemberRating);
+  }, []);
+
+  // 上一頁
   const setStepStore: MouseEventHandler<HTMLParagraphElement> = () => {
     setStep("store");
   };
 
   // 儲存店家評價
-  const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    const content = e.target.value;
-    const userId = Number(e.target.name);
-    const newValue = { ...memberValues[userId], comment: content };
+  const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
+    (e) => {
+      const content = e.target.value;
+      const userId = Number(e.target.name);
 
-    // setMemberValues({ ...memberValues, ...newValue });
-  };
+      setMemberValues((prevValues) => ({
+        ...prevValues,
+        [userId]: {
+          ...prevValues[userId],
+          comment: content,
+        },
+      }));
+    },
+    [setMemberValues]
+  );
 
   // 儲存分數
   const handleScoreValue: MouseEventHandler<HTMLDivElement> = (e) => {
@@ -76,9 +88,13 @@ export default function RatingMember() {
     const target = e.target as HTMLElement;
     const scoreNum = Number(target.dataset.score);
 
-    const newValue = { ...memberValues[userId], score: scoreNum };
-
-    // setMemberValues((prevState) => ({ ...prevState, ...newValue }));
+    setMemberValues((prevValues) => ({
+      ...prevValues,
+      [userId]: {
+        ...prevValues[userId],
+        score: scoreNum,
+      },
+    }));
   };
 
   const MemberBlock = ({
@@ -87,6 +103,8 @@ export default function RatingMember() {
     userId,
     profileImg,
   }: MemberBlockProps) => {
+    if (!memberValues[userId]) return <div>Loading...</div>;
+
     console.log("userId", userId);
     console.log("拿資料", memberValues[userId]);
 
@@ -103,20 +121,20 @@ export default function RatingMember() {
         <div className="grow">
           <div className="flex gap-3 mb-4">
             <h4 className="text-lg">評分：</h4>
-            {/* <RatingSelector
+            <RatingSelector
               ratingName={userId}
               scoreValue={memberValues[userId].score}
               handleScoreValue={handleScoreValue}
-            /> */}
+            />
           </div>
-          {/* <TextArea
+          <TextArea
             title="評語"
             maxLength={50}
             rows={4}
             inputName={userId.toString()}
             value={memberValues[userId].comment}
             onChange={handleInputValue}
-          /> */}
+          />
         </div>
       </div>
     );

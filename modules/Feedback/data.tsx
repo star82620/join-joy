@@ -10,6 +10,29 @@ export type FeedbackProps = {
   groupId: FeedbackPageProps["id"];
 };
 
+// FeedBack
+
+export type feedbackStepType = "member" | "store";
+
+// RatingStore
+
+export type RatingStoreProps = {
+  groupId: number;
+  step: feedbackStepType;
+  setStep: React.Dispatch<SetStateAction<feedbackStepType>>;
+  storeValues: StoreValuesType;
+  setStoreValues: React.Dispatch<SetStateAction<StoreValuesType>>;
+};
+
+// RatingMember
+export type RatingMemberProps = {
+  groupId: number;
+  step: feedbackStepType;
+  setStep: React.Dispatch<SetStateAction<feedbackStepType>>;
+  memberValues: MemberValuesType;
+  setMemberValues: React.Dispatch<SetStateAction<MemberValuesType>>;
+};
+
 //
 
 export type RatingNameType =
@@ -46,7 +69,7 @@ export type MemberValuesItemType = {
   comment: string;
 };
 
-export type MemberValuesType = Record<string, MemberValuesItemType>;
+export type MemberValuesType = Record<number, MemberValuesItemType>;
 
 export type StepType = "store" | "member";
 

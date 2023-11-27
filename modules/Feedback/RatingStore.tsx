@@ -1,21 +1,18 @@
-import React, {
-  ChangeEventHandler,
-  MouseEventHandler,
-  useContext,
-  useEffect,
-} from "react";
+import React, { ChangeEventHandler, MouseEventHandler, useEffect } from "react";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileImg from "@/common/components/ProfileImg";
 import TextArea from "@/common/components/Form/TextArea";
-import { RatingItemSet, RatingNameType } from "./data";
+import { RatingItemSet, RatingNameType, RatingStoreProps } from "./data";
 import RatingSelector from "./RatingSelector";
-import { RatingValueContext } from ".";
 
-export default function RatingStore() {
-  const { groupId, storeValues, setStoreValues, step, setStep } =
-    useContext(RatingValueContext);
-
+export default function RatingStore({
+  groupId,
+  step,
+  setStep,
+  storeValues,
+  setStoreValues,
+}: RatingStoreProps) {
   console.log("storeValues", storeValues);
 
   // 帶入 groupId

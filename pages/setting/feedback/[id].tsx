@@ -6,7 +6,7 @@ import { FeedbackPageProps } from "@/modules/Feedback/data";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { id } = context.params as { id: string };
-  console.log("iddd", id);
+
   const { authToken } = context.req.cookies;
   // if (!authToken) {
   //   return {
@@ -23,6 +23,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function FeedbackPage({ id }: FeedbackPageProps) {
+  // if (!id) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
     <Layout pageCategory="setting">
       <Feedback groupId={id} />
