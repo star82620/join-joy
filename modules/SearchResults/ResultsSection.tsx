@@ -41,8 +41,17 @@ export default function ResultsSection({}) {
 
   // // 搜尋
   useEffect(() => {
+    console.log("動了");
     getSearchResult();
-  }, [queryKeys]);
+  }, [
+    queryKeys,
+    searchKeys.groupFilter,
+    searchKeys.groupTag,
+    searchKeys.groupppl,
+    searchKeys.joinppl,
+    searchKeys.storeFilter,
+    searchKeys.storeTag,
+  ]);
 
   return (
     <div className="mt-9 md:mt-4">

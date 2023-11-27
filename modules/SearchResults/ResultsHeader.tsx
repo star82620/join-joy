@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import FilterBlock from "./FilterBlock";
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import { groupFilterSet, storeFilterSet } from "./data";
+import { FilterSetType, groupFilterSet, storeFilterSet } from "./data";
 import { useRouter } from "next/router";
 import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
 
@@ -65,8 +65,15 @@ export default function ResultsHeader() {
       </p>
       <div className="flex flex-wrap gap-3 md:gap-1 mt-6 md:mt-2 flex-s">
         {filterSet.map((item) => {
-          const { title, options } = item;
-          return <FilterBlock key={title} title={title} options={options} />;
+          const { title, options, inputName } = item;
+          return (
+            <FilterBlock
+              key={title}
+              title={title}
+              inputName={inputName}
+              options={options}
+            />
+          );
         })}
       </div>
     </div>

@@ -1,7 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FilterSetItemType } from "./data";
+import { SearchContext } from "@/common/contexts/SearchProvider";
+import { SearchKeysType } from "@/constants/globalTypes";
 
-export default function FilterBlock({ title, options }: FilterSetItemType) {
+export default function FilterBlock({
+  title,
+  options,
+  inputName,
+}: FilterSetItemType) {
+  const searchContext = useContext(SearchContext);
+  const { searchKeys, setSearchKeys } = searchContext;
+
+  const handleSelectFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const inputName = e.target.name;
+
+    if (
+      [
+        "page",
+        "pageSize",
+        "groupFilter",
+        "groupTag",
+        "groupppl",
+        "joinppl",
+        "storeFilter",
+        "storeTag",
+      ].includes(inputName)
+    ) {
+      const value = Number(e.target.value);
+
+      console.log("喔喔喔", inputName, value);
+
+      setSearchKeys((prevState: SearchKeysType) => ({
+        ...prevState,
+        [inputName]: value,
+      }));
+    }
+  };
+
   const textNum = title.length;
 
   const spaces: Record<number, string> = {
@@ -18,10 +53,17 @@ export default function FilterBlock({ title, options }: FilterSetItemType) {
       <label className="relative flex items-center flex-shrink-0 whitespace-nowrap text-sm">
         <select
           className={`min-h-9 rounded-sm bg-yellow-tint border-2 border-gray-500 text-gray-600 pr-3 py-1.5 ${spaceStyle}`}
+          name={inputName}
+          value={searchKeys[inputName]}
+          onChange={handleSelectFilter}
         >
           {options.map((option) => {
             const { value, text, checked } = option;
-            return <option key={value}>{text}</option>;
+            return (
+              <option key={value} value={value}>
+                {text}
+              </option>
+            );
           })}
         </select>
         <p className="absolute top-[7px] left-3 font-semibold">{title}</p>

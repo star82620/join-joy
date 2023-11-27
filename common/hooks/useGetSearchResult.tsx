@@ -15,12 +15,16 @@ import { SearchContext } from "../contexts/SearchProvider";
 export function useGetSearchResult() {
   const router = useRouter();
   const searchContext = useContext(SearchContext);
-  const { searchResultsData, setSearchResultsData, totalCount, setTotalCount } =
-    searchContext;
+
+  const {
+    searchResultsData,
+    setSearchResultsData,
+    totalCount,
+    setTotalCount,
+    searchKeys,
+  } = searchContext;
 
   const querySearchKeys = router.query;
-
-  console.log("網址querySearchKeys", querySearchKeys);
 
   const { tab, city, date, keyword } = querySearchKeys;
 
@@ -38,12 +42,13 @@ export function useGetSearchResult() {
         cityId: cityIdKey,
         startDate: startDateKey,
         gameName: gameNameKey,
-        joinppl: 0,
+        groupFilter: searchKeys.groupFilter, //最相關...
+        groupTag: searchKeys.groupTag, //遊戲面向
+        groupppl: searchKeys.groupppl, //揪團總人數
+        joinppl: searchKeys.joinppl,
         page: 1,
         pageSize: 16,
       };
-
-      console.log("條件searchGroupKey", searchGroupKey);
 
       const GroupsData = await getSearchGroups(searchGroupKey, "haveCount");
 

@@ -40,10 +40,15 @@ export const SearchContext = createContext(defaultSearchContext);
 export default function SearchProvider({ children }: SearchProviderProps) {
   const [searchKeys, setSearchKeys] =
     useState<SearchKeysType>(defaultSearchKeys);
+
+  console.log("searchKeys", searchKeys);
+
   const [activeTab, setActiveTab] = useState<string>("group");
+
   const [searchResultsData, setSearchResultsData] = useState<
     StoreDataType[] | GroupDataType[]
   >([]);
+
   const [totalCount, setTotalCount] = useState(0);
 
   const dataSet = {

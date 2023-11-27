@@ -1,6 +1,7 @@
 import { SelectOptionType } from "@/common/components/Form/data";
 import { GroupDataType } from "@/constants/types/groupDataType";
 import { StoreDataType } from "@/constants/types/storeDataType";
+import { ChangeEventHandler } from "react";
 
 // page
 export type SearchResultsPageProps = {
@@ -11,13 +12,19 @@ export type SearchResultsPageProps = {
 //
 export type SearchResultsProps = SearchResultsPageProps;
 
-export type FilterSetItemType = { title: string; options: SelectOptionType[] };
+export type FilterSetItemType = {
+  title: string;
+  inputName: string;
+  options: SelectOptionType[];
+};
 export type FilterSetType = FilterSetItemType[];
 
 // -- data --
 export const storeFilterSet: FilterSetType = [
   {
     title: "排序",
+    inputName: "storeFilter",
+
     options: [
       {
         value: "0",
@@ -36,6 +43,7 @@ export const storeFilterSet: FilterSetType = [
   },
   {
     title: "服務設施",
+    inputName: "storeTag",
     options: [
       {
         value: "0",
@@ -69,6 +77,7 @@ export const storeFilterSet: FilterSetType = [
 export const groupFilterSet: FilterSetType = [
   {
     title: "排序",
+    inputName: "groupFilter",
     options: [
       {
         value: "0",
@@ -87,6 +96,7 @@ export const groupFilterSet: FilterSetType = [
   },
   {
     title: "揪團總人數",
+    inputName: "groupppl",
     options: [
       {
         value: "0",
@@ -109,6 +119,7 @@ export const groupFilterSet: FilterSetType = [
   },
   {
     title: "可加入人數",
+    inputName: "joinppl",
     options: [
       {
         value: "0",
@@ -127,6 +138,7 @@ export const groupFilterSet: FilterSetType = [
   },
   {
     title: "遊戲面向",
+    inputName: "groupTag",
     options: [
       {
         value: "0",
