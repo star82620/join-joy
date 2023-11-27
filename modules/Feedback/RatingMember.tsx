@@ -30,10 +30,8 @@ const testData: MemberDataItemType[] = [
 ];
 
 export default function RatingMember() {
-  const { memberValues, setMemberValues, step, setStep } =
+  const { groupId, memberValues, setMemberValues, step, setStep } =
     useContext(RatingValueContext);
-
-  console.log(memberValues);
 
   const filteredData = testData.filter((item) => {
     return item.isRated === false;
@@ -46,7 +44,7 @@ export default function RatingMember() {
     filteredData.forEach((item) => {
       const { memberId } = item;
       const defaultValue = {
-        groupId: 2,
+        groupId: groupId,
         memberId: memberId,
         score: 0,
         comment: "",
@@ -57,7 +55,6 @@ export default function RatingMember() {
     setMemberValues(defaultMemberRating);
   }, []);
 
-  console.log("defaultMemberRating", defaultMemberRating);
   console.log("emberValues", memberValues);
 
   const setStepStore: MouseEventHandler<HTMLParagraphElement> = () => {
@@ -91,6 +88,7 @@ export default function RatingMember() {
     profileImg,
   }: MemberBlockProps) => {
     console.log("userId", userId);
+    console.log("拿資料", memberValues[userId]);
 
     const memberStatus = memberStatusIndex[status];
     return (

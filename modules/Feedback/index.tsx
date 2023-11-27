@@ -11,7 +11,7 @@ import RatingStore from "./RatingStore";
 import RatingMember from "./RatingMember";
 
 export const defaultRatingValueContext = {
-  groupId: "0",
+  groupId: 0,
   storeValues: defaultStoreValues,
   setStoreValues: (value: React.SetStateAction<StoreValuesType>) => {},
   memberValues: defaultMemberValues,
@@ -23,7 +23,6 @@ export const defaultRatingValueContext = {
 export const RatingValueContext = createContext(defaultRatingValueContext);
 
 export default function Feedback({ groupId }: FeedbackProps) {
-  console.log("groupId", groupId);
   const [storeValues, setStoreValues] = useState(defaultStoreValues);
   const [memberValues, setMemberValues] = useState(defaultMemberValues);
   const [step, setStep] = useState("store");
@@ -32,7 +31,7 @@ export default function Feedback({ groupId }: FeedbackProps) {
   const isMemberRating = step === "member";
 
   const contextValues = {
-    groupId,
+    groupId: Number(groupId),
     storeValues,
     setStoreValues,
     memberValues,
