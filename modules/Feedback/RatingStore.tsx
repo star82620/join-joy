@@ -19,10 +19,8 @@ export default function RatingStore({
   console.log("groupData", groupData);
   console.log("storeValues", storeValues);
 
-  const { store, date, startTime, endTime } = groupData;
-
-  if (!store) return;
-  const { storeId, storeName, address } = store;
+  const { storeId, storeName, address, photo, date, startTime, endTime } =
+    groupData;
 
   // 帶入 groupId
   useEffect(() => {
@@ -61,11 +59,7 @@ export default function RatingStore({
         <div className="pt-10 pb-14 px-14">
           <div className="flex justify-between gap-[10%]">
             <div className="w-[70%] mdg:w-full flex justify-center mdg:justify-start items-center gap-x-4 h-16 mdg:h-auto">
-              <ProfileImg
-                src="https://2be5-4-224-16-99.ngrok-free.app/upload/store/profile/Store_7_20231111205949.png"
-                alt="storeName"
-                sizeStyle="w-16 h-16"
-              />
+              <ProfileImg src={photo} alt="storeName" sizeStyle="w-16 h-16" />
               <div>
                 <h3 className="text-lg truncate">{storeName}</h3>
                 <p className="text-gray-700 mt-1">{address}</p>

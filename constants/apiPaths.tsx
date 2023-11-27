@@ -39,6 +39,7 @@ const apiPaths = {
   // feedback
   "rating-store": "/member/ratingstore",
   "rating-member": "/member/ratingmember",
+  "group-store-info": "/member/storeinfobygroup",
 };
 
 export default apiPaths;

@@ -22,14 +22,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     // 取得揪團資料
     const groupApiParams: apiParamsType = {
-      apiPath: `${apiPaths["get-group-info"]}/${id}`,
+      apiPath: `${apiPaths["group-store-info"]}/${id}`,
       method: "GET",
     };
     const groupRes = await fetchApi(groupApiParams);
     let groupData = null;
 
     if (groupRes.status) {
-      groupData = groupRes?.data.groupWithGames;
+      groupData = groupRes?.data;
       console.log("ooooo", groupData);
     }
 
@@ -63,7 +63,7 @@ export default function FeedbackPage({
   memberRatingData,
 }: FeedbackPageProps) {
   console.log("aaaaaaa", memberRatingData);
-  if (!memberRatingData || !groupData.store) return <div>挖哈哈哈哈哈</div>;
+  if (!memberRatingData || !groupData) return <div>挖哈哈哈哈哈</div>;
 
   return (
     <Layout pageCategory="setting">

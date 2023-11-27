@@ -2,20 +2,29 @@ import { GroupDataType } from "@/constants/types/groupDataType";
 import { MouseEventHandler, SetStateAction } from "react";
 
 // Page
+
+export type RatingGroupType = {
+  storeId: number;
+  storeName: string;
+  address: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  photo: string;
+};
+
 export type FeedbackPageProps = {
   id: string;
-  groupData: GroupDataType;
+  groupData: RatingGroupType;
   memberRatingData: MemberDataType;
 };
 
 // Feedback
 export type FeedbackProps = {
   groupId: FeedbackPageProps["id"];
-  groupData: GroupDataType;
+  groupData: RatingGroupType;
   memberRatingData: MemberDataType;
 };
-
-// FeedBack
 
 export type feedbackStepType = "member" | "store";
 
@@ -23,7 +32,7 @@ export type feedbackStepType = "member" | "store";
 
 export type RatingStoreProps = {
   groupId: number;
-  groupData: GroupDataType;
+  groupData: RatingGroupType;
   step: feedbackStepType;
   setStep: React.Dispatch<SetStateAction<feedbackStepType>>;
   storeValues: StoreValuesType;
