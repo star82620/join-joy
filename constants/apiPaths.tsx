@@ -35,6 +35,11 @@ const apiPaths = {
   "search-store": "/search/search/storesearch",
   "search-group": "/search/search/groups",
   "get-preference-group": "/search/search/groupsinterest",
+
+  // feedback
+  "rating-store": "/member/ratingstore",
+  "rating-member": "/member/ratingmember",
+  "group-store-info": "/member/storeinfobygroup",
 };
 
 export default apiPaths;
