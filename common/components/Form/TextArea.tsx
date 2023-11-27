@@ -15,9 +15,9 @@ export default function TextArea({
   readonly,
   errorMsg,
 }: TextAreaProps) {
-  // const currentLength = value.length;
+  const currentLength = value.length;
 
-  // const isError = required && currentLength === 0;
+  const isError = required && currentLength === 0;
 
   const errorText = errorMsg ?? defaultErrorText;
   return (
@@ -27,7 +27,7 @@ export default function TextArea({
           <h3 className="text-lg font-semibold md:text-md">{title}</h3>
           {!!maxLength && (
             <span className="text-sm md:text-xs">
-              {/* {currentLength}/{maxLength} */}
+              {currentLength}/{maxLength}
             </span>
           )}
         </div>
@@ -44,11 +44,11 @@ export default function TextArea({
           disabled={disabled}
           readOnly={readonly}
         />
-        {/* {isError && (
+        {isError && (
           <p className="text-danger mt-2 md:mt-1 text-sm md:text-xs">
             {errorText}
           </p>
-        )} */}
+        )}
       </section>
     </label>
   );
