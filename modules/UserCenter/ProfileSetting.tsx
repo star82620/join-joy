@@ -20,6 +20,8 @@ export default function ProfileSetting() {
   const { authData } = useAuth();
   const profileImg = authData?.photo;
 
+  console.log("profileData", profileData);
+
   const [defaultData, setDefaultData] = useState({
     allCities: {},
     allGametypes: {},
@@ -31,10 +33,11 @@ export default function ProfileSetting() {
     return { allCities: citiesData, allGameTypes: gameTypesData };
   };
 
-  useEffect(() => {
-    const dataSet = getDefaultData();
-    // setDefaultData(dataSet);
-  });
+  // if (profileValues.description === null) {
+  //   setProfileValues({ ...profileValues, description: "" });
+  // }
+
+  console.log("2profileData", profileData);
 
   return (
     <section className="p-8 md:px-4">

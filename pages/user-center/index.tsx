@@ -36,7 +36,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     authToken: authToken,
   };
   const profileRes = await fetchApi(profileApiParams);
-  const profileData: ProfileDataType = await profileRes?.data;
+  const data: ProfileDataType = await profileRes?.data;
+  const profileData =
+    data.description === null ? { ...data, description: "" } : data;
+
+  console.log("欸欸欸", data.description === "null");
+  console.log("QQQ", { ...data, description: "" });
+  console.log("AAAA", profileData);
 
   // 取得所有揪團資料
   const groupsApiParams: apiParamsType = {
@@ -101,6 +107,8 @@ function UserCenterPage({
   groupRatingsSet,
 }: UserCenterPageProps) {
   const dataSet = { profileData, groupsData, groupRatingsSet };
+
+  console.log("ssss", profileData);
 
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">
