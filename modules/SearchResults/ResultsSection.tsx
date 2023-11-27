@@ -26,7 +26,7 @@ export default function ResultsSection({}) {
 
   const queryKeys = router.query;
 
-  const isGroup = activeTab === "group";
+  const isGroup = queryKeys.tab === "group";
   const isEmptyResult = searchResultsData.length === 0;
 
   // 分頁設定
@@ -43,15 +43,24 @@ export default function ResultsSection({}) {
   useEffect(() => {
     console.log("動了");
     getSearchResult();
+  }, [queryKeys]);
+
+  useEffect(() => {
+    if (isGroup) {
+      getSearchResult();
+    }
   }, [
-    queryKeys,
     searchKeys.groupFilter,
     searchKeys.groupTag,
     searchKeys.groupppl,
     searchKeys.joinppl,
-    searchKeys.storeFilter,
-    searchKeys.storeTag,
   ]);
+
+  useEffect(() => {
+    if (!isGroup) {
+      getSearchResult();
+    }
+  }, [searchKeys.storeFilter, searchKeys.storeTag]);
 
   return (
     <div className="mt-9 md:mt-4">

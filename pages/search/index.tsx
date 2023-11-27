@@ -90,12 +90,7 @@ export default function SearchResultsPage({
   return (
     <SearchProvider>
       <Layout pageCategory="searchresult">
-        <div className="bg-yellow-dark">
-          <SearchResults
-            defaultData={defaultData}
-            defaultCount={defaultCount}
-          />
-        </div>
+        <SearchResults defaultData={defaultData} defaultCount={defaultCount} />
       </Layout>
     </SearchProvider>
   );
