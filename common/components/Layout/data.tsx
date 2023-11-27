@@ -11,9 +11,9 @@ export type PageCategoryType =
   | "group"
   | "user"
   | "store"
-  | "landingpage"
+  | "landing-page"
   | "error"
-  | "searchresult"
+  | "search-result"
   | "setting";
 
 export type LayoutProps = {

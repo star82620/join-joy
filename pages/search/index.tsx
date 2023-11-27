@@ -87,7 +87,7 @@ export default function SearchResultsPage({
 }: SearchResultsPageProps) {
   return (
     <SearchProvider>
-      <Layout pageCategory="searchresult">
+      <Layout pageCategory="search-result">
         <SearchResults defaultData={defaultData} defaultCount={defaultCount} />
       </Layout>
     </SearchProvider>
