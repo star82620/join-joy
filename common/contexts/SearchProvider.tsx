@@ -41,8 +41,6 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   const [searchKeys, setSearchKeys] =
     useState<SearchKeysType>(defaultSearchKeys);
 
-  "searchKeys", searchKeys;
-
   const [activeTab, setActiveTab] = useState<"group" | "store">("group");
 
   const [searchResultsData, setSearchResultsData] = useState<
@@ -61,6 +59,8 @@ export default function SearchProvider({ children }: SearchProviderProps) {
     totalCount,
     setTotalCount,
   };
+
+  console.log("searchResultsData", searchResultsData);
 
   return (
     <SearchContext.Provider value={dataSet}>{children}</SearchContext.Provider>

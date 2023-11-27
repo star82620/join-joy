@@ -27,6 +27,7 @@ export default function ResultsSection({}) {
   const queryKeys = router.query;
 
   const isGroup = queryKeys.tab === "group";
+  const isStore = queryKeys.tab === "store";
   const isEmptyResult = searchResultsData.length === 0;
 
   // 分頁設定
@@ -42,43 +43,37 @@ export default function ResultsSection({}) {
   // // 搜尋
   useEffect(() => {
     getSearchResult();
-  }, [queryKeys]);
-
-  useEffect(() => {
-    if (isGroup) {
-      getSearchResult();
-    }
   }, [
+    queryKeys,
     searchKeys.groupFilter,
     searchKeys.groupTag,
     searchKeys.groupppl,
     searchKeys.joinppl,
+    searchKeys.storeFilter,
+    searchKeys.storeTag,
   ]);
-
-  useEffect(() => {
-    if (!isGroup) {
-      getSearchResult();
-    }
-  }, [searchKeys.storeFilter, searchKeys.storeTag]);
 
   return (
     <div className="mt-9 md:mt-4">
-      {isGroup && (
-        <div className="flex flex-wrap gap-x-4 gap-y-8 md:gap-3">
-          {searchResultsData.map((item) => {
-            const isGroupData = "groupId" in item;
-            return (
-              <div
-                key={isGroupData ? item.groupId : item.storeId}
-                className="w-full max-w-[280px] md:max-w-full"
-              >
-                {isGroupData && <GroupCard data={item} />}
-                {!isGroupData && <StoreCard data={item} />}
-              </div>
-            );
-          })}
-        </div>
-      )}
+      <div className="flex flex-wrap gap-x-4 gap-y-8 md:gap-3">
+        {searchResultsData.map((item) => {
+          const isGroupData = "groupId" in item;
+          const isStoreData = "storeId" in item;
+          const cardWidth = isGroup
+            ? "max-w-[280px] min-w-[280px]"
+            : "min-w-[376px] max-w-[376px]";
+
+          return (
+            <div
+              key={isGroupData ? item.groupId : item.storeId}
+              className={`w-full ${cardWidth} md:max-w-full`}
+            >
+              {isGroupData && <GroupCard data={item} />}
+              {isStoreData && <StoreCard data={item} />}
+            </div>
+          );
+        })}
+      </div>
 
       {/* 分頁 */}
       <div className="flex gap-1 items-center w-fit m-auto mt-16 md:mt-8">

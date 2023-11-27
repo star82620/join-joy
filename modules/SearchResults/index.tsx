@@ -31,7 +31,6 @@ export default function SearchResults({
 
   const isGroup = activeTab === "group";
   const isEmptyResult = searchResultsData.length === 0;
-  console.log("isEmptyResult", isEmptyResult);
 
   return (
     <div className="container pt-12 pb-[108px]">
