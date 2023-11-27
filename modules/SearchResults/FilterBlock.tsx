@@ -12,7 +12,9 @@ export default function FilterBlock({
   const { searchKeys, setSearchKeys } = searchContext;
 
   const handleSelectFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const inputName = e.target.name;
+    type KeyOfSearchKeysType = keyof SearchKeysType;
+    // const inputName = e.target.name;
+    const inputName: KeyOfSearchKeysType = e.target.name as KeyOfSearchKeysType;
 
     if (
       [
@@ -28,10 +30,10 @@ export default function FilterBlock({
     ) {
       const value = Number(e.target.value);
 
-      setSearchKeys((prevState: SearchKeysType) => ({
-        ...prevState,
+      setSearchKeys({
+        ...searchKeys,
         [inputName]: value,
-      }));
+      });
     }
   };
 
