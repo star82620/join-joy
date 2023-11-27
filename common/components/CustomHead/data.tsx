@@ -81,6 +81,12 @@ export const dataSet: Record<string, dataType> = {
     url: "",
     image: "",
   },
+  error: {
+    title: "",
+    desc: "",
+    url: "",
+    image: "",
+  },
 };
 
 export type CustomHeadProps = {
