@@ -1,5 +1,4 @@
 import { SelectOptionType } from "@/common/components/Form/data";
-import { CitiesDataType } from "@/constants/globalTypes";
 import { GroupDataType } from "@/constants/types/groupDataType";
 import { StoreDataType } from "@/constants/types/storeDataType";
 
@@ -7,7 +6,6 @@ import { StoreDataType } from "@/constants/types/storeDataType";
 export type SearchResultsPageProps = {
   defaultData: GroupDataType[] | StoreDataType[] | [];
   defaultCount: number;
-  citiesData: CitiesDataType;
 };
 
 //

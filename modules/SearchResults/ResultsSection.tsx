@@ -6,8 +6,11 @@ import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
+import { useRouter } from "next/router";
+import { useGetSearchResult } from "@/common/hooks/getSearchResult";
 
 export default function ResultsSection({}) {
+  const router = useRouter();
   const searchContext = useContext(SearchContext);
   const {
     searchKeys,
@@ -32,6 +35,9 @@ export default function ResultsSection({}) {
     const pageNum = Number(e.currentTarget.value);
     setSearchKeys({ ...searchKeys, page: pageNum });
   };
+
+  // 搜尋
+  const a = useGetSearchResult();
 
   return (
     <div className="mt-9 md:mt-4">

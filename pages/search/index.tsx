@@ -22,7 +22,6 @@ import { getCitiesApi } from "@/common/helpers/getApi/getCitiesApi";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let defaultData = [];
   let defaultCount = 0;
-  let citiesData = [];
 
   const searchKeys = context.query;
 
@@ -32,10 +31,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const isGroup = tab === "group";
   const isStore = tab === "store";
-
-  citiesData = await getCitiesApi();
-
-  console.log(citiesData);
 
   if (isGroup) {
     const cityIdKey = city ? Number(city) : 0;
@@ -56,10 +51,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     const isEmptyResult = typeof GroupsData === "string";
 
-    // if (!isEmptyResult) {
-    //   defaultData = GroupsData.finalGroups;
-    //   defaultCount = GroupsData.groupCount;
-    // }
+    if (!isEmptyResult) {
+      defaultData = GroupsData.finalGroups;
+      defaultCount = GroupsData.groupCount;
+    }
   }
 
   if (isStore) {
@@ -79,10 +74,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     const isEmptyResult = typeof StoreData === "string";
 
-    // if (!isEmptyResult) {
-    //   defaultData = StoreData.matchedStores;
-    //   defaultCount = StoreData?.storeCount;
-    // }
+    if (!isEmptyResult) {
+      defaultData = StoreData.matchedStores;
+      defaultCount = StoreData?.storeCount;
+    }
   }
 
   return { props: { defaultData, defaultCount } };
@@ -91,10 +86,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function SearchResultsPage({
   defaultData,
   defaultCount,
-}: // citiesData,
-SearchResultsPageProps) {
-  console.log("OMD", defaultCount, defaultData);
-
+}: SearchResultsPageProps) {
   return (
     <SearchProvider>
       <Layout pageCategory="searchresult">

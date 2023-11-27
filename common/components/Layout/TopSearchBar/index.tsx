@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import Button from "../../GeneralButton";
-import { SearchContext } from "@/common/contexts/SearchProvider";
-import useSearch from "@/modules/LandingPage/useSearch";
-import { GetDataContext } from "@/pages";
+import useSearch from "@/common/hooks/useSearch";
 import SearchTab from "./SearchTab";
-import { DisplayCategoryType } from "./data";
-import { CitiesDataContext } from "@/common/contexts/CitiesProvider";
+import { SearchContext } from "@/common/contexts/SearchProvider";
 import { CitiesDataType } from "@/constants/globalTypes";
-import SelectInput from "../../Form/SelectInput";
+import { DisplayCategoryType } from "./data";
 
 export default function TopSearchBar() {
   const {
