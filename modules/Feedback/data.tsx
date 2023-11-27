@@ -1,5 +1,17 @@
 import { MouseEventHandler, SetStateAction } from "react";
 
+// Page
+export type FeedbackPageProps = {
+  id: string;
+};
+
+// Feedback
+export type FeedbackProps = {
+  groupId: FeedbackPageProps["id"];
+};
+
+//
+
 export type RatingNameType =
   | "groupId"
   | "clean"
@@ -34,7 +46,7 @@ export type MemberValuesItemType = {
   comment: string;
 };
 
-export type MemberValuesType = Record<number, MemberValuesItemType>;
+export type MemberValuesType = Record<string, MemberValuesItemType>;
 
 export type StepType = "store" | "member";
 

@@ -2,6 +2,7 @@ import React, {
   ChangeEventHandler,
   MouseEventHandler,
   useContext,
+  useEffect,
 } from "react";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
@@ -12,16 +13,31 @@ import RatingSelector from "./RatingSelector";
 import { RatingValueContext } from ".";
 
 export default function RatingStore() {
-  const { storeValues, setStoreValues, step, setStep } =
+  const { groupId, storeValues, setStoreValues, step, setStep } =
     useContext(RatingValueContext);
 
+  console.log("storeValues", storeValues);
+
+  // 帶入 groupId
+  useEffect(() => {
+    setStoreValues({
+      ...storeValues,
+      groupId: Number(groupId),
+    });
+  }, []);
+
+  // 下一步按鈕
   const setStepMember: MouseEventHandler<HTMLButtonElement> = () => {
     setStep("member");
   };
 
   // 儲存店家評價
-  const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = () => {
-    setStoreValues((prevState) => ({ ...prevState, comment: "" }));
+  const handleInputValue: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    const value = e.target.value;
+    setStoreValues((prevState) => ({
+      ...prevState,
+      comment: value,
+    }));
   };
 
   // 儲存分數
@@ -57,7 +73,10 @@ export default function RatingStore() {
                 {RatingItemSet.map((item) => {
                   const { title, ratingName } = item;
                   return (
-                    <li className="w-full flex justify-between">
+                    <li
+                      key={ratingName}
+                      className="w-full flex justify-between"
+                    >
                       <h4>{title}</h4>
                       <RatingSelector
                         key={ratingName}
@@ -74,6 +93,7 @@ export default function RatingStore() {
               <TextArea
                 title="評語"
                 maxLength={100}
+                rows={4}
                 inputName="comment"
                 value={storeValues.comment}
                 onChange={handleInputValue}

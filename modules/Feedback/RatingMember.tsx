@@ -17,7 +17,7 @@ import { memberStatusIndex } from "@/constants/wordIndexes";
 
 const testData: MemberDataItemType[] = [
   {
-    memberId: 0,
+    memberId: 111,
     memberName: "乃胖胖胖",
     memberPhoto:
       "https://2be5-4-224-16-99.ngrok-free.app/upload/profile/Member_6_20231111213427.jpg",
@@ -40,23 +40,25 @@ export default function RatingMember() {
   });
 
   let defaultMemberRating = {} as MemberValuesType;
-  filteredData.forEach((item) => {
-    const { memberId } = item;
-    const defaultValue = {
-      groupId: 2,
-      memberId: memberId,
-      score: 0,
-      comment: "",
-    };
-    defaultMemberRating[memberId] = defaultValue;
-  });
 
   useEffect(() => {
-    if (Object.keys(memberValues).length === 0) {
-      setMemberValues(defaultMemberRating);
-    }
-    console.log("eee");
+    // 生成每個團員的預設資料
+    filteredData.forEach((item) => {
+      const { memberId } = item;
+      const defaultValue = {
+        groupId: 2,
+        memberId: memberId,
+        score: 0,
+        comment: "",
+      };
+      defaultMemberRating[memberId] = defaultValue;
+    });
+
+    setMemberValues(defaultMemberRating);
   }, []);
+
+  console.log("defaultMemberRating", defaultMemberRating);
+  console.log("emberValues", memberValues);
 
   const setStepStore: MouseEventHandler<HTMLParagraphElement> = () => {
     setStep("store");
@@ -68,7 +70,7 @@ export default function RatingMember() {
     const userId = Number(e.target.name);
     const newValue = { ...memberValues[userId], comment: content };
 
-    setMemberValues((prevState) => ({ ...prevState, ...newValue }));
+    // setMemberValues({ ...memberValues, ...newValue });
   };
 
   // 儲存分數
@@ -79,7 +81,7 @@ export default function RatingMember() {
 
     const newValue = { ...memberValues[userId], score: scoreNum };
 
-    setMemberValues((prevState) => ({ ...prevState, ...newValue }));
+    // setMemberValues((prevState) => ({ ...prevState, ...newValue }));
   };
 
   const MemberBlock = ({
@@ -88,6 +90,8 @@ export default function RatingMember() {
     userId,
     profileImg,
   }: MemberBlockProps) => {
+    console.log("userId", userId);
+
     const memberStatus = memberStatusIndex[status];
     return (
       <div className="w-full flex gap-6">
@@ -101,19 +105,20 @@ export default function RatingMember() {
         <div className="grow">
           <div className="flex gap-3 mb-4">
             <h4 className="text-lg">評分：</h4>
-            <RatingSelector
+            {/* <RatingSelector
               ratingName={userId}
               scoreValue={memberValues[userId].score}
               handleScoreValue={handleScoreValue}
-            />
+            /> */}
           </div>
-          <TextArea
+          {/* <TextArea
             title="評語"
             maxLength={50}
+            rows={4}
             inputName={userId.toString()}
             value={memberValues[userId].comment}
             onChange={handleInputValue}
-          />
+          /> */}
         </div>
       </div>
     );
@@ -127,6 +132,7 @@ export default function RatingMember() {
             const { status, memberName, memberId, memberPhoto } = item;
             return (
               <MemberBlock
+                key={memberId}
                 status={status}
                 userName={memberName}
                 userId={memberId}

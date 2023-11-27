@@ -132,8 +132,6 @@ function GroupsList({ pageCategory }: GroupListProps) {
 
     const status = setGroupStatus(groupStatus, memberStatus);
 
-    console.log("pppp", groupName, status);
-
     const isClosed = status === "closed";
 
     const now = new Date();
