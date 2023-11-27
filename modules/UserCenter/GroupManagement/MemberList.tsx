@@ -74,7 +74,7 @@ export default function MemberList() {
     const isAttended = btnCategory === "出席";
 
     checkMemberAttended(groupId, userId, isAttended).then((res) => {
-      console.log(res);
+      // console.log(res);
       if (res.status) {
         // window.location.reload();
       }

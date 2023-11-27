@@ -41,18 +41,22 @@ function GroupItem({ group, btnSet }: GroupItemProps) {
   const setBtn = () => {
     const isLeader = memberStatus === "leader";
 
+    // 取消
     if (status === "cancel") return "cancel";
 
+    // 已結束
     if (status === "closed") {
       if (isCommented) return "commented";
       return "closed";
     }
 
+    // 已預約
     if (status === "reserved") {
       if (isLeader) return "leader";
       return "cancel";
     }
 
+    // 開團中
     if (status === "opening") return "leader";
 
     return status;
@@ -94,7 +98,7 @@ function GroupItem({ group, btnSet }: GroupItemProps) {
         {currentPeople}/{totalMemberNum}
       </p>
       <div className="flex items-center w-[10%] min-h-[42px]">
-        {!isWithoutBtn && (
+        {!isWithoutBtn ? (
           <Button
             type="button"
             appearance="black"
@@ -106,6 +110,8 @@ function GroupItem({ group, btnSet }: GroupItemProps) {
           >
             <span className="text-sm">{btnText}</span>
           </Button>
+        ) : (
+          <p className="w-full text-center">{myGroupStatusSet[status].text} </p>
         )}
       </div>
     </li>

@@ -10,8 +10,6 @@ export function useCheckMemberStatus(groupId: number) {
 
   const [status, setStatus] = useState<MemberStatusType | null>(null);
 
-  console.log("authUserID", authUserID, "groupId", groupId);
-
   useEffect(() => {
     const checkMemberStatus = async () => {
       try {

@@ -3,10 +3,10 @@ import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileSetting from "./ProfileSetting";
 import MyGroupsLeader from "./MyGroups/MyGroupsLeader";
 import MyGroupsMember from "./MyGroups/MyGroupsMember";
-import icons from "@/constants/iconsPackage/userNavIcons";
 import MyFollowing from "./MyFollowing";
 import MyNotification from "./MyNotification";
 import UserNavBar from "./UserNavBar";
+import icons from "@/constants/iconsPackage/userNavIcons";
 import {
   NavSetType,
   NavIdType,

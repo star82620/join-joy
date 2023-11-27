@@ -22,20 +22,20 @@ export const globalIcons: Record<string, ImgType> = {
     alt: "icon-search-white",
   },
   "search-group-light": {
-    src: "/images/icon-search-group-light.svg",
+    src: "/images/search/icon-search-group-light.svg",
     alt: "icon-search-group-light",
   },
   "search-group-dark": {
-    src: "/images/icon-search-group-dark.svg",
+    src: "/images/search/icon-search-group-dark.svg",
     alt: "icon-search-group-dark",
   },
 
   "search-store-light": {
-    src: "/images/icon-search-store-light.svg",
+    src: "/images/search/icon-search-store-light.svg",
     alt: "icon-search-store-light",
   },
   "search-store-dark": {
-    src: "/images/icon-search-store-dark.svg",
+    src: "/images/search/icon-search-store-dark.svg",
     alt: "icon-search-store-dark",
   },
 

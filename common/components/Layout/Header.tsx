@@ -8,6 +8,7 @@ import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { logoSet } from "@/constants/logoSet";
 import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 import { useAuth } from "@/common/hooks/useAuth";
+import TopSearchBar from "./TopSearchBar";
 
 export default function Header({ pageCategory }: HeaderProps) {
   const router = useRouter();
@@ -29,6 +30,8 @@ export default function Header({ pageCategory }: HeaderProps) {
   const logoAlt = logoSet.header.alt;
 
   const { authData, isLogin } = useAuth();
+
+  const isSearchPage = pageCategory === "searchresult";
 
   return (
     <header className={headerStyle}>
@@ -86,6 +89,7 @@ export default function Header({ pageCategory }: HeaderProps) {
           </div>
         </section>
       </div>
+      {isSearchPage && <TopSearchBar />}
     </header>
   );
 }

@@ -14,9 +14,11 @@ export default async function handler(
       method: "GET",
     };
 
-    const result = await fetchApi(apiParams);
+    const res = await fetchApi(apiParams);
+    const json = res.json();
+    const data = json.data;
 
-    res.status(200).json(result);
+    res.status(200).json(data);
   } catch (error) {
     console.error("API Error:", error);
 
