@@ -39,7 +39,6 @@ export default function GroupDetailForm() {
   };
 
   const [values, setValues] = useState(defaultValues);
-  console.log(values);
 
   const selectedGamesData: SelectedGamesType = games.map((game) => {
     const { gameId, gameName } = game;
