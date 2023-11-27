@@ -11,8 +11,9 @@ import { RatingValueContext } from ".";
 import ProfileImg from "@/common/components/ProfileImg";
 import RatingSelector from "./RatingSelector";
 import TextArea from "@/common/components/Form/TextArea";
-import { memberStatusFormat } from "@/constants/memberStatusFormat";
+
 import { MemberBlockProps, MemberDataItemType, MemberValuesType } from "./data";
+import { memberStatusIndex } from "@/constants/wordIndexes";
 
 const testData: MemberDataItemType[] = [
   {
@@ -87,7 +88,7 @@ export default function RatingMember() {
     userId,
     profileImg,
   }: MemberBlockProps) => {
-    const memberStatus = memberStatusFormat[status];
+    const memberStatus = memberStatusIndex[status];
     return (
       <div className="w-full flex gap-6">
         <div>
@@ -108,12 +109,10 @@ export default function RatingMember() {
           </div>
           <TextArea
             title="評語"
-            textAreaParams={{
-              maxLength: 50,
-              inputName: userId.toString(),
-              value: memberValues[userId].comment,
-              onChange: handleInputValue,
-            }}
+            maxLength={50}
+            inputName={userId.toString()}
+            value={memberValues[userId].comment}
+            onChange={handleInputValue}
           />
         </div>
       </div>

@@ -73,13 +73,11 @@ export default function RatingStore() {
             <div className="w-full mdg:mt-8">
               <TextArea
                 title="評語"
-                textAreaParams={{
-                  maxLength: 100,
-                  inputName: "comment",
-                  value: storeValues.comment,
-                  onChange: handleInputValue,
-                  placeholder: "留下評論並讓大家知道",
-                }}
+                maxLength={100}
+                inputName="comment"
+                value={storeValues.comment}
+                onChange={handleInputValue}
+                placeholder="留下評論並讓大家知道"
               />
             </div>
           </div>

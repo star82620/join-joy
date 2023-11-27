@@ -91,7 +91,6 @@ export type TextAreaProps = {
   title: string;
   inputName: string;
   value: string;
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
   rows?: number;
   cols?: number;
   maxLength?: number;
@@ -101,12 +100,6 @@ export type TextAreaProps = {
   readonly?: boolean;
   errorMsg?: string;
   onChange: ChangeEventHandler<HTMLTextAreaElement>;
-};
-
-export type TextAreaProps = {
-  title: string | ReactNode;
-  textAreaParams: TextAreaParamsType;
-  isError?: boolean;
 };
 
 // SelectInput
