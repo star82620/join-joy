@@ -7,6 +7,7 @@ import {
 } from "./data";
 import RatingStore from "./RatingStore";
 import RatingMember from "./RatingMember";
+import { useRouter } from "next/router";
 
 export default function Feedback({
   groupId,
@@ -14,6 +15,7 @@ export default function Feedback({
   memberRatingData,
 }: FeedbackProps) {
   if (!memberRatingData) return <div>loading</div>;
+  const router = useRouter();
 
   const [storeValues, setStoreValues] = useState(defaultStoreValues);
   const [memberValues, setMemberValues] = useState(defaultMemberValues);
@@ -28,10 +30,24 @@ export default function Feedback({
   const isMemberRating = step === "member";
 
   // 送出評價
-  const handleSubmitRatings: FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmitRatings: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    Object.values(memberValues).forEach((member) => {});
+    // Object.values(memberValues).forEach((member) => {
+    //   // ???
+    // });
+
+    const res = await fetch("/api/setting/feedback/ratingStore", {
+      method: "POST",
+      body: JSON.stringify(storeValues),
+    });
+
+    console.log(res.json());
+
+    if (res.status) {
+      alert("成功送出評論！");
+      router.push("/user-center");
+    }
 
     console.log("memberValues", memberValues);
     console.log("storeValues", storeValues);

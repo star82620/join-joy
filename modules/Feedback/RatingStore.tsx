@@ -84,7 +84,7 @@ export default function RatingStore({
           <div className="flex mdg:flex-col justify-between gap-[10%] mt-8">
             <div className="w-[70%] mdg:w-full">
               <h3 className="text-lg">各項目評分：</h3>
-              <ul className="flex flex-col gap-6 mt-4">
+              <ul className="flex flex-col gap-6 mt-8 pl-4">
                 {RatingItemSet.map((item) => {
                   const { title, ratingName } = item;
                   return (
