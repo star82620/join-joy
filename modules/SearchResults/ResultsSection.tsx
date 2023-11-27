@@ -84,6 +84,7 @@ export default function ResultsSection({}) {
 
           return (
             <Button
+              key={num}
               type="button"
               appearance={btnAppearance}
               rounded
