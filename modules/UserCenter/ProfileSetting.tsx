@@ -1,4 +1,4 @@
-import React, { Children, useContext, useState } from "react";
+import React, { Children, useContext, useEffect, useState } from "react";
 import fetchApi from "@/common/helpers/fetchApi";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
@@ -19,6 +19,22 @@ export default function ProfileSetting() {
   const [profileValues, setProfileValues] = useState(profileData);
   const { authData } = useAuth();
   const profileImg = authData?.photo;
+
+  const [defaultData, setDefaultData] = useState({
+    allCities: {},
+    allGametypes: {},
+  });
+
+  const getDefaultData = async () => {
+    const citiesData = await fetch("/api/global/getAllCities");
+    const gameTypesData = await fetch("/api/global/getAllCities");
+    return { allCities: citiesData, allGameTypes: gameTypesData };
+  };
+
+  useEffect(() => {
+    const dataSet = getDefaultData();
+    // setDefaultData(dataSet);
+  });
 
   return (
     <section className="p-8 md:px-4">

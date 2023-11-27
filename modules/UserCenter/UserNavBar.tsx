@@ -4,6 +4,7 @@ import Image from "@/common/components/FillImage";
 import icons from "@/constants/iconsPackage/userNavIcons";
 import { UserNavBarProps, NavSetType } from "./date";
 import { useAuth } from "@/common/hooks/useAuth";
+import { useLogout } from "@/common/hooks/useLogout";
 
 const subNavOpenIcon = (
   <Image
@@ -53,6 +54,7 @@ export default function UserNavBar({
   };
 
   const { authData } = useAuth();
+  const logout = useLogout();
 
   const nickName = authData?.nickName || "";
   const photo = authData?.photo || "";
@@ -100,7 +102,7 @@ export default function UserNavBar({
             );
           })}
         </ul>
-        <div className="p-3 flex gap-3 grow">
+        <div className="p-3 flex gap-3 grow cursor-pointer" onClick={logout}>
           <Image
             src={icons.logout.src}
             alt={icons.logout.alt}
