@@ -54,11 +54,11 @@ export default function GroupCard({ data }: GroupCardProps) {
           </div>
         </div>
         <div className="grow">
-          <p className="font-bold aheadIcon before:w-4 before:h-4 mt-2.5 md:mt-2 before:bg-group-time">
+          <p className="font-bold aheadIcon before:w-4 before:h-4 mt-2.5 md:mt-2 before:bg-group-card-time">
             <span>{date}</span>
             <span className="whitespace-nowrap">{`${startTime} - ${endTime}`}</span>
           </p>
-          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-location mt-2">
+          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-card-location mt-2">
             {groupLocation}
           </p>
           <div className="flex justify-start items-center gap-1 mt-3 md:mt-2 text-sm text-gray-500 font-semibold whitespace-nowrap overflow-scroll scrollbar-none">
@@ -68,7 +68,7 @@ export default function GroupCard({ data }: GroupCardProps) {
               return (
                 <p
                   key={tag}
-                  className={`aheadIcon before:w-3 before:h-3 before:bg-group-tag before:mr-0.5 pr-1 ${lineStyle}`}
+                  className={`aheadIcon before:w-3 before:h-3 before:bg-group-card-tag before:mr-0.5 pr-1 ${lineStyle}`}
                 >
                   {tag}
                 </p>
@@ -77,7 +77,7 @@ export default function GroupCard({ data }: GroupCardProps) {
           </div>
         </div>
         <div className="flex justify-between items-center border-t-2 border-gray-500 mt-2 pt-2 md:pt-1 ">
-          <p className="text-sm font-bold ml-1 aheadIcon before:w-4 before:h-4 before:bg-group-member">
+          <p className="text-sm font-bold ml-1 aheadIcon before:w-4 before:h-4 before:bg-group-card-member">
             {currentMembersNum}/{totalMemberNum}
           </p>
 

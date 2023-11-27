@@ -24,13 +24,27 @@ const searchStoresApiParams: apiParamsType = {
   method: "POST",
 };
 
-export async function getSearchStores(searchKey: StoresSearchKeyType) {
+export async function getSearchStores(
+  searchKey: StoresSearchKeyType,
+  haveCount?: "haveCount"
+) {
   if (searchKey) {
     searchStoresApiParams.data = searchKey;
   }
 
   try {
     const res = await fetchApi(searchStoresApiParams);
+
+    if (!res.status) {
+      return res.message;
+    }
+
+    if (haveCount) {
+      const data = res?.data ?? [];
+
+      return data;
+    }
+
     const data = res?.data.matchedStores ?? [];
 
     return data;

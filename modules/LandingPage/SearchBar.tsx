@@ -11,74 +11,33 @@ import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import TabBlock from "@/common/components/FileWrapper/TabBlock";
 import {
   SearchContext,
-  defaultSearchValues,
+  defaultSearchKeys,
 } from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
-import { useRouter } from "next/router";
-import { tabs } from "./data";
+
+import { searchTabs } from "@/constants/searchTabs";
+import useSearch from "@/common/hooks/useSearch";
 
 export default function SearchBar() {
-  const router = useRouter();
+  const {
+    setSelectValue,
+    setInputValue,
+    submitSearch,
+    isError,
+    isGroup,
+    submitBtnText,
+  } = useSearch();
 
   const searchContext = useContext(SearchContext);
+  const { searchKeys, setSearchKeys, activeTab, setActiveTab } = searchContext;
+
   const getDataContext = useContext(GetDataContext);
-
-  const { searchValues, setSearchValues, activeTab, setActiveTab } =
-    searchContext;
-
-  const isEmptyCityId = searchValues.cityId === 0;
-  const isEmptyStartDate = searchValues.startDate === "";
-  const isEmptyGameName = searchValues.gameName === "";
-  const isEmptyStoreName = searchValues.storeName === "";
-
-  const isAllEmpty =
-    isEmptyCityId && isEmptyStartDate && isEmptyGameName && isEmptyStoreName;
-
-  const [error, setError] = useState(false);
-
-  const isError = error === true;
-
-  useEffect(() => {}, [searchValues]);
-
   const { citiesData } = getDataContext;
-
-  const isGroup = activeTab === "group";
-
-  const btnText = isGroup ? "搜出揪團" : "搜出店家";
 
   const titleStyle = "text-lg md:text-md";
 
-  // 儲存 input value
-  const setSelectValue: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    const inputName = e.target.name;
-    const isCityId = inputName === "cityId";
-    const value = isCityId ? Number(e.target.value) : e.target.value;
-
-    setSearchValues({ ...searchValues, [inputName]: value });
-  };
-
-  // 儲存 input value
-  const setInputValue: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const inputName = e.target.name;
-    const value = e.target.value;
-
-    setSearchValues({ ...searchValues, [inputName]: value });
-  };
-
-  // 送出搜尋
-  const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-
-    if (isAllEmpty) {
-      setError(true);
-      return;
-    }
-
-    router.push("/search");
-  };
-
   useEffect(() => {
-    setSearchValues(defaultSearchValues);
+    setSearchKeys(defaultSearchKeys);
   }, [activeTab]);
 
   const groupKeyWordInput = (
@@ -87,7 +46,7 @@ export default function SearchBar() {
       className="inputStyle"
       placeholder="輸入你想找的遊戲"
       name="gameName"
-      value={searchValues.gameName}
+      value={searchKeys.gameName}
       onChange={setInputValue}
     />
   );
@@ -98,7 +57,7 @@ export default function SearchBar() {
       className="inputStyle"
       placeholder="輸入你想找的店家"
       name="storeName"
-      value={searchValues.storeName}
+      value={searchKeys.storeName}
       onChange={setInputValue}
     />
   );
@@ -106,7 +65,7 @@ export default function SearchBar() {
   return (
     <section className="w-full flex flex-col items-center relative lg:w-full">
       <div className="flex items-start absolute">
-        {tabs.map((tab, index, tabs) => {
+        {searchTabs.map((tab, index, tabs) => {
           const zIndex = tabs.length - index;
           const isActive = activeTab === tab.tabName;
           return (
@@ -134,7 +93,7 @@ export default function SearchBar() {
               <select
                 className="inputStyle !pl-9"
                 name="cityId"
-                value={searchValues.cityId}
+                value={searchKeys.cityId}
                 onChange={setSelectValue}
               >
                 <option value="">選擇城市</option>
@@ -144,7 +103,7 @@ export default function SearchBar() {
                   </option>
                 ))}
               </select>
-              <span className="absolute left-3 bottom-0.5 -translate-y-1/4 aheadIcon before:bg-group-location before:bg-cover before:w-5 before:h-5"></span>
+              <span className="absolute left-3 bottom-0.5 -translate-y-1/4 aheadIcon before:bg-group-card-location before:bg-cover before:w-5 before:h-5"></span>
             </div>
           </div>
 
@@ -155,7 +114,7 @@ export default function SearchBar() {
                 <select
                   className="inputStyle !pl-10"
                   name="startDate"
-                  value={searchValues.startDate}
+                  value={searchKeys.startDate}
                   onChange={setSelectValue}
                 >
                   <option value="">選擇遊玩的日期</option>
@@ -189,7 +148,7 @@ export default function SearchBar() {
                   widthProp="w-6 md:w-5"
                   heightProp="h-6 md:h-5"
                 />
-                {btnText}
+                {submitBtnText}
               </div>
             </Button>
           </div>

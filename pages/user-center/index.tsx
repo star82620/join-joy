@@ -48,7 +48,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const groupsData: GroupDataSetType = await groupsRes.data;
 
   // 取得個別揪團的評價狀態（揪團紀錄中全部的揪團）
-  // 這支 API 還要修，先不要動
   async function fetchGroupRatings(
     groupsData: MyGroupsItemType[]
   ): Promise<GroupRatingsType[]> {
@@ -91,7 +90,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export const DataContext = createContext<DataContextType>({
-  profileData: [defaultProfileData],
+  profileData: defaultProfileData,
   groupsData: defaultGroupsData,
   groupRatingsSet: defaultGroupRatingsSet,
 });
@@ -103,9 +102,6 @@ function UserCenterPage({
 }: UserCenterPageProps) {
   const dataSet = { profileData, groupsData, groupRatingsSet };
 
-  console.log("profileData", profileData);
-  console.log("groupsData", groupsData);
-  console.log("groupRatingsSet", groupRatingsSet);
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">
       <DataContext.Provider value={dataSet}>

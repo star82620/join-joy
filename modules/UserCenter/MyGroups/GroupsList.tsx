@@ -128,19 +128,28 @@ function GroupsList({ pageCategory }: GroupListProps) {
 
   // 篩選要跑出來的列表內容
   const filteredData = groupsData.filter((group) => {
-    const { endTime, groupStatus, memberStatus } = group;
+    const { groupName, endTime, groupStatus, memberStatus } = group;
+
     const status = setGroupStatus(groupStatus, memberStatus);
+
+    console.log("pppp", groupName, status);
+
     const isClosed = status === "closed";
+
     const now = new Date();
     const today = now.toISOString();
-    const isExpiredGroup = endTime < today;
+    const isExpiredGroup = endTime <= today;
 
     if (isUpcoming) {
       if (isExpiredGroup || isClosed) return false;
       return true;
     }
 
-    if (isExpiredGroup || isClosed) return true;
+    if (isClosed) {
+      if (isExpiredGroup || isClosed) return true;
+    }
+
+    // Something wrong here...
 
     return false;
   });

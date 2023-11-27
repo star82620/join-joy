@@ -3,6 +3,8 @@ import ProfileImg from "@/common/components/ProfileImg";
 import Image from "@/common/components/FillImage";
 import icons from "@/constants/iconsPackage/userNavIcons";
 import { UserNavBarProps, NavSetType } from "./date";
+import { useAuth } from "@/common/hooks/useAuth";
+import { useLogout } from "@/common/hooks/useLogout";
 
 const subNavOpenIcon = (
   <Image
@@ -31,6 +33,7 @@ export default function UserNavBar({
 }: UserNavBarProps) {
   const subNavList = (nav: NavSetType) => {
     if (!nav.subItem) return null;
+
     return (
       <ul className="block font-normal">
         {nav.subItem.map((subNav) => {
@@ -50,15 +53,21 @@ export default function UserNavBar({
     );
   };
 
+  const { authData } = useAuth();
+  const logout = useLogout();
+
+  const nickName = authData?.nickName || "";
+  const photo = authData?.photo || "";
+
   return (
     <section className="flex flex-col">
       <div className="flex flex-col items-center py-4">
         <ProfileImg
-          src="/images/photo-user-000.png"
+          src={photo}
           alt="userName"
           sizeStyle="w-16 md:w-10 h-16 md:h-16"
         />
-        <p className="mt-3 text-center text-lg font-semibold">多多</p>
+        <p className="mt-3 h-7 text-center text-lg font-semibold">{nickName}</p>
       </div>
       <nav className="px-1 flex flex-col">
         <ul className="flex flex-col gap-1">
@@ -93,7 +102,7 @@ export default function UserNavBar({
             );
           })}
         </ul>
-        <div className="p-3 flex gap-3 grow">
+        <div className="p-3 flex gap-3 grow cursor-pointer" onClick={logout}>
           <Image
             src={icons.logout.src}
             alt={icons.logout.alt}

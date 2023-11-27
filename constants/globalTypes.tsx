@@ -5,9 +5,30 @@ export type ImgType = {
   alt: string;
 };
 
+// iconsPackage
+export type IconsPackageType = Record<string, ImgType>;
+
+type IconIdType =
+  | "my-following"
+  | "my-following-active"
+  | "my-groups"
+  | "my-groups-active"
+  | "profile-setting"
+  | "profile-setting-active"
+  | "my-notification"
+  | "my-notification-active"
+  | "logout"
+  | "sub-closing"
+  | "sub-opening";
+
+export type UserNavIconsType = Record<IconIdType, ImgType>;
+
+// defaultImages
+export type DefaultImagesType = Record<string, ImgType>;
+
 export type IconsType = Record<string, ImgType>;
 
-// game
+// game 這個跟樓下有個 GameDataType 一樣哦
 export type GameType = {
   gameId: number;
   gameType: string;
@@ -60,18 +81,9 @@ export type UserProfileType = UserInfoType & {
   cities: Array<number>;
 };
 
-// AuthProvider
-export type AuthProviderProps = {
-  children: ReactNode;
-};
-
+// useAuth
 export type AuthDataType = UserInfoType & {
   photo: string;
-};
-
-export type AuthContextType = {
-  authData: AuthDataType | null;
-  setAuthData: React.Dispatch<React.SetStateAction<AuthDataType | null>>;
 };
 
 // 所有的城市列表
@@ -81,6 +93,7 @@ export type CitiesDataItemType = {
 };
 
 export type CitiesDataType = CitiesDataItemType[];
+
 // store
 export type StoreDataType = {
   storeId: number;
@@ -121,3 +134,25 @@ export type GroupTagIdType =
   | "competitiveTag";
 
 export type GroupTagItemType = { id: GroupTagIdType; text: string };
+
+// SearchProvider
+export type SearchProviderProps = { children: ReactNode };
+
+export type SearchKeysType = {
+  cityId: number;
+  page: number;
+  pageSize: number;
+
+  // group
+  startDate: string;
+  gameName: string;
+  groupFilter: number;
+  groupTag: number;
+  groupppl: number;
+  joinppl: number;
+
+  // store
+  storeName: string;
+  storeFilter: number;
+  storeTag: number;
+};

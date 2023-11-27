@@ -2,7 +2,16 @@ import { MouseEventHandler, ReactNode } from "react";
 
 export type ButtonType = {
   type: "button" | "submit" | "reset";
-  appearance: "orange" | "yellow" | "white" | "black" | "gray" | "brown";
+  appearance:
+    | "orange"
+    | "yellow"
+    | "yellow-dark"
+    | "white"
+    | "white-gray"
+    | "black"
+    | "gray"
+    | "brown"
+    | "page-selector-arrow";
   children: ReactNode;
   onClick?: MouseEventHandler | undefined;
   isDisabled?: boolean;
@@ -31,6 +40,14 @@ export const dataSet = {
       "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
     textColor: "text-gray-950",
   },
+  "yellow-dark": {
+    default: "bg-yellow-dark border-gray-500",
+    hover: "hover:bg-white hover:text-gray-950 hover:border-gray-950",
+    active: "active:bg-yellow-neutral",
+    disabled:
+      "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
+    textColor: "text-gray-500",
+  },
   white: {
     default: "bg-white border-gray-950",
     hover: "hover:bg-gray-100",
@@ -46,6 +63,14 @@ export const dataSet = {
     disabled:
       "disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-400",
     textColor: "text-gray-500",
+  },
+  "page-selector-arrow": {
+    default: "bg-white border-gray-200",
+    hover: "hover:bg-gray-50",
+    active: "active:bg-gray-100",
+    disabled:
+      "disabled:bg-gray-200 disabled:border-gray-200 disabled:text-gray-100",
+    textColor: "text-gray-300",
   },
   gray: {
     default: "bg-gray-100",

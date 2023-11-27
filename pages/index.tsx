@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { GetServerSidePropsContext } from "next";
 import { Inter } from "next/font/google";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
@@ -14,12 +14,15 @@ import {
   getSearchStores,
 } from "@/common/helpers/getApi/getSearchStores";
 import {
+  DefaultDataContextType,
   HomeProps,
   defaultCitiesData,
   defaultCommentsData,
+} from "@/modules/LandingPage/data";
+import {
   defaultGroupsData,
   defaultStoresData,
-} from "@/modules/LandingPage/data";
+} from "@/constants/defaultSearchDate";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +42,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     // 取得所有城市
     const citiesApiParams: apiParamsType = {
-      apiPath: apiPaths.getCities,
+      apiPath: apiPaths["get-cities"],
       method: "GET",
     };
     const citiesRes = await fetchApi(citiesApiParams);
@@ -124,7 +127,8 @@ export const defaultDataContext = {
   nearbyStoresData: defaultStoresData,
 };
 
-export const GetDataContext = createContext<HomeProps>(defaultDataContext);
+export const GetDataContext =
+  createContext<DefaultDataContextType>(defaultDataContext);
 
 export default function Home({
   citiesData,
