@@ -33,25 +33,26 @@ const testData: MemberDataItemType[] = [
 
 export default function RatingMember({
   groupId,
+  membersData,
   memberValues,
   setMemberValues,
   step,
   setStep,
 }: RatingMemberProps) {
   // 找出尚未評價的成員
-  const filteredData = testData.filter((item) => {
+  const filteredData = membersData.filter((item) => {
     return item.isRated === false;
   });
 
   // 生成每個團員的預設資料
-  const defaultMemberRating = filteredData.reduce((allMember, item) => {
-    allMember[item.memberId] = {
+  const defaultMemberRating = filteredData.reduce((members, item) => {
+    members[item.memberId] = {
       groupId: groupId,
       memberId: item.memberId,
       score: 0,
       comment: "",
     };
-    return allMember;
+    return members;
   }, {} as MemberValuesType);
 
   console.log("emberValues", memberValues);
@@ -105,17 +106,15 @@ export default function RatingMember({
   }: MemberBlockProps) => {
     if (!memberValues[userId]) return <div>Loading...</div>;
 
-    console.log("userId", userId);
-    console.log("拿資料", memberValues[userId]);
-
     const memberStatus = memberStatusIndex[status];
+
     return (
       <div className="w-full flex gap-6">
-        <div>
+        <div className="w-[20%]">
           <p className="font-semibold">{memberStatus}</p>
           <div className="flex items-center gap-2 mt-4">
             <ProfileImg src={profileImg} alt={userName} sizeStyle="w-16 h-16" />
-            <h3 className="text-lg">{userName}</h3>
+            <p className="text-lg font-semibold truncate">{userName}</p>
           </div>
         </div>
         <div className="grow">
@@ -143,8 +142,8 @@ export default function RatingMember({
   return (
     <div className="container pt-14 pb-12">
       <ModalWrapper title="評論同行的夥伴" layout="primary">
-        <div className="w-full flex flex-col gap-6 px-14 pt-10 pb-6">
-          {testData.map((item) => {
+        <div className="w-full flex flex-col gap-10 px-14 pt-10 pb-6">
+          {membersData.map((item) => {
             const { status, memberName, memberId, memberPhoto } = item;
             return (
               <MemberBlock

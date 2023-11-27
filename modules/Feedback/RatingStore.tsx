@@ -8,12 +8,21 @@ import RatingSelector from "./RatingSelector";
 
 export default function RatingStore({
   groupId,
+  groupData,
   step,
   setStep,
   storeValues,
   setStoreValues,
 }: RatingStoreProps) {
+  if (!groupData) return <div>load</div>;
+
+  console.log("groupData", groupData);
   console.log("storeValues", storeValues);
+
+  const { store, date, startTime, endTime } = groupData;
+
+  if (!store) return;
+  const { storeId, storeName, address } = store;
 
   // 帶入 groupId
   useEffect(() => {
@@ -52,15 +61,24 @@ export default function RatingStore({
         <div className="pt-10 pb-14 px-14">
           <div className="flex justify-between gap-[10%]">
             <div className="w-[70%] mdg:w-full flex justify-center mdg:justify-start items-center gap-x-4 h-16 mdg:h-auto">
-              <ProfileImg src="" alt="storeName" sizeStyle="w-16 h-16" />
+              <ProfileImg
+                src="https://2be5-4-224-16-99.ngrok-free.app/upload/store/profile/Store_7_20231111205949.png"
+                alt="storeName"
+                sizeStyle="w-16 h-16"
+              />
               <div>
-                <h3 className="text-lg truncate">六角桌遊店</h3>
-                <p className="text-gray-700 mt-1">高雄市新興區民生一路56號</p>
+                <h3 className="text-lg truncate">{storeName}</h3>
+                <p className="text-gray-700 mt-1">{address}</p>
               </div>
             </div>
             <div className="w-full flex flex-col justify-center items-start">
               <h3 className="text-lg">本次遊戲時間</h3>
-              <p className="mt-1">2023/10/2 14:00 - 20:00</p>
+              <p className="mt-1">
+                {date}
+                <span className="ml-2">
+                  {startTime}-{endTime}
+                </span>
+              </p>
             </div>
           </div>
           <div className="flex mdg:flex-col justify-between gap-[10%] mt-8">
