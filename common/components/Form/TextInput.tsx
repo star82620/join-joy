@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInputProps } from "./data";
+import { read } from "fs";
 
 export default function TextInput({
   type,
@@ -10,6 +11,7 @@ export default function TextInput({
   placeholder,
   required,
   disabled,
+  readOnly,
   pattern,
   errorMsg,
   isError,
@@ -27,6 +29,7 @@ export default function TextInput({
         placeholder={placeholder}
         required={required}
         disabled={disabled}
+        readOnly={readOnly}
       />
       {isError && (
         <p className="text-danger mt-2 md:mt-1 text-sm md:text-xs">

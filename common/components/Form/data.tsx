@@ -56,12 +56,13 @@ export type IsInputErrorsType = Record<string, boolean>;
 export type TextInputProps = {
   type: "text" | "email" | "number";
   inputName: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   id?: string;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
+  readOnly?: boolean;
   pattern?: RegExp;
   errorMsg?: string;
   isError?: boolean;
