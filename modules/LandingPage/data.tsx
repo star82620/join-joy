@@ -1,9 +1,14 @@
 import { StoreDataType } from "@/constants/types/storeDataType";
 import { CommentDataType } from "@/constants/types/commentDataType";
 import { GroupDataType } from "@/constants/types/groupDataType";
-import { AuthDataType, CitiesDataType } from "@/constants/globalTypes";
+import {
+  AuthDataType,
+  CitiesDataItemType,
+  CitiesDataType,
+} from "@/constants/globalTypes";
 import { TabType } from "@/common/components/FileWrapper/data";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
+import { ReactNode } from "react";
 
 // page
 export type DefaultDataContextType = {
@@ -12,7 +17,9 @@ export type DefaultDataContextType = {
   nearbyGroupsData: GroupDataType[];
   remainingGroupsData: GroupDataType[];
   preferenceData: GroupDataType[];
+  newestData: GroupDataType[];
   nearbyStoresData: StoreDataType[];
+  nearbyCity: CitiesDataItemType;
 };
 
 export type HomeProps = DefaultDataContextType;
@@ -22,6 +29,7 @@ export type CardsSectionProps = {
   layout: "swipe" | "block";
   cardCategory: "group" | "store";
   title: string;
+  subTitle?: string;
   moreHref: string;
   cardsData: GroupDataType[] | StoreDataType[];
 };
@@ -34,7 +42,9 @@ export type CommentCardProps = {
 // ----data----
 
 // page default data
-export const defaultCitiesData: CitiesDataType = [{ Id: 0, CityName: "" }];
+export const defaultCityData: CitiesDataItemType = { Id: 0, CityName: "" };
+
+export const defaultCitiesData: CitiesDataType = [defaultCityData];
 
 export const defaultCommentsData: CommentDataType[] = [
   {

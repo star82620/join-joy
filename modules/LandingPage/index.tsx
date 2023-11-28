@@ -9,12 +9,17 @@ import { GetDataContext } from "@/pages";
 export default function LandingPage() {
   const getDataContext = useContext(GetDataContext);
   const {
+    newestData,
     commentsData,
     remainingGroupsData,
     nearbyGroupsData,
     preferenceData,
     nearbyStoresData,
+    nearbyCity,
   } = getDataContext;
+
+  if (!nearbyCity) return null;
+  const nearbyCityName = nearbyCity?.CityName;
 
   return (
     <section className="bg-contain bg-no-repeat bg-landing-banner-bg md:bg-landing-banner-bg-md md:bg-[center_top_-54px]">
@@ -46,6 +51,13 @@ export default function LandingPage() {
       >
         <div className="flex flex-col gap-[96px] md:gap-6 bg-brown-dark">
           <CardsSection
+            title="最新建立的揪團"
+            cardCategory="group"
+            cardsData={newestData}
+            moreHref="/search"
+            layout="swipe"
+          />
+          <CardsSection
             title="就差你一個成團"
             cardCategory="group"
             cardsData={remainingGroupsData}
@@ -53,7 +65,8 @@ export default function LandingPage() {
             layout="swipe"
           />
           <CardsSection
-            title="你 附近 的揪團"
+            title="你附近的揪團"
+            subTitle={nearbyCity.CityName}
             cardCategory="group"
             cardsData={nearbyGroupsData}
             moreHref="/search"
@@ -71,7 +84,8 @@ export default function LandingPage() {
       <div className="pt-[124px] md:pt-6">
         <div className="">
           <CardsSection
-            title="你 附近 的店家"
+            title="你附近的店家"
+            subTitle={nearbyCity.CityName}
             cardCategory="store"
             cardsData={nearbyStoresData}
             moreHref="/search"

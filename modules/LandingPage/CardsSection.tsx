@@ -14,6 +14,7 @@ export default function CardsSection({
   layout,
   cardCategory,
   title,
+  subTitle,
   moreHref,
   cardsData,
 }: CardsSectionProps) {
@@ -30,7 +31,7 @@ export default function CardsSection({
     ? "min-w-[376px] max-w-[376px]"
     : "max-w-[280px] min-w-[280px]";
 
-  const storeCardStyle = "h-[360px]";
+  const storeCardStyle = "min-h-[320px]";
 
   const groupCardStyle = !isSwipe
     ? "md:max-w-full "
@@ -50,7 +51,10 @@ export default function CardsSection({
       <div
         className={`container flex justify-between items-center font-semibold mb-10 md:mb-6 ${titleColor}`}
       >
-        <h2 className={`text-3xl md:text-xl ${titleStyle}`}>{title}</h2>
+        <div className="flex items-end gap-3">
+          <h2 className={`text-3xl md:text-xl ${titleStyle}`}>{title}</h2>
+          <div className="border-l-2 pl-2">{subTitle}</div>
+        </div>
         {isSwipe && (
           <div className="flex items-center gap-8">
             <Link href={moreHref}>查看全部</Link>
