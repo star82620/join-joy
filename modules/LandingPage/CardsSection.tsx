@@ -15,7 +15,7 @@ export default function CardsSection({
   cardCategory,
   title,
   subTitle,
-  moreHref,
+  handleSeeMore,
   cardsData,
 }: CardsSectionProps) {
   const isStore = cardCategory === "store";
@@ -57,7 +57,9 @@ export default function CardsSection({
         </div>
         {isSwipe && (
           <div className="flex items-center gap-8">
-            <Link href={moreHref}>查看全部</Link>
+            <button type="button" onClick={handleSeeMore}>
+              查看全部
+            </button>
             <div className="flex gap-4">
               <button type="button" className={arrowBtnStyle}>
                 <Image
@@ -101,6 +103,7 @@ export default function CardsSection({
             type="button"
             appearance="brown"
             className="!px-[72px]"
+            onClick={handleSeeMore}
             rounded
           >
             查看全部
