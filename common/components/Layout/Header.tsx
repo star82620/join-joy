@@ -9,7 +9,7 @@ import { logoSet } from "@/constants/logoSet";
 import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 import { useAuth } from "@/common/hooks/useAuth";
 import TopSearchBar from "./TopSearchBar";
-import CustomHead from "../CustomHead";
+import ProfileImg from "../ProfileImg";
 
 export default function Header({ pageCategory }: HeaderProps) {
   const router = useRouter();
@@ -31,12 +31,14 @@ export default function Header({ pageCategory }: HeaderProps) {
   const logoAlt = logoSet.header.alt;
 
   const { authData, isLogin } = useAuth();
+  if (!authData) return null;
+  const photo = authData?.photo;
+  const nickName = authData?.nickName;
 
   const isSearchPage = pageCategory === "search-result";
 
   return (
     <header className={headerStyle}>
-      <CustomHead pageCategory={pageCategory} />
       <div className="container flex justify-between items-center py-2">
         <Link href="/">
           <Image
@@ -67,18 +69,28 @@ export default function Header({ pageCategory }: HeaderProps) {
           <div className="flex flex-col">
             <Button
               type="button"
-              appearance="white"
+              appearance="yellow-tint"
               onClick={() => setToggleNavBar(!toggleNavBar)}
               className="w-fit"
             >
               <div className="flex items-center gap-3">
-                <Image
-                  src={globalIcons["header-user"].src}
-                  alt={globalIcons["header-user"].alt}
-                  widthProp="w-6"
-                  heightProp="h-6"
-                />
-                <div className="w-0.5 h-6 bg-gray-950"></div>
+                <div className="md:hidden">
+                  {isLogin ? (
+                    <ProfileImg
+                      src={photo}
+                      alt={nickName}
+                      sizeStyle="w-6 h-6"
+                    />
+                  ) : (
+                    <Image
+                      src={globalIcons["header-user"].src}
+                      alt={globalIcons["header-user"].alt}
+                      widthProp="w-6"
+                      heightProp="h-6"
+                    />
+                  )}
+                </div>
+                <div className="w-0.5 h-6 bg-gray-950 md:hidden"></div>
                 <Image
                   src={globalIcons["header-menu"].src}
                   alt={globalIcons["header-menu"].alt}
