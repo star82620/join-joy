@@ -31,7 +31,7 @@ export default function CardsSection({
     ? "min-w-[376px] max-w-[376px]"
     : "max-w-[280px] min-w-[280px]";
 
-  const storeCardStyle = "h-[360px]";
+  const storeCardStyle = "min-h-[320px]";
 
   const groupCardStyle = !isSwipe
     ? "md:max-w-full "

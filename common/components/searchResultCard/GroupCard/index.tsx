@@ -56,9 +56,9 @@ export default function GroupCard({ data }: GroupCardProps) {
         <div className="grow">
           <p className="font-bold aheadIcon before:w-4 before:h-4 mt-2.5 md:mt-2 before:bg-group-card-time">
             <span>{date}</span>
-            <span className="whitespace-nowrap">{`${startTime} - ${endTime}`}</span>
+            <span className="whitespace-nowrap ml-2">{`${startTime} - ${endTime}`}</span>
           </p>
-          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-card-location mt-2">
+          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-card-location mt-2 truncate">
             {groupLocation}
           </p>
           <div className="flex justify-start items-center gap-1 mt-3 md:mt-2 text-sm text-gray-500 font-semibold whitespace-nowrap overflow-scroll scrollbar-none">

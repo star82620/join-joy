@@ -20,7 +20,8 @@ export default function CommentCard({ data }: CommentCardProps) {
   const storeHref = `/store/${storeId}`;
 
   return (
-    <Link href={storeHref} className="no-underline">
+    <div>
+      {/* <Link href={storeHref} className="no-underline"> */}
       <div
         className={`snap-start snap-normal scroll-ml-12 md:scroll-ml-6 sm:scroll-ml-3 ${cardStyle}`}
       >
@@ -56,6 +57,7 @@ export default function CommentCard({ data }: CommentCardProps) {
           </div>
         </div>
       </div>
-    </Link>
+      {/* </Link> */}
+    </div>
   );
 }
