@@ -57,8 +57,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       return city.Id === nearbyCityId;
     });
 
-    console.log("city", nearbyCity, citiesData);
-
     // 取得最新評價
     const commentsApiParams: apiParamsType = {
       apiPath: apiPaths["get-newest-rating"],

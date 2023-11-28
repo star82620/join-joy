@@ -11,7 +11,7 @@ export default function SearchTab() {
   const { activeTab, setActiveTab } = searchContext;
 
   return (
-    <div className="flex items-center gap-0.5 p-1 bg-yellow-tint font-semibold leading-6 whitespace-nowrap flex-shrink-0">
+    <div className="flex gap-0.5 p-1 bg-yellow-tint font-semibold leading-6 whitespace-nowrap flex-shrink-0">
       {searchTabs.map((tab) => {
         const { tabName, tabText, img } = tab;
         const isActive = activeTab === tabName;

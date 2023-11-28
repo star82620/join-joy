@@ -183,3 +183,9 @@ a#scroll-btn:before {
 .progressBar {
   background: linear-gradient(transparent 50%, #787878 50%);
 }
+
+.md-min-w-80 {
+  @media (max-width: 768px) {
+    min-width: 300px;
+  }
+}

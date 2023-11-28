@@ -5,6 +5,7 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./modules/**/*.{js,ts,jsx,tsx,mdx}",
     "./common/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/tailwind-datepicker-react/dist/**/*.js",
   ],
   theme: {
     screens: {
@@ -74,6 +75,7 @@ const config: Config = {
     extend: {
       boxShadow: {
         btn: "2px 2px 0 0 #504F4E",
+        "btn-hover": "4px 4px 0 0 #504F4E",
         window: "3px 2px 0 0 #504F4E",
         "profile-img":
           "2px 2px 4px 0px rgba(0, 0, 0, 0.08), 0px 0px 6px 0px rgba(0, 0, 0, 0.02)",
@@ -156,6 +158,7 @@ const config: Config = {
         "18": "72px",
         "20": "80px",
         "22": "88px",
+        "80": "320px",
       },
       height: {
         "14": "56px",
@@ -164,6 +167,7 @@ const config: Config = {
         "18": "72px",
         "20": "80px",
         "22": "88px",
+        "80": "320px",
       },
       padding: {
         "14.5": "56px",
