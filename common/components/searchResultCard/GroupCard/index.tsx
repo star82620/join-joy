@@ -44,7 +44,7 @@ export default function GroupCard({ data }: GroupCardProps) {
 
   return (
     <Link href={`/group/${groupId}`} className="no-underline">
-      <div className="w-full h-full flex flex-col justify-between bg-yellow-tint shadow-btn rounded-md border-2 px-3 py-4 flex-shrink-0">
+      <div className="w-full h-full flex flex-col justify-between bg-yellow-tint shadow-btn rounded-md border-2 px-3 py-4 flex-shrink-0 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-btn-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
         <div className="flex justify-between">
           <h3 className="grow text-lg whitespace-nowrap text-ellipsis overflow-hidden">
             {groupName}
