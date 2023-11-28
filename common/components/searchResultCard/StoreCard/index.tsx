@@ -31,7 +31,7 @@ export default function StoreCard({ data }: StoreCardProps) {
   const openHours = `${openTime}-${closeTime}`;
 
   return (
-    <div className="h-full rounded-md border-2 flex-shrink-0 ">
+    <div className="h-full rounded-md border-2 flex-shrink-0 bg-yellow-tint">
       {/* <Link href={`/store/${storeId}`} className="no-underline"> */}
       <div
         className="rounded-t-md w-full h-[200px] 

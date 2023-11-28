@@ -33,14 +33,30 @@ export default function ResultsSection({}) {
   // 分頁設定
   const pageBtnStyle = "text-gray-950 font-semibold";
   const perPage = isGroup ? 16 : 9;
-  const pageNum = Math.ceil(totalCount / perPage);
+  const totalPageNum = Math.ceil(totalCount / perPage); //總頁數
 
-  const setTurnPage: MouseEventHandler<HTMLButtonElement> = (e) => {
-    const pageNum = Number(e.currentTarget.value);
+  const isPrevDisabled = searchKeys.page === 1;
+  const isNextDisabled = searchKeys.page === totalPageNum;
+
+  const setPrevPage = () => {
+    const pageNum = searchKeys.page - 1;
+    if (pageNum === 0) return;
     setSearchKeys({ ...searchKeys, page: pageNum });
   };
 
-  // // 搜尋
+  const setNextPage = () => {
+    if (searchKeys.page === totalPageNum) return;
+    const pageNum = searchKeys.page + 1;
+    setSearchKeys({ ...searchKeys, page: pageNum });
+  };
+
+  const setTurnPage: MouseEventHandler<HTMLButtonElement> = (e) => {
+    const pageNum = Number(e.currentTarget.value);
+    console.log(pageNum);
+    setSearchKeys({ ...searchKeys, page: pageNum });
+  };
+
+  // 搜尋
   useEffect(() => {
     getSearchResult();
   }, [
@@ -51,6 +67,7 @@ export default function ResultsSection({}) {
     searchKeys.joinppl,
     searchKeys.storeFilter,
     searchKeys.storeTag,
+    searchKeys.page,
   ]);
 
   return (
@@ -82,8 +99,9 @@ export default function ResultsSection({}) {
           type="button"
           appearance="page-selector-arrow"
           rounded
-          isDisabled
+          isDisabled={isPrevDisabled}
           className="!p-1"
+          onClick={setPrevPage}
         >
           <span className={pageBtnStyle}>
             <Image
@@ -94,10 +112,10 @@ export default function ResultsSection({}) {
             />
           </span>
         </Button>
-        {[...Array(pageNum)].map((_, index) => {
+        {[...Array(totalPageNum)].map((_, index) => {
           const num = (index + 1).toString();
           const isActivePage = searchKeys.page === index + 1;
-          const btnAppearance = isActivePage ? "orange" : "white-gray";
+          const btnAppearance = isActivePage ? "orange" : "page-selector-arrow";
 
           return (
             <Button
@@ -119,6 +137,8 @@ export default function ResultsSection({}) {
           appearance="page-selector-arrow"
           rounded
           className="!p-1"
+          onClick={setNextPage}
+          isDisabled={isNextDisabled}
         >
           <span className={pageBtnStyle}>
             <Image

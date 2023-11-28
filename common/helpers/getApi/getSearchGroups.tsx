@@ -35,6 +35,7 @@ export async function getSearchGroups(
   haveCount?: "haveCount"
 ) {
   if (searchKey) {
+    console.log("search", searchKey);
     searchGroupsApiParams.data = searchKey;
   }
 

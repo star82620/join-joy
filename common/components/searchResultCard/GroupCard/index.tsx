@@ -23,20 +23,24 @@ export default function GroupCard({ data }: GroupCardProps) {
     members,
   } = data;
 
+  const filteredMembers = members.filter((member) => {
+    return member.status !== "pending";
+  });
+
   const isStore = store !== null;
   const groupLocation = isStore ? store.storeName : place;
 
   const currentMembersNum =
-    members.reduce((counts: number, member) => {
+    filteredMembers.reduce((counts: number, member) => {
       counts = counts + member.initNum;
       return counts;
     }, 0) + leader.initNum;
 
-  const plusNum = currentMembersNum - (members.length + 1);
+  const plusNum = currentMembersNum - (filteredMembers.length + 1);
 
   const hasExtraNumbers = plusNum > 0;
 
-  const filteredMembers = members.filter((_, index) => {
+  const middleMembers = filteredMembers.filter((_, index) => {
     return index <= 2;
   });
 
@@ -76,7 +80,7 @@ export default function GroupCard({ data }: GroupCardProps) {
             })}
           </div>
         </div>
-        <div className="flex justify-between items-center border-t-2 border-gray-500 mt-2 pt-2 md:pt-1 ">
+        <div className="flex justify-between items-end border-t-2 border-gray-500 mt-2 pt-2 md:pt-1 ">
           <p className="text-sm font-bold ml-1 aheadIcon before:w-4 before:h-4 before:bg-group-card-member">
             {currentMembersNum}/{totalMemberNum}
           </p>
@@ -94,7 +98,7 @@ export default function GroupCard({ data }: GroupCardProps) {
                 rounded
               />
             </div>
-            {filteredMembers.map((member, index, ary) => {
+            {middleMembers.map((member, index, ary) => {
               if (index > 3) return;
               const zIndex = `z-${ary.length - index}`;
               const { profileImg, userId, userName } = member;

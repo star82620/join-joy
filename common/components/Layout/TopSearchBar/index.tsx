@@ -5,6 +5,7 @@ import SearchTab from "./SearchTab";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import { DisplayCategoryType } from "./data";
 import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
+import DatePickerInput from "../../DatePickerInput";
 
 export default function TopSearchBar() {
   const {
@@ -17,7 +18,7 @@ export default function TopSearchBar() {
   } = useSearch();
 
   const searchContext = useContext(SearchContext);
-  const { activeTab, setActiveTab, searchKeys } = searchContext;
+  const { activeTab, setActiveTab, searchKeys, setSearchKeys } = searchContext;
 
   const keywordPlaceholderText = isGroup
     ? "輸入你想找的遊戲"
@@ -41,6 +42,12 @@ export default function TopSearchBar() {
   // 所有城市資料
   const allCitiesData = useGetAllCitiesData();
 
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    setSearchKeys({ ...searchKeys, startDate: date });
+  }, [date]);
+
   return (
     <div className="py-4 md:px-4 md:py-3 bg-brown-dark">
       <form onSubmit={submitSearch}>
@@ -54,7 +61,7 @@ export default function TopSearchBar() {
           </div>
         )} */}
         {isDefault && (
-          <div className="container flex items-center md:flex-col gap-7 md:gap-4">
+          <div className="container flex md:flex-col gap-7 md:gap-4">
             <SearchTab />
             <div className="w-full flex md:flex-col gap-7 md:gap-4 md:mt-1">
               <select
@@ -70,18 +77,7 @@ export default function TopSearchBar() {
                   </option>
                 ))}
               </select>
-              {isGroup && (
-                <select
-                  className="inputStyle !mt-0"
-                  name="startDate"
-                  value={searchKeys.startDate}
-                  onChange={setSelectValue}
-                >
-                  <option>請選擇日期</option>
-                  <option value="2023-11-31">2023/11/31</option>
-                  <option value="2023-12-01">2023/12/01</option>
-                </select>
-              )}
+              {isGroup && <DatePickerInput value={date} setValue={setDate} />}
               <input
                 type="text"
                 className="inputStyle !mt-0"
