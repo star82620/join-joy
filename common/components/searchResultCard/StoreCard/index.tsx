@@ -30,8 +30,6 @@ export default function StoreCard({ data }: StoreCardProps) {
 
   const openHours = `${openTime}-${closeTime}`;
 
-  console.log("openHours", data);
-
   return (
     <div className="h-full rounded-md border-2 flex-shrink-0 ">
       {/* <Link href={`/store/${storeId}`} className="no-underline"> */}
