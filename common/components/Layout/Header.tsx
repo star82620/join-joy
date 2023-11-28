@@ -51,9 +51,9 @@ export default function Header({ pageCategory }: HeaderProps) {
         <section className="flex items-center gap-6 relative">
           {!isStoreButtonHidden && (
             <div className="md:hidden font-semibold">
-              <Link href="/" className="no-underline">
+              {/* <Link href="/" className="no-underline">
                 在 揪遊 上成立店家
-              </Link>
+              </Link> */}
             </div>
           )}
           {!isGroupButtonHidden && (
