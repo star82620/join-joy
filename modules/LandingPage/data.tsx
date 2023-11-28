@@ -8,7 +8,7 @@ import {
 } from "@/constants/globalTypes";
 import { TabType } from "@/common/components/FileWrapper/data";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
-import { ReactNode } from "react";
+import { MouseEventHandler, ReactNode } from "react";
 
 // page
 export type DefaultDataContextType = {
@@ -30,7 +30,7 @@ export type CardsSectionProps = {
   cardCategory: "group" | "store";
   title: string;
   subTitle?: string;
-  moreHref: string;
+  handleSeeMore?: MouseEventHandler<HTMLButtonElement>;
   cardsData: GroupDataType[] | StoreDataType[];
 };
 

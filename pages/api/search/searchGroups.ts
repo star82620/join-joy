@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 
@@ -25,37 +26,25 @@ export const defaultGroupsSearchKey: GroupsSearchKeyType = {
   pageSize: 0, //一頁多少筆
 };
 
-const searchGroupsApiParams: apiParamsType = {
-  apiPath: apiPaths["search-group"],
-  method: "POST",
-};
-
-export async function getSearchGroups(
-  searchKey: GroupsSearchKeyType,
-  haveCount?: "haveCount"
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
-  if (searchKey) {
-    console.log("search", searchKey);
-    searchGroupsApiParams.data = searchKey;
-  }
-
   try {
-    const res = await fetchApi(searchGroupsApiParams);
+    const data = req.body;
 
-    if (!res.status) {
-      return res.message;
-    }
+    const searchGroupsApiParams: apiParamsType = {
+      apiPath: apiPaths["search-group"],
+      method: "POST",
+      data: JSON.stringify(data),
+    };
 
-    if (haveCount) {
-      const data = res?.data;
-      return data;
-    }
+    const result = await fetchApi(searchGroupsApiParams);
 
-    const data = res?.data.finalGroups ?? [];
-
-    return data;
+    res.status(200).json(result);
   } catch (error) {
-    console.log("error", error);
-    throw error;
+    console.error("API Error:", error);
+
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }
