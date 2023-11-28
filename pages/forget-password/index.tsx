@@ -1,4 +1,4 @@
-import DatePickerInput from "@/common/components/DatePickerInput";
+import DatePickerInput from "@/common/components/Form/DatePickerInput";
 import Loading from "@/common/components/Loading";
 import LottieAnimation from "@/common/components/Loading";
 import React from "react";

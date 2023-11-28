@@ -17,7 +17,7 @@ import { GetDataContext } from "@/pages";
 
 import { searchTabs } from "@/constants/searchTabs";
 import useSearch from "@/common/hooks/useSearch";
-import DatePickerInput from "@/common/components/DatePickerInput";
+import DatePickerInput from "@/common/components/Form/DatePickerInput";
 
 export default function SearchBar() {
   const {

@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import Button from "../../GeneralButton";
 import useSearch from "@/common/hooks/useSearch";
+import Button from "../../GeneralButton";
+import Image from "../../FillImage";
 import SearchTab from "./SearchTab";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import { DisplayCategoryType } from "./data";
 import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
-import DatePickerInput from "../../DatePickerInput";
+import DatePickerInput from "../../Form/DatePickerInput";
+import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 
 export default function TopSearchBar() {
   const {
@@ -87,7 +89,15 @@ export default function TopSearchBar() {
               />
             </div>
             <Button type="submit" appearance="black" rounded>
-              <span className="whitespace-nowrap">{submitBtnText}</span>
+              <div className="flex justify-center items-center gap-2.5 whitespace-nowrap">
+                <Image
+                  src={globalIcons["search-white"].src}
+                  alt={globalIcons["search-white"].alt}
+                  widthProp="w-6 md:w-5"
+                  heightProp="h-6 md:h-5"
+                />
+                <span className="whitespace-nowrap">{submitBtnText}</span>
+              </div>
             </Button>
           </div>
         )}

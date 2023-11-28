@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import Datepicker from "tailwind-datepicker-react";
-
+import FillImage from "../../FillImage";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { DatePickerInputProps, IOptions } from "./data";
-import FillImage from "../FillImage";
+
+const minDate = () => {
+  // 最小可選日期為今天
+  const today = new Date();
+  const fiveDaysAgo = new Date();
+  const minDate = fiveDaysAgo.setDate(today.getDate() - 1);
+
+  return new Date(minDate);
+};
 
 const options: IOptions = {
   // title: "Demo Title",
@@ -12,7 +20,7 @@ const options: IOptions = {
   clearBtn: false,
   // clearBtnText: "Clear",
   maxDate: new Date("2030-01-01"),
-  minDate: new Date("2023-12-01"),
+  minDate: minDate(),
   theme: {
     background: "bg-white dark:bg-gray-800",
     todayBtn: "bg-yellow-dark text-gray-500 border border-gray-500",
@@ -44,7 +52,7 @@ const options: IOptions = {
     ),
   },
   datepickerClassNames: "top-15",
-  defaultDate: new Date("2023-12-01"),
+  // defaultDate: new Date("2023-12-01"),
   language: "en",
   disabledDates: [],
   weekDays: ["一", "二", "三", "四", "五", "六", "日"],
