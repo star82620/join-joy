@@ -28,7 +28,7 @@ export default function CardsSection({
     : "overflow-auto snap-x scrollbar-none";
 
   const widthClass = isStore
-    ? "min-w-[376px] max-w-[376px]"
+    ? "max-w-[376px] min-w-[376px]"
     : "max-w-[280px] min-w-[280px]";
 
   const storeCardStyle = "min-h-[320px]";
@@ -81,13 +81,13 @@ export default function CardsSection({
       </div>
 
       {/* 卡片列表 */}
-      <div className={`container flex gap-4 md:gap-3  ${listStyle}`}>
+      <div className={`container flex gap-4 md:gap-3 ${listStyle}`}>
         {cardsData.map((item) => {
           const isStore = "storeId" in item;
           return (
             <div
               key={isStore ? item.storeId : item.groupId}
-              className={`w-full ${widthClass} ${cardStyle}`}
+              className={`w-full md-min-w-80 ${widthClass} ${cardStyle}`}
             >
               {isStore ? <StoreCard data={item} /> : <GroupCard data={item} />}
             </div>

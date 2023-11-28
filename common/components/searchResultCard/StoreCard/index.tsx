@@ -14,7 +14,8 @@ export default function StoreCard({ data }: StoreCardProps) {
     storeId,
     storeName,
     address,
-    openHours,
+    openTime,
+    closeTime,
     profileImg,
     cover,
     score,
@@ -27,8 +28,12 @@ export default function StoreCard({ data }: StoreCardProps) {
   const coverPhotoSrc = cover || defaultImages.storeCoverPhoto;
   const scoreNum = Math.floor(score * 10) / 10;
 
+  const openHours = `${openTime}-${closeTime}`;
+
+  console.log("openHours", data);
+
   return (
-    <div className="h-full rounded-md border-2 flex-shrink-0">
+    <div className="h-full rounded-md border-2 flex-shrink-0 ">
       {/* <Link href={`/store/${storeId}`} className="no-underline"> */}
       <div
         className="rounded-t-md w-full h-[200px] 
@@ -45,7 +50,7 @@ export default function StoreCard({ data }: StoreCardProps) {
             />
             <div className="w-full grow">
               <div className="flex justify-between items-center gap-3">
-                <h3 className="text-lg md:text-md">
+                <h3 className="text-lg md:text-md max-w-[200px] md:max-w-full">
                   <p className="truncate">{storeName}</p>
                 </h3>
                 <span className="flex gap-1 font-bold md:text-sm">
@@ -58,8 +63,10 @@ export default function StoreCard({ data }: StoreCardProps) {
                   />
                 </span>
               </div>
-              <div className="text-sm text-gray-500 mt-1.5 md:mt-1">
-                <p className="whitespace-nowrap overflow-hidden">{address}</p>
+              <div className="text-sm text-gray-500 mt-1.5 md:mt-1 max-w-[268px] md:max-w-full">
+                <p className="whitespace-nowrap overflow-hidden truncate">
+                  {address}
+                </p>
                 <p>{openHours}</p>
               </div>
             </div>

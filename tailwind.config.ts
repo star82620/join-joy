@@ -157,6 +157,7 @@ const config: Config = {
         "18": "72px",
         "20": "80px",
         "22": "88px",
+        "80": "320px",
       },
       height: {
         "14": "56px",
@@ -165,6 +166,7 @@ const config: Config = {
         "18": "72px",
         "20": "80px",
         "22": "88px",
+        "80": "320px",
       },
       padding: {
         "14.5": "56px",
