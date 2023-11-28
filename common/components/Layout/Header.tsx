@@ -9,6 +9,7 @@ import { logoSet } from "@/constants/logoSet";
 import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 import { useAuth } from "@/common/hooks/useAuth";
 import TopSearchBar from "./TopSearchBar";
+import CustomHead from "../CustomHead";
 
 export default function Header({ pageCategory }: HeaderProps) {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Header({ pageCategory }: HeaderProps) {
   let isGroupButtonHidden = hiddenGroupBtnPages.includes(pageCategory);
   let isStoreButtonHidden = hiddenStoreBtnPages.includes(pageCategory);
 
-  let isLandingPage = pageCategory === "landingpage";
+  let isLandingPage = pageCategory === "landing-page";
 
   const pushToCreateGroup: MouseEventHandler<HTMLButtonElement> = () => {
     router.push("/create-group");
@@ -31,10 +32,11 @@ export default function Header({ pageCategory }: HeaderProps) {
 
   const { authData, isLogin } = useAuth();
 
-  const isSearchPage = pageCategory === "searchresult";
+  const isSearchPage = pageCategory === "search-result";
 
   return (
     <header className={headerStyle}>
+      <CustomHead pageCategory={pageCategory} />
       <div className="container flex justify-between items-center py-2">
         <Link href="/">
           <Image

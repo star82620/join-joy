@@ -149,7 +149,7 @@ export default function Home({
 
   return (
     <>
-      <Layout pageCategory="landingpage">
+      <Layout pageCategory="landing-page">
         <GetDataContext.Provider value={dataSet}>
           <LandingPage />
         </GetDataContext.Provider>

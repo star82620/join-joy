@@ -8,7 +8,7 @@ export default function Layout({
   children,
   mainClassName,
 }: LayoutProps) {
-  const isSearchPage = pageCategory === "searchresult";
+  const isSearchPage = pageCategory === "search-result";
   const bgColor = isSearchPage ? "bg-yellow-dark" : "bg-yellow-tint";
   return (
     <div className="min-h-screen flex flex-col">
