@@ -17,12 +17,14 @@ import {
   DefaultDataContextType,
   HomeProps,
   defaultCitiesData,
+  defaultCityData,
   defaultCommentsData,
 } from "@/modules/LandingPage/data";
 import {
   defaultGroupsData,
   defaultStoresData,
 } from "@/constants/defaultSearchDate";
+import { CitiesDataItemType } from "@/constants/globalTypes";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,10 +34,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   let citiesData = [];
   let commentsData = [];
+  let nearbyCity = [];
   let nearbyGroupsData = [];
   let remainingGroupsData = [];
   let preferenceData = [];
   let nearbyStoresData = [];
+  let newestData = [];
 
   try {
     const nearbyCityId = 15;
@@ -47,6 +51,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
     const citiesRes = await fetchApi(citiesApiParams);
     citiesData = citiesRes?.data ?? [];
+
+    // 定位的城市
+    [nearbyCity] = citiesData.filter((city: CitiesDataItemType) => {
+      return city.Id === nearbyCityId;
+    });
+
+    console.log("city", nearbyCity, citiesData);
 
     // 取得最新評價
     const commentsApiParams: apiParamsType = {
@@ -93,6 +104,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     remainingGroupsData = await getSearchGroups(searchRemaining);
 
+    // group 最新揪團
+    const searchNewest = {
+      ...defaultGroupsSearchKey,
+      groupFilter: 2,
+      page: 1,
+      pageSize: 8,
+    };
+
+    newestData = await getSearchGroups(searchNewest);
+
     // 你附近的店家（IP 先定高雄）
     const searchLocationStores = {
       ...defaultStoresSearchKey,
@@ -108,12 +129,14 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      citiesData: citiesData,
-      commentsData: commentsData,
-      nearbyGroupsData: nearbyGroupsData,
-      remainingGroupsData: remainingGroupsData,
-      preferenceData: preferenceData,
-      nearbyStoresData: nearbyStoresData,
+      citiesData,
+      commentsData,
+      nearbyGroupsData,
+      remainingGroupsData,
+      preferenceData,
+      nearbyStoresData,
+      newestData,
+      nearbyCity,
     },
   };
 }
@@ -125,6 +148,8 @@ export const defaultDataContext = {
   remainingGroupsData: defaultGroupsData,
   preferenceData: defaultGroupsData,
   nearbyStoresData: defaultStoresData,
+  newestData: defaultGroupsData,
+  nearbyCity: defaultCityData,
 };
 
 export const GetDataContext =
@@ -137,14 +162,18 @@ export default function Home({
   remainingGroupsData,
   preferenceData,
   nearbyStoresData,
+  newestData,
+  nearbyCity,
 }: HomeProps) {
   const dataSet = {
-    citiesData: citiesData,
-    commentsData: commentsData,
-    nearbyGroupsData: nearbyGroupsData,
-    remainingGroupsData: remainingGroupsData,
-    preferenceData: preferenceData,
-    nearbyStoresData: nearbyStoresData,
+    citiesData,
+    commentsData,
+    nearbyGroupsData,
+    remainingGroupsData,
+    preferenceData,
+    nearbyStoresData,
+    newestData,
+    nearbyCity,
   };
 
   return (

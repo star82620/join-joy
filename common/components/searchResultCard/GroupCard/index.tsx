@@ -56,9 +56,9 @@ export default function GroupCard({ data }: GroupCardProps) {
         <div className="grow">
           <p className="font-bold aheadIcon before:w-4 before:h-4 mt-2.5 md:mt-2 before:bg-group-card-time">
             <span>{date}</span>
-            <span className="whitespace-nowrap">{`${startTime} - ${endTime}`}</span>
+            <span className="whitespace-nowrap ml-2">{`${startTime} - ${endTime}`}</span>
           </p>
-          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-card-location mt-2">
+          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-card-location mt-2 truncate">
             {groupLocation}
           </p>
           <div className="flex justify-start items-center gap-1 mt-3 md:mt-2 text-sm text-gray-500 font-semibold whitespace-nowrap overflow-scroll scrollbar-none">
@@ -84,7 +84,7 @@ export default function GroupCard({ data }: GroupCardProps) {
           <div className="flex relative">
             <div
               key={leader.userId}
-              className="rounded-full bg-white shadow-profile-img -ml-2 z-10"
+              className="rounded-full bg-white shadow-profile-img -ml-2 z-10 border border-gray-50"
             >
               <Image
                 src={leaderProfileImgSrc}
@@ -102,7 +102,7 @@ export default function GroupCard({ data }: GroupCardProps) {
               return (
                 <div
                   key={userId}
-                  className={`rounded-full bg-white shadow-profile-img -ml-2 ${zIndex}`}
+                  className={`rounded-full bg-white border border-gray-50 shadow-profile-img -ml-2 ${zIndex}`}
                 >
                   <Image
                     src={profileImgSrc}
