@@ -84,7 +84,7 @@ export default function GroupCard({ data }: GroupCardProps) {
           <div className="flex relative">
             <div
               key={leader.userId}
-              className="rounded-full bg-white shadow-profile-img -ml-2 z-10"
+              className="rounded-full bg-white shadow-profile-img -ml-2 z-10 border border-gray-50"
             >
               <Image
                 src={leaderProfileImgSrc}
@@ -102,7 +102,7 @@ export default function GroupCard({ data }: GroupCardProps) {
               return (
                 <div
                   key={userId}
-                  className={`rounded-full bg-white shadow-profile-img -ml-2 ${zIndex}`}
+                  className={`rounded-full bg-white border border-gray-50 shadow-profile-img -ml-2 ${zIndex}`}
                 >
                   <Image
                     src={profileImgSrc}

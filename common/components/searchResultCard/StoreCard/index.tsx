@@ -35,7 +35,7 @@ export default function StoreCard({ data }: StoreCardProps) {
           bg-no-repeat bg-center bg-cover"
         style={{ backgroundImage: `url(${coverPhotoSrc})` }}
       />
-      <div className="px-5 pt-2 pb-4 md:px-4 md:pb-3">
+      <div className="px-5 pt-3 pb-4 md:px-4 md:pb-3">
         <div>
           <div className="w-full flex justify-start gap-4">
             <ProfileImg
@@ -45,7 +45,9 @@ export default function StoreCard({ data }: StoreCardProps) {
             />
             <div className="w-full grow">
               <div className="flex justify-between items-center gap-3">
-                <h3 className="text-lg md:text-md">{storeName}</h3>
+                <h3 className="text-lg md:text-md">
+                  <p className="truncate">{storeName}</p>
+                </h3>
                 <span className="flex gap-1 font-bold md:text-sm">
                   {scoreNum}
                   <Image
