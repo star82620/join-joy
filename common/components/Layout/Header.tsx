@@ -31,7 +31,7 @@ export default function Header({ pageCategory }: HeaderProps) {
   const logoAlt = logoSet.header.alt;
 
   const { authData, isLogin } = useAuth();
-  if (!authData) return null;
+  // if (!authData) return null;
   const photo = authData?.photo;
   const nickName = authData?.nickName;
 
