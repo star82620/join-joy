@@ -47,8 +47,16 @@ export default function ReserveInfo() {
     (member) => member.status !== "pending"
   );
 
+  const filteredMemberNum = filteredMemberData.reduce(
+    (counts: number, member) => {
+      counts = counts + member.initNum;
+      return counts;
+    },
+    0
+  );
+
   const pendingNum = filteredPendingData.length;
-  const memberNum = filteredMemberData.length;
+  const memberNum = filteredMemberNum;
 
   const isMemberFull = memberNum === totalMemberNum;
 
@@ -76,7 +84,7 @@ export default function ReserveInfo() {
     }
 
     postReserve().then((res) => {
-      // console.log(res);
+      alert("成功送出預約");
     });
   };
 
