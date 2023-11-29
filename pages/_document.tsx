@@ -3,10 +3,6 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html lang="zh-TW">
-      {/* <Head>
-        <script src="/images/loading/lottie.js"></script>
-        <script src="/images/loading/script.js"></script>
-      </Head> */}
       <Head />
 
       <link
