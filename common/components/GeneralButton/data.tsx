@@ -7,7 +7,7 @@ export type ButtonType = {
     | "yellow"
     | "yellow-dark"
     | "white"
-    | "white-gray"
+    | "yellow-tint"
     | "black"
     | "gray"
     | "brown"
@@ -48,21 +48,21 @@ export const dataSet = {
       "disabled:bg-gray-300  disabled:text-gray-500 disabled:border-gray-500 ",
     textColor: "text-gray-500",
   },
+  "yellow-tint": {
+    default: "bg-yellow-tint border-gray-950",
+    hover: "hover:bg-white hover:bg-gray-100",
+    active: "active:bg-white",
+    disabled:
+      "disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-400",
+    textColor: "text-gray-950",
+  },
   white: {
     default: "bg-white border-gray-950",
     hover: "hover:bg-gray-100",
     active: "active:bg-gray-200",
     disabled:
-      "disabled:bg-gray-300 disabled:border-gray-400 disabled:text-gray-400",
-    textColor: "text-gray-950",
-  },
-  "white-gray": {
-    default: "bg-white border-gray-500",
-    hover: "hover:bg-gray-100",
-    active: "active:bg-gray-200",
-    disabled:
       "disabled:bg-gray-300 disabled:border-gray-300 disabled:text-gray-400",
-    textColor: "text-gray-500",
+    textColor: "text-gray-950",
   },
   "page-selector-arrow": {
     default: "bg-white border-gray-200",
