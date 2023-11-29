@@ -10,6 +10,8 @@ import SelectInput from "@/common/components/Form/SelectInput";
 import TextArea from "@/common/components/Form/TextArea";
 import { useAuth } from "@/common/hooks/useAuth";
 import PreferenceBlock from "@/common/components/PreferenceBlock";
+import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
+import { useGetAllGameTypes } from "@/common/hooks/useGetAllGameType";
 
 const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
 const inputDescStyle = "text-sm md:text-xs text-gray-500";
@@ -20,24 +22,16 @@ export default function ProfileSetting() {
   const { authData } = useAuth();
   const profileImg = authData?.photo;
 
-  console.log("profileData", profileData);
-
   const [defaultData, setDefaultData] = useState({
     allCities: {},
     allGametypes: {},
   });
 
-  const getDefaultData = async () => {
-    const citiesData = await fetch("/api/global/getAllCities");
-    const gameTypesData = await fetch("/api/global/getAllCities");
-    return { allCities: citiesData, allGameTypes: gameTypesData };
-  };
+  console.log("defaultData", defaultData);
 
   // if (profileValues.description === null) {
   //   setProfileValues({ ...profileValues, description: "" });
   // }
-
-  console.log("2profileData", profileData);
 
   return (
     <section className="p-8 md:px-4">
@@ -117,8 +111,18 @@ export default function ProfileSetting() {
           <div>
             <h3 className={`${inputTitleStyle} mb-2 md:mb-1`}>喜好遊戲種類</h3>
             <p className={`${inputDescStyle} mb-4 md:mb-2`}>最多選擇3個</p>
-            <div>
-              <PreferenceBlock isActive={true}>策略遊戲</PreferenceBlock>
+            <div className="flex flex-wrap gap-3">
+              <div className="w-full">
+                <PreferenceBlock isActive={false}>不限定</PreferenceBlock>
+              </div>
+              <PreferenceBlock isActive={false}>派對遊戲</PreferenceBlock>
+              <PreferenceBlock isActive={false}>陣營遊戲</PreferenceBlock>
+              <PreferenceBlock isActive={false}>心機遊戲</PreferenceBlock>
+              <PreferenceBlock isActive={true}>卡牌遊戲</PreferenceBlock>
+              <PreferenceBlock isActive={true}>兒童遊戲</PreferenceBlock>
+              <PreferenceBlock isActive={false}>家庭遊戲</PreferenceBlock>
+              <PreferenceBlock isActive={true}>抽象遊戲</PreferenceBlock>
+              <PreferenceBlock isActive={false}>劇本殺</PreferenceBlock>
             </div>
           </div>
           <div>
