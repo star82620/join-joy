@@ -13,6 +13,7 @@ import TagItem from "./TagItem";
 import GameItem from "./GameItem";
 import { GameItemType } from "../data";
 import { useCheckMemberStatus } from "@/common/hooks/useCheckMemberStatus";
+import GroupStatusSign from "@/common/components/GroupStatusSign";
 
 export default function GroupInfo() {
   const router = useRouter();
@@ -38,6 +39,9 @@ export default function GroupInfo() {
 
   const isLeader = myMemberStatus === "leader";
   const isMember = myMemberStatus !== null;
+  const isPending = myMemberStatus === "pending";
+
+  const haveGames = games.length !== 0;
 
   const isPlace = place !== null;
 
@@ -113,10 +117,8 @@ export default function GroupInfo() {
   return (
     <section className="px-12 py-8 md:px-3 md:py-4">
       <div className="flex items-center gap-2">
-        <h1 className="text-3xl md:text-2xl">{groupName}</h1>
-        <span className="grow before:content-[''] before:w-2.5 before:h-2.5 before:rounded-full before:bg-green-light before:inline-block before:mr-1">
-          {groupStatusText}
-        </span>
+        <h1 className="text-3xl md:text-2xl mr-3">{groupName}</h1>
+        <GroupStatusSign category="group" status={groupStatus} />
         {isLeader && (
           <Button
             type="button"
@@ -156,6 +158,7 @@ export default function GroupInfo() {
           <li>
             <Title content="games" />
             <ul className="flex flex-col gap-4 md:gap-2">
+              {!haveGames && "無"}
               {games.map((game: GameItemType) => (
                 <GameItem key={game.gameId} game={game} />
               ))}
@@ -167,13 +170,17 @@ export default function GroupInfo() {
           <span className="whitespace-pre-wrap text-sm">{description}</span>
         </li>
       </ul>
-      <div className="flex gap-2 mt-3 flex-wrap">
+      <div className="flex gap-2 mt-10 flex-wrap text-gray-500 font-semibold">
         {tags.map((tag) => (
           <TagItem key={tag} tag={tag} />
         ))}
       </div>
       {!isFull && !isMember && <JoinForm />}
-      {isMember && <p>團主審核中，請耐心等待</p>}
+      {isPending && (
+        <p className="text-center mt-10 text-sm text-gray-500">
+          ❖ 團主審核中，請耐心等待
+        </p>
+      )}
     </section>
   );
 }
