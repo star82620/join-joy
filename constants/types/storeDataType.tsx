@@ -11,7 +11,8 @@ export type StoreDataType = {
   address: string;
   profileImg: string | null;
   cover: string | null;
-  openHours: string;
+  openTime: string;
+  closeTime: string;
   score: number;
   description: string;
   tags: StoreTagType[];

@@ -9,6 +9,7 @@ interface Props {
   children: ReactNode;
   target?: string;
   className?: string;
+  noUnderLine?: boolean;
 }
 
 export default function GeneralLink({
@@ -16,11 +17,14 @@ export default function GeneralLink({
   children,
   target,
   className,
+  noUnderLine,
 }: Props) {
+  const underline = noUnderLine ? "" : "underline";
+
   // 如果有 href 但沒有 target => 內部連結
   if (href && !target)
     return (
-      <Link className={clsx("underline", className)} href={href}>
+      <Link className={`cursor-pointer ${underline} ${className}`} href={href}>
         {children}
       </Link>
     );
@@ -29,7 +33,7 @@ export default function GeneralLink({
   if (href && target)
     return (
       <a
-        className={clsx("underline", className)}
+        className={`cursor-pointer ${underline} ${className}`}
         href={href}
         target={target}
         rel="noreferrer noopener"

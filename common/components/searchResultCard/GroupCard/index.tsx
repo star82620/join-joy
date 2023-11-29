@@ -23,20 +23,24 @@ export default function GroupCard({ data }: GroupCardProps) {
     members,
   } = data;
 
+  const filteredMembers = members.filter((member) => {
+    return member.status !== "pending";
+  });
+
   const isStore = store !== null;
   const groupLocation = isStore ? store.storeName : place;
 
   const currentMembersNum =
-    members.reduce((counts: number, member) => {
+    filteredMembers.reduce((counts: number, member) => {
       counts = counts + member.initNum;
       return counts;
     }, 0) + leader.initNum;
 
-  const plusNum = currentMembersNum - (members.length + 1);
+  const plusNum = currentMembersNum - (filteredMembers.length + 1);
 
   const hasExtraNumbers = plusNum > 0;
 
-  const filteredMembers = members.filter((_, index) => {
+  const middleMembers = filteredMembers.filter((_, index) => {
     return index <= 2;
   });
 
@@ -44,7 +48,7 @@ export default function GroupCard({ data }: GroupCardProps) {
 
   return (
     <Link href={`/group/${groupId}`} className="no-underline">
-      <div className="w-full h-full flex flex-col justify-between bg-yellow-tint shadow-btn rounded-md border-2 px-3 py-4 flex-shrink-0">
+      <div className="w-full h-full flex flex-col justify-between bg-yellow-tint shadow-btn rounded-md border-2 px-3 py-4 flex-shrink-0 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-btn-hover active:translate-x-0.5 active:translate-y-0.5 active:shadow-none">
         <div className="flex justify-between">
           <h3 className="grow text-lg whitespace-nowrap text-ellipsis overflow-hidden">
             {groupName}
@@ -56,9 +60,9 @@ export default function GroupCard({ data }: GroupCardProps) {
         <div className="grow">
           <p className="font-bold aheadIcon before:w-4 before:h-4 mt-2.5 md:mt-2 before:bg-group-card-time">
             <span>{date}</span>
-            <span className="whitespace-nowrap">{`${startTime} - ${endTime}`}</span>
+            <span className="whitespace-nowrap ml-2">{`${startTime} - ${endTime}`}</span>
           </p>
-          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-card-location mt-2">
+          <p className="font-bold aheadIcon before:w-4 before:h-4 before:bg-group-card-location mt-2 truncate">
             {groupLocation}
           </p>
           <div className="flex justify-start items-center gap-1 mt-3 md:mt-2 text-sm text-gray-500 font-semibold whitespace-nowrap overflow-scroll scrollbar-none">
@@ -76,7 +80,7 @@ export default function GroupCard({ data }: GroupCardProps) {
             })}
           </div>
         </div>
-        <div className="flex justify-between items-center border-t-2 border-gray-500 mt-2 pt-2 md:pt-1 ">
+        <div className="flex justify-between items-end border-t-2 border-gray-500 mt-2 pt-2 md:pt-1 ">
           <p className="text-sm font-bold ml-1 aheadIcon before:w-4 before:h-4 before:bg-group-card-member">
             {currentMembersNum}/{totalMemberNum}
           </p>
@@ -84,7 +88,7 @@ export default function GroupCard({ data }: GroupCardProps) {
           <div className="flex relative">
             <div
               key={leader.userId}
-              className="rounded-full bg-white shadow-profile-img -ml-2 z-10"
+              className="rounded-full bg-white shadow-profile-img -ml-2 z-10 border border-gray-50"
             >
               <Image
                 src={leaderProfileImgSrc}
@@ -94,7 +98,7 @@ export default function GroupCard({ data }: GroupCardProps) {
                 rounded
               />
             </div>
-            {filteredMembers.map((member, index, ary) => {
+            {middleMembers.map((member, index, ary) => {
               if (index > 3) return;
               const zIndex = `z-${ary.length - index}`;
               const { profileImg, userId, userName } = member;
@@ -102,7 +106,7 @@ export default function GroupCard({ data }: GroupCardProps) {
               return (
                 <div
                   key={userId}
-                  className={`rounded-full bg-white shadow-profile-img -ml-2 ${zIndex}`}
+                  className={`rounded-full bg-white border border-gray-50 shadow-profile-img -ml-2 ${zIndex}`}
                 >
                   <Image
                     src={profileImgSrc}

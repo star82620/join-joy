@@ -61,7 +61,10 @@ export default function useSearch() {
         queryData = { ...queryData, city: encodeURIComponent(cityId) };
       }
       if (startDate) {
-        queryData = { ...queryData, date: encodeURIComponent(startDate) };
+        queryData = {
+          ...queryData,
+          date: encodeURIComponent(startDate.replace(/\//g, "-")),
+        };
       }
       if (gameName) {
         queryData = { ...queryData, keyword: encodeURIComponent(gameName) };
@@ -93,7 +96,9 @@ export default function useSearch() {
       queryValues = `${queryValues}&city=${encodeURIComponent(cityId)}`;
     }
     if (startDate) {
-      queryValues = `${queryValues}&date=${encodeURIComponent(startDate)}`;
+      queryValues = `${queryValues}&date=${encodeURIComponent(
+        startDate.replace(/\//g, "-")
+      )}`;
     }
     if (gameName) {
       queryValues = `${queryValues}&keyword=${encodeURIComponent(gameName)}`;

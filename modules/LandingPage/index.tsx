@@ -3,18 +3,38 @@ import Image from "@/common/components/FillImage";
 import CardsSection from "./CardsSection";
 import CommentCard from "./CommentCard";
 import SearchBar from "./SearchBar";
-import SearchProvider from "@/common/contexts/SearchProvider";
+import SearchProvider, {
+  SearchContext,
+} from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
+import { useRouter } from "next/router";
 
 export default function LandingPage() {
+  const router = useRouter();
   const getDataContext = useContext(GetDataContext);
   const {
+    newestData,
     commentsData,
     remainingGroupsData,
     nearbyGroupsData,
     preferenceData,
     nearbyStoresData,
+    nearbyCity,
   } = getDataContext;
+  const searchContext = useContext(SearchContext);
+  const { searchKeys, setSearchKeys } = searchContext;
+
+  if (!nearbyCity) return null;
+  const nearbyCityName = nearbyCity?.CityName;
+
+  // 搜尋最新揪團
+  // const handleNewestGroup = () => {
+  //   console.log("333adde");
+  //   setSearchKeys({ ...searchKeys, groupFilter: 2, page: 1, pageSize: 16 });
+  //   router.push(`/search?tab=group`);
+  // };
+
+  console.log("444", searchKeys);
 
   return (
     <section className="bg-contain bg-no-repeat bg-landing-banner-bg md:bg-landing-banner-bg-md md:bg-[center_top_-54px]">
@@ -46,24 +66,32 @@ export default function LandingPage() {
       >
         <div className="flex flex-col gap-[96px] md:gap-6 bg-brown-dark">
           <CardsSection
-            title="就差你一個成團"
+            title="最新建立的揪團"
             cardCategory="group"
-            cardsData={remainingGroupsData}
-            moreHref="/search"
+            cardsData={newestData}
+            // handleSeeMore={handleNewestGroup}
             layout="swipe"
           />
           <CardsSection
-            title="你 附近 的揪團"
+            title="就差你一個成團"
+            cardCategory="group"
+            cardsData={remainingGroupsData}
+            // handleSeeMore="/search"
+            layout="swipe"
+          />
+          <CardsSection
+            title="你附近的揪團"
+            subTitle={nearbyCityName}
             cardCategory="group"
             cardsData={nearbyGroupsData}
-            moreHref="/search"
+            // handleSeeMore="/search"
             layout="swipe"
           />
           <CardsSection
             title="你可能會有興趣的揪團"
             cardCategory="group"
             cardsData={preferenceData}
-            moreHref="/search"
+            // handleSeeMore="/search"
             layout="block"
           />
         </div>
@@ -71,10 +99,11 @@ export default function LandingPage() {
       <div className="pt-[124px] md:pt-6">
         <div className="">
           <CardsSection
-            title="你 附近 的店家"
+            title="你附近的店家"
+            subTitle={nearbyCityName}
             cardCategory="store"
             cardsData={nearbyStoresData}
-            moreHref="/search"
+            // handleSeeMore="/search"
             layout="swipe"
           />
         </div>

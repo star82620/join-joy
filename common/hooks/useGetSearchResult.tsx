@@ -46,8 +46,8 @@ export function useGetSearchResult() {
         groupTag: searchKeys.groupTag, //遊戲面向
         groupppl: searchKeys.groupppl, //揪團總人數
         joinppl: searchKeys.joinppl,
-        page: 1,
-        pageSize: 16,
+        page: searchKeys.page || 1,
+        pageSize: searchKeys.pageSize || 16,
       };
 
       const GroupsData = await getSearchGroups(searchGroupKey, "haveCount");

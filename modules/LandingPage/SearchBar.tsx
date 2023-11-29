@@ -17,6 +17,7 @@ import { GetDataContext } from "@/pages";
 
 import { searchTabs } from "@/constants/searchTabs";
 import useSearch from "@/common/hooks/useSearch";
+import DatePickerInput from "@/common/components/Form/DatePickerInput";
 
 export default function SearchBar() {
   const {
@@ -39,6 +40,12 @@ export default function SearchBar() {
   useEffect(() => {
     setSearchKeys(defaultSearchKeys);
   }, [activeTab]);
+
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    setSearchKeys({ ...searchKeys, startDate: date });
+  }, [date]);
 
   const groupKeyWordInput = (
     <input
@@ -110,17 +117,7 @@ export default function SearchBar() {
           {isGroup && (
             <div className="w-full">
               <h3 className={titleStyle}>日期</h3>
-              <div className="relative">
-                <select
-                  className="inputStyle !pl-10"
-                  name="startDate"
-                  value={searchKeys.startDate}
-                  onChange={setSelectValue}
-                >
-                  <option value="">選擇遊玩的日期</option>
-                </select>
-                <span className="absolute left-3 -bottom-[1px] -translate-y-1/4 aheadIcon  before:bg-search-date before:w-6 before:h-6 before:md:w-5 before:md:h-5"></span>
-              </div>
+              <DatePickerInput value={date} setValue={setDate} />
             </div>
           )}
 

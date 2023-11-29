@@ -21,6 +21,7 @@ import {
 import TextInput from "@/common/components/Form/TextInput";
 import SelectInput from "@/common/components/Form/SelectInput";
 import RadioInput from "@/common/components/Form/RadioInput";
+import DatePickerInput from "@/common/components/Form/DatePickerInput";
 
 // 輸入自行輸入地點 input
 const PlaceInput = ({ place, handleInputValue }: PlaceInputProps) => {
@@ -30,7 +31,7 @@ const PlaceInput = ({ place, handleInputValue }: PlaceInputProps) => {
       inputName="place"
       value={place}
       onChange={handleInputValue}
-      placeholder="請選擇輸入詳細地址"
+      placeholder="請輸入詳細地址"
     />
   );
 };
@@ -172,8 +173,8 @@ export default function StepOne({ citiesData }: StepOneProps) {
     }));
     const storeIdOptions = cityId ? formattedStores : [];
     const isEmpty = storeIdOptions.length === 0;
-    const defaultText =
-      cityId && isEmpty ? "這個地區還沒有店家・゜・(PД`q｡)・゜・" : undefined;
+    const defaultText = undefined;
+    // cityId && isEmpty ? "這個地區還沒有店家・゜・(PД`q｡)・゜・" : undefined;
 
     return (
       <div className="w-full">
@@ -245,6 +246,13 @@ export default function StepOne({ citiesData }: StepOneProps) {
     setRemainingBlockHidden(!remainingBlockHidden);
   };
 
+  const [selectedDate, setSelectedDate] = useState("");
+
+  useEffect(() => {
+    const formattedDate = selectedDate.replace(/\//g, "-");
+    setValues((prevState) => ({ ...prevState, date: formattedDate }));
+  }, [selectedDate]);
+
   return (
     <>
       <section className="flex flex-col w-full gap-10">
@@ -293,7 +301,8 @@ export default function StepOne({ citiesData }: StepOneProps) {
             require={true}
             full
           >
-            <input
+            <DatePickerInput value={selectedDate} setValue={setSelectedDate} />
+            {/* <input
               list="data"
               placeholder="請選擇日期"
               className="inputStyle"
@@ -304,7 +313,7 @@ export default function StepOne({ citiesData }: StepOneProps) {
             <datalist id="data">
               <option value="2023-11-20">2023-11-20</option>
               <option value="2023-12-01">2023-12-01</option>
-            </datalist>
+            </datalist> */}
           </TitleBlock>
         </label>
 

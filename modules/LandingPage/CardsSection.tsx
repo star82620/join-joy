@@ -14,7 +14,8 @@ export default function CardsSection({
   layout,
   cardCategory,
   title,
-  moreHref,
+  subTitle,
+  handleSeeMore,
   cardsData,
 }: CardsSectionProps) {
   const isStore = cardCategory === "store";
@@ -27,10 +28,10 @@ export default function CardsSection({
     : "overflow-auto snap-x scrollbar-none";
 
   const widthClass = isStore
-    ? "min-w-[376px] max-w-[376px]"
+    ? "max-w-[376px] min-w-[376px]"
     : "max-w-[280px] min-w-[280px]";
 
-  const storeCardStyle = "h-[360px]";
+  const storeCardStyle = "min-h-[320px]";
 
   const groupCardStyle = !isSwipe
     ? "md:max-w-full "
@@ -50,10 +51,15 @@ export default function CardsSection({
       <div
         className={`container flex justify-between items-center font-semibold mb-10 md:mb-6 ${titleColor}`}
       >
-        <h2 className={`text-3xl md:text-xl ${titleStyle}`}>{title}</h2>
+        <div className="flex items-end gap-3">
+          <h2 className={`text-3xl md:text-xl ${titleStyle}`}>{title}</h2>
+          <div className="border-l-2 pl-2">{subTitle}</div>
+        </div>
         {isSwipe && (
           <div className="flex items-center gap-8">
-            <Link href={moreHref}>查看全部</Link>
+            <button type="button" onClick={handleSeeMore}>
+              查看全部
+            </button>
             <div className="flex gap-4">
               <button type="button" className={arrowBtnStyle}>
                 <Image
@@ -77,13 +83,13 @@ export default function CardsSection({
       </div>
 
       {/* 卡片列表 */}
-      <div className={`container flex gap-4 md:gap-3  ${listStyle}`}>
+      <div className={`container flex gap-4 md:gap-3 ${listStyle}`}>
         {cardsData.map((item) => {
           const isStore = "storeId" in item;
           return (
             <div
               key={isStore ? item.storeId : item.groupId}
-              className={`w-full ${widthClass} ${cardStyle}`}
+              className={`w-full md-min-w-80 ${widthClass} ${cardStyle}`}
             >
               {isStore ? <StoreCard data={item} /> : <GroupCard data={item} />}
             </div>
@@ -97,6 +103,7 @@ export default function CardsSection({
             type="button"
             appearance="brown"
             className="!px-[72px]"
+            onClick={handleSeeMore}
             rounded
           >
             查看全部

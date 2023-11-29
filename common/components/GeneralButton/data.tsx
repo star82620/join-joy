@@ -67,10 +67,10 @@ export const dataSet = {
   "page-selector-arrow": {
     default: "bg-white border-gray-200",
     hover: "hover:bg-gray-50",
-    active: "active:bg-gray-100",
+    active: "active:bg-gray-100 active:border-gray-950",
     disabled:
       "disabled:bg-gray-200 disabled:border-gray-200 disabled:text-gray-100",
-    textColor: "text-gray-300",
+    textColor: "text-gray-950",
   },
   gray: {
     default: "bg-gray-100",
