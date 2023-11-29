@@ -173,6 +173,7 @@ export default function GroupInfo() {
         ))}
       </div>
       {!isFull && !isMember && <JoinForm />}
+      {isMember && <p>團主審核中，請耐心等待</p>}
     </section>
   );
 }
