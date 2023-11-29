@@ -78,8 +78,18 @@ const formatDate = (date: Date) => {
 export default function DatePickerInput({
   value,
   setValue,
+  minDate,
+  maxDate,
 }: DatePickerInputProps) {
   const [show, setShow] = useState<boolean>(false);
+
+  if (minDate) {
+    options.minDate = minDate;
+  }
+
+  if (maxDate) {
+    options.maxDate = maxDate;
+  }
 
   const handleChange = (date: Date) => {
     const dateObj = new Date(date);

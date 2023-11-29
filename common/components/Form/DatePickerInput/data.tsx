@@ -43,4 +43,6 @@ export default options;
 export type DatePickerInputProps = {
   value: string;
   setValue: React.Dispatch<SetStateAction<string>>;
+  minDate?: Date;
+  maxDate?: Date;
 };
