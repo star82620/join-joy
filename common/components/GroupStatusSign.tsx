@@ -2,9 +2,9 @@ import React from "react";
 import {
   groupStatusSet,
   myGroupStatusSet,
-  GroupStatusKeyType,
   MyGroupStatusKeyType,
 } from "@/constants/groupStatusSet";
+import { GroupStatusKeyType } from "@/constants/types/groupDataType";
 
 export type GroupStatusSignProps = {
   category: "group" | "mine";

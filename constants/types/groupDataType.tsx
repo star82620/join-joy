@@ -1,6 +1,6 @@
 // 來自搜尋揪團 API
 
-import { GroupStatusKeyType } from "../groupStatusSet";
+export type GroupStatusKeyType = "已結束" | "已失效" | "已預約" | "開團中";
 
 export type StoreType = {
   storeId: number;
@@ -15,13 +15,14 @@ export type GameType = {
 
 export type MemberStatusType = "leader" | "member" | "pending";
 
-export type UserType = {
+export type MemberItemType = {
   userId: number;
   userName: string;
+  profileImg: string | null;
   status: MemberStatusType;
   initNum: number;
-  profileImg: string | null;
 };
+// export type GroupMemberType = { AuthResType & {status: MemberStatusType; initNum: number; }
 
 export type GroupTagType =
   | "新手團"
@@ -36,7 +37,7 @@ export type GroupDataType = {
   groupId: number;
   groupName: string;
   place: string | null;
-  groupStatus: GroupStatusKeyType; // 之後要改成定義好的
+  groupStatus: GroupStatusKeyType;
   isPrivate: boolean;
   isHomeGroup: boolean;
   store: StoreType | null;
@@ -44,8 +45,8 @@ export type GroupDataType = {
   startTime: string;
   endTime: string;
   games: GameType[];
-  leader: UserType;
-  members: UserType[];
+  leader: MemberItemType;
+  members: MemberItemType[];
   tags: GroupTagType[];
   currentpeople: number;
   totalMemberNum: number;

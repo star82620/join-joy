@@ -1,6 +1,9 @@
 import { MemberStatusType, StoreType } from "@/constants/globalTypes";
-import { GroupStatusKeyType } from "@/constants/groupStatusSet";
-import { GroupTagType } from "@/constants/types/groupDataType";
+
+import {
+  GroupStatusKeyType,
+  GroupTagType,
+} from "@/constants/types/groupDataType";
 
 // page
 export type getStaticPropsProps = { params: Record<string, string> };

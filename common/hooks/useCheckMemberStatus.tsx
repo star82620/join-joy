@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { UserType } from "@/constants/types/groupDataType";
+import { MemberItemType } from "@/constants/types/groupDataType";
 import { useAuth } from "../hooks/useAuth";
 import { MemberStatusType } from "@/constants/globalTypes";
 import fetchApi, { apiParamsType } from "../helpers/fetchApi";
@@ -15,7 +15,7 @@ export function useCheckMemberStatus(groupId: number) {
       try {
         const res = await fetch(`/api/group/${groupId}`);
         const json = await res.json();
-        const data: UserType[] = await json?.data;
+        const data: MemberItemType[] = await json?.data;
 
         console.log("memberStatussss res:::", data);
 

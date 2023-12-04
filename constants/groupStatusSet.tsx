@@ -1,3 +1,5 @@
+import { GroupStatusKeyType } from "./types/groupDataType";
+
 // 我的揪團列表
 export type MyGroupStatusKeyType =
   | "pending"
@@ -47,7 +49,6 @@ export const myGroupStatusSet: MyGroupStatusSetType = {
 // export default myGroupStatusSet;
 
 // 揪團狀態
-export type GroupStatusKeyType = "已結束" | "已失效" | "已預約" | "開團中";
 
 export type GroupStatusSetType = Record<GroupStatusKeyType, IndexContentType>;
 

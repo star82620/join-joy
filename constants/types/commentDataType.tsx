@@ -1,4 +1,4 @@
-export type UserType = {
+export type AuthResType = {
   userId: number;
   userName: string;
   profileImg: string | null;
@@ -13,7 +13,7 @@ export type GroupType = {
 };
 
 export type CommentDataType = {
-  commentBy: UserType;
+  commentBy: AuthResType; //auth 的 AuthResType
   group: GroupType;
   commentId: number;
   msg: string;

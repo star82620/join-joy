@@ -1,7 +1,10 @@
 import { GroupTagItemType } from "./globalTypes";
 
+export type IndexStringType = Record<string, string>;
+export type IndexNumberType = Record<number, string>;
+
 // 遊戲類型
-export const gameTypeIndex: Record<number, string> = {
+export const gameTypeIndex: IndexNumberType = {
   1: "不限定",
   2: "派對遊戲",
   3: "陣營遊戲",
@@ -15,18 +18,18 @@ export const gameTypeIndex: Record<number, string> = {
 };
 
 // 團員身份
-export const memberStatusIndex: Record<string, string> = {
+export const memberStatusIndex: IndexStringType = {
   leader: "團主",
   member: "團員",
 };
 
 // 揪團狀態
-export const groupStatusIndex: Record<string, string> = {
+export const groupStatusIndex: IndexStringType = {
   opening: "開團中",
   closed: "已結束",
 };
 
-export const citiesIndex: Record<number, string> = {
+export const citiesIndex: IndexNumberType = {
   1: "基隆市",
   2: "台北市",
   3: "新北市",

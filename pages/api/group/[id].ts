@@ -1,6 +1,5 @@
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-import { GameType, UserType } from "@/constants/types/groupDataType";
 
 import { NextApiRequest, NextApiResponse } from "next";
 

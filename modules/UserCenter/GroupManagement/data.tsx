@@ -1,6 +1,4 @@
-import { GroupTagIdType, ImgType } from "@/constants/globalTypes";
-import { GroupStatusKeyType } from "@/constants/groupStatusSet";
-import { groupProfileTitles } from "@/constants/iconsPackage/groupCardIcons";
+import { GroupStatusKeyType } from "@/constants/types/groupDataType";
 import { MouseEventHandler, ReactNode, SetStateAction } from "react";
 
 // page
