@@ -1,32 +1,11 @@
 import React, { ReactNode } from "react";
 
-export type ImgType = {
+export type ImgAttrType = {
   src: string;
   alt: string;
 };
 
-// iconsPackage
-export type IconsPackageType = Record<string, ImgType>;
-
-type IconIdType =
-  | "my-following"
-  | "my-following-active"
-  | "my-groups"
-  | "my-groups-active"
-  | "profile-setting"
-  | "profile-setting-active"
-  | "my-notification"
-  | "my-notification-active"
-  | "logout"
-  | "sub-closing"
-  | "sub-opening";
-
-export type UserNavIconsType = Record<IconIdType, ImgType>;
-
-// defaultImages
-export type DefaultImagesType = Record<string, ImgType>;
-
-export type IconsType = Record<string, ImgType>;
+export type ImgType = Record<string, ImgAttrType>;
 
 // game 這個跟樓下有個 GameDataType 一樣哦
 export type GameType = {
@@ -93,25 +72,6 @@ export type CitiesDataItemType = {
 };
 
 export type CitiesDataType = CitiesDataItemType[];
-
-// store
-export type StoreDataType = {
-  storeId: number;
-  storeName: string;
-  address: string;
-  profileImg: string;
-  cover: string | null;
-  score: number;
-  tag: {
-    wifiTag: boolean;
-    teachTag: boolean;
-    meal: boolean;
-    mealout: boolean;
-    buffet: boolean;
-    hqTag: boolean;
-    popTag: boolean;
-  };
-};
 
 // game
 export type GameDataType = {

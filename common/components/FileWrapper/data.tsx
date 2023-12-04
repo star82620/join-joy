@@ -1,17 +1,13 @@
+import { ImgAttrType } from "@/constants/globalTypes";
 import { ReactNode } from "react";
 
 //有增加的就 ＆ 擴展進來
 export type TabNameType = string;
 
-export type ImgType = {
-  src: string;
-  alt: string;
-};
-
 export type TabType = {
   tabName: TabNameType;
   tabText: string;
-  img: ImgType;
+  img: ImgAttrType;
 };
 
 export type TabSetType = Array<TabType>;

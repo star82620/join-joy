@@ -1,6 +1,6 @@
-import { IconsType } from "@/constants/globalTypes";
+import { ImgType } from "@/constants/globalTypes";
 
-export const logoSet: IconsType = {
+export const logoSet: ImgType = {
   header: {
     src: "/images/logo/logo-joinjoy-main.svg",
     alt: "logo-joinjoy-main",

@@ -1,6 +1,6 @@
-import { IconsType } from "../globalTypes";
+import { ImgType } from "../globalTypes";
 
-const createGroupIcons: IconsType = {
+const createGroupIcons: ImgType = {
   "arrow-up": {
     src: "/images/create-group/icon-arrow-up.svg",
     alt: "icon-arrow-up",
