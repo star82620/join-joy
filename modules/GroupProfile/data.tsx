@@ -1,9 +1,9 @@
-import { MemberStatusType, StoreType } from "@/constants/globalTypes";
+import { ImgAttrType, MemberStatusType } from "@/constants/globalTypes";
 import {
   GameInGroupNameType,
-  GameNameType,
   GamesInGroupType,
 } from "@/constants/types/apiTypes/game";
+import { StoreInfoType } from "@/constants/types/apiTypes/store";
 
 import {
   GroupStatusKeyType,
@@ -59,10 +59,7 @@ type IconKeyType =
 
 export type TitleItemType = {
   title: string;
-  img: {
-    src: string;
-    alt: string;
-  };
+  img: ImgAttrType;
 };
 
 export type TitlesType = Record<IconKeyType, TitleItemType>;
@@ -81,7 +78,7 @@ export type GroupDataType = {
   groupName: string;
   groupStatus: GroupStatusKeyType;
   place: string | null;
-  store: StoreType | null;
+  store: StoreInfoType | null;
   date: string;
   startTime: string;
   endTime: string;
@@ -102,7 +99,7 @@ export type GameItemProps = {
 };
 
 export type StoreLocationProps = {
-  store: StoreType | null;
+  store: StoreInfoType | null;
 };
 
 // MemberList
@@ -168,6 +165,7 @@ export const titles: TitlesType = {
   },
 };
 
+// page
 export const defaultGroupData: GroupDataType = {
   groupName: "",
   groupStatus: "開團中",

@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { StoreInfoType } from "./types/apiTypes/store";
 
 export type ImgAttrType = {
   src: string;
@@ -6,12 +7,6 @@ export type ImgAttrType = {
 };
 
 export type ImgType = Record<string, ImgAttrType>;
-
-export type StoreType = {
-  storeId: number;
-  storeName: string;
-  address: string;
-};
 
 export type TabType = {
   tabId: string;
@@ -32,7 +27,7 @@ export type MyGroupsItemType = {
   totalMemberNum: number;
   currentPeople: number;
   place: string | null;
-  store: StoreType | null;
+  store: StoreInfoType | null;
   memberStatus: MemberStatusType;
   groupStatus: GroupStatusType;
 };

@@ -1,7 +1,10 @@
 import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from "react";
 import { SelectedGamesType } from "@/common/components/GameList/data";
-import { StoreType } from "@/constants/globalTypes";
 import { OptionItemType } from "@/common/components/Form/data";
+import {
+  RemainingSeatsType,
+  StoreInfoType,
+} from "@/constants/types/apiTypes/store";
 
 // page
 export type CityDataType = {
@@ -83,13 +86,9 @@ export type StepOneProps = {
   citiesData: CitiesDataType;
 };
 
-export type RemainingSeatsType = {
-  time: string;
-  seats: number;
-};
-
+// state
 export type StoreDataType = {
-  stores: StoreType[];
+  stores: StoreInfoType[];
   remainingSeats: RemainingSeatsType[];
   acceptedNum: number;
 };
