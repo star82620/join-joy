@@ -1,6 +1,7 @@
 import { GroupTagItemType } from "./globalTypes";
 
 export type IndexStringType = Record<string, string>;
+
 export type IndexNumberType = Record<number, string>;
 
 // 遊戲類型

@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from "react";
 import { SelectedGamesType } from "@/common/components/GameList/data";
-import { GameType, StoreType } from "@/constants/globalTypes";
+import { StoreType } from "@/constants/globalTypes";
 import { OptionItemType } from "@/common/components/Form/data";
 
 // page
@@ -106,9 +106,6 @@ export type PlaceInputProps = {
 };
 
 // StepTwo
-export type GameItemType = GameType;
-
-export type GamesDataType = GameItemType[];
 
 export type QuestionType = {
   title: string;

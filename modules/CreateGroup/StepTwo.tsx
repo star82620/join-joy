@@ -11,11 +11,11 @@ import GroupTagSelector from "@/common/components/Form/GroupTagSelector";
 import TextArea from "@/common/components/Form/TextArea";
 import {
   questionsWithRadio,
-  GamesDataType,
   HandlePrivateGroupType,
   HandlePDescriptionValueType,
   StepTwoProps,
 } from "./data";
+import { GamesInStoreType } from "@/constants/types/apiTypes/game";
 
 export default function StepTwo({
   selectedGames,
@@ -33,7 +33,7 @@ export default function StepTwo({
   const storeId = values.storeId;
 
   // 取得遊戲列表的資料
-  const [gamesData, setGamesData] = useState<GamesDataType>([]);
+  const [gamesData, setGamesData] = useState<GamesInStoreType>([]);
 
   const isGamesEmpty = gamesData.length === 0;
 

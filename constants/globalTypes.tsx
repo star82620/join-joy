@@ -7,16 +7,6 @@ export type ImgAttrType = {
 
 export type ImgType = Record<string, ImgAttrType>;
 
-// game 這個跟樓下有個 GameDataType 一樣哦
-export type GameType = {
-  gameId: number;
-  gameType: string;
-  gameName: string;
-  version: string;
-  peopleNum: string;
-  qtu: number;
-};
-
 export type StoreType = {
   storeId: number;
   storeName: string;
@@ -72,16 +62,6 @@ export type CitiesDataItemType = {
 };
 
 export type CitiesDataType = CitiesDataItemType[];
-
-// game
-export type GameDataType = {
-  gameId: number;
-  gameType: string;
-  gameName: string;
-  version: string;
-  peopleNum: string;
-  qtu: number;
-};
 
 // GroupTagSelector
 export type GroupTagIdType =

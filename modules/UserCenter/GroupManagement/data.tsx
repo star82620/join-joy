@@ -1,5 +1,6 @@
-import { GroupStatusKeyType } from "@/constants/types/groupDataType";
 import { MouseEventHandler, ReactNode, SetStateAction } from "react";
+import { GamesInStoreType } from "@/constants/types/apiTypes/game";
+import { GroupStatusKeyType } from "@/constants/types/groupDataType";
 
 // page
 export type GroupStatusType = GroupStatusKeyType;
@@ -8,12 +9,6 @@ export type StoreType = {
   storeId: number;
   storeName: string;
   address: string;
-};
-
-export type GameItemType = {
-  gameId: number;
-  gameName: string;
-  gameType: string;
 };
 
 export type MemberType = {
@@ -38,27 +33,16 @@ export type GroupDataType = {
   cost: string;
   description: string;
   isPrivate: boolean;
-  games: GameItemType[] | [];
+  games: GamesInStoreType | [];
   members: MemberType[] | [];
   tags: string[] | [];
 };
-
-export type GamesDataItemType = {
-  gameId: number;
-  gameType: string;
-  gameName: string;
-  version: string;
-  peopleNum: string;
-  qtu: number;
-};
-
-export type GamesDataType = GamesDataItemType[];
 
 export type GroupDataContextType = {
   groupId: number;
   groupData: GroupDataType;
   membersData: MembersDataType;
-  gamesData: GamesDataType;
+  gamesData: GamesInStoreType;
 };
 
 export type GroupManagePageProps = GroupDataContextType;
@@ -149,7 +133,7 @@ export const defaultMembersData: MembersDataType = [
   },
 ];
 
-export const defaultGamesData: GamesDataType = [
+export const defaultGamesData: GamesInStoreType = [
   {
     gameId: 0,
     gameType: "",

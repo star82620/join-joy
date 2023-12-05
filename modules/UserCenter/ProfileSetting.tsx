@@ -10,8 +10,6 @@ import SelectInput from "@/common/components/Form/SelectInput";
 import TextArea from "@/common/components/Form/TextArea";
 import { useAuth } from "@/common/hooks/useAuth";
 import PreferenceBlock from "@/common/components/PreferenceBlock";
-import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
-import { useGetAllGameTypes } from "@/common/hooks/useGetAllGameType";
 
 const inputTitleStyle = "text-lg md:text-md mb-2 md:mb-1";
 const inputDescStyle = "text-sm md:text-xs text-gray-500";

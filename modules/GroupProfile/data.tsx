@@ -1,4 +1,9 @@
 import { MemberStatusType, StoreType } from "@/constants/globalTypes";
+import {
+  GameInGroupNameType,
+  GameNameType,
+  GamesInGroupType,
+} from "@/constants/types/apiTypes/game";
 
 import {
   GroupStatusKeyType,
@@ -64,12 +69,6 @@ export type TitlesType = Record<IconKeyType, TitleItemType>;
 
 export type TitleProps = { content: IconKeyType };
 
-export type GameItemType = {
-  gameName: string;
-  gameId: string;
-  gameType: number;
-};
-
 export type MemberType = {
   userId: number;
   userName: string;
@@ -88,7 +87,7 @@ export type GroupDataType = {
   endTime: string;
   cost: string;
   totalMemberNum: number;
-  games: GameItemType[];
+  games: GamesInGroupType;
   description: string;
   members: MemberType[];
   tags: GroupTagType[];
@@ -99,7 +98,7 @@ export type TagItemProps = {
 };
 
 export type GameItemProps = {
-  game: GameItemType;
+  game: GameInGroupNameType;
 };
 
 export type StoreLocationProps = {
