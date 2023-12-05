@@ -13,25 +13,6 @@ export type TabType = {
   text: string;
 };
 
-// group
-export type GroupStatusType = "已失效" | "已結束" | "開團中" | "已預約";
-
-export type MemberStatusType = "pending" | "member" | "leader";
-
-// 取得我的所有揪團紀錄API的資料，沒有 isPrivate
-export type MyGroupsItemType = {
-  groupId: number;
-  groupName: string;
-  startTime: string;
-  endTime: string;
-  totalMemberNum: number;
-  currentPeople: number;
-  place: string | null;
-  store: StoreInfoType | null;
-  memberStatus: MemberStatusType;
-  groupStatus: GroupStatusType;
-};
-
 // user profile
 export type UserInfoType = {
   userId: number;
@@ -49,18 +30,6 @@ export type UserProfileType = UserInfoType & {
 export type AuthDataType = UserInfoType & {
   photo: string;
 };
-
-// GroupTagSelector
-export type GroupTagIdType =
-  | "beginnerTag"
-  | "expertTag"
-  | "practiceTag"
-  | "openTag"
-  | "tutorialTag"
-  | "casualTag"
-  | "competitiveTag";
-
-export type GroupTagItemType = { id: GroupTagIdType; text: string };
 
 // SearchProvider
 export type SearchProviderProps = { children: ReactNode };

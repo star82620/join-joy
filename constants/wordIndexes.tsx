@@ -1,4 +1,4 @@
-import { GroupTagItemType } from "./globalTypes";
+import { GroupTagSetType } from "./types/apiTypes/group";
 
 export type IndexStringType = Record<string, string>;
 
@@ -56,7 +56,7 @@ export const citiesIndex: IndexNumberType = {
 };
 
 // 揪團 tags
-export const groupTags: GroupTagItemType[] = [
+export const groupTags: GroupTagSetType = [
   { id: "beginnerTag", text: "新手團" },
   { id: "expertTag", text: "老手團" },
   { id: "practiceTag", text: "經驗切磋" },

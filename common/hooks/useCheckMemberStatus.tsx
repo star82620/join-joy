@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MemberItemType } from "@/constants/types/groupDataType";
 import { useAuth } from "../hooks/useAuth";
-import { MemberStatusType } from "@/constants/globalTypes";
-import fetchApi, { apiParamsType } from "../helpers/fetchApi";
+import { MemberStatusType } from "@/constants/types/apiTypes/group";
 
 export function useCheckMemberStatus(groupId: number) {
   const { authData } = useAuth();

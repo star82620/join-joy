@@ -1,19 +1,24 @@
-import { ImgAttrType, MemberStatusType } from "@/constants/globalTypes";
+import { ImgAttrType } from "@/constants/globalTypes";
 import {
   GameInGroupNameType,
   GamesInGroupType,
 } from "@/constants/types/apiTypes/game";
+import {
+  GroupDataType,
+  MemberStatusType,
+} from "@/constants/types/apiTypes/group";
 import { StoreInfoType } from "@/constants/types/apiTypes/store";
 
 import {
   GroupStatusKeyType,
   GroupTagType,
 } from "@/constants/types/groupDataType";
+import { MemberType } from "../UserCenter/GroupManagement/data";
 
 // page
 export type getStaticPropsProps = { params: Record<string, string> };
 
-export type GroupType = { groupId: number; groupName: string };
+// export type GroupType = { groupId: number; groupName: string };
 
 export type GroupIdType = number;
 
@@ -65,30 +70,6 @@ export type TitleItemType = {
 export type TitlesType = Record<IconKeyType, TitleItemType>;
 
 export type TitleProps = { content: IconKeyType };
-
-export type MemberType = {
-  userId: number;
-  userName: string;
-  status: MemberStatusType;
-  initNum: number;
-  profileImg: string;
-};
-
-export type GroupDataType = {
-  groupName: string;
-  groupStatus: GroupStatusKeyType;
-  place: string | null;
-  store: StoreInfoType | null;
-  date: string;
-  startTime: string;
-  endTime: string;
-  cost: string;
-  totalMemberNum: number;
-  games: GamesInGroupType;
-  description: string;
-  members: MemberType[];
-  tags: GroupTagType[];
-};
 
 export type TagItemProps = {
   tag: string;
