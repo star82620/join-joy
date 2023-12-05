@@ -1,14 +1,11 @@
+import { MouseEventHandler, ReactNode } from "react";
 import { StoreDataType } from "@/constants/types/storeDataType";
 import { CommentDataType } from "@/constants/types/commentDataType";
 import { GroupDataType } from "@/constants/types/groupDataType";
 import {
-  AuthDataType,
   CitiesDataItemType,
   CitiesDataType,
-} from "@/constants/globalTypes";
-import { TabType } from "@/common/components/FileWrapper/data";
-import { globalIcons } from "@/constants/iconsPackage/globalIcons";
-import { MouseEventHandler, ReactNode } from "react";
+} from "@/constants/types/apiTypes/city";
 
 // page
 export type DefaultDataContextType = {

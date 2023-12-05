@@ -1,6 +1,6 @@
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-import { CitiesDataType } from "@/constants/globalTypes";
+import { CitiesDataType } from "@/constants/types/apiTypes/city";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

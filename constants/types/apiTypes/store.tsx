@@ -10,5 +10,3 @@ export type RemainingSeatsType = {
   time: string;
   seats: number;
 };
-
-// get-city-stores

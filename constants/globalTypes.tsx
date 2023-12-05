@@ -50,14 +50,6 @@ export type AuthDataType = UserInfoType & {
   photo: string;
 };
 
-// 所有的城市列表
-export type CitiesDataItemType = {
-  Id: number;
-  CityName: string;
-};
-
-export type CitiesDataType = CitiesDataItemType[];
-
 // GroupTagSelector
 export type GroupTagIdType =
   | "beginnerTag"

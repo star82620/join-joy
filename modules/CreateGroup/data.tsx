@@ -5,15 +5,9 @@ import {
   RemainingSeatsType,
   StoreInfoType,
 } from "@/constants/types/apiTypes/store";
+import { CitiesDataType } from "@/constants/types/apiTypes/city";
 
 // page
-export type CityDataType = {
-  Id: number;
-  CityName: string;
-};
-
-export type CitiesDataType = CityDataType[];
-
 export type CreateGroupPageProps = {
   citiesData: CitiesDataType;
 };
