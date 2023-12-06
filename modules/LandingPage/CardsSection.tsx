@@ -18,6 +18,10 @@ export default function CardsSection({
   handleSeeMore,
   cardsData,
 }: CardsSectionProps) {
+  console.log(title, cardsData);
+
+  const isEmpty = typeof cardsData === "string";
+
   const isStore = cardCategory === "store";
 
   const isSwipe = layout === "swipe";
@@ -44,12 +48,27 @@ export default function CardsSection({
 
   const titleStyle = !isStore ? titleStyleWithBorder : "";
 
-  const titleColor = isStore ? "" : "text-white";
+  const textColor = isStore ? "" : "text-white";
+
+  const Cards = () => {
+    if (isEmpty) return <p className={textColor}>目前還沒有揪團 (〒︿〒)</p>;
+    return cardsData.map((item) => {
+      const isStore = "storeId" in item;
+      return (
+        <div
+          key={isStore ? item.storeId : item.groupId}
+          className={`w-full md-min-w-80 ${widthClass} ${cardStyle}`}
+        >
+          {isStore ? <StoreCard data={item} /> : <GroupCard data={item} />}
+        </div>
+      );
+    });
+  };
 
   return (
     <div>
       <div
-        className={`container flex justify-between items-center font-semibold mb-10 md:mb-6 ${titleColor}`}
+        className={`container flex justify-between items-center font-semibold mb-10 md:mb-6 ${textColor}`}
       >
         <div className="flex items-end gap-3">
           <h2 className={`text-3xl md:text-xl ${titleStyle}`}>{title}</h2>
@@ -84,17 +103,7 @@ export default function CardsSection({
 
       {/* 卡片列表 */}
       <div className={`container flex gap-4 md:gap-3 ${listStyle}`}>
-        {cardsData.map((item) => {
-          const isStore = "storeId" in item;
-          return (
-            <div
-              key={isStore ? item.storeId : item.groupId}
-              className={`w-full md-min-w-80 ${widthClass} ${cardStyle}`}
-            >
-              {isStore ? <StoreCard data={item} /> : <GroupCard data={item} />}
-            </div>
-          );
-        })}
+        {Cards()}
       </div>
 
       {!isSwipe && (

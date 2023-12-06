@@ -13,6 +13,11 @@ export type TabType = {
   text: string;
 };
 
+export type TitleItemType = {
+  title: string;
+  img: ImgAttrType;
+};
+
 // user profile
 export type UserInfoType = {
   userId: number;

@@ -1,46 +1,30 @@
-import { ImgAttrType } from "@/constants/globalTypes";
-import {
-  GameInGroupNameType,
-  GamesInGroupType,
-} from "@/constants/types/apiTypes/game";
-import {
-  GroupDataType,
-  MemberStatusType,
-} from "@/constants/types/apiTypes/group";
+import { TitleItemType } from "@/constants/globalTypes";
+import { GameInGroupNameType } from "@/constants/types/apiTypes/game";
+import { GroupDataType } from "@/constants/types/apiTypes/group";
 import { StoreInfoType } from "@/constants/types/apiTypes/store";
-
-import {
-  GroupStatusKeyType,
-  GroupTagType,
-} from "@/constants/types/groupDataType";
 import { MemberType } from "../UserCenter/GroupManagement/data";
+import { ChangeEventHandler, MouseEventHandler } from "react";
+import {
+  CommentItemDataType,
+  CommentSetDataType,
+} from "@/constants/types/apiTypes/comment";
 
 // page
 export type getStaticPropsProps = { params: Record<string, string> };
 
-// export type GroupType = { groupId: number; groupName: string };
-
 export type GroupIdType = number;
-
-export type CommentsDataItemType = {
-  userId: number;
-  userName: string;
-  userPhoto: string;
-  commentContent: string;
-  commentDate: string;
-};
 
 export type GroupDataContextType = {
   groupId: GroupIdType;
   groupData: GroupDataType;
   currentMemberNum: number;
-  commentsData: CommentsDataItemType[];
+  commentsData: CommentSetDataType;
 };
 
 export type GroupProfilePageProps = {
   groupId: GroupIdType;
   groupData: GroupDataType;
-  commentsData: CommentsDataItemType[];
+  commentsData: CommentSetDataType;
 };
 
 export type GroupProfileProps = {
@@ -48,10 +32,10 @@ export type GroupProfileProps = {
 };
 
 export type CommentCardProps = {
-  comment: CommentsDataItemType;
+  comment: CommentItemDataType;
 };
 
-//
+// Title
 
 type IconKeyType =
   | "location"
@@ -61,11 +45,6 @@ type IconKeyType =
   | "totalMembers"
   | "games"
   | "description";
-
-export type TitleItemType = {
-  title: string;
-  img: ImgAttrType;
-};
 
 export type TitlesType = Record<IconKeyType, TitleItemType>;
 
@@ -90,6 +69,14 @@ export type MemberCardProps = { member: MemberType; subNum: number };
 export type GroupInfoProps = {
   setApplyNum: (applyNum: number) => void;
   handleJoinSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+};
+
+// CommentsBoard
+export type CommentTextAreaProps = {
+  textLength: number;
+  commentValue: string;
+  handleInputValue: ChangeEventHandler<HTMLTextAreaElement>;
+  handleSubmitComment: MouseEventHandler<HTMLFormElement>;
 };
 
 // ---data---
@@ -175,7 +162,7 @@ export const defaultGroupData: GroupDataType = {
   tags: [],
 };
 
-export const defaultCommentData: CommentsDataItemType = {
+export const defaultCommentData: CommentItemDataType = {
   userId: 0,
   userName: "",
   userPhoto: "",

@@ -28,7 +28,7 @@ export type CardsSectionProps = {
   title: string;
   subTitle?: string;
   handleSeeMore?: MouseEventHandler<HTMLButtonElement>;
-  cardsData: GroupDataType[] | StoreDataType[];
+  cardsData: GroupDataType[] | StoreDataType[] | string;
 };
 
 // CommentCard

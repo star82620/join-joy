@@ -111,7 +111,7 @@ export default function LandingPage() {
           <Image
             src="/images/landing-page/img-home-comments.svg"
             alt="img-home-comments"
-            widthProp="w-[410px]"
+            widthProp="w-[410px] md:w-full"
             heightProp="h-[150px]"
           />
         </div>
