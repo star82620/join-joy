@@ -6,6 +6,7 @@ import {
   StoreInfoType,
 } from "@/constants/types/apiTypes/store";
 import { CitiesDataType } from "@/constants/types/apiTypes/city";
+import { GroupTagIdType } from "@/constants/types/apiTypes/group";
 
 // page
 export type CreateGroupPageProps = {
@@ -23,16 +24,7 @@ export type ValuesContextType = [
   React.Dispatch<React.SetStateAction<ValuesType>>
 ];
 
-export type SelectedTagIdType =
-  | "beginnerTag"
-  | "expertTag"
-  | "practiceTag"
-  | "openTag"
-  | "tutorialTag"
-  | "casualTag"
-  | "competitiveTag";
-
-export type SelectedTagsType = { id: SelectedTagIdType; text: string };
+export type SelectedTagsType = { id: GroupTagIdType; text: string };
 
 export type LocationKindType = "store" | "place";
 

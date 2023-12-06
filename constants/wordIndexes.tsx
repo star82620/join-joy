@@ -1,3 +1,4 @@
+import { StoreRatingDetailSetType } from "./types/apiTypes/comment";
 import { GroupTagSetType } from "./types/apiTypes/group";
 
 export type IndexStringType = Record<string, string>;
@@ -64,4 +65,13 @@ export const groupTags: GroupTagSetType = [
   { id: "tutorialTag", text: "教學團" },
   { id: "casualTag", text: "輕鬆" },
   { id: "competitiveTag", text: "競技" },
+];
+
+// 店家評價細項
+export const StoreRatingDetailSet: StoreRatingDetailSetType = [
+  { id: "clean", text: "環境舒適" },
+  { id: "service", text: "服務態度" },
+  { id: "variety", text: "遊戲多樣性" },
+  { id: "value", text: "性價比" },
+  // { id: "overall", text: "整體" },
 ];

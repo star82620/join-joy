@@ -1,29 +1,27 @@
-import { GroupDataType } from "@/constants/types/groupDataType";
+import {
+  MemberRatingDataType,
+  MemberRatingStatusSetType,
+  MemberRatingValuesType,
+  GroupOfRatingDataType,
+  StoreRatingValuesType,
+  StoreRatingDetailIdType,
+} from "@/constants/types/apiTypes/comment";
+
 import { MouseEventHandler, SetStateAction } from "react";
 
 // Page
 
-export type RatingGroupType = {
-  storeId: number;
-  storeName: string;
-  address: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  photo: string;
-};
-
 export type FeedbackPageProps = {
   id: string;
-  groupData: RatingGroupType;
-  memberRatingData: MemberDataType;
+  groupData: GroupOfRatingDataType;
+  memberRatingData: MemberRatingDataType;
 };
 
 // Feedback
 export type FeedbackProps = {
   groupId: FeedbackPageProps["id"];
-  groupData: RatingGroupType;
-  memberRatingData: MemberDataType;
+  groupData: GroupOfRatingDataType;
+  memberRatingData: MemberRatingDataType;
 };
 
 export type feedbackStepType = "member" | "store";
@@ -32,60 +30,28 @@ export type feedbackStepType = "member" | "store";
 
 export type RatingStoreProps = {
   groupId: number;
-  groupData: RatingGroupType;
+  groupData: GroupOfRatingDataType;
   step: feedbackStepType;
   setStep: React.Dispatch<SetStateAction<feedbackStepType>>;
-  storeValues: StoreValuesType;
-  setStoreValues: React.Dispatch<SetStateAction<StoreValuesType>>;
+  storeValues: StoreRatingValuesType;
+  setStoreValues: React.Dispatch<SetStateAction<StoreRatingValuesType>>;
 };
 
 // RatingMember
 export type RatingMemberProps = {
   groupId: number;
-  membersData: MemberDataItemType[];
+  membersData: MemberRatingStatusSetType;
   step: feedbackStepType;
   setStep: React.Dispatch<SetStateAction<feedbackStepType>>;
-  memberValues: MemberValuesType;
-  setMemberValues: React.Dispatch<SetStateAction<MemberValuesType>>;
-};
-
-//
-
-export type RatingNameType =
-  | "groupId"
-  | "clean"
-  | "service"
-  | "variety"
-  | "value";
-
-export type StoreValuesType = {
-  groupId: number;
-  clean: number;
-  service: number;
-  variety: number;
-  value: number;
-  comment: string;
-};
-
-export type RatingItemSetType = {
-  title: string;
-  ratingName: RatingNameType;
+  memberValues: MemberRatingValuesType;
+  setMemberValues: React.Dispatch<SetStateAction<MemberRatingValuesType>>;
 };
 
 export type RatingSelectorProps = {
-  ratingName: RatingNameType | string | number;
+  ratingName: StoreRatingDetailIdType | string | number;
   scoreValue: number;
   handleScoreValue: MouseEventHandler<HTMLElement>;
 };
-
-export type MemberValuesItemType = {
-  groupId: number;
-  memberId: number;
-  score: number;
-  comment: string;
-};
-
-export type MemberValuesType = Record<number, MemberValuesItemType>;
 
 export type StepType = "store" | "member";
 
@@ -97,41 +63,19 @@ export type MemberBlockProps = {
   profileImg: string;
 };
 
-export type MemberDataItemType = {
-  memberId: number;
-  memberName: string;
-  memberPhoto: string;
-  isRated: boolean;
-  score: number;
-  comment: string | null;
-  status: "member" | "leader";
-};
-
-export type MemberDataType = {
-  isAllRated: boolean;
-  ratingStatus: MemberDataItemType[];
-};
-
 // ---data---
 
-export const defaultStoreValues: StoreValuesType = {
+export const defaultStoreValues: StoreRatingValuesType = {
   groupId: 0,
   clean: 0,
   service: 0,
   variety: 0,
   value: 0,
+  // overall: 0,
   comment: "",
 };
 
-export const RatingItemSet: RatingItemSetType[] = [
-  { ratingName: "clean", title: "環境舒適" },
-  { ratingName: "service", title: "服務態度" },
-  { ratingName: "variety", title: "遊戲多樣性" },
-  { ratingName: "value", title: "性價比" },
-  // { ratingName: "all", title: "整體" },
-];
-
-export const defaultMemberValues: MemberValuesType = {
+export const defaultMemberValues: MemberRatingValuesType = {
   0: {
     groupId: 0,
     memberId: 0,
@@ -139,5 +83,3 @@ export const defaultMemberValues: MemberValuesType = {
     comment: "",
   },
 };
-
-// RatingMember
