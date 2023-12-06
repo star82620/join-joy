@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 import { StoreInfoType } from "./types/apiTypes/store";
 
-export type ImgAttrType = {
+export type ImgType = {
   src: string;
   alt: string;
 };
 
-export type ImgSetType = Record<string, ImgAttrType>;
+export type ImgSetType = Record<string, ImgType>;
 
 export type TabType = {
   tabId: string;
@@ -15,7 +15,7 @@ export type TabType = {
 
 export type TitleItemType = {
   title: string;
-  img: ImgAttrType;
+  img: ImgType;
 };
 
 // user profile
