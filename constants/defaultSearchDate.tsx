@@ -1,7 +1,7 @@
+import { SearchedGroupItemDataType } from "./types/apiTypes/group";
 import { StoreSetDataType } from "./types/apiTypes/store";
-import { GroupDataType } from "./types/groupDataType";
 
-export const defaultGroupsData: GroupDataType[] = [
+export const defaultGroupsData: SearchedGroupItemDataType[] = [
   {
     groupId: 0,
     groupName: "",

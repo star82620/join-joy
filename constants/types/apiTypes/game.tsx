@@ -7,9 +7,14 @@ export type GameCategoryItemType = {
 export type GameCategoriesType = GameCategoryItemType[];
 
 //
-export type GameNameType = {
+export type GameItemType = {
   gameName: string;
+  gameType: number;
+};
+
+export type GameNameType = {
   gameId: number;
+  gameName: string;
 };
 
 // Games in store

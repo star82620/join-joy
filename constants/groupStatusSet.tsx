@@ -1,24 +1,9 @@
-import { GroupStatusKeyType } from "./types/groupDataType";
+import {
+  GroupStatusSetType,
+  MyGroupStatusSetType,
+} from "./types/apiTypes/group";
 
 // 我的揪團列表
-export type MyGroupStatusKeyType =
-  | "pending"
-  | "member"
-  | "closed"
-  | "opening"
-  | "reserved"
-  | "cancel";
-
-export type IndexContentType = {
-  text: string;
-  style: string;
-};
-
-export type MyGroupStatusSetType = Record<
-  MyGroupStatusKeyType,
-  IndexContentType
->;
-
 export const myGroupStatusSet: MyGroupStatusSetType = {
   pending: {
     text: "審核中",
@@ -46,12 +31,7 @@ export const myGroupStatusSet: MyGroupStatusSetType = {
   },
 };
 
-// export default myGroupStatusSet;
-
 // 揪團狀態
-
-export type GroupStatusSetType = Record<GroupStatusKeyType, IndexContentType>;
-
 export const groupStatusSet: GroupStatusSetType = {
   已結束: {
     text: "已結束",

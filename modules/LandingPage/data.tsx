@@ -1,6 +1,6 @@
 import { MouseEventHandler, ReactNode } from "react";
 
-import { GroupDataType } from "@/constants/types/groupDataType";
+import { StoreSetDataType } from "@/constants/types/apiTypes/store";
 import {
   CitiesDataItemType,
   CitiesDataType,
@@ -9,16 +9,16 @@ import {
   CommentItemOfStoreDataType,
   CommentSetOfStoreDataType,
 } from "@/constants/types/apiTypes/comment";
-import { StoreSetDataType } from "@/constants/types/apiTypes/store";
+import { SearchedGroupItemDataType } from "@/constants/types/apiTypes/group";
 
 // page
 export type DefaultDataContextType = {
   citiesData: CitiesDataType;
   commentsData: CommentSetOfStoreDataType;
-  nearbyGroupsData: GroupDataType[];
-  remainingGroupsData: GroupDataType[];
-  preferenceData: GroupDataType[];
-  newestData: GroupDataType[];
+  nearbyGroupsData: SearchedGroupItemDataType[];
+  remainingGroupsData: SearchedGroupItemDataType[];
+  preferenceData: SearchedGroupItemDataType[];
+  newestData: SearchedGroupItemDataType[];
   nearbyStoresData: StoreSetDataType;
   nearbyCity: CitiesDataItemType;
 };
@@ -32,7 +32,7 @@ export type CardsSectionProps = {
   title: string;
   subTitle?: string;
   handleSeeMore?: MouseEventHandler<HTMLButtonElement>;
-  cardsData: GroupDataType[] | StoreSetDataType | string;
+  cardsData: SearchedGroupItemDataType[] | StoreSetDataType | string;
 };
 
 // CommentCard

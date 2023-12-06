@@ -57,3 +57,8 @@ export type SearchKeysType = {
   storeFilter: number;
   storeTag: number;
 };
+
+export type IndexContentType = {
+  text: string;
+  style: string;
+};

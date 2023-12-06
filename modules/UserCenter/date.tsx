@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 import { TabType, UserProfileType } from "@/constants/globalTypes";
-import { MyGroupSetType } from "@/constants/types/apiTypes/group";
-import { GroupStatusType } from "./GroupManagement/data";
+import {
+  GroupStatusType,
+  MyGroupSetType,
+} from "@/constants/types/apiTypes/group";
 
 // page
 export type ProfileDataType = UserProfileType;

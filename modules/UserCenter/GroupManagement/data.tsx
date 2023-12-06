@@ -1,9 +1,8 @@
 import { MouseEventHandler, ReactNode, SetStateAction } from "react";
 import { GamesInStoreType } from "@/constants/types/apiTypes/game";
-import { GroupStatusKeyType } from "@/constants/types/groupDataType";
+import { GroupStatusType } from "@/constants/types/apiTypes/group";
 
 // page
-export type GroupStatusType = GroupStatusKeyType;
 
 export type StoreType = {
   storeId: number;

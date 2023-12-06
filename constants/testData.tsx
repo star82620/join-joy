@@ -1,8 +1,9 @@
 import { CommentSetOfStoreDataType } from "./types/apiTypes/comment";
-import { StoreSetDataType } from "./types/apiTypes/store";
-import { GroupDataType } from "./types/groupDataType";
+import { SearchedGroupItemDataType } from "./types/apiTypes/group";
 
-export const groupSet: GroupDataType[] = [
+import { StoreSetDataType } from "./types/apiTypes/store";
+
+export const groupSet: SearchedGroupItemDataType[] = [
   {
     groupId: 18,
     groupName: "咕咕咕咕",
@@ -48,7 +49,7 @@ export const groupSet: GroupDataType[] = [
         userName: "黑柴老大",
         status: "member",
         initNum: 2,
-        profileImg: null,
+        profileImg: "null",
       },
       {
         userId: 81,
