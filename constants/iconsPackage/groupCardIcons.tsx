@@ -1,6 +1,6 @@
-import { ImgType } from "../globalTypes";
+import { ImgSetType } from "../globalTypes";
 
-const groupCardIcons: ImgType = {
+const groupCardIcons: ImgSetType = {
   location: {
     src: "/images/group-card/icon-location.svg",
     alt: "icon-location",
@@ -21,7 +21,7 @@ const groupCardIcons: ImgType = {
 
 export default groupCardIcons;
 
-export const groupProfileTitles: ImgType = {
+export const groupProfileTitles: ImgSetType = {
   location: {
     src: "/images/group-profile/icon-location.svg",
     alt: "icon-location",

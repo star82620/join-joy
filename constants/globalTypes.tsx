@@ -6,7 +6,7 @@ export type ImgAttrType = {
   alt: string;
 };
 
-export type ImgType = Record<string, ImgAttrType>;
+export type ImgSetType = Record<string, ImgAttrType>;
 
 export type TabType = {
   tabId: string;

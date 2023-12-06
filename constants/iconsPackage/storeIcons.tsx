@@ -1,6 +1,6 @@
-import { ImgType } from "../globalTypes";
+import { ImgSetType } from "../globalTypes";
 
-export const storeIcons: ImgType = {
+export const storeIcons: ImgSetType = {
   wifiTag: {
     src: "/images/store/icon-wifitag.svg",
     alt: "wifiTag",
