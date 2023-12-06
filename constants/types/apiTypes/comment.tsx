@@ -8,6 +8,33 @@ export type CommentItemDataType = {
 
 export type CommentSetDataType = CommentItemDataType[];
 
+// 取得店家的評價
+// [TBD] 之後改 nickName 就可以用 Auth 裡的
+export type AuthResType = {
+  userId: number;
+  userName: string;
+  profileImg: string | null;
+};
+
+export type GroupOfCommentType = {
+  groupName: string;
+  groupDate: string;
+  memberNum: number;
+  storeId: number;
+  storeName: string;
+};
+
+export type CommentItemOfStoreDataType = {
+  commentBy: AuthResType;
+  group: GroupOfCommentType;
+  commentId: number;
+  msg: string;
+  commentDate: string;
+  score: number;
+};
+
+export type CommentSetOfStoreDataType = CommentItemOfStoreDataType[];
+
 // rating
 export type StoreRatingDetailIdType =
   | "groupId"

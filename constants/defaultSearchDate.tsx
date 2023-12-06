@@ -1,5 +1,5 @@
+import { StoreSetDataType } from "./types/apiTypes/store";
 import { GroupDataType } from "./types/groupDataType";
-import { StoreDataType } from "./types/storeDataType";
 
 export const defaultGroupsData: GroupDataType[] = [
   {
@@ -34,7 +34,7 @@ export const defaultGroupsData: GroupDataType[] = [
   },
 ];
 
-export const defaultStoresData: StoreDataType[] = [
+export const defaultStoresData: StoreSetDataType = [
   {
     storeId: 0,
     storeName: "",

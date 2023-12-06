@@ -1,13 +1,12 @@
 import React from "react";
 import Image from "../../FillImage";
 import ProfileImg from "../../ProfileImg";
+import convertImgSrc from "@/common/helpers/convertImgSrc";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { storeTagsIndex } from "@/constants/storeTagsIndex";
 import { storeIcons } from "@/constants/iconsPackage/storeIcons";
-import Link from "../../GeneralLink";
 import { defaultImages } from "@/constants/defaultImages";
 import { StoreCardProps } from "./data";
-import convertImgSrc from "@/common/helpers/convertImgSrc";
 
 export default function StoreCard({ data }: StoreCardProps) {
   const {

@@ -1,21 +1,25 @@
 import { MouseEventHandler, ReactNode } from "react";
-import { StoreDataType } from "@/constants/types/storeDataType";
-import { CommentDataType } from "@/constants/types/commentDataType";
+
 import { GroupDataType } from "@/constants/types/groupDataType";
 import {
   CitiesDataItemType,
   CitiesDataType,
 } from "@/constants/types/apiTypes/city";
+import {
+  CommentItemOfStoreDataType,
+  CommentSetOfStoreDataType,
+} from "@/constants/types/apiTypes/comment";
+import { StoreSetDataType } from "@/constants/types/apiTypes/store";
 
 // page
 export type DefaultDataContextType = {
   citiesData: CitiesDataType;
-  commentsData: CommentDataType[];
+  commentsData: CommentSetOfStoreDataType;
   nearbyGroupsData: GroupDataType[];
   remainingGroupsData: GroupDataType[];
   preferenceData: GroupDataType[];
   newestData: GroupDataType[];
-  nearbyStoresData: StoreDataType[];
+  nearbyStoresData: StoreSetDataType;
   nearbyCity: CitiesDataItemType;
 };
 
@@ -28,12 +32,12 @@ export type CardsSectionProps = {
   title: string;
   subTitle?: string;
   handleSeeMore?: MouseEventHandler<HTMLButtonElement>;
-  cardsData: GroupDataType[] | StoreDataType[] | string;
+  cardsData: GroupDataType[] | StoreSetDataType | string;
 };
 
 // CommentCard
 export type CommentCardProps = {
-  data: CommentDataType;
+  data: CommentItemOfStoreDataType;
 };
 
 // ----data----
@@ -43,7 +47,7 @@ export const defaultCityData: CitiesDataItemType = { Id: 0, CityName: "" };
 
 export const defaultCitiesData: CitiesDataType = [defaultCityData];
 
-export const defaultCommentsData: CommentDataType[] = [
+export const defaultCommentsData: CommentSetOfStoreDataType = [
   {
     commentBy: {
       userId: 0,

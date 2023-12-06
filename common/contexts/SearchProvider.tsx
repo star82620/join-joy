@@ -1,6 +1,8 @@
 import { SearchProviderProps, SearchKeysType } from "@/constants/globalTypes";
+import { StoreSetDataType } from "@/constants/types/apiTypes/store";
+
 import { GroupDataType } from "@/constants/types/groupDataType";
-import { StoreDataType } from "@/constants/types/storeDataType";
+
 import { useState, createContext, Children, SetStateAction } from "react";
 
 export const defaultSearchKeys: SearchKeysType = {
@@ -27,9 +29,9 @@ export const defaultSearchContext = {
   setActiveTab: (activeTab: string) => {},
   searchKeys: defaultSearchKeys,
   setSearchKeys: (searchKeys: SearchKeysType) => {},
-  searchResultsData: [] as StoreDataType[] | GroupDataType[],
+  searchResultsData: [] as StoreSetDataType | GroupDataType[],
   setSearchResultsData: (
-    searchResultsData: StoreDataType[] | GroupDataType[]
+    searchResultsData: StoreSetDataType | GroupDataType[]
   ) => {},
   totalCount: 0,
   setTotalCount: (totalCount: number) => {},
@@ -44,7 +46,7 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   const [activeTab, setActiveTab] = useState<string>("group");
 
   const [searchResultsData, setSearchResultsData] = useState<
-    StoreDataType[] | GroupDataType[]
+    StoreSetDataType | GroupDataType[]
   >([]);
 
   const [totalCount, setTotalCount] = useState(0);

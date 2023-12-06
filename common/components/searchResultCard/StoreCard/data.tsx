@@ -1,5 +1,5 @@
-import { StoreDataType } from "@/constants/types/storeDataType";
+import { StoreItemDataType } from "@/constants/types/apiTypes/store";
 
 export type StoreCardProps = {
-  data: StoreDataType;
+  data: StoreItemDataType;
 };

@@ -1,7 +1,6 @@
-// 專案結束要刪掉
-import { CommentDataType } from "./types/commentDataType";
+import { CommentSetOfStoreDataType } from "./types/apiTypes/comment";
+import { StoreSetDataType } from "./types/apiTypes/store";
 import { GroupDataType } from "./types/groupDataType";
-import { StoreDataType } from "./types/storeDataType";
 
 export const groupSet: GroupDataType[] = [
   {
@@ -200,7 +199,7 @@ export const groupSet: GroupDataType[] = [
   },
 ];
 
-export const storeSet: StoreDataType[] = [
+export const storeSet: StoreSetDataType = [
   {
     storeId: 3,
     storeName: "進來就要咕咕咕的店",
@@ -248,7 +247,7 @@ export const storeSet: StoreDataType[] = [
   },
 ];
 
-export const commentSet: CommentDataType[] = [
+export const commentSet: CommentSetOfStoreDataType = [
   {
     commentBy: {
       userId: 7,

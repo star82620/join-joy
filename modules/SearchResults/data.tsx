@@ -1,11 +1,10 @@
 import { SelectOptionType } from "@/common/components/Form/data";
+import { StoreSetDataType } from "@/constants/types/apiTypes/store";
 import { GroupDataType } from "@/constants/types/groupDataType";
-import { StoreDataType } from "@/constants/types/storeDataType";
-import { ChangeEventHandler } from "react";
 
 // page
 export type SearchResultsPageProps = {
-  defaultData: GroupDataType[] | StoreDataType[] | [];
+  defaultData: GroupDataType[] | StoreSetDataType | [];
   defaultCount: number;
 };
 
