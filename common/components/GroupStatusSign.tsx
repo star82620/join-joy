@@ -1,21 +1,20 @@
 import React from "react";
 import {
-  groupStatusSet,
-  myGroupStatusSet,
-  GroupStatusKeyType,
+  GroupStatusType,
   MyGroupStatusKeyType,
-} from "@/constants/groupStatusSet";
+} from "@/constants/types/apiTypes/group";
+import { groupStatusSet, myGroupStatusSet } from "@/constants/groupStatusSet";
 
 export type GroupStatusSignProps = {
   category: "group" | "mine";
-  status: GroupStatusKeyType | MyGroupStatusKeyType;
+  status: GroupStatusType | MyGroupStatusKeyType;
 };
 
 function isMyGroupStatusKey(key: any): key is MyGroupStatusKeyType {
   return ["pending", "member", "closed"].includes(key);
 }
 
-function isGroupStatusKey(key: any): key is GroupStatusKeyType {
+function isGroupStatusKey(key: any): key is GroupStatusType {
   return ["已結束", "已失效", "已預約", "開團中"].includes(key);
 }
 

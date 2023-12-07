@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileImg from "@/common/components/ProfileImg";
-import { CommentCardProps } from "../data";
 import Link from "@/common/components/GeneralLink";
+import { CommentCardProps } from "../data";
 
 export default function CommentCard({ comment }: CommentCardProps) {
   const { userName, commentContent, commentDate, userPhoto, userId } = comment;

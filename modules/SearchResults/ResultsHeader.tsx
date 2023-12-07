@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import FilterBlock from "./FilterBlock";
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import { FilterSetType, groupFilterSet, storeFilterSet } from "./data";
 import { useRouter } from "next/router";
 import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
+import { FilterSetType, groupFilterSet, storeFilterSet } from "./data";
 
 export default function ResultsHeader() {
   const searchContext = useContext(SearchContext);

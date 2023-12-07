@@ -1,4 +1,7 @@
-import { GroupStatusType, MemberStatusType } from "@/constants/globalTypes";
+import {
+  GroupStatusType,
+  MemberStatusType,
+} from "@/constants/types/apiTypes/group";
 
 // 團的狀態 groupStatus
 export default function setGroupStatus(

@@ -5,15 +5,14 @@ import { useAuth } from "@/common/hooks/useAuth";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import { groupStatusIndex } from "@/constants/wordIndexes";
-import { MemberStatusType } from "@/constants/globalTypes";
+import { useCheckMemberStatus } from "@/common/hooks/useCheckMemberStatus";
+import GroupStatusSign from "@/common/components/GroupStatusSign";
+import { GameInGroupNameType } from "@/constants/types/apiTypes/game";
 import { GroupDataContext } from "../index";
 import StoreLocation from "./StoreLocation";
 import Title from "./Title";
 import TagItem from "./TagItem";
 import GameItem from "./GameItem";
-import { GameItemType } from "../data";
-import { useCheckMemberStatus } from "@/common/hooks/useCheckMemberStatus";
-import GroupStatusSign from "@/common/components/GroupStatusSign";
 
 export default function GroupInfo() {
   const router = useRouter();
@@ -159,7 +158,7 @@ export default function GroupInfo() {
             <Title content="games" />
             <ul className="flex flex-col gap-4 md:gap-2">
               {!haveGames && "無"}
-              {games.map((game: GameItemType) => (
+              {games.map((game: GameInGroupNameType) => (
                 <GameItem key={game.gameId} game={game} />
               ))}
             </ul>

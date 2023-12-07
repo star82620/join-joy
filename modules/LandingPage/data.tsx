@@ -1,24 +1,24 @@
-import { StoreDataType } from "@/constants/types/storeDataType";
-import { CommentDataType } from "@/constants/types/commentDataType";
-import { GroupDataType } from "@/constants/types/groupDataType";
+import { MouseEventHandler, ReactNode } from "react";
+import { StoreSetDataType } from "@/constants/types/apiTypes/store";
 import {
-  AuthDataType,
   CitiesDataItemType,
   CitiesDataType,
-} from "@/constants/globalTypes";
-import { TabType } from "@/common/components/FileWrapper/data";
-import { globalIcons } from "@/constants/iconsPackage/globalIcons";
-import { MouseEventHandler, ReactNode } from "react";
+} from "@/constants/types/apiTypes/city";
+import {
+  CommentItemOfStoreDataType,
+  CommentSetOfStoreDataType,
+} from "@/constants/types/apiTypes/comment";
+import { SearchedGroupItemDataType } from "@/constants/types/apiTypes/group";
 
 // page
 export type DefaultDataContextType = {
   citiesData: CitiesDataType;
-  commentsData: CommentDataType[];
-  nearbyGroupsData: GroupDataType[];
-  remainingGroupsData: GroupDataType[];
-  preferenceData: GroupDataType[];
-  newestData: GroupDataType[];
-  nearbyStoresData: StoreDataType[];
+  commentsData: CommentSetOfStoreDataType;
+  nearbyGroupsData: SearchedGroupItemDataType[];
+  remainingGroupsData: SearchedGroupItemDataType[];
+  preferenceData: SearchedGroupItemDataType[];
+  newestData: SearchedGroupItemDataType[];
+  nearbyStoresData: StoreSetDataType;
   nearbyCity: CitiesDataItemType;
 };
 
@@ -31,12 +31,12 @@ export type CardsSectionProps = {
   title: string;
   subTitle?: string;
   handleSeeMore?: MouseEventHandler<HTMLButtonElement>;
-  cardsData: GroupDataType[] | StoreDataType[];
+  cardsData: SearchedGroupItemDataType[] | StoreSetDataType | string;
 };
 
 // CommentCard
 export type CommentCardProps = {
-  data: CommentDataType;
+  data: CommentItemOfStoreDataType;
 };
 
 // ----data----
@@ -46,7 +46,7 @@ export const defaultCityData: CitiesDataItemType = { Id: 0, CityName: "" };
 
 export const defaultCitiesData: CitiesDataType = [defaultCityData];
 
-export const defaultCommentsData: CommentDataType[] = [
+export const defaultCommentsData: CommentSetOfStoreDataType = [
   {
     commentBy: {
       userId: 0,

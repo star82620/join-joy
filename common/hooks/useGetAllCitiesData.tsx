@@ -1,5 +1,5 @@
-import { CitiesDataType } from "@/constants/globalTypes";
 import React, { useEffect, useState } from "react";
+import { CitiesDataType } from "@/constants/types/apiTypes/city";
 
 export function useGetAllCitiesData() {
   const [allCitiesData, setAllCitiesData] = useState<CitiesDataType>([]);

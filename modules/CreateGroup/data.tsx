@@ -1,16 +1,14 @@
 import React, { ChangeEventHandler, MouseEventHandler, ReactNode } from "react";
 import { SelectedGamesType } from "@/common/components/GameList/data";
-import { GameType, StoreType } from "@/constants/globalTypes";
 import { OptionItemType } from "@/common/components/Form/data";
+import {
+  RemainingSeatsType,
+  StoreInfoType,
+} from "@/constants/types/apiTypes/store";
+import { CitiesDataType } from "@/constants/types/apiTypes/city";
+import { GroupTagIdType } from "@/constants/types/apiTypes/group";
 
 // page
-export type CityDataType = {
-  Id: number;
-  CityName: string;
-};
-
-export type CitiesDataType = CityDataType[];
-
 export type CreateGroupPageProps = {
   citiesData: CitiesDataType;
 };
@@ -26,16 +24,7 @@ export type ValuesContextType = [
   React.Dispatch<React.SetStateAction<ValuesType>>
 ];
 
-export type SelectedTagIdType =
-  | "beginnerTag"
-  | "expertTag"
-  | "practiceTag"
-  | "openTag"
-  | "tutorialTag"
-  | "casualTag"
-  | "competitiveTag";
-
-export type SelectedTagsType = { id: SelectedTagIdType; text: string };
+export type SelectedTagsType = { id: GroupTagIdType; text: string };
 
 export type LocationKindType = "store" | "place";
 
@@ -83,13 +72,9 @@ export type StepOneProps = {
   citiesData: CitiesDataType;
 };
 
-export type RemainingSeatsType = {
-  time: string;
-  seats: number;
-};
-
+// state
 export type StoreDataType = {
-  stores: StoreType[];
+  stores: StoreInfoType[];
   remainingSeats: RemainingSeatsType[];
   acceptedNum: number;
 };
@@ -106,9 +91,6 @@ export type PlaceInputProps = {
 };
 
 // StepTwo
-export type GameItemType = GameType;
-
-export type GamesDataType = GameItemType[];
 
 export type QuestionType = {
   title: string;

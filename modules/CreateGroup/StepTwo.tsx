@@ -7,11 +7,11 @@ import { StepContext, ValuesContext } from "./index";
 import GameList from "@/common/components/GameList";
 import TitleBlock from "@/common/components/Form/TitleBlock";
 import RadioInput from "@/common/components/Form/RadioInput";
+import { GamesInStoreType } from "@/constants/types/apiTypes/game";
 import GroupTagSelector from "@/common/components/Form/GroupTagSelector";
 import TextArea from "@/common/components/Form/TextArea";
 import {
   questionsWithRadio,
-  GamesDataType,
   HandlePrivateGroupType,
   HandlePDescriptionValueType,
   StepTwoProps,
@@ -33,7 +33,7 @@ export default function StepTwo({
   const storeId = values.storeId;
 
   // 取得遊戲列表的資料
-  const [gamesData, setGamesData] = useState<GamesDataType>([]);
+  const [gamesData, setGamesData] = useState<GamesInStoreType>([]);
 
   const isGamesEmpty = gamesData.length === 0;
 

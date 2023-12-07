@@ -1,3 +1,17 @@
+// store of group location
+export type StoreInfoType = {
+  storeId: number;
+  storeName: string;
+  address: string;
+};
+
+// get-remaining-seats
+export type RemainingSeatsType = {
+  time: string;
+  seats: number;
+};
+
+// 取得店家資料
 export type StoreTagType =
   | "wifiTag"
   | "teachTag"
@@ -5,7 +19,7 @@ export type StoreTagType =
   | "mealout"
   | "buffet";
 
-export type StoreDataType = {
+export type StoreItemDataType = {
   storeId: number;
   storeName: string;
   address: string;
@@ -19,3 +33,5 @@ export type StoreDataType = {
   hqTag: boolean;
   popTag: boolean;
 };
+
+export type StoreSetDataType = StoreItemDataType[];

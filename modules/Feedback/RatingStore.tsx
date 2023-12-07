@@ -3,8 +3,10 @@ import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileImg from "@/common/components/ProfileImg";
 import TextArea from "@/common/components/Form/TextArea";
-import { RatingItemSet, RatingNameType, RatingStoreProps } from "./data";
 import RatingSelector from "./RatingSelector";
+import { StoreRatingDetailIdType } from "@/constants/types/apiTypes/comment";
+import { StoreRatingDetailSet } from "@/constants/wordIndexes";
+import { RatingStoreProps } from "./data";
 
 export default function RatingStore({
   groupId,
@@ -46,7 +48,8 @@ export default function RatingStore({
 
   // 儲存分數
   const handleScoreValue: MouseEventHandler<HTMLElement> = (e) => {
-    const ratingName = e.currentTarget.dataset.ratingname as RatingNameType;
+    const ratingName = e.currentTarget.dataset
+      .ratingname as StoreRatingDetailIdType;
     const target = e.target as HTMLElement;
     const scoreNum = Number(target.dataset.score);
 
@@ -79,18 +82,15 @@ export default function RatingStore({
             <div className="w-[70%] mdg:w-full">
               <h3 className="text-lg">各項目評分：</h3>
               <ul className="flex flex-col gap-6 mt-8 pl-4">
-                {RatingItemSet.map((item) => {
-                  const { title, ratingName } = item;
+                {StoreRatingDetailSet.map((item) => {
+                  const { id, text } = item;
                   return (
-                    <li
-                      key={ratingName}
-                      className="w-full flex justify-between"
-                    >
-                      <h4>{title}</h4>
+                    <li key={id} className="w-full flex justify-between">
+                      <h4>{text}</h4>
                       <RatingSelector
-                        key={ratingName}
-                        ratingName={ratingName}
-                        scoreValue={storeValues[ratingName]}
+                        key={id}
+                        ratingName={id}
+                        scoreValue={storeValues[id]}
                         handleScoreValue={handleScoreValue}
                       />
                     </li>

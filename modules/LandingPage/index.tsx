@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useRouter } from "next/router";
 import Image from "@/common/components/FillImage";
 import CardsSection from "./CardsSection";
 import CommentCard from "./CommentCard";
@@ -7,7 +8,6 @@ import SearchProvider, {
   SearchContext,
 } from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
-import { useRouter } from "next/router";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -33,8 +33,6 @@ export default function LandingPage() {
   //   setSearchKeys({ ...searchKeys, groupFilter: 2, page: 1, pageSize: 16 });
   //   router.push(`/search?tab=group`);
   // };
-
-  console.log("444", searchKeys);
 
   return (
     <section className="bg-contain bg-no-repeat bg-landing-banner-bg md:bg-landing-banner-bg-md md:bg-[center_top_-54px]">
@@ -111,7 +109,7 @@ export default function LandingPage() {
           <Image
             src="/images/landing-page/img-home-comments.svg"
             alt="img-home-comments"
-            widthProp="w-[410px]"
+            widthProp="w-[410px] md:w-full"
             heightProp="h-[150px]"
           />
         </div>

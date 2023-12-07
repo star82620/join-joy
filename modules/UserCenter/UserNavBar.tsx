@@ -2,9 +2,9 @@ import React from "react";
 import ProfileImg from "@/common/components/ProfileImg";
 import Image from "@/common/components/FillImage";
 import icons from "@/constants/iconsPackage/userNavIcons";
-import { UserNavBarProps, NavSetType } from "./date";
 import { useAuth } from "@/common/hooks/useAuth";
 import { useLogout } from "@/common/hooks/useLogout";
+import { UserNavBarProps, NavSetType } from "./date";
 
 const subNavOpenIcon = (
   <Image

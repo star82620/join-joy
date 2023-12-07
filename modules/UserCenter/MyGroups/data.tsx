@@ -1,4 +1,5 @@
-import { MyGroupsItemType, TabType } from "@/constants/globalTypes";
+import { TabType } from "@/constants/globalTypes";
+import { MyGroupItemType } from "@/constants/types/apiTypes/group";
 
 // GroupsList
 export type BtnItemType = {
@@ -31,7 +32,7 @@ export type GroupListProps = {
 
 // GroupItem
 export type GroupItemProps = {
-  group: MyGroupsItemType;
+  group: MyGroupItemType;
   btnSet: BtnSetType;
 };
 

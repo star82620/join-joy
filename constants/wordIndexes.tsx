@@ -1,7 +1,12 @@
-import { GroupTagItemType } from "./globalTypes";
+import { StoreRatingDetailSetType } from "./types/apiTypes/comment";
+import { GroupTagSetType } from "./types/apiTypes/group";
+
+export type IndexStringType = Record<string, string>;
+
+export type IndexNumberType = Record<number, string>;
 
 // 遊戲類型
-export const gameTypeIndex: Record<number, string> = {
+export const gameTypeIndex: IndexNumberType = {
   1: "不限定",
   2: "派對遊戲",
   3: "陣營遊戲",
@@ -15,18 +20,18 @@ export const gameTypeIndex: Record<number, string> = {
 };
 
 // 團員身份
-export const memberStatusIndex: Record<string, string> = {
+export const memberStatusIndex: IndexStringType = {
   leader: "團主",
   member: "團員",
 };
 
 // 揪團狀態
-export const groupStatusIndex: Record<string, string> = {
+export const groupStatusIndex: IndexStringType = {
   opening: "開團中",
   closed: "已結束",
 };
 
-export const citiesIndex: Record<number, string> = {
+export const citiesIndex: IndexNumberType = {
   1: "基隆市",
   2: "台北市",
   3: "新北市",
@@ -52,7 +57,7 @@ export const citiesIndex: Record<number, string> = {
 };
 
 // 揪團 tags
-export const groupTags: GroupTagItemType[] = [
+export const groupTags: GroupTagSetType = [
   { id: "beginnerTag", text: "新手團" },
   { id: "expertTag", text: "老手團" },
   { id: "practiceTag", text: "經驗切磋" },
@@ -60,4 +65,13 @@ export const groupTags: GroupTagItemType[] = [
   { id: "tutorialTag", text: "教學團" },
   { id: "casualTag", text: "輕鬆" },
   { id: "competitiveTag", text: "競技" },
+];
+
+// 店家評價細項
+export const StoreRatingDetailSet: StoreRatingDetailSetType = [
+  { id: "clean", text: "環境舒適" },
+  { id: "service", text: "服務態度" },
+  { id: "variety", text: "遊戲多樣性" },
+  { id: "value", text: "性價比" },
+  //[TBD] { id: "overall", text: "整體" },
 ];
