@@ -1,5 +1,4 @@
 import React, { Children, useContext, useEffect, useState } from "react";
-import fetchApi from "@/common/helpers/fetchApi";
 import Image from "@/common/components/FillImage";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";

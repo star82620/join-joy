@@ -5,14 +5,14 @@ import { useAuth } from "@/common/hooks/useAuth";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import { groupStatusIndex } from "@/constants/wordIndexes";
+import { useCheckMemberStatus } from "@/common/hooks/useCheckMemberStatus";
+import GroupStatusSign from "@/common/components/GroupStatusSign";
+import { GameInGroupNameType } from "@/constants/types/apiTypes/game";
 import { GroupDataContext } from "../index";
 import StoreLocation from "./StoreLocation";
 import Title from "./Title";
 import TagItem from "./TagItem";
 import GameItem from "./GameItem";
-import { useCheckMemberStatus } from "@/common/hooks/useCheckMemberStatus";
-import GroupStatusSign from "@/common/components/GroupStatusSign";
-import { GameInGroupNameType } from "@/constants/types/apiTypes/game";
 
 export default function GroupInfo() {
   const router = useRouter();

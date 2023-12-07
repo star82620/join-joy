@@ -7,6 +7,7 @@ import { StepContext, ValuesContext } from "./index";
 import GameList from "@/common/components/GameList";
 import TitleBlock from "@/common/components/Form/TitleBlock";
 import RadioInput from "@/common/components/Form/RadioInput";
+import { GamesInStoreType } from "@/constants/types/apiTypes/game";
 import GroupTagSelector from "@/common/components/Form/GroupTagSelector";
 import TextArea from "@/common/components/Form/TextArea";
 import {
@@ -15,7 +16,6 @@ import {
   HandlePDescriptionValueType,
   StepTwoProps,
 } from "./data";
-import { GamesInStoreType } from "@/constants/types/apiTypes/game";
 
 export default function StepTwo({
   selectedGames,

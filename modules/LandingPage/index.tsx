@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useRouter } from "next/router";
 import Image from "@/common/components/FillImage";
 import CardsSection from "./CardsSection";
 import CommentCard from "./CommentCard";
@@ -7,7 +8,6 @@ import SearchProvider, {
   SearchContext,
 } from "@/common/contexts/SearchProvider";
 import { GetDataContext } from "@/pages";
-import { useRouter } from "next/router";
 
 export default function LandingPage() {
   const router = useRouter();

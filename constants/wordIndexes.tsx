@@ -73,5 +73,5 @@ export const StoreRatingDetailSet: StoreRatingDetailSetType = [
   { id: "service", text: "服務態度" },
   { id: "variety", text: "遊戲多樣性" },
   { id: "value", text: "性價比" },
-  // { id: "overall", text: "整體" },
+  //[TBD] { id: "overall", text: "整體" },
 ];

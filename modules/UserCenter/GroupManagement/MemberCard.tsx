@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import Button from "@/common/components/GeneralButton";
 import ProfileImg from "@/common/components/ProfileImg";
-import { MemberCardContextType, MemberCardProps } from "./data";
-
 import Link from "@/common/components/GeneralLink";
 import { MemberCardContext } from "./MemberList";
 import { memberStatusIndex } from "@/constants/wordIndexes";
+import { MemberCardContextType, MemberCardProps } from "./data";
 
 function isOpen(date: string, startTime: string, endTime: string) {
   // 將日期和時間轉換為 Date 對象

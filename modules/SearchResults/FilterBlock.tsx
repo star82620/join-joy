@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { FilterSetItemType } from "./data";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import { SearchKeysType } from "@/constants/globalTypes";
+import { FilterSetItemType } from "./data";
 
 export default function FilterBlock({
   title,

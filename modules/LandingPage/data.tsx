@@ -1,5 +1,4 @@
 import { MouseEventHandler, ReactNode } from "react";
-
 import { StoreSetDataType } from "@/constants/types/apiTypes/store";
 import {
   CitiesDataItemType,

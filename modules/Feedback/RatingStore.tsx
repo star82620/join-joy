@@ -3,11 +3,10 @@ import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileImg from "@/common/components/ProfileImg";
 import TextArea from "@/common/components/Form/TextArea";
-
 import RatingSelector from "./RatingSelector";
-import { RatingStoreProps } from "./data";
 import { StoreRatingDetailIdType } from "@/constants/types/apiTypes/comment";
 import { StoreRatingDetailSet } from "@/constants/wordIndexes";
+import { RatingStoreProps } from "./data";
 
 export default function RatingStore({
   groupId,

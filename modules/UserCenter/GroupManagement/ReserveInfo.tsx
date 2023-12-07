@@ -5,9 +5,8 @@ import { GroupDataContext } from "@/pages/user-center/group/[id]";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
 import TitleBlock from "@/common/components/Form/TitleBlock";
-import { StoreLocationProps, groupTitleSet } from "./data";
-import Image from "@/common/components/FillImage";
 import GroupStatusSign from "@/common/components/GroupStatusSign";
+import { StoreLocationProps, groupTitleSet } from "./data";
 
 const StoreLocation = ({ storeData }: StoreLocationProps) => {
   if (!storeData) return null;

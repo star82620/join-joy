@@ -8,10 +8,10 @@ import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileImg from "@/common/components/ProfileImg";
 import TextArea from "@/common/components/Form/TextArea";
-import { MemberBlockProps, RatingMemberProps } from "./data";
 import { memberStatusIndex } from "@/constants/wordIndexes";
 import RatingSelector from "./RatingSelector";
 import { MemberRatingValuesType } from "@/constants/types/apiTypes/comment";
+import { MemberBlockProps, RatingMemberProps } from "./data";
 
 export default function RatingMember({
   groupId,

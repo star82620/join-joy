@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "@/common/components/GeneralLink";
-import { StepThreeProps } from "./data";
 import Image from "@/common/components/FillImage";
+import { StepThreeProps } from "./data";
 
 export default function StepThree({ createdGroupId }: StepThreeProps) {
   const router = useRouter();
