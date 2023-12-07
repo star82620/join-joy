@@ -1,4 +1,4 @@
-import { ImgType } from "./globalTypes";
+import { ImgSetType } from "./globalTypes";
 
 export const defaultImages: Record<string, string> = {
   userProfileImg: "/images/default-img/img-default-user-1.svg",
@@ -7,7 +7,7 @@ export const defaultImages: Record<string, string> = {
   subMemberProfileImg: "/images/default-img/img-default-user-3.svg",
 };
 
-export const mascotImages: Record<string, ImgType> = {
+export const mascotImages: ImgSetType = {
   "blue-1": {
     src: "/images/mascot/img-mascot-blue-1.svg",
     alt: "img-mascot-blue-1",

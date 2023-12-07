@@ -1,12 +1,12 @@
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-import { GameType } from "@/constants/types/groupDataType";
+import { GameItemType } from "@/constants/types/apiTypes/game";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<GameType | { error: string }>
+  res: NextApiResponse<GameItemType | { error: string }>
 ) {
   try {
     const apiParams: apiParamsType = {

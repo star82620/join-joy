@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { GroupDataContext } from "@/pages/user-center/group/[id]";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import MemberCard from "./MemberCard";
-import Link from "@/common/components/GeneralLink";
 import ReserveInfo from "./ReserveInfo";
 import GroupDetailForm from "./GroupDetailForm";
 import MemberList from "./MemberList";

@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import { SearchResultsProps, groupFilterSet, storeFilterSet } from "./data";
-import { groupSet, storeSet } from "@/constants/testData";
 import ResultsSection from "./ResultsSection";
 import ResultsHeader from "./ResultsHeader";
 import EmptyResults from "./EmptyResults";
+import { SearchResultsProps } from "./data";
 
 export default function SearchResults({
   defaultData,

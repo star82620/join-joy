@@ -1,21 +1,22 @@
-import { GameType } from "@/constants/globalTypes";
+import {
+  GameNameType,
+  GamesInStoreItemType,
+  GamesInStoreType,
+} from "@/constants/types/apiTypes/game";
 
-export type SelectedGameItemType = {
-  gameId: GameType["gameId"];
-  gameName: GameType["gameName"];
-};
+export type SelectedGameItemType = GameNameType;
 
 export type SelectedGamesType = SelectedGameItemType[];
 
 export type GameListProps = {
   category: "view" | "form";
-  gamesData: GameType[];
+  gamesData: GamesInStoreType;
   selectedGames?: SelectedGamesType;
   setSelectedGames?: React.Dispatch<React.SetStateAction<SelectedGamesType>>;
 };
 
 export type GameItemProps = {
-  game: GameType;
+  game: GamesInStoreItemType;
   isReadOnly: boolean;
   selectedGames?: SelectedGamesType;
   handleSelected?: React.ChangeEventHandler;

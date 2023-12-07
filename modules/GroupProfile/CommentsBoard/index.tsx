@@ -12,8 +12,8 @@ import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import CommentCard from "./CommentCard";
 import { mascotImages } from "@/constants/defaultImages";
 import { GroupDataContext } from "../index";
-import { CommentsDataItemType } from "../data";
-import { CommentTextAreaProps } from "./data";
+import { CommentItemDataType } from "@/constants/types/apiTypes/comment";
+import { CommentTextAreaProps } from "../data";
 
 const CommentTextArea = ({
   textLength,
@@ -106,7 +106,7 @@ export default function CommentsBoard() {
             />
           </div>
         )}
-        {commentsData.map((comment: CommentsDataItemType) => (
+        {commentsData.map((comment: CommentItemDataType) => (
           <CommentCard key={comment.commentDate} comment={comment} />
         ))}
       </div>

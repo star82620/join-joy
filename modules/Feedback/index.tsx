@@ -1,14 +1,13 @@
 import React, { FormEventHandler, useState } from "react";
+import { useRouter } from "next/router";
+import RatingStore from "./RatingStore";
+import RatingMember from "./RatingMember";
 import {
   FeedbackProps,
   defaultMemberValues,
   defaultStoreValues,
   feedbackStepType,
 } from "./data";
-import RatingStore from "./RatingStore";
-import RatingMember from "./RatingMember";
-import { useRouter } from "next/router";
-import { apiParamsType } from "@/common/helpers/fetchApi";
 
 export default function Feedback({
   groupId,
@@ -24,8 +23,6 @@ export default function Feedback({
   const [storeValues, setStoreValues] = useState(defaultStoreValues);
   const [memberValues, setMemberValues] = useState(defaultMemberValues);
   const [step, setStep] = useState<feedbackStepType>("store");
-
-  console.log("11111", memberRatingData);
 
   const membersData = memberRatingData.ratingStatus;
 

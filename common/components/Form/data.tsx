@@ -1,7 +1,10 @@
 import { ChangeEventHandler, MouseEventHandler, ReactNode } from "react";
 import { ButtonType } from "../GeneralButton/data";
 import { apiParamsType } from "@/common/helpers/fetchApi";
-import { GroupTagIdType, GroupTagItemType } from "@/constants/globalTypes";
+import {
+  GroupTagIdType,
+  GroupTagSetType,
+} from "@/constants/types/apiTypes/group";
 
 export type InputType = {
   label: string;
@@ -124,8 +127,8 @@ export type SelectInputProps = {
 // GroupTagSelector
 
 export type GroupTagSelectorProps = {
-  selectedTags: GroupTagItemType[];
-  setSelectedTags: React.Dispatch<React.SetStateAction<GroupTagItemType[]>>;
+  selectedTags: GroupTagSetType;
+  setSelectedTags: React.Dispatch<React.SetStateAction<GroupTagSetType>>;
 };
 
 export type ToggleTagsBlockType = MouseEventHandler<HTMLElement>;

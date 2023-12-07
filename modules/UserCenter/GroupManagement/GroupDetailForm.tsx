@@ -15,13 +15,14 @@ import {
 } from "@/common/components/GameList/data";
 import GroupTagSelector from "@/common/components/Form/GroupTagSelector";
 import { groupTags } from "@/constants/wordIndexes";
-import { GroupTagItemType } from "@/constants/globalTypes";
+
 import TextArea from "@/common/components/Form/TextArea";
 import RadioInput from "@/common/components/Form/RadioInput";
 import { questionsWithRadio } from "@/modules/CreateGroup/data";
 import Button from "@/common/components/GeneralButton";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
+import { GroupTagSetType } from "@/constants/types/apiTypes/group";
 
 export default function GroupDetailForm() {
   const dataContext = useContext(GroupDataContext);
@@ -55,7 +56,7 @@ export default function GroupDetailForm() {
   });
 
   const [selectedTags, setSelectedTags] =
-    useState<GroupTagItemType[]>(selectedTagsData);
+    useState<GroupTagSetType>(selectedTagsData);
 
   // 儲存 input value
   const handleInputValue: ChangeEventHandler<HTMLInputElement> = (e) => {

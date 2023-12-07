@@ -14,7 +14,7 @@ import {
   defaultGroupRatingsSet,
 } from "@/modules/UserCenter/date";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
-import { MyGroupsItemType } from "@/constants/globalTypes";
+import { MyGroupSetType } from "@/constants/types/apiTypes/group";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
@@ -40,10 +40,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const profileData =
     data.description === null ? { ...data, description: "" } : data;
 
-  console.log("欸欸欸", data.description === "null");
-  console.log("QQQ", { ...data, description: "" });
-  console.log("AAAA", profileData);
-
   // 取得所有揪團資料
   const groupsApiParams: apiParamsType = {
     apiPath: apiPaths["my-groups-list"],
@@ -55,7 +51,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // 取得個別揪團的評價狀態（揪團紀錄中全部的揪團）
   async function fetchGroupRatings(
-    groupsData: MyGroupsItemType[]
+    groupsData: MyGroupSetType
   ): Promise<GroupRatingsType[]> {
     const fetchPromises = groupsData.map(async (group) => {
       const commentsApiParams: apiParamsType = {
@@ -107,8 +103,6 @@ function UserCenterPage({
   groupRatingsSet,
 }: UserCenterPageProps) {
   const dataSet = { profileData, groupsData, groupRatingsSet };
-
-  console.log("ssss", profileData);
 
   return (
     <Layout pageCategory="user-center" mainClassName="pt-14 pb-20 md:py-9">

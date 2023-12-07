@@ -1,3 +1,3 @@
-import { GroupDataType } from "@/constants/types/groupDataType";
+import { SearchedGroupItemDataType } from "@/constants/types/apiTypes/group";
 
-export type GroupCardProps = { data: GroupDataType };
+export type GroupCardProps = { data: SearchedGroupItemDataType };

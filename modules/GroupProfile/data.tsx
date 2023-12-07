@@ -1,33 +1,30 @@
-import { MemberStatusType, StoreType } from "@/constants/globalTypes";
-import { GroupStatusKeyType } from "@/constants/groupStatusSet";
-import { GroupTagType } from "@/constants/types/groupDataType";
+import { TitleItemType } from "@/constants/globalTypes";
+import { GameInGroupNameType } from "@/constants/types/apiTypes/game";
+import { GroupDataType } from "@/constants/types/apiTypes/group";
+import { StoreInfoType } from "@/constants/types/apiTypes/store";
+import { MemberType } from "../UserCenter/GroupManagement/data";
+import { ChangeEventHandler, MouseEventHandler } from "react";
+import {
+  CommentItemDataType,
+  CommentSetDataType,
+} from "@/constants/types/apiTypes/comment";
 
 // page
 export type getStaticPropsProps = { params: Record<string, string> };
 
-export type GroupType = { groupId: number; groupName: string };
-
 export type GroupIdType = number;
-
-export type CommentsDataItemType = {
-  userId: number;
-  userName: string;
-  userPhoto: string;
-  commentContent: string;
-  commentDate: string;
-};
 
 export type GroupDataContextType = {
   groupId: GroupIdType;
   groupData: GroupDataType;
   currentMemberNum: number;
-  commentsData: CommentsDataItemType[];
+  commentsData: CommentSetDataType;
 };
 
 export type GroupProfilePageProps = {
   groupId: GroupIdType;
   groupData: GroupDataType;
-  commentsData: CommentsDataItemType[];
+  commentsData: CommentSetDataType;
 };
 
 export type GroupProfileProps = {
@@ -35,10 +32,10 @@ export type GroupProfileProps = {
 };
 
 export type CommentCardProps = {
-  comment: CommentsDataItemType;
+  comment: CommentItemDataType;
 };
 
-//
+// Title
 
 type IconKeyType =
   | "location"
@@ -49,58 +46,20 @@ type IconKeyType =
   | "games"
   | "description";
 
-export type TitleItemType = {
-  title: string;
-  img: {
-    src: string;
-    alt: string;
-  };
-};
-
 export type TitlesType = Record<IconKeyType, TitleItemType>;
 
 export type TitleProps = { content: IconKeyType };
-
-export type GameItemType = {
-  gameName: string;
-  gameId: string;
-  gameType: number;
-};
-
-export type MemberType = {
-  userId: number;
-  userName: string;
-  status: MemberStatusType;
-  initNum: number;
-  profileImg: string;
-};
-
-export type GroupDataType = {
-  groupName: string;
-  groupStatus: GroupStatusKeyType;
-  place: string | null;
-  store: StoreType | null;
-  date: string;
-  startTime: string;
-  endTime: string;
-  cost: string;
-  totalMemberNum: number;
-  games: GameItemType[];
-  description: string;
-  members: MemberType[];
-  tags: GroupTagType[];
-};
 
 export type TagItemProps = {
   tag: string;
 };
 
 export type GameItemProps = {
-  game: GameItemType;
+  game: GameInGroupNameType;
 };
 
 export type StoreLocationProps = {
-  store: StoreType | null;
+  store: StoreInfoType | null;
 };
 
 // MemberList
@@ -110,6 +69,14 @@ export type MemberCardProps = { member: MemberType; subNum: number };
 export type GroupInfoProps = {
   setApplyNum: (applyNum: number) => void;
   handleJoinSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+};
+
+// CommentsBoard
+export type CommentTextAreaProps = {
+  textLength: number;
+  commentValue: string;
+  handleInputValue: ChangeEventHandler<HTMLTextAreaElement>;
+  handleSubmitComment: MouseEventHandler<HTMLFormElement>;
 };
 
 // ---data---
@@ -166,6 +133,7 @@ export const titles: TitlesType = {
   },
 };
 
+// page
 export const defaultGroupData: GroupDataType = {
   groupName: "",
   groupStatus: "開團中",
@@ -194,7 +162,7 @@ export const defaultGroupData: GroupDataType = {
   tags: [],
 };
 
-export const defaultCommentData: CommentsDataItemType = {
+export const defaultCommentData: CommentItemDataType = {
   userId: 0,
   userName: "",
   userPhoto: "",

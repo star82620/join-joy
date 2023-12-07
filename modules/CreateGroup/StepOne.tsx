@@ -2,11 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import Image from "@/common/components/FillImage";
+import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 import icons from "@/constants/iconsPackage/createGroupIcons";
 import TitleBlock from "@/common/components/Form/TitleBlock";
-import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import { StepContext, ValuesContext } from "./index";
-import apiPaths from "@/constants/apiPaths";
+import TextInput from "@/common/components/Form/TextInput";
+import SelectInput from "@/common/components/Form/SelectInput";
+import RadioInput from "@/common/components/Form/RadioInput";
+import DatePickerInput from "@/common/components/Form/DatePickerInput";
 import {
   StepOneProps,
   StoreDataType,
@@ -16,12 +20,7 @@ import {
   HandleSelectedTimeType,
   PlaceInputProps,
   locationOptions,
-  // inputParamsSet,
 } from "./data";
-import TextInput from "@/common/components/Form/TextInput";
-import SelectInput from "@/common/components/Form/SelectInput";
-import RadioInput from "@/common/components/Form/RadioInput";
-import DatePickerInput from "@/common/components/Form/DatePickerInput";
 
 // 輸入自行輸入地點 input
 const PlaceInput = ({ place, handleInputValue }: PlaceInputProps) => {

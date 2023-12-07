@@ -5,9 +5,9 @@ import GroupItem from "./GroupItem";
 import { DataContext } from "@/pages/user-center";
 import setGroupStatus from "./setGroupStatus";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
+import apiPaths from "@/constants/apiPaths";
 import { defaultGroupsData } from "../date";
 import { tabs, BtnSetType, GroupListProps } from "./data";
-import apiPaths from "@/constants/apiPaths";
 
 function GroupsList({ pageCategory }: GroupListProps) {
   const router = useRouter();

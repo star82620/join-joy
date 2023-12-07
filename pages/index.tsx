@@ -24,7 +24,7 @@ import {
   defaultGroupsData,
   defaultStoresData,
 } from "@/constants/defaultSearchDate";
-import { CitiesDataItemType } from "@/constants/globalTypes";
+import { CitiesDataItemType } from "@/constants/types/apiTypes/city";
 
 const inter = Inter({ subsets: ["latin"] });
 

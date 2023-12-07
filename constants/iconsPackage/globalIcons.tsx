@@ -1,6 +1,6 @@
-import { ImgType } from "../globalTypes";
+import { ImgSetType } from "../globalTypes";
 
-export const globalIcons: Record<string, ImgType> = {
+export const globalIcons: ImgSetType = {
   "arrow-left": {
     src: "/images/landing-page/icon-arrow-left.svg",
     alt: "icon-arrow-left",

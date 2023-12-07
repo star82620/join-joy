@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import TitleBlock from "./TitleBlock";
 import Image from "../FillImage";
 import icons from "@/constants/iconsPackage/createGroupIcons";
-import { GroupTagItemType } from "@/constants/globalTypes";
 import { groupTags } from "@/constants/wordIndexes";
 import {
   GroupTagSelectorProps,
   HandleSelectedTagType,
   ToggleTagsBlockType,
 } from "./data";
+import { GroupTagItemType } from "@/constants/types/apiTypes/group";
 
 export default function GroupTagSelector({
   selectedTags,

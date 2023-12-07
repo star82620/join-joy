@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import Rating from "./Rating";
 import Link from "../GeneralLink";
+import Rating from "./Rating";
 import { CommentCardProps } from "./data";
 
 export default function CommentCard({ comment }: CommentCardProps) {

@@ -1,12 +1,11 @@
 import React, { MouseEventHandler, useContext, useEffect } from "react";
+import { useRouter } from "next/router";
+import Button from "@/common/components/GeneralButton";
+import Image from "@/common/components/FillImage";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import GroupCard from "@/common/components/searchResultCard/GroupCard";
 import StoreCard from "@/common/components/searchResultCard/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
-
-import Button from "@/common/components/GeneralButton";
-import Image from "@/common/components/FillImage";
-import { useRouter } from "next/router";
 import { useGetSearchResult } from "@/common/hooks/useGetSearchResult";
 
 export default function ResultsSection({}) {

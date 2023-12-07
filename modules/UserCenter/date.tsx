@@ -1,17 +1,16 @@
 import { ReactNode } from "react";
+import { TabType, UserProfileType } from "@/constants/globalTypes";
 import {
-  MyGroupsItemType,
   GroupStatusType,
-  TabType,
-  UserProfileType,
-} from "@/constants/globalTypes";
+  MyGroupSetType,
+} from "@/constants/types/apiTypes/group";
 
 // page
 export type ProfileDataType = UserProfileType;
 
 export type GroupDataSetType = {
-  member: MyGroupsItemType[];
-  leader: MyGroupsItemType[];
+  member: MyGroupSetType;
+  leader: MyGroupSetType;
 };
 
 export type UserCenterPageProps = {

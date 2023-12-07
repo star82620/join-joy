@@ -3,20 +3,15 @@ import React, {
   MouseEventHandler,
   useCallback,
   useEffect,
-  useState,
 } from "react";
 import Button from "@/common/components/GeneralButton";
 import ModalWrapper from "@/common/components/ModalWrapper";
 import ProfileImg from "@/common/components/ProfileImg";
 import TextArea from "@/common/components/Form/TextArea";
-import {
-  MemberBlockProps,
-  MemberDataItemType,
-  MemberValuesType,
-  RatingMemberProps,
-} from "./data";
 import { memberStatusIndex } from "@/constants/wordIndexes";
 import RatingSelector from "./RatingSelector";
+import { MemberRatingValuesType } from "@/constants/types/apiTypes/comment";
+import { MemberBlockProps, RatingMemberProps } from "./data";
 
 export default function RatingMember({
   groupId,
@@ -31,8 +26,6 @@ export default function RatingMember({
     return item.isRated === false;
   });
 
-  console.log("耶", filteredData);
-
   // 生成每個團員的預設資料
   const defaultMemberRating = filteredData.reduce((members, item) => {
     members[item.memberId] = {
@@ -42,7 +35,7 @@ export default function RatingMember({
       comment: "",
     };
     return members;
-  }, {} as MemberValuesType);
+  }, {} as MemberRatingValuesType);
 
   console.log("emberValues", memberValues);
 
