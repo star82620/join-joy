@@ -18,8 +18,6 @@ export default function CardsSection({
   handleSeeMore,
   cardsData,
 }: CardsSectionProps) {
-  console.log(title, cardsData);
-
   const isEmpty = typeof cardsData === "string";
 
   const isStore = cardCategory === "store";
@@ -52,17 +50,21 @@ export default function CardsSection({
 
   const Cards = () => {
     if (isEmpty) return <p className={textColor}>目前還沒有揪團 (〒︿〒)</p>;
-    return cardsData.map((item) => {
-      const isStore = "storeId" in item;
-      return (
-        <div
-          key={isStore ? item.storeId : item.groupId}
-          className={`w-full md-min-w-80 ${widthClass} ${cardStyle}`}
-        >
-          {isStore ? <StoreCard data={item} /> : <GroupCard data={item} />}
-        </div>
-      );
-    });
+    return (
+      <>
+        {cardsData.map((item) => {
+          const isStore = "storeId" in item;
+          return (
+            <div
+              key={isStore ? item.storeId : item.groupId}
+              className={`w-full md-min-w-80 ${widthClass} ${cardStyle}`}
+            >
+              {isStore ? <StoreCard data={item} /> : <GroupCard data={item} />}
+            </div>
+          );
+        })}
+      </>
+    );
   };
 
   return (

@@ -34,8 +34,6 @@ export default function LandingPage() {
   //   router.push(`/search?tab=group`);
   // };
 
-  console.log("444", searchKeys);
-
   return (
     <section className="bg-contain bg-no-repeat bg-landing-banner-bg md:bg-landing-banner-bg-md md:bg-[center_top_-54px]">
       <div className="container flex flex-col items-center pt-11 md:pt-12 pb-[164px] md:pb-[120px]">
