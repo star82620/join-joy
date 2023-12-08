@@ -6,20 +6,22 @@ import {
 } from "@/constants/types/apiTypes/group";
 
 // page
-export type ProfileDataType = UserProfileType;
-
-export type GroupDataSetType = {
-  member: MyGroupSetType;
-  leader: MyGroupSetType;
+export type ProfileSettingPageProps = {
+  profileData: UserProfileType;
 };
 
-export type UserCenterPageProps = {
-  profileData: ProfileDataType;
-  groupsData: GroupDataSetType;
-  groupRatingsSet: GroupRatingsType[];
-};
+// export type GroupDataSetType = {
+//   member: MyGroupSetType;
+//   leader: MyGroupSetType;
+// };
 
-export type DataContextType = UserCenterPageProps;
+// export type UserCenterPageProps = {
+//   profileData: ProfileDataType;
+//   groupsData: GroupDataSetType;
+//   groupRatingsSet: GroupRatingsType[];
+// };
+
+// export type DataContextType = UserCenterPageProps;
 
 export type RatingContentType = {
   memberId: number;
@@ -39,6 +41,11 @@ export type GroupRatingsType = {
   id: number;
   groupStatus: GroupStatusType;
   data: GroupRatingItemType;
+};
+
+// Wrapper
+export type WrapperProps = {
+  children: ReactNode;
 };
 
 // UserNavBar
@@ -83,72 +90,77 @@ export type TabSectionProps = {
   setActiveTab: (activeTab: string) => void;
 };
 
+// ProfileSetting
+export type ProfileSettingProps = {
+  data: UserProfileType;
+};
+
 // ----data----
 
-export const defaultProfileData: ProfileDataType = {
-  userId: 0,
-  nickName: "",
-  email: "",
-  description: "",
-  games: [],
-  cities: [],
-};
+// export const defaultProfileData: ProfileDataType = {
+//   userId: 0,
+//   nickName: "",
+//   email: "",
+//   description: "",
+//   games: [],
+//   cities: [],
+// };
 
-export const defaultGroupsData: GroupDataSetType = {
-  leader: [
-    {
-      groupId: 0,
-      groupName: "",
-      startTime: "",
-      endTime: "",
-      totalMemberNum: 0,
-      currentPeople: 0,
-      place: null,
-      store: {
-        storeId: 0,
-        storeName: "",
-        address: "",
-      },
-      memberStatus: "leader",
-      groupStatus: "已結束",
-    },
-  ],
-  member: [
-    {
-      groupId: 0,
-      groupName: "",
-      startTime: "",
-      endTime: "",
-      totalMemberNum: 0,
-      currentPeople: 0,
-      place: null,
-      store: {
-        storeId: 0,
-        storeName: "",
-        address: "",
-      },
-      memberStatus: "member",
-      groupStatus: "已結束",
-    },
-  ],
-};
+// export const defaultGroupsData: GroupDataSetType = {
+//   leader: [
+//     {
+//       groupId: 0,
+//       groupName: "",
+//       startTime: "",
+//       endTime: "",
+//       totalMemberNum: 0,
+//       currentPeople: 0,
+//       place: null,
+//       store: {
+//         storeId: 0,
+//         storeName: "",
+//         address: "",
+//       },
+//       memberStatus: "leader",
+//       groupStatus: "已結束",
+//     },
+//   ],
+//   member: [
+//     {
+//       groupId: 0,
+//       groupName: "",
+//       startTime: "",
+//       endTime: "",
+//       totalMemberNum: 0,
+//       currentPeople: 0,
+//       place: null,
+//       store: {
+//         storeId: 0,
+//         storeName: "",
+//         address: "",
+//       },
+//       memberStatus: "member",
+//       groupStatus: "已結束",
+//     },
+//   ],
+// };
 
-export const defaultGroupRatingsSet: GroupRatingsType[] = [
-  {
-    id: 0,
-    groupStatus: "已結束",
-    data: {
-      isAllRated: false,
-      ratingStatus: [
-        {
-          memberId: 0,
-          memberName: "",
-          memberPhoto: null,
-          isRated: false,
-          score: 0,
-          comment: null,
-        },
-      ],
-    },
-  },
-];
+// export const defaultGroupRatingsSet: GroupRatingsType[] = [
+//   {
+//     id: 0,
+//     groupStatus: "已結束",
+//     data: {
+//       isAllRated: false,
+//       ratingStatus: [
+//         {
+//           memberId: 0,
+//           memberName: "",
+//           memberPhoto: null,
+//           isRated: false,
+//           score: 0,
+//           comment: null,
+//         },
+//       ],
+//     },
+//   },
+// ];
