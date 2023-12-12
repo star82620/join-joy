@@ -6,7 +6,7 @@ import Layout from "@/common/components/Layout";
 import Wrapper from "@/modules/UserCenter/Wrapper";
 import GroupsList from "@/modules/UserCenter/MyGroups/GroupsList";
 import { MyGroupSetType } from "@/constants/types/apiTypes/group";
-import { MyGroupsLeaderPageProps } from "@/modules/UserCenter/date";
+import { MyGroupsPageProps } from "@/modules/UserCenter/date";
 import {
   GroupRatingStatusItemType,
   GroupRatingStatusSetType,
@@ -96,8 +96,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function MyGroupsLeaderPage({
   groupSetData,
   ratingStatusSet,
-}: MyGroupsLeaderPageProps) {
-  console.log("groupSetData", groupSetData, "ratingStatusSet", ratingStatusSet);
+}: MyGroupsPageProps) {
   return (
     <Layout pageCategory="user-center">
       <Wrapper>

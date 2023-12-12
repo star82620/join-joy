@@ -48,7 +48,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function ProfileSettingPage({
   profileData,
 }: ProfileSettingPageProps) {
-  console.log(profileData);
   return (
     <Layout pageCategory="user-center">
       <Wrapper>

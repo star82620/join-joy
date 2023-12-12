@@ -76,6 +76,27 @@ function GroupItem({ group, btnSet, ratingStatusSet }: GroupItemProps) {
   const groupTime = `${formattedStartTime} - ${formattedEndTime}`;
   const groupIdString = groupId.toString();
 
+  const BtnComponent = () => {
+    if (isWithoutBtn)
+      return (
+        <p className="w-full text-center">{myGroupStatusSet[status].text}</p>
+      );
+
+    return (
+      <Button
+        type="button"
+        appearance="black"
+        rounded
+        value={groupIdString}
+        isDisabled={btnDisabled}
+        onClick={btnOnClick}
+        className="w-[84px]"
+      >
+        <span className="text-sm text-center whitespace-nowrap">{btnText}</span>
+      </Button>
+    );
+  };
+
   return (
     <React.Fragment key={groupId}>
       <li className="md:hidden w-full flex justify-between items-center p-2 bg-yellow-tint text-center text-sm">
@@ -94,24 +115,7 @@ function GroupItem({ group, btnSet, ratingStatusSet }: GroupItemProps) {
           {currentPeople}/{totalMemberNum}
         </p>
         <div className="flex items-center justify-center w-[10%] min-h-[42px]">
-          {!isWithoutBtn ? (
-            <Button
-              type="button"
-              appearance="black"
-              rounded
-              value={groupIdString}
-              isDisabled={btnDisabled}
-              onClick={btnOnClick}
-            >
-              <span className="text-sm text-center whitespace-nowrap">
-                {btnText}
-              </span>
-            </Button>
-          ) : (
-            <p className="w-full text-center">
-              {myGroupStatusSet[status].text}
-            </p>
-          )}
+          <BtnComponent />
         </div>
       </li>
       <div className="h-px bg-gray-200 last-of-type:hidden md:hidden"></div>
@@ -135,25 +139,7 @@ function GroupItem({ group, btnSet, ratingStatusSet }: GroupItemProps) {
               <span className="ml-1.5">{groupTime}</span>
             </p>
           </div>
-          {!isWithoutBtn ? (
-            <Button
-              type="button"
-              appearance="black"
-              className="w-20"
-              rounded
-              value={groupIdString}
-              isDisabled={btnDisabled}
-              onClick={btnOnClick}
-            >
-              <span className="text-sm text-center whitespace-nowrap">
-                {btnText}
-              </span>
-            </Button>
-          ) : (
-            <p className="w-full text-center">
-              {myGroupStatusSet[status].text}
-            </p>
-          )}
+          <BtnComponent />
         </div>
       </li>
     </React.Fragment>

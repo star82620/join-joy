@@ -11,7 +11,7 @@ export type ProfileSettingPageProps = {
   profileData: UserProfileType;
 };
 
-export type MyGroupsLeaderPageProps = {
+export type MyGroupsPageProps = {
   groupSetData: MyGroupSetType;
   ratingStatusSet: GroupRatingStatusSetType[];
 };
