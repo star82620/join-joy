@@ -5,9 +5,9 @@ import { WrapperProps } from "./date";
 
 export default function Wrapper({ children }: WrapperProps) {
   return (
-    <section className="container flex items-start gap-9 lg:gap-6 pt-14 pb-20 md:py-9">
-      <div className="w-[216px] h-[1500px] md:hidden">
-        <ModalWrapper title="" layout="secondary">
+    <section className="container flex items-start gap-9 lg:gap-6 pt-14 pb-20 md:py-9 grow h-full">
+      <div className="w-[216px] md:hidden flex-shrink-0 h-full">
+        <ModalWrapper title="" layout="secondary" fill>
           {/* <UserNavBar
             navSet={navSet}
             activeNav={activeNav}

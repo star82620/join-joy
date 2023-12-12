@@ -15,7 +15,9 @@ export default function Layout({
     <div className="min-h-screen flex flex-col">
       <CustomHead pageCategory={pageCategory} />
       <Header pageCategory={pageCategory} />
-      <main className={`grow ${bgColor} ${mainClassName}`}>{children}</main>
+      <main className={`grow flex flex-col ${bgColor} ${mainClassName}`}>
+        {children}
+      </main>
       <Footer pageCategory={pageCategory} />
     </div>
   );

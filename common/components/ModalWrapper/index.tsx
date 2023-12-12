@@ -5,15 +5,15 @@ export default function ModalWrapper({
   title,
   children,
   layout,
+  fill,
 }: ModalWrapperProps) {
   const { haveShadow, haveHeadDots } = layoutStyles[layout || "default"];
   const isSecondary = layout === "secondary";
-
+  const shadowStyle = haveShadow ? "shadow-window" : "";
+  const fillStyle = !!fill ? "min-h-full" : "";
   return (
     <div
-      className={`w-full flex flex-col rounded-t-lg ${
-        haveShadow ? "shadow-window" : ""
-      }`}
+      className={`w-full flex flex-col rounded-t-lg ${shadowStyle} ${fillStyle}`}
     >
       <section className="flex justify-between items-center bg-yellow-neutral border-[3px] border-b-2 rounded-t-lg px-3 py-2 text-center">
         {haveHeadDots && (
