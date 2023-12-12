@@ -99,44 +99,46 @@ function GroupItem({ group, btnSet, ratingStatusSet }: GroupItemProps) {
 
   return (
     <React.Fragment key={groupId}>
-      <li className="md:hidden w-full flex justify-between items-center p-2 bg-yellow-tint text-center text-sm">
-        <p className="w-[8%] text-xs">
+      <li className="mdg:hidden w-full flex justify-between items-center p-2 bg-yellow-tint text-center text-sm">
+        <p className="w-[10%] text-xs">
           <span className={`groupStatusDot ${statusStyle}`}>{statusText}</span>
         </p>
         <p className="w-[20%] truncate text-sm">
           <Link href={`/group/${groupId}`}>{groupName}</Link>
         </p>
         <p className="w-[20%] truncate">{location}</p>
-        <p className="w-[20%] flex flex-wrap justify-center gap-2">
+        <p className="w-[15%] flex flex-wrap justify-center gap-2">
           <span className="">{groupDate}</span>
           <span className="">{groupTime}</span>
         </p>
-        <p className="w-[10%]">
+        <p className="w-[8%]">
           {currentPeople}/{totalMemberNum}
         </p>
-        <div className="flex items-center justify-center w-[10%] min-h-[42px]">
+        <div className="flex items-center justify-center w-[15%] min-h-[42px]">
           <BtnComponent />
         </div>
       </li>
-      <div className="h-px bg-gray-200 last-of-type:hidden md:hidden"></div>
-      <li className="hidden md:block p-4 bg-yellow-tint">
+      <div className="h-px bg-gray-200 last-of-type:hidden mdg:hidden"></div>
+      <li className="hidden mdg:block p-4 bg-yellow-tint">
         <span className={`groupStatusDot ${statusStyle} text-xs`}>
           {statusText}
         </span>
-        <div className="flex justify-between font-semibold">
-          <Link href={`/group/${groupId}`}>{groupName}</Link>
-          <p className="aheadIcon before:w-5 before:h-5 before:bg-group-card-member text-sm">
+        <div className="w-full flex justify-between font-semibold">
+          <div className="truncate">
+            <Link href={`/group/${groupId}`}>{groupName}</Link>
+          </div>
+          <div className="w-[35%] text-right aheadIcon before:w-5 before:h-5 before:bg-group-card-member text-sm">
             {currentPeople}/{totalMemberNum}
-          </p>
+          </div>
         </div>
-        <div className="flex justify-between mt-4 text-xs">
+        <div className="flex justify-between items-end mt-4 text-xs">
           <div className="flex flex-col justify-center items-start">
             <p className="aheadIcon before:w-4 before:h-4 before:bg-group-card-location">
               {location}
             </p>
-            <p className="aheadIcon before:w-4 before:h-4 before:bg-group-card-time mt-0.5">
-              <span>{groupDate}</span>
-              <span className="ml-1.5">{groupTime}</span>
+            <p className="flex flex-wrap aheadIcon before:w-4 before:h-4 before:bg-group-card-time mt-0.5">
+              <span className="mr-1.5 whitespace-nowrap">{groupDate}</span>
+              <span className="whitespace-nowrap">{groupTime}</span>
             </p>
           </div>
           <BtnComponent />

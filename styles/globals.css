@@ -189,3 +189,7 @@ a#scroll-btn:before {
     min-width: 300px;
   }
 }
+
+.min-w-20 {
+  min-width: 80px;
+}

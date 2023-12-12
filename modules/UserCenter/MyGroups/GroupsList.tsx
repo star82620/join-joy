@@ -143,16 +143,16 @@ export default function GroupsList({
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
-        <div className="mt-10 md:mt-4">
-          <div className="w-full flex justify-between items-center gap-3 md:gap-2 p-2 mb-3 border-b-2 text-center font-semibold leading-[1.2] mdg:text-sm md:hidden">
-            <p className="w-[8%]">狀態</p>
+        <div className="mt-10 mdg:mt-4">
+          <div className="w-full flex justify-between items-center gap-3 p-2 mb-3 border-b-2 text-center font-semibold leading-[1.2] mdg:text-sm mdg:hidden">
+            <p className="w-[10%]">狀態</p>
             <p className="w-[20%]">名稱</p>
             <p className="w-[20%]">地點</p>
-            <p className="w-[20%]">時間</p>
-            <p className="w-[10%]">人數</p>
-            <p className="w-[10%]">{btnTitle}</p>
+            <p className="w-[15%]">時間</p>
+            <p className="w-[8%]">人數</p>
+            <p className="w-[15%]">{btnTitle}</p>
           </div>
-          <ul className="w-full flex flex-col gap-1 md:gap-3">
+          <ul className="w-full flex flex-col gap-1 mdg:gap-3">
             {filteredData.map((group) => (
               <GroupItem
                 key={group.groupId}
