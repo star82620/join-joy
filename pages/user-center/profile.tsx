@@ -8,6 +8,30 @@ import ProfileSetting from "@/modules/UserCenter/ProfileSetting";
 import { UserProfileType } from "@/constants/globalTypes";
 import { ProfileSettingPageProps } from "@/modules/UserCenter/date";
 
+async function getData(authToken: string) {
+  try {
+    // 取得會員資料
+    const profileApiParams: apiParamsType = {
+      apiPath: apiPaths["get-my-profile"],
+      method: "GET",
+      authToken: authToken,
+    };
+    const profileRes = await fetchApi(profileApiParams);
+    // 可能回傳解析內容，或者 null
+
+    if (!profileRes.data) return null;
+
+    const data: UserProfileType = await profileRes?.data;
+
+    const profileData =
+      data.description === null ? { ...data, description: "" } : data;
+
+    return profileData;
+  } catch (error) {
+    console.log("Have a mistake QQ :", error);
+  }
+}
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { req } = context;
 
@@ -21,24 +45,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  let profileData = null;
-
-  try {
-    // 取得會員資料
-    const profileApiParams: apiParamsType = {
-      apiPath: apiPaths["get-my-profile"],
-      method: "GET",
-      authToken: authToken,
-    };
-    const profileRes = await fetchApi(profileApiParams);
-    const data: UserProfileType = await profileRes?.data;
-    if (profileRes.data) {
-      profileData =
-        data.description === null ? { ...data, description: "" } : data;
-    }
-  } catch (error) {
-    console.log("Have a mistake QQ :", error);
-  }
+  const profileData = await getData(authToken);
 
   return {
     props: { profileData },
