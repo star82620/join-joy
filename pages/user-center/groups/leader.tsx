@@ -23,27 +23,63 @@ async function fetchGroupRatings(
       method: "GET",
       authToken: authToken,
     };
-    return fetchApi(commentsApiParams)
-      .then((commentsRes) => {
-        const commentsData: GroupRatingStatusItemType | null =
-          commentsRes?.data ?? null;
-        return {
-          id: group.groupId,
-          groupStatus: group.groupStatus,
-          data: commentsData,
-        };
-      })
-      .catch((error) => {
-        console.log(error);
-        return {
-          id: group.groupId,
-          groupStatus: group.groupStatus,
-          data: null,
-        };
-      });
+
+    try {
+      const commentsRes = await fetchApi(commentsApiParams);
+
+      const commentsData: GroupRatingStatusItemType | null =
+        commentsRes?.data ?? null;
+
+      return {
+        id: group.groupId,
+        groupStatus: group.groupStatus,
+        data: commentsData,
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        id: group.groupId,
+        groupStatus: group.groupStatus,
+        data: null,
+      };
+    }
   });
 
   return await Promise.all(fetchPromises);
+}
+
+async function getData(authToken: string) {
+  let groupSetData: MyGroupSetType | null = null;
+  let ratingStatusSet: GroupRatingStatusSetType[] | null = null;
+
+  try {
+    // 取得所有揪團資料
+    const groupsApiParams: apiParamsType = {
+      apiPath: apiPaths["my-groups-list"],
+      method: "GET",
+      authToken: authToken,
+    };
+
+    const groupsRes = await fetchApi(groupsApiParams);
+
+    if (!groupsRes.data) return { groupSetData: null, ratingStatusSet: null };
+
+    groupSetData = await groupsRes?.data?.leader;
+
+    // 取得所有團的評價狀態
+    if (!groupSetData)
+      return { groupSetData: groupSetData, ratingStatusSet: null };
+
+    const closedGroups = groupSetData.filter((group) => {
+      return group.groupStatus === "已結束";
+    });
+
+    ratingStatusSet = await fetchGroupRatings(closedGroups, authToken);
+  } catch (error) {
+    console.log(error);
+  }
+
+  return { groupSetData, ratingStatusSet };
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -59,37 +95,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  let groupSetData: MyGroupSetType | null = null;
-  let ratingStatusSet: GroupRatingStatusSetType[] | null = null;
-
-  try {
-    // 取得所有揪團資料
-    const groupsApiParams: apiParamsType = {
-      apiPath: apiPaths["my-groups-list"],
-      method: "GET",
-      authToken: authToken,
-    };
-
-    const groupsRes = await fetchApi(groupsApiParams);
-
-    if (groupsRes.data) {
-      groupSetData = await groupsRes.data.leader;
-
-      if (!groupSetData) return;
-
-      const closedGroups = groupSetData.filter((group) => {
-        return group.groupStatus === "已結束";
-      });
-
-      // 取得所有團的評價狀態
-      ratingStatusSet = await fetchGroupRatings(closedGroups, authToken);
-    }
-  } catch (error) {
-    console.log(error);
-  }
+  const { groupSetData, ratingStatusSet } = await getData(authToken);
 
   return {
-    props: { groupSetData, ratingStatusSet },
+    props: {
+      groupSetData,
+      ratingStatusSet,
+    },
   };
 }
 

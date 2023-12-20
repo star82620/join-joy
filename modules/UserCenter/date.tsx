@@ -121,15 +121,6 @@ export const tabs: TabType[] = [
   },
 ];
 
-// export const defaultProfileData: ProfileDataType = {
-//   userId: 0,
-//   nickName: "",
-//   email: "",
-//   description: "",
-//   games: [],
-//   cities: [],
-// };
-
 export const defaultGroupsData: MyGroupSetType = [
   {
     groupId: 0,
@@ -148,23 +139,3 @@ export const defaultGroupsData: MyGroupSetType = [
     groupStatus: "已結束",
   },
 ];
-
-// export const defaultGroupRatingsSet: GroupRatingsType[] = [
-//   {
-//     id: 0,
-//     groupStatus: "已結束",
-//     data: {
-//       isAllRated: false,
-//       ratingStatus: [
-//         {
-//           memberId: 0,
-//           memberName: "",
-//           memberPhoto: null,
-//           isRated: false,
-//           score: 0,
-//           comment: null,
-//         },
-//       ],
-//     },
-//   },
-// ];
