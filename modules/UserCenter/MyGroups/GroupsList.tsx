@@ -5,18 +5,16 @@ import GroupItem from "./GroupItem";
 import setGroupStatus from "./setGroupStatus";
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-
 import ModalWrapper from "@/common/components/ModalWrapper";
 import { BtnSetType, GroupListProps, tabs } from "../date";
 
 // 無論 leader member 都是要用這個元件，只有顯示的按鈕會依據類型不同，資料一開始傳入就不同了
 
 export default function GroupsList({
-  pageCategory,
+  pageCategory = "member",
   groupSetData,
   ratingStatusSet,
 }: GroupListProps) {
-  if (!pageCategory) pageCategory === "leader";
   if (!groupSetData) return null;
 
   const router = useRouter();
