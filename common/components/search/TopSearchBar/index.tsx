@@ -31,8 +31,8 @@ export default function TopSearchBar() {
     useState<DisplayCategoryType>("default");
 
   // 畫面滾動位置為依據
-
   const ishidden = displayCategory === "hidden";
+
   // 點擊切換、手機版
   const isDefault = displayCategory === "default";
   const isSimply = displayCategory === "simply";
@@ -45,6 +45,10 @@ export default function TopSearchBar() {
   const allCitiesData = useGetAllCitiesData();
 
   const [date, setDate] = useState("");
+
+  useEffect(() => {
+    setSearchKeys({ ...searchKeys, startDate: date });
+  }, [date]);
 
   useEffect(() => {
     setSearchKeys({ ...searchKeys, startDate: date });

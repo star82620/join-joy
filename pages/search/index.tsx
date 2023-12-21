@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { GetServerSidePropsContext } from "next";
 import Layout from "@/common/components/Layout";
 import SearchResults from "@/modules/SearchResults";
-import TopSearchBar from "@/common/components/Layout/TopSearchBar";
+import TopSearchBar from "@/common/components/search/TopSearchBar";
 import SearchProvider, {
   SearchContext,
 } from "@/common/contexts/SearchProvider";

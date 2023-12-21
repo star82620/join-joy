@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import GroupCard from "@/common/components/searchResultCard/GroupCard";
-import StoreCard from "@/common/components/searchResultCard/StoreCard";
+import GroupCard from "@/common/components/search/GroupCard";
+import StoreCard from "@/common/components/search/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { useGetSearchResult } from "@/common/hooks/useGetSearchResult";
 
