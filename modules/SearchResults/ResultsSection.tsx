@@ -7,6 +7,7 @@ import GroupCard from "@/common/components/search/GroupCard";
 import StoreCard from "@/common/components/search/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { useGetSearchResult } from "@/common/hooks/useGetSearchResult";
+import EmptyResults from "./EmptyResults";
 
 export default function ResultsSection({}) {
   const router = useRouter();
@@ -28,7 +29,6 @@ export default function ResultsSection({}) {
   const queryKeys = router.query;
 
   const isGroup = queryKeys.tab === "group";
-  const isStore = queryKeys.tab === "store";
   const isEmptyResult = searchResultsData.length === 0;
 
   // 分頁設定
@@ -69,6 +69,8 @@ export default function ResultsSection({}) {
     filterKeys.storeTag,
     filterKeys.page,
   ]);
+
+  if (isEmptyResult) return <EmptyResults />;
 
   return (
     <div className="mt-9 md:mt-4">

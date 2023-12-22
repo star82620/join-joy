@@ -27,8 +27,8 @@ export async function getSearchStores(
   try {
     const res = await fetchApi(searchStoresApiParams);
 
-    if (!res.status) {
-      return res.message;
+    if (!res.status || res.stateCode === "404") {
+      return [];
     }
 
     if (haveCount) {

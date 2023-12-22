@@ -33,8 +33,10 @@ export function useGetSearchResult() {
   const isStore = tab === "store";
 
   const getSearchResult = async () => {
+    const cityIdKey = city ? Number(city) : 0;
+
     if (isGroup) {
-      const cityIdKey = city ? Number(city) : 0;
+      // 把條件組起來
       const startDateKey = date ? date.toString() : "";
       const gameNameKey = keyword ? keyword.toString() : "";
 
@@ -53,16 +55,19 @@ export function useGetSearchResult() {
 
       const GroupsData = await getSearchGroups(searchGroupKey, "haveCount");
 
-      const isEmptyResult = typeof GroupsData === "string";
+      const isEmptyResult = GroupsData.length === 0;
 
-      if (isEmptyResult) return;
+      if (isEmptyResult) {
+        setSearchResultsData([]);
+        setTotalCount(0);
+        return;
+      }
+
       setSearchResultsData(GroupsData.finalGroups);
       setTotalCount(GroupsData.groupCount);
     }
 
     if (isStore) {
-      const cityIdKey = city ? Number(city) : 0;
-
       const storeNameKey = keyword ? keyword.toString() : "";
 
       const searchStoresKey: StoresSearchKeyType = {
@@ -75,12 +80,16 @@ export function useGetSearchResult() {
 
       const StoreData = await getSearchStores(searchStoresKey, "haveCount");
 
-      const isEmptyResult = typeof StoreData === "string";
+      const isEmptyResult = StoreData.length === 0;
 
-      if (isEmptyResult) return;
+      if (isEmptyResult) {
+        setSearchResultsData([]);
+        setTotalCount(0);
+        return;
+      }
 
       setSearchResultsData(StoreData.matchedStores);
-      setTotalCount(StoreData?.storeCount);
+      setTotalCount(StoreData.storeCount);
     }
   };
 

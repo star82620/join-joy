@@ -23,16 +23,16 @@ export async function getSearchGroups(
   searchKey: GroupsSearchKeyType,
   haveCount?: "haveCount"
 ) {
-  if (searchKey) {
-    console.log("search", searchKey);
-    searchGroupsApiParams.data = searchKey;
-  }
+  if (!searchKey) return null;
+
+  searchGroupsApiParams.data = searchKey;
 
   try {
     const res = await fetchApi(searchGroupsApiParams);
 
-    if (!res.status) {
-      return res.message;
+    if (!res.status || res.statusCode === "404") {
+      console.log(res.message);
+      return [];
     }
 
     if (haveCount) {
@@ -40,7 +40,7 @@ export async function getSearchGroups(
       return data;
     }
 
-    const data = res?.data.finalGroups ?? [];
+    const data = res?.data?.finalGroups || [];
 
     return data;
   } catch (error) {

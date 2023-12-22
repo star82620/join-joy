@@ -43,7 +43,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     const GroupsData = await getSearchGroups(searchGroupKey, "haveCount");
 
-    const isEmptyResult = typeof GroupsData === "string";
+    const isEmptyResult = GroupsData.length === 0;
 
     if (!isEmptyResult) {
       defaultData = GroupsData.finalGroups;
@@ -66,7 +66,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     const StoreData = await getSearchStores(searchStoresKey, "haveCount");
 
-    const isEmptyResult = typeof StoreData === "string";
+    const isEmptyResult = StoreData.length === 0;
 
     if (!isEmptyResult) {
       defaultData = StoreData.matchedStores;
