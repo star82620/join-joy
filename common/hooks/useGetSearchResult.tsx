@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import {
-  GroupsSearchKeyType,
   defaultGroupsSearchKey,
   getSearchGroups,
-} from "../helpers/getApi/getSearchGroups";
+} from "../helpers/getApi/search/getSearchGroups";
 import {
-  StoresSearchKeyType,
   defaultStoresSearchKey,
   getSearchStores,
-} from "../helpers/getApi/getSearchStores";
+} from "../helpers/getApi/search/getSearchStores";
+import { GroupsSearchKeyType } from "@/constants/types/apiTypes/group";
+import { StoresSearchKeyType } from "@/pages/api/search/searchStores";
 import { SearchContext } from "../contexts/SearchProvider";
 
 export function useGetSearchResult() {

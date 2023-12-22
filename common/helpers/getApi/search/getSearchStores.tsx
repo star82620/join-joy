@@ -1,14 +1,6 @@
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-
-export type StoresSearchKeyType = {
-  cityId: number;
-  storeName: string;
-  storeFilter: number;
-  storeTag: number;
-  page: number;
-  pageSize: number;
-};
+import { StoresSearchKeyType } from "@/constants/types/apiTypes/store";
 
 export const defaultStoresSearchKey: StoresSearchKeyType = {
   cityId: 0, //城市

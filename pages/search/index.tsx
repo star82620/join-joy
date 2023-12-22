@@ -1,23 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import { GetServerSidePropsContext } from "next";
 import Layout from "@/common/components/Layout";
 import SearchResults from "@/modules/SearchResults";
-import TopSearchBar from "@/common/components/search/TopSearchBar";
-import SearchProvider, {
-  SearchContext,
-} from "@/common/contexts/SearchProvider";
+import SearchProvider from "@/common/contexts/SearchProvider";
 import {
-  GroupsSearchKeyType,
   defaultGroupsSearchKey,
   getSearchGroups,
-} from "@/common/helpers/getApi/getSearchGroups";
+} from "@/common/helpers/getApi/search/getSearchGroups";
 import {
-  StoresSearchKeyType,
   defaultStoresSearchKey,
   getSearchStores,
-} from "@/common/helpers/getApi/getSearchStores";
+} from "@/common/helpers/getApi/search/getSearchStores";
+import { GroupsSearchKeyType } from "@/constants/types/apiTypes/group";
+import { StoresSearchKeyType } from "@/constants/types/apiTypes/store";
 import { SearchResultsPageProps } from "@/modules/SearchResults/data";
-import { getCitiesApi } from "@/common/helpers/getApi/getCitiesApi";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   let defaultData = [];

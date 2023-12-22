@@ -1,17 +1,6 @@
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-
-export type GroupsSearchKeyType = {
-  cityId: number;
-  startDate: string;
-  gameName: string;
-  groupFilter: number;
-  groupTag: number;
-  groupppl: number;
-  joinppl: number;
-  page: number;
-  pageSize: number;
-};
+import { GroupsSearchKeyType } from "@/constants/types/apiTypes/group";
 
 export const defaultGroupsSearchKey: GroupsSearchKeyType = {
   cityId: 0, //城市
