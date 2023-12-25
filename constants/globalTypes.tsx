@@ -41,19 +41,24 @@ export type SearchProviderProps = { children: ReactNode };
 
 export type SearchKeysType = {
   cityId: number;
+  // group
+  startDate: string;
+  gameName: string;
+  // store
+  storeName: string;
+};
+
+export type FilterKeysType = {
   page: number;
   pageSize: number;
 
   // group
-  startDate: string;
-  gameName: string;
   groupFilter: number;
   groupTag: number;
   groupppl: number;
   joinppl: number;
 
   // store
-  storeName: string;
   storeFilter: number;
   storeTag: number;
 };

@@ -2,8 +2,8 @@ import React from "react";
 import Button from "@/common/components/GeneralButton";
 import Link from "@/common/components/GeneralLink";
 import Image from "@/common/components/FillImage";
-import GroupCard from "@/common/components/searchResultCard/GroupCard";
-import StoreCard from "@/common/components/searchResultCard/StoreCard";
+import GroupCard from "@/common/components/search/GroupCard";
+import StoreCard from "@/common/components/search/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { CardsSectionProps } from "./data";
 

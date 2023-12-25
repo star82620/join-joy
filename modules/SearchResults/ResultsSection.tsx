@@ -3,10 +3,11 @@ import { useRouter } from "next/router";
 import Button from "@/common/components/GeneralButton";
 import Image from "@/common/components/FillImage";
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import GroupCard from "@/common/components/searchResultCard/GroupCard";
-import StoreCard from "@/common/components/searchResultCard/StoreCard";
+import GroupCard from "@/common/components/search/GroupCard";
+import StoreCard from "@/common/components/search/StoreCard";
 import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { useGetSearchResult } from "@/common/hooks/useGetSearchResult";
+import EmptyResults from "./EmptyResults";
 
 export default function ResultsSection({}) {
   const router = useRouter();
@@ -15,6 +16,8 @@ export default function ResultsSection({}) {
   const {
     searchKeys,
     setSearchKeys,
+    filterKeys,
+    setFilterKeys,
     activeTab,
     setActiveTab,
     searchResultsData,
@@ -26,7 +29,6 @@ export default function ResultsSection({}) {
   const queryKeys = router.query;
 
   const isGroup = queryKeys.tab === "group";
-  const isStore = queryKeys.tab === "store";
   const isEmptyResult = searchResultsData.length === 0;
 
   // 分頁設定
@@ -34,25 +36,24 @@ export default function ResultsSection({}) {
   const perPage = isGroup ? 16 : 9;
   const totalPageNum = Math.ceil(totalCount / perPage); //總頁數
 
-  const isPrevDisabled = searchKeys.page === 1;
-  const isNextDisabled = searchKeys.page === totalPageNum;
+  const isPrevDisabled = filterKeys.page === 1;
+  const isNextDisabled = filterKeys.page === totalPageNum;
 
   const setPrevPage = () => {
-    const pageNum = searchKeys.page - 1;
+    const pageNum = filterKeys.page - 1;
     if (pageNum === 0) return;
-    setSearchKeys({ ...searchKeys, page: pageNum });
+    setFilterKeys({ ...filterKeys, page: pageNum });
   };
 
   const setNextPage = () => {
-    if (searchKeys.page === totalPageNum) return;
-    const pageNum = searchKeys.page + 1;
-    setSearchKeys({ ...searchKeys, page: pageNum });
+    if (filterKeys.page === totalPageNum) return;
+    const pageNum = filterKeys.page + 1;
+    setFilterKeys({ ...filterKeys, page: pageNum });
   };
 
   const setTurnPage: MouseEventHandler<HTMLButtonElement> = (e) => {
     const pageNum = Number(e.currentTarget.value);
-    console.log(pageNum);
-    setSearchKeys({ ...searchKeys, page: pageNum });
+    setFilterKeys({ ...filterKeys, page: pageNum });
   };
 
   // 搜尋
@@ -60,14 +61,16 @@ export default function ResultsSection({}) {
     getSearchResult();
   }, [
     queryKeys,
-    searchKeys.groupFilter,
-    searchKeys.groupTag,
-    searchKeys.groupppl,
-    searchKeys.joinppl,
-    searchKeys.storeFilter,
-    searchKeys.storeTag,
-    searchKeys.page,
+    filterKeys.groupFilter,
+    filterKeys.groupTag,
+    filterKeys.groupppl,
+    filterKeys.joinppl,
+    filterKeys.storeFilter,
+    filterKeys.storeTag,
+    filterKeys.page,
   ]);
+
+  if (isEmptyResult) return <EmptyResults />;
 
   return (
     <div className="mt-9 md:mt-4">
@@ -113,7 +116,7 @@ export default function ResultsSection({}) {
         </Button>
         {[...Array(totalPageNum)].map((_, index) => {
           const num = (index + 1).toString();
-          const isActivePage = searchKeys.page === index + 1;
+          const isActivePage = filterKeys.page === index + 1;
           const btnAppearance = isActivePage ? "orange" : "page-selector-arrow";
 
           return (

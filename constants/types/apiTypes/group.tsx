@@ -109,3 +109,15 @@ export type SearchedGroupItemDataType = {
   currentpeople: number;
   totalMemberNum: number;
 };
+
+export type GroupsSearchKeyType = {
+  cityId: number;
+  startDate: string;
+  gameName: string;
+  groupFilter: number;
+  groupTag: number;
+  groupppl: number;
+  joinppl: number;
+  page: number;
+  pageSize: number;
+};

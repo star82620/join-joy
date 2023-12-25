@@ -22,4 +22,5 @@ export type ModalWrapperProps = {
   title: string;
   children: ReactNode;
   layout?: "default" | "primary" | "secondary";
+  fill?: boolean;
 };

@@ -1,44 +1,24 @@
 import { ReactNode } from "react";
 import { TabType, UserProfileType } from "@/constants/globalTypes";
+import { GroupRatingStatusSetType } from "@/constants/types/apiTypes/comment";
 import {
-  GroupStatusType,
   MyGroupSetType,
+  MyGroupItemType,
 } from "@/constants/types/apiTypes/group";
 
 // page
-export type ProfileDataType = UserProfileType;
-
-export type GroupDataSetType = {
-  member: MyGroupSetType;
-  leader: MyGroupSetType;
+export type ProfileSettingPageProps = {
+  profileData: UserProfileType;
 };
 
-export type UserCenterPageProps = {
-  profileData: ProfileDataType;
-  groupsData: GroupDataSetType;
-  groupRatingsSet: GroupRatingsType[];
+export type MyGroupsPageProps = {
+  groupSetData: MyGroupSetType;
+  ratingStatusSet: GroupRatingStatusSetType[];
 };
 
-export type DataContextType = UserCenterPageProps;
-
-export type RatingContentType = {
-  memberId: number;
-  memberName: string;
-  memberPhoto: string | null;
-  isRated: boolean;
-  score: number;
-  comment: string | null;
-};
-
-export type GroupRatingItemType = {
-  isAllRated: boolean;
-  ratingStatus: RatingContentType[];
-};
-
-export type GroupRatingsType = {
-  id: number;
-  groupStatus: GroupStatusType;
-  data: GroupRatingItemType;
+// Wrapper
+export type WrapperProps = {
+  children: ReactNode;
 };
 
 // UserNavBar
@@ -83,72 +63,79 @@ export type TabSectionProps = {
   setActiveTab: (activeTab: string) => void;
 };
 
+// ProfileSetting
+export type ProfileSettingProps = {
+  data: UserProfileType;
+};
+
+// GroupList
+export type GroupListProps = {
+  pageCategory: "leader" | "member";
+  groupSetData: MyGroupSetType;
+  ratingStatusSet: GroupRatingStatusSetType[];
+};
+
+// GroupItem
+export type GroupItemProps = {
+  group: MyGroupItemType;
+  btnSet: BtnSetType;
+  ratingStatusSet: GroupRatingStatusSetType[];
+};
+
+// GroupsList
+export type BtnItemType = {
+  text: string;
+  func?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled: boolean;
+};
+
+export type GroupStatusKeyType =
+  | "pending"
+  | "member"
+  | "opening"
+  | "reserved"
+  | "closed"
+  | "cancel";
+
+export type BtnTextType =
+  | "pending"
+  | "member"
+  | "leader"
+  | "closed"
+  | "commented"
+  | "cancel";
+
+export type BtnSetType = Record<BtnTextType, BtnItemType>;
+
 // ----data----
 
-export const defaultProfileData: ProfileDataType = {
-  userId: 0,
-  nickName: "",
-  email: "",
-  description: "",
-  games: [],
-  cities: [],
-};
-
-export const defaultGroupsData: GroupDataSetType = {
-  leader: [
-    {
-      groupId: 0,
-      groupName: "",
-      startTime: "",
-      endTime: "",
-      totalMemberNum: 0,
-      currentPeople: 0,
-      place: null,
-      store: {
-        storeId: 0,
-        storeName: "",
-        address: "",
-      },
-      memberStatus: "leader",
-      groupStatus: "已結束",
-    },
-  ],
-  member: [
-    {
-      groupId: 0,
-      groupName: "",
-      startTime: "",
-      endTime: "",
-      totalMemberNum: 0,
-      currentPeople: 0,
-      place: null,
-      store: {
-        storeId: 0,
-        storeName: "",
-        address: "",
-      },
-      memberStatus: "member",
-      groupStatus: "已結束",
-    },
-  ],
-};
-
-export const defaultGroupRatingsSet: GroupRatingsType[] = [
+// GroupList 列表篩選
+export const tabs: TabType[] = [
   {
-    id: 0,
-    groupStatus: "已結束",
-    data: {
-      isAllRated: false,
-      ratingStatus: [
-        {
-          memberId: 0,
-          memberName: "",
-          memberPhoto: null,
-          isRated: false,
-          score: 0,
-          comment: null,
-        },
-      ],
+    tabId: "upcoming",
+    text: "未開始",
+  },
+  {
+    tabId: "expired",
+    text: "已結束",
+  },
+];
+
+export const defaultGroupsData: MyGroupSetType = [
+  {
+    groupId: 0,
+    groupName: "",
+    startTime: "",
+    endTime: "",
+    totalMemberNum: 0,
+    currentPeople: 0,
+    place: null,
+    store: {
+      storeId: 0,
+      storeName: "",
+      address: "",
     },
+    memberStatus: "leader",
+    groupStatus: "已結束",
   },
 ];

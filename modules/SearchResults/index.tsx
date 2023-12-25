@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import ResultsSection from "./ResultsSection";
 import ResultsHeader from "./ResultsHeader";
-import EmptyResults from "./EmptyResults";
 import { SearchResultsProps } from "./data";
 
 export default function SearchResults({
@@ -27,14 +26,10 @@ export default function SearchResults({
     setSearchResultsData(defaultData);
   }, []);
 
-  const isGroup = activeTab === "group";
-  const isEmptyResult = searchResultsData.length === 0;
-
   return (
     <div className="container pt-12 pb-[108px]">
       <ResultsHeader />
-      {/* <ResultsSection /> */}
-      {!isEmptyResult ? <ResultsSection /> : <EmptyResults />}
+      <ResultsSection />
     </div>
   );
 }

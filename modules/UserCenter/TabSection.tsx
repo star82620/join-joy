@@ -17,7 +17,7 @@ export default function TabSection({
         return (
           <p
             key={tab.tabId}
-            className={`px-12 py-3 font-semibold ${tabStyle}`}
+            className={`px-12 py-3 text-center font-semibold whitespace-nowrap md:px-0 md:w-1/2 ${tabStyle}`}
             onClick={() => setActiveTab(tab.tabId)}
           >
             {tab.text}

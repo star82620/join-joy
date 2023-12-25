@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 import {
-  GroupsSearchKeyType,
   defaultGroupsSearchKey,
   getSearchGroups,
-} from "../helpers/getApi/getSearchGroups";
+} from "../helpers/getApi/search/getSearchGroups";
 import {
-  StoresSearchKeyType,
   defaultStoresSearchKey,
   getSearchStores,
-} from "../helpers/getApi/getSearchStores";
+} from "../helpers/getApi/search/getSearchStores";
+import { GroupsSearchKeyType } from "@/constants/types/apiTypes/group";
+import { StoresSearchKeyType } from "@/pages/api/search/searchStores";
 import { SearchContext } from "../contexts/SearchProvider";
 
 export function useGetSearchResult() {
@@ -22,18 +22,21 @@ export function useGetSearchResult() {
     totalCount,
     setTotalCount,
     searchKeys,
+    filterKeys,
   } = searchContext;
 
-  const querySearchKeys = router.query;
+  const queryKeys = router.query;
 
-  const { tab, city, date, keyword } = querySearchKeys;
+  const { tab, city, date, keyword } = queryKeys;
 
   const isGroup = tab === "group";
   const isStore = tab === "store";
 
   const getSearchResult = async () => {
+    const cityIdKey = city ? Number(city) : 0;
+
     if (isGroup) {
-      const cityIdKey = city ? Number(city) : 0;
+      // 把條件組起來
       const startDateKey = date ? date.toString() : "";
       const gameNameKey = keyword ? keyword.toString() : "";
 
@@ -42,49 +45,53 @@ export function useGetSearchResult() {
         cityId: cityIdKey,
         startDate: startDateKey,
         gameName: gameNameKey,
-        groupFilter: searchKeys.groupFilter, //最相關...
-        groupTag: searchKeys.groupTag, //遊戲面向
-        groupppl: searchKeys.groupppl, //揪團總人數
-        joinppl: searchKeys.joinppl,
-        page: searchKeys.page || 1,
-        pageSize: searchKeys.pageSize || 16,
+        groupFilter: filterKeys.groupFilter, //最相關...
+        groupTag: filterKeys.groupTag, //遊戲面向
+        groupppl: filterKeys.groupppl, //揪團總人數
+        joinppl: filterKeys.joinppl,
+        page: filterKeys.page || 1,
+        pageSize: filterKeys.pageSize || 16,
       };
 
       const GroupsData = await getSearchGroups(searchGroupKey, "haveCount");
 
-      const isEmptyResult = typeof GroupsData === "string";
+      const isEmptyResult = GroupsData.length === 0;
 
-      if (isEmptyResult) return;
+      if (isEmptyResult) {
+        setSearchResultsData([]);
+        setTotalCount(0);
+        return;
+      }
+
       setSearchResultsData(GroupsData.finalGroups);
       setTotalCount(GroupsData.groupCount);
     }
 
     if (isStore) {
-      const cityIdKey = city ? Number(city) : 0;
-
       const storeNameKey = keyword ? keyword.toString() : "";
 
       const searchStoresKey: StoresSearchKeyType = {
         ...defaultStoresSearchKey,
         cityId: cityIdKey,
         storeName: storeNameKey,
-        page: 1,
-        pageSize: 9,
+        page: filterKeys.page || 1,
+        pageSize: filterKeys.pageSize || 9,
       };
 
       const StoreData = await getSearchStores(searchStoresKey, "haveCount");
 
-      const isEmptyResult = typeof StoreData === "string";
+      const isEmptyResult = StoreData.length === 0;
 
-      if (isEmptyResult) return;
+      if (isEmptyResult) {
+        setSearchResultsData([]);
+        setTotalCount(0);
+        return;
+      }
 
       setSearchResultsData(StoreData.matchedStores);
-      setTotalCount(StoreData?.storeCount);
+      setTotalCount(StoreData.storeCount);
     }
   };
 
   return getSearchResult;
-  // useEffect(() => {
-  //   getSearchResult();
-  // }, [querySearchKeys]);
 }

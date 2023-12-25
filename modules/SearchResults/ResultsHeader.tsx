@@ -1,22 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import FilterBlock from "./FilterBlock";
 import { SearchContext } from "@/common/contexts/SearchProvider";
 import { useRouter } from "next/router";
 import { useGetAllCitiesData } from "@/common/hooks/useGetAllCitiesData";
-import { FilterSetType, groupFilterSet, storeFilterSet } from "./data";
+import { groupFilterSet, storeFilterSet } from "./data";
 
 export default function ResultsHeader() {
   const searchContext = useContext(SearchContext);
-  const {
-    searchKeys,
-    setSearchKeys,
-    activeTab,
-    setActiveTab,
-    searchResultsData,
-    setSearchResultsData,
-    totalCount,
-    setTotalCount,
-  } = searchContext;
+  const { searchKeys, totalCount } = searchContext;
 
   const allCitiesData = useGetAllCitiesData();
 
@@ -36,10 +27,8 @@ export default function ResultsHeader() {
     ? ` ${searchKeys.startDate}`
     : null;
 
-  // 抓 query 的 city 如果 city 不是 undefined 就 回傳 不然就 null
-
   const resultCountLocation = city
-    ? `在 ${allCitiesData?.[Number(city) - 1]?.CityName}`
+    ? ` 在 ${allCitiesData?.[Number(city) - 1]?.CityName}`
     : null;
 
   const resultCountTab = isGroup ? "揪團" : "店家";

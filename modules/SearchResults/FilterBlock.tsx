@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { SearchContext } from "@/common/contexts/SearchProvider";
-import { SearchKeysType } from "@/constants/globalTypes";
+import { FilterKeysType } from "@/constants/globalTypes";
 import { FilterSetItemType } from "./data";
 
 export default function FilterBlock({
@@ -9,12 +9,11 @@ export default function FilterBlock({
   inputName,
 }: FilterSetItemType) {
   const searchContext = useContext(SearchContext);
-  const { searchKeys, setSearchKeys } = searchContext;
+  const { filterKeys, setFilterKeys } = searchContext;
 
   const handleSelectFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    type KeyOfSearchKeysType = keyof SearchKeysType;
-    // const inputName = e.target.name;
-    const inputName: KeyOfSearchKeysType = e.target.name as KeyOfSearchKeysType;
+    type KeyOfFilterKeysType = keyof FilterKeysType;
+    const inputName: KeyOfFilterKeysType = e.target.name as KeyOfFilterKeysType;
 
     if (
       [
@@ -30,8 +29,8 @@ export default function FilterBlock({
     ) {
       const value = Number(e.target.value);
 
-      setSearchKeys({
-        ...searchKeys,
+      setFilterKeys({
+        ...filterKeys,
         [inputName]: value,
       });
     }
@@ -54,7 +53,7 @@ export default function FilterBlock({
         <select
           className={`min-h-9 rounded-sm bg-yellow-tint border-2 border-gray-500 text-gray-600 pr-3 py-1.5 ${spaceStyle}`}
           name={inputName}
-          value={searchKeys[inputName]}
+          value={filterKeys[inputName]}
           onChange={handleSelectFilter}
         >
           {options.map((option) => {

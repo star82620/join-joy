@@ -1,17 +1,6 @@
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-
-export type GroupsSearchKeyType = {
-  cityId: number;
-  startDate: string;
-  gameName: string;
-  groupFilter: number;
-  groupTag: number;
-  groupppl: number;
-  joinppl: number;
-  page: number;
-  pageSize: number;
-};
+import { GroupsSearchKeyType } from "@/constants/types/apiTypes/group";
 
 export const defaultGroupsSearchKey: GroupsSearchKeyType = {
   cityId: 0, //城市
@@ -34,16 +23,17 @@ export async function getSearchGroups(
   searchKey: GroupsSearchKeyType,
   haveCount?: "haveCount"
 ) {
-  if (searchKey) {
-    console.log("search", searchKey);
-    searchGroupsApiParams.data = searchKey;
-  }
+  if (!searchKey) return null;
+
+  searchGroupsApiParams.data = searchKey;
 
   try {
     const res = await fetchApi(searchGroupsApiParams);
+    const { status, statusCode } = res;
 
-    if (!res.status) {
-      return res.message;
+    if (!status || statusCode === "404") {
+      console.log(res.message);
+      return [];
     }
 
     if (haveCount) {
@@ -51,7 +41,7 @@ export async function getSearchGroups(
       return data;
     }
 
-    const data = res?.data.finalGroups ?? [];
+    const data = res?.data?.finalGroups || [];
 
     return data;
   } catch (error) {
