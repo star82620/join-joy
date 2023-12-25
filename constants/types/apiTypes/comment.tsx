@@ -1,3 +1,5 @@
+import { GroupStatusType } from "./group";
+
 export type CommentItemDataType = {
   userId: number;
   userName: string;
@@ -90,7 +92,7 @@ export type MemberRatingValuesItemType = {
 
 export type MemberRatingValuesType = Record<number, MemberRatingValuesItemType>;
 
-// 取得評價的團資料
+// 取得目前這筆評價的團資料
 export type GroupOfRatingDataType = {
   storeId: number;
   storeName: string;
@@ -99,4 +101,25 @@ export type GroupOfRatingDataType = {
   startTime: string;
   endTime: string;
   photo: string;
+};
+
+// the rating status of group (used in user center)
+export type GroupRatingStatusContentType = {
+  memberId: number;
+  memberName: string;
+  memberPhoto: string | null;
+  isRated: boolean;
+  score: number;
+  comment: string | null;
+};
+
+export type GroupRatingStatusItemType = {
+  isAllRated: boolean;
+  ratingStatus: GroupRatingStatusContentType[];
+};
+
+export type GroupRatingStatusSetType = {
+  id: number;
+  groupStatus: GroupStatusType;
+  data: GroupRatingStatusItemType | null;
 };
