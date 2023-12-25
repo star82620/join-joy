@@ -128,15 +128,19 @@ export const groupFilterSet: FilterSetType = [
     options: [
       {
         value: "0",
-        text: "1-3人",
+        text: "不限定",
         checked: true,
       },
       {
         value: "1",
-        text: "4-6人",
+        text: "1-3人",
       },
       {
         value: "2",
+        text: "4-6人",
+      },
+      {
+        value: "3",
         text: "7人以上",
       },
     ],

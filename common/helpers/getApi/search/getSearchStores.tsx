@@ -1,14 +1,6 @@
 import fetchApi, { apiParamsType } from "@/common/helpers/fetchApi";
 import apiPaths from "@/constants/apiPaths";
-
-export type StoresSearchKeyType = {
-  cityId: number;
-  storeName: string;
-  storeFilter: number;
-  storeTag: number;
-  page: number;
-  pageSize: number;
-};
+import { StoresSearchKeyType } from "@/constants/types/apiTypes/store";
 
 export const defaultStoresSearchKey: StoresSearchKeyType = {
   cityId: 0, //城市
@@ -34,18 +26,19 @@ export async function getSearchStores(
 
   try {
     const res = await fetchApi(searchStoresApiParams);
+    const { status, statusCode } = res;
 
-    if (!res.status) {
-      return res.message;
+    if (!status || statusCode === "404") {
+      return [];
     }
 
     if (haveCount) {
-      const data = res?.data ?? [];
+      const data = res?.data || [];
 
       return data;
     }
 
-    const data = res?.data.matchedStores ?? [];
+    const data = res?.data.matchedStores || [];
 
     return data;
   } catch (error) {

@@ -8,7 +8,7 @@ import { globalIcons } from "@/constants/iconsPackage/globalIcons";
 import { logoSet } from "@/constants/logoSet";
 import { HeaderProps, hiddenGroupBtnPages, hiddenStoreBtnPages } from "./data";
 import { useAuth } from "@/common/hooks/useAuth";
-import TopSearchBar from "./TopSearchBar";
+import TopSearchBar from "../search/TopSearchBar";
 import ProfileImg from "../ProfileImg";
 
 export default function Header({ pageCategory }: HeaderProps) {

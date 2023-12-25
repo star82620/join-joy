@@ -35,3 +35,13 @@ export type StoreItemDataType = {
 };
 
 export type StoreSetDataType = StoreItemDataType[];
+
+// search
+export type StoresSearchKeyType = {
+  cityId: number;
+  storeName: string;
+  storeFilter: number;
+  storeTag: number;
+  page: number;
+  pageSize: number;
+};

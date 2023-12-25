@@ -8,11 +8,11 @@ import Layout from "@/common/components/Layout";
 import {
   defaultGroupsSearchKey,
   getSearchGroups,
-} from "@/common/helpers/getApi/getSearchGroups";
+} from "@/common/helpers/getApi/search/getSearchGroups";
 import {
   defaultStoresSearchKey,
   getSearchStores,
-} from "@/common/helpers/getApi/getSearchStores";
+} from "@/common/helpers/getApi/search/getSearchStores";
 import {
   DefaultDataContextType,
   HomeProps,
