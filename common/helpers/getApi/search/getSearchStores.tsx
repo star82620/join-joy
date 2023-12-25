@@ -26,18 +26,19 @@ export async function getSearchStores(
 
   try {
     const res = await fetchApi(searchStoresApiParams);
+    const { status, statusCode } = res;
 
-    if (!res.status || res.stateCode === "404") {
+    if (!status || statusCode === "404") {
       return [];
     }
 
     if (haveCount) {
-      const data = res?.data ?? [];
+      const data = res?.data || [];
 
       return data;
     }
 
-    const data = res?.data.matchedStores ?? [];
+    const data = res?.data.matchedStores || [];
 
     return data;
   } catch (error) {

@@ -29,8 +29,9 @@ export async function getSearchGroups(
 
   try {
     const res = await fetchApi(searchGroupsApiParams);
+    const { status, statusCode } = res;
 
-    if (!res.status || res.statusCode === "404") {
+    if (!status || statusCode === "404") {
       console.log(res.message);
       return [];
     }
