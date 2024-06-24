@@ -54,6 +54,7 @@ export default function useSearch() {
 
     const { cityId, startDate, gameName, storeName } = searchKeys;
 
+    // 搜尋頁面 Search
     if (isSearchPage) {
       let queryData: Record<string, string> = { tab: activeTab };
 
@@ -81,15 +82,17 @@ export default function useSearch() {
         undefined,
         { shallow: true }
       );
-
+      setIsLoading(false);
       return;
     }
 
+    // 沒有選擇搜尋條件
     if (isAllEmpty) {
       setError(true);
       return;
     }
 
+    // landingPage Search
     let queryValues = `?tab=${activeTab}`;
 
     if (cityId) {
