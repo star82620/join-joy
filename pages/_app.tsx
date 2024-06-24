@@ -46,7 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <loadingContext.Provider value={{ isLoading, setIsLoading }}>
       <Component {...pageProps} />
-      <Loading />
+      {isLoading && <Loading />}
     </loadingContext.Provider>
   );
 }
