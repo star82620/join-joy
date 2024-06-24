@@ -1,8 +1,29 @@
-import { SetStateAction, createContext, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import type { AppProps } from "next/app";
 import Loading from "@/common/components/Loading";
 import "@/styles/globals.css";
 import { Router } from "next/router";
+
+export type LoadingContextType = {
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+};
+
+const defaultLoadingContenxt = {
+  isLoading: false,
+  setIsLoading: () => {},
+};
+
+export const loadingContext = createContext<LoadingContextType>(
+  defaultLoadingContenxt
+);
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,9 +44,9 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
+    <loadingContext.Provider value={{ isLoading, setIsLoading }}>
       <Component {...pageProps} />
-      {isLoading && <Loading />}
-    </>
+      <Loading />
+    </loadingContext.Provider>
   );
 }

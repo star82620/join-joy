@@ -1,4 +1,4 @@
-import React, {
+import {
   ChangeEventHandler,
   FormEventHandler,
   useContext,
@@ -6,9 +6,11 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import { SearchContext } from "@/common/contexts/SearchProvider";
+import { loadingContext } from "@/pages/_app";
 
 export default function useSearch() {
   const router = useRouter();
+  const { setIsLoading } = useContext(loadingContext);
 
   const searchContext = useContext(SearchContext);
   const { searchKeys, setSearchKeys, activeTab, setActiveTab } = searchContext;
@@ -49,6 +51,7 @@ export default function useSearch() {
   // 送出搜尋
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const isSearchPage = router.asPath.split("?")[0] === "/search";
 
@@ -111,6 +114,7 @@ export default function useSearch() {
     }
 
     router.push(`/search${queryValues}`);
+    setIsLoading(false);
   };
 
   return {
