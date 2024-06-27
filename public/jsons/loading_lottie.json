@@ -12,7 +12,7 @@
       "id": "image_0",
       "w": 143,
       "h": 40,
-      "u": "images/loading/",
+      "u": "/images/loading/",
       "p": "img_0.png",
       "e": 0
     },
@@ -20,7 +20,7 @@
       "id": "image_1",
       "w": 65,
       "h": 22,
-      "u": "images/loading/",
+      "u": "/images/loading/",
       "p": "img_1.png",
       "e": 0
     },
@@ -28,7 +28,7 @@
       "id": "image_2",
       "w": 193,
       "h": 19,
-      "u": "images/loading/",
+      "u": "/images/loading/",
       "p": "img_2.png",
       "e": 0
     },
@@ -36,7 +36,7 @@
       "id": "image_3",
       "w": 217,
       "h": 293,
-      "u": "images/loading/",
+      "u": "/images/loading/",
       "p": "img_3.png",
       "e": 0
     }

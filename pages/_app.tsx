@@ -43,6 +43,10 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isLoading ? "hidden" : "auto";
+  }, [isLoading]);
+
   return (
     <loadingContext.Provider value={{ isLoading, setIsLoading }}>
       <Component {...pageProps} />
