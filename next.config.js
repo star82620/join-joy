@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
+    domains: ["joinjoy-api.rocket-coding.com"],
     remotePatterns: [
       {
         protocol: "https",
