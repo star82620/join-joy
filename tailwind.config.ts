@@ -150,6 +150,7 @@ const config: Config = {
         "7": "7",
         "8": "8",
         "9": "9",
+        loading: "999",
       },
       width: {
         "14": "56px",
