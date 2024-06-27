@@ -1,4 +1,4 @@
-import React, {
+import {
   ChangeEventHandler,
   FormEventHandler,
   useContext,
@@ -6,9 +6,11 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import { SearchContext } from "@/common/contexts/SearchProvider";
+import { loadingContext } from "@/pages/_app";
 
 export default function useSearch() {
   const router = useRouter();
+  const { setIsLoading } = useContext(loadingContext);
 
   const searchContext = useContext(SearchContext);
   const { searchKeys, setSearchKeys, activeTab, setActiveTab } = searchContext;
@@ -49,11 +51,13 @@ export default function useSearch() {
   // 送出搜尋
   const submitSearch: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const isSearchPage = router.asPath.split("?")[0] === "/search";
 
     const { cityId, startDate, gameName, storeName } = searchKeys;
 
+    // 搜尋頁面 Search
     if (isSearchPage) {
       let queryData: Record<string, string> = { tab: activeTab };
 
@@ -81,15 +85,17 @@ export default function useSearch() {
         undefined,
         { shallow: true }
       );
-
+      setIsLoading(false);
       return;
     }
 
+    // 沒有選擇搜尋條件
     if (isAllEmpty) {
       setError(true);
       return;
     }
 
+    // landingPage Search
     let queryValues = `?tab=${activeTab}`;
 
     if (cityId) {
@@ -108,6 +114,7 @@ export default function useSearch() {
     }
 
     router.push(`/search${queryValues}`);
+    setIsLoading(false);
   };
 
   return {
