@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import Inputs from "./Inputs";
+import React, { useContext, useState } from "react";
+import Inputs from "@/common/components/Form/Inputs";
 import Button from "@/common/components/GeneralButton";
 import fetchApi from "@/common/helpers/fetchApi";
 import {
@@ -9,9 +9,8 @@ import {
   ShowPasswordType,
   InputValuesType,
 } from "@/common/components/Form/data";
-import { setCookie } from "@/common/helpers/setCookie";
-import { useRouter } from "next/router";
 import { loadingContext } from "@/pages/_app";
+import { useRouter } from "next/router";
 
 export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
   const router = useRouter();
@@ -38,11 +37,7 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
   const [inputErrors, setInputErrors] = useState<InputErrorsType>(errors);
   const [inputValues, setInputValues] = useState<InputValuesType>(values);
   const [showPassword, setShowPassword] = useState<ShowPasswordType>(show);
-  const [isLoginFailed, setIsLoginFailed] = useState(false);
-
-  useEffect(() => {
-    if (isLoginFailed) return setIsLoginFailed(false);
-  }, [inputValues]);
+  const [signFailedMsg, setSignFailedMsg] = useState(null);
 
   // handle 獲取欄位資料
   const handleInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,14 +60,18 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     const errors: InputErrorsType = {};
 
     inputSet.forEach((input) => {
+      const isRequired = input.required;
+      const isMatch = input.pattern;
+
       // 必填但是沒有指定驗證的欄位就驗證有沒有填
-      if (input.required && !input.pattern) {
+      if (isRequired && !isMatch) {
         errors[input.inputName] = !inputValues[input.inputName] ? true : false;
       }
       // 有指定驗證內容就依照驗證內容
-      if (input.pattern) {
-        const isTestPass = input.pattern.test(inputValues[input.inputName]);
-        errors[input.inputName] = !isTestPass;
+      if (isMatch) {
+        errors[input.inputName] = !isMatch.test(inputValues[input.inputName])
+          ? true
+          : false;
       }
       // 確認密碼欄位
       if (input.inputName === "confirmPassword") {
@@ -85,6 +84,7 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     });
 
     setInputErrors(errors);
+
     const isVerifyPass = !Object.values(errors).includes(true);
     return isVerifyPass;
   };
@@ -95,25 +95,30 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
     setIsLoading(true);
     // 表單驗證，如果 false 就擋掉
     const isVerifyPass = checkValidForm();
-    if (!isVerifyPass) return;
+    if (!isVerifyPass) return setIsLoading(false);
     // 打 API
     apiParams.data = inputValues;
     const data = await fetchApi(apiParams);
-
-    // API打出去，還沒有回覆的時候要給 loading 狀態（redux）
-    // 如果傳回 status === false (api回應登入失敗)
+    // 如果傳回 status === false 就不做後續 loading 動作
     if (!data.status) {
-      setIsLoginFailed(true);
+      setSignFailedMsg(data.message);
       setIsLoading(false);
       return;
     }
 
-    // 成功登入，儲存 token
-    setCookie("authToken", data.jwtToken);
+    setIsLoading(false);
     router.push("/");
   };
 
-  const { type, children, onClick, isDisabled, appearance, className } = btnSet;
+  const {
+    type,
+    children,
+    onClick,
+    isDisabled,
+    appearance,
+    className,
+    rounded,
+  } = btnSet;
   const btnHandleSelector = type === "button" ? onClick : undefined;
   return (
     <form
@@ -128,18 +133,19 @@ export default function Form({ inputSet, btnSet, apiParams }: FormProps) {
         handleInputValue={handleInputValue}
         handleShowPassword={handleShowPassword}
       />
+      {signFailedMsg && (
+        <p className="text-danger text-center">{signFailedMsg}</p>
+      )}
       <Button
         type={type}
         appearance={appearance}
         onClick={btnHandleSelector}
         isDisabled={isDisabled}
         className={className}
+        rounded={rounded}
       >
         {children}
       </Button>
-      {isLoginFailed && (
-        <p className="text-danger text-center">登入失敗，請再次確認</p>
-      )}
     </form>
   );
 }

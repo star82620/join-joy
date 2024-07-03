@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "@/common/components/GeneralLink";
 import ModalWrapper from "@/common/components/ModalWrapper";
-import Form from "@/common/components/Form";
+import Form from "./Form";
 import { title, inputSet, btnSet, apiParams } from "./data";
 
 export default function Signup() {
